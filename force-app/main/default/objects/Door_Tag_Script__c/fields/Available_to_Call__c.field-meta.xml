@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Available_to_Call__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(Left( DispostionUser__r.UserRole.Name ,2)=&apos;IB&apos;,
+  Not(ISPICKVAL( Consent__c , &apos;No&apos;)),
+  Not(ISPICKVAL(Are_you_the_homeowner__c,&apos;Renter&apos;)),
+  Not(User_Address__r.UserAccount__r.PersonContact.DoNotCall),
+  Disposition__c  &lt;&gt; &apos;Not Owner&apos;,
+  Disposition__c  &lt;&gt; &apos;OB Wrong Person&apos;),
+  TRUE,
+  IF( OR( User_Address__r.UserAccount__r.PersonContact.DoNotCall ,
+      ISPICKVAL( Consent__c , &apos;No&apos;),
+      ISPICKVAL(Are_you_the_homeowner__c,&apos;Renter&apos;),
+      Disposition__c  = &apos;NC: Not Interested&apos;,
+      Disposition__c  = &apos;NC: Hang Up&apos;,
+      Disposition__c  = &apos;OB Wrong Person&apos;,
+      Disposition__c  = &apos;Not Owner&apos;,
+      Disposition__c  = &apos;Complete&apos;,
+      Call_Count__c &gt; 5), 
+  FALSE, 
+TRUE))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Available to Call</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

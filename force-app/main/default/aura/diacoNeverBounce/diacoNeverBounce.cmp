@@ -1,0 +1,121 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of handling neverBounce__c custom setting
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		09/05/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component controller="validateEmailNeverBounce" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+    <aura:attribute name="neverBounce" type="neverBounce__c" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12">
+        <fieldset class="slds-box slds-theme--default ">
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">NeverBounce</h1>
+                        <h2 class="slds-text-heading--medium">Configuration</h2>
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                    <lightning:buttonIcon iconName="utility:save"  
+                                          variant="border-filled" 
+                                          onclick="{! c.saveConfig }" 
+                                          alternativeText="save Settings" />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout horizontalAlign="center">
+                <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                    <div aria-labelledby="FirstCustomerInformation">
+                        <form class="slds-form--stacked"> 
+                            <div class="slds-form slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Api Key" 
+                                                     label="Api Key"
+                                                     value="{!v.neverBounce.ApiKey__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     name="Job Id" 
+                                                     disabled="true"
+                                                     label="Job Id"
+                                                     value="{!v.neverBounce.Job_id__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input type="number" aura:id="datalogInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Emails_per_page" 
+                                                     label="Emails per page"
+                                                     value="{!v.neverBounce.Emails_per_page__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input type="number" aura:id="datalogInfo"
+                                                     class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     name="First_Job" 
+                                                     label="Request this job in (min)"
+                                                     value="{!v.neverBounce.First_Job__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input type="number" aura:id="datalogInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Second_Job" 
+                                                     label="Request the pages of this job after (min)"
+                                                     value="{!v.neverBounce.Second_Job__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input type="number" aura:id="datalogInfo"
+                                                     class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     name="next_page" 
+                                                     label="Next Page"
+                                                     disabled="true"
+                                                     value="{!v.neverBounce.next_page__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input type="number" aura:id="datalogInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="number_of_pages" 
+                                                     disabled="true"
+                                                     label="Total Page Number"
+                                                     value="{!v.neverBounce.number_of_pages__c}"/>
+                                </div>
+                                <!--buttons to send jobs-->
+                                <div class="slds-col slds-size_1-of-3 slds-medium-size_4-of-12 slds-large-size_4-of-12">
+                                    <lightning:button variant="brand" label="Send Job" 
+                                                      class="slds-m-top--medium slds-align_absolute-center" 
+                                                      title="Brand action" 
+                                                      onclick="{! c.sendNewJob}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-3 slds-medium-size_4-of-12 slds-large-size_4-of-12">
+                                    <lightning:button variant="brand" label="Reinit Job" 
+                                                      class="slds-m-top--medium slds-align_absolute-center" 
+                                                      title="Brand action" 
+                                                      onclick="{! c.ReinitJob}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-3 slds-medium-size_4-of-12 slds-large-size_4-of-12">
+                                    <lightning:button variant="destructive" label="Delete Job" 
+                                                      class="slds-m-top--medium slds-align_absolute-center" 
+                                                      title="Brand action" 
+                                                      onclick="{! c.deleteJobSf}" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </fieldset>
+    </div>
+    
+</aura:component>

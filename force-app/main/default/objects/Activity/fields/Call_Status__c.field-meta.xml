@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Call Status</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Completed Call</fullName>
+                <default>false</default>
+                <label>Completed Call</label>
+            </value>
+            <value>
+                <fullName>Attempted Call</fullName>
+                <default>false</default>
+                <label>Attempted Call</label>
+            </value>
+            <value>
+                <fullName>Follow Up</fullName>
+                <default>false</default>
+                <label>Follow Up</label>
+            </value>
+            <value>
+                <fullName>No Good</fullName>
+                <default>false</default>
+                <label>No Good</label>
+            </value>
+            <value>
+                <fullName>No Answer</fullName>
+                <default>false</default>
+                <label>No Answer</label>
+            </value>
+            <value>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+                <label>Rescheduled</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+            <value>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+                <label>Voicemail</label>
+            </value>
+            <value>
+                <fullName>Call Back</fullName>
+                <default>false</default>
+                <label>Call Back</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

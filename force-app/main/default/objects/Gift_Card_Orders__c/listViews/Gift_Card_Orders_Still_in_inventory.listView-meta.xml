@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gift_Card_Orders_Still_in_inventory</fullName>
+    <columns>NAME</columns>
+    <columns>Date_Ordered__c</columns>
+    <columns>Date_Received__c</columns>
+    <columns>Branch_Location__c</columns>
+    <columns>Quantity_Ordered__c</columns>
+    <columns>Fulfilled__c</columns>
+    <columns>Warehouse__c</columns>
+    <columns>Office__c</columns>
+    <columns>Driver_Assigned__c</columns>
+    <columns>Delivered__c</columns>
+    <columns>Order_Complete__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Parent_Gift_Card_Order__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Date_Received__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Warehouse__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Remaining_Delivered__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <label>Gift Card Orders - Still in inventory</label>
+</ListView>

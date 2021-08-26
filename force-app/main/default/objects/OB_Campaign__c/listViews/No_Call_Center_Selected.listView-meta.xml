@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Call_Center_Selected</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>Opportunity__c</columns>
+    <columns>NAME</columns>
+    <columns>OB_Campaign_Call_Center__c</columns>
+    <columns>OB_Campaign_Active__c</columns>
+    <columns>fScheduling_Paused_Start_Date__c</columns>
+    <columns>fScheduling_Paused_End_Date__c</columns>
+    <columns>Call_Center_is_Ready_Post__c</columns>
+    <columns>OB_Campaign_Branch__c</columns>
+    <columns>Industry__c</columns>
+    <columns>Opp_OB_Operation_Stage__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OB_Campaign_Call_Center__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>OB_Campaign_Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>fOpportunity__c</field>
+        <operation>notContain</operation>
+        <value>test</value>
+    </filters>
+    <label>No Call Center Selected</label>
+</ListView>

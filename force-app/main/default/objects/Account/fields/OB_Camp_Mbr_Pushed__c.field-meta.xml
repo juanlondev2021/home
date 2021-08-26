@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OB_Camp_Mbr_Pushed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Records that have been pushed to another Org or 3rd Party.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Records that have been pushed to another Org or 3rd Party.</inlineHelpText>
+    <label>OB Camp Mbr Pushed</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

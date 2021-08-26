@@ -1,0 +1,71 @@
+<!--
+* Diaco
+* @author             Jull Quintero Daza
+* Project:            Site Home Service
+* TestClass:          
+* Description:        Visual force page - Site Lightning Out 
+*
+* Changes (Version)
+* _________________________________________
+*            No.        Date            Author                    Description
+*            ____    __________        __________________      _____________________________________
+* @version    1.0    23/09/2020         Jull Quintero D         Initial implementation of the class.
+*
+-->
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>My Home Services</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            <apex:includeLightning />
+        </head>
+    </html>
+    <body>
+        <div id="lightning">
+        </div>
+        <script>
+        var view = 'classic';
+        if((typeof sforce != 'undefined') && (sforce != null)){
+            view = 'sforce';
+        }
+        //console.log(view);
+        var c__ConfirmationNumber = "{!$CurrentPage.parameters.c__ConfirmationNumber}";
+        var c__AccountId = "{!$CurrentPage.parameters.c__AccountId}";
+        var c__PhoneRep = "{!$CurrentPage.parameters.c__PhoneRep}";
+        var c__CallerId = "{!$CurrentPage.parameters.c__CallerId}";
+        var c__FirstName = "{!$CurrentPage.parameters.c__FirstName}";
+        var c__LastName = "{!$CurrentPage.parameters.c__LastName}";
+        var c__Street = "{!$CurrentPage.parameters.c__Street}";
+        var c__City = "{!$CurrentPage.parameters.c__City}";
+        var c__State = "{!$CurrentPage.parameters.c__State}";
+        var c__Zip = "{!$CurrentPage.parameters.c__Zip}";
+        var c__Email = "{!$CurrentPage.parameters.c__Email}";
+        $Lightning.use("c:SiteMyHomeServicesApp", function () {
+            $Lightning.createComponent(
+                    "c:SiteMyHomeServicesCmp",
+                    {UserContext: view,
+                    pageReference:{
+                        state:{
+                            "c__AccountId": c__AccountId,
+                            "c__PhoneRep": c__PhoneRep,
+                            "c__ConfirmationNumber": c__ConfirmationNumber,
+                            "c__CallerId": c__CallerId,
+                            "c__FirstName": c__FirstName,
+                            "c__LastName": c__LastName,
+                            "c__Street": c__Street,
+                            "c__City": c__City,
+                            "c__State": c__State,
+                            "c__Zip": c__Zip,
+                            "c__Email": c__Email
+                        }
+                    }
+                },
+                "lightning"); 
+        });
+        </script>
+    </body>
+</apex:page>

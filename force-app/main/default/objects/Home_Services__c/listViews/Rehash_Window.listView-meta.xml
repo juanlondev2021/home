@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rehash_Window</fullName>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>012410000013G9S,012410000013IA2,012410000013IAg,012410000013IBK</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Rehash</value>
+    </filters>
+    <label>Rehash - Window</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+        <role>Reschedule_Rehash</role>
+    </sharedTo>
+</ListView>

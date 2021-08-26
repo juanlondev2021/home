@@ -1,0 +1,100 @@
+<!--***************************************************************************************************************
+Description : Display list of cases which are created by current loggedin user and the cases created by current user.
+********************************************************************************************************************-->
+<apex:page controller="nuHome_Case_Obj_Controller" tabStyle="Cases__tab">
+    <style>
+        .pbBody{
+        margin:0px!important;
+        }
+        .data2Col{
+        padding:0px!important;
+        }
+        .sfdctr td:first-child{
+        padding-left:10px;
+        }
+        .sfdctr td:last-child {
+        padding-right:10px;
+        }
+        .sfdctr th:first-child{
+        padding-left:10px;
+        }
+        .sfdctr th:nth-child(1){
+        width:10%;
+        }
+        .sfdctr th:nth-child(2){
+        width:15%;
+        }
+        .sfdctr th:last-child {
+        padding-right:10px;
+        }
+        .sfdcback td:not(:first-child){
+        padding-left:10px;
+        }
+        .sfdcback a{
+        color: #015ba7;
+        }
+        .sfdcback{
+        background:#fff;
+        }
+        .sfdctr th{
+        padding:2px 6px 3px 6px;
+        border-right: 1px solid #E0E3E5!important;
+        border-bottom: 1px solid #E0E3E5!important;
+        }
+        .sfdctr th:hover{
+        background:#E0E3E5;
+        }
+        .sfdcback td{
+        padding:3px;
+        }
+        thead tr{
+        background: #F2F3F3;
+        }
+        .pbHeader{
+        border-bottom:0px solid red!important;
+        }
+        .sfdcback td{
+        border-bottom: 1px solid #E0E3E5!important;
+        }
+        .sfdcback:hover{
+        background:#e6f4ff;
+        }
+    </style>
+    <apex:sectionHeader title="Cases" subtitle="Home"/>
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageblockbuttons >
+           <apex:commandbutton value="New Case" action="{!newCase}" />
+           <!-- <input type="button" class="btn" value="New Case" onclick="window.location='https://fullsb-nuhome.cs17.force.com/index/nuHome_WebtoCase?userId='+{!$User.Id}"/> -->
+        </apex:pageblockbuttons>
+        <apex:pageBlockSection columns="1">
+            <table id="tabledata" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr class="sfdctr">
+                        <th>Case Number</th>
+                        <th>Contact</th>
+                        <th>Subject</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!CaseList1}" var="cList">
+                        <tr class="sfdctr sfdcback">
+                            <td><a href="/apex/nuHome_Case_Comment?id={!cList.Id}">{!cList.CaseNumber}</a></td>
+                            <td>{!cList.Contact_Name}</td>
+                            <td>{!cList.Subject}</td>
+                            <td>{!cList.Priority}</td>
+                            <td>{!cList.Status}</td>
+                            <td>{!cList.Type}</td>
+                            <td>{!cList.Subject}</td>
+                        </tr>
+                    </apex:repeat>
+                </tbody> 
+            </table>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+      </apex:form>
+</apex:page>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Industry_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+CONTAINS( RecordType.Name , &quot;Home Automation&quot; ), &quot;Home Automation&quot;, 
+IF(
+CONTAINS(RecordType.Name, &quot;Solar&quot; ), &quot;Solar&quot;,
+IF(
+CONTAINS(RecordType.Name, &quot;Water&quot; ), &quot;Water Treatment&quot;,
+IF(
+CONTAINS(RecordType.Name, &quot;Remodel&quot; ), &quot;Remodel&quot;,
+IF(
+CONTAINS(RecordType.Name, &quot;Pest Control&quot; ), &quot;Pest Control&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Carpet &amp; Tile Cleaning&quot; ), &quot;Carpet &amp; Tile Cleaning&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Flooring&quot; ), &quot;Flooring&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Garage Doors&quot; ), &quot;Garage Doors&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Garage Floor Coating&quot; ), &quot;Garage Floor Coating&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Handy Man&quot; ), &quot;Handy Man&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Internet-Cable-Satellite&quot; ), &quot;Internet-Cable-Satelite&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Kitchen &amp; Bath&quot; ), &quot;Kitchen &amp; Bath&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Lock Smith&quot; ), &quot;Lock Smith&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Maid Service&quot; ), &quot;Maid Service&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Painting&quot; ), &quot;Painting&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;Pool Maintenance&quot; ), &quot;Pool Maintenance&quot;, 
+IF( 
+CONTAINS(RecordType.Name, &quot;HVAC&quot; ), &quot;HVAC&quot;, 
+&quot;&quot;)))))))))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Industry:</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,104 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Referral Create HS
+* Description:		
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		12/10/2019		Álvaro Ortega (AO)		Create Home Services per Referral in Account
+**/-->
+<aura:component controller="DiacoAccountReferralCreateHS" implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+	<aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="data" type="List"/>
+    
+    <aura:attribute name="isOpen" type="boolean" default='false'/>
+    <aura:attribute name="isOpenHS" type="boolean" default='false'/>
+    
+    <aura:attribute name="recordsType" type="List"/>
+    <aura:attribute name="recordtypeId" type="String"/>
+    <aura:attribute name="referralIdToSave" type="String" />
+    
+    <aura:attribute name="isLoad" type="boolean" default='true'/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="newHSId" type="String"/>
+    
+    <aura:handler name="change" value="{!v.newHSId}" action="{!c.newHSId}"/>
+    
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="small" />
+        <aura:set attribute="else">
+            <lightning:buttonIcon class="slds-m-around_x-small" iconName="utility:refresh" variant="border-filled" onclick="{! c.doInit }" />
+            <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                <lightning:datatable
+                                     keyField="id"
+                                     data="{! v.data }"
+                                     columns="{! v.columns }"
+                                     onrowaction="{! c.handleRowAction }"
+                                     hideCheckboxColumn="true"/>
+            </div>
+        </aura:set>
+    </aura:if>
+    
+    <c:DiacoCreateHomeServiceModalFlow isOpen="{!v.isOpen}" 
+                                       recordtypeId="{!v.recordtypeId}"
+                                       accountId="{!v.recordId}"
+                                       newHSId="{!v.newHSId}"/>
+    <aura:if isTrue="{!v.isOpenHS}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Home Services</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-align_absolute-center container-border">
+                    <div class="slds-grid slds-wrap slds-m-top_small">
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning:select name="recordType"
+                                              required="true"
+                                              label="Select a Industry"
+                                              aura:id="recordTypeSelect"
+                                              value="{!v.recordtypeId}">
+                                <option value="">choose one...</option>
+                                <aura:iteration items="{!v.recordsType}" var="type">
+                                    <option text="{!type.Name}" value="{!type.Id}"></option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand" 
+                                      label="New Home Services"
+                                      title="New Home Services"
+                                      onclick="{! c.newHS }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    
+</aura:component>

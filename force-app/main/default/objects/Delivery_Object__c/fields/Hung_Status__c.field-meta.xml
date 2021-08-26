@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hung_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Hung Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Arrived</fullName>
+                <default>false</default>
+                <label>Arrived</label>
+            </value>
+            <value>
+                <fullName>Business</fullName>
+                <default>false</default>
+                <label>Business</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
+            <value>
+                <fullName>Hung</fullName>
+                <default>false</default>
+                <label>Hung</label>
+            </value>
+            <value>
+                <fullName>COMPLETED GATED</fullName>
+                <default>false</default>
+                <label>COMPLETED GATED</label>
+            </value>
+            <value>
+                <fullName>Gated</fullName>
+                <default>false</default>
+                <label>Gated</label>
+            </value>
+            <value>
+                <fullName>Cant Find</fullName>
+                <default>false</default>
+                <label>Cant Find</label>
+            </value>
+            <value>
+                <fullName>Investor</fullName>
+                <default>false</default>
+                <label>Investor</label>
+            </value>
+            <value>
+                <fullName>Invld</fullName>
+                <default>false</default>
+                <label>Invld</label>
+            </value>
+            <value>
+                <fullName>Remove: Management</fullName>
+                <default>false</default>
+                <label>Remove: Management</label>
+            </value>
+            <value>
+                <fullName>Too Far</fullName>
+                <default>false</default>
+                <label>Too Far</label>
+            </value>
+            <value>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <label>Duplicate</label>
+            </value>
+            <value>
+                <fullName>Wrong House Number</fullName>
+                <default>false</default>
+                <label>Wrong House Number</label>
+            </value>
+            <value>
+                <fullName>Under Construction</fullName>
+                <default>false</default>
+                <label>Under Construction</label>
+            </value>
+            <value>
+                <fullName>Remove: Gated</fullName>
+                <default>false</default>
+                <label>Remove: Gated</label>
+            </value>
+            <value>
+                <fullName>Remove: Aging</fullName>
+                <default>false</default>
+                <label>Remove: Aging</label>
+            </value>
+            <value>
+                <fullName>Sent To Cheetah</fullName>
+                <default>false</default>
+                <label>Sent To Cheetah</label>
+            </value>
+            <value>
+                <fullName>Processing</fullName>
+                <default>false</default>
+                <label>Processing</label>
+            </value>
+            <value>
+                <fullName>Gio - In Process</fullName>
+                <default>false</default>
+                <label>Gio - In Process</label>
+            </value>
+            <value>
+                <fullName>NULL</fullName>
+                <default>false</default>
+                <label>NULL</label>
+            </value>
+            <value>
+                <fullName>Can&apos;t Access Home</fullName>
+                <default>false</default>
+                <label>Can&apos;t Access Home</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

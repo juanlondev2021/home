@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Task</fullName>
+    <active>true</active>
+    <label>Task</label>
+    <picklistValues>
+        <picklist>Appointment_results__c</picklist>
+        <values>
+            <fullName>1 Leg</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bid Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NQ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Cancel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quote</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reset</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale Turn Down</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Cloud_Call_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rehashed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Purpose__c</picklist>
+        <values>
+            <fullName>Confirmation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rehash</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Status__c</picklist>
+        <values>
+            <fullName>Attempted Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rescheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation_Status__c</picklist>
+        <values>
+            <fullName>Cancelled In Transit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmation Text Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed Running Blind</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed Via Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed Voice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed via Text</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DNR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Show to Confirm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Qualified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reset</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dispositions__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DNC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Has Provider</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No English</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Homeowner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Qualified</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Meetings__c</picklist>
+        <values>
+            <fullName>1st Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2nd Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3rd Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4th Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>No_Good_Reasons_Confirmation__c</picklist>
+        <values>
+            <fullName>Bought System</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dead Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Duplicate lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Had System</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Language barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>No_Good_Reasons_Dispatch__c</picklist>
+        <values>
+            <fullName>Duplicate lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Has a system</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Language barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No money%2Fmotivation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No showed multiple times</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wants product we don%E2%80%99t carry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Window repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Non_Qualified_Reasons_Dispatch__c</picklist>
+        <values>
+            <fullName>Bills too low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not meet requirements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low income</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Non_Qualified_Reasons_confirmation__c</picklist>
+        <values>
+            <fullName>Bills too low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not meet requirements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low income</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rep_Status__c</picklist>
+        <values>
+            <fullName>Going In</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Transit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Service_Type__c</picklist>
+        <values>
+            <fullName>Maintenance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Quote</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distribution_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Distribution Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Email Lead</fullName>
+                <default>false</default>
+                <label>Email Lead</label>
+            </value>
+            <value>
+                <fullName>Custom Report</fullName>
+                <default>false</default>
+                <label>Custom Report</label>
+            </value>
+            <value>
+                <fullName>Appt Dispatch</fullName>
+                <default>false</default>
+                <label>Appt Dispatch</label>
+            </value>
+            <value>
+                <fullName>Lead Distributed</fullName>
+                <default>false</default>
+                <label>Lead Distributed</label>
+            </value>
+            <value>
+                <fullName>Distribution Process Incomplete</fullName>
+                <default>false</default>
+                <label>Distribution Process Incomplete</label>
+            </value>
+            <value>
+                <fullName>We no longer use the OBCC Checkbox to send distribute leads</fullName>
+                <default>false</default>
+                <label>We no longer use the OBCC Checkbox to send distribute leads</label>
+            </value>
+            <value>
+                <fullName>This Customer is set up for Email Lead Only</fullName>
+                <default>false</default>
+                <label>This Customer is set up for Email Lead Only</label>
+            </value>
+            <value>
+                <fullName>A valid customer needs to be attached to this record</fullName>
+                <default>false</default>
+                <label>A valid customer needs to be attached to this record</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

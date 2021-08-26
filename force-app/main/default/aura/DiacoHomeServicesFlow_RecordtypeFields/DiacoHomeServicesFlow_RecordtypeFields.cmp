@@ -1,0 +1,1552 @@
+<aura:component >
+    <aura:handler name="change" value="{!v.open}" action="{!c.doInit}" />    
+    <aura:attribute name="open" type="Boolean" default="false" required="true"/>
+    <!-- OBJECT -->
+    <aura:attribute name="appointment" type="Object" required="true"/>
+    <aura:attribute name="appoinmType" type="Object" required="true" />
+
+    <!-- PICKLIST VALUES -->
+    <aura:attribute name="picklistValues" type="list" required="true"/> 
+    <aura:attribute name="apiNames" type="List" required="true"/>
+
+    <aura:attribute access="private"  name="Existing_Keypad__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Do_you_have_a_water_filtration_system__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Pets__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Types_of_Pets__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Pest_loose_in_backyard__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Backyard_gate_locked__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Age_of_Current_AC_System__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Occupancy_of_House__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Type_of_Material__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Leak_Damage__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Frequency_Desired__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Sq_Ft_of_Project_Area__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Design__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Included_in_Landscape_Project__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Chemical_Type__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Area_of_Concrete_Surface__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Area_to_be_coated__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Existing_Coating__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Existing_Issue_with_current_door__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Type_of_Material_on_Current_Door__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Area_of_Concrete__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Frequency_Requested__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Floorplan__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Cabinets__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Bath_Floorplan__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="All_Decision_Makers__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Main_Area_of_Concern__c" type="List" default="[]" />
+    <aura:attribute access="private"  name="Payment_Type__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Blinds__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Current_Window_Coverings__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Paint_Or_Stained__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Number_of_Rooms__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Utility_Provider__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Number_of_Windows__c" type="List" default="[]" /> 
+
+    <!-- PICKLIST VALUES FOR RECORDTYPE-->
+    <aura:attribute name="picklistValuesByRecordType" type="list" required="true"/> 
+    <aura:attribute access="private"  name="Type_of_Service__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Project_Type__c" type="List" default="[]" /> 
+
+    <!-- MULTIPLICKLIST Rooms_to_be_Installed__c-->
+    <aura:attribute access="private"  name="Rooms_to_be_Installed__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Rooms_to_be_Installed_Values" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="isBedrooms" type="Boolean" default="false" />
+    <aura:attribute access="private"  name="isBathrooms" type="Boolean" default="false" />
+
+    <!-- MULTIPLICKLIST Project_Type__c-->
+    <aura:attribute access="private"  name="Project_Type_Values" type="List" default="[]" />
+
+    <!-- MULTIPLICKLIST Description_of_closet__c-->
+    <aura:attribute access="private"  name="Description_of_closet__c" type="List" default="[]" />
+    <aura:attribute access="private"  name="Description_of_closet_values" type="List" default="[]" />
+
+
+    <!-- MULTIPLICKLIST Type_of_System_to_be_installed__c-->
+    <aura:attribute access="private"  name="Type_of_System_to_be_installed__c" type="List" default="[]" />
+    <aura:attribute access="private"  name="Type_of_System_to_be_installed_values" type="List" default="[]" />
+
+    <!-- MULTIPLICKLIST Rooms_included_in_project__c-->
+    <aura:attribute access="private"  name="Rooms_included_in_project__c" type="List" default="[]" /> 
+    <aura:attribute access="private"  name="Rooms_included_in_project_values" type="List" default="[]" /> 
+
+    <!-- SECTION APPOINTMENT INFO  -->
+    <aura:attribute access="private"  name="Timeline_of_Intent__c" type="List" default="[]" /> 
+    <aura:attribute name="account" type="Account" required="true"/>
+    <aura:attribute name="appointmentSetter" type="string" description="PERSONEL ID"/> 
+
+
+    <!-- APPOINTMENT DATETIME -->
+    <aura:attribute access="private" name="appointmentDate" type="Date" />
+    <aura:attribute access="private" name="appointmentTime" type="DateTime" /> 
+    <aura:attribute access="private" name="appointmentTimeValues" type="List" default="[]" />
+    <aura:attribute access="private" name="startDate" type="List" default="[]" />
+    <aura:attribute access="private" name="endHour" type="Integer" />
+
+    <!-- LOOKUP -->
+    <aura:attribute name="isRenderDone" type="Boolean" default="false" />
+
+    <!-- MODAL CONFIMATION -->
+    <aura:attribute name="openConfimationCreateHomeService" type="Boolean" default="false" />
+
+    <!-- Event Upsert Appointment -->
+    <aura:registerEvent name="upsertAppointment" type="c:DiacoEventInterestsWebForm" />
+
+    <!-- Event update Appointment -->
+    <aura:registerEvent name="updateAppointment" type="c:DiacoEventHomeServicesFlow" />
+
+    <!-- HEADER  -->
+    <div class="slds-card slds-box">
+    
+        <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:quick_text" />
+            </lightning:layoutItem>
+
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header ">
+                    <h1 class="slds-text-heading--label">Qualifying</h1>
+                    <h2 class="slds-text-heading--medium">                                
+                        <lightning:formattedText value="{!v.appointment.Id != null ? v.appointment.Name : v.appoinmType.name}" />
+                    </h2>
+                </div>
+            </lightning:layoutItem>
+
+            <aura:if isTrue="{! and(v.appointment.Id != null, v.appointment.Home_Service__c != null) }">
+                <lightning:layoutItem  alignmentBump="left" padding="horizontal-small">
+
+                    <a class="slds-m-horizontal_small slds-button" href="{!'/lightning/r/' + v.appointment.Home_Service__c + '/view'}" target="_blank">
+                        <div class="slds-visual-picker">
+                            <span class="slds-visual-picker__figure slds-visual-picker__icon slds-align_absolute-center">
+                                <lightning:icon iconName="custom:custom33" alternativeText="Home service" title="Home Service" />
+                            </span>
+                            <span class="slds-visual-picker__body">
+                                <span class="slds-text-title">Home Service</span>
+                            </span>
+                        </div>
+                    </a>
+
+                </lightning:layoutItem>
+            </aura:if>
+
+        </lightning:layout>
+
+    </div>
+    <!-- HEADER  -->
+        <!-- RT Home Automation -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Home Automation' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Main Area of Concern" value="{! v.appointment.Main_Area_of_Concern__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Main_Area_of_Concern__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Main_Area_of_Concern__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Existing Keypad" value="{! v.appointment.Existing_Keypad__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Existing_Keypad__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Existing_Keypad__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of Entry/Exit Doors" value="{!v.appointment.Number_of_Entry_Exit_Doors__c}" type="number" step='0' />
+                </div>
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Existing Contract" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Existing_Contract__c }"/>
+                </div>
+                
+                <aura:if isTrue="{! v.appointment.Existing_Contract__c}">
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <lightning:input aura:id='fieldId' label="Months Remaining" value="{!v.appointment.Months_Remaining__c}" type="number" step="0" required="fañse"/>
+                    </div>
+                </aura:if>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Do you have a Doorbell Camera ? " 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Do_you_have_a_Doorbell_Camera__c }"/>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="RMR Verified" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.RMR_Verified__c }"/>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="$99 Activation Fee Verified" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.X99_Activation_Fee_Verified__c }"/>                
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Payment Type" value="{! v.appointment.Payment_Type__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Payment_Type__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Payment_Type__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of People in the home" value="{!v.appointment.Number_of_People_in_the_home__c}" type="number" step="0"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of people with their own cell phone" value="{!v.appointment.Number_of_cell_phone_owners__c}" type="number" step="0"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of of people over 12" value="{!v.appointment.Number_of_people_over_12__c}" type="number" step="0"/>
+                </div>
+                
+            </div>
+
+        </aura:if>
+        <!-- RT Home Automation -->
+
+        <!--RT Water Filtration -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Water Filtration'}">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Already have a system" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Already_have_a_system__c }"/>                
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Pre plumbing" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Pre_plumbing__c }"/>                
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of People in the home" value="{!v.appointment.Number_of_People_in_the_home__c}" type="number" step="0"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Avg Monthly Spend on Bottled Water" value="{!v.appointment.Avg_Monthly_Spend_on_Bottled_Water__c}" type="number" step="0"/>
+                </div>     
+                    
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Do you have a water filtration system?" value="{! v.appointment.Do_you_have_a_water_filtration_system__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Do_you_have_a_water_filtration_system__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Do_you_have_a_water_filtration_system__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!--/RT Water Filtration -->
+
+        <!--RT Solar -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Solar' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Utility Provider" value="{! v.appointment.Utility_Provider__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Utility_Provider__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Utility_Provider__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of People in the home" value="{!v.appointment.Number_of_People_in_the_home__c}" type="number" step="0"/>
+                </div>
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="House Sq. Footage" value="{!v.appointment.House_Square_Footage_Text__c}"/>
+                </div>
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Avg Temperature AC Kept at" value="{!v.appointment.Avg_Temperature_AC_Kept_at__c}" type="number" step="0"/>
+                </div>
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Avg Electric Bill" value="{!v.appointment.Avg_Electric_Bill__c}"/>
+                </div>
+        
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Credit Score" value="{!v.appointment.Credit_Score__c	}"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+        
+            </div>
+        </aura:if>
+        <!--/RT Solar -->
+
+        <!-- RT Pest -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Pest Control' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Pets" value="{! v.appointment.Pets__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Pets__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Pets__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Types of Pets" value="{! v.appointment.Types_of_Pets__c	 }">
+                        <aura:iteration items="{!v.Types_of_Pets__c	}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Types_of_Pets__c	 == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Pets loose in backyard" value="{! v.appointment.Pest_loose_in_backyard__c}">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Pest_loose_in_backyard__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Pest_loose_in_backyard__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Backyard gate locked" value="{! v.appointment.Backyard_gate_locked__c}">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Backyard_gate_locked__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Backyard_gate_locked__c	 == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+            
+            </div>
+
+        </aura:if>
+        <!-- RT Pest -->
+
+        <!-- RT HVAC -->
+        <aura:if isTrue="{!v.appoinmType.name == 'HVAC' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Age of Current AC System" value="{! v.appointment.Age_of_Current_AC_System__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Age_of_Current_AC_System__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Age_of_Current_AC_System__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+            
+            </div>
+
+        </aura:if>
+        <!-- RT HVAC -->
+
+        <!-- RT Flooring -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Flooring' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Approx. Sq. Ft" value="{!v.appointment.Approx_Sq_Ft_Text__c}"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Service" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                    
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Have you purchased material?" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Have_you_purchased_material__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Are you Interested in Financing?" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Are_you_Interested_in_Financing__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-top_large slds-p-bottom_large">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="RoomstobeInstalled" 
+                                            label="Rooms to be Installed" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Rooms_to_be_Installed__c}" 
+                                            value="{!v.Rooms_to_be_Installed_Values}" 
+                                            onchange="{!c.handlerRoomsInstalled}"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-top_large slds-p-bottom_large">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <aura:if isTrue="{!v.isBathrooms}">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                <lightning:input aura:id='fieldId' label="Number of Bathrooms" value="{!v.appointment.Number_of_Bathrooms__c}"/>
+                            </div>    
+                        </aura:if>
+                        <aura:if isTrue="{!v.isBedrooms}">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                <lightning:input aura:id='fieldId' label="Number of Bedrooms" value="{!v.appointment.Number_of_Bedrooms__c}"/>
+                            </div>
+                        </aura:if>
+                    </div>
+                </div>
+            
+            </div>
+
+        </aura:if>
+        <!-- RT Flooring -->
+
+        <!-- RT Painting -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Painting' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Painting Type" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Occupancy of House" value="{! v.appointment.Occupancy_of_House__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Occupancy_of_House__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Occupancy_of_House__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+            
+            </div>
+
+        </aura:if>
+        <!-- RT Painting -->
+
+        <!-- RT Roofing -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Roofing' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Material" value="{! v.appointment.Type_of_Material__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Material__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Material__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Leak Damage" value="{! v.appointment.Leak_Damage__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Leak_Damage__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Leak_Damage__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+            
+            </div>
+
+        </aura:if>
+        <!-- RT Roofing -->
+
+        <!-- RT Windows  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Windows' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of Windows for Repair" value="{!v.appointment.Number_of_Windows_for_Repair__c}" type="number" step="0"/>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of Windows for Replace" value="{!v.appointment.Number_of_Windows_for_Replace__c}" type="number" step="0"/>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- RT Windows  -->
+
+        <!-- RT Blinds & Shutters   -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Blinds &amp; Shutters' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Work" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Number of Windows" value="{! v.appointment.Number_of_Windows__c }">
+                        <aura:iteration items="{!v.Number_of_Windows__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Number_of_Windows__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+            </div>
+
+        </aura:if>
+        <!-- RT Blinds & Shutters   -->
+
+        <!-- RT Landscape Maintenance   -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Landscape Maintenance' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Landscape Type" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Frequency Desired" value="{! v.appointment.Frequency_Desired__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Frequency_Desired__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Frequency_Desired__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+            </div>
+
+        </aura:if>
+        <!-- RT Landscape Maintenance   -->
+
+        <!-- RT  Landscape Design/Installation  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Landscape Design/Installation' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Sq Ft of Project Area" value="{! v.appointment.Sq_Ft_of_Project_Area__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Sq_Ft_of_Project_Area__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Sq_Ft_of_Project_Area__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Design" value="{! v.appointment.Design__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Design__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Design__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>     
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Included in Landscape Project" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- RT  Landscape Design/Installation  -->
+
+        <!-- RT  Pool Maintenance  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Pool Maintenance' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Chemical Type" value="{! v.appointment.Chemical_Type__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Chemical_Type__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Chemical_Type__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Frequency Desired" value="{! v.appointment.Frequency_Desired__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Frequency_Desired__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Frequency_Desired__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+                
+            </div>
+
+        </aura:if>
+        <!-- /RT Pool Maintenance -->
+        
+        <!-- RT  Pool Installation	 -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Pool Design/Installation' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Design" value="{! v.appointment.Design__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Design__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Design__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>     
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- RT  Pool Installation	 -->
+
+        <!-- RT  Garage Organization -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Garage Organization' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Garage Sq. footage" value="{!v.appointment.Approx_Sq_Ft_Text__c}"/>
+                </div>       
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="# of walls that need shelving/storage" value="{!v.appointment.of_walls_that_need_shelving_storage__c}" type="number" step="0"/>
+                </div>                
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Add Cabinets/Shelving" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Update_Add_Cabinets_Shelving__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Garage Door(s)" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Update_Replace_Garage_Door__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Epoxy Flooring" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Epoxy_Flooring__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Add Remove Walls Drywall" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Add_Remove_Walls_Drywall__c }"/>
+                </div>
+            </div>
+
+        </aura:if>
+        <!-- /RT Garage Organization -->
+
+        <!-- RT  Concrete Coating	 -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Concrete Coating' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Area of Concrete Surface" value="{! v.appointment.Area_of_Concrete_Surface__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Area_of_Concrete_Surface__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Area_of_Concrete_Surface__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Area to be coated" value="{! v.appointment.Area_to_be_coated__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Area_to_be_coated__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Area_to_be_coated__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Existing Coating" value="{! v.appointment.Existing_Coating__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Existing_Coating__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Existing_Coating__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT Concrete Coating -->
+
+        <!-- RT Garage Doors -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Garage Doors' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Service" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+                    
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Existing Issue(s) with current door" value="{! v.appointment.Existing_Issue_with_current_door__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Existing_Issue_with_current_door__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Existing_Issue_with_current_door__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Material on Current Door" value="{! v.appointment.Type_of_Material_on_Current_Door__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Material_on_Current_Door__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Material_on_Current_Door__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+                
+            </div>
+
+        </aura:if>
+        <!-- RT Garage Doors-->
+
+        <!-- RT  Concrete-->
+        <aura:if isTrue="{!v.appoinmType.name == 'Concrete' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Area of Concrete" value="{! v.appointment.Area_of_Concrete__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Area_of_Concrete__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Area_of_Concrete__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Replace Existing Patio/Walkway" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Replace_Existing_Patio_Walkway__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Concrete Steps Installed" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Concrete_Steps_Installed__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Would you like concrete finished with an overlay or coating ?" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Concrete_Finished_with_Overlay_Coating__c }" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT Concrete -->
+
+        <!-- RT  Addition(s)-->
+        <aura:if isTrue="{!v.appoinmType.name == 'Addition(s)' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Addition" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Project Type" value="{! v.Project_Type_Values }" onchange="{!c.handlerProjectType}">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Project_Type__c}" var="item" >
+                            <option value="{!item.value}" selected="{! v.Project_Type_Values == item.value}">
+                                {!item.label}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="RoomsIncludedProject" 
+                                            label="Rooms included in project" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Rooms_included_in_project__c}" 
+                                            value="{!v.Rooms_included_in_project_values}" 
+                                            onchange="{!c.handlerRoomsIncludedProject}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- RT  /Addition(s) -->
+
+        <!-- RT  Sunroom Patio Enclosure  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Sunroom Patio Enclosure' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT Sunroom Patio Enclosure  -->
+
+        <!-- RT  Closet Organization -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Closet Organization' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="Descriptionofcloset" 
+                                            label="Description of closet" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Description_of_closet__c}" 
+                                            value="{!v.Description_of_closet_values}" 
+                                            onchange="{!c.handlerDescriptionOfCloset}"/>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="TypeofSystemtoInstalled" 
+                                            label="Type of System to be installed" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Type_of_System_to_be_installed__c}" 
+                                            value="{!v.Type_of_System_to_be_installed_values}" 
+                                            onchange="{!c.handlerTypeofSystemtoInstalled}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- RT Closet Organization	 -->
+
+        <!-- RT  Plumbing-->
+        <aura:if isTrue="{!v.appoinmType.name == 'Plumbing' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT Plumbing  -->
+
+        <!-- RT Electrical  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Electrical' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT  Electrical -->
+
+        <!-- RT   Locksmith -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Locksmith' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of Doors" value="{!v.appointment.Number_of_Doors__c}" type="number" step="0"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Lock Type" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{! v.Type_of_Service__c }" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    <lightning:dualListbox  aura:id="fieldId" 
+                                            name="ProjectType" 
+                                            label="Project Type" 
+                                            sourceLabel="Available" 
+                                            selectedLabel="Selected" 
+                                            options="{!v.Project_Type__c}" 
+                                            value="{!v.Project_Type_Values}" 
+                                            onchange="{!c.handlerProjectType}"/>
+                </div>
+                
+            </div>
+
+        </aura:if>
+        <!-- /RT Locksmith  -->
+
+        <!-- RT  Handyman -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Handyman' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:textarea aura:id='fieldId' label="Project Description" placeholder="type here..." value="{!v.appointment.Project_Description__c}"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT  Handyman -->
+
+        <!-- RT  Security Doors  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Security Doors' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Number of Doors" value="{!v.appointment.Number_of_Doors__c}" type="number" step="0"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT Security Doors -->
+
+        <!-- RT   House Cleaning-->
+        <aura:if isTrue="{!v.appoinmType.name == 'House Cleaning' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Frequency Requested" value="{! v.appointment.Frequency_Requested__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Frequency_Requested__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Frequency_Requested__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Home Sq. Footage" value="{!v.appointment.House_Sq_Footage__c}" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Number of Rooms"  value="{! v.appointment.Number_of_Rooms__c }">
+                        <aura:iteration items="{!v.Number_of_Rooms__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Number_of_Rooms__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- RT  House Cleaning-->
+
+        <!-- RT  TV & Internet  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'TV &amp; Internet' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Type of Service" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Do you already have a provider?" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Do_you_already_have_a_provider__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Are you in an existing contract?" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Existing_Contract__c }"/>
+                </div>
+
+                <aura:if isTrue="{! v.appointment.Existing_Contract__c}">
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <lightning:input aura:id='fieldId' label="Months Remaining" value="{!v.appointment.Months_Remaining__c}" type="number" step="0" required="false"/>
+                    </div>
+                </aura:if>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT  TV & Internet  -->
+        
+        <!-- RT  Carpet/Floor Cleaning  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Carpet/Floor Cleaning' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Number of Rooms"  value="{! v.appointment.Number_of_Rooms__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Number_of_Rooms__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Number_of_Rooms__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id='fieldId' label="Square Footage to be cleaned" value="{!v.appointment.Square_Footage_to_be_cleaned__c}" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Flooring type" value="{! v.appointment.Type_of_Service__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Type_of_Service__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Type_of_Service__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT  Carpet/Floor Cleaning  -->
+
+        <!-- RT  Kitchen Remodel  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Kitchen Remodel' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Floorplan" value="{! v.appointment.Floorplan__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Floorplan__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Floorplan__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Cabinets" value="{! v.appointment.Cabinets__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Cabinets__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Cabinets__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Move /Update Appliances" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Move_Update_Appliances__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Countertops" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Update_Replace_Countertops__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update Replace Sinks" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Update_Replace_Sinks__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Flooring" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Update_Replace_Flooring__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Lighting" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Update_Replace_Lighting__c }"/>
+                </div>
+
+            </div>
+
+        </aura:if>
+        <!-- /RT  Kitchen Remodel -->
+
+
+        <!-- RT  Bathroom Remodel  -->
+        <aura:if isTrue="{!v.appoinmType.name == 'Bathroom Remodel' }">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Floorplan" value="{! v.appointment.Bath_Floorplan__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Bath_Floorplan__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Bath_Floorplan__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="New Cabinets Vanity" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.New_Cabinets_Vanity__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Move Install New Shower Bath" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Move_Install_New_Shower_Bath__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Countertops" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Bath_Update_Replace_Countertops__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Move/Install New Toilet" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Move_Install_New_Toilet__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Sinks" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Bath_Update_Replace_Sinks__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Update/Replace Flooring" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Bath_Update_Replace_Flooring__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Show tub combo conversion to shower" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Show_tub_combo_conversion_to_shower__c }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                    <lightning:input    type="toggle" 
+                                        label="Bench Seat" 
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{! v.appointment.Bench_seat__c }"/>
+                </div>
+
+
+            </div>
+
+        </aura:if>
+        <!-- /RT  Bathroom Remodel -->
+
+        <!--APPOINTMENT INFORMATION -->
+        <div>
+            <div class="slds-card slds-box">
+                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+
+                    <lightning:layoutItem padding="horizontal-small">
+                        <lightning:icon iconName="standard:action_list_component" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="page-section page-header ">
+                            <h1 class="slds-text-heading--label">Appointment</h1>
+                            <h2 class="slds-text-heading--medium">Information</h2>
+                        </div>
+                    </lightning:layoutItem>
+    
+                </lightning:layout>
+            </div>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_small">
+                    <p class="slds-text-title" title="System Size">Account</p>
+                    <lightning:button variant="base" label="{!v.account.Name}" title="Base action" onclick="{! c.handlerOpenAccount }"/>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Timeline of Intent" value="{! v.appointment.Timeline_of_Intent__c }">
+                        <option value="">--None--</option>
+                        <aura:iteration items="{!v.Timeline_of_Intent__c}" var="item" >
+                            <option value="{!item.key}" selected="{! v.appointment.Timeline_of_Intent__c == item.key}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:input aura:id="fieldId" type="date" label="Appointment Date" value="{!v.appointmentDate}" onchange="{!c.handlerAppointmentDateTime}"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:select  aura:id='fieldId' label="Appointment Time" value="{! v.appointmentTime }"  onchange="{!c.handlerAppointmentDateTime}">
+                        <option value="{!v.appointmentTime}"> <lightning:formattedText value="{!v.appointmentTime}" /> </option>
+                        <aura:iteration items="{!v.appointmentTimeValues}" var="item" >
+                            <option value="{!item.time}" selected="{! v.appointmentTime == item.time}">
+                                {!item.value}
+                            </option>
+                        </aura:iteration>                                                                                    
+                    </lightning:select>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <lightning:textarea aura:id='fieldId' label="Appointment Notes" placeholder="type here..." value="{!v.appointment.Appointment_Notes__c}"/>
+                </div>
+                <aura:if isTrue="{!v.appointmentSetter == null}">
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <c:diacoLookup  objectAPIName="Personnel__c"                                         
+                                        value="{!v.appointment.Appointment_Setter__c}"
+                                        IconName="custom:custom47" 
+                                        label="Appointment Setter"                                          
+                                        required="false" 
+                                        isRenderDone="{!v.isRenderDone}"/>
+                    </div>
+                </aura:if>
+                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                    <c:diacoLookup  objectAPIName="Personnel__c"                                         
+                                    value="{!v.appointment.Lead_Review__c}"
+                                    IconName="custom:custom47" 
+                                    label="Lead Review"                                          
+                                    required="false"
+                                    isRenderDone="{!v.isRenderDone}"/>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-align_absolute-center slds-m-top_small">
+            <lightning:button   variant="brand" 
+                                label="{!v.appointment.Id != null ? 'Update' : 'New'}" 
+                                title="upsert" 
+                                iconName="{!v.appointment.Id != null ? 'utility:edit' : 'utility:new'}" 
+                                iconPosition="left"
+                                onclick="{! c.handlerUpdate }" />
+        </div>
+            
+        <!--APPOINTMENT INFORMATION -->
+
+    
+</aura:component>

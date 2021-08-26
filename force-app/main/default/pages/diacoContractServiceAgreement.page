@@ -1,0 +1,499 @@
+<!--/**
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		Visualforce responsible of rendering water service contract
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		22/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+**/-->
+<apex:page renderAs="pdf" standardController="Home_Services__c" extensions="RenderContractController"
+           showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <title>Solar Contract</title>
+            
+            <style>
+                @page {
+                size: letter;
+                margin: 5mm 5mm 5mm 5mm;
+                }
+                .page-break {
+                display:block;
+                page-break-after:always;
+                }
+                body {
+                font-family: Arial;
+                font-size: 13px;
+                }
+               
+            </style>
+        </head> 
+        <body>
+            <div class="page-break">
+                <div style='width: 100%'>
+                    <p align="center" style="font-size: 15px;">
+                        <b>Aqua Bright Water, LLC<br/>
+                            664 W. Warner Rd. Tempe AZ 85284<br/>
+                            (480) 776-5085</b>
+                    </p>
+                    <p align="center" style="font-size: 15px;">
+                        <b>SERVICE AGREEMENT</b>
+                    </p>
+                </div>  
+                
+                
+                <p align="justify">
+                    This Agreement is entered into on <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u> between Aqua Bright Water, LLC, and SUBSCRIBER'S listed below.
+                </p>
+                
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td style="border-top: 1px solid black;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;" width="50%">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Subscriber #1:</td>
+                                            <td>{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            
+                            <td style="
+                                       border-top: 1px solid black;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;" width="50%">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Subscriber #2:</td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Home Phone: </td>
+                                            <td>{!Home_Services__c.Account__r.Phone}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Home Phone: </td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_Phone_Number__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 1px solid black;
+                                       border-left: 1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Email:</td>
+                                            <td>{!Home_Services__c.Account__r.PersonEmail}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 1px solid black;
+                                       border-left: 1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Email:</td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_Email__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td style="border-top: 1px solid black;
+                                       border-right: 0px;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                
+                                Service Address: {!Home_Services__c.Account__r.Street__c}
+                                
+                            </td> 
+                            <td style="border-top: 1px solid black;
+                                       border-right: 0px;
+                                       border-bottom: 0px;
+                                       border-left:0px;">
+                                
+                                city: {!Home_Services__c.Account__r.City__c}
+                                
+                            </td> 
+                            <td style="border-top: 1px solid black;
+                                       border-right: 0px;
+                                       border-bottom: 0px;
+                                       border-left:0px;">
+                                
+                                State: {!Home_Services__c.Account__r.State__c}
+                                
+                            </td> 
+                            <td style=" border-top: 1px solid black;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:0px">
+                                
+                                Zip: {!Home_Services__c.Account__r.Zip__c }
+                                
+                            </td> 
+                        </tr>
+                        <tr>
+                            
+                            <td colspan="4" style="border-top: 1px solid black;
+                                                   border-right: 1px solid black;
+                                                   border-bottom: 1px solid black;
+                                                   border-left: 1px solid black">
+                                
+                                Install Date/Time:&nbsp;<apex:outputField value="{!Home_Services__c.Requested_service_Date__c}"/> 
+                                
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td style="height:20px;border-top: 1px solid black;
+                                       border-right: 0px;
+                                       border-bottom: 1px solid black;
+                                       border-left:1px solid black;">
+                                
+                                Billing Address: {!Home_Services__c.Account__r.Primary_Billing_Street_Service__c}
+                                
+                            </td> 
+                            <td style="border-top: 1px solid black;
+                                       border-right: 0px;
+                                       border-bottom: 1px solid black;
+                                       border-left:0px;">
+                                
+                                city: {!Home_Services__c.Account__r.Primary_Billing_City_Service__c}
+                                
+                            </td> 
+                            <td style="border-top: 1px solid black;
+                                       border-right: 0px;
+                                       border-bottom: 1px solid black;
+                                       border-left:0px;">
+                                
+                                State: {!Home_Services__c.Account__r.Primary_Billing_State_Service__c}
+                                
+                            </td> 
+                            <td style=" border-top: 1px solid black;
+                                       border-right: 1px solid black;
+                                       border-bottom: 1px solid black;
+                                       border-left:0px">
+                                
+                                Zip: {!Home_Services__c.Account__r.Primary_Billing_Zip_Code_Service__c }
+                                
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr >
+                            <td colspan="6"><h2 style="text-align: center;">Services List</h2>
+                                <table width="90%" style="margin: 0 auto" >
+                                    
+                                    <tbody>
+                                        <apex:repeat value="{!toLineItems2}" var="LineIte" id="theRepea">
+                                            <tr>
+                                                <td width="50%">
+                                                    -&nbsp;<apex:outputField value="{!LineIte.Name}" />
+                                                </td>
+                                                <td width="20%">
+                                                    Monthly cost:&nbsp;<apex:outputField value="{!LineIte.Total_Sales_Price_p__c}" />
+                                                </td>
+                                                <td align="right" width="30%">
+                                                    Bill Start Date:&nbsp;<apex:outputField value="{!LineIte.Bill_Start_Date__c }" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0;font-size: 12px;">
+                    <tbody>
+                        <tr>
+                            <td width="70%">
+                                <table style="margin: 0 auto;" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Monthly Services Fee: ${! Home_Services__c.Total_Monthly_Investment__c * 12} , plus applicable taxes per month payable in advance each month.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Total amount of agreement:&nbsp;<apex:outputField value="{!Home_Services__c.Total_Monthly_Investment__c}"/> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                The initial term of services will begin on <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u> and will end on &nbsp;<u><apex:outputField value="{!toLineItems2[0].Bill_Start_Date__c }"/></u>&nbsp;
+                                            </td>
+                                        </tr>
+                                        <!--tr>
+                                            <td>Pre Paid monthly service fee: __________</td>
+                                        </tr-->
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td  width="30%" align="center">
+                                Billing Frequency:&nbsp;{!toLineItems2[0].Billing_Frequency__c}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td align="center"><b>ACH RECURRING PAYMENT AUTHORIZATION</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment_Service_System__c == "Checking","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {!Home_Services__c.Method_Of_Payment_Service_System__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td >{!Home_Services__c.Account_Number_Checking_Service__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td >{!Home_Services__c.Routing_Number_New__c}</td>
+                                        </tr> 
+                                        
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment_Service_System__c == "Credit Card","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th >METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {! Home_Services__c.Method_Of_Payment_Service_System__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Card Type:</th>
+                                            <td >
+                                                {! Home_Services__c.Card_Type_Service__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Name on Card (Account):</th>
+                                            <td >{!Home_Services__c.Name_On_Card_Service__c}</td>
+                                            <th >EXP DATE:</th> 
+                                            <td >{!Home_Services__c.Card_Expiration_Month_Service__c &"/"& Home_Services__c.Card_Expiration_Year_Service__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th >Account Number:</th>
+                                            <td >{!Home_Services__c.Account_Number_Credit_Card_Service__c}</td>                                
+                                            <th >CSV:</th>
+                                            <td >{!Home_Services__c.CSV_Service__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <table>
+                                    <tr>
+                                        <td>Authorization Signature(s)</td>
+                                        <td colspan="3">#1 __________________________</td>
+                                        <td colspan="3">#2 __________________________</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <b>Here’s How Recurring Payments Work:</b>
+                </p>
+                <p align="justify">
+                    You authorize regularly scheduled charges to your checking or savings account.  You will be charged the amount indicated above each 
+                    billing period.  A receipt for each payment will be emailed to you. You agree that no prior-notification will be provided unless the 
+                    date or amount changes, in which case you will receive notice from Aqua Bright Water, LLC at least 10 days prior to the payment being
+                    collected. You understand that this authorization will remain in effect until you cancel it in writing, and you agree to notify Aqua 
+                    Bright Water, LLC in writing of any changes in my account information or termination of this authorization at least 15 days prior to 
+                    the next billing date. If the above noted periodic payment dates fall on a weekend or holiday, you understand that the payment may be 
+                    executed on the next business day.  You understand that because this is an electronic transaction, these funds may be withdrawn from
+                    my account as soon as the above noted periodic transaction dates. In the case of an ACH Transaction being rejected for Non Sufficient
+                    Funds (NSF) You understand that  Aqua Bright Water, LLC may at its discretion attempt to process the charge again within 30 days, and 
+                    agree to an additional  $25.00 charge for each attempt returned NSF which will be initiated as a separate transaction from the 
+                    authorized recurring payment. You acknowledge that the origination of ACH transactions to your account must comply with the provisions 
+                    of U.S. law. 
+                </p>
+                <p>
+                    <b>FOR THIS WARRANTY TO BE VALID, YOU MUST:</b>
+                </p>
+                <ul>
+                    <li>Pay the full agreement price and be current on monthly payments.</li>
+                    <li>Retain a copy of the original agreement.</li>
+                    <li>Make the property accessible to AQUA BRIGHT WATER to perform the inspection and repairs.</li>
+                    <li>Not make or permit any alterations, additions, or repairs to the Unit by anyone other than AQUA BRIGHT WATER.</li>
+                </ul>
+                
+            </div>
+            <div class="page-break">
+                <p colspan="6"  align="center">
+                    <b>PLEASE READ THE TERMS AND CONDITIONS ON THE FRONT AND BACK OF THIS AGREEMENT BEFORE SIGNING.</b>
+                </p>
+                <p>
+                    <b>TERM OF AGREEMENT / RENEWAL:</b>
+                </p>
+                <p align="justify">
+                    The term of this agreement will be for a period of twelve <u>12</u> months and will automatically renew for <u>1</u> months thereafter under the same terms and conditions, unless either party gives written notice to the other by certified mail, return receipt requested, of their intention not to renew the agreement at least 30 days prior to the expiration of any term. After the initial twelve (12) month term, AQUA BRIGHT WATER will be permitted from time to time to increase the monthly cost by an amount not to exceed five percent (5%) and Customer agrees to pay such increase.  
+                </p>
+                <p>
+                    <b>PAYMENT TERMS: </b>
+                </p>
+                <p align="justify">
+                    Any payment not received within 10 days from the date of invoice is subject to interest at the highest amount allowed by law until paid. If applicable, sales tax is included in the monthly fee. If AQUA BRIGHT WATER commences litigation or incurs fees to collect payment for any amount due from Customer, Customer agrees to pay reasonable costs and attorney's fees which may accrue. Any and all disputes arising out of this sale will be interpreted under the laws of the state in which the work was performed. 
+                </p>
+                <p>
+                    <b>LIMITED ONE YEAR WARRANTY</b>
+                </p>
+                <p align="justify">
+                    AQUA BRIGHT WATER warrants that all work performed will be completed in a workmanlike manner and that all parts and equipment which are installed are free from defects. In the event that any part of the Reverse Osmosis or Softener (“Unit”) becomes defective, or in the event that any repairs are required, AQUA BRIGHT WATER agrees to make all repairs and supply replacement parts without cost to the Customer for a period of one (1) years from the date the work was done, subject to the exclusions below.  AQUA BRIGHT WATER reserves the option to either replace or repair the Unit, and reserves the right to substitute materials of equal quality at time of replacement, or to use reconditioned parts in fulfillment of this warranty.  Written warranty claims specifying the defect must be received by AQUA BRIGHT WATER within the one (1) year warranty period. All warranty issues must be allowed to be inspected and approved by AQUA BRIGHT WATER before any warranty repair is made. AQUA BRIGHT WATER is not the manufacturer of the Unit, and other than AQUA BRIGHT WATER’s limited warranty, Customer agrees to look exclusively to the manufacturer of the equipment for repairs under its warranty coverage if any.    
+                </p>
+                <p align="justify">
+                    THIS LIMITED WARRANTY IS THE ONLY EXPRESS WARRANTY MADE BY AQUA BRIGHT WATER AND IS IN LIEU OF ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. THIS WARRANTY COVERS ONLY THOSE PARTS OR SERVICES PROVIDED BY AQUA BRIGHT WATER TO THE ORIGINAL PURCHASER NAMED IN THIS AGREEMENT. THIS WARRANTY MAY NOT BE ALTERED OR EXTENDED FOR ANY PURPOSE UNLESS DONE SO IN A WRITING SIGNED BY ALL PARTIES TO THIS AGREEMENT.
+                    <br/><br/>
+                    This Limited Warranty gives you specific legal rights and you may also have other rights which vary from state to state.
+                </p>
+                <p>
+                    <b>LIMITED WARRANTY DOES NOT COVER: </b>
+                </p>
+                <ul>
+                    <li>Repair of any parts or of damage caused by parts not supplied by AQUA BRIGHT WATER.</li>
+                    <li>Repair for any work not performed by AQUA BRIGHT WATER.</li>
+                    <li>Any repairs necessitated as a result of a defect in the materials caused by the manufacturer.</li>
+                    <li>Damage or repair due to ordinary wear and tear.</li>
+                    <li>Damage due to abnormal use or misuse, or caused in any way by the Customer.</li>
+                    <li>Damage due to settling, movement, or structural defects of the Customer’s home.</li>
+                    <li>Damage or defects caused in whole or in part by reason of fire, explosion, flood, acts of God, extreme weather conditions, vandalism, or any other similar causes beyond the control of AQUA BRIGHT WATER.</li>
+                </ul>
+                <p>
+                    <b> LIMITATION OF LIABILITY</b>
+                </p>
+                <p align="justify">
+                    IN NO EVENT WILL AQUA BRIGHT WATER OR ANY OF ITS INDEPENDENT CONTRACTORS BE LIABLE UNDER THIS AGREEMENT TO CUSTOMER OR ANY THIRD PARTY FOR CONSEQUENTIAL, INDIRECT, OR INCIDENTAL DAMAGES ARISING OUT OF ANY BREACH OF THIS AGREEMENT, REGARDLESS OF (A) WHETHER SUCH DAMAGES WERE FORESEEABLE, (B) WHETHER OR NOT CUSTOMER WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, AND (C) THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT, OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.  IN NO EVENT WILL AQUA BRIGHT WATER’S LIABILITY EXCEED THE AMOUNT OF THE TWELVE (12) MONTH PRICE OF THIS AGREEMENT. THIS LIMITATION WILL NOT APPLY IN THE EVENT OF GROSS NEGLIGENCE OR WILLFUL MISCONDUCT BY AQUA BRIGHT WATER OR ITS INDEPENDENT CONTRACTORS IN PERFORMING ITS OBLIGATIONS UNDER THIS AGREEMENT.
+                    
+                </p>
+                <p>
+                    <b>ASSIGNMENT </b>
+                </p>
+                <p  align="justify">
+                    AQUA BRIGHT WATER may freely assign its rights, or delegate its obligations, to an entity that acquires all or substantially all of the business or assets of AQUA BRIGHT WATER, whether by merger, reorganization, acquisition, sale, or otherwise.
+                </p>
+                
+            </div>
+            <div style="margin: 50px 0 0 0">
+                <p>
+                    <b>SERVICE REQUESTS</b>
+                </p>
+                <p  align="justify">
+                    For warranty service, Customer should schedule an inspection of the Unit by calling AQUA BRIGHT WATER at (480) 776-5085.  All warranty inspections and work will be performed during regular business hours, or a service fee will apply.
+                </p>
+                <table  width="100%" style="margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td align="center" width="50%"></td>
+                            <td align="center" width="50%">
+                                <b style="font-size: 10px;">NOTICE OF CANCELLATION<br/>
+                                    YOU, THE BUYER, MAY CANCEL THIS TRANSACTION AT ANY TIME PRIOR TO MIDNIGHT OF THE THIRD BUSINESS DAY AFTER THE DATE OF THIS TRANSACTION.  SEE THE ATTACHED NOTICE OF CANCELLATION FORM FOR AN EXPLANATION OF THIS RIGHT.</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" width="50%"><img src="{!URLFOR($Resource.contractIcon,'contractIcon/sign.png')}" style='float:center' class="changeImage"/></td>
+                            <td width="50%">
+                                <table width="100%">
+                                    <tr>
+                                        <td >--.</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" heigth="5px"><hr/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td >__.</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><hr/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p align="justify" style="font-size: 10px;">
+                    any respect, such invalidity, illegality, or unenforceability shall not affect any other provision of these Alarm.com Terms. The parties intend that all disclaimers of warranties, limitations of liability, and exclusions of damages in these Alarm.com Terms shall be upheld and applied to the maximum extent permitted by law. Alarm.com is an intended third-party beneficiary of these Alarm.com Terms and shall have the right to enforce and/or otherwise invoke any and all provisions set forth in any of these Alarm.com Terms directly. The words “include,” “includes” and “including” shall be deemed to be followed by the phrase “without limitation.”
+                    <br/>
+                    A12. YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOU HAVE NO CONTRACTUAL RELATIONSHIP WHATSOEVER WITH THE UNDERLYING WIRELESS SERVICE PROVIDER OR ITS AFFILIATES OR CONTRACTORS AND THAT YOU ARE NOT A THIRD PARTY BENEFICIARY OF ANY AGREEMENT BETWEEN ALARM.COM AND THE UNDERLYING CARRIER. IN ADDITION, YOU ACKNOWLEDGE AND AGREE THAT THE UNDERLYING CARRIER AND ITS AFFILIATES AND CONTRACTORS SHALL HAVE NO LEGAL, EQUITABLE, OR OTHER LIABILITY OF ANY KIND TO YOU AND YOU HEREBY WAIVE ANY AND ALL CLAIMS OR DEMANDS THEREFOR.  
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

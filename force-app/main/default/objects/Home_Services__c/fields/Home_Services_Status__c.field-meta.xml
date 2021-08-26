@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Home_Services_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Sales Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+                <label>Scheduled</label>
+            </value>
+            <value>
+                <fullName>Reschedule</fullName>
+                <default>false</default>
+                <label>Reschedule</label>
+            </value>
+            <value>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+                <label>Rescheduled</label>
+            </value>
+            <value>
+                <fullName>Confirmation</fullName>
+                <default>false</default>
+                <label>Confirmation</label>
+            </value>
+            <value>
+                <fullName>Dispatch</fullName>
+                <default>false</default>
+                <label>Dispatch</label>
+            </value>
+            <value>
+                <fullName>Dispatched</fullName>
+                <default>false</default>
+                <label>Dispatched</label>
+            </value>
+            <value>
+                <fullName>Bid Submitted</fullName>
+                <default>false</default>
+                <label>Bid Submitted</label>
+            </value>
+            <value>
+                <fullName>Quote</fullName>
+                <default>false</default>
+                <label>Quote</label>
+            </value>
+            <value>
+                <fullName>Rehash</fullName>
+                <default>false</default>
+                <label>Rehash</label>
+            </value>
+            <value>
+                <fullName>Sale Pending</fullName>
+                <default>false</default>
+                <label>Sale Pending</label>
+            </value>
+            <value>
+                <fullName>Closed Lost</fullName>
+                <default>false</default>
+                <label>Closed Lost</label>
+            </value>
+            <value>
+                <fullName>Closed Won</fullName>
+                <default>false</default>
+                <label>Closed Won</label>
+            </value>
+            <value>
+                <fullName>Closed Won/Canceled</fullName>
+                <default>false</default>
+                <label>Closed Won/Canceled</label>
+            </value>
+            <value>
+                <fullName>Closed Won / Service Only</fullName>
+                <default>false</default>
+                <label>Closed Won / Service Only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

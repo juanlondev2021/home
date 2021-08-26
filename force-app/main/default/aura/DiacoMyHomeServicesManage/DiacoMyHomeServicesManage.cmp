@@ -1,0 +1,208 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			My Home Services Component
+* Description:		
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		14/04/2020		Álvaro Ortega (AO)		Component Creation 
+**/-->
+
+<aura:component controller="DiacoMyHomeServicesManageController" implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="companyOptions" type="List" default="[
+                                                              {'label': 'All', 'value': ''},
+                                                              {'label': 'Aqua Bright Water', 'value': 'Aqua Bright Water'},
+                                                              {'label': 'Protection Source', 'value': 'Protection Source'},
+                                                              {'label': 'Latch', 'value': 'Latch'},
+                                                              {'label': 'Jax Pest Control', 'value': 'Jax Pest Control'},
+                                                              {'label': 'N-Ergy', 'value': 'N-Ergy'},
+                                                              {'label': 'Rescue On Air', 'value': 'Rescue On Air'},
+                                                              ]"/> 
+    
+    <aura:attribute name="checkOptions" type="List" default="[
+                                                              {'label': 'All', 'value': 'True,False'},
+                                                              {'label': 'Yes', 'value': 'True'},
+                                                              {'label': 'No',  'value': 'False'},
+                                                              ]"/> 
+    
+    <aura:attribute name="selectedCompany" type="string" default=""/>
+    <aura:attribute name="selectedMarketing" type="string" default="True,False"/>
+    <aura:attribute name="selectedData" type="string" default="True,False"/>
+    <aura:attribute name="selectedAppointment" type="string" default="True,False"/>
+    <aura:attribute name="selectedHotLead" type="string" default="True,False"/>
+    <aura:attribute name="selectedCreatedDateTo" type="date"/>
+    <aura:attribute name="selectedCreatedDateFrom" type="date"/>
+    
+    <aura:attribute name="data" type="list" default="[]"/>
+    <aura:attribute name="originalData" type="list" default="[]"/>
+    <aura:attribute name="allData" type="list" default="[]"/> 
+    <aura:attribute name="columns" type="list"/>
+    
+    <aura:attribute name="draftValues" type="List" default="[]"/>
+    <aura:attribute name="allDraftValues" type="List" default="[]"/>
+    
+    <aura:attribute name="totalPages" type="integer" default="1"/>
+    <aura:attribute name="selectedPage" type="integer" default="1"/>
+    
+    <aura:attribute name="isLoading" type="boolean" default="True"/>
+    <aura:attribute name="isOpenAlert" type="boolean" default="False"/>
+
+    <div id="filters" class="container slds-box slds-theme--default toLeft">
+        <div class="slds-m-bottom_small">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container">
+                            <lightning:icon iconName="custom:custom33" alternativeText="Usuario" size="medium"/>
+                        </span>
+                    </div>
+                    <div class="slds-media__body slds-m-top_xx-small">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="Ticket Manager">Home Service Manage</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aura:if isTrue="{!v.isLoading}">
+            <lightning:spinner style="height: 181%;" alternativeText="Loading" size="medium" />
+        </aura:if>              
+        <div class="slds-box slds-grid slds-wrap">
+            <div class="slds-col slds-grid slds-wrap slds-size_12-of-12">
+                <div class="slds-col slds-size_1-of-12 slds-small-size--1-of-1 slds-medium-size--2-of-2 slds-large-size--1-of-12 slds-p-horizontal_x-small slds-m-top_large">
+                    <lightning:button variant="brand" name="Clear" label="Clear" onclick="{!c.clearFilter}"/>
+                </div>
+                <div class="slds-col slds-size_11-of-12 slds-small-size--1-of-1 slds-medium-size--2-of-2 slds-large-size--11-of-12 slds-p-horizontal_x-small">
+                    <lightning:radioGroup aura:id="companyId"
+                                          name="Company"
+                                          label="Company"
+                                          options="{! v.companyOptions}"
+                                          type="button"
+                                          onchange="{!c.searching}"
+                                          value="{!v.selectedCompany}"/>
+                </div>
+            </div> 
+            
+            <div class="slds-col slds-grid slds-wrap slds-size_12-of-12 slds-m-top_medium slds-m-left_x-small" style="font-size: 12px;font-weight: bold;margin-bottom: -5px;">
+                Created Date
+            </div>
+            
+            <div class="slds-col slds-grid slds-wrap slds-size_12-of-12">
+                <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-2 slds-medium-size--6-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small">
+                    <lightning:input type="date" name="From" label="From" value="{!v.selectedCreatedDateFrom}" onchange="{!c.searching}"/>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-2 slds-medium-size--6-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small">
+                    <lightning:input type="date" name="To" label="To" value="{!v.selectedCreatedDateTo}" onchange="{!c.searching}"/>
+                </div>
+                
+                <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small">
+                    <!--lightning:input type="checkbox" label="Marketing" name="Marketing"  checked="{!v.selectedMarketing}" onchange="{!c.searching}"/-->
+                    <lightning:radioGroup aura:id="marketingId"
+                                          name="Marketing"
+                                          label="Marketing"
+                                          options="{! v.checkOptions}"
+                                          type="button"
+                                          onchange="{!c.searching}"
+                                          value="{!v.selectedMarketing}"/>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small">
+                    <!--lightning:input type="checkbox" label="Data" name="Data"  checked="{!v.selectedData}" onchange="{!c.searching}"/-->
+                    <lightning:radioGroup aura:id="dataId"
+                                          name="Data"
+                                          label="Data"
+                                          options="{! v.checkOptions}"
+                                          type="button"
+                                          onchange="{!c.searching}"
+                                          value="{!v.selectedData}"/>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small">
+                    <!--lightning:input type="checkbox" label="Appointment" name="Appointment"  checked="{!v.selectedAppointment}" onchange="{!c.searching}"/-->
+                    <lightning:radioGroup aura:id="appointmentId"
+                                          name="Appointment"
+                                          label="Appointment"
+                                          options="{! v.checkOptions}"
+                                          type="button"
+                                          onchange="{!c.searching}"
+                                          value="{!v.selectedAppointment}"/>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small">
+                    <!--lightning:input type="checkbox" label="Hot Lead" name="Hot Lead"  checked="{!v.selectedHotLead}" onchange="{!c.searching}"/-->
+                    <lightning:radioGroup aura:id="hotLeadId"
+                                          name="Hot Lead"
+                                          label="Hot Lead"
+                                          options="{! v.checkOptions}"
+                                          type="button"
+                                          onchange="{!c.searching}"
+                                          value="{!v.selectedHotLead}"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slds-align_absolute-center slds-m-top_small">
+            <div style="max-width: 100%;" class="slds-box slds-col slds-size_12-of-12 ">
+                
+                <lightning:buttonGroup>
+                    <span class="slds-page-header__title slds-truncate slds-m-top_xx-small slds-m-bottom_x-small" style="font-size:12px">{!v.allData.length +' Home Services • Page '+ v.selectedPage + ' / ' + v.totalPages }</span>
+                    <div class="slds-m-left_small slds-m-bottom_x-small">
+                        <lightning:buttonIcon iconName="utility:left" alternativeText="Left" variant="bare" size="medium" onclick="{! c.backPage }"/>
+                        <lightning:buttonIcon iconName="utility:right" alternativeText="Right" variant="bare" size="medium" onclick="{! c.nextPage }"/>
+                    </div>
+                </lightning:buttonGroup>
+                <div style="height:400px; border-bottom: 1px solid #c7c7c7;" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                    <lightning:datatable keyField="id"
+                                         data="{! v.data }"
+                                         columns="{! v.columns }"
+                                         draftValues="{! v.allDraftValues }"
+                                         hideCheckboxColumn="true"
+                                         showRowNumberColumn="true"
+                                         onsave="{! c.handleSaveEdition }"
+                                         oncancel="{! c.handleCancelEdition }"
+                                         oncellchange="{! c.handleCellChange }" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <aura:if isTrue="{!v.isOpenAlert}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModalAlert }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Alert</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-align_absolute-center slds-m-around_x-small">
+                        Save/Cancel the changes first
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######--> 
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="brand" 
+                                      label="Close"
+                                      title="Close"
+                                      onclick="{! c.closeModalAlert}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+</aura:component>

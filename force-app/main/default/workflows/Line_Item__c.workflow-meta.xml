@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>City_Tax</fullName>
+        <field>City_Tax_Amount__c</field>
+        <formula>IF(Product__r.Taxable__c, Total_Sales_Price_p__c *  City_Tax_Rate__c, 0 )</formula>
+        <name>City Tax</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>County_Tax</fullName>
+        <field>County_Tax_Amount__c</field>
+        <formula>IF(Product__r.Taxable__c, Total_Sales_Price_p__c *   Home_Service__r.Account__r.County_Lookup__r.Tax_Rate__c   ,0)</formula>
+        <name>County Tax</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Cost</fullName>
+        <field>Cost__c</field>
+        <formula>Total_Cost__c +  Total_Installation_Cost__c</formula>
+        <name>Update Cost</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Line Item</fullName>
+        <actions>
+            <name>City_Tax</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>County_Tax</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Cost</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>Name &lt;&gt; null</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Gift_Card_Orders</fullName>
+    <columns>NAME</columns>
+    <columns>Date_Ordered__c</columns>
+    <columns>Date_Received__c</columns>
+    <columns>Branch_Location__c</columns>
+    <columns>Quantity_Ordered__c</columns>
+    <columns>Fulfilled__c</columns>
+    <columns>Warehouse__c</columns>
+    <columns>Office__c</columns>
+    <columns>Driver_Assigned__c</columns>
+    <columns>Delivered__c</columns>
+    <columns>Order_Complete__c</columns>
+    <columns>Parent_Gift_Card_Order__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Branch_Location__c</field>
+        <operation>equals</operation>
+        <value>TX-Denton_Collin</value>
+    </filters>
+    <filters>
+        <field>Date_Ordered__c</field>
+        <operation>lessThan</operation>
+        <value>7/30/2016</value>
+    </filters>
+    <label>All Gift Card Orders</label>
+</ListView>

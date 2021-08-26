@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Or_are_you_in_need_of_exterior_painting__c</fullName>
+    <description>(Painting (Exterior/Interior))</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Painting (Exterior/Interior))</inlineHelpText>
+    <label>Or are you in need of exterior painting?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Painting (Exterior/Interior) - Exterior - complete</fullName>
+                <default>false</default>
+                <label>Painting (Exterior/Interior) - Exterior - complete</label>
+            </value>
+            <value>
+                <fullName>Painting (Exterior/Interior) - Exterior - partial</fullName>
+                <default>false</default>
+                <label>Painting (Exterior/Interior) - Exterior - partial</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

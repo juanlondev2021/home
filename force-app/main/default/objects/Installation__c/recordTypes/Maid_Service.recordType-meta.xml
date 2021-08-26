@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maid_Service</fullName>
+    <active>true</active>
+    <label>Maid Service</label>
+    <picklistValues>
+        <picklist>Appt_Installation_Status__c</picklist>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dispatched</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation_Call_Status__c</picklist>
+        <values>
+            <fullName>Attempted Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed Call</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Document_Status__c</picklist>
+        <values>
+            <fullName>Documents Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Reviewed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Revisions</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HOA_Approval_Required__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Installation_Status__c</picklist>
+        <values>
+            <fullName>Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Installed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Permit_Required__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Permitting_Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revisions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Plans_Status__c</picklist>
+        <values>
+            <fullName>Appoved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reviewed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revisions</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Project_Status__c</picklist>
+        <values>
+            <fullName>HOA%2FPermit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In House</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inter-Company Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Materials Delay%2FSelection</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On Track</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendor Extension</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QC_Call_Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reschedule_Call_Status__c</picklist>
+        <values>
+            <fullName>Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rescheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

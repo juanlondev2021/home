@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Qualified_Reasons_Dispatch__c</fullName>
+    <externalId>false</externalId>
+    <label>Non-Qualified Reasons</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Appointment_results__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bills too low</fullName>
+                <default>false</default>
+                <label>Bills too low</label>
+            </value>
+            <value>
+                <fullName>Low credit</fullName>
+                <default>false</default>
+                <label>Low credit</label>
+            </value>
+            <value>
+                <fullName>Low income</fullName>
+                <default>false</default>
+                <label>Low income</label>
+            </value>
+            <value>
+                <fullName>Does not meet requirements</fullName>
+                <default>false</default>
+                <label>Does not meet requirements</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>NQ</controllingFieldValue>
+            <valueName>Bills too low</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>NQ</controllingFieldValue>
+            <valueName>Low credit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>NQ</controllingFieldValue>
+            <valueName>Low income</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>NQ</controllingFieldValue>
+            <valueName>Does not meet requirements</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

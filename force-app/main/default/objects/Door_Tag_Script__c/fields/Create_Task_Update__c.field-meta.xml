@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Task_Update__c</fullName>
+    <description>It is a custom picklist field</description>
+    <externalId>false</externalId>
+    <label>Create Task Update</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DTS Updated</fullName>
+                <default>false</default>
+                <label>DTS Updated</label>
+            </value>
+            <value>
+                <fullName>Email Sent</fullName>
+                <default>false</default>
+                <label>Email Sent</label>
+            </value>
+            <value>
+                <fullName>Task Created</fullName>
+                <default>false</default>
+                <label>Task Created</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

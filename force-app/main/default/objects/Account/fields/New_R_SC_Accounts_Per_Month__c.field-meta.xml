@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_R_SC_Accounts_Per_Month__c</fullName>
+    <externalId>false</externalId>
+    <label>New R/SC Accounts Per Month</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>0</fullName>
+                <default>false</default>
+                <label>0</label>
+            </value>
+            <value>
+                <fullName>1 To 5</fullName>
+                <default>false</default>
+                <label>1 To 5</label>
+            </value>
+            <value>
+                <fullName>6 To 10</fullName>
+                <default>false</default>
+                <label>6 To 10</label>
+            </value>
+            <value>
+                <fullName>11-25</fullName>
+                <default>false</default>
+                <label>11-25</label>
+            </value>
+            <value>
+                <fullName>26-50</fullName>
+                <default>false</default>
+                <label>26-50</label>
+            </value>
+            <value>
+                <fullName>51-100</fullName>
+                <default>false</default>
+                <label>51-100</label>
+            </value>
+            <value>
+                <fullName>100+</fullName>
+                <default>false</default>
+                <label>100+</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

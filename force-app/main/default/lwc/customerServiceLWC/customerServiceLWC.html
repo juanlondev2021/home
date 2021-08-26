@@ -1,0 +1,339 @@
+<!--
+  @description       : 
+  @author            : William Aldana
+  @group             : 
+  @last modified on  : 12-09-2020
+  @last modified by  : William Aldana
+  Modifications Log 
+  Ver   Date         Author           Modification
+  1.0   08-21-2020   William Aldana   Initial Version
+  1.0   09-04-2020   Fabian Pineda    Added current date as default for new calls; improved table user experience
+  2.0	09-08-2020   Fabian Pineda    Replaced datatable with a SLDS Timeline
+  3.0   04-12-2020   William Aldana	  Changed object to record edit - All LWC function changed	 
+-->
+<template>
+	<lightning-card title="Customer Services" icon-name="standard:contact" >
+		<div style="padding: 1em 0 2em 0;">
+			<lightning-button variant="brand" label="Create Call" title="create Create Call" onclick={handleCreateCall}
+			class="slds-var-m-left_x-small"></lightning-button>
+		</div>
+
+		<!-- Call Timeline -->
+		<template if:true={timelineData}>
+			<ul class="slds-timeline">
+				<template iterator:it={timelineData}>
+					<!-- Timeline Item -->
+					<li key={it.value.Id}>
+						<div class={it.value.timelineCSSClasses}>
+							<span class="slds-assistive-text">Call information</span>
+							<div class="slds-media">
+								<div class="slds-media__figure">
+									<!-- Expand/Collapse Button -->
+									<button class="slds-button slds-button_icon" title="Toggle details" aria-controls={it.value.htmlDetailsId} aria-expanded={it.value.detailsExpanded} data-index={it.index} onclick={handleExpandCollapseCall}>
+										<svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden="true">
+											<use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#switch"></use>
+										</svg>
+										<span class="slds-assistive-text">Toggle details</span>
+									</button>
+									<!-- /Expand/Collapse Button -->
+									<!-- Item Icon -->
+									<div class="slds-icon_container slds-icon-standard-log-a-call slds-timeline__icon" title="Call">
+										<svg class="slds-icon slds-icon_small" aria-hidden="true">
+											<use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#log_a_call"></use>
+										</svg>
+									</div>
+									<!-- /Item Icon -->
+								</div>
+								<div class="slds-media__body">
+									<div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+										<!-- Item Title -->
+										<div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+											<h3 class="slds-truncate" title={it.value.Type}>
+												<a href="javascript:void(0);" data-index={it.index} onclick={handleCallClick}>
+													<strong>{it.value.Type}</strong>
+												</a>
+											</h3>
+										</div>
+										<!-- /Item Title -->
+										<div class="slds-timeline__actions slds-timeline__actions_inline">
+											<!-- Call Date -->
+											<template if:true={it.value.Call_Timestamp__c}>
+												<p class="slds-timeline__date">
+													<lightning-formatted-date-time value={it.value.Call_Timestamp__c} year="numeric" month="numeric" day="numeric" hour="numeric" minute="numeric" hour12="true" time-zone={timezone}></lightning-formatted-date-time>
+												</p>
+											</template>
+											<!-- /Call Date -->
+											<div class={it.value.menuClasses}>
+												<!-- Popup Button -->
+												<button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" aria-haspopup="true" data-index={it.index} onclick={handleOpenCloseMenu} title="More options for this item">
+													<svg class="slds-button__icon" aria-hidden="true">
+														<use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#down"></use>
+													</svg>
+													<span class="slds-assistive-text">More options for this item</span>
+												</button>
+												<!-- /Popup Button -->
+												<!-- Popup Menu -->
+												<div class="slds-dropdown slds-dropdown_right">
+													<ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+														<li class="slds-dropdown__item" role="presentation">
+															<a href="javascript:void(0);" role="menuitem" data-index={it.index} onclick={handleEditCall} tabindex="0">
+																<span class="slds-truncate" title="Menu Item One">Edit</span>
+															</a>
+														</li>
+														<li class="slds-dropdown__item" role="presentation">
+															<a href="javascript:void(0);" role="menuitem" data-index={it.index} onclick={handleDeleteCall} tabindex="-1">
+																<span class="slds-truncate" title="Menu Item Two">Delete</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+												<!-- /Popup Menu -->
+											</div>
+										</div>
+									</div>
+									<!-- Summary -->
+									<template if:false={it.value.expanded}>
+										<template if:true={it.value.Call_Status__c}>
+											<p class="slds-m-horizontal_xx-small">
+												Call status: {it.value.Call_Status__c}
+											</p>
+										</template>
+									</template>
+									<!-- /Summary -->
+									<!-- Details -->
+									<article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_medium" id={it.value.htmlDetailsId} aria-hidden={it.value.detailsHidden}>
+										<ul class="slds-list_horizontal slds-wrap">
+											<template if:true={it.value.Type}>
+												<li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+													<span class="slds-text-title slds-p-bottom_x-small">Call Type</span>
+													<span class="slds-text-body_medium slds-truncate">
+														{it.value.Type}
+													</span>
+												</li>
+											</template>
+											<template if:true={it.value.Call_Status__c}>
+												<li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+													<span class="slds-text-title slds-p-bottom_x-small">Call Status</span>
+													<span class="slds-text-body_medium slds-truncate">
+														{it.value.Call_Status__c}
+													</span>
+												</li>
+											</template>
+											<template if:true={it.value.Confirmation__c}>
+												<li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+													<span class="slds-text-title slds-p-bottom_x-small">Call Follow-Up Required</span>
+													<span class="slds-text-body_medium slds-truncate">
+														{it.value.Confirmation__c}
+													</span>
+												</li>
+											</template>
+											<template if:true={it.value.Confirmation_DateTime__c}>
+													<li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+														<span class="slds-text-title slds-p-bottom_x-small">Call Follow-Up Date</span>
+														<span class="slds-text-body_medium slds-truncate">
+															<lightning-formatted-date-time value={it.value.Confirmation_DateTime__c} year="numeric" month="numeric" day="numeric" hour="numeric" minute="numeric" hour12="true" time-zone={timezone}></lightning-formatted-date-time>
+														</span>
+													</li>
+											</template>
+										</ul>
+										<template if:true={it.value.Description}>
+											<div>
+												<span class="slds-text-title">Notes</span>
+												<p class="slds-p-top_x-small">{it.value.Description}</p>
+											</div>
+										</template>
+									</article>
+									<!-- /Details -->
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- /Timeline Item -->
+				</template>
+			</ul>
+		</template>
+
+	   <!-- Spinner -->
+	   <div if:true={showLoadingSpinner}>
+		   <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	   </div>
+	   
+	<template if:true={isUpdateRecord}>
+		<!-- Modal/Popup Box LWC starts here -->
+		<section style="bottom: unset;" role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeCreateModal}>
+						<lightning-icon icon-name="utility:close"
+							alternative-text="close"
+							variant="inverse"
+							size="small" ></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Modify Customer Call</h2>
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+					<lightning-record-view-form object-api-name="Task">
+						<lightning-layout multiple-rows="true">
+							<lightning-layout-item size="12" medium-device-size="12" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Call Date/Time</span>
+										</label>
+										<lightning-input type="datetime" name="callDateTime" onchange={genericOnChange} value={callDT}></lightning-input>
+									</div>
+								</div>
+						</lightning-layout-item>	
+						<lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+							<div class="page-section page-header">
+								<div class="slds-global-header__item" style="width: 100%">
+									<label class="slds-form-element__label">
+										<span class="">Call Type</span>
+									</label>
+									<lightning-combobox name="type" value={SltType} options={types} onchange={genericOnChange} ></lightning-combobox>
+								</div>
+							</div>
+						</lightning-layout-item>
+ 						<lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Status</span>
+										</label>
+										<lightning-combobox name="status" value={SltStatus} options={statuses} onchange={genericOnChange} ></lightning-combobox>
+									</div>
+								</div>
+							</lightning-layout-item>
+							<lightning-layout-item size="12" medium-device-size="12" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<lightning-textarea name="comments" value={CommentsVal} label="Comments" onchange={genericOnChange}></lightning-textarea>
+									</div>
+								</div>
+							</lightning-layout-item>
+							<lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Follow Up Required</span>
+										</label>
+										<lightning-combobox name="followUpCallRequired" value={SltFUR} options={yesOrNo} onchange={handleFollowUp} ></lightning-combobox>
+									</div>
+								</div>
+							</lightning-layout-item>
+							<lightning-layout-item size="12" medium-device-size="6" padding="around-small" if:true={isFollowUp}>
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Follow up Date/Time</span>
+										</label>
+										<lightning-input type="datetime" name="followUpDateTime" value={FUDT} onchange={genericOnChange}></lightning-input>
+									</div>
+								</div>
+							</lightning-layout-item>	
+						</lightning-layout>
+					</lightning-record-view-form>  
+				</div>
+				<!--- Modal/Popup Box LWC footer starts here -->
+				<footer class="slds-modal__footer">
+					<button class="slds-button slds-button_neutral" onclick={closeUpdateModal} title="Cancel">Cancel</button>
+					<button class="slds-button slds-button_brand" onclick={submitDetails} title="Submit">Submit</button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<template if:true={isCreateRecord}>
+		<!-- Modal/Popup Box LWC starts here -->
+		<section style="bottom: unset;" role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeCreateModal}>
+						<lightning-icon icon-name="utility:close"
+							alternative-text="close"
+							variant="inverse"
+							size="small" ></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Create Customer Call</h2>
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+					<lightning-record-view-form object-api-name="Task">
+						<lightning-layout multiple-rows="true">
+							<lightning-layout-item size="12" medium-device-size="12" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Call Date/Time</span>
+										</label>
+										<lightning-input type="datetime" name="callDateTime" onchange={genericOnChange}></lightning-input>
+									</div>
+								</div>
+						</lightning-layout-item>	
+						<lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+							<div class="page-section page-header">
+								<div class="slds-global-header__item" style="width: 100%">
+									<label class="slds-form-element__label">
+										<span class="">Call Type</span>
+									</label>
+									<lightning-combobox name="type" options={types} onchange={genericOnChange} ></lightning-combobox>
+								</div>
+							</div>
+						</lightning-layout-item>
+ 						<lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Status</span>
+										</label>
+										<lightning-combobox name="status" options={statuses} onchange={genericOnChange} ></lightning-combobox>
+									</div>
+								</div>
+							</lightning-layout-item>
+							<lightning-layout-item size="12" medium-device-size="12" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<lightning-textarea name="comments" value="" label="Comments" onchange={genericOnChange}></lightning-textarea>
+									</div>
+								</div>
+							</lightning-layout-item>
+							<lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Follow Up Required</span>
+										</label>
+										<lightning-combobox name="followUpCallRequired" options={yesOrNo} onchange={handleFollowUp} ></lightning-combobox>
+									</div>
+								</div>
+							</lightning-layout-item>
+							<lightning-layout-item size="12" medium-device-size="6" padding="around-small" if:true={isFollowUp}>
+								<div class="page-section page-header">
+									<div class="slds-global-header__item" style="width: 100%">
+										<label class="slds-form-element__label">
+											<span class="">Follow up Date/Time</span>
+										</label>
+										<lightning-input type="datetime" name="followUpDateTime" onchange={genericOnChange}></lightning-input>
+									</div>
+								</div>
+							</lightning-layout-item>	
+						</lightning-layout>
+					</lightning-record-view-form>  
+				</div>
+				<!--- Modal/Popup Box LWC footer starts here -->
+				<footer class="slds-modal__footer">
+					<button class="slds-button slds-button_neutral" onclick={closeCreateModal} title="Cancel">Cancel</button>
+					<button class="slds-button slds-button_brand" onclick={submitDetails} title="Submit">Submit</button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+   </lightning-card>   
+</template>

@@ -1,0 +1,52 @@
+<!--
+* Diaco
+* Project:			Interest Manager
+* Description:		Create and update appointments
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		08-12-2020		Jull Quintero           Initial implementation of the class.
+-->
+<aura:component controller="DiacoInterestWebformController">
+
+<aura:attribute name="loaded" type="Boolean" default="false" />
+<aura:handler name="change" value="{!v.open}" action="{!c.doInit}" />
+
+<aura:attribute name="open"  type="Boolean" default="false" required="true"/>
+<aura:attribute name="appointment" type="Appointment__c" required="true"/>
+<aura:attribute name="appoinmType" type="object" required="true"/>
+<aura:attribute name="account" type="Account" required="true"/>
+<aura:attribute name="appointmentSetter" type="string" description="PERSONEL ID"/> 
+
+<!-- CMP FORM  RECORDTYPE  -->
+<aura:attribute name="handlerDoinit" type="Boolean" default="false"/>
+<aura:attribute name="picklistValues" type="list" required="true"/>
+<aura:attribute name="picklistValuesByRecordType" type="list" required="true"/>
+<aura:attribute name="apiNames" type="List" />
+
+<!-- EVENT UPSERT APPOINTMENT -->
+<aura:handler name="upsertAppointment" event="c:DiacoEventInterestsWebForm" action="{! c.handlerUpdate }" />       
+
+<div class="slds-box slds-m-bottom_x-large">
+    <div class="slds-card">
+
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner />
+        </aura:if>
+
+        <!-- INFO BY RECORDTYPE-->
+        <c:DiacoHomeServicesFlow_RecordtypeFields   open="{!v.handlerDoinit}"
+                                                    appointment="{!v.appointment}" 
+                                                    appoinmType="{!v.appoinmType}"
+                                                    account="{!v.account}"
+                                                    appointmentSetter="{!v.appointmentSetter}"
+                                                    picklistValues= "{!v.picklistValues }" 
+                                                    picklistValuesByRecordType="{!v.picklistValuesByRecordType}"
+                                                    apiNames="{!v.apiNames}"/>
+        <!-- INFO BY RECORDTYPE-->
+    </div>
+</div>
+
+</aura:component>

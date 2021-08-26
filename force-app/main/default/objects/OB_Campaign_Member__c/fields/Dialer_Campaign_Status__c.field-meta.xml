@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dialer_Campaign_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(fVerbal_Consent_Flag__c = True,Status_Post__c = &quot;&quot;), &apos;Processing&apos;, 
+IF(AND(fVerbal_Consent_Flag__c = True,Status_Post__c &lt;&gt; &quot;&quot;), &apos;Completed&apos;, &apos;Invalid&apos;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dialer Campaign Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Cadence_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Rule will check this box once a campaign member in a specific industry is eligible to be dialed and has been sent to the dialer list.</description>
+    <externalId>false</externalId>
+    <label>Call Cadence Sent</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

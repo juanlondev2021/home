@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Spec_Card__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>A Spec card is/was made for this Business</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check if this business will have a spec card made.</inlineHelpText>
+    <label>Spec Card</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

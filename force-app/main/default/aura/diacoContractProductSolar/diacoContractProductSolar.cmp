@@ -1,0 +1,45 @@
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="lineitem" type="Line_Item__c" />
+    <aura:attribute name="Product" type="Product__c" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:if isTrue="{!v.lineitem.Active__c}">
+        <div class="slds-col slds-size_1-of-2 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+            <div class="slds-col slds-size_1-of-2 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                <fieldset class="slds-box slds-theme--default slds-m-top--medium">
+                    <lightning:card variant="Narrow" title="{!v.lineitem.Name}" iconName="standard:account">
+                        <aura:set attribute="actions">
+                            <lightning:buttonIcon iconName="utility:close" variant="border-filled" onclick="{!c.deleteItem}" alternativeText="Show More"/>
+                        </aura:set>
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_10-of-12 slds-align_absolute-center"
+                                                 name="Name" 
+                                                 placeholder="Name"
+                                                 value="{!v.lineitem.Name}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_10-of-12 slds-align_absolute-center"
+                                                 name="Name" 
+                                                 placeholder="Quantity"
+                                                 onchange="{!c.totalPrice}"
+                                                 value="{!v.lineitem.Quantity__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 formatter="currency"
+                                                 readOnly="true"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                                                 name="Total Sales Price" 
+                                                 label="Total Sales Price"
+                                                 value="{!v.lineitem.Total_Sales_Price_p__c}"/>
+                            </div>
+                        </div>
+                    </lightning:card>
+                </fieldset>
+            </div>
+        </div>
+    </aura:if>  
+</aura:component>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Type__c</fullName>
+    <description>It contains values for Case Sub Type</description>
+    <externalId>false</externalId>
+    <label>Sub Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Headsets</fullName>
+                <default>false</default>
+                <label>Headsets</label>
+            </value>
+            <value>
+                <fullName>Mouse/Key Board/Monitors</fullName>
+                <default>false</default>
+                <label>Mouse/Key Board/Monitors</label>
+            </value>
+            <value>
+                <fullName>Printers</fullName>
+                <default>false</default>
+                <label>Printers</label>
+            </value>
+            <value>
+                <fullName>Bright pattern</fullName>
+                <default>false</default>
+                <label>Bright pattern</label>
+            </value>
+            <value>
+                <fullName>Salesforce</fullName>
+                <default>false</default>
+                <label>Salesforce</label>
+            </value>
+            <value>
+                <fullName>Clearview</fullName>
+                <default>false</default>
+                <label>Clearview</label>
+            </value>
+            <value>
+                <fullName>DNC</fullName>
+                <default>false</default>
+                <label>DNC</label>
+            </value>
+            <value>
+                <fullName>Driver Issues</fullName>
+                <default>false</default>
+                <label>Driver Issues</label>
+            </value>
+            <value>
+                <fullName>Data Issues</fullName>
+                <default>false</default>
+                <label>Data Issues</label>
+            </value>
+            <value>
+                <fullName>Media - Routes to Travis</fullName>
+                <default>false</default>
+                <label>Media - Routes to Travis</label>
+            </value>
+            <value>
+                <fullName>Police Officers/Public Relations</fullName>
+                <default>false</default>
+                <label>Police Officers/Public Relations</label>
+            </value>
+            <value>
+                <fullName>Pen</fullName>
+                <default>false</default>
+                <label>Pen</label>
+            </value>
+            <value>
+                <fullName>Notepad</fullName>
+                <default>false</default>
+                <label>Notepad</label>
+            </value>
+            <value>
+                <fullName>New Art work</fullName>
+                <default>false</default>
+                <label>New Art work</label>
+            </value>
+            <value>
+                <fullName>Proofs</fullName>
+                <default>false</default>
+                <label>Proofs</label>
+            </value>
+            <value>
+                <fullName>Request for docusign</fullName>
+                <default>false</default>
+                <label>Request for docusign</label>
+            </value>
+            <value>
+                <fullName>Red Line Agreement</fullName>
+                <default>false</default>
+                <label>Red Line Agreement</label>
+            </value>
+            <value>
+                <fullName>Status Update</fullName>
+                <default>false</default>
+                <label>Status Update</label>
+            </value>
+            <value>
+                <fullName>Portal</fullName>
+                <default>false</default>
+                <label>Portal</label>
+            </value>
+            <value>
+                <fullName>Surveys</fullName>
+                <default>false</default>
+                <label>Surveys</label>
+            </value>
+            <value>
+                <fullName>Telemarketing/Lead Qual</fullName>
+                <default>false</default>
+                <label>Telemarketing/Lead Qual</label>
+            </value>
+            <value>
+                <fullName>Billing</fullName>
+                <default>false</default>
+                <label>Billing</label>
+            </value>
+            <value>
+                <fullName>Changes to Art Work</fullName>
+                <default>false</default>
+                <label>Changes to Art Work</label>
+            </value>
+            <value>
+                <fullName>Hot Leads</fullName>
+                <default>false</default>
+                <label>Hot Leads</label>
+            </value>
+            <value>
+                <fullName>Client Products/Services</fullName>
+                <default>false</default>
+                <label>Client Products/Services</label>
+            </value>
+            <value>
+                <fullName>Consumer Attorney complaint</fullName>
+                <default>false</default>
+                <label>Consumer Attorney complaint</label>
+            </value>
+            <value>
+                <fullName>Inbound Telephone Call</fullName>
+                <default>false</default>
+                <label>Inbound Telephone Call</label>
+            </value>
+            <value>
+                <fullName>Email Creation</fullName>
+                <default>false</default>
+                <label>Email Creation</label>
+            </value>
+            <value>
+                <fullName>Salesforce Activation</fullName>
+                <default>false</default>
+                <label>Salesforce Activation</label>
+            </value>
+            <value>
+                <fullName>Email Deactivation</fullName>
+                <default>false</default>
+                <label>Email Deactivation</label>
+            </value>
+            <value>
+                <fullName>Salesforce Deactivation</fullName>
+                <default>false</default>
+                <label>Salesforce Deactivation</label>
+            </value>
+            <value>
+                <fullName>Account Data Model Issues</fullName>
+                <default>false</default>
+                <label>Account Data Model Issues</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>New Employee</controllingFieldValue>
+            <valueName>Email Creation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>New Employee</controllingFieldValue>
+            <valueName>Salesforce Activation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Termination</controllingFieldValue>
+            <valueName>Email Deactivation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Employee Termination</controllingFieldValue>
+            <valueName>Salesforce Deactivation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hardware</controllingFieldValue>
+            <valueName>Headsets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hardware</controllingFieldValue>
+            <valueName>Mouse/Key Board/Monitors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hardware</controllingFieldValue>
+            <valueName>Printers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Salesforce</controllingFieldValue>
+            <valueName>Account Data Model Issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compliance</controllingFieldValue>
+            <valueName>DNC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compliance</controllingFieldValue>
+            <valueName>Driver Issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compliance</controllingFieldValue>
+            <valueName>Data Issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compliance</controllingFieldValue>
+            <valueName>Media - Routes to Travis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Compliance</controllingFieldValue>
+            <valueName>Police Officers/Public Relations</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Supplies</controllingFieldValue>
+            <valueName>Pen</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Supplies</controllingFieldValue>
+            <valueName>Notepad</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Software</controllingFieldValue>
+            <valueName>Bright pattern</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Software</controllingFieldValue>
+            <valueName>Salesforce</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Software</controllingFieldValue>
+            <valueName>Clearview</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Art Work</controllingFieldValue>
+            <valueName>New Art work</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Art Work</controllingFieldValue>
+            <valueName>Proofs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Docusign</controllingFieldValue>
+            <valueName>Request for docusign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Docusign</controllingFieldValue>
+            <valueName>Red Line Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Docusign</controllingFieldValue>
+            <valueName>Status Update</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Portal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Surveys</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Telemarketing/Lead Qual</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Billing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Changes to Art Work</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Hot Leads</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client Request</controllingFieldValue>
+            <valueName>Client Products/Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Irate Consumer</controllingFieldValue>
+            <valueName>Inbound Telephone Call</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Attorney General</controllingFieldValue>
+            <valueName>Consumer Attorney complaint</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

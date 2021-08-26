@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Completed__c</fullName>
+    <description>Used to distinguish between delivered and non delivered hang Status</description>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL( Hung_Status__c , &quot;Hung&quot;) , True, False)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Delivery Completed</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

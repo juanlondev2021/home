@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Capital_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Capital Source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sell Your Accounts</fullName>
+                <default>false</default>
+                <label>Sell Your Accounts</label>
+            </value>
+            <value>
+                <fullName>Debt Financing (Bank Loan)</fullName>
+                <default>false</default>
+                <label>Debt Financing (Bank Loan)</label>
+            </value>
+            <value>
+                <fullName>Self Funded</fullName>
+                <default>false</default>
+                <label>Self Funded</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

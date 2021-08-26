@@ -1,0 +1,136 @@
+<!--***************************************************************************************************************
+Description : Display the case details in readonly mode and provide options to add comment to the particular case.
+********************************************************************************************************************-->
+<apex:page controller="nuHome_Case_Obj_Controller" tabStyle="Cases__tab"  action="{!getComment}">
+    <style>
+        .detailcol1{
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+        font-weight: bold;
+        padding-right: 60px;
+        }
+        .detailcol2{
+        display:inline-block;
+        width:40%;
+        text-align:left;
+        }
+        .textareacustom{
+        width:400px;
+        height:100px;
+        }
+    </style>
+    <apex:form >
+        <apex:sectionHeader subtitle="{!wrapins.CaseNumber}" title="Case"/>
+        <apex:pageBlock mode="maindetail" title="Case Detail" >
+            <apex:pageBlockSection columns="2" collapsible="false">
+                
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Case Owner</div><div class="detailcol2">{!wrapins.vf_owner}</div>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Account Name</div><div class="detailcol2">{!wrapins.Account_Name}</div>
+                </apex:pageBlockSectionItem>
+                
+                
+                
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Case Number</div><div class="detailcol2">{!wrapins.CaseNumber}</div>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Contact Name</div><div class="detailcol2">{!wrapins.Contact_Name}</div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Status</div><div class="detailcol2">{!wrapins.Status}</div>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Case Origin</div><div class="detailcol2">{!wrapins.Origin}</div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Priority</div><div class="detailcol2">{!wrapins.Priority}</div>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Case Reason</div><div class="detailcol2">{!wrapins.Reason}</div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Subject</div><div class="detailcol2">{!wrapins.Subject}</div>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <div class="detailcol1">Description</div><div class="detailcol2">{!wrapins.Description}</div>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock mode="detail" title="Case Comments">
+            <apex:pageBlockButtons location="Top">
+                <apex:commandButton action="{!showComment}" styleclass="btn" value="New" reRender="commentBlock"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" collapsible="false">
+                <apex:pageblocktable value="{!casecommentList1}" var="commentlist">
+                    <apex:column headerValue="Action">
+                        <apex:commandLink value="Edit " action="{!editComment}" reRender="editCommentBlock">
+                            <apex:param name="Id" value="{!commentlist.Id}" assignTo="{!commentId}"/>  
+                            <apex:param name="Body" value="{!commentlist.CommentBody}" assignTo="{!commentBody}"/>
+                        </apex:commandLink>|<apex:commandLink value=" Del" action="{!deleteComment}" > 
+                        <apex:param name="Id" value="{!commentlist.Id}" assignTo="{!commentId}"/>
+                        </apex:commandLink>
+                    </apex:column>
+                    <apex:column headerValue="Comments" value="{!commentlist.CommentBody}"/>
+                </apex:pageblocktable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:outputPanel id="commentBlock">
+            <apex:pageBlock mode="edit" rendered="{!showComment}">
+                <apex:pageBlockSection title="Case Comments" columns="2" collapsible="false">
+                    
+                    <apex:inputTextarea styleClass="textareacustom" value="{!casecommentstring}"/>
+                    <apex:commandButton value="Create" action="{!Comment}"/>
+                    
+                    {!caseidfromurl}
+                </apex:pageBlockSection>
+                <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/jquery-1.12.0.min.js')}"/>
+                <script>
+                    $(document).ready(function() {
+                    $('.textareacustom').keydown(function(event) {
+                        if (event.keyCode == 13) {
+                            event.preventDefault();
+                        }
+                    });
+                });
+                </script>
+            </apex:pageBlock>
+        </apex:outputPanel>  
+        
+        <apex:outputPanel id="editCommentBlock">
+            <apex:pageBlock mode="edit" rendered="{!editCommentBody }">
+                <apex:pageBlockSection title="Case Comments" columns="2" collapsible="false">    
+                    <apex:inputTextarea styleClass="textareacustom" value="{!commentBody}"/>
+                    <apex:commandButton value="Save" action="{!updateComment}">  
+                        <apex:param name="Id" value="{!commentId}" assignTo="{!commentId}"/> 
+                        <apex:param name="Body" value="{!tempcommentBody}" assignTo="{!tempcommentBody}"/>
+                        <apex:param name="Body" value="{!commentBody}" assignTo="{!commentBody}"/>
+                    </apex:commandButton> 
+                    {!caseidfromurl}
+                </apex:pageBlockSection>
+                <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/jquery-1.12.0.min.js')}"/>
+                <script>
+                    $(document).ready(function() {
+                    $('.textareacustom').keydown(function(event) {
+                        if (event.keyCode == 13) {
+                            event.preventDefault();
+                        }
+                    });
+                });
+                </script>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        
+    </apex:form>
+    
+    
+    
+</apex:page>

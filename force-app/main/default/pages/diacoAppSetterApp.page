@@ -1,0 +1,59 @@
+<apex:page showHeader="false" standardStylesheets="false"
+           sidebar="false" docType="html-5.0" applyBodyTag="false" applyHtmlTag="false"> 
+    
+    <html>
+        <head>
+            <!--apex:stylesheet value="{!URLFOR($Resource.ChargentOrders__SLDS214, 'assets/styles/salesforce-lightning-design-system.min.css')}" /-->
+            <apex:includeLightning />
+        </head>
+        <body style="margin: 0;">
+            <div id="app"> 
+               
+            </div>
+            <script>
+            var view = 'classic';
+            if((typeof sforce != 'undefined') && (sforce != null)){
+                view = 'sforce';
+            }
+            var c__ConfirmationNumber = "{!$CurrentPage.parameters.c__ConfirmationNumber}";
+            var c__AccountId = "{!$CurrentPage.parameters.c__AccountId}";
+            var c__PhoneRep = "{!$CurrentPage.parameters.c__PhoneRep}";
+            var c__CallerId = "{!$CurrentPage.parameters.c__CallerId}";
+            var c__FirstName = "{!$CurrentPage.parameters.c__FirstName}";
+            var c__LastName = "{!$CurrentPage.parameters.c__LastName}";
+            var c__Street = "{!$CurrentPage.parameters.c__Street}";
+            var c__City = "{!$CurrentPage.parameters.c__City}";
+            var c__State = "{!$CurrentPage.parameters.c__ConfirmationNumber}";
+            var c__Zip = "{!$CurrentPage.parameters.c__Zip}";
+            var c__Email = "{!$CurrentPage.parameters.c__Email}";
+            $Lightning.use("c:diacoAppSetterApp", function() {
+                $Lightning.createComponent("c:DiacoAppSetterComponent",
+                                           {UserContext: view,
+                                           pageReference:{
+                                               state:{
+                                               "c__AccountId": c__AccountId,
+                                               "c__PhoneRep": c__PhoneRep,
+                                               "c__ConfirmationNumber": c__ConfirmationNumber,
+                                               "c__CallerId": c__CallerId,
+                                               "c__FirstName": c__FirstName,
+                                               "c__LastName": c__LastName,
+                                               "c__Street": c__Street,
+                                               "c__City": c__City,
+                                               "c__State": c__State,
+                                               "c__Zip": c__Zip,
+                                               "c__Email": c__Email
+                                               }
+                                           }
+                                           },
+                                           "app",
+                                           function(cmp) {
+                                               console.log('Created Component!');
+                                               //document.getElementById("sliderDemo").style.display = 'none'; 
+                                           });
+            });
+            </script>
+            
+        </body>
+    </html> 
+    
+</apex:page>

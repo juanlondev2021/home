@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number_of_Windows__c</fullName>
+    <externalId>false</externalId>
+    <label>Number of Windows</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>One</fullName>
+                <default>false</default>
+                <label>One</label>
+            </value>
+            <value>
+                <fullName>Two</fullName>
+                <default>false</default>
+                <label>Two</label>
+            </value>
+            <value>
+                <fullName>Three to Five</fullName>
+                <default>false</default>
+                <label>Three to Five</label>
+            </value>
+            <value>
+                <fullName>Six to Nine</fullName>
+                <default>false</default>
+                <label>Six to Nine</label>
+            </value>
+            <value>
+                <fullName>10+</fullName>
+                <default>false</default>
+                <label>10+</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

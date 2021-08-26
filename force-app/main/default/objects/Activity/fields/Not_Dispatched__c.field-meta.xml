@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Not_Dispatched__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;Confirmed Voice&quot;, OR(Owner:User.Id  = &quot;005410000063Ajs&quot;,Owner:User.Id  = &quot;00541000005Hdpd&quot;)),AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;Confirmed via Text&quot;,OR(Owner:User.Id  = &quot;005410000063Ajs&quot;,Owner:User.Id  = &quot;00541000005Hdpd&quot;)),AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;Confirmed Voice&quot;, OR(Owner:User.Id  = &quot;005410000063Ajs&quot;,Owner:User.Id  = &quot;00541000005Hdpd&quot;)),AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;Confirmed via Text&quot;, OR(Owner:User.Id  = &quot;005410000063Ajs&quot;,Owner:User.Id  = &quot;00541000005Hdpd&quot;) ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Not Dispatched</label>
+    <type>Checkbox</type>
+</CustomField>

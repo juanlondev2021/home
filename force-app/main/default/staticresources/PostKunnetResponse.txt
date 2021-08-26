@@ -1,0 +1,5 @@
+[
+{"ok": true , "message" : "success","tableName" : "test_table1", "affectedRows" : 34, "totalRows" : 100},
+{"ok": true , "message" : "success","tableName" : "test_table2", "affectedRows" : 8, "totalRows" : 100},
+{"ok": false , "message": "Error TEST TEST", "tableName" : "test_table3", "affectedRows" : 0, "totalRows" : 100}
+]

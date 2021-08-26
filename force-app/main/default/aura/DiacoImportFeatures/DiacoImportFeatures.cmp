@@ -1,0 +1,190 @@
+<aura:component controller='DiacoImportFeatures' implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome"
+                access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="filetype" type="List" default="['.csv']" />
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="filesContractId" type="String"/>
+    <aura:attribute name="ConfirmModal" type="Boolean" default="false"/>
+    <aura:attribute name="ConfirmModal2" type="Boolean" default="false"/>
+    <aura:attribute name="loaded" type="Boolean" default="false"/>
+
+    <!--Attributes for datatable-->
+    <aura:attribute name="ObjectsListS" type="Object" access="private"/>
+    <aura:attribute name="ObjectsListR" type="Object" access="private"/>
+    <aura:attribute name="ObjectsList" type="Object" access="private"/>
+    <aura:attribute name="ObjectsColumns" type="List" access="private"/>
+    <aura:attribute name="ObjectsColumnsR" type="List" access="private"/>
+    <aura:attribute name="ObjectsColumnsS" type="List" access="private"/>
+    <aura:attribute name="ObjectRow" type="Object" access="private"/>
+    
+    <div class="slds-grid slds-wrap slds-box slds-theme_default" style="min-height: 90vh;">
+        <div class=" slds-col slds-size_12-of-12 ">
+            <lightning:tabset aura:id="tabs" variant="vertical">
+                <lightning:tab aura:id="Import" id="Auth" label="Account Import" iconName="utility:lock">
+                    <div style="margin-bottom:20px;">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem>
+                                <lightning:icon iconName="action:upload" class="blueOnwhite" alternativeText="SMS Diaco - Credential" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Import Process</h1>
+                                    <h2 class="slds-text-heading--medium">Import Accounts</h2>
+                                </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                                <div class='slds-p-top_xx-small slds-align_absolute-center'>
+                                    <lightning:input name="input1" placeholder="ContentDocumentId" value="{!v.filesContractId}"/>
+                                    <div style="width: auto; margin-top:20px;"> 
+                                        <lightning:buttonIcon iconName="utility:search" size="large" onclick="{! c.handleClick1 }" alternativeText="Search" title="Search" />
+                                    </div>
+                                </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                                <lightning:fileUpload label="Upload import File"
+                                                      name="fileUploader"
+                                                      accept="{!v.filetype}"
+                                                      onuploadfinished="{!c.handleUploadFinished}" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <aura:if isTrue="{!v.loaded}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="medium" variant="brand"/>                                    
+                        </div>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!v.ObjectsList.length || v.ObjectsListR.length || v.ObjectsListS.length}">
+                                <aura:if isTrue="{!v.ObjectsListR.length}">
+                                    <h2>Duplicated records</h2>
+                                    <div style="width: auto; margin-bottom:20px;">
+                                        <!-- the container element determine the height of the datatable -->
+                                        <div style="height: 300px">
+                                            <lightning:datatable class="slds-scrollable_x"
+                                                                keyField="id"
+                                                                data="{! v.ObjectsListR }"
+                                                                columns="{! v.ObjectsColumnsR }"
+                                                                onrowaction="{! c.handleRowAction }"
+                                                                hideCheckboxColumn="true"/>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.ObjectsListS.length}">
+                                    <h2>Selected records</h2>
+                                    <div style="width: auto; margin-bottom:20px;">
+                                        <!-- the container element determine the height of the datatable -->
+                                        <div style="height: 200px">
+                                            <lightning:datatable
+                                                                keyField="id"
+                                                                data="{! v.ObjectsListS }"
+                                                                columns="{! v.ObjectsColumnsS }"
+                                                                onrowaction="{! c.handleRowAction }"
+                                                                hideCheckboxColumn="true"/>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.ObjectsList.length}">
+                                    <h2>Unique records</h2>
+                                    <div style="width: auto; margin-bottom:20px;">
+                                        <!-- the container element determine the height of the datatable -->
+                                        <div style="height: 300px">
+                                            <lightning:datatable
+                                                                keyField="id"
+                                                                data="{! v.ObjectsList }"
+                                                                columns="{! v.ObjectsColumns }"
+                                                                hideCheckboxColumn="true"/>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.ObjectsList.length || v.ObjectsListS.length}">
+                                    <div class="slds-align_absolute-center">
+                                        <lightning:button  variant="brand" label="Confirm" title="Confirm" onclick="{! c.handleClick }" />
+                                    </div>
+                                </aura:if>
+                                <aura:set attribute="else">
+                                    <div class="slds-modal__content" id="modal-content-id-1">
+                                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                                            <h2>No file was upload or selected</h2>
+                                        </div>
+                                    </div>
+                                </aura:set>
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                    <!--Confirmation Modal-->
+                    <aura:if isTrue="{!v.ConfirmModal}">
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- ###### MODAL BOX HEADER Start ######-->
+                                <header class="slds-modal__header">
+                                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm Import Insertion</h2>
+                                </header>
+                                <!--###### MODAL BOX BODY Part Start######-->
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">Are you sure to insert this records?</div>
+                                        <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">{!v.ObjectsList.length + v.ObjectsListS.length} Records</div>
+                                    </div>
+                                </div>
+                                <!--###### MODAL BOX FOOTER Part Start ######-->
+                                <footer class="slds-modal__footer">
+                                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }" />
+                                    <lightning:button variant="success" label="Insert and create deliveries" title="Insert" onclick="{! c.handleInsert1}" />
+                                    <lightning:button variant="success" label="Insert records only" title="Insert" onclick="{! c.handleInsert2}" />
+                                </footer>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                        <!--###### MODAL BOX Part END Here ######-->
+                    </aura:if>
+                </lightning:tab>
+                <lightning:tab aura:id="Deliveries" id="Deliveries" label="Create Deliveries" iconName="utility:lock">
+                    <div style="margin-bottom:20px;">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem>
+                                <lightning:icon iconName="action:upload" class="blueOnwhite" alternativeText="SMS Diaco - Credential" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Import Process</h1>
+                                    <h2 class="slds-text-heading--medium">Create Deliveries</h2>
+                                </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                                <lightning:button  variant="brand" label="Create Deliveries" title="Create Deliveries" onclick="{! c.handleDeliveries }" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <!--Confirmation Modal-->
+                    <aura:if isTrue="{!v.ConfirmModal2}">
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- ###### MODAL BOX HEADER Start ######-->
+                                <header class="slds-modal__header">
+                                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm Delivery creation</h2>
+                                </header>
+                                <!--###### MODAL BOX BODY Part Start######-->
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">Are you sure to create deliveries?</div>
+                                    </div>
+                                </div>
+                                <!--###### MODAL BOX FOOTER Part Start ######-->
+                                <footer class="slds-modal__footer">
+                                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }" />
+                                    <lightning:button variant="success" label="Create deliveries" title="Create deliveries" onclick="{! c.handleDeliveries}" />
+                                </footer>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                        <!--###### MODAL BOX Part END Here ######-->
+                    </aura:if>
+                </lightning:tab>
+            </lightning:tabset>
+        </div>
+    </div>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+</aura:component>

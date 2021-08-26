@@ -1,0 +1,5 @@
+({
+	getDataCustomer : function(component, recordId) {
+       
+    }
+})

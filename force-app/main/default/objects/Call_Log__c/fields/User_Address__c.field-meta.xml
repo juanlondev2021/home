@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Address__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This is a lookup field to connect call log to the user address.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is a lookup field to connect call log to the user address.</inlineHelpText>
+    <label>User Address</label>
+    <referenceTo>User_Address__c</referenceTo>
+    <relationshipLabel>Call Logs</relationshipLabel>
+    <relationshipName>Call_Logs</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

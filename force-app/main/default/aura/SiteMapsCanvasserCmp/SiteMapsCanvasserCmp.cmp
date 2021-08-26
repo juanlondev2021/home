@@ -1,0 +1,123 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Site Maps Canvasser
+ * TestClass:          
+ * Description:        Aura Cmp - Site Lightning In 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    05/11/2020         Jull Quintero D         Initial implementation of the class.
+ *-->
+
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,lightning:isUrlAddressable"
+                access="global">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />    
+    <aura:attribute access="global" name="recordId" type="String" />
+
+    <!-- Modal message -->
+    <aura:attribute access="Private"  name="ErrorModal" type="Boolean" default="false"/>
+    <aura:attribute access="Private"  name="SuccessModal" type="Boolean" default="false"/>
+
+    <!-- Get GeoLocation -->
+    <aura:attribute name="latitude" type="Decimal" />
+    <aura:attribute name="longitude" type="Decimal" />
+    
+    <!-- Hide Interests -->
+    <aura:attribute name="hideInterests" type="string" default="Flooring;Kitchen;Bath;Blinds &amp; Shutters;Closet Organization;Garage Floor Coating;Addition(s);Garage Organization;Handyman;Windows;Painting;Roofing;Landscape Design/Installation;Pool Design/Installation;Concrete;Sunroom Patio Enclosure;Landscape Maintenance;Pool Maintenance;Electric;Garage Doors;Plumbing;HVAC;Security Doors;TV &amp; Internet;Locksmith;House Cleaning;Floor Cleaning" description="hide interest"/>
+
+    <aura:if isTrue="{!and(v.latitude != null,v.longitude != null)}">
+        <aura:if isTrue="{!$Browser.isPhone}">
+            <!-- PHONE -->
+            <div class="slds-card">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                        <lightning:tabset variant="scoped">
+                            <lightning:tab label="Homeowner">
+                                <c:SiteMapsCanvasser_HomeOwnerInfo recordId="{!v.recordId}" latitude="{!v.latitude}" longitude="{!v.longitude}" />
+                            </lightning:tab>
+                            <lightning:tab label="Interests">
+                                <c:SiteMapsCanvasser_InterestsWebForm recordId="{!v.recordId}" kunnectID="" hideInterests="{!v.hideInterests}"/>
+                            </lightning:tab>
+                        </lightning:tabset>
+                    </div>
+                </div>
+            </div>
+            <!-- /PHONE -->
+
+            <!-- DESKTOP -->
+            <aura:set attribute="else">
+                <div class="slds-grid slds-wrap">
+                    <!-- Account info-->
+                    <div class="slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12 slds-m-right_large slds-m-bottom_large">
+                        <c:SiteMapsCanvasser_HomeOwnerInfo recordId="{!v.recordId}" latitude="{!v.latitude}" longitude="{!v.longitude}"/>
+                    </div>
+                    <!-- /Account info-->
+            
+                    <!--  interests  -->
+                    <div class="slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12">
+                            <c:SiteMapsCanvasser_InterestsWebForm recordId="{!v.recordId}" kunnectID="" hideInterests="{!v.hideInterests}"/>
+                    </div>
+                    <!--  /interests  -->
+                </div>
+            </aura:set>
+            <!-- /DESKTOP -->
+        </aura:if>
+
+        <aura:set attribute="else">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.getLogation }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close black"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium" style="color:black"><strong>Use Location ? </strong></h2>
+                    </header>
+                    
+                    <div class="slds-modal__content" id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info slds-align_absolute-center" role="alert">
+                                        <span class="slds-assistive-text">Information</span>
+                                        <span class="slds-icon_container slds-icon-utility-user slds-m-right_x-small" title="Description of icon when needed">
+                                            <lightning:icon class="white" iconName="utility:checkin" size="large"/>
+                                        </span>
+                                        <h2 class="slds-text-color_inverse slds-text-heading_medium">
+                                            <p>This website need permission to get location. <br/><br/>
+                                                Click on the lock icon <lightning:icon class="white" iconName="utility:lock" size="x-small"/> in url section
+                                            </p>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+    
+                    <footer class="slds-modal__footer">
+                        <lightning:button   variant="neutral" 
+                                            label="Ok"
+                                            title="OK"
+                                            onclick="{! c.getLogation }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:set>
+    </aura:if>
+
+    <!--img src="{!$Resource.HomeMapsCanvasser}"/-->
+
+    <!-- Modal toast -->
+    <c:SiteModalMessage show="{! v.ErrorModal }"
+                        variant="error" title="ERROR" 
+                        message="An unexpected error has occurred" />
+
+    <c:SiteModalMessage show="{! v.SuccessModal }" 
+                        variant="success" title="SUCCESS" 
+                        message="The record has been saved successfully" />
+</aura:component>

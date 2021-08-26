@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Pool_Service_Install_one_time_clean__c</fullName>
+    <externalId>false</externalId>
+    <label>Pool Service /Install /one-time clean</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pool Maintenance - Weekly</fullName>
+                <default>false</default>
+                <label>Pool Maintenance - Weekly</label>
+            </value>
+            <value>
+                <fullName>Pool Maintenance - Bi-Weekly</fullName>
+                <default>false</default>
+                <label>Pool Maintenance - Bi-Weekly</label>
+            </value>
+            <value>
+                <fullName>Pool Maintenance - Monthly</fullName>
+                <default>false</default>
+                <label>Pool Maintenance - Monthly</label>
+            </value>
+            <value>
+                <fullName>Pool Installation/Remodeling - Salt Water</fullName>
+                <default>false</default>
+                <label>Pool Installation/Remodeling - Salt Water</label>
+            </value>
+            <value>
+                <fullName>Pool Installation/Remodeling - Chlorine</fullName>
+                <default>false</default>
+                <label>Pool Installation/Remodeling - Chlorine</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

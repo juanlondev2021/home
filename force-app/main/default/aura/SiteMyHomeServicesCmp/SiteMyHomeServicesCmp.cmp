@@ -1,0 +1,115 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Site Home Service
+ * TestClass:          
+ * Description:        Aura Cmp - Site Lightning Out 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    23/09/2020         Jull Quintero D         Initial implementation of the class.
+ *
+-->  
+<aura:component controller="SiteMyHomeServicesController" 
+                implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,forceCommunity:availableForAllPageTypes" 
+                access="GLOBAL">
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <aura:attribute name="loading" type="boolean" default='false'/>
+    <aura:attribute name="userAddress" type="String"/>
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="phoneRep" type="String"/>
+    <aura:attribute name="callerId" type="String"/>
+    
+    <aura:attribute name="fn" type="String"/>
+    <aura:attribute name="ln" type="String"/>
+    <aura:attribute name="st" type="String"/>
+    <aura:attribute name="ct" type="String"/>
+    <aura:attribute name="sta" type="String"/>
+    <aura:attribute name="zp" type="String"/>
+    <aura:attribute name="em" type="String"/>
+    
+    <aura:attribute name="isOpen" type="boolean" default='false'/>
+
+    <aura:if isTrue="{!v.recordId != null}">
+        
+        <c:SiteHomeServiceTabs recordId="{!v.recordId}"/>
+        
+        <aura:set attribute="else">
+
+            <aura:if isTrue="{!v.userAddress == null}">
+                <div class="c-container slds-p-around_medium">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:avatar" class="blueOnwhite" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <!--h1 class="slds-text-heading-label">Information About</h1-->
+                                    <h2 class="slds-text-heading--medium">My Home Services</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-p-bottom_large" onkeyup="{!c.formPress}">
+                        <div align="center" >
+                            <lightning:input style="width:50%" class="slds-p-bottom_small"  aura:id="confirmationNumber" name="confirmationNumber" label="Confirmation Number" placeholder="Type here..."/>
+                        </div>
+                        <aura:if isTrue="{!v.loading}">
+                            <lightning:spinner alternativeText="Loading" size="small" />
+                            <aura:set attribute="else">
+                                <lightning:button class="slds-float_right" variant="brand" label="Next" title="Next" onclick="{! c.handleClick }" />
+                                <lightning:button class="slds-float_right slds-m-right_x-small" label="New Account" title="New Account" onclick="{! c.newAccount }" />
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </div>
+                
+                <aura:set attribute="else">
+                    <div class="c-container">
+                        <lightning:button class="slds-float_right slds-m-horizontal_x-small slds-m-top_xx-small" variant="brand" label="Back" title="Back" onclick="{! c.handleClickBack }" />
+                        <c:SiteHomeServiceTabs recordId="{!v.userAddress}" phoneRep="{!v.phoneRep}" callerId="{!v.callerId}"
+                                                fn="{!v.fn}"
+                                                ln="{!v.ln}"
+                                                st="{!v.st}"
+                                                ct="{!v.ct}"
+                                                sta="{!v.sta}"
+                                                zp="{!v.zp}"
+                                                em="{!v.em}"/>
+                    </div>
+                    
+                </aura:set>
+            </aura:if>
+            
+            <!-- MODAL CONFIMATION NUMBER -->
+            <aura:if isTrue="{!v.isOpen}">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <h4 class="slds-p-horizontal_x-large">Confirmation number has not found. Do you want to create a new account?</h4>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning:button   variant="neutral" 
+                                                label="Cancel"
+                                                title="Cancel"
+                                                onclick="{! c.closeModel }"/>
+                            <lightning:button   variant="brand" 
+                                                label="New Account"
+                                                title="New Account"
+                                                onclick="{! c.newAccount }"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </aura:if>
+            <!-- MODAL CONFIMATION NUMBER -->
+
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

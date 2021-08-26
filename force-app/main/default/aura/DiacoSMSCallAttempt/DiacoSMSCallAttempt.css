@@ -1,0 +1,22 @@
+.THIS lightning-primitive-header-actions {
+    display: none;
+}
+
+.THIS .iconAdd{
+    margin:20px 0 0 15px;
+    
+}
+
+.THIS .red svg{
+    fill:red !important;
+}
+
+.THIS .green svg{
+    fill:green !important;
+}
+
+.THIS .blue svg{
+    fill:blue !important;
+}
+
+.THIS .slds-grid_align-end { justify-content: left !important; }

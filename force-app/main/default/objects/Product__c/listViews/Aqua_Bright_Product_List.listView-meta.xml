@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aqua_Bright_Product_List</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>NAME</columns>
+    <columns>UOM__c</columns>
+    <columns>Description__c</columns>
+    <columns>Sales_Price__c</columns>
+    <columns>Unit_Total_Cost__c</columns>
+    <columns>active__c</columns>
+    <columns>Product_Type__c</columns>
+    <columns>Manufacture__c</columns>
+    <columns>Part_Number__c</columns>
+    <columns>Service__c</columns>
+    <columns>Taxable__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Product_Type__c</field>
+        <operation>equals</operation>
+        <value>Water</value>
+    </filters>
+    <label>Aqua Bright Product List</label>
+</ListView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BestnumberSolarInbound__c</fullName>
+    <description>Alright so just to make sure the best number to reach you on is?</description>
+    <externalId>false</externalId>
+    <label>Alright so just to make sure the best nu</label>
+    <length>14</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

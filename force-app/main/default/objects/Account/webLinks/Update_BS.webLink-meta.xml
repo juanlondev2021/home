@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Update_BS</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Update BS</masterLabel>
+    <openType>noSidebar</openType>
+    <protected>false</protected>
+    <url>https://myhomeservices.lightning.force.com/apex/BussinesAccount?core.apexpages.request.devconsole=1&amp;id={!Account.Id}</url>
+</WebLink>

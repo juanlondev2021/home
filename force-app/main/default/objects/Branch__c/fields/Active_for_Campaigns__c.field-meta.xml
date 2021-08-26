@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_for_Campaigns__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Set for filtering out non-active branches on all page layouts.</description>
+    <externalId>false</externalId>
+    <label>Active for Campaigns</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

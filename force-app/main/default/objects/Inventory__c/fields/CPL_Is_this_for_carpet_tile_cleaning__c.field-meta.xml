@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Is_this_for_carpet_tile_cleaning__c</fullName>
+    <description>(Carpet/Tile Cleaning) Is this going to be for carpet/tile cleaning?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Carpet/Tile Cleaning) Is this going to be for carpet/tile cleaning?</inlineHelpText>
+    <label>Is this for carpet/tile cleaning?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Carpet/Tile Cleaning - Carpet Cleaning - 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning - Carpet Cleaning - 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet/Tile Cleaning - Carpet Cleaning - 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning - Carpet Cleaning - 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet/Tile Cleaning - Carpet Cleaning- 5 + rooms</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning - Carpet Cleaning- 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet/Tile Cleaning - Tile Cleaning - 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning - Tile Cleaning - 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet/Tile Cleaning - Tile Cleaning - 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning - Tile Cleaning - 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet/Tile Cleaning - Tile Cleaning - 5 + rooms</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning - Tile Cleaning - 5 + rooms</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

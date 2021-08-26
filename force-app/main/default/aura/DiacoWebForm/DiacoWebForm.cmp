@@ -1,0 +1,38 @@
+<!--
+* Diaco
+* @author 			Esnayder Morales href=<esnaydermorales25@gmail.com>
+* Project:			WebForm
+* Description:		Unique object
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		23/07/2019		Esnayder Morales (EM)   Initial implementation of the class.
+-->
+<aura:component controller="DiacoCmpTaskController"
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="HasAccount" type="Boolean" default="false"/>
+    <aura:handler name="change" value="{!v.HasAccount}" action="{!c.init}"/>
+    <aura:handler name="init" action="{!c.init}" value="{!this}"/>
+    <lightning:tabset variant="scoped">
+        <lightning:tab label="Account">
+            <!--c:DiacoTaskWebForm recordId="{!v.recordId}"  HasAccount="{!v.HasAccount}"/-->
+            <c:DiacoWebFormAccount recordId="{!v.recordId}" HasAccount="{!v.HasAccount}"/>
+        </lightning:tab>
+        
+        <aura:if isTrue="{!v.accountId != undefined}">
+            <lightning:tab label="Interest">
+                <!--c:DiacoManageWebForm recordId="{!v.accountId}"/-->
+                <c:DiacoInterestWebForm recordId="{!v.accountId}"/>
+            </lightning:tab>
+            
+            <lightning:tab label="Home Services">
+                <c:DiacoHomeServicesFlow recordId="{!v.accountId}"/>
+            </lightning:tab>
+        </aura:if>
+    </lightning:tabset>
+    
+</aura:component>

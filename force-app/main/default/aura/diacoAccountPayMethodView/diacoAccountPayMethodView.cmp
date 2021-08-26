@@ -1,0 +1,53 @@
+<aura:component >
+    <aura:attribute name="selectedPaymentId" type="String" />
+    <aura:attribute name="selectedPaymentType" type="String" />
+    
+    <lightning:recordEditForm recordId="{!v.selectedPaymentId}" objectApiName="PaymentMethod__c" aura:id='ViewPaymenttEditForm'>
+        
+        <lightning:messages />
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1" style="">
+                <lightning:inputField fieldName="PaymentMethodType__c" disabled="true" />
+            </div>
+            
+            <aura:if isTrue="{!v.selectedPaymentType == 'ACH'}">
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:inputField fieldName="BankName__c" aura:id="BankName__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:inputField fieldName="Bank_Account_Name__c" aura:id="Bank_Account_Name__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:inputField fieldName="BankAccountType__c" aura:id="BankAccountType__c" disabled="true"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:inputField fieldName="BankAccountNumber__c" aura:id="BankAccountNumber__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:inputField fieldName="RoutingNumber__c" aura:id="RoutingNumber__c" readonly="true" />
+                </div>
+            </aura:if>
+            
+            <aura:if isTrue="{!v.selectedPaymentType =='Credit Card'}">
+                <div class="slds-col slds-size_1-of-1 " style="">
+                    <lightning:inputField fieldName="NameOnCard__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 " style="">
+                    <lightning:inputField fieldName="CardNumber__c" readonly="true" maxlength="4" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 " style="">
+                    <lightning:inputField fieldName="CardType__c" disabled="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 " style="">
+                    <lightning:inputField fieldName="CSV__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 " style="">
+                    <lightning:inputField fieldName="CardExpirationMonth__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 " style="">
+                    <lightning:inputField fieldName="Card_Expiration_Year__c" readonly="true" />
+                </div>
+            </aura:if>
+        </div>
+    </lightning:recordEditForm>
+</aura:component>

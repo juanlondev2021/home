@@ -1,0 +1,220 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Tickets Component
+* Description:		
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		20/02/2020		Álvaro Ortega (AO)		Create Tickets and Attentios
+**/-->
+
+<aura:component controller="DiacoTicketComponentController" implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+    
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="selectedPriority" type="String" />
+    <aura:attribute name="selectedCode" type="String"/>
+    <aura:attribute name="selectedStatus" type="String" />
+    <aura:attribute name="selectedAssignTo" type="String" />
+    
+    <aura:attribute name="isLoad" type="Boolean" default="true" />
+    <aura:attribute name="isRecordLoaded" type="Boolean" default="false" />
+    
+    <aura:attribute name="isOpenDelete" type="Boolean" default="false" />
+    
+    <!--aura:handler event="force:editRecord" action="{!c.doInit}"/-->
+    <aura:handler event="force:showToast" action="{!c.onRefresh}"/>
+    
+    <aura:attribute name="attentionList" type="List"/>
+    
+    <aura:attribute name="attentionToDelete" type="Object"/>
+    
+    <aura:attribute name="ticketTypesOptions" type="List"/>
+    
+    <aura:attribute name="selectedTicketType" type="String"/>
+    
+    <!--aura:attribute name="priorityOptions" type="Object" default="{'Very Low' : 'arrowT down lowGreen',
+                                                                  'Low'      : 'arrowT down green',
+                                                                  'Medium'   : 'arrowT up yellow',
+                                                                  'High'     : 'arrowT up orange',
+                                                                  'Very High': 'arrowT up red'}"/--> 
+    <aura:if isTrue="{!(v.isLoad || !v.isRecordLoaded)}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if> 
+    
+    <div class="slds-col slds-grid slds-wrap">
+        <div class="slds-box slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--6-of-12 slds-m-bottom_medium">
+            <lightning:recordEditForm aura:id="toRecordEditForm"
+                                      recordId="{!v.recordId}"
+                                      onload="{!c.onLoad}"
+                                      onsuccess="{!c.onSuccess}"
+                                      onsubmit='{!c.onSubmitTicket}'
+                                      objectApiName="Ticket__c">
+                <!-- the messages component is for error messages -->
+                <div class="slds-col slds-grid slds-wrap">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_x-small">
+                        <lightning:messages />
+                        <lightning:inputField class="slds-hide" fieldName="Status__c" />
+                    </div>
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_small slds-m-bottom_xx-small">
+                        <!--span class="slds-page-header__title slds-truncate" style="font-size: 15px" title="Ticket Manager">{!v.selectedCode+' - '+v.selectedStatus}</span-->
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:calibration" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">{!v.selectedStatus}</h1>
+                                    <h2 class="slds-text-heading--medium">{!v.selectedCode}</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_x-small">
+                        <lightning:inputField fieldName="Name" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                        <div class="slds-col slds-grid slds-wrap">
+                            <aura:if isTrue="{!v.isRecordLoaded}">
+                                <div class="slds-col slds-size_1-of-12 slds-small-size--1-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12 slds-p-left_x-small slds-m-top_x-large">
+                                    <div class="{!'arrowT ' + (v.selectedPriority == 'Very Low' ? 'down lowGreen' : (v.selectedPriority == 'Low' ? 'down green' : (v.selectedPriority == 'Medium' ? 'up yellow' : (v.selectedPriority == 'High' ? 'up orange' : 'up red') ) ))}"></div>
+                                </div>
+                            </aura:if>
+                            <div class="slds-col slds-size_11-of-12 slds-small-size--11-of-12 slds-medium-size--11-of-12 slds-large-size--11-of-12 slds-p-right_x-small">
+                                <lightning:inputField fieldName="Priority__c" value="{!v.selectedPriority}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_small">
+                        <!--lightning:inputField fieldName="Ticket_Type__c" /-->
+                        <lightning:combobox aura:id="Ticket_Type__c"
+                                            label="Ticket Type"
+                                            name="Ticket Type"
+                                            placeholder="Choose Ticket Type"
+                                            options="{!v.ticketTypesOptions}"
+                                            onchange="{!c.onChangeTicketType}"
+                                            fieldLevelHelp="The Type of Ticket"
+                                            required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                        <lightning:inputField fieldName="Account__c" />
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                        <lightning:inputField fieldName="Assign_to__c" />
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_x-small">
+                        <lightning:inputField fieldName="Description__c" />
+                    </div>
+                </div>
+                <div class="slds-m-top_small">
+                    <lightning:button variant="Neutral" type="submit" name="{!v.recordId != ''? 'Save' :  'Create'}" label="{!v.recordId != ''? 'Save' :  'Create'}" />
+                </div>
+            </lightning:recordEditForm>
+            
+        </div>
+        <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem padding="horizontal-small">
+                    <lightning:icon iconName="standard:contract_line_item" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Attentions</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-col slds-grid slds-wrap">
+                <!--div class="slds-col slds-m-bottom_x-small slds-m-top_x-small">
+                    <span class="slds-page-header__title slds-truncate" style="font-size: 15px; margin-top:8px" title="Ticket Manager">Attentions</span>
+                </div-->
+                <div class="slds-col slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-align_absolute-center slds-m-bottom_x-small slds-m-top_x-small">
+                    <lightning:button variant="Neutral" name="New" label="New" onclick="{!c.onCreateAttention}" disabled="{!not(v.recordId != '')}"/>
+                </div>
+                
+                <aura:iteration items="{!v.attentionList}" var="item">
+                    <div class="slds-box slds-col slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-m-bottom_x-small">
+                        <lightning:recordViewForm aura:id="viewForm" recordId="{!item.Id}" objectApiName="Attention__c">
+                            <div class="slds-col slds-grid slds-wrap">
+                                <aura:if isTrue="{!item.This_Closed_Ticket__c}">
+                                    <div class="slds-col slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_small">
+                                        <Strong>This Attention closed Ticket</Strong>
+                                    </div>
+                                </aura:if>
+                                <div class="slds-col slds-size_6-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                    <lightning:outputField fieldName="Name"/>
+                                </div>
+                                <div class="slds-col slds-size_5-of-12 slds-small-size--5-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12 slds-p-horizontal_x-small">
+                                    <lightning:outputField fieldName="Personnel__c"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12 slds-small-size--1-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12 slds-p-horizontal_x-small">
+                                    <div class="slds-col slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_6-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                            <lightning:buttonIcon iconName="utility:edit" class="slds-col_bump-left" value="{!item.Id}" iconClass="slds-button__icon_hint" variant="bare" alternativeText="Edit Record" onclick="{!c.editRecord}"/>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                            <lightning:buttonIcon iconName="utility:delete" class="slds-col_bump-left" name="{!item.Name}" value="{!item.Id}" iconClass="slds-button__icon_hint" variant="bare" alternativeText="Delete Record" onclick="{!c.openModalDelete}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-col slds-size_12-of-12 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_x-small">
+                                    <lightning:outputField fieldName="Description__c"/>
+                                </div>
+                            </div>
+                            
+                        </lightning:recordViewForm>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+        
+    </div>
+    
+    <aura:if isTrue="{!v.isOpenDelete}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModalDelete }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Attention</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-align_absolute-center slds-m-around_x-small">
+                        {!('Are you sure you want to delete '+v.attentionToDelete.Name+'?')}
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######--> 
+                <footer class="slds-modal__footer">
+                    <aura:if isTrue="{!!(v.draftValues.length > 0)}">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModalDelete }"/>
+                    </aura:if>
+                    <lightning:button variant="brand" 
+                                      label="Delete"
+                                      title="Delete"
+                                      onclick="{!c.deleteRecord}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+
+</aura:component>

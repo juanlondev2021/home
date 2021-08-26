@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Call_Center_is_Ready_for_Leads</fullName>
+        <description>Call Center is Ready for Leads</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_LeadQual_New_Campaign</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_LeadQual_New_Campaign_Added</fullName>
+        <description>Email LeadQual New Campaign Added</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_LeadQual_New_Campaign</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_New_Campaign_to_LeadQual</fullName>
+        <ccEmails>clientservices@leadqual.com</ccEmails>
+        <ccEmails>goppenheimer@leadqual.com</ccEmails>
+        <description>Send New Campaign to LeadQual</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_LeadQual_New_Campaign</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Activate_nuHome_Call_Center</fullName>
+        <field>Call_Center_is_Ready_Post__c</field>
+        <literalValue>1</literalValue>
+        <name>Activate nuHome Call Center</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Call_Center_is_Ready_Date</fullName>
+        <field>Call_Center_is_Ready_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Call Center is Ready Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>OB_Campaign_Deactive_Date</fullName>
+        <field>OB_Campaign_Deactivated_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>OB Campaign Deactive Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>LeadQual_OB_Campaign_Activation</fullName>
+        <apiVersion>38.0</apiVersion>
+        <description>sends the new Active OB Campaign information.</description>
+        <endpointUrl>https://www.leadqual.com/post/nuhome/nuhome-campaign-updates.php</endpointUrl>
+        <fields>Call_Center_is_Ready_Post__c</fields>
+        <fields>Id</fields>
+        <fields>Industry__c</fields>
+        <fields>OB_Campaign_Active_Date__c</fields>
+        <fields>OB_Campaign_Active__c</fields>
+        <fields>OB_Campaign_Branch__c</fields>
+        <fields>OB_Campaign_Call_Center__c</fields>
+        <fields>OB_Campaign_ID__c</fields>
+        <fields>OB_Campaign_Offer_Amount__c</fields>
+        <fields>OB_Campaign_Primary_Contact_Email__c</fields>
+        <fields>OB_Campaign_Time_Zones__c</fields>
+        <fields>OB_DBA_Name__c</fields>
+        <fields>Opportunity_ID__c</fields>
+        <fields>Opportunity__c</fields>
+        <fields>fOB_Campaign_Transfer_Number__c</fields>
+        <fields>fOpportunity__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>cgarrett@myhomes.services</integrationUser>
+        <name>LeadQual OB Campaign Activation</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Call Center is Ready</fullName>
+        <actions>
+            <name>Call_Center_is_Ready_for_Leads</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( Call_Center_is_Ready_Post__c ) &amp;&amp; Call_Center_is_Ready_Post__c = True &amp;&amp; OB_Campaign_Active__c = True</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email LeadQual New Campaign</fullName>
+        <actions>
+            <name>Send_New_Campaign_to_LeadQual</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign__c.fOB_Campaign_Call_Center__c</field>
+            <operation>equals</operation>
+            <value>LeadQual</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Call Center Ready Date Stamp</fullName>
+        <actions>
+            <name>Call_Center_is_Ready_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>OB_Campaign__c.Call_Center_is_Ready_Post__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Deactive Date</fullName>
+        <actions>
+            <name>OB_Campaign_Deactive_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OB_Campaign_Active__c = False</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send LeadQual Email</fullName>
+        <actions>
+            <name>Email_LeadQual_New_Campaign_Added</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign__c.Name</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign__c.fOB_Campaign_Call_Center__c</field>
+            <operation>equals</operation>
+            <value>LeadQual</value>
+        </criteriaItems>
+        <description>Once a new Campaign is created where LeadQual is selected as the OB Campaign Call Center an email is sent to their Client Services Department to add the new Campaign on their side prior to adding Campaign Members.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send LeadQual OB Campaign Data to Setup</fullName>
+        <actions>
+            <name>LeadQual_OB_Campaign_Activation</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign__c.OB_Campaign_Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign__c.fOB_Campaign_Transfer_Number__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.OB_DBA_Name__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign__c.fOB_Campaign_Call_Center__c</field>
+            <operation>equals</operation>
+            <value>LeadQual</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>nuHome Call Center Ready</fullName>
+        <actions>
+            <name>Activate_nuHome_Call_Center</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>OB_Campaign__c.OB_Campaign_Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign__c.fOB_Campaign_Call_Center__c</field>
+            <operation>equals</operation>
+            <value>nuHome</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

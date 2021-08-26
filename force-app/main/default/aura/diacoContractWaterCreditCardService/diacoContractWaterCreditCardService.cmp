@@ -1,0 +1,135 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water credit payment method for services
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		18/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Card_Type" type="String" />
+    <aura:attribute name="HomeServices" type="Home_Services__c" default="{ 'sobjectType': 'Home_Services__c' }"/>
+    <aura:attribute name="options" type="String[]" default="Visa,Mastercard,Discover,American Express,MC Eurocard,UK Maestro,JCB Card,Diners Club"/>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+        <fieldset class=" slds-theme--default ">
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="custom:custom17" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Credit Card</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-form slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-align_absolute-center">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                        <fieldset class="slds-box slds-theme--default ">
+                            <div class="slds-form slds-grid slds-wrap">
+                                <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Home_Services__c">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_4-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--small">
+                                            <lightning:outputField fieldName="Card_Type_Service__c" />
+                                        </div>
+                                        <div class="slds-col slds-size_4-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--small">
+                                            <lightning:outputField fieldName="Name_On_Card_Service__c" />
+                                        </div>
+                                        <div class="slds-col slds-size_4-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-bottom--small">
+                                            <lightning:outputField fieldName="Account_Number_Credit_Card_Service__c" />
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--small">
+                                            <lightning:outputField fieldName="CSV_Service__c" />
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--small">
+                                            <lightning:outputField fieldName="Card_Last_4_Service__c" />
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--x-small">
+                                            <lightning:outputField fieldName="Card_Expiration_Month_Service__c" />
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--x-small">
+                                            <lightning:outputField fieldName="Card_Expiration_Year_Service__c" />
+                                        </div>
+                                    </div>
+                                </lightning:recordViewForm>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-align_absolute-center">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                        <fieldset class="slds-box slds-theme--default ">
+                            <div class="slds-form slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_12-of-12 ">
+                                    <lightning:select name="Card Type" aura:id="Card_Type"
+                                                      label="Card Type"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.Card_Type}">
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.options}" var="card">
+                                            <option value="{!card}">{!card}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <!--
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Name on Card"
+                                                     onchange="{!c.changeStatus}"
+                                                     label="Name on Card"/>
+                                </div>-->
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_12-of-12"
+                                                     name="Card Number" 
+                                                     label="Card Number"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="16"/>
+                                </div>
+                                
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="CSV" 
+                                                     label="CSV"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="4"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     name="Expiration Month" 
+                                                     label="Expiration Month"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="2"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Expiration Year" 
+                                                     label="Expiration Year"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="4"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                
+            </div>
+        </fieldset>
+    </div>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+        <fieldset class=" slds-theme--default ">
+            <c:diacoContractWaterCheckingService recordId="{!v.recordId}" HomeServices="{!v.HomeServices}" />
+        </fieldset>
+    </div>
+</aura:component>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Diaco_EmailAlertCouponUsePercent</fullName>
+        <description>Email notification for exceded percent use</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Diaco_EmailNotification1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Diaco_EmailNotification2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Diaco_EmailNotification3__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Diaco_EmailNotification4__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Diaco_EmailNotification5__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Diaco_EmailNotificationCuponUse</template>
+    </alerts>
+</Workflow>

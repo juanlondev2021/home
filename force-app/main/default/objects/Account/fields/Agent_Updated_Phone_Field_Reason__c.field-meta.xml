@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agent_Updated_Phone_Field_Reason__c</fullName>
+    <description>Reasons why Phone had to be updated by Agent</description>
+    <externalId>false</externalId>
+    <label>Agent Updated Phone Field Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Agent_Updated_Phone_Field__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Correct Account (no lookup) Phone field blank</fullName>
+                <default>false</default>
+                <label>Correct Account (no lookup) Phone field blank</label>
+            </value>
+            <value>
+                <fullName>Lead ID unreadable</fullName>
+                <default>false</default>
+                <label>Lead ID unreadable</label>
+            </value>
+            <value>
+                <fullName>Lead ID wrong on door tag</fullName>
+                <default>false</default>
+                <label>Lead ID wrong on door tag</label>
+            </value>
+            <value>
+                <fullName>Looked up by Lead ID</fullName>
+                <default>false</default>
+                <label>Looked up by Lead ID</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Lead ID unreadable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Lead ID wrong on door tag</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Looked up by Lead ID</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inventory_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Inventory Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DT Script</fullName>
+                <default>false</default>
+                <label>DT Script</label>
+            </value>
+            <value>
+                <fullName>nuCard Spec</fullName>
+                <default>false</default>
+                <label>nuCard Spec</label>
+            </value>
+            <value>
+                <fullName>nuHome OB Campaign</fullName>
+                <default>false</default>
+                <label>nuHome OB Campaign</label>
+            </value>
+            <value>
+                <fullName>nuHome nuCard CPL</fullName>
+                <default>false</default>
+                <label>nuHome nuCard CPL</label>
+            </value>
+            <value>
+                <fullName>NuCard Sub-CPL</fullName>
+                <default>false</default>
+                <label>NuCard Sub-CPL</label>
+            </value>
+            <value>
+                <fullName>nuHome Hot Lead</fullName>
+                <default>false</default>
+                <label>nuHome Hot Lead</label>
+            </value>
+            <value>
+                <fullName>Verified Spec Lead</fullName>
+                <default>false</default>
+                <label>Verified Spec Lead</label>
+            </value>
+            <value>
+                <fullName>Appt.Scheduled Spec Lead</fullName>
+                <default>false</default>
+                <label>Appt.Scheduled Spec Lead</label>
+            </value>
+            <value>
+                <fullName>Verified DTS Lead</fullName>
+                <default>false</default>
+                <label>Verified DTS Lead</label>
+            </value>
+            <value>
+                <fullName>Appt.Scheduled DTS Lead</fullName>
+                <default>false</default>
+                <label>Appt.Scheduled DTS Lead</label>
+            </value>
+            <value>
+                <fullName>Verified OBC Lead</fullName>
+                <default>false</default>
+                <label>Verified OBC Lead</label>
+            </value>
+            <value>
+                <fullName>Appt.Scheduled OBC Lead</fullName>
+                <default>false</default>
+                <label>Appt.Scheduled OBC Lead</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

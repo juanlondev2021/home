@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Incontact_Port__c</fullName>
+    <externalId>false</externalId>
+    <label>Incontact Port</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Plivo # forwarded to buisiness</fullName>
+                <default>true</default>
+                <label>Plivo # forwarded to buisiness</label>
+            </value>
+            <value>
+                <fullName>Plivo # forwarded to Incontact</fullName>
+                <default>false</default>
+                <label>Plivo # forwarded to Incontact</label>
+            </value>
+            <value>
+                <fullName>Verified Port to Incotact</fullName>
+                <default>false</default>
+                <label>Verified Port to Incotact</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

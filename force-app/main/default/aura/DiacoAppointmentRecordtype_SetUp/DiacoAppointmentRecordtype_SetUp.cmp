@@ -1,0 +1,63 @@
+<!--
+* Diaco
+* @author 			
+* Project:		    Appointment Recordtype Set Up
+* Description:		Parent cmp - Setting create Home service and Setting Interests
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		12/08/2020		Jull Quintero     		Initial implementation of the class.
+-->
+
+<aura:component controller="DiacoAppointmentRecordSetUp_ctr"
+                implements="flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global"> 
+
+<aura:attribute name="loaded" type="Boolean" default="false"/>
+
+<!-- EVENT DELETE -->
+<aura:handler name="deleteAppointmentMtd" event="c:DiacoEventAppointmentRecordType_SetUp" action="{! c.handlerDelete }" />
+
+<!-- EVENT UPDATE -->
+<aura:handler name="updateAppointmentMtd" event="c:DiacoEventAppointmentRecordType_SetUp" action="{! c.handlerUpdate }" />       
+
+<div class="slds-card slds-box">
+
+    <aura:if isTrue="{!v.loaded}">
+        <lightning:spinner />
+    </aura:if>
+
+        <!-- HEADER -->
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="custom:custom32" class="blackOnGreen" />
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header ">
+                <h1 class="slds-text-heading--label"></h1>
+                <h2 class="slds-text-heading--medium">Appointment Set Up</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <!-- /HEADER -->
+
+    <lightning:tabset selectedTabId="1">
+
+        <lightning:tab label='Home Services' id="1" onactive="{! c.handlerHomeService }">
+            <c:DiacoAppointmentRecordType_HomeServiceSetUp aura:id="homeserviceId" />
+        </lightning:tab>
+
+        <lightning:tab label='Appointment' id="2" onactive="{! c.handlerAppointment }">
+            <c:DiacoAppointmentRecordType_AppointmentSetUp aura:id="appointmentId" />
+        </lightning:tab>
+
+        <lightning:tab label="Interests" id="3"  onactive="{! c.handlerInterests }">
+            <c:DiacoAppointmentRecordType_InterestSetUp aura:id="interestsId"  />
+        </lightning:tab>
+
+    </lightning:tabset>
+</div>
+
+</aura:component>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Final_Disposition__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Was this call task a final disposition?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Was this call task a final disposition?</inlineHelpText>
+    <label>Final Disposition</label>
+    <precision>1</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

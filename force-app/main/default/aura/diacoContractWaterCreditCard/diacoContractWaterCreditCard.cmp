@@ -1,0 +1,211 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water credit payment method
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		09/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Card_Type" type="String" />
+    
+    <aura:attribute name="HomeServices" type="Home_Services__c"/>
+    <aura:attribute name="options" type="String[]" default="Visa,Mastercard,Discover,American Express,MC Eurocard,UK Maestro,JCB Card,Diners Club"/>
+    
+    <aura:attribute name="isEdit" type="Boolean" default="False"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:handler event="force:showToast" action="{!c.onRefresh}"/>
+    
+    <aura:attribute name="toService" type="Boolean" default="False"/>
+    
+    <aura:method name="validityCheck" action="{!c.validityCheck}">
+        <aura:attribute name="isValid" type="boolean" default="false" />
+    </aura:method>
+    
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+        <fieldset class=" slds-theme--default ">
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="custom:custom17" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Credit Card</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-form slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+                    <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <fieldset class="slds-box slds-theme--default ">
+                            <div class="slds-form slds-grid slds-wrap">
+                                <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Home_Services__c">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-p-horizontal_small">
+                                            <!--lightning:outputField aura:id="nameOnCardField" fieldName="Name_on_Card__c"/-->
+                                            <lightning:input aura:id="nameOnCardField"
+                                                             name="Name On Card" 
+                                                             label="Name On Card"
+                                                             readonly="true"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-m-bottom--small">
+                                        	<lightning:buttonIcon iconName="{!v.isEdit ? 'utility:close' : 'utility:edit'}" class="slds-col_bump-left" iconClass="slds-button__icon_hint" variant="bare" alternativeText="Edit Credit Card" onclick="{!c.editRecord}"/>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-horizontal_small">
+                                            <aura:if isTrue="{!v.isEdit}">
+                                                <aura:if isTrue="{!v.toService}">
+                                                    <lightning:select aura:id="CustomerInfo"
+                                                                      name="Card Type"
+                                                                      label="Card Type"
+                                                                      required="true"
+                                                                      value="{!v.HomeServices.Card_Type_Service__c}">
+                                                        <option value="">choose one...</option>
+                                                        <aura:iteration items="{!v.options}" var="card">
+                                                            <option value="{!card}">{!card}</option>
+                                                        </aura:iteration>
+                                                    </lightning:select>
+                                                    <aura:set attribute="else">
+                                                        <lightning:select aura:id="CustomerInfo"
+                                                                          name="Card Type"
+                                                                          label="Card Type"
+                                                                          required="true"
+                                                                          value="{!v.HomeServices.Card_Type__c}">
+                                                            <option value="">choose one...</option>
+                                                            <aura:iteration items="{!v.options}" var="card">
+                                                                <option value="{!card}">{!card}</option>
+                                                            </aura:iteration>
+                                                        </lightning:select>
+                                                    </aura:set>
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                    <lightning:outputField fieldName="{!v.toService ? 'Card_Type_Service__c' : 'Card_Type__c'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                            
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_8-of-12 slds-m-bottom--small slds-p-horizontal_small">
+                                            <aura:if isTrue="{!v.isEdit}">
+                                                <aura:if isTrue="{!v.toService}">
+                                                    <lightning:input aura:id="CustomerInfo"
+                                                                     name="Card Number" 
+                                                                     label="Card Number"
+                                                                     required="true"
+                                                                     value="{!v.HomeServices.Account_Number_Credit_Card_Service__c}"
+                                                                     maxlength="16"/>
+                                                    <aura:set attribute="else">
+                                                        <lightning:input aura:id="CustomerInfo"
+                                                                         name="Card Number" 
+                                                                         label="Card Number"
+                                                                         required="true"
+                                                                         value="{!v.HomeServices.Account_Number__c}"
+                                                                         maxlength="16"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                    <lightning:outputField fieldName="{!v.toService ? 'Account_Number_Credit_Card_Service__c' : 'Account_Number__c'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_4-of-12 slds-m-bottom--small slds-p-horizontal_small">
+                                            <aura:if isTrue="{!v.isEdit}">
+                                                <aura:if isTrue="{!v.toService}">
+                                                    <lightning:input aura:id="CustomerInfo"
+                                                                     name="CSV" 
+                                                                     label="CSV"
+                                                                     required="true"
+                                                                     value="{!v.HomeServices.CSV_Service__c}"
+                                                                     maxlength="4"/>
+                                                    <aura:set attribute="else">
+                                                <lightning:input aura:id="CustomerInfo"
+                                                                 name="CSV" 
+                                                                 label="CSV"
+                                                                 required="true"
+                                                                 value="{!v.HomeServices.CSV__c}"
+                                                                 maxlength="4"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                    <lightning:outputField fieldName="{!v.toService ? 'CSV_Service__c' : 'CSV__c'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                        <!--div class="slds-col slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom-small slds-p-horizontal_small">
+                                            <lightning:outputField fieldName="Card_Last_4__c"/>
+                                        </div-->
+                                        <div class="slds-col slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--x-small slds-p-horizontal_small">
+                                            <aura:if isTrue="{!v.isEdit}">
+                                                <aura:if isTrue="{!v.toService}">
+                                                    <lightning:input aura:id="CustomerInfo"
+                                                                     name="Expiration Month" 
+                                                                     label="Expiration Month"
+                                                                     required="true"
+                                                                     value="{!v.HomeServices.Card_Expiration_Month_Service__c}"
+                                                                     maxlength="2"
+                                                                     max="12"
+                                                                     min="1"/>
+                                                    <aura:set attribute="else">
+                                                        <lightning:input aura:id="CustomerInfo"
+                                                                         name="Expiration Month" 
+                                                                         label="Expiration Month"
+                                                                         required="true"
+                                                                         value="{!v.HomeServices.Card_Expiration_Month__c}"
+                                                                         maxlength="2"
+                                                                         max="12"
+                                                                         min="1"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                    <lightning:outputField fieldName="{!v.toService ? 'Card_Expiration_Month_Service__c' : 'Card_Expiration_Month__c'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-bottom--x-small slds-p-horizontal_small">
+                                            <aura:if isTrue="{!v.isEdit}">
+                                                <aura:if isTrue="{!v.toService}">
+                                                    <lightning:input aura:id="CustomerInfo"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                     name="Expiration Year" 
+                                                                     label="Expiration Year"
+                                                                     required="true"
+                                                                     value="{!v.HomeServices.Card_Expiration_Year_Service__c}"
+                                                                     maxlength="4"/>
+                                                    <aura:set attribute="else">
+                                                        <lightning:input aura:id="CustomerInfo"
+                                                                         class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                         name="Expiration Year" 
+                                                                         label="Expiration Year"
+                                                                         required="true"
+                                                                         value="{!v.HomeServices.Card_Expiration_Year__c}"
+                                                                         maxlength="4"/>
+                                                    </aura:set>
+                                                </aura:if>
+                                                <aura:set attribute="else">
+                                                    <lightning:outputField fieldName="{!v.toService ? 'Card_Expiration_Year_Service__c' : 'Card_Expiration_Year__c'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                    </div>
+                                </lightning:recordViewForm>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                
+            </div>
+        </fieldset>
+    </div>
+    
+    <!--div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top-medium">
+        <fieldset class="slds-theme-default ">
+            <c:diacoContractWaterChecking recordId="{!v.recordId}" HomeServices="{!v.HomeServices}" />
+        </fieldset>
+    </div-->
+</aura:component>

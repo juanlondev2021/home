@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Full_Kitchen_Partial_Kitchen__c</fullName>
+    <description>(Kitchen Remodeling)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Kitchen Remodeling)</inlineHelpText>
+    <label>Full Kitchen /Partial Kitchen</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Kitchen Remodeling - Full Kitchen</fullName>
+                <default>false</default>
+                <label>Kitchen Remodeling - Full Kitchen</label>
+            </value>
+            <value>
+                <fullName>Kitchen Remodeling - Partial Kitchen</fullName>
+                <default>false</default>
+                <label>Kitchen Remodeling - Partial Kitchen</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Clear_Data_from_Driver_lead_status</fullName>
+        <field>Driver_Lead_Status__c</field>
+        <name>Clear Data from Driver lead status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_COMPLETED_GATED</fullName>
+        <field>Hung_Status__c</field>
+        <literalValue>Hung</literalValue>
+        <name>Update COMPLETED GATED</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Delivered_to_1</fullName>
+        <field>Delivered__c</field>
+        <formula>1</formula>
+        <name>Update Delivered to 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Delivery_to_0</fullName>
+        <field>Delivered__c</field>
+        <formula>0</formula>
+        <name>Update Delivery to 0</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Hung_Gated</fullName>
+        <field>Hung_Gated__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Hung Gated</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Push_to_Cheetah</fullName>
+        <apiVersion>38.0</apiVersion>
+        <description>This Outbound message will push the Delivery object details to Cheetah</description>
+        <endpointUrl>https://nuhome-delivery-prod.cloudhub.io/delivery</endpointUrl>
+        <fields>Carrier_ID__c</fields>
+        <fields>CreatedDate</fields>
+        <fields>Hang__c</fields>
+        <fields>Hung_Status__c</fields>
+        <fields>Id</fields>
+        <fields>Name</fields>
+        <fields>No_of_Attempts__c</fields>
+        <fields>Product_Details__c</fields>
+        <fields>fAddress_Street_1__c</fields>
+        <fields>fCity__c</fields>
+        <fields>fFirst_Name__c</fields>
+        <fields>fLast_Name__c</fields>
+        <fields>fLead_Id__c</fields>
+        <fields>fMiddle_Name__c</fields>
+        <fields>fRegion__c</fields>
+        <fields>fService_Name__c</fields>
+        <fields>fState__c</fields>
+        <fields>fZip__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>cgarrett@myhomes.services</integrationUser>
+        <name>Push to Cheetah</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Change COMPLETED GATED</fullName>
+        <actions>
+            <name>Update_COMPLETED_GATED</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Hung_Gated</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Delivery_Object__c.Hung_Status__c</field>
+            <operation>equals</operation>
+            <value>COMPLETED GATED</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Data Status removal on none responded deliveries</fullName>
+        <actions>
+            <name>Clear_Data_from_Driver_lead_status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Delivery_Object__c.Driver_Lead_Status__c</field>
+            <operation>equals</operation>
+            <value>Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Delivery_Object__c.Account_Responded__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Push Delivery Object To Cheetah</fullName>
+        <actions>
+            <name>Push_to_Cheetah</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>This WF will Push the Delivery Object record to Cheetah</description>
+        <formula>AND(NOT(CONTAINS( LastModifiedBy.Username , &apos;middleware@nuhome.com&apos;) ), OR(ISNEW() , ISCHANGED( Hung_Status__c )))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Delivered to 0</fullName>
+        <actions>
+            <name>Update_Delivery_to_0</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Delivery_Object__c.Hung_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Hung</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Delivered to 1</fullName>
+        <actions>
+            <name>Update_Delivered_to_1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Delivery_Object__c.Hung_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Hung</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

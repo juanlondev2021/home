@@ -1,0 +1,45 @@
+.THIS.container {
+}
+
+.THIS slds-box:hover {
+  /*transform: rotate(90deg);*/
+  border-color: blue;
+}
+
+.THIS textarea{
+    height: 106px;
+}
+
+.THIS .arrowT {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.THIS .up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.THIS .down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+    margin-bottom: 3px;
+}
+
+.THIS .red{
+	border-color: red;
+}
+.THIS .orange{
+	border-color: orange;
+}
+.THIS .green{
+	border-color: green;
+}
+.THIS .lowGreen{
+	border-color: #2ecc71;
+}
+.THIS .yellow{
+	border-color: #e0ff00;
+}

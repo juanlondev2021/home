@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OBCC_Approved_to_Send_Appt_Email__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Outbound call center auditors use this check box to send the email template to the business showing the appointment has been set.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if you approve this appointment to be sent to the business.</inlineHelpText>
+    <label>OBCC Approved to Send Appt Email?</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

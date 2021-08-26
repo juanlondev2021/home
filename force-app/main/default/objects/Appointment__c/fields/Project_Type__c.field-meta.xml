@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Project Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Replace</fullName>
+                <default>false</default>
+                <label>Replace</label>
+            </value>
+            <value>
+                <fullName>Rekey</fullName>
+                <default>false</default>
+                <label>Rekey</label>
+            </value>
+            <value>
+                <fullName>Pest</fullName>
+                <default>false</default>
+                <label>Pest</label>
+            </value>
+            <value>
+                <fullName>Weed</fullName>
+                <default>false</default>
+                <label>Weed</label>
+            </value>
+            <value>
+                <fullName>Solar</fullName>
+                <default>false</default>
+                <label>Solar</label>
+            </value>
+            <value>
+                <fullName>Energy Efficiencies</fullName>
+                <default>false</default>
+                <label>Energy Efficiencies</label>
+            </value>
+            <value>
+                <fullName>Service Existing System</fullName>
+                <default>false</default>
+                <label>Service Existing System</label>
+            </value>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Repair</fullName>
+                <default>false</default>
+                <label>Repair</label>
+            </value>
+            <value>
+                <fullName>Replace Existing Windows</fullName>
+                <default>false</default>
+                <label>Replace Existing Windows</label>
+            </value>
+            <value>
+                <fullName>Repair Existing Window Glass</fullName>
+                <default>false</default>
+                <label>Repair Existing Window Glass</label>
+            </value>
+            <value>
+                <fullName>Blinds/Shades</fullName>
+                <default>false</default>
+                <label>Blinds/Shades</label>
+            </value>
+            <value>
+                <fullName>Wood Shutters</fullName>
+                <default>false</default>
+                <label>Wood Shutters</label>
+            </value>
+            <value>
+                <fullName>Vertical Blinds</fullName>
+                <default>false</default>
+                <label>Vertical Blinds</label>
+            </value>
+            <value>
+                <fullName>Electric Blind/Shade Opener</fullName>
+                <default>false</default>
+                <label>Electric Blind/Shade Opener</label>
+            </value>
+            <value>
+                <fullName>Sprinkler System</fullName>
+                <default>false</default>
+                <label>Sprinkler System</label>
+            </value>
+            <value>
+                <fullName>Grass</fullName>
+                <default>false</default>
+                <label>Grass</label>
+            </value>
+            <value>
+                <fullName>Trees/Shrubs</fullName>
+                <default>false</default>
+                <label>Trees/Shrubs</label>
+            </value>
+            <value>
+                <fullName>Drainage System</fullName>
+                <default>false</default>
+                <label>Drainage System</label>
+            </value>
+            <value>
+                <fullName>Wood Structure(s), Deck(s), Gazebo(s), etc</fullName>
+                <default>false</default>
+                <label>Wood Structure(s), Deck(s), etc</label>
+            </value>
+            <value>
+                <fullName>Concrete Patio/Walkway, etc</fullName>
+                <default>false</default>
+                <label>Concrete Patio/Walkway, etc</label>
+            </value>
+            <value>
+                <fullName>Masonry/Brick/Stone work</fullName>
+                <default>false</default>
+                <label>Masonry/Brick/Stone work</label>
+            </value>
+            <value>
+                <fullName>Fencing</fullName>
+                <default>false</default>
+                <label>Fencing</label>
+            </value>
+            <value>
+                <fullName>Retaining wall</fullName>
+                <default>false</default>
+                <label>Retaining wall</label>
+            </value>
+            <value>
+                <fullName>Landscape lighting</fullName>
+                <default>false</default>
+                <label>Landscape lighting</label>
+            </value>
+            <value>
+                <fullName>Pool/Spa</fullName>
+                <default>false</default>
+                <label>Pool/Spa</label>
+            </value>
+            <value>
+                <fullName>Storage Shed</fullName>
+                <default>false</default>
+                <label>Storage Shed</label>
+            </value>
+            <value>
+                <fullName>Built in BBQ</fullName>
+                <default>false</default>
+                <label>Built in BBQ</label>
+            </value>
+            <value>
+                <fullName>Pergola</fullName>
+                <default>false</default>
+                <label>Pergola</label>
+            </value>
+            <value>
+                <fullName>Firepit Gas</fullName>
+                <default>false</default>
+                <label>Firepit Gas</label>
+            </value>
+            <value>
+                <fullName>Firepit Electric</fullName>
+                <default>false</default>
+                <label>Firepit Electric</label>
+            </value>
+            <value>
+                <fullName>Refurbish Old</fullName>
+                <default>false</default>
+                <label>Refurbish Old</label>
+            </value>
+            <value>
+                <fullName>Design and Build</fullName>
+                <default>false</default>
+                <label>Design and Build</label>
+            </value>
+            <value>
+                <fullName>Build (use existing architectural drawing(s))</fullName>
+                <default>false</default>
+                <label>Build (existing architectural drawing)</label>
+            </value>
+            <value>
+                <fullName>Drains</fullName>
+                <default>false</default>
+                <label>Drains</label>
+            </value>
+            <value>
+                <fullName>Faucets, fixtures, pipes</fullName>
+                <default>false</default>
+                <label>Faucets, fixtures, pipes</label>
+            </value>
+            <value>
+                <fullName>Pumps</fullName>
+                <default>false</default>
+                <label>Pumps</label>
+            </value>
+            <value>
+                <fullName>Septic System, sewers, or water mains</fullName>
+                <default>false</default>
+                <label>Septic System, sewers, or water mains</label>
+            </value>
+            <value>
+                <fullName>Water heater(s)</fullName>
+                <default>false</default>
+                <label>Water heater(s)</label>
+            </value>
+            <value>
+                <fullName>Water Softening and purification</fullName>
+                <default>false</default>
+                <label>Water Softening and purification</label>
+            </value>
+            <value>
+                <fullName>Run new outlets</fullName>
+                <default>false</default>
+                <label>Run new outlets</label>
+            </value>
+            <value>
+                <fullName>Install new lighting</fullName>
+                <default>false</default>
+                <label>Install new lighting</label>
+            </value>
+            <value>
+                <fullName>Install electric vehicle charging station</fullName>
+                <default>false</default>
+                <label>Install electric vehicle charging</label>
+            </value>
+            <value>
+                <fullName>Rewire house</fullName>
+                <default>false</default>
+                <label>Rewire house</label>
+            </value>
+            <value>
+                <fullName>Main panel</fullName>
+                <default>false</default>
+                <label>Main panel</label>
+            </value>
+            <value>
+                <fullName>Service existing electrical</fullName>
+                <default>false</default>
+                <label>Service existing electrical</label>
+            </value>
+            <value>
+                <fullName>Enclose existing patio or porch with roof, walls or windows</fullName>
+                <default>false</default>
+                <label>Enclose existing patio/porch</label>
+            </value>
+            <value>
+                <fullName>Build new sunroom or enclosed patio/porch</fullName>
+                <default>false</default>
+                <label>Build new sunroom/enclosed patio/porch</label>
+            </value>
+            <value>
+                <fullName>Screen in existing covered porch/patio</fullName>
+                <default>false</default>
+                <label>Screen in existing covered porch/patio</label>
+            </value>
+            <value>
+                <fullName>Add a metal awning to existing porch/patio</fullName>
+                <default>false</default>
+                <label>Add metal awning to existing porch/patio</label>
+            </value>
+            <value>
+                <fullName>Add fabric awning to existing porch/patio</fullName>
+                <default>false</default>
+                <label>Add fabric awning to porch/patio</label>
+            </value>
+            <value>
+                <fullName>Repair existing sunroom, porch, patio</fullName>
+                <default>false</default>
+                <label>Repair existing sunroom, porch, patio</label>
+            </value>
+            <value>
+                <fullName>Install new AC System</fullName>
+                <default>false</default>
+                <label>Install new AC System</label>
+            </value>
+            <value>
+                <fullName>Both</fullName>
+                <default>false</default>
+                <label>Both</label>
+            </value>
+            <value>
+                <fullName>Build New</fullName>
+                <default>false</default>
+                <label>Build New</label>
+            </value>
+            <value>
+                <fullName>New Install</fullName>
+                <default>false</default>
+                <label>New Install</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

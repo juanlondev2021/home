@@ -1,0 +1,50 @@
+<aura:component>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="AccId" type="String" />
+    <aura:attribute name="ready" type="Boolean" default='false'/>
+    <aura:registerEvent name="AccPayMethod" type="c:DiacoFinanceOrderTypeEvent"/>
+    <lightning:recordEditForm Aura:id="recordForm" recordId="{!v.recordId == null? '': v.recordId}"  
+                              onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}" objectApiName="PaymentMethod__c">
+        <lightning:messages aura:id="MessageError"/>
+        <div class="slds-form-element slds-form-element_horizontal">
+            <div class="slds-grid slds-wrap slds-m-top_small container-box">
+                <aura:if isTrue='{!v.ready}'>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="BankName__c" aura:id="BankName__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="Bank_Account_Name__c" aura:id="Bank_Account_Name__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="BankAccountType__c" aura:id="BankAccountType__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="BankAccountNumber__c" label="Bank Account Number" required="true" 
+                                            messageWhenPatternMismatch="Enter a valid Account Number" pattern="\d*"/>                    
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="RoutingNumber__c" label="Routing Number" required="true"
+                                            messageWhenPatternMismatch="Enter a valid Routing Number" pattern="\d*"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12">
+                        <div class="slds-float_right">
+                            <lightning:button label="Save" title="Save" type="submit" />
+                        </div>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">The payment method has not been created, do you want to create it?</div> 
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12">
+                            <div class="slds-float_right">
+                                <lightning:button label="Create" title="Create" onclick="{!c.createACH}" />
+                            </div>
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </div>
+        </div>
+    </lightning:recordEditForm>
+</aura:component>

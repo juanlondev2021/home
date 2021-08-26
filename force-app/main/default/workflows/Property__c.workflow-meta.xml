@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>FieldUpdateFromProperty</fullName>
+        <description>Update Year Built field on Address from Property</description>
+        <field>fYear_Built__c</field>
+        <formula>Year_Built__c</formula>
+        <name>FieldUpdateFromProperty</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>PopulateExternalId</fullName>
+        <field>External_ID__c</field>
+        <formula>CASESAFEID(Id)</formula>
+        <name>PopulateExternalId</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>ExternalIDPopulation</fullName>
+        <actions>
+            <name>PopulateExternalId</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Property__c.External_ID__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>UpdateYearBuiltFromProperty</fullName>
+        <actions>
+            <name>FieldUpdateFromProperty</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>To populate fYear Built field from the property</description>
+        <formula>ISCHANGED(Year_Built__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

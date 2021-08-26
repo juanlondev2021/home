@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_Created_by__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Capturing the user who updated the verbal consent from null to not null</description>
+    <externalId>false</externalId>
+    <label>Consent Created by</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Accounts3</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

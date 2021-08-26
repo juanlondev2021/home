@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Are_you_in_need_of_blinds__c</fullName>
+    <description>(Blinds/Shutters)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Blinds/Shutters)</inlineHelpText>
+    <label>Are you in need of blinds?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Blinds/Shutters - Blinds - 5 or Below</fullName>
+                <default>false</default>
+                <label>Blinds/Shutters - Blinds - 5 or Below</label>
+            </value>
+            <value>
+                <fullName>Blinds/Shutters - Blinds - 6 or more</fullName>
+                <default>false</default>
+                <label>Blinds/Shutters - Blinds - 6 or more</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

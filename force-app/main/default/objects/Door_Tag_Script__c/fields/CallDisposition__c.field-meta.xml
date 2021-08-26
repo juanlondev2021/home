@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CallDisposition__c</fullName>
+    <externalId>false</externalId>
+    <label>Call Disposition</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+            <value>
+                <fullName>NC: Not Interested</fullName>
+                <default>false</default>
+                <label>NC: Not Interested</label>
+            </value>
+            <value>
+                <fullName>NC: Time</fullName>
+                <default>false</default>
+                <label>NC: Time</label>
+            </value>
+            <value>
+                <fullName>NC: Hang Up</fullName>
+                <default>false</default>
+                <label>NC: Hang Up</label>
+            </value>
+            <value>
+                <fullName>NC: System</fullName>
+                <default>false</default>
+                <label>NC: System</label>
+            </value>
+            <value>
+                <fullName>OB Wrong Person</fullName>
+                <default>false</default>
+                <label>OB Wrong Person</label>
+            </value>
+            <value>
+                <fullName>No Answer</fullName>
+                <default>false</default>
+                <label>No Answer</label>
+            </value>
+            <value>
+                <fullName>Not Owner</fullName>
+                <default>false</default>
+                <label>Not Owner</label>
+            </value>
+            <value>
+                <fullName>Appointment Set</fullName>
+                <default>false</default>
+                <label>Appointment Set</label>
+            </value>
+            <value>
+                <fullName>Appt Set and Inventory Created</fullName>
+                <default>false</default>
+                <label>Appt Set and Inventory Created</label>
+            </value>
+            <value>
+                <fullName>Appt Set: IB</fullName>
+                <default>false</default>
+                <label>Appt Set: IB</label>
+            </value>
+            <value>
+                <fullName>Appt Set: OB</fullName>
+                <default>false</default>
+                <label>Appt Set: OB</label>
+            </value>
+            <value>
+                <fullName>Appt set: Project Yes</fullName>
+                <default>false</default>
+                <label>Appt set: Project Yes</label>
+            </value>
+            <value>
+                <fullName>Business No Answer</fullName>
+                <default>false</default>
+                <label>Business No Answer</label>
+            </value>
+            <value>
+                <fullName>Call Back</fullName>
+                <default>false</default>
+                <label>Call Back</label>
+            </value>
+            <value>
+                <fullName>Call Back Appointment</fullName>
+                <default>false</default>
+                <label>Call Back Appointment</label>
+            </value>
+            <value>
+                <fullName>Delivered to Wrong House</fullName>
+                <default>false</default>
+                <label>Delivered to Wrong House</label>
+            </value>
+            <value>
+                <fullName>Disposition</fullName>
+                <default>false</default>
+                <label>Disposition</label>
+            </value>
+            <value>
+                <fullName>Dropped while talking</fullName>
+                <default>false</default>
+                <label>Dropped while talking</label>
+            </value>
+            <value>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <label>Duplicate</label>
+            </value>
+            <value>
+                <fullName>Failed Transfer</fullName>
+                <default>false</default>
+                <label>Failed Transfer</label>
+            </value>
+            <value>
+                <fullName>Hang Up</fullName>
+                <default>false</default>
+                <label>Hang Up</label>
+            </value>
+            <value>
+                <fullName>Lead Returned</fullName>
+                <default>false</default>
+                <label>Lead Returned</label>
+            </value>
+            <value>
+                <fullName>Left Message</fullName>
+                <default>false</default>
+                <label>Left Message</label>
+            </value>
+            <value>
+                <fullName>Manager Call</fullName>
+                <default>false</default>
+                <label>Manager Call</label>
+            </value>
+            <value>
+                <fullName>Need a Pro</fullName>
+                <default>false</default>
+                <label>Need a Pro</label>
+            </value>
+            <value>
+                <fullName>No Email</fullName>
+                <default>false</default>
+                <label>No Email</label>
+            </value>
+            <value>
+                <fullName>No Email/Activation</fullName>
+                <default>false</default>
+                <label>No Email/Activation</label>
+            </value>
+            <value>
+                <fullName>No English</fullName>
+                <default>false</default>
+                <label>No English</label>
+            </value>
+            <value>
+                <fullName>No Gift Box Delivered</fullName>
+                <default>false</default>
+                <label>No Gift Box Delivered</label>
+            </value>
+            <value>
+                <fullName>No Good</fullName>
+                <default>false</default>
+                <label>No Good</label>
+            </value>
+            <value>
+                <fullName>No Home owner</fullName>
+                <default>false</default>
+                <label>No Home owner</label>
+            </value>
+            <value>
+                <fullName>No Network</fullName>
+                <default>false</default>
+                <label>No Network</label>
+            </value>
+            <value>
+                <fullName>Not Home owner</fullName>
+                <default>false</default>
+                <label>Not Home owner</label>
+            </value>
+            <value>
+                <fullName>Not Homeowner</fullName>
+                <default>false</default>
+                <label>Not Homeowner</label>
+            </value>
+            <value>
+                <fullName>QC Call</fullName>
+                <default>false</default>
+                <label>QC Call</label>
+            </value>
+            <value>
+                <fullName>Send Activation</fullName>
+                <default>false</default>
+                <label>Send Activation</label>
+            </value>
+            <value>
+                <fullName>Silence</fullName>
+                <default>false</default>
+                <label>Silence</label>
+            </value>
+            <value>
+                <fullName>Technical Problems</fullName>
+                <default>false</default>
+                <label>Technical Problems</label>
+            </value>
+            <value>
+                <fullName>Telemarketing Call</fullName>
+                <default>false</default>
+                <label>Telemarketing Call</label>
+            </value>
+            <value>
+                <fullName>Transfer to Business</fullName>
+                <default>false</default>
+                <label>Transfer to Business</label>
+            </value>
+            <value>
+                <fullName>Transfer: IB</fullName>
+                <default>false</default>
+                <label>Transfer: IB</label>
+            </value>
+            <value>
+                <fullName>Transfer: OB</fullName>
+                <default>false</default>
+                <label>Transfer: OB</label>
+            </value>
+            <value>
+                <fullName>Transfer: Project Yes</fullName>
+                <default>false</default>
+                <label>Transfer: Project Yes</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

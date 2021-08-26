@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Responsible_Organization__c</fullName>
+    <externalId>false</externalId>
+    <label>Responsible Organization</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Plivo</fullName>
+                <default>false</default>
+                <label>Plivo</label>
+            </value>
+            <value>
+                <fullName>inContact</fullName>
+                <default>false</default>
+                <label>inContact</label>
+            </value>
+            <value>
+                <fullName>Twilio</fullName>
+                <default>true</default>
+                <label>Twilio</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

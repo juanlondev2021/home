@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>COC_Start_Date__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( CONTAINS(TEXT( Installation_Status__c ),&quot;Certificate of Completion&quot;), COC_Start__c , COC_Start__c - 5 )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>COC Start Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

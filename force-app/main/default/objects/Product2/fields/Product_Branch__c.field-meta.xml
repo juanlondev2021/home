@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Branch__c</fullName>
+    <externalId>false</externalId>
+    <formula>Product_State__c +&apos;-&apos;+ Product_City__c</formula>
+    <label>Product_Branch</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

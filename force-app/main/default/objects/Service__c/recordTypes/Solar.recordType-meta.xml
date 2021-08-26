@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solar</fullName>
+    <active>true</active>
+    <label>Solar</label>
+    <picklistValues>
+        <picklist>Appt_Services_Status__c</picklist>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dispatched</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Schedule</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_Frequency__c</picklist>
+        <values>
+            <fullName>Annual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monthly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quarterly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation_Call_Status__c</picklist>
+        <values>
+            <fullName>Attempted Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed Call</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reschedule_Call_Status__c</picklist>
+        <values>
+            <fullName>Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rescheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Service_Cancelation_Reason__c</picklist>
+        <values>
+            <fullName>1st Payment Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - 3 Day</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Accounting Correction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Competition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Deceased</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Dissatisfied</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Doesn%27t Want</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Financial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancel - Move</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Fulfilled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Services_Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Time and Materials Only</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

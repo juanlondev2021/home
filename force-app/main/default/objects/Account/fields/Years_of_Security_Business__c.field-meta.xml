@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Years_of_Security_Business__c</fullName>
+    <externalId>false</externalId>
+    <label>Years of Security Business</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Under 2 Years</fullName>
+                <default>false</default>
+                <label>Under 2 Years</label>
+            </value>
+            <value>
+                <fullName>2-7 Years</fullName>
+                <default>false</default>
+                <label>2-7 Years</label>
+            </value>
+            <value>
+                <fullName>8+ Years</fullName>
+                <default>false</default>
+                <label>8+ Years</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

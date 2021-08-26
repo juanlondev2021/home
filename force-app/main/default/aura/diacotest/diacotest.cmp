@@ -1,0 +1,9 @@
+<aura:component controller="DiacoCmpFlowController" 
+                implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,forceCommunity:availableForAllPageTypes" 
+                access="GLOBAL">
+    <aura:attribute name="c__AccountId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <fieldset class="slds-box slds-theme--default">
+        <lightning:flow aura:id="flowData"/>
+    </fieldset>
+</aura:component>

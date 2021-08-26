@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WholeHouseorjustPartial__c</fullName>
+    <description>When you eventually add Rain Gutters to your home, do you want to put them around the Whole House or just Partial?</description>
+    <externalId>false</externalId>
+    <label>When you eventually add Rain Gutters to</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Full Installation.</fullName>
+                <default>false</default>
+                <label>Full Installation.</label>
+            </value>
+            <value>
+                <fullName>Partial Installation.</fullName>
+                <default>false</default>
+                <label>Partial Installation.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,243 @@
+<!--
+* Diaco
+* @author 			Álvaro Ortega href=<aovargas05@gmail.com>
+* Project:			Products
+* Description:		Component to create Line Items Objects
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		05/March/2020	Alvaro Ortega (AO)		Component.
+* @version	1.1		22/May/2020		John Hernandez(JH)		Row with button to view and Edit Product, and dataTable optimization for Mobile.
+* @version	1.1		15/Jul/2020		John Hernandez(JH)		Event for checking tab completion.
+* @version	1.1		16/Oct/2020		Fabian Pineda (FP)		Adjusted sizes of the modal windows and the dual list box.
+-->
+
+<aura:component controller="DiacoLineItemsController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="displayInstallerPointColumn" type="Boolean" default="false" />
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="originalData" type="List"/>
+    <aura:attribute name="draftValues" type="List" default="[]"/>
+    <aura:attribute name="AllDraftValues" type="List" default="[]"/>
+    
+    <aura:attribute name="isLoad" type="boolean" default='true'/> 
+    <aura:attribute name="isLoadP" type="boolean" default='true'/> 
+    <aura:attribute name="isLoadUpdateProduct" type="boolean" default='true'/> <!--Update modal' Spinner v(1.1)-->
+    
+    <aura:attribute name="isOpen" type="boolean" default='false'/><!--Open modal to add Products-->
+    <aura:attribute name="isOpenViewProduct" type="boolean" default='false'/><!--Open modal to View and Edit Product(V 1.1)-->
+    <aura:attribute name="isOpenDelete" type="boolean" default='false'/>
+    
+    <aura:attribute name="LTtoDelete" type="Object"/>
+    
+    <aura:attribute name="options" type="boolean" default='false'/>
+    <aura:attribute name="selectedOptions" type="List" default="[]"/>
+    <aura:attribute name="productRowId" type="String" default=""/><!--the Id of the selected Product in the DataTable(V 1.1)-->
+    
+    <aura:registerEvent name="tabSaved" type="c:diacoTabCompletionEvent"/><!--Event for firing check of completion-->
+    
+    <!--HEADER-->
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:work_capacity_usage" alternativeText="Products"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Information About</h1>
+                <h2 class="slds-text-heading--medium">Products</h2>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem alignmentBump="left" padding="horizontal-small"> 
+            
+            <lightning:buttonIcon  iconName="utility:add"  
+                                  variant="brand" 
+                                  alternativeText="Add Product" 
+                                  onclick="{! c.openModel }" 
+                                  disabled='{!v.draftValues.length > 0}'/>                                    
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <aura:if isTrue="{!v.isLoad}">
+        <div class="slds-align_absolute-center">
+            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+        </div>
+        <aura:set attribute="else">
+            <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                <lightning:datatable
+                                     keyField="id"
+                                     data="{! v.data }"
+                                     columns="{! v.columns }"
+                                     draftValues="{! v.AllDraftValues }"
+                                     hideCheckboxColumn="true"
+                                     onrowaction="{! c.handleRowAction }"
+                                     onsave="{! c.handleSaveEdition }"
+                                     oncancel="{! c.handleCancelEdition }"
+                                     oncellchange="{! c.handleCellEdition }" />
+            </div>
+        </aura:set>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isOpen}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Products List</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <aura:if isTrue="{!v.isLoadP}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+                        </div>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!$Browser.formFactor=='DESKTOP'}">
+                                <lightning:dualListbox aura:id="listBoxP"
+                                                    name="languages"
+                                                    class="slds-m-top--medium slds-align_absolute-center"
+                                                    label= "Select Products" 
+                                                    sourceLabel="Available" 
+                                                    selectedLabel="Selected" 
+                                                    fieldLevelHelp="This is a dual listbox"
+                                                    value="{!v.selectedOptions}" 
+                                                    options="{!v.options}"/>
+                            </aura:if>
+                            <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+                            <lightning:checkboxGroup name="Checkbox Group"
+                             label="Select Products"
+                             options="{! v.options }"
+                             value="{! v.selectedOptions }"
+                             />
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"
+                                      disabled="{!v.isLoadP}"/>
+                    <lightning:button variant="brand" 
+                                      label="Add"
+                                      title="Add"
+                                      onclick="{! c.addProducts }"
+                                      disabled="{!v.isLoadP}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isOpenDelete}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModelDelete }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Product</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-align_absolute-center slds-m-around_x-small">
+                        {!v.draftValues.length > 0 ? ('Save the changes first') : ('Are you sure you want to delete '+v.LTtoDelete.Name+'?')}
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######--> 
+                <footer class="slds-modal__footer">
+                    <aura:if isTrue="{!!(v.draftValues.length > 0)}">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModelDelete }"/>
+                    </aura:if>
+                    <lightning:button variant="brand" 
+                                      label="{! v.draftValues.length > 0 ? 'Accept' : 'Delete' }"
+                                      title="{! v.draftValues.length > 0 ? 'Accept' : 'Delete' }"
+                                      onclick="{! v.draftValues.length > 0 ? c.closeModelDelete : c.deletingOrderItem }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    
+    <!--Modal to View the fields of the selected item and in Given case Edit and Update V1.1-->
+    <aura:if isTrue="{!v.isOpenViewProduct}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Product Information</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" style="weight: 700px" id="modal-content-id-1">
+                    
+                    <!--CONTENT-->
+                    <lightning:recordEditForm recordId="{!v.productRowId}" objectApiName="Line_Item__c" aura:id='ViewProductEditForm' onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}">
+                        <lightning:messages />
+                        <aura:if isTrue="{!v.isLoadUpdateProduct}">
+                            <lightning:inputField fieldName="Name" disabled="true" />
+                            <lightning:inputField fieldName="Quantity__c" />
+                            <lightning:inputField fieldName="Unit_Price__c" />
+                            <lightning:inputField fieldName="Total_Price__c" disabled="true" />
+                        </aura:if>
+                    </lightning:recordEditForm>
+                    
+                    
+                    <aura:if isTrue="{!v.isLoadUpdateProduct ==false}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+                        </div>
+                    </aura:if>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Close"
+                                      title="Close"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand" 
+                                      label="Update"
+                                      title="Update"
+                                      onclick="{! c.updateProduct}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+</aura:component>

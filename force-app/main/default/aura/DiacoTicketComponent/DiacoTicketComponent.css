@@ -1,0 +1,60 @@
+.THIS.container{
+    max-width: 100%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.THIS .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    max-width: 0%;
+    max-height: 1%;
+    margin-left: 10%;
+    margin-top: 200%;
+}
+
+.THIS .up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.THIS .down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.THIS .red{
+	border-color: red;
+}
+.THIS .orange{
+	border-color: orange;
+}
+.THIS .green{
+	border-color: green;
+}
+.THIS .lowGreen{
+	border-color: #2ecc71;
+}
+.THIS .yellow{
+	border-color: #e0ff00;
+}
+
+.THIS lightning-primitive-header-actions {
+    display: none;
+}
+
+.THIS .toLeft{
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    left: 105%;
+  }
+
+  to {
+    left: 0%;
+  }
+}

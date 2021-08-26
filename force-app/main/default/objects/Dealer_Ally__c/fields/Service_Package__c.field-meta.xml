@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Package__c</fullName>
+    <externalId>false</externalId>
+    <label>Service Package</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Wireless Signal Forwarding</fullName>
+                <default>false</default>
+                <label>Wireless Signal Forwarding</label>
+            </value>
+            <value>
+                <fullName>Pro Video</fullName>
+                <default>false</default>
+                <label>Pro Video</label>
+            </value>
+            <value>
+                <fullName>Interactive Gold</fullName>
+                <default>false</default>
+                <label>Interactive Gold</label>
+            </value>
+            <value>
+                <fullName>Interactive + Automation</fullName>
+                <default>false</default>
+                <label>Interactive + Automation</label>
+            </value>
+            <value>
+                <fullName>Interactive</fullName>
+                <default>false</default>
+                <label>Interactive</label>
+            </value>
+            <value>
+                <fullName>Home Access</fullName>
+                <default>false</default>
+                <label>Home Access</label>
+            </value>
+            <value>
+                <fullName>Commercial Plus</fullName>
+                <default>false</default>
+                <label>Commercial Plus</label>
+            </value>
+            <value>
+                <fullName>Commercial</fullName>
+                <default>false</default>
+                <label>Commercial</label>
+            </value>
+            <value>
+                <fullName>Basic Interactive</fullName>
+                <default>false</default>
+                <label>Basic Interactive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

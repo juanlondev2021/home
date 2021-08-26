@@ -1,0 +1,128 @@
+<aura:component controller='DiacoPaymentMethod'>
+  <aura:attribute name="recordId" type="String" />
+  <aura:attribute name="hsId" type="String" />
+  <aura:attribute name="paymentType" type="String" />
+  <aura:attribute name="frequencyPay" type="String" />
+  <aura:attribute name="isChangeOrder" type="String" default="Yes" />
+  <aura:attribute name="destinationOrder" type="String" />
+  <aura:attribute name="showACH" type="Boolean" default="true" />
+    
+  <aura:method name="save" action="{!c.save}" access="PUBLIC" />
+  <aura:registerEvent name="DiacoContractPayMethodClose" type="c:DiacoContractPayMethodClose" />
+    
+  <lightning:recordEditForm aura:id="recordForm" recordId="{!v.recordId == null? '': v.recordId}" onload="{!c.handleLoad}" onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}" objectApiName="PaymentMethod__c">
+    <lightning:messages />
+    <div class="slds-form-element slds-form-element_horizontal">
+      <div class="slds-grid slds-wrap slds-m-top_small container-box">
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+          <lightning:inputField fieldName="Payment_Destination__c" aura:id="destination" onchange="{!c.handleChangeDestination}" />
+        </div>
+
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium" style="{!v.showACH ? 'display:block;' : 'display:none;'}">
+          <lightning:inputField fieldName="PaymentMethodType__c" aura:id="type" onchange="{!c.handleChange}" />
+        </div>
+
+        <aura:if isTrue="{!(!v.showACH)}">
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:select aura:id="selectType" name="selectType" label="Payment method type" onchange="{! c.onChangeTypeSelect }">
+              <option value="">choose one...</option>
+              <option value="Checking">Checking</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Finance">Finance</option>
+              <option value="Lease">Lease</option>
+            </lightning:select>
+          </div>
+        </aura:if>
+
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+          <lightning:inputField fieldName="Amount__c" aura:id="amount" />
+        </div>
+        <aura:if isTrue="{!v.paymentType == 'Finance'}">
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="FinanceCompany__c" />
+          </div>
+        </aura:if>
+
+        <aura:if isTrue="{!v.paymentType == 'Credit Card'}">
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="CardType__c" aura:id="CardType__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="NameOnCard__c" aura:id="NameOnCard__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="CardNumber__c" label="Card Number" />
+            <lightning:inputField class="not-rendered" fieldName="CardNumber__c" aura:id="CardNumber__c_real" type="number"/>
+          </div>
+
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="CSV__c" label="CSV" maxlength="4" minlength="3" />
+            <lightning:inputField class="not-rendered" fieldName="CSV__c" aura:id="CSV__c_real"/>
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="CardExpirationMonth__c" label="Card Expiration Month" maxlength="2" minlength="2" />
+            <lightning:inputField class="not-rendered" fieldName="CardExpirationMonth__c" aura:id="CardExpirationMonth__c_real"/>
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="Card_Expiration_Year__c" label="Card Expiration Year" maxlength="4" minlength="4" />
+            <lightning:inputField class="not-rendered" fieldName="Card_Expiration_Year__c" aura:id="Card_Expiration_Year__c_real"/>
+          </div>
+        </aura:if>
+        <aura:if isTrue="{!v.paymentType == 'ACH'}">
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="BankName__c" aura:id="BankName__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="Bank_Account_Name__c" aura:id="Bank_Account_Name__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="BankAccountType__c" aura:id="BankAccountType__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="BankAccountNumber__c" label="Bank Account Number" />
+            <lightning:inputField class="not-rendered" fieldName="BankAccountNumber__c" aura:id="BankAccountNumber__c_real"/>
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="RoutingNumber__c" label="Routing Number" />
+            <lightning:inputField class="not-rendered" fieldName="RoutingNumber__c" aura:id="RoutingNumber__c_real"/>
+          </div>
+        </aura:if>
+        <aura:if isTrue="{!v.paymentType == 'Checking'}">
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="BankName__c" aura:id="BankName__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="BankAccountType__c" aura:id="BankAccountType__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:inputField fieldName="Bank_Account_Name__c" aura:id="Bank_Account_Name__c" />
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="BankAccountNumber__c" label="Bank Account Number" />
+            <lightning:inputField class="not-rendered" fieldName="BankAccountNumber__c" aura:id="BankAccountNumber__c_real"/>
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="RoutingNumber__c" label="Routing Number" />
+            <lightning:inputField class="not-rendered" fieldName="RoutingNumber__c" aura:id="RoutingNumber__c_real"/>
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+            <lightning:input type="number" aura:id="AccountNumberChecking" label="Account Number Checking" />
+            <lightning:inputField class="not-rendered" fieldName="AccountNumberChecking__c" aura:id="AccountNumberChecking_real" />
+          </div>
+
+        </aura:if>
+        <aura:if isTrue="{!v.paymentType == 'Checking' || v.paymentType == 'Credit Card'}">
+          <aura:if isTrue="{!and(v.destinationOrder =='Services')}">
+            <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+              <lightning:inputField fieldName="Payment_Frequency__c" aura:id="Payment_Frequency__c" value="{!v.frequencyPay}" />
+            </div>
+          </aura:if>
+        </aura:if>
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium slds-hidden">
+          <lightning:inputField fieldName="HomeService__c" value="{!v.hsId}" />
+          <lightning:inputField fieldName="Chargent_Order__c" aura:id="chargent" />
+        </div>
+      </div>
+    </div>
+  </lightning:recordEditForm>
+</aura:component>

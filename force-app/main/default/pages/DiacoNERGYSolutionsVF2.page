@@ -1,0 +1,298 @@
+<apex:page renderAs="pdf" showHeader="false" standardController="Home_Services__c"
+           sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    
+    <head>
+        <title>N-ERGY</title>
+        
+         <style type="text/css">
+            
+            @page {
+            size: Legal;
+            margin: 5mm 2mm 2mm 2mm;
+            
+            }
+            
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            table, th, td {
+            border: 1px solid black;
+            }
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+            
+        </style>
+       <!--
+      <style type="text/css">   
+        @page {
+            size: A4;
+            margin: 5mm 2mm 10mm 2mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            }
+            div.footer {
+            align-text: justify;
+            font-size: 6pt;
+            margin: 0mm 9mm 0mm 10mm;
+            position: running(footer);
+            }
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.3pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .left {
+            float: left;
+            text-align: left;
+            padding-right: 10px;
+            }
+            .right {
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+            }
+            #page15{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.5pt; 
+            margin: 5mm 10mm 5mm 15mm;
+            }
+            #page16{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt; 
+            margin: 5mm 10mm 5mm 15mm;
+            }
+            .blue-color{
+            color: #0070C0;
+            }
+        </style>
+        -->
+    </head>
+    <div style="width:90%; margin:auto; font-size:12px" id="page15">
+        <div style="text-align:center;">
+            <h2>
+                ELECTRICAL DISTRICT NO. 3 OF PINAL COUNTY
+            </h2>
+            
+            <div style="width:100%; text-align:center; display: inline-block;">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/electricallogo.png')}"/>
+            </div>
+            <h1 style="color:red; font-size:16px">
+                RIDER NO. 08
+            </h1>
+            <h3>
+                <b style="color:red;">SOLAR PROGRAM – </b><b>BUYBACK</b><b style="color:red;"> - RESIDENTIAL / SMALL GENERAL SERVICE</b>
+            </h3>
+            <p>
+                Page 1 of 1
+            </p>
+            
+        </div>
+        <div style="width:100%; margin:auto;">
+            <div  style="width:50%; float:left;"><h3><b>REVISION NO.: 1</b></h3></div>
+            <div style="width:50%; float:right; text-align:right;"><h3><b>EFFECTIVE: 03/26/18</b></h3></div>                    
+        </div>
+        <br/>
+        <table width="100%" style="border:0px; border-collapse: collapse">
+            <tr>
+                <td width="15%" style="border:0px"><h3><b style="color:red;">PLEASE NOTE:</b></h3></td>
+                <td width="85%" style="border:0px"><h3 style="padding-top: 15px;color:red;"><b>CUSTOMER APPLICATIONS THAT ARE PLACED IN THE QUEUE ARE SUBJECT TO ALL REVISIONS AND CHANGES TO THIS PROGRAM DURING THEIR TIME IN THE QUEUE.</b></h3></td>
+            </tr>
+        </table>
+        <p>
+            <b><u>Applicability</u></b>
+        </p>
+        <p align="justify">
+            Program applies to Customer Owned Distributed Generation (“DG”) Systems with a DC electrical peak capability of ten kilowatts (10 kW) or less for Residential Service and twenty kilowatts (20 kW) or less for Small General Service. Limited to customers served by ED3, who purchase power and energy provided by ED3, and whose generation systems are qualified to deliver power and energy back to ED3.
+        </p>
+        <p align="justify">
+            An “Application for Operation of Customer Owned Distributed Generation” with the customer shall be required for service under this rider.
+        </p>
+        <p align="justify">
+            Distributed Generation Interconnections may require a System Engineering Analysis, the cost of which will be borne by the Customer. An initial System Engineering Analysis Fee of $500 (five hundred dollars) will be required to begin the study. Any additional analysis costs will be billed to the Customer in advance and any unused amounts will be returned upon completion of the analysis.
+        </p>
+        <p align="justify">
+            Prior to receiving service under this Rider, the customer will be required to sign the ED3 “Agreement for Interconnection of Customer Owned Distributed Generation”.
+        </p>
+        <p align="justify">
+            Service under this schedule is in accordance with the terms of ED3's Electric Service Guidelines, including any amendments.
+        </p>
+        <p>
+            <b><u>Conditions</u></b>
+        </p>
+        <ol>
+            <li>
+                <p align="justify">
+                    The customer energy usage (kWh) will be netted with the DG kWh each month. If customer energy usage exceeds generation, the monthly net will be billed according to the applicable retail Residential or Small General Service rate. If generation exceeds customer usage, ED3 will pay the customer based on the ED3 avoided cost for energy1 (for the monthly net energy amount).
+                </p>
+            </li>
+            <li>
+                <p align="justify">
+                    Distributed Generation Fixed Cost Recovery (DGFCR) – A monthly surcharge will be applied based on the nameplate kW-DC power rating of the distributed generation facility. DG Systems require the use of multiple registers; therefore, the customer charge will be equivalent to those of Time of Use rates.
+                </p>
+            </li>
+            <li>
+                <p align="justify">
+                    The customer shall pay ED3 for interconnection costs prior to commencement of service under this rider. Interconnection costs may include but are not limited to reasonable costs of connection, switching, relaying, metering, safety provisions, engineering studies and administrative costs incurred by ED3 directly related to the installation of the physical facilities necessary to permit interconnected operations. An estimate of these costs will be provided to the customer following their completed “Application for Operation of Customer Owned Distributed Generation”.
+                </p>
+            </li>
+            <li>
+                <p align="justify">
+                    The customer is required to provide a meter socket for any additional meters. Typically, a meter is required for incoming service from ED3, and a meter is required for generated power from the DG System. At the discretion of ED3, if a single bi-directional meter is available that can record load and generation separately; a single meter may be used.
+                </p>
+            </li>
+        </ol>
+        <p>
+            <b><u>Green Credits</u></b>
+        </p>
+        <p align="justify">
+            Title to and ownership of any and all environmental / green credits associated with Customer Owned Distributed Generation System shall pass from Customer to ED3 upon initiation of service and ED3 shall maintain title to and ownership of all such environmental / green credits, benefits, emissions reductions, offsets and allowances, howsoever entitled, attributable to the generation of energy from the DG System. The calculation, use and retirement of any and all environmental / green credits shall be in the sole and exclusive discretion of ED3. Any funds derived from these green credits will be added to the ED3 Solar program funds.
+        </p>
+        <table WIDTH="100%" >
+            <tr style="border-top: 0px; ">
+                <td WIDTH="15%" style="border:0px;">
+                    Customer Name: 
+                </td>
+                <td WIDTH="57%" style="border:0px; border-bottom:1px solid black;">
+                    {!Home_Services__c.Full_Name_Customer_1__c}
+                </td>
+                <td WIDTH="6%" style="border:0px;" align="right">
+                    Date: 
+                </td>
+                <td colspan="2" WIDTH="22%" style="border:0px; border-bottom:1px solid black;color: white;">
+                    Date_1
+                </td>
+            </tr>
+            <tr style="border-top: 0px; ">
+                <td WIDTH="15%" style="border:0px;">
+                    
+                </td>
+                <td WIDTH="57%" style="border:0px;" align="center">
+                    <i>Please Print</i>
+                </td>
+                <td WIDTH="6%" style="border:0px;" align="right">
+                    
+                </td>
+                <td colspan="2" WIDTH="22%" style="border:0px;">
+                    
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="100%" style="margin-top: 25px;">
+            <tr style="border-top: 0px; ">
+                <td WIDTH="15%" style="border:0px;">
+                    Customer Signature: 
+                </td>
+                <td WIDTH="57%" style="border:0px; border-bottom:1px solid black;color: white;">
+                    Sign_1
+                </td>
+                <td WIDTH="6%" style="border:0px;" align="right">
+                    
+                </td>
+                <td colspan="2" WIDTH="22%" style="border:0px;">
+                    
+                </td>
+            </tr>
+        </table>
+        <div class="footer">
+            <ol>
+                <li>
+                    <p>
+                        ED3 avoided energy costs will be periodically evaluated and the amount paid under this rider will change accordingly. The generation / purchased power cost component included in ED3’s retail rates can change based on actual costs incurred by ED3.
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</apex:page>

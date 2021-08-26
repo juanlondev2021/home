@@ -1,0 +1,27 @@
+<!--
+* Diaco
+* @author 			Fabian Pineda href=<fpineda@diaco.us>
+* Project:			Contracts
+* Description:		Renders Home Services that don't fall under record types "Water", "Solar", "Home Automation" or "Pest."
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		06/11/2020		Fabian Pineda (FP)		Initial version.
+-->
+<aura:component>
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="toReloadFirstCustomer" type="Boolean" default="false"/>
+    <aura:attribute name="toReloadSecondCustomer" type="Boolean" default="false"/>
+    
+    <lightning:tabset>
+        <lightning:tab id="firstCustomer" label="First Customer" onactive="{!c.reload}">
+            <c:diacoContractFirstCustomer recordId="{!v.recordId}" showAddress="true" showHOA="true" reload="{!v.toReloadFirstCustomer}"/>
+        </lightning:tab>
+        <lightning:tab id="secondCustomer" label="Second Customer" onactive="{!c.reload}">
+            <c:diacoContractSecondCustomer recordId="{!v.recordId}" reload="{!v.toReloadSecondCustomer}" />
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

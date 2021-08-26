@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Wood_Carpet_Tile__c</fullName>
+    <description>(Flooring/Carpeting)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Flooring/Carpeting)</inlineHelpText>
+    <label>What type of flooring are you inneed of?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Flooring/Carpeting - Carpet - Install 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Carpet - Install 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Carpet - Install 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Carpet - Install 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Carpet - Repair 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Carpet - Repair 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Carpet - Repair 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Carpet - Repair 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Tile - Install 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Tile - Install 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Tile - Install 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Tile - Install 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Tile - Install 5 + rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Tile - Install 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Tile - Repair 5 + rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Tile - Repair 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Tile -Repair 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Tile -Repair 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Install 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Install 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Install 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Install 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Install 5 + rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Install 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Refinish 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Refinish 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Refinish 5 + rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Refinish 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Repair 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Repair 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting - Wood - Repair 5 + rooms</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting - Wood - Repair 5 + rooms</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

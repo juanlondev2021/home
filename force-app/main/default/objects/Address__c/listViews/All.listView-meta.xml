@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Branch__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>County__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>County__c</field>
+        <operation>equals</operation>
+        <value>maricopa</value>
+    </filters>
+    <filters>
+        <field>ConfirmationNUM__c</field>
+        <operation>equals</operation>
+        <value>15501649</value>
+    </filters>
+    <label>All</label>
+</ListView>

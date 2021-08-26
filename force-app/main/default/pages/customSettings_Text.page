@@ -1,0 +1,74 @@
+<apex:page lightningStylesheets="true" showHeader="false"   standardController="Text_Settings_Appt__c" extensions="customSettings">
+        
+
+    <apex:pageBlock title="Text Settings">
+        
+        <apex:pageBlockSection title="Text Settings Information">
+            
+            	<apex:form rendered="true">
+                
+                      <table WIDTH="500">
+                          <tr>
+                               <th>
+                                   <h3>
+                                        Send Automatic Text on Confirmation:
+                                   </h3>
+                               </th>
+                               
+                          </tr>
+                          
+                          <tr>
+                               <td><apex:outputLabel value="Home Automation "/></td>
+                               <td><apex:inputCheckbox value="{!Confirmed_HA}"/></td>
+                          </tr>
+                          <tr>
+                              <td><apex:outputLabel value="Solar"/></td>
+                              <td><apex:inputCheckbox value="{!Confirmed_SO}"/></td>
+                          </tr>
+                          <tr>
+                               <td><apex:outputLabel value="Water"/></td>
+                               <td><apex:inputCheckbox value="{!Confirmed_WA}"/></td>
+                          </tr>
+                          <tr>
+                              <td><apex:outputLabel value="Windows"/></td>
+                              <td><apex:inputCheckbox value="{!Confirmed_WI}"/></td>
+                          </tr>
+                          <tr>
+                               <th>
+                                   <h3>
+                                        Send Automatic Text on Appointment Sent:
+                                   </h3>
+                              </th>
+                          </tr>
+                          <tr>
+                               <td><apex:outputLabel value="Home Automation "/></td>
+                               <td><apex:inputCheckbox value="{!Set_HA}"/></td>
+                          </tr>
+                          <tr>
+                              <td><apex:outputLabel value="Solar"/></td>
+                              <td><apex:inputCheckbox value="{!Set_SO}"/></td>
+                          </tr>
+                          <tr>
+                               <td><apex:outputLabel value="Water"/></td>
+                               <td><apex:inputCheckbox value="{!Set_WA}"/></td>
+                          </tr>
+                          <tr>
+                              <td><apex:outputLabel value="Windows"/></td>
+                              <td><apex:inputCheckbox value="{!Set_WI}"/></td>
+                          </tr>
+                          <tr>
+                              
+                              <td align="center" colspan="2"></td> 
+                          </tr>
+                          <tr>
+                              
+                              <td align="center" colspan="2"><apex:commandButton value="Save"  action="{!test}" onclick="alert('SAVE COMPLETED');" rerender="out" status="status"/></td> 
+                          </tr>
+                           <apex:pageMessages />
+                          
+                     </table>
+            </apex:form>
+            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

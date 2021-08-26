@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ResDate_NumOfDays__c</fullName>
+    <description>Required for call cadence so when this person is in a call campaign we know how old it is by number of days since response.</description>
+    <externalId>false</externalId>
+    <formula>TODAY() - Respond_Date__c</formula>
+    <label>ResDate NumOfDays</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_New_electrical_work_existing_repair__c</fullName>
+    <description>(Electrician)Do you need existing electrical repaired or do you need new electrical work installed?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Electrician)Do you need existing electrical repaired or do you need new electrical work installed?</inlineHelpText>
+    <label>New electrical work/existing repaired</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Electrician - New Installation</fullName>
+                <default>false</default>
+                <label>Electrician - New Installation</label>
+            </value>
+            <value>
+                <fullName>Electrician - Repair</fullName>
+                <default>false</default>
+                <label>Electrician - Repair</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

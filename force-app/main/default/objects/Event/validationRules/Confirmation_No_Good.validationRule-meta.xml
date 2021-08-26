@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmation_No_Good</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL( Confirmation_Status__c , &quot;No Good&quot;)   &amp;&amp;  
+
+ISPICKVAL( No_Good_Reasons_Confirmation__c , &quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>No_Good_Reasons_Confirmation__c</errorDisplayField>
+    <errorMessage>Is Required</errorMessage>
+</ValidationRule>

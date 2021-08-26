@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pets_Yes</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL( Pets__c , &quot;Yes&quot;) &amp;&amp;
+
+ISPICKVAL( Kinds_Of_Pets__c, &quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>Kinds_Of_Pets__c</errorDisplayField>
+    <errorMessage>Kinds Of Pets is requiered</errorMessage>
+</ValidationRule>

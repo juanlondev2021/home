@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disqualified__c</fullName>
+    <externalId>false</externalId>
+    <label>Disqualified Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Status</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Couldn&apos;t get past gatekeeper</fullName>
+                <default>false</default>
+                <label>Couldn&apos;t get past gatekeeper</label>
+            </value>
+            <value>
+                <fullName>Decision Maker wouldn&apos;t state</fullName>
+                <default>false</default>
+                <label>Decision Maker wouldn&apos;t state</label>
+            </value>
+            <value>
+                <fullName>Hung up</fullName>
+                <default>false</default>
+                <label>Hung up</label>
+            </value>
+            <value>
+                <fullName>Not in Budget</fullName>
+                <default>false</default>
+                <label>Not in Budget</label>
+            </value>
+            <value>
+                <fullName>No time</fullName>
+                <default>false</default>
+                <label>No time</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Disqualified</controllingFieldValue>
+            <valueName>Couldn&apos;t get past gatekeeper</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Disqualified</controllingFieldValue>
+            <valueName>Decision Maker wouldn&apos;t state</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Disqualified</controllingFieldValue>
+            <valueName>Hung up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Disqualified</controllingFieldValue>
+            <valueName>Not in Budget</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Disqualified</controllingFieldValue>
+            <valueName>No time</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Disqualified</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

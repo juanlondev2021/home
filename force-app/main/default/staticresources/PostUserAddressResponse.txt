@@ -1,0 +1,1 @@
+{"ok": true , "message" : "success", "tableName" : "test_table", "affectedRows" : 34, "totalRows" : 100}

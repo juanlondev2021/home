@@ -1,0 +1,165 @@
+<!--
+* Diaco
+* Project:			Site Interest Manager
+* Description:		Site Interest Manager Lightning Out - Flow Canvasser Disposition
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		09-23-2020		Jull Quintero    Initial implementation of the class.
+-->
+
+<aura:component controller="SiteMyHomeServicesController" implements='lightning:availableForFlowScreens' access="global">
+<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+<aura:attribute name="recordId" type="String" />
+<aura:attribute name="loaded" type="Boolean" default="true"/>
+
+<aura:attribute name="leadSource" type="string" default="Salesforce Site" description="If flow Canvasser Disposition param value is canvasser"/>
+
+<!-- modal message -->
+<aura:attribute access="Private"  name="ErrorModal" type="Boolean" default="false"/>
+<aura:attribute access="Private"  name="SuccessModal" type="Boolean" default="false"/>
+
+<!-- hide interests -->
+<aura:attribute name="hideInterests" type="string" />
+
+<!-- APPOINTMENT -->
+<aura:attribute name="appointments" type="Map" />
+<aura:attribute name="kunnectID" type="string" default="" required="true" description="FIND Kunnect ID IN PERSONEL"/>
+
+<!---ACCOUNT -->
+<aura:attribute name="account" type="Account"/>
+<aura:attribute name="appointmentSetter" type="string" description="PERSONEL ID"/> 
+
+<!--- MODAL INTERESTS  -->
+<aura:attribute name="openInterests" type="Boolean" default="false"/>
+<aura:attribute name="interests" type="List" default="[]"/>
+<aura:attribute name="interestSelected" type="List" default="[]"/>    
+
+<!-- PICKLIST API NAME APPOINTMENT -->
+<aura:attribute name="apiNames" type="List" default="[  'Existing_Keypad__c','Do_you_have_a_water_filtration_system__c','Pets__c','Types_of_Pets__c',
+                                                        'Pest_loose_in_backyard__c', 'Backyard_gate_locked__c','Age_of_Current_AC_System__c',
+                                                        'Occupancy_of_House__c','Type_of_Material__c','Leak_Damage__c','Timeline_of_Intent__c',
+                                                        'Frequency_Desired__c','Sq_Ft_of_Project_Area__c','Design__c','Included_in_Landscape_Project__c',
+                                                        'Chemical_Type__c','Area_of_Concrete_Surface__c','Area_to_be_coated__c','Existing_Coating__c',
+                                                        'Existing_Issue_with_current_door__c','Type_of_Material_on_Current_Door__c','Area_of_Concrete__c','Rooms_included_in_project__c',
+                                                        'Description_of_closet__c','Frequency_Requested__c','Floorplan__c','Cabinets__c','Bath_Floorplan__c',
+                                                        'Main_Area_of_Concern__c','Payment_Type__c',
+                                                        'Rooms_to_be_Installed__c','Number_of_Rooms__c','Utility_Provider__c',
+                                                        'Type_of_System_to_be_installed__c','Number_of_Windows__c']" />
+<!-- picklist values -->
+<aura:attribute name="picklistValues" type="List" />
+<aura:attribute name="picklistValuesByRecordType" type="list"/>
+
+<!-- EVENT LIST INTEREST SELECTED-->
+<aura:handler name="listInterestSelected" event="c:DiacoEventInterestsWebForm" action="{! c.handlerAppointments }" />
+
+
+<div class="slds-card slds-box">
+
+    <aura:if isTrue="{!v.loaded}">
+        <lightning:spinner alternativeText="Loading" size="small" />
+    </aura:if>
+
+    <!-- HEADER -->
+    <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--large">
+
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="action:new_account" class="blackOnGreen"/>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header ">
+                <h1 class="slds-text-heading--label"></h1>
+                <h2 class="slds-text-heading--medium slds-m-top_small">Interests</h2>
+            </div>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem  alignmentBump="left" padding="horizontal-small">
+
+            <aura:if isTrue="{! v.openInterests }">
+
+                <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                    <lightning:buttonIcon iconName="utility:back" variant="bare" size="large" alternativeText="Back" iconClass="dark" title="Back" onclick="{! c.handlerAppointments }"/>
+                </lightning:layoutItem>
+
+                <aura:set attribute="else">
+                    <lightning:button   variant="brand-outline"
+                                        label="Interests" 
+                                        title="Interests" 
+                                        onclick="{! c.handlerAppointments }" />    
+                </aura:set>
+
+            </aura:if>    
+                                
+        </lightning:layoutItem>
+
+
+    </lightning:layout>
+    <!-- /HEADER -->
+
+    <aura:if isTrue="{!v.openInterests}">
+
+        <!-- INTERESTS LIST --> 
+        <c:SiteInterestsWebForm_Interests   interests="{!v.interests}" 
+                                            interestSelected="{!v.interestSelected}"/>
+        <!-- /INTERESTS LIST-->
+
+        <!-- APPOINTMENTS -->
+        <aura:set attribute="else">
+            <aura:if isTrue="{!v.appointments.length > 0}">
+
+                <div class="{!$Browser.formFactor == 'DESKTOP' ? 'slds-card slds-scrollable_y scroll_height' : ''}">
+                    <aura:iteration items="{!v.appointments}" var="item" >  
+                        <c:SiteInterestWebForm_PutAppointment   appointment="{!item.appointment}"   
+                                                                appoinmType="{!item.appoinmType}"
+                                                                account="{!v.account}"
+                                                                appointmentSetter="{!v.appointmentSetter}"
+                                                                apiNames="{!v.apiNames}" 
+                                                                picklistValues="{!v.picklistValues}"
+                                                                leadSource="{!v.leadSource}"/>
+                        
+                    </aura:iteration>  
+                </div>
+                
+                <aura:if isTrue="{!$Browser.formFactor == 'PHONE'}">
+                    <div class="slds-grid slds-grid_align-end">
+                        <lightning:buttonIcon class="slds-col" iconName="utility:jump_to_top" size="large" variant="bare" alternativeText="View More" title="View More" onclick="{!c.topScroll}"/>
+                    </div>
+                </aura:if>
+
+                <aura:set attribute="else">
+
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info slds-align_absolute-center" role="alert">
+                                <span class="slds-assistive-text">Information</span>
+                                <span class="slds-icon_container slds-icon-utility-user slds-m-right_x-small" title="Description of icon when needed">
+                                    <lightning:icon class="white" iconName="utility:alert" size="large"/>
+                                </span>
+                                <h2 class="slds-text-title_caps slds-text-color_inverse">
+                                    <lightning:button class="slds-text-color_inverse" variant="base" label="SELECT INTERESTS" title="Open Interests" onclick="{! c.handlerOpenInterests }"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </aura:set>
+            </aura:if>
+        <!-- APPOINTMENTS -->
+        </aura:set>
+    </aura:if>
+
+</div>
+
+<!-- Modal toast -->
+<c:SiteModalMessage show="{! v.ErrorModal }"
+                    variant="error" title="ERROR" 
+                    message="An unexpected error has occurred" />
+
+<c:SiteModalMessage show="{! v.SuccessModal }" 
+                    variant="success" title="SUCCESS" 
+                    message="The record has been saved successfully" />
+
+</aura:component>

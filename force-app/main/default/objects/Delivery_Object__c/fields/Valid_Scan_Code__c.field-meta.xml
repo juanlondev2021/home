@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_Scan_Code__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Parent_Gift_Card_Order__r.Name  =  &apos;Cheetah Gift Card Order&apos;, FALSE,TRUE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Valid Scan Code</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

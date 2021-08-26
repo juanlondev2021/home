@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fPhoneBP__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Industry__c = &quot;a3Gj0000000XZLm&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000XZLh&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000fylo&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000fymN&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000XZM3&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000XZM5&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000XZM6&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000fynB&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000XZMS&quot;, &quot;Remodel&quot;, 
+IF(Industry__c = &quot;a3Gj0000000XZMd&quot;, &quot;Remodel&quot;,
+&quot;&quot;))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fPhoneBP</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

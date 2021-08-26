@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cost_Allocation__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( 
+CONTAINS( RecordType.Name,&apos;Home Automation&apos;), $Setup.HS_Cost_Allocation__c.Protection_Source__c  ,
+IF( 
+CONTAINS( RecordType.Name,&apos;Water Treatment&apos;),  $Setup.HS_Cost_Allocation__c.Aqua__c ,
+IF( 
+CONTAINS( RecordType.Name,&apos;Solar&apos;),  $Setup.HS_Cost_Allocation__c.Nergy__c ,
+IF( 
+CONTAINS( RecordType.Name,&apos;Remodel&apos;), $Setup.HS_Cost_Allocation__c.Latch__c ,0
+
+))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Other Cost Allocation %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

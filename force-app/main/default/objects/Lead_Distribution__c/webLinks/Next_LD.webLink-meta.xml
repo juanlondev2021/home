@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Next_LD</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Next LD</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>if(localStorage[&apos;CycleLead_Distribution__c&apos;]){
+var cycleLead_Distribution__c = localStorage[&apos;CycleLead_Distribution__c&apos;].split(&apos;,&apos;);
+var currentLead_Distribution__cPos = cycleLead_Distribution__c.indexOf(&apos;{!Lead_Distribution__c.Id}&apos;);
+
+if(currentLead_Distribution__cPos == cycleLead_Distribution__c.length - 1){
+alert(&apos;This was the Last Lead Distribution!&apos;);
+}
+else{
+location.replace(&apos;/&apos; + cycleLead_Distribution__c[currentLead_Distribution__cPos + 1]);
+}
+}</url>
+</WebLink>

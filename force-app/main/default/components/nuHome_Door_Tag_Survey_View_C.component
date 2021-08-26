@@ -1,0 +1,116 @@
+<apex:component >
+    <!-- -->
+    <apex:attribute name="doorTagIns" type="Door_Tag_Script__c" description="Door Tag Script instance"/>
+
+    
+         <apex:pageBlockSection columns="1"  title="Form Lead Up">
+          
+                <apex:outputField value="{!doorTagIns.Are_you_the_homeowner__c}" label="1.{!doorTagIns.Account__r.Name} ,I’m assuming you are the homeowner, correct?"/>
+                <apex:outputField value="{!doorTagIns.First_Home__c}" label="2. Is this your first house?"/>
+                <div class="labelCol">
+                    (if yes, congratulate them on that accomplishment and build rapport) 
+                </div><br/>
+                <apex:outputField value="{!doorTagIns.Different_State__c}" label="3. Was it a local move?"/>
+                <apex:outputField label="4. Is your home a new construction? " value="{!doorTagIns.New_Build__c}"/> 
+            <!-- <apex:outputField value="{!doorTagIns.New_Construction__c}" label="4. Did you build new or did you move into a previously occupied home?  "/> -->
+         </apex:pageBlockSection>
+    <apex:pageBlockSection columns="1">
+        <h2 class="ch2">
+            Congratulations again.  Here at nuHome, we are the largest concierge service in the country between homeowners and local businesses. Our goal is to help the new homeowner “Get Stuff Done.” We have a lot of services to offer, such as Lifelock who is giving our new home owners a free 30-days of credit and identity theft protection just for activating. So I’m going make sure they reach out, explain all of the benefits and answer any questions you may have, Okay  {!doorTagIns.Account__r.Name} 
+        </h2>
+        <apex:outputField value="{!doorTagIns.Identity_Theft__c}"/>
+        <h2 class="ch2">In addition, I am just going to go over some of the other top services we provide. If you need any of the businesses or services just answer yes and we will make sure one of our “certified professionals” reaches out to assist you.Now….. (GO STRAIGHT INTO QUESTIONS) </h2>
+        <apex:outputField value="{!doorTagIns.Cable_and_Internet_Service__c}" label="1.Cable, Internet, or Satellite TV Services?"/>
+             <apex:outputField value="{!doorTagIns.Home_Security__c}" label="2.(Home Security) Statistics show 1 in 3 new homes will be burglarized – Are you looking at securing your new home with a system?"/>
+             <apex:outputField value="{!doorTagIns.Home_Automation__c}" label="3.(Home Automation) Would you be interested in saving money on your electric bill by controlling your thermostat and lighting all from your smart phone?"/>
+            <apex:outputField value="{!doorTagIns.Pest_Control__c}" label="4.(Pest Control) Most new homeowners don’t realize they have a pest problem until it’s too late. The best thing for all new homeowners to do is to establish proper barriers to protect themselves and their family from any and all pests.  Would you like to have a professional discuss your options?"/>
+            <apex:outputField value="{!doorTagIns.Landscape_Maintenance__c}" label="5.(Landscaping) Are you looking for a Landscaper to help with design, maintenance, lawn and weed control or Synthetic Grass/Putting greens "/>
+            <apex:outputField value="{!doorTagIns.Handyman__c}" label="6.(Handyman) Do you have any minor projects you need a handyman to complete? "/>
+            <apex:outputField value="{!doorTagIns.House_Cleaning__c}" label="7.Housecleaning/Maid Service"/>
+            <apex:outputField value="{!doorTagIns.Lockssmith__c}" label="8.(Locksmith) Most people don’t realize how many people have copies of the keys to their new home. Are you interested in having someone come out and re-key your home?"/>
+            <apex:outputField value="{!doorTagIns.HVAC__c}" label="9.(Heating & Air (HVAC) did you know that during a home inspection the #1 item missed is heating and air.  It has been proven that by having a license professional come by and make sure it is set up properly will save you time and money in the long run.  We would love to make sure you have someone come by and make sure everything is order."/>
+            <apex:outputField value="{!doorTagIns.Electrical__c}" label="10.(Electrical) Is there any additional wiring or electrical needs you might have? "/>
+            <apex:outputField value="{!doorTagIns.Do_you_have_a_Water_Softener__c}" label="11.(Water Filtration/Water Softening) Are you interested in Water Filtration/Water Softening? "/>
+            <h1><u>These next items are services that homeowners also express great interest in.  Again, anything you need just say yes and I will take care of it.</u></h1>  <br></br>
+            <apex:outputField value="{!doorTagIns.Blinds_Shutters__c}" label="12.(Blinds & Shutters) – Are you still looking for the perfect Blinds & Shutters for your new home? "/>
+            <apex:outputField value="{!doorTagIns.Flooring__c}" label="13.(Flooring/Carpet) – Are you planning on any additional flooring? "/>
+            <apex:outputField value="{!doorTagIns.Closet_Organizing__c}" label="14.Are you interested in a custom upgrade to your closet? "/>
+            <apex:outputField value="{!doorTagIns.Home_Remodeling__c}" label="15.(Home Remodeling) Are you planning any Home additions or remodeling? "/>
+            <apex:outputField value="{!doorTagIns.Kitchen_Remodeling__c}" label="16.Are you looking for Bathroom or Kitchen Remodeling? "/>
+            <apex:outputField value="{!doorTagIns.Granite_Marble__c}" label="17.(Granite or Marble Work) One of the top items we get requests for each day is Granite & Marble.  Are you looking at redoing anything in your home with Granite and Marble?"/>
+            <apex:outputField value="{!doorTagIns.Carpet_Cleaning__c}" label="18.We know most new homeowners want to deep clean – are you planning on having someone come out and clean either Tile or Carpet "/>
+            <apex:outputField value="{!doorTagIns.Garage_Doors__c}" label="19.(Garage door service) Most new homeowners need to take a look at their current garage – are you planning on updating your garage? "/>
+           <apex:outputField value="{!doorTagIns.Plumbing__c}" label="20.(Plumbing) Are you looking at any home improvements projects that you will need a plumber? "/>
+          
+          <!-- <apex:outputField value="{!doorTagIns.Roofer__c}" label="11. Are you in need of Roofer? "/>
+            <apex:pageblocksectionItem />
+         </apex:pageBlockSection>
+         <apex:pageBlockSection columns="1" title="Home Improvement and Outside">
+            <apex:pageblocksectionItem />
+            
+            
+            <apex:outputField value="{!doorTagIns.Bathroom_Remodeling__c}" label="2. How about Bathroom Remodeling? "/>-->
+             <apex:outputField value="{!doorTagIns.Windows_Doors__c}" label="21.    (Windows & Doors) Saving money and making a home more energy efficient is top of mind for most of our clients.  Are you looking at getting a quote to add more energy efficient Window & Doors?"/>
+            <apex:outputField value="{!doorTagIns.Gutters__c}" label="22.Are you going to be needing any exterior renovations such as gutters, siding or roofing ? "/>
+            <apex:outputField value="{!doorTagIns.Professional_Painting__c}" label="23.(Painting) Are you looking at painting the inside or outside of your home? "/>
+            <apex:outputField value="{!doorTagIns.Garage_Floor_Coating__c}" label="24.(Garage Floor Coating) Are you planning on having Epoxy done to protect your garage floor?  "/>
+            <apex:outputField value="{!doorTagIns.Solar_Power__c}" label="25.(Solar) Are you going to do anything to cut back your utility bills like Solar Power? "/>            
+            <apex:outputField value="{!doorTagIns.Energy_Audit__c}" label="26.(Energy Audit) Are you interested in having an energy audit to suggest ways to save on your energy bills? "/>
+            <apex:outputField value="{!doorTagIns.Deck_Patio_Awnings__c}" label="27.Are you planning any outside additions like Decks/Patios/ Awnings or Fencing?"/>
+            <apex:outputField value="{!doorTagIns.Shed__c}" label="28.(Sheds) Today sheds are very popular to avoid storage costs are you looking at having a shed built?"/>
+            <apex:outputField value="{!doorTagIns.Pool__c}" label="29.(Swimming Pool) Do you currently have a pool?"/>
+           <!-- <apex:outputField value="{!doorTagIns.New_Pool__c}" label="Are you interested in having one installed?"/>-->
+            <apex:outputField value="{!doorTagIns.Pool_Maintenance__c}" label="will you need an ongoing service to assist you with keeping up with regular maintenance? "/>
+            <apex:outputField value="{!doorTagIns.Hot_Tub__c}" label="Do you have plans on adding a Swimming pool or Hot Tub/Jacuzzi? "/>
+           <apex:pageBlockSection columns="1"  title="Professional Services">
+           <apex:outputField value="{!doorTagIns.Dentist__c}" label="30.(Dentist) Will you be needing a new Dentist? "/>
+            <apex:outputField value="{!doorTagIns.Chiropractor__c}" label="31.Chiropractic Services "/>
+            
+            <apex:outputField value="{!doorTagIns.Home_Warranty_Appliance_Protection__c}" label="32.Are you looking for a Home Protection Plan that covers your appliances and systems inside of your home?"/>
+            <apex:outputField value="{!doorTagIns.Mortgage_Protection__c}" label="33.Mortgage Protection is important for all new home owners – Do you plan on having a Mortgage Protection service in case your house value drops?"/>
+           <apex:outputField value="{!doorTagIns.Health_Clubs_Crossfit__c}" label="34.(Gym) Fitness is at an all-time high – are you looking at locating a new workout facility? "/>
+             <apex:outputField value="{!doorTagIns.Auto_New_Car__c}" label="35. (New Car) We hear often, that most of our new homeowners actually now are looking at putting a new vehicle in the garage.  Are you planning on shopping for that new vehicle?"/>
+            <apex:outputText label="36. We always like to determine how far all new homeowners move – what was your previous address?"/>
+            <apex:outputField value="{!doorTagIns.Previous_Street__c}" label="Previous Street"/>
+            <apex:outputField value="{!doorTagIns.Previous_City__c}" label="Previous City"/>
+            <apex:outputField value="{!doorTagIns.Previous_State__c}" label="Previous State"/>
+            <apex:outputField value="{!doorTagIns.Previous_Zip__c}" label="Previous Zip"/>
+            <apex:outputField value="{!doorTagIns.Previous_Country__c}" label="Previous Country"/>
+            <apex:outputField value="{!doorTagIns.Appointment_Summary__c}" label="Summary"/>
+            <h1>37. Is there anything else we can assist you with? </h1>
+            </apex:pageBlockSection>
+            
+           <!-- <apex:outputText label="Oh great!  What are you doing to do…>Wood, Carpet, or Tile? "/>
+            <apex:outputField value="{!doorTagIns.Wood__c}" label="Wood"  />
+            <apex:outputField value="{!doorTagIns.Carpet__c}" label="Carpet"  />
+            <apex:outputField value="{!doorTagIns.Tile__c}" label="Tile"  />-->
+            
+            
+           
+            
+            <apex:pageblocksectionItem />
+           <!-- <apex:outputField value="{!doorTagIns.Landscape_install__c}" label="1. Do you need Landscape Install or Design? "/>
+            <apex:outputField value="{!doorTagIns.Lawn_and_Weed_Control__c}" label="2. What about Lawn and Weed Control? "/>
+            <apex:outputField value="{!doorTagIns.Synthetic_grass_interested__c}" label="3. Are you interested in having a quote for Synthetic Grass or Putting Green?"/>
+            
+            <apex:outputField value="{!doorTagIns.Awning__c}" label="5. Awnings outside for shade? "/>
+            
+            <apex:outputField value="{!doorTagIns.Fencing__c}" label="7. Will you be putting in Fencing? "/>
+            
+            <apex:outputField value="{!doorTagIns.Siding__c}" label="9. Are you in need of Siding for your home? "/>
+            
+             <apex:pageblocksectionItem />-->
+         </apex:pageBlockSection>
+        <!-- <apex:pageBlockSection columns="1"  title="Professional Services">
+            <h2 class="ch2">I’m not sure how far you moved, but are you in need of a: </h2>
+            
+            <apex:outputField value="{!doorTagIns.Identity_Theft__c}" label="3. So when you buy a house, I’m sure you know, a lot of your personal information gets on the internet.  Do you need information on Protecting your Credit & Identity? "/>
+            ection service in case you house value drops? "/>
+            <apex:outputField value="{!doorTagIns.Estimated_Spend__c}" label="8. So with everything you plan to do, how much do you estimate it will take to get it all the way you want it?...Obviously, not down to the penny, but what are you thinking?  Under 10,000, between 10 and 25, 25-50, or more than 50? "/>
+            
+            <apex:pageblocksectionItem />
+         </apex:pageBlockSection>-->
+         <apex:pageBlockSection columns="1" title="Closing Statement">
+           <h2 class="ch2">Again, congratulations on the new home, I’m glad we could get these cards activated for you.  (IF Survey Yes GIVEN) For everything you said Yes to (RECAP), I will pass your information on to our network of professionals and I’ll do my best to have them contact you in the next 24 hours. Have a great day!</h2>
+         </apex:pageBlockSection>
+</apex:component>

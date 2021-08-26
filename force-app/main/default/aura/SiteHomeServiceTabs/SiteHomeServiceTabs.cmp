@@ -1,0 +1,109 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Site Home Service
+ * TestClass:          
+ * Description:        Aura Cmp - Site Lightning Out 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    23/09/2020         Jull Quintero D         Initial implementation of the class.
+ *
+-->  
+<aura:component controller="SiteMyHomeServicesController" implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"  
+                access="GLOBAL">
+                
+    <aura:attribute name="phoneRep" type="String" description="kunnectID"/>
+    <aura:attribute name="callerId" type="String"/>
+
+    <!-- modal message -->
+    <aura:attribute access="Private"  name="ErrorModal" type="Boolean" default="false"/>
+    <aura:attribute access="Private"  name="SuccessModal" type="Boolean" default="false"/>
+
+    <!-- Url Params -->
+    <aura:attribute name="fn" type="String"/>
+    <aura:attribute name="ln" type="String"/>
+    <aura:attribute name="st" type="String"/> 
+    <aura:attribute name="ct" type="String"/>
+    <aura:attribute name="sta" type="String"/>
+    <aura:attribute name="zp" type="String"/>
+    <aura:attribute name="em" type="String"/>
+    <aura:attribute name="account" type="Account" default="{Id : null}"/>
+
+    <!-- personnel -->
+    <aura:attribute name="personnel" type="Personnel__c" description="find personnel by kunnectID"/>
+
+    <!--Countruies-->
+    <aura:attribute name="counties" type="List" default="[]"/>
+
+    <!-- Get Account Picklist values -->
+    <aura:attribute name="apiNames" type="List" default="['Pool__c','Number_of_AC_Units__c','Number_of_Stories__c','State__c']" />
+    <aura:attribute name="picklistValues" type="List"/>
+
+    <!-- event get new account -->
+    <aura:handler name="newAccount" event="c:SiteMyHomeServicesEvent" action="{! c.handlerGetNewAccount }" />       
+
+    <lightning:tabset variant="scoped" selectedTabId="one">
+
+        <aura:if isTrue="{!v.account.Id != null }">
+            <!-- ACCOUNT -->
+            <lightning:tab label="Account" id="one" onactive="{! c.doInit }">
+                <c:SiteAccount  aura:id="accountId" 
+                                account='{!v.account}' 
+                                personnel="{!v.personnel}"
+                                counties="{!v.counties}" 
+                                apiNames="{!v.apiNames}" 
+                                picklistValues="{!v.picklistValues}" />
+            </lightning:tab>
+            <!-- /ACCOUNT -->
+
+            <!-- INTEREST -->
+            <lightning:tab label="Interest" id="two">
+                <c:SiteInterestWebForm recordId="{!v.account.Id}" kunnectID="{!v.phoneRep}"/>
+            </lightning:tab>
+            <!-- /INTEREST -->
+
+            <!-- HOME SERVICES  -->
+            <lightning:tab label="Home Services">
+                <c:SiteHomeServicesFlow recordId="{!v.account.Id}"/>
+            </lightning:tab>
+            <!-- /HOME SERVICES  -->
+
+            <aura:set attribute="else">
+                <lightning:tab label="Account" id="one" onactive="{! c.doInit }">
+                    <!-- New ACCOUNT -->
+                    <c:SiteAccount  aura:id="accountId" 
+                                    account='{!v.account}' 
+                                    personnel="{!v.personnel}" 
+                                    counties="{!v.counties}" 
+                                    apiNames="{!v.apiNames}" 
+                                    picklistValues="{!v.picklistValues}" 
+                                    phoneRep="{!v.phoneRep}" 
+                                    callerId="{!v.callerId}"
+
+                                    fn="{!v.fn}"
+                                    ln="{!v.ln}"
+                                    st="{!v.st}"
+                                    ct="{!v.ct}"
+                                    sta="{!v.sta}"
+                                    zp="{!v.zp}"
+                                    em="{!v.em}"/>                    
+                    <!-- New ACCOUNT -->
+                </lightning:tab>
+            </aura:set>
+
+        </aura:if>
+
+    </lightning:tabset>
+
+    <!-- Modal toast -->
+    <c:SiteModalMessage show="{! v.ErrorModal }"
+                        variant="error" title="ERROR" 
+                        message="An unexpected error has occurred" />
+
+    <c:SiteModalMessage show="{! v.SuccessModal }" 
+                        variant="success" title="SUCCESS" 
+                        message="The record has been saved successfully" />
+</aura:component>

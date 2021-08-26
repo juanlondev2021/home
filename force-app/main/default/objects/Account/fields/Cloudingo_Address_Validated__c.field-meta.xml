@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cloudingo_Address_Validated__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Once Cloudingo validates the addresses this field will be updated automatically on the Salesforce Object Page Layout showing that the address validation is complete.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Once Cloudingo validates the addresses this field will be updated automatically on the Salesforce Object Page Layout showing that the address validation is complete.</inlineHelpText>
+    <label>Cloudingo Address Validated</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

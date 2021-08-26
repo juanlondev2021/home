@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_you_need_additional_shelving__c</fullName>
+    <description>(Closet Remodel)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Closet Remodel)</inlineHelpText>
+    <label>Do you need additional shelving?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Closet Organizing/Garage Shelving - Shelves - 1-2 Closets</fullName>
+                <default>false</default>
+                <label>Closet Organizing/Garage Shelving - Shelves - 1-2 Closets</label>
+            </value>
+            <value>
+                <fullName>Closet Organizing/Garage Shelving - Shelves - 3 + Closets</fullName>
+                <default>false</default>
+                <label>Closet Organizing/Garage Shelving - Shelves - 3 + Closets</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Cost__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( ISPICKVAL(Hung_Status__c, &quot;Hung&quot;),
+  IF ( AND(Name = &quot;1&quot;, ISBLANK( Scan_Code__c )) ,2.50,5),
+0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Delivery Cost</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

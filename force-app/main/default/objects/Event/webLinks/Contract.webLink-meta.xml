@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Contract</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://myhomeservices.lightning.force.com/apex/Contracts?core.apexpages.request.devconsole=1&amp;id={!Event.Home_ServiceId__c}</url>
+</WebLink>

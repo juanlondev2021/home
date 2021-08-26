@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solar_No_Appt_Set_14_Days_Ago</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ACCOUNT.PHONE1</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <columns>Disposition_2__c</columns>
+    <columns>Respond_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Solar_Status__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PersonAccount.PersonAccount</value>
+    </filters>
+    <filters>
+        <field>Respond_Date__c</field>
+        <operation>equals</operation>
+        <value>N_DAYS_AGO:9</value>
+    </filters>
+    <filters>
+        <field>Verbal_Consent__c</field>
+        <operation>equals</operation>
+        <value>Yes</value>
+    </filters>
+    <label>Solar_No Appt Set 14 Days Ago</label>
+</ListView>

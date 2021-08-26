@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesRabbit_users</fullName>
+    <columns>NAME</columns>
+    <columns>Full_Name__c</columns>
+    <columns>salesRabbitUserId__c</columns>
+    <columns>SF_User__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>salesRabbitUserId__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>SalesRabbit users</label>
+</ListView>

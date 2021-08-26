@@ -1,0 +1,164 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Lead Forms Manage
+* Description:		
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		24/04/2020		Álvaro Ortega (AO)		Create Tickets and Attentios
+**/-->
+
+<aura:component controller="DiacoLeadFormsManageController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" 
+                access="global">
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="record" type="object"/>
+    <aura:attribute name="taskToCreate" type="object"/>
+    
+    <aura:attribute name="data" type="list" default="[]"/> 
+    <aura:attribute name="columns" type="list"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="isLoading" type="boolean" default="True"/>
+    <aura:attribute name="isLoadingSaveLF" type="boolean" default="False"/>
+    <aura:attribute name="isLoadingCreateLog" type="boolean" default="False"/>
+    
+    <aura:attribute name="dispositionsOptions" type="list" default="No Answer, Call Back, Not Interested, Not Qualified, DNC,
+                                                                    Has Provider, No English, Not Homeowner"/> 
+        <aura:attribute name="StateOptions" type="String[]" default="AK,AL,AR,AZ,CA,CO,CT,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY"/>
+    <aura:if isTrue="{!v.isLoading}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>  
+    
+    <div class="slds-col slds-grid slds-wrap slds-gutters_small" >
+        <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--10-of-12 slds-large-size--6-of-12">
+            <div class="slds-col slds-size_1-of-1">
+                <div class="slds-m-bottom_x-small">
+                    <lightning:tabset selectedTabId="call" variant="scoped">
+                        <lightning:tab label="Create Call Log" id="call">
+                            <div style="min-height: 186px">
+                                <aura:if isTrue="{!v.isLoadingCreateLog}">
+                                    <div style="position: relative; padding-top: 169px;">
+                                        <lightning:spinner alternativeText="Loading" size="small" />
+                                    </div>
+                                    <aura:set attribute="else">
+                                        <div class="slds-col slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <aura:if isTrue="{!!v.isLoadingSaveLF}">
+                                                    <!--
+                                                    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Lead_Form__c">
+                                                        <lightning:outputField fieldName="Phone__c" />
+                                                    </lightning:recordViewForm>
+													<p><lightning:formattedPhone value="{!v.record.Phone__c}"></lightning:formattedPhone></p>-->
+                                                    <!--Testing-->
+                                                    <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                        <lightning:input name="Last Name" label="Phone"  value="{!v.record.Phone__c}" readonly="true"/>
+                                                    </div>
+                                                     
+                                                    
+                                                </aura:if>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:select aura:id="fieldTask" name="Dispositions" label="Dispositions" required="true" 
+                                                                  value="{!v.taskToCreate.Dispositions__c}">
+                                                    <option value="">choose one...</option>
+                                                    <aura:iteration items="{!v.dispositionsOptions}" var="item">
+                                                        <option value="{!item}">{!item}</option>
+                                                    </aura:iteration>
+                                                </lightning:select>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_x-small">
+                                                <lightning:textarea aura:id="fieldTask" name="Comments" label="Comments" required="true" 
+                                                                    value="{!v.taskToCreate.Description}"/>
+                                            </div>
+                                            <div class="slds-m-top_x-small slds-p-horizontal_x-small" style="text-align: end; width: 100%">
+                                                <lightning:button variant="brand" label="Create" title="Create Call Log" onclick="{!c.creatingTask}"/>
+                                            </div>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </lightning:tab>
+                        <lightning:tab label="Details" id="datail">
+                            <div style="min-height: 186px">
+                                <aura:if isTrue="{!v.isLoadingSaveLF}">
+                                    <div style="position: relative; padding-top: 169px;">
+                                        <lightning:spinner alternativeText="Loading" size="small" />
+                                    </div>
+                                    <aura:set attribute="else">
+                                        <div class="slds-col slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input name="First Name" label="First Name" placeholder="type here..." value="{!v.record.First_Name__c}"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input name="Last Name" label="Last Name" placeholder="type here..." value="{!v.record.Last_Name__c}"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input name="Street" label="Street" placeholder="type here..." value="{!v.record.Street__c}"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input name="City" label="City" placeholder="type here..." value="{!v.record.City__c}"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                               
+                                                <lightning:select name="state" aura:id="state"
+                                                                  label="State"
+                                                                  class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                  value="{!v.record.State__c}">
+                                                    <option value="">choose one...</option>
+                                                    <aura:iteration items="{!v.StateOptions}" var="state">
+                                                        <option value="{!state}">{!state}</option>
+                                                    </aura:iteration>
+                                                </lightning:select>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input name="Zip" label="Zip" placeholder="type here..." value="{!v.record.Zip__c}"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input type="tel" name="Phone" label="Phone" placeholder="type here..." value="{!v.record.Phone__c}"/>
+                                            </div>
+                                            <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                                <lightning:input type="Email" name="Email" label="Email" placeholder="type here..." value="{!v.record.Email__c}"/>
+                                            </div>
+                                            <div class="slds-m-top_x-small slds-p-horizontal_x-small" style="text-align: end; width: 100%">
+                                                <lightning:button variant="brand" label="Save" title="Save Lead Form" onclick="{!c.savingLeadForm}"/>
+                                            </div>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>  
+                                
+                            </div>
+                        </lightning:tab>
+                    </lightning:tabset>
+                </div>	
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:tabset selectedTabId="callLogs" variant="scoped">
+                    <lightning:tab label="Call Logs" id="callLogs">
+                        <div style="min-height: 150px">
+                            <div style="max-height:150px;" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                                <lightning:datatable keyField="id"
+                                                     data="{! v.data }"
+                                                     columns="{! v.columns }"
+                                                     hideCheckboxColumn="true"
+                                                     showRowNumberColumn="true"
+                                                     onrowaction="{! c.handleRowAction }"/>
+                            </div>
+                        </div>
+                    </lightning:tab>
+                </lightning:tabset>
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--10-of-12 slds-large-size--6-of-12">
+            <div class="slds-box">
+                <c:DiacoLeadFormAccount recordId="{!v.recordId}" /> 
+            </div>
+        </div>
+    </div>
+
+</aura:component>

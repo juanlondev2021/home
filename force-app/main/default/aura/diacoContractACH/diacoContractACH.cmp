@@ -1,0 +1,83 @@
+<!--
+
+ Diaco
+ @author 			Esnayder Morales Corpas href=<esnaydermorales25@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering solar ACH form
+     
+ Changes (Version)
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		01/05/2019		Esnayder Morales (ES)	Initial implementation  of the component.
+-->
+<aura:component >
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="isEdit" type="Boolean" default="False"/>
+    
+    <aura:handler event="force:showToast" action="{!c.onRefresh}"/>
+    
+    <aura:method name="validityCheck" action="{!c.validityCheck}">
+        <aura:attribute name="isValid" type="boolean" default="false" />
+    </aura:method>
+    
+    <div aria-labelledby="FirstCustomerInformation">
+        <fieldset class="slds-theme--default ">
+            <lightning:layout class="slds-page-header slds-page-header--object-home">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="custom:custom17" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information</h1>
+                        <h2 class="slds-text-heading--medium">ACH</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-form slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Home_Services__c">
+                            <fieldset class="slds-box slds-theme--default">
+                                <div class="slds-form slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-p-horizontal_small">
+                                        <aura:if isTrue="{!v.isEdit}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             name="Routing Number"
+                                                             label="Routing Number"
+                                                             required="true"
+                                                             value="{!v.Home_Services.Routing_Number_ACH__c}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:outputField fieldName="Routing_Number_ACH__c"/>
+                                            </aura:set>
+                                        </aura:if>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-m-bottom--small">
+                                        <lightning:buttonIcon iconName="{!v.isEdit ? 'utility:close' : 'utility:edit'}" class="slds-col_bump-left" iconClass="slds-button__icon_hint" variant="bare" alternativeText="Edit Credit Card" onclick="{!c.editRecord}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-horizontal_small">
+                                        <aura:if isTrue="{!v.isEdit}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             required="true"
+                                                             value="{!v.Home_Services.Account_Number_ACH__c}"
+                                                             name="Account Number" 
+                                                             label="Account Number"/>
+                                            <aura:set attribute="else">
+                                                <lightning:outputField fieldName="Account_Number_ACH__c"/>
+                                            </aura:set>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </lightning:recordViewForm>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    
+</aura:component>

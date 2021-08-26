@@ -1,0 +1,111 @@
+<apex:page controller="nuHome_WebtoCaseController">
+<apex:stylesheet value="{!URLFOR($Resource.nuHome_jQuery, '/tooltip.css')}" />
+<apex:sectionHeader title="New Case" subtitle="Select Case Record Type" description="Select a record type for the new case. To skip this page in the future, change your record type settings on your personal setup page." rendered="{!displayCaseEditPage==false}"/>
+  <apex:form rendered="{!displayCaseEditPage==false}">
+  <apex:pageBlock title="Select Case Record Type" rendered="{!displayCaseEditPage==false}"> 
+  <apex:pageBlockbuttons location="bottom"><apex:commandbutton value="Continue" action="{!chooseRT}"/>  </apex:pageBlockbuttons>
+  <apex:pageBlockSection >
+  <apex:pageBlockSectionItem >Record Type of new record   <apex:selectList value="{!RecordType}" multiselect="false" size="1" styleClass="RecordTypeValues" style="border-left: 3px solid #c00;">
+       <apex:selectOptions value="{!TypeValues}"/>
+    </apex:selectList></apex:pageBlockSectionItem>
+
+    
+    </apex:pageBlockSection>
+    </apex:pageBlock>  
+  </apex:form>
+<apex:outputpanel rendered="{!displayCaseEditPage==false}">
+<table class="infoTable recordTypeInfo" border="0" cellpadding="0" cellspacing="0" rendered="{!displayCaseEditPage==false}">
+<tbody><tr class="headerRow"><th class="recordTypeName" scope="col">Record Type Name</th><th class="recordTypeDescription" scope="col">Description</th></tr>
+<tr><th class="recordTypeName" scope="row">Building Maintenance</th><td class="recordTypeDescription">Plumbing, Electrical, HVAC, Appliances</td></tr>
+<tr><th class="recordTypeName" scope="row">Call Center</th><td class="recordTypeDescription">Compliance, Supplies, Payroll, Hardware</td></tr>
+<tr><th class="recordTypeName" scope="row">Client Services</th><td class="recordTypeDescription">Client Request, Portal, Artwork, Telemarketing, Billing</td></tr>
+<tr><th class="recordTypeName" scope="row">Finance</th><td class="recordTypeDescription">Payroll, Expenses, Accounts Payable, Charge Backs</td></tr>
+<tr><th class="recordTypeName" scope="row">Fulfillment</th><td class="recordTypeDescription">Redeliver Cups, Request to move furniture</td></tr>
+<tr><th class="recordTypeName" scope="row">HR</th><td class="recordTypeDescription">New Employee, Employee Termination</td></tr>
+<tr><th class="recordTypeName" scope="row">Inside and Outside Sales</th><td class="recordTypeDescription">Portal, Docusing, Salesforce1, Reporting and Dashboards</td></tr>
+<tr><th class="recordTypeName" scope="row">IT</th><td class="recordTypeDescription">Hardware, Software, Salesforce, zDrive, AWS</td></tr>
+<tr><th class="recordTypeName" scope="row">Legal and Compliance</th><td class="recordTypeDescription">DNC Issues, Irate Consumer, Attorney General</td></tr>
+<tr><th class="recordTypeName" scope="row">Metro Deliveries</th><td class="recordTypeDescription">Wrong Address, Bad Area for Delivery</td></tr>
+<tr class="last"><th class="recordTypeName" scope="row">Sales Admin</th><td class="recordTypeDescription">Art work, Docusign</td></tr>
+</tbody></table>
+</apex:outputpanel>
+
+
+
+
+<apex:sectionHeader title="Case Edit" subtitle="New Case" rendered="{!displayCaseEditPage==true}"/>
+<apex:form rendered="{!displayCaseEditPage==true}">
+<apex:pageBlock title="Case Edit" rendered="{!displayCaseEditPage==true}">
+    <apex:pageBlockSection title="Case Information" collapsible="false">
+       <apex:outputField value="{!caseobj.RecordTypeId}" />
+       <apex:inputField value="{!caseobj.ContactId}" styleClass="masterTooltip"/>
+    </apex:pageblocksection>
+    
+     <apex:pageBlockSection title="Additional Information" collapsible="false">
+        <apex:inputField value="{!caseobj.Status}" />
+        <apex:inputField value="{!caseobj.Priority}" />
+        <apex:inputField value="{!caseobj.Type}" />
+        <apex:inputField value="{!caseobj.Reason}" />
+        <apex:inputField value="{!caseobj.Sub_Type__c}" />
+    </apex:pageblocksection>
+    
+    <apex:pageBlockSection title="Description" collapsible="false">
+        <apex:inputField value="{!caseobj.Subject}" />
+        <apex:inputField value="{!caseobj.SuppliedEmail}" />
+        <apex:inputField value="{!caseobj.SuppliedPhone}" />
+        <apex:inputField value="{!caseobj.SuppliedCompany}" />
+        <apex:inputField value="{!caseobj.Description}" />
+    </apex:pageblocksection>
+    
+     <apex:pageBlockSection title="Add Attachments" collapsible="false" columns="1">
+       <apex:repeat value="{!newAttachments}" var="newAtt"> 
+       <apex:pageBlockSection columns="1"> 
+       <apex:pageBlockSectionItem > 
+       <apex:inputFile value="{!newAtt.body}" filename="{!newAtt.name}"  /> 
+       </apex:pageBlockSectionItem> 
+       </apex:pageBlockSection> 
+       </apex:repeat> <br/> 
+       <apex:commandButton value="Add Attachments" action="{!addMore}" /> 
+     </apex:pageblocksection>
+    
+    <apex:pageblockbuttons >
+    <apex:commandbutton value="Save" action="{!caseCreate}" />
+    <apex:commandbutton value="Cancel" action="{!Cancel}" />
+    </apex:pageblockbuttons>
+</apex:pageblock>
+</apex:form>
+
+<!--<apex:sectionHeader subtitle="{!CaseObj.casenumber}" rendered="{!displayDetailPage==true}"/>
+<apex:form rendered="{!displayDetailPage==true}">
+<apex:pageBlock rendered="{!displayDetailPage==true}">
+    <apex:pageBlockSection title="Case Information" collapsible="false">
+       <apex:outputField value="{!caseobj.RecordTypeId}" />
+       <apex:outputField value="{!caseobj.Contact.Name}" />
+    </apex:pageblocksection>
+    
+     <apex:pageBlockSection title="Additional Information" collapsible="false">
+        <apex:outputField value="{!caseobj.Status}" />
+        <apex:outputField value="{!caseobj.Priority}" />
+        <apex:outputField value="{!caseobj.Type}" />
+        <apex:outputField value="{!caseobj.Reason}" />
+        <apex:outputField value="{!caseobj.Sub_Type__c}" />
+    </apex:pageblocksection>
+    
+    <apex:pageBlockSection title="Description" collapsible="false">
+        <apex:outputField value="{!caseobj.Subject}" />
+        <apex:outputField value="{!caseobj.SuppliedEmail}" />
+        <apex:outputField value="{!caseobj.SuppliedPhone}" />
+        <apex:outputField value="{!caseobj.SuppliedCompany}" />
+        <apex:outputField value="{!caseobj.Description}" />
+    </apex:pageblocksection>
+   
+   
+</apex:pageblock>
+
+
+</apex:form>
+ <apex:relatedList subject="{!CaseObj}" list="CombinedAttachments" /> -->
+ <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/jquery-1.12.0.min.js')}"/>
+ <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/tooltip.js')}"/>
+
+</apex:page>

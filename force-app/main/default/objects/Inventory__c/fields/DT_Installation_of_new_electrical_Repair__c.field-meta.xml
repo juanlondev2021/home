@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Installation_of_new_electrical_Repair__c</fullName>
+    <description>(Electrician)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Electrician)</inlineHelpText>
+    <label>Installation of new electrical /Repair</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Electrician - New Installation</fullName>
+                <default>false</default>
+                <label>Electrician - New Installation</label>
+            </value>
+            <value>
+                <fullName>Electrician - Repair</fullName>
+                <default>false</default>
+                <label>Electrician - Repair</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

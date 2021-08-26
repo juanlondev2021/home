@@ -1,0 +1,103 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water contract Products view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="LineItems"         type="Line_Item__c[]" />
+    <aura:attribute name="OriginalLineItems" type="Line_Item__c[]" />
+    <aura:attribute name="NewLineItems" type="String[]" />
+    <aura:attribute name="title" type="String" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="LineItemProduct" type="Line_Item__c[]" />
+    <aura:attribute name="values" type="List" default="[]"/>
+    <aura:attribute name="options" type="List"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="isUpdate" type="boolean" default="false"/>
+    <aura:handler name="change" value="{!v.isUpdate}" action="{!c.DeleteLineItems}"/>
+    
+    <aura:attribute name="toReload" type="Boolean"/>
+    <aura:handler name="change" value="{!v.toReload}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    
+    <!--Use "slds-m-around_xx-large" class to add standard X-Large padding to the component--> 
+    <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Products</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:button class="slds-m-vertical_medium slds-align_absolute-center" label="Add Product" title="Add_Product" onclick="{! c.openModel }" />
+        
+        <aura:if isTrue="{!v.LineItemProduct.length >= 1}">
+            <div class="slds-form slds-grid slds-wrap">
+                <c:diacoContractProductList LineItemProduct="{!v.LineItemProduct}" isUpdate="{!v.isUpdate}"/>
+            </div>
+            <lightning:button label="{!v.title}" variant="brand" class="slds-m-top--medium slds-align_absolute-center" title="Save_Products" onclick="{! c.SaveLineItems }" />
+        </aura:if>
+        
+        <div class="slds-m-around_xx-large">
+            
+            
+            <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+            <aura:if isTrue="{!v.isOpen}">
+                
+                <!--###### MODAL BOX Start######--> 
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- ###### MODAL BOX HEADER Start ######-->
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Product List</h2>
+                        </header>
+                        <!--###### MODAL BOX BODY Part Start######-->
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <lightning:dualListbox name="languages"
+                                                   class="slds-m-top--medium slds-align_absolute-center"
+                                                   label= "Select The Products" 
+                                                   sourceLabel="Available" 
+                                                   selectedLabel="Selected" 
+                                                   fieldLevelHelp="This is a dual listbox" 
+                                                   options="{!v.options}"
+                                                   onchange="{! c.handleChange }"/>
+                        </div>
+                        <!--###### MODAL BOX FOOTER Part Start ######-->
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" 
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{! c.closeModel }"/>
+                            <lightning:button variant="brand" 
+                                              label="Validate"
+                                              title="Validate"
+                                              onclick="{! c.likenClose }"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                <!--###### MODAL BOX Part END Here ######-->
+                
+            </aura:if>
+        </div>
+    </fieldset>
+</aura:component>

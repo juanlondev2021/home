@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X001_Home_Automation_To_Confirm2</fullName>
+    <columns>CREATED_DATE</columns>
+    <columns>ApptSetter__c</columns>
+    <columns>Phone_Number_1__c</columns>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <columns>Notes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Home_Services__c.HVAC_Sales</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Scheduled,Confirmation</value>
+    </filters>
+    <label>018 HVAC To Confirm</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+    </sharedTo>
+</ListView>

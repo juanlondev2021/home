@@ -1,0 +1,230 @@
+<!--
+* Diaco
+* @author 			Fabian Pineda href=<fpineda@diaco.us>
+* Project:			Contracts
+* Description:		Renders a Home Service's Utility Information tab under its Contract tab
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		06/15/2020		Fabian Pineda (FP)		Initial version.
+* @version  1.0		24/06/2020		Fabian Pineda (FP)		Added stricter validation to all fields.
+* @version  1.0		30/06/2020		John Hernandez (JH)		Added multiCheckbox instead of dual listbox in mobile view.
+* @version  1.0		15/07/2020		John Hernandez (JH)		Added Event for tab completion.
+-->
+<aura:component controller="DiacoSolarUtilityInformationController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="toReload" type="Boolean" default="false" />
+
+    <aura:attribute name="utilityContractsPicklist" type="List" />
+    <aura:attribute name="typeOfApplicationPicklist" type="List" />
+    <aura:attribute name="typeOfApplicationPicklistDefaults" type="List" />
+    <aura:attribute name="typeOfApplicationPicklistValue" type="List" />
+    <aura:attribute name="homeService" type="Home_Services__c" />
+
+    <aura:attribute name="pets" type="Boolean" default="false" />
+
+    <aura:attribute name="loadingInstallationCompany" type="Boolean" default="true" />
+    <aura:attribute name="installationCompany" type="sObject" default="{}" />
+    <aura:handler name="oSelectedRecordEvent" event="c:selectedsObjectRecordEvent" action="{!c.handleInstallationCompanySelectEvent}" />
+    <aura:handler event="c:clearEvent" action="{!c.handleInstallationCompanyClearEvent}" />
+
+    <aura:attribute name="loadingUtilityContractsPicklist" type="Boolean" default="true" />
+    <aura:attribute name="loadingTypeOfApplicationPicklist" type="Boolean" default="true" />
+    <aura:attribute name="typeOfApplicationPicklistReady" type="Boolean" default="false" />
+    <aura:attribute name="loadingHomeService" type="Boolean" default="true" />
+    <aura:attribute name="saving" type="Boolean" default="false" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" action="{!c.reloadComponent}" value="{!v.reload}" />
+
+    <aura:registerEvent name="tabSaved" type="c:diacoTabCompletionEvent" />
+
+    <fieldset class="slds-box slds-theme--default">
+        <aura:if isTrue="v.loadingHomeService">
+            <!-- Displayed only while loading the home service record -->
+            <lightning:spinner alternativeText="Loading" size="medium" />
+            <aura:set attribute="else">
+
+                <!--Form header -->
+                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                    <lightning:layoutItem>
+                        <lightning:icon iconName="standard:client" alternativeText="Utility Contract" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="page-section page-header">
+                            <h1 class="slds-text-heading--label">Information About</h1>
+                            <h2 class="slds-text-heading--medium">Utility Contract</h2>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+
+                <!-- Form -->
+                <lightning:layout horizontalAlign="center">
+                    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12">
+                        <form class="slds-form--stacked">
+                            <div class="slds-form slds-grid slds-wrap">
+
+                                <!-- Utility Company picklist -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:select aura:id="UtilityCompany" class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12" name="UtilityCompany" label="Utility Company" value="{!v.homeService.Utility_Company__c}" onchange="{!c.handleUtilityContractsPicklistChange}">
+                                        <aura:if isTrue="{!v.loadingUtilityContractsPicklist == false}">
+                                            <aura:if isTrue="{!v.homeService.Utility_Company__c == undefined || v.homeService.Utility_Company__c == null || v.homeService.Utility_Company__c == ''}">
+                                                <option value="" selected="selected">Select an option</option>
+                                                <aura:set attribute="else">
+                                                    <option value="">Select an option</option>
+                                                </aura:set>
+                                            </aura:if>
+                                            <aura:iteration items="{!v.utilityContractsPicklist}" var="item">
+                                                <aura:if isTrue="{!v.homeService.Utility_Company__c == item.value}">
+                                                    <option value="{!item.value}" selected="selected">{!item.key}</option>
+                                                    <aura:set attribute="else">
+                                                        <option value="{!item.value}">{!item.key}</option>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </aura:if>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="margin-bottom: 1em"></div>
+
+                                <!-- Fields displayed unconditionally -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12" name="UserName" label="User Name" onchange="{!c.handleUtilityInformationFormChange}" value="{!v.homeService.Username__c}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="password" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Password" label="Password" onchange="{!c.handleUtilityInformationFormChange}" value="{!v.homeService.Password__c}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="margin-bottom: 1em">
+                                    <lightning:input aura:id="utilityInformationForm" type="number" step="0.1" class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12" name="HouseSquareFootage" label="House Square Footage" onchange="{!c.handleUtilityInformationFormChange}" value="{!v.homeService.House_Square_Footage__c}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="margin-bottom: 1em">
+                                    <lightning:input aura:id="utilityInformationForm" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" type="number" step="0.1" name="SystemSize" value="{!v.homeService.System_Size__c}" onchange="{!c.handleUtilityInformationFormChange}" label="System Size" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="PropertyOwner" label="Property owner?" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Property_Owner__c}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="ElectricBehindFence" label="Electric behind fence?" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Electric_Behind_Fence__c}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="ExistingGeneratingSolarSystem" label="Existing generating solar system?" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Existing_Generating_Solar_System__c}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="Pets" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Pets" label="Pets?" checked="{!v.pets}" onchange="{!c.handlePetsCheckboxChange}" />
+                                </div>
+                            </div>
+
+                            <!-- Section displayed only if Utility Company is 'APS' -->
+                            <aura:if isTrue="{!v.homeService.Utility_Company__c == 'APS'}">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="margin-top: 2em"></div>
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:client" alternativeText="Utility Contract" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">APS</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <div style="margin-top: 1em;"></div>
+                                <div class="slds-form slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                        <lightning:input aura:id="utilityInformationForm" class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12" name="APSAccount" label="APS Account" onchange="{!c.handleUtilityInformationFormChange}" value="{!v.homeService.APS_Account__c}" />
+                                    </div>
+                                </div>
+                            </aura:if>
+
+                            <!-- Section displayed only if Utility Company is 'SRP' -->
+                            <aura:if isTrue="{!v.homeService.Utility_Company__c == 'SRP'}">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="margin-top: 2em"></div>
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:client" alternativeText="Utility Contract" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">SRP</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <div class="slds-form slds-grid slds-wrap">
+                                    <aura:if isTrue="{!v.typeOfApplicationPicklistReady}">
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="margin-top: 1em">
+                                            <aura:if isTrue="{!$Browser.formFactor=='DESKTOP'}">
+                                                <lightning:dualListbox aura:id="typeOfApplication" name="typeOfApplication" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" label="Type of Application" fieldLevelHelp="Select all that apply" sourceLabel="Available Options" selectedLabel="Selected Options" options="{!v.typeOfApplicationPicklist}" value="{!v.typeOfApplicationPicklistValue}" />
+                                            </aura:if>
+                                            <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+                                                <lightning:checkboxGroup name="typeOfApplication2" label="Type of Application" options="{!v.typeOfApplicationPicklist}" value="{!v.typeOfApplicationPicklistValue}" />
+                                            </aura:if>
+                                        </div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!!v.loadingInstallationCompany}">
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="margin-top: 1em">
+                                            <c:customLookup objectAPIName="Account" installationCompanySearch="true" IconName="standard:user" label="Installation Company" selectedRecord="{!v.installationCompany}" />
+                                        </div>
+                                    </aura:if>
+                                </div>
+                                <div style="margin-top: 1em"></div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="ExistingGeneratingSolarSystem" label="Is access to any required output metering by SRP personnel in any way restricted or impeded (locks, gates, walls, etc.)?" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.way_restricted_or_impeded__c}" />
+                                </div>
+                                <div style="margin-top: 1em"></div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:textarea name="input2" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" label="If checked, explain" value="{!v.homeService.Explain_SRP__c}" disabled="{!!v.homeService.way_restricted_or_impeded__c}" />
+                                </div>
+                                <div style="margin-top: 1em"></div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <p>Primary Battery Use</p>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="BackupPower" label="Backup Power" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Battery_Use_Backup_Power__c}" />
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="EnergyDemandReduction" label="Energy / Demand Reduction" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Battery_Use_Energy_Demand_Reduction__c}" />
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="SolarSelfConsumption" label="Solar Self-consumption" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Battery_Use_Solar_Self_consumption__c}" />
+                                </div>
+                                <div style="margin-top: 1em"></div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <p>Battery Location</p>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Garage" label="Garage" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Battery_Location_Garage__c}" />
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Inside" label="Inside" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Battery_Location_Inside__c}" />
+                                    <lightning:input aura:id="utilityInformationForm" type="checkbox" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Outside" label="Outside" onchange="{!c.handleUtilityInformationFormChange}" checked="{!v.homeService.Battery_Location_Outside__c}" />
+                                </div>
+                            </aura:if>
+
+                            <!-- Section displayed only if Utility Company is 'ED3' -->
+                            <aura:if isTrue="{!v.homeService.Utility_Company__c == 'ED3'}">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="margin-top: 2em"></div>
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:client" alternativeText="Utility Contract" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">ED3</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <div style="margin-top: 1em;"></div>
+                                <div class="slds-form slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                        <lightning:input aura:id="utilityInformationForm" type="number" step="0.1" class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12" name="AnnualEstimatedGeneration" label="Annual Estimated Generation (kWh)" onchange="{!c.handleUtilityInformationFormChange}" value="{!v.homeService.Annual_Estimated_Generation__c}" />
+                                    </div>
+                                </div>
+                            </aura:if>
+
+                            <!-- Submit button -->
+                            <lightning:button variant="brand" class="slds-m-top--medium slds-align_absolute-center" label="{!v.saving ? 'Saving...' : 'Save'}" title="{!v.saving ? 'Saving...' : 'Save'}" disabled="{!v.saving}" onclick="{!c.handleSaveButtonClick}" />
+                        </form>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </aura:set>
+        </aura:if>
+    </fieldset>
+</aura:component>

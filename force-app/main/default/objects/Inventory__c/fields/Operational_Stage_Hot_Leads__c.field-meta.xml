@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Operational_Stage_Hot_Leads__c</fullName>
+    <description>It captures Operational stage field values from Opportunity.</description>
+    <externalId>false</externalId>
+    <label>Operational Stage - Hot Leads</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Active Tier 1</fullName>
+                <default>false</default>
+                <label>Active Tier 1</label>
+            </value>
+            <value>
+                <fullName>Active Tier 2</fullName>
+                <default>false</default>
+                <label>Active Tier 2</label>
+            </value>
+            <value>
+                <fullName>Active Tier 3</fullName>
+                <default>false</default>
+                <label>Active Tier 3</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

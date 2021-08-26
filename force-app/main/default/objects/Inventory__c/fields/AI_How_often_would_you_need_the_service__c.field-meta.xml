@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_How_often_would_you_need_the_service__c</fullName>
+    <description>It will holds service needed time</description>
+    <externalId>false</externalId>
+    <label>How often would you need the service?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>House Cleaning - Weekly</fullName>
+                <default>false</default>
+                <label>House Cleaning - Weekly</label>
+            </value>
+            <value>
+                <fullName>House Cleaning - Bi-Weekly</fullName>
+                <default>false</default>
+                <label>House Cleaning - Bi-Weekly</label>
+            </value>
+            <value>
+                <fullName>House Cleaning - Monthly</fullName>
+                <default>false</default>
+                <label>House Cleaning - Monthly</label>
+            </value>
+            <value>
+                <fullName>House Cleaning - One Time</fullName>
+                <default>false</default>
+                <label>House Cleaning - One Time</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_What_type_of_granite_or_marble_work__c</fullName>
+    <description>(Granite/Marble)What type of granite or marble work are you in need of?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Granite/Marble)What type of granite or marble work are you in need of?</inlineHelpText>
+    <label>What type of granite or marble work need</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Granite/Marble - Granite - Bathroom</fullName>
+                <default>false</default>
+                <label>Granite/Marble - Granite - Bathroom</label>
+            </value>
+            <value>
+                <fullName>Granite/Marble - Granite - Countertops</fullName>
+                <default>false</default>
+                <label>Granite/Marble - Granite - Countertops</label>
+            </value>
+            <value>
+                <fullName>Granite/Marble - Granite - Fireplace</fullName>
+                <default>false</default>
+                <label>Granite/Marble - Granite - Fireplace</label>
+            </value>
+            <value>
+                <fullName>Granite/Marble - Marble - Bathroom</fullName>
+                <default>false</default>
+                <label>Granite/Marble - Marble - Bathroom</label>
+            </value>
+            <value>
+                <fullName>Granite/Marble - Marble - Countertops</fullName>
+                <default>false</default>
+                <label>Granite/Marble - Marble - Countertops</label>
+            </value>
+            <value>
+                <fullName>Granite/Marble - Marble - Fireplace</fullName>
+                <default>false</default>
+                <label>Granite/Marble - Marble - Fireplace</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,591 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering Custom setting text setting
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		21/05/2019		Jorge Martinez (JM)		Initial implementation of the component.
+-->
+
+<aura:component controller="customSettings" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+    <aura:attribute name="customSetting" type="Text_Settings_Appt__c" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+    
+    
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_8-of-12 slds-m-top--medium slds-align_absolute-center">
+        <fieldset class="slds-box slds-theme--default ">
+            <div class="slds-form slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right">
+                        <lightning:layoutItem>
+                            <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="horizontal-small">
+                            <div class="page-section page-header">
+                                <h1 class="slds-text-heading--label">CUSTOM SETTING</h1>
+                                <h2 class="slds-text-heading--medium">HOME SERVICE</h2>
+                            </div>
+                        </lightning:layoutItem>
+                        <!--lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                            <lightning:buttonIcon iconName="utility:save"
+                                                  variant="brand"
+                                                  alternativeText="Save Information"
+                                                  onclick="{!c.saveInfo}"
+                                                  />
+                        </lightning:layoutItem-->
+                    </lightning:layout>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium ">
+                    <lightning:tabset variant="scoped">
+                        <lightning:tab label="SALES">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                <lightning:layoutItem>
+                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">TEXT SETTING</h1>
+                                        <h2 class="slds-text-heading--medium">SALES</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium"> Confirmation Text</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_Text_Home_Automation__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_Text_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_Text_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_Text_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_Text_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">New Appointment</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_New_Appointment_Home_Automation__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_New_Appointment_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_New_Appointment_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_New_Appointment_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_New_Appointment_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">In Transit</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_In_Transit_Home_Automation__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_In_Transit_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_In_Transit_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_In_Transit_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_In_Transit_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">Confirmation "C"</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_C_Home_Automation__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_C_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_C_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_C_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sale_Confirmation_C_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">Review Rep</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sales_Review_Rep_HA__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sales_Review_Rep_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sales_Review_Rep_SO__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sales_Review_Rep_WA__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Sales_Review_Rep_WI__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning:tab>
+                        <lightning:tab label="INSTALLATION">
+                            
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                <lightning:layoutItem>
+                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">TEXT SETTING</h1>
+                                        <h2 class="slds-text-heading--medium">INSTALLATION</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium"> Confirmation Text</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_Confirmation_Text_Home_A__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_Confirmation_Text_Pest_C__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_Confirmation_Text_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_Confirmation_Text_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_Confirmation_Text_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">New Appointment</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_New_Appointment_Home_Aut__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_New_Appointment_Pest_Con__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_New_Appointment_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_New_Appointment_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_New_Appointment_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">In Transit</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_In_Transit_Home_Automati__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_In_Transit_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_In_Transit_Solar__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_In_Transit_Water__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Installation_In_Transit_Window__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                                        <fieldset class="slds-box slds-theme--default ">
+                                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                                <lightning:layoutItem>
+                                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                                </lightning:layoutItem>
+                                                <lightning:layoutItem padding="horizontal-small">
+                                                    <div class="page-section page-header">
+                                                        <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                        <h2 class="slds-text-heading--medium">Review Rep</h2>
+                                                    </div>
+                                                </lightning:layoutItem>
+                                            </lightning:layout>
+                                            <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Home Automation" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Instatllation_Review_Rep_HA__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                    
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Pest Control" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Instatllation_Review_Rep_Pest_Control__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Solar" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Instatllation_Review_Rep_SO__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Water" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Instatllation_Review_Rep_WA__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input type="checkbox" 
+                                                                     label="Window" 
+                                                                     name="options" 
+                                                                     checked="{!v.customSetting.Instatllation_Review_Rep_WI__c}"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                                                </div>
+                                            </div>
+                                        </fieldset> 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </lightning:tab>
+                    </lightning:tabset>
+                    <lightning:button       
+                                      label="Save"
+                                      class="slds-m-top--medium slds-align_absolute-center"
+                                      variant="brand"
+                                      onclick="{!c.saveInfo}"
+                                      />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</aura:component>

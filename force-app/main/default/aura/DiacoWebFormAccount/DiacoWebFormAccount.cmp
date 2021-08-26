@@ -1,0 +1,106 @@
+<aura:component implements="flexipage:availableForAllPageTypes"
+                controller="DiacoCmpTaskController" access="global" >
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="HasAccount" type="Boolean" default="false"/>
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="infoWebForm" type="String" />
+    <aura:handler name="change" value="{!v.HasAccount}" action="{!c.init}"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Account Information</h1>
+                <h2 class="slds-text-heading--medium">Account</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+        <lightning:recordEditForm
+                                  onload="{!c.handleLoad}"
+                                  onsubmit="{!c.handleSubmit}"
+                                  onsuccess="{!c.handleSuccess}"
+                                  recordId="{!v.accountId == undefined ? '' : v.accountId}"
+                                  objectApiName="Account">
+            <!-- the messages component is for error messages -->
+            <lightning:messages />
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="FirstName" aura:id="firstName"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="LastName" aura:id="lastName"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="Phone" aura:id="phone"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="PersonEmail" aura:id="email"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="Street__c" aura:id="street"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="Zip__c" aura:id="zip"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="State__c" aura:id="State" value=""/>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning:inputField fieldName="City__c" aura:id="city"/>
+                </div>
+                 <lightning:inputField class="slds-hidden" value="{!v.recordId}" 
+                                       fieldName="Web_Form__c" />
+
+            </div>
+            <div class="slds-p-bottom_medium slds-p-top_medium">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <lightning:icon iconName="standard:avatar" class="blueOnwhite" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">Homeowner</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </div>
+                        
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_First_Name__c"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Last_Name__c"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Email__c"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Phone_Number__c"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Mobile__c" />
+                            </div>
+                        </div>
+            <div class="slds-m-top_medium slds-m-bottom_large slds-size_12-of-12 slds-align_absolute-center">
+                <lightning:button variant="brand" type="submit" 
+                                  name="{!v.accountId == undefined ? 'save' : 'update'}" label="{!v.accountId == undefined ? 'Save' : 'Update'}" 
+                                  />
+            </div>
+        </lightning:recordEditForm>
+    
+    
+</aura:component>

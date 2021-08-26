@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Verbal_Consent_for_DNC</fullName>
+    <active>true</active>
+    <description>If DNC is checked the verbal consent must be changed to No.</description>
+    <errorConditionFormula>AND(PersonDoNotCall = TRUE, 
+OR( 
+Text(Verbal_Consent__c) &lt;&gt; &quot;No&quot;), $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
+    <errorDisplayField>Verbal_Consent__c</errorDisplayField>
+    <errorMessage>DNC has been checked and Verbal Consent must be changed to &quot;No&quot;.</errorMessage>
+</ValidationRule>

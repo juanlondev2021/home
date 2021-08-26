@@ -1,0 +1,12 @@
+<aura:component >
+	<aura:attribute name="home" type="Home_Services__c"/>
+    <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+        <lightning:input type="number"
+                         formatter="currency"
+                         readonly="true"
+                         class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                         name="Total Monthly Investment" 
+                         label="Total Monthly Investment"
+                         value="{!home.Total_Monthly_Investment__c}"/>
+    </div>
+</aura:component>

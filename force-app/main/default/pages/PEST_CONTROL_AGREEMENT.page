@@ -1,0 +1,575 @@
+<!--
+
+Diaco
+@author             Jorge Andres Martinez Peña href=<jorgeality29@gmail.com>
+Project:            DiacoContracts
+Description:        This VFP is responsible for rendering pest control contract As A PDF document.
+
+Changes (Version)
+_________________________________________
+
+@version   Date            Author                  Description
+____       __________      __________________      _____________________________________       
+1.0         12/03/2019      Jorge Martinez(JM)      Initial implementation  of the component.
+2.0         21/07/2020      William Aldana(WA)      Fixed as the real report      
+-->
+<apex:page applyBodyTag="false" standardController="Home_Services__c" 
+           renderAs="pdf" extensions="RenderContractController,diacoRenderContractController"
+           showHeader="false" sidebar="false" 
+           standardStylesheets="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <!-- Compiled and minified CSS --> 
+            <style>
+                @page {
+                size: letter;
+                margin: 15mm 10mm 10mm 10mm;
+                padding: 5mm 1mm 5mm 1mm;
+                }
+                
+                .page-break {
+                display:block;
+                page-break-after:always;
+                }
+                body {
+                font-family: Arial;
+                font-size: 12px;
+                }
+                .cotain {
+                background-size: contain;
+                background-repeat: no-repeat;
+                }
+                li {
+                list-style-type: none;
+                display: inline;
+                float: left;
+                }
+                
+                
+                ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 70px;
+                }
+                .bold {
+                font-weight: bold
+                }
+                .border{
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                .border th{
+                border: 1px solid black;
+                }
+                .border td{
+                border: 1px solid black;
+                }
+                .no-border{
+                border: 0px solid black;
+                border-collapse: collapse;
+                }
+                .no-border th{
+                border: 0px solid black;
+                }
+                .no-border td{
+                border: 0px solid black;
+                }
+                .margin p {
+                margin: 0;
+                }
+                .letter {
+                font-size: 15px;
+                }
+                .hidden{
+                    color: white;
+                } 
+
+                div.cls_002::after {
+                content: "\a";
+                white-space: pre;
+                }
+                
+                div.cls_002 {
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                font-size: 12px;
+                position: inherit;
+                top: 0px;
+                }
+
+                div.cls_004 {
+                font-family: Arial, serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                margin-left: 5px
+                }
+                
+                
+            </style>
+        </head>
+        <body>
+            <div>
+                <div class="bold" border="1" style="margin-top: 100px;width:100%;text-align: center;">
+                    <b class="letter" style="font-family:Calibri;font-size:10.7pt">Jax Home Services Pest Control</b>
+                    <br/><b style="font-family:Calibri;font-size:8.8pt">664 W. Warner Rd. Tempe,AZ 85286</b>
+                    <br/><b style="font-family:Calibri;font-size:8.8pt">(480) 240-3992</b>
+                    <br/><b class="letter" style="font-family:Calibri;font-size:10.7pt">PEST CONTROL AGREEMENT</b>
+                </div>
+                <div border="1" style="margin-top: 30px;width:100%;">
+                    This Agreement is entered into on <u>
+                        <apex:outputtext value="{0, date, medium}">
+                            <apex:param value="{!TODAY()}"></apex:param>
+                        </apex:outputtext>
+                    </u>
+                    between Jax Home Services, LLC, and SUBSCRIBER'S listed below.
+                </div>
+
+                <table width="100%" style="margin-top: 10px; border-collapse:collapse">
+                    <tr style="width: 100% ">
+                        <td style="width: 50%; border: 1px solid black;">
+                            <div class="cls_002">Subscriber #1</div>
+                            <div class="cls_004" style="padding:3px; ">{!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}</div>
+                        </td>
+                        <td style="width: 50%; border: 1px solid black;">
+                            <div class="cls_002">Subscriber #2</div>
+                            <div class="cls_004" style="padding:3px;">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</div>
+                        </td>
+                    </tr>
+                </table>
+
+                <!--Phone ROW-->
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr style="width: 100%">
+                        <td style="width: 20%; border: 1px solid black;">
+                            <div class="cls_002">Subscriber #1 Phone</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Phone}</div>
+                        </td>
+                        <td style="width: 30%; border: 1px solid black;">
+                            <div class="cls_002">Subscriber # 1 Email</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.PersonEmail}</div>
+                        </td>
+                        <td style="width: 20%; border: 1px solid black;">
+                            <div class="cls_002">Subscriber #2 Phone</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Phone_Number__c}</div>
+                        </td>
+                        <td style="width: 30%; border: 1px solid black;">
+                            <div class="cls_002">Subscriber #2 Email</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Email__c}</div>
+                        </td>
+                    </tr>
+                </table>  
+                
+                <!--Adress Mortgage ROW and PRODUCT TR-->
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr style="width: 100%">
+                        <td style="width: 42%; border:1px solid black;">
+                            <div class="cls_002">Service Address</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Street__c}</div>
+                        </td>
+                        <td style="width: 11%; border:1px solid black;">
+                            <div class="cls_002">City</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.city__c}</div>
+                        </td>    
+                        <td style="width: 7%; border:1px solid black;">
+                            <div class="cls_002">State</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.state__c}</div>
+                        </td>     
+                        <td style="width: 10%; border:1px solid black;">
+                            <div class="cls_002">Zip Code</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Zip__c}</div>
+                        </td>  
+                        <td style="width: 30%; border:1px solid black;">
+                            <div class="cls_002">Service Date/Time</div>
+                            <div class="cls_004">
+                                {!MONTH(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}/
+                                {!DAY(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}/
+                                {!YEAR(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}
+                            </div>
+                        </td>    
+                    </tr>
+                </table>
+                <table width="100%" style="border-collapse: collapse; ">
+                    <tr style="width:100%">
+                        <td style="width:100%; border:1px solid black;">
+                            <div style="margin-left:5px;display:inline-block;border-style:solid;width:10px;height:10px;"></div><div style="display:inline-block;margin-left:5px;">Billing Address Same As Monitored Address</div> 
+                        </td>
+                    </tr>
+                </table>        
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr style="width: 100%">
+                        <td style="width: 42%; border:1px solid black;">
+                            <div class="cls_002">Billing Address</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_Street_Service__c}</div>
+                        </td>
+                        <td style="width: 11%; border:1px solid black;">
+                            <div class="cls_002">City</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_City_Service__c}</div>
+                        </td>    
+                        <td style="width: 7%; border:1px solid black;">
+                            <div class="cls_002">State</div>
+                            <div class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_State_Service__c}</div>
+                        </td>     
+                        <td style="width: 10%; border:1px solid black;">
+                            <div class="cls_002">Zip Code</div>
+                            <div class="cls_004"> {!Home_Services__c.Account__r.Primary_Billing_Zip_Code_Service__c}</div>
+                        </td>  
+                        <td style="width: 30%; border:1px solid black;">
+                        </td> 
+                    </tr>
+                </table>
+
+                <table width="100%" style="border-collapse: collapse; ">
+                    <tr style="width:100%">
+                        <td style="width:100%; border:1px solid black;">
+                            <div style="display:inline-block;margin-left:5px;"><b>Services:</b></div>
+                            <apex:repeat var="serv" value="{!toLineItems2}">
+                                <div style="display:inline-block;margin-left:5px;"><b>{!serv.Name}, </b></div> 
+                            </apex:repeat> 
+                        </td>
+                    </tr>
+                </table>                 
+                <table class="border" style="width:100%;">
+                    <tr>
+                        <td style="width: 70%;">
+                            <div style="margin-top:5px;margin-left:40px">
+                                Monthly Fee: <u><apex:outputField value="{!Home_Services__c.Total_Monthly_Investment__c}"/></u> , plus applicable taxes per month payable in advance each month.
+                            </div>
+                            <div style="margin-top:5px;margin-left:10px">
+                                Total amount of agreement: <u>$ {!Home_Services__c.Total_Monthly_Investment__c * 12}</u>
+                            </div>
+                            <div style="margin-top:5px;margin-left:10px">
+                                The initial term of services will begin on <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }</u> and will end on 
+                                <u>{! CASE(MONTH(expirationDate), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(expirationDate)}/{! YEAR(expirationDate) }</u>
+                            </div>
+                            <div style="margin-top:5px;margin-left:10px;margin-bottom:5px">
+                                Pre Paid monthly security fee: _________________________
+                            </div>
+                        </td>
+                        <td style="width: 30%;">
+                            <div style="font-size: 15px;margin-left:40px">
+                                Bill Start Date:  <u><apex:outputField value="{!toLineItems2[0].Bill_Start_Date__c}"/> </u>
+                            </div >
+                            <div style="font-size: 15px;margin-left:20px" >
+                                Billing Frequency: <u>{!IF(toLineItems2[0].Billing_Frequency__c==null, '', toLineItems2[0].Billing_Frequency__c)}</u>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td align="center" style="border:1px solid black;">
+                            <b><u>ACH RECURRING PAYMENT AUTHORIZATION</u></b>
+                        </td>
+                    </tr>
+                </table> 
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td width="100%" style="border:1px solid black;">
+                            
+                            <apex:repeat var="pm" value="{!paymentMethodsServ}">
+                                <div style='display:{!IF(pm.PaymentMethodType__c == null,"block", "none")};'>
+                                    <br/><br/><br/><br/>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "ACH","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td>
+                                                {!pm.BankAccountNumber__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.Amount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>                                        
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Card Type:</th>
+                                            <td>
+                                                {!pm.CardType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name on Card (Account):</th>
+                                            <td>{!pm.NameOnCard__c}</td>
+                                            <th>EXP DATE:</th>
+                                            <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CSV:</th>
+                                            <td>{!pm.CSV__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.Amount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>   
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>{!pm.PaymentMethodType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Name:</th>
+                                            <td>{!pm.BankName__c}</td>
+                                            <th>Bank Account Type:</th>
+                                            <td>{!pm.BankAccountType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Account Name:</th>
+                                            <td>{!pm.Bank_Account_Name__c}</td>
+                                            <th>Bank Account Number:</th>
+                                            <td>{!pm.BankAccountNumber__c}</td>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number Checking:</th>
+                                            <td>{!pm.AccountNumberChecking__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.Amount__c}"/>
+                                                </apex:outputText>    
+                                            </td>
+                                        </tr>   
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Finance Company:</th>
+                                            <td>
+                                                {!pm.FinanceCompany__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Financed Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.FinancedAmount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </apex:repeat>
+                            
+                            
+                            
+                            <!--
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == null,"block", "none")};'>
+                                <br/><br/><br/><br/>
+                            </div>
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Checking","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th>METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {!Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number:</th>
+                                        <td >{!Home_Services__c.Bank_Account_Number_Encrypted__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Routing Number:</th>
+                                        <td >{!Home_Services__c.Routing_Number__c}</td>
+                                    </tr> 
+                                    
+                                </table>
+                                <br/>
+                                <br/><br/>
+                            </div>
+                            
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Credit Card","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th >METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {! Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Card Type:</th>
+                                        <td >
+                                            {! Home_Services__c.Card_Type__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Name on Card (Account):</th>
+                                        <td >{!Home_Services__c.Name_on_Card__c}</td>
+                                        <th >EXP DATE:</th> 
+                                        <td >{!Home_Services__c.Card_Expiration_Month__c &"/"& Home_Services__c.Card_Expiration_Year__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th >Account Number:</th>
+                                        <td >{!Home_Services__c.Account_Number__c}</td>                                
+                                        <th >CSV:</th>
+                                        <td >{!Home_Services__c.CSV__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        -->
+                            <table width="100%">
+                                <tr>
+                                    <td>Authorization Signature(s)</td>
+                                    <td colspan="3" width="50%">
+                                        <div style="display:inline-block;min-width:100%;"> #1
+                                        <div style="display:inline-block;min-width:90%;border-bottom: 1px solid black;"><span class="hidden" style="margin-left:20px;">sign_2</span></div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3" width="50%">  
+                                        <div style="display:inline-block;min-width:100%;"> #2
+                                            <div style="display:inline-block;min-width:90%;border-bottom: 1px solid black;"><span class="hidden" style="margin-left:20px;">
+                                                {!IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c==null && Home_Services__c.Account__r.Homeowner_2_First_Name__c=='' || Home_Services__c.Account__r.Homeowner_2_Last_Name__c==null && Home_Services__c.Account__r.Homeowner_2_Last_Name__c=='','','sign_3')}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" style="border-collapse: collapse;">
+                    <tbody>
+                        <tr>
+                            <td width="100%" style="border:1px solid black;">                                
+                                <p style="font-family: Calibri;font-size:6.8pt">Here’s How Recurring Payments Work:</p>
+                                <p align="justify" style="font-family: Calibri;font-size:6.8pt">
+                                    You authorize regularly scheduled charges to your checking or savings account. You will be charged the amount indicated above each billing period. A receipt for each payment will be emailed to
+                                    you. You agree that no prior-notification will be provided unless the date or amount changes, in which case you will receive notice from Jax Home Services, LLC at least 10 days prior to the payment
+                                    being collected. You understand that this authorization will remain in effect until you cancel it in writing, and you agree to notify Jax Home Services, LLC in writing of any changes in my account
+                                    information or termination of this authorization at least 15 days prior to the next billing date. If the above noted periodic payment dates fall on a weekend or holiday, you understand that the
+                                    payment may be executed on the next business day. You understand that because this is an electronic transaction, these funds may be withdrawn from my account as soon as the above noted
+                                    periodic transaction dates. In the case of an ACH Transaction being rejected for Non Sufficient Funds (NSF) You understand that Jax Home Services, LLC may at its discretion attempt to process the
+                                    charge again within 30 days, and agree to an additional $25.00 charge for each attempt returned NSF which will be initiated as a separate transaction from the authorized recurring payment. You
+                                    acknowledge that the origination of ACH transactions to your account must comply with the provisions of U.S. law.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>               
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td align="center" style="border:1px solid black;">
+                            <b><u>PLEASE READ THE TERMS AND CONDITIONS ON THE FRONT AND BACK OF THIS AGREEMENT BEFORE SIGNING.</u></b>
+                        </td>
+                    </tr>
+                </table> 
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr width="100%">
+                        <td style="width:100%;border:1px solid black;">
+                            <table width="100%">
+                                <tr width="100%">
+                                    <td style="width:100%">
+                                        <div style="align-text:justify;margin-top:-10px">
+                                            <p style="font-family: Calibri;font-size:6.8pt">TERM OF AGREEMENT / RENEWAL:</p>
+                                            <p align="justify" style="font-family: Calibri;font-size:6.8pt;margin-top:-5px">
+                                                The term of this agreement will be for a period of <u> 12 </u> months and will automatically renew for <u> 1 </u> months thereafter under the same terms and conditions, unless either party gives
+                                                written notice to the other by certified mail, return receipt requested, of their intention not to renew the agreement at least 30 days prior to the expiration of any term. After the initial twelve (12)
+                                                month term, Jax Home Services will be permitted from time to time to increase the monthly cost by an amount not to exceed five percent (5%) and Customer agrees to pay such increase.
+                                            </p>
+                                            <p style="font-family: Calibri;font-size:6.8pt">PAYMENT TERMS:</p>
+                                            <p align="justify" style="font-family: Calibri;font-size:6.8pt;margin-top:-5px">
+                                                Any payment not received within 10 days from the date of invoice is subject to interest at the highest amount allowed by law until paid. If applicable, sales tax is included in the monthly fee. If Jax
+                                                Home Services commences litigation or incurs fees to collect payment for any amount due from Customer, Customer agrees to pay reasonable costs and attorney's fees which may accrue. Any and
+                                                all disputes arising out of this sale will be interpreted under the laws of the state in which the work was performed.
+                                            </p>
+                                            <p align="justify" style="font-family: Calibri;font-size:6.8pt;margin-top:-5px">
+                                                Jax Home Services may freely assign its rights, or delegate its obligations, to an entity that acquires all or substantially all of the business or assets of Jax Home Services, whether by merger,
+                                                reorganization, acquisition, sale, or otherwise.
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr width="100%">
+                                    <td style="width:100%">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="width: 50%">
+                                                    <div align="center" style="margin-bottom:0px;">
+                                                        Jax Home Services Pest Control, LLC
+                                                    </div>
+                                                    <hr align="left" style="margin-top:0px;"/>
+                                                    <div align="center" style="margin: 0px;">AUTHORIZED PS REPRESENTATIVE</div>    
+                                                    <hr align="left" style="margin-top:7px;"/>
+                                                </td>
+                                                <td style="width: 50%;">
+                                                    <div class="bold" align="center" style="font-family:Arial;font-size:6pt;margin-top:-20px;">
+                                                        NOTICE OF CANCELLATION
+                                                        YOU, THE BUYER, MAY CANCEL THIS TRANSACTION AT ANY TIME PRIOR
+                                                        TO MIDNIGHT OF THE THIRD BUSINESS DAY AFTER THE DATE OF THIS
+                                                        TRANSACTION. SEE THE ATTACHED NOTICE OF CANCELLATION FORM
+                                                        FOR AN EXPLANATION OF THIS RIGHT.
+                                                    </div>
+                                                    <div>
+                                                        <p class="hidden" align="left" style="margin-bottom: 0px;">
+                                                            sign_2
+                                                        </p>
+                                                        <hr align="left" style="margin-top: 2px;"/>
+                                                        <div align="center">{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c} <apex:outputtext value="{0, date, medium}"><apex:param value="{!TODAY()}"></apex:param></apex:outputtext></div>
+                                                        <p class="hidden" align="left" style="margin-bottom: 0px;">
+                                                            sign_3
+                                                        </p>
+                                                        <hr align="left" style="margin-top: 2px;"/>
+                                                        <div align="center">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c} <apex:outputtext value="{0, date, medium}"><apex:param value="{!TODAY()}"></apex:param></apex:outputtext></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>                
+            </div>
+        </body>
+    </html>
+</apex:page>

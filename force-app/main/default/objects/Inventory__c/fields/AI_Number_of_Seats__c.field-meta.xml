@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_Number_of_Seats__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>It will holds the number of seats value</inlineHelpText>
+    <label>Number of Seats</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hot Tub - 4 seats</fullName>
+                <default>false</default>
+                <label>Hot Tub - 4 seats</label>
+            </value>
+            <value>
+                <fullName>Hot Tub - 8 seats</fullName>
+                <default>false</default>
+                <label>Hot Tub - 8 seats</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

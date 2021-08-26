@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Box_with_Activation__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This will capture whether the person consented to having the box sent back out.</description>
+    <externalId>false</externalId>
+    <label>No Box with Activation</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

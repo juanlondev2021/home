@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>It will hold CPL  Case Queue detail and User field details</description>
+    <enableFeeds>false</enableFeeds>
+    <label>CPL Case Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

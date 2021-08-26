@@ -1,0 +1,179 @@
+<!--
+* Diaco
+* @author 			William Aldana href=<wialdana@gmail.com>
+* Project:			Diaco SMS
+* Description:		Componenet to configure SMS notification Status
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		08/01/2020		Jull Quintero D		    Initial implementation of the component.
+-->
+
+<aura:component>      
+    <aura:method name="init" action="{!c.doInit}" />   
+    <aura:attribute name="open" type="boolean" default="false" description="OPEN MODAL" required="true" />
+    <aura:attribute name="notification" type="SMS_Notification_Status__c" description="Notification" required="true" />
+    <aura:attribute access="private" name="conditions" type="List" default="['AND','OR', 'CUSTOM_lOGIC']" />
+    <aura:attribute access="private" name="providers" type="List" default="['Diaco SMS','Magic SMS']" />
+    <aura:attribute access="private" name="isNew" type="Boolean" default="false" />
+
+    <!-- LOOKUP -->
+    <aura:attribute access="private" name="isRenderDone" type="Boolean" default="false" />
+
+    <!--EVENT  -->
+    <aura:registerEvent name="updateNotf" type="c:DiacoSMSNotificationEvent" />
+
+    <aura:if isTrue="{! v.open }">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon   iconName="utility:close"
+                                            onclick="{! c.closeModel }"
+                                            alternativeText="close"
+                                            variant="bare-inverse"
+                                            class="slds-modal__close"/>
+
+                <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header_vertical slds-align_absolute-center">
+                    <lightning:layoutItem padding="horizontal-small">
+                        <lightning:icon iconName="standard:sms" />
+                    </lightning:layoutItem>
+            
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span></span>
+                                    <span class="slds-page-header__title slds-truncate" title="Recently Viewed"> {!v.isNew==True ? 'CREATE NOTIFICATION: '+v.notification.Name :v.notification.Name } </span>
+                                </h1>
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>                    
+                </header>    
+                <!-- /HEADER -->
+                
+                <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap slds-gutters">
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:Id="fieldId" label="Name" value="{! v.notification.Name }" required="true"/>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    type="toggle" 
+                                                label="Active" 
+                                                messageToggleActive='yes'
+                                                messageToggleInactive="No"
+                                                checked = "{! v.notification.Active__c }"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Category"	value="{!v.notification.Category__c}"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Type"	value="{!v.notification.Type__c}"/>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Object ApiName" value="{!v.notification.Object_ApiName__c}"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="ParentId ApiName"	value="{!v.notification.ParentId_ApiName__c	}" required="true"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="PhoneNumber ApiName"	value="{!v.notification.PhoneNumber_ApiName__c}"/>
+                        </div>
+    
+                        <!-- TEMPLATE AND SENDER Id -->
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Magic SenderId"	value="{!v.notification.Magic_SenderId__c}"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <!--lightning:input aura:id='fieldId' label="Magic TemplateId"	value="{!v.notification.Magic_TemplateId__c}"/-->
+                            <c:diacoLookup  objectAPIName="smagicinteract__SMS_Template__c"                                         
+                                            value="{!v.notification.Magic_TemplateId__c}"
+                                            IconName="custom:custom20" 
+                                            label="Magic TemplateId"                                          
+                                            required="false" 
+                                            isRenderDone="{!v.isRenderDone}"/>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Magic Source"	value="{!v.notification.Magic_Source__c}"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Diaco SenderId"	value="{!v.notification.Diaco_SenderId__c}"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <!--lightning:input aura:id='fieldId' label="Diaco TemplateId"	value="{!v.notification.Diaco_TemplateId__c}"/-->
+                            <c:diacoLookup  objectAPIName="dsms__Template__c"                                         
+                                            value="{!v.notification.Diaco_TemplateId__c}"
+                                            IconName="custom:custom18" 
+                                            label="Diaco TemplateId"                                          
+                                            required="false" 
+                                            isRenderDone="{!v.isRenderDone}"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:textarea aura:id='fieldId' label="SMSText"	value="{!v.notification.SMSText__c}"/>
+                        </div>
+    
+                        <!-- /TEMPLATE AND SENDER Id -->
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:select  aura:id='fieldId' label="Provider" value="{! v.notification.Provider__c }">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.providers}" var="item" >
+                                    <option value="{!item}" selected="{! v.notification.Provider__c == item}">
+                                        {!item}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:select  aura:id='fieldId' label="Conditions" value="{! v.notification.conditions__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.conditions}" var="item" >
+                                    <option value="{!item}" selected="{! v.notification.conditions__c == item}">
+                                        {!item}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+
+                        <aura:if isTrue="{!v.notification.conditions__c == 'CUSTOM_lOGIC'}">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:input aura:id='fieldId' label="Customize Logic"	value="{!v.notification.Customize_Logic__c}" required="true"/>
+                            </div>
+                        </aura:if>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                        label="Close"
+                                        title="Close"
+                                        onclick="{! c.closeModel }"/>
+                    
+                    <lightning:button   variant="brand" 
+                                        label="Save" 
+                                        title="save" 
+                                        iconName="utility:save" 
+                                        iconPosition="left"  
+                                        onclick="{! c.handlerSave }" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

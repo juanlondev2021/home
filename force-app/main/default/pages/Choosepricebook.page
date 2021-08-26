@@ -1,0 +1,22 @@
+<!-- Its add/update a pricebook on opportunity and also updating opportunity 
+              recordtype based on the Pricebook choosen. -->
+<apex:page id="thePage" standardController="Opportunity" extensions="ChoosepricebookController">
+    <apex:sectionHeader title="Choose Price Book for" subtitle="{!Opportunity.Name}" description="Select a price book for this opportunity. You can add products only from a single price book. Changing a selected price book will delete all existing products from this opportunity."/>
+        <apex:form >
+        <apex:pageBlock title="Choose Pricebook for: {!Opportunity.Name}" >
+                <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputlabel value="Price Book"/>
+                        <apex:selectList value="{!selectedPriceBookId}" size="1">
+                            <apex:selectOptions value="{!priceBookOptions}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save" action="{!savePriceBookName}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}"/>
+                </apex:pageBlockButtons>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

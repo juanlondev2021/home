@@ -1,0 +1,1195 @@
+<!--
+  @File Name          : Aqua_Bright_Water_LLC.page
+  @Description        : 
+  @Author             : William Aldana
+  @Group              : 
+  @Last Modified By   : William Aldana
+  @Last Modified On   : 5/23/2020, 9:19:19 AM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    5/21/2020   William Aldana     Initial Version
+-->
+<apex:page renderAs="pdf" standardController="Home_Services__c" extensions="RenderContractController" showHeader="false"
+    sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <apex:variable var="count" value="1" />
+    <html>
+
+    <head>
+        <title>Water Contract</title>
+
+        <style>
+            @page {
+                size: legal;
+                margin: 1mm 5mm 5mm 5mm;
+            }
+
+            .page-break {
+                display: block;
+                page-break-after: always;
+            }
+
+            body {
+                font-family: Arial;
+                font-size: 13px;
+            }
+
+            .hidden {
+                color: white;
+            }
+
+            .hidden-WithBorder {
+                color: white;
+                border-bottom: 1px solid gray;
+            }
+
+            .hidden-h {
+                color: white;
+            }
+
+            <!--NEW-->.cotain {
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            li {
+                list-style-type: none;
+                display: inline;
+                float: left;
+            }
+
+
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 70px;
+            }
+
+            .bold {
+                font-weight: bold
+            }
+
+            .border {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            .border th {
+                border: 1px solid black;
+            }
+
+            .border td {
+                border: 1px solid black;
+            }
+
+            .no-border {
+                border: 0px solid black;
+                border-collapse: collapse;
+            }
+
+            .no-border th {
+                border: 0px solid black;
+            }
+
+            .no-border td {
+                border: 0px solid black;
+            }
+
+            .margin p {
+                margin: 0;
+            }
+
+
+            .mark-below {
+                color: white;
+                border-bottom: 1px solid gray;
+            }
+
+            .mark-below-visible {
+                color: black;
+                border-bottom: 1px solid gray;
+            }
+
+            span.cls_002::after {
+                content: "\a";
+                white-space: pre;
+            }
+
+            span.cls_002 {
+                font-family: "Calibri", serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                font-size: 8px;
+                position: inherit;
+                top: 0px;
+            }
+
+            span.cls_003::after {
+                content: "\a";
+                white-space: pre;
+            }
+
+            span.cls_003 {
+                font-family: "Calibri", serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                position: inherit;
+                top: 0px;
+            }
+
+            span.cls_004 {
+                font-family: Arial, serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                margin-left: 5px
+            }
+        </style>
+    </head>
+
+    <body>
+        <!--NEW FIRST PAGE-->
+        <div class="page-break;">
+            <!--Header-->
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 33.33333%">
+                        <img src="{!URLFOR($Resource.contractIcon,'contractIcon/contractIcon.png')}" class="changeImage" />
+                    </td>
+                    <td style="width: 33.33333%">
+                        <div style="margin-top:20px;width:100%;text-align:center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:12px">
+                            Aqua Bright Water, LLC
+                            <br />AZROC # 313639
+                            <br />664 W. Warner Rd. • Tempe, AZ 85284
+                            <br/>480-776-5085
+                            <br/>Water Treatment
+                        </div>
+                    </td>
+                    <td style="width: 33.33333%">
+                       <!-- Logo no longer used: <img src="{!URLFOR($Resource.contractIcon,'contractIcon/hagueLogo.png')}" height="100%" width="100%" class="changeImage"/>-->
+                    </td>
+                </tr>
+            </table>
+
+            <div style='clear:right;'>
+                <p align="justify" style="font-size:0.8em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                    This Agreement is entered into on
+                    <u>
+                        <apex:outputtext value="{0, date, medium}">
+                            <apex:param value="{!TODAY()}"></apex:param>
+                        </apex:outputtext>
+                    </u> by
+                    <u>{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</u>
+                    and between Aqua Bright Water LLC, (664 W. Warner Rd. Tempe, AZ 85284), hereinafter referred to as “COMPANY” and “CUSTOMER”
+                    listed below")
+                </p>
+            </div>
+
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 50%">
+                        <span class="cls_002">Customer #1</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.AcctFirstName__c & ' '& Home_Services__c.Account__r.AcctLastName__c}</span>
+                    </td>
+                    <td style="width: 50%">
+                        <span class="cls_002">Customer #2</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</span>
+                    </td>
+                </tr>
+            </table>
+            <!--Name and SSN ROW-->
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 16.666%">
+                        <span class="cls_002">SSN</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Customer_1_SSN_E__c}</span>
+                    </td>
+                    <td style="width: 16.666%">
+                        <span class="cls_002" style="margin-left: 0px;font-size:10px;">DOB</span>
+                        <span class="cls_004">
+                            <apex:outputtext value="{0, date, medium}">
+                                <apex:param value="{!Home_Services__c.Account__r.Customer_1_DOB__c}"></apex:param>
+                            </apex:outputtext>
+                        </span>
+                    </td>
+                    <td style="width: 16.67%">
+                        <span class="cls_002">DL#</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Customer_1_Drivers_License__c}</span>
+                    </td>
+                    <td style="width: 16.666%">
+                        <span class="cls_002">SSN</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Customer_2_SSN__c}</span>
+                    </td>
+                    <td style="width: 16.666%">
+                        <span class="cls_002">DOB</span>
+                        <span class="cls_004">
+                            <apex:outputtext value="{0, date, medium}">
+                                <apex:param value="{!Home_Services__c.Account__r.Customer_2_DOB__c}"></apex:param>
+                            </apex:outputtext>
+                        </span>
+                    </td>
+                    <td style="width: 16.668%">
+                        <span class="cls_002">DL#</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Customer_2_Drivers_License__c}</span>
+                    </td>
+                </tr>
+            </table>
+            <!--Phone ROW-->
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 25%">
+                        <span class="cls_002">Home Phone</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Phone}</span>
+                    </td>
+                    <td style="width: 25%">
+                        <span class="cls_002">Cell Phone</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.PersonMobilePhone}</span>
+                    </td>
+                    <td style="width: 25%">
+                        <span class="cls_002">Home Phone</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Phone_Number__c}</span>
+                    </td>
+                    <td style="width: 25%">
+                        <span class="cls_002">Cell Phone</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Mobile__c}</span>
+                    </td>
+                </tr>
+            </table>
+            <!--Emails ROW-->
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 50%">
+                        <span class="cls_002">#1 Email</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.PersonEmail}</span>
+                    </td>
+                    <td style="width: 50%">
+                        <span class="cls_002">#2 Email</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Email__c}</span>
+                    </td>
+                </tr>
+            </table>
+
+            <!--Employer ROW-->
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 25%">
+                        <div>
+                            Employer:
+                            <u style="padding-right: 75px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_1_Employer__c}</u>
+                        </div>
+                        <div>
+                            Income:
+                            <u style="padding-right: 82px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;"><apex:outputField value="{!Home_Services__c.Account__r.Customer_1_Income__c}"/></u>
+
+                        </div>
+                    </td>
+                    <td style="width: 25%">
+                        <div>
+                            Employer Phone:
+                            <u style="padding-right: 50px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_1_Employer_Phone__c}</u>
+                        </div>
+                        <div>
+                            Lenght of Emp:
+                            <u style="padding-right: 83px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_1_Length_of_Employment__c}</u>
+                        </div>
+                        <div>
+                            Position:
+                            <u style="padding-right: 70px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_1_Employment_Position__c}</u>
+                        </div>
+                    </td>
+                    <td style="width: 25%">
+                        <div>
+                            Employer:
+                            <u style="padding-right: 45px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_2_Employer__c}</u>
+                        </div>
+                        <div>
+                            Income:
+                            <u style="padding-right: 82px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;"><apex:outputField value="{!Home_Services__c.Account__r.Customer_2_Income__c}" /></u>
+                        </div>
+                    </td>
+                    <td style="width: 25%">
+                        <div>
+                            Employer Phone:
+                            <u style="padding-right: 42px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_2_Employer_Phone__c}</u>
+                        </div>
+                        <div>
+                            Lenght of Emp:
+                            <u style="padding-right: 77px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_2_Length_of_Employment__c}</u>
+                        </div>
+                        <div>
+                            Position:
+                            <u style="padding-right: 78px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Account__r.Customer_2_Employment_Position__c}</u>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--Adress Mortgage ROW and PRODUCT TR-->
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 50%">
+                        <span class="cls_002">Address</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Street__c &' '& Home_Services__c.Account__r.Zip__c &' '& Home_Services__c.Account__r.City__c
+                            &' '& Home_Services__c.Account__r.State__c }</span>
+                    </td>
+                    <td style="width: 16%">
+                        <span class="cls_002">Mortgage Payment</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Mortgage_Payment__c}</span>
+                    </td>
+                    <td style="width: 18%">
+                        <span class="cls_002">Install Date/time</span>
+                        <span class="cls_004">
+                            <apex:outputField value="{!Home_Services__c.Requested_Install_Date__c}" />
+                        </span>
+                    </td>
+                    <td style="width: 16%">
+                        <span class="cls_002">Sales Rep.</span>
+                        <span class="cls_004">{!Home_Services__c.Sales_Rep__r.name}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="border-top:1px solid black;border-left:1px solid black;">
+                        <h4 style="text-align: center;">Product List</h4>
+                        <table width="60%" style="margin: 0 auto">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <b>Name</b>
+                                    </th>
+                                    <!--<th align="center">Product</th>-->
+                                    <th align="center">
+                                        <b>Quantity</b>
+                                    </th>
+                                    <th align="right">
+                                        <b>Total Sales Price</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepeat">
+                                    <tr>
+                                        <td>
+                                            <apex:outputField value="{!LineIte.Name}" />
+                                        </td>
+                                        <td align="center">
+                                            <apex:outputField value="{!LineIte.Quantity__c}" />
+                                        </td>
+                                        <td align="right">
+                                            <apex:outputField value="{!LineIte.Total_Sales_Price_p__c }" />
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!--Water  ANALYSIS _______________________________ -->
+            <table border="1|0" width="100%" style="border-collapse: collapse; margin: 0px 0 0 0">
+                <tbody>
+                    <tr>
+                        <td width="60%" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-left:1px solid black;">
+                            <h4 style="text-align: center;">
+                                Water Analysis
+                            </h4>
+                            <table>
+                                <tr>
+                                    <td style="width: 40%">
+                                        <table align="center">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="right">Hardness:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Hardness_gpg__c}</u></td>
+                                                    <td>gpg</td>    
+                                                </tr>
+                                                <tr>
+                                                    <td align="right">ph:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Ph__c}</u></td>
+                                                    <td></td>     
+                                                </tr>     
+                                                <tr>                                               
+                                                    <td align="right">Iron Algae:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Iron_Algae__c}</u></td>
+                                                    <td></td>     
+                                                </tr>
+                                                <tr>
+                                                    <td align="right">Iron:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Iron_ppm__c}</u></td>
+                                                    <td>ppm</td>     
+                                                </tr>  
+                                                <tr>
+                                                    <td align="right">Hyd. supl.:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Hyd_Supl_ppm__c}</u></td>
+                                                    <td>ppm</td>    
+                                                </tr>                                                                                              
+                                                <tr>
+                                                    <td align="right">No reg.:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.No_Reg__c}</u></td>
+                                                    <td></td>     
+                                                </tr>
+                                                <tr>
+                                                    <td align="right">other:</td>
+                                                    <td align="left"><u style="border-bottom: 1px solid black;
+                                                        margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Other__c}</u></td>
+                                                    <td></td>     
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td style="width: 60%;vertical-align: top;align-content: center; height: 100%">
+                                        <table style="margin-right: 20px; border-top: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-left:1px solid black;" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="center">Special Instructions</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="justify" style="font-size:0.8em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                                        <u>{!Home_Services__c.Special_Instructions__c}</u>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="40%" style="
+                                                     border-top: 1px solid black;
+                                                     border-right: 1px solid black;
+                                                     border-bottom: 1px solid black;
+                                                     border-left:1px solid black;">
+                            <table style="margin: 0 auto;">
+                                <tbody>
+                                    <tr>
+                                        <td width="50%">Total Cash Selling Price: </td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Total_Cash_Selling_Price__c}" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="50%">Total Sales Tax: </td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Customer_Tax__c}" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="50%">Total Cash Price: </td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Total_Cash_Price__c}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">Down Payment:</td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Down_Payment__c}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">Trade in Allowance:</td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Trade_in_Allowance__c}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">Total Down Payment:</td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Total_Down_Payment__c}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">Balance Due:</td>
+                                        <td width="30%" align="right" style="border-bottom: 1px solid black;">
+                                            <apex:outputField value="{!Home_Services__c.Balance_Due__c}" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tbody>
+                    <apex:repeat var="pm" value="{!paymentMethodsProd}">
+                        <tr>
+                            <td>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "ACH","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td>
+                                                {!pm.BankAccountNumber__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Card Type:</th>
+                                            <td>
+                                                {!pm.CardType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name on Card (Account):</th>
+                                            <td>{!pm.NameOnCard__c}</td>
+                                            <th>EXP DATE:</th>
+                                            <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CSV:</th>
+                                            <td>{!pm.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>{!pm.PaymentMethodType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Name:</th>
+                                            <td>{!pm.BankName__c}</td>
+                                            <th>Bank Account Type:</th>
+                                            <td>{!pm.BankAccountType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Account Name:</th>
+                                            <td>{!pm.Bank_Account_Name__c}</td>
+                                            <th>Bank Account Number:</th>
+                                            <td>{!pm.BankAccountNumber__c}</td>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number Checking:</th>
+                                            <td>{!pm.AccountNumberChecking__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Finance Company:</th>
+                                            <td>
+                                                {!pm.FinanceCompany__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Financed Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.Amount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Lease","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <apex:variable var="count" value="{!VALUE(count)+1}" />
+                    </apex:repeat>
+                </tbody>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse; margin: 0 0 0 0">
+                <tbody>
+
+                    <tr>
+                        <td colspan="6" align="justify">
+                            <p style="font-size: 8px">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By signing below you certify that all information above is true and complete. You authorize
+                                us to confirm the information in this application and to request and receive credit information
+                                about you in order to determing creditworthiness. You further authorize us to furnish information
+                                about your account to credit reporting agencies. Credit Reports: By submitting your application,
+                                you agree that we may obtain at any time your credit report s for any legitimate purpose
+                                associated with your application, account or other requests, including but not limited to
+                                reviewing, modifying, renewing or collecting on your account. At your request you will be
+                                informed if such a report was obtained by us, and you will be given contact information for
+                                the consumer reporting agency that furnished the report.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" width="50%">
+                            <div style="margin-bottom: 5px;margin-left:120px;">Aqua Bright Water LLC</div>
+                            <hr align="left" style="margin-bottom: 0px;" />
+                            <div style="margin: 0px;">AUTHORIZED REPRESENTATIVE</div>
+
+                        </td>
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <br/>
+                                        <span class="hidden" style="margin-left:20px;">Sign_1</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" heigth="5px">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</td>
+                                </tr>
+                                <tr>
+                                    <td align="center"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="hidden" style="margin-left:20px;">Sign_2</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--CANCELLATION-->
+        <div class="page-break;" style="page-break-before: always;">
+            <div class="cotain" style=" width: 100%;text-align:center;margin-top:40px;">
+                <p> Aqua Bright Wter LLC.</p>
+                <p style="margin-top:-10px;"> 664 W. Warner Rd. Tempe, AZ 85284</p>
+                <p style="margin-top:-10px;"> (480) 776-5085</p>
+
+            </div>
+
+            <div class="bold" border="1" style="margin-top: 20px;width:100%;font-weight: bold;" align="center">
+                <u>NOTICE OF CANCELLATION</u>
+            </div>
+            <div class="bold" border="1" style="margin-top: 3px;width:100%;" align="center">
+                Aqua Bright Water (hereinafter referred to as Seller) to enter date of transaction
+            </div>
+            <br/>
+            <br/>
+            <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;">
+                <div>
+                    {!MONTH(TODAY())}/ {!DAY(TODAY())}/ {!YEAR(TODAY())}
+                    <hr align="left" style="margin-top: 0px;" />
+                </div>
+                <div style="margin-top:0px;">
+                    Date
+                </div>
+            </div>
+            <br/>
+            <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;">
+                <div>
+                    {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                    <hr align="left" style="margin-top: 0px;" />
+                </div>
+                <div style="margin-top:0px;">
+                    Customer Name
+                </div>
+            </div>
+            <br/>
+
+
+            <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;">
+                <div>
+                    {!Home_Services__c.Account__r.Street__c &' '& Home_Services__c.Account__r.City__c &' '& Home_Services__c.Account__r.State__c
+                    &' '& Home_Services__c.Account__r.Zip__c }
+                    <hr align="left" style="margin-top: 0px;" />
+                </div>
+                <div style="margin-top:0px;">
+                    Customer Address
+                </div>
+            </div>
+            <br/>
+
+            <div style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                You may cancel this transaction, without any penalty or obligation, within three business days from the above date.
+            </div>
+            <div style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                If you cancel, any property traded in, any payments made by you under the contract or sale and any negotiable instrument
+                executed by you will be returned within ten business days following receipt by Seller of your cancellation
+                notice.
+            </div>
+
+            <div align="justify; " style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                If you cancel, you must make available to Seller at your residence in substantially as good condition as when received, any
+                goods delivered to you under this contract or sale; or you may, if you wish, comply with the instructions
+                of Seller regarding the return shipment of the goods at Protection Source's expense and risk.
+            </div>
+
+            <div align="justify; " style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                If you do make the goods available to Seller and Seller does not pick them up within twentydays of the date of your notice
+                of cancellation, you may retain or dispose of the goods without any further obligation. If you fail to make
+                the goods available to Seller, or if you agree to return the goods to Seller and fail to do so, then you
+                remain liable for performance of all obligations under the contract.
+            </div>
+
+            <div align="justify; " style="border-collapse: collapse;margin-top:20px;">
+                To cancel this transaction, mail or deliver a signed and dated copy of this cancellation notice or any other written notice,
+                or send a telegram to:
+            </div>
+            <div class="cotain" style=" width: 100%;text-align:center;">
+                <p> Aqua Bright Wter LLC.</p>
+                <p style="margin-top:-10px;"> 664 W. Warner Rd.</p>
+                <p style="margin-top:-10px;">Tempe, AZ 85284</p>
+
+            </div>
+            <br/>
+            <div style="width: 50%;margin-botttom: 0; text-align:left;">
+                <div style="display:inline-block">
+                    NOT LATER THAN MIDNIGHT OF
+                </div>
+                <div style="display:inline-block;">
+                    {!MONTH(TODAY()+4)}/ {!DAY(TODAY()+4)}/ {!YEAR(TODAY()+4)}
+                    <hr align="left" style="margin-top: 0px; " />
+                </div>
+
+            </div>
+
+            <div>I HEREBY CANCEL THIS TRANSACTION</div>
+            <br/>
+            <br/>
+
+            <div style="width: 40%;padding-botttom: 0; text-align:center;">
+                <div>
+                    <hr align="left" style="margin-top: 0px;" /> </div>
+                <div style="margin-top:0px;">Date of Cancellation to be entered by buyer</div>
+            </div>
+            <br/>
+            <br/>
+            <div style="width: 40%;padding-botttom: 0; text-align:center;">
+                <!--<p align="center" class="hidden-h"> sign_2</p>-->
+                <div>
+                    <hr align="left" style="margin-top: 5px;" /> </div>
+                <div style="margin-top:0px;">Buyer's Signature</div>
+            </div>
+            <br/>
+            <br/>
+            <div align="right">
+                <div>
+                    <p>2 COPIES OF THIS FORM RECEIVED BY </p>
+                    <p>BUYER ON DATE OF TRANSACTION </p>
+                </div>
+                <div align="right" style="float:right; margin-top:10px">
+                    <div>
+                        <p align="left " class="hidden-h"> Sign_1</p>
+                        <hr style="margin-top: 5px; " />
+                    </div>
+                    <div style=" margin-top:0px;float:right;">Customer initial to acknowledge receipt of these forms</div>
+                </div>
+            </div>
+        </div>
+
+        <apex:variable var="count" value="1" />
+        <!--new Payment Agreement-->
+        <div class="page-break;" style="page-break-before: always;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 33.33333%">
+                        <div class="cotain" style="width: 120%; background-image: url({! $Resource.AquaBrightLogo });
+                                                       height: 100px; background-position: left;
+                                                       position: relative;left: 10px;top:10px">
+
+                        </div>
+                    </td>
+                    <td style="width: 33.33333%">
+                        <div class="bold" style="margin-top:90px;width:100%;text-align:center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:9px">
+                            Aqua Bright Water, LLC
+                            <br />ROC#313639
+                            <br />664 W. Warner Rd. Tempe AZ 85284
+                            <br/>(480) 240-3936
+                            <br/>
+                        </div>
+                    </td>
+                    <td style="width: 33.33333%"></td>
+                </tr>
+            </table>
+            <div class="bold" border="1" style="margin-top: 10px;width:100%;text-align:center">
+                SERVICE AGREEMENT
+            </div>
+            <div border="1" style="margin-top: 30px;width:100%;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                This Agreement is entered into on
+                <u style="margin-left: 5px; margin-right:5px;">
+                    <apex:outputtext value="{0, date}">
+                        <apex:param value="{!TODAY()}"></apex:param>
+                    </apex:outputtext>
+                </u>Aqua Bright Water, LLC, and CUSTOMER'S listed below.
+            </div>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 50%">
+                        <span class="cls_002">Customer #1</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.AcctFirstName__c & ' '& Home_Services__c.Account__r.AcctLastName__c}</span>
+                    </td>
+                    <td style="width: 50%">
+                        <span class="cls_002">Customer #2</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</span>
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 25%">
+                        <span class="cls_002">Customer #1 Phone</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Phone}</span>
+                    </td>
+                    <td style="width: 25%">
+                        <span class="cls_002">Customer # 1 Email</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.PersonEmail}</span>
+                    </td>
+                    <td style="width: 25%">
+                        <span class="cls_002">Customer #2 Phone</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Phone_Number__c}</span>
+                    </td>
+                    <td style="width: 25%">
+                        <span class="cls_002">Customer #2 Email</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Email__c}</span>
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 41%">
+                        <span class="cls_002">Service Address</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Street__c}</span>
+                    </td>
+                    <td style="width: 13%">
+                        <span class="cls_002">City</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.City__c}</span>
+                    </td>
+                    <td style="width: 6%;">
+                        <span class="cls_002">State</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.State__c}</span>
+                    </td>
+                    <td style="width: 15%;">
+                        <span class="cls_002">Zip Code</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Zip__c}</span>
+                    </td>
+                    <td style="width: 25%;">
+                        <span class="cls_002">Install Date/Time</span>
+                        <span class="cls_004">
+                            <apex:outputtext value="{0}">
+                                <apex:param value="{!Home_Services__c.Requested_Install_Date__c}"></apex:param>
+                            </apex:outputtext>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 100%" class="cls_002">
+                        Billing Address Same As Monitored Address - {!IF(Home_Services__c.Account__r.Street__c == Home_Services__c.Account__r.Primary_Billing_Street_Service__c,"Yes",
+                        "No")}
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style='display:{!IF(Home_Services__c.Account__r.Street__c == Home_Services__c.Account__r.Primary_Billing_Street_Service__c,"none", "table")};border-collapse: collapse;'>
+                <tr style="width: 100%">
+                    <td style="width: 41%">
+                        <span class="cls_002">Billing Address</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_Street_Service__c}</span>
+                    </td>
+                    <td style="width: 13%">
+                        <span class="cls_002">City</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_City_Service__c}</span>
+                    </td>
+                    <td style="width: 6%; padding-right: 100px; text-align: left;">
+                        <span class="cls_002">State</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_State_Service__c}</span>
+                    </td>
+                    <td style="width: 15%; padding-right: 100px;">
+                        <span class="cls_002">Zip Code</span>
+                        <span class="cls_004">{!Home_Services__c.Account__r.Primary_Billing_Zip_Code_Service__c}</span>
+                    </td>
+                    <td style="width: 25%; padding-right: 100px;padding-botttom: 0;">
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 70%">
+                        <span class="cls_002">Services:</span>
+                        <table style="width: 70%;table-layout:fixed;">
+                            <apex:repeat var="srvs" value="{!toLineItems2}">
+                                <tr style="width: 70%;">
+                                    <td style="width: 50%;border:0px,white;">
+                                        {!srvs.Name}
+                                    </td>
+                                    <td style="width: 50%;border:0px,white">
+                                        Monthly Investment: $
+                                        <u style="padding-right: 20px;border-bottom: 1px solid black;
+                                                                           margin-bottom: 0px; text-decoration: none;">{!srvs.Monthly_Investment__c}</u>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </table>
+                    </td>
+                    <td style="width: 30%;">
+                        <table style="width: 100%;table-layout:fixed;">
+                            <tr>
+                                <td style="border:0px,white">Bill Start Date:
+                                    <u style="display: inline-block; padding-right: 50px;border-bottom: 1px solid black;
+                                                  margin-bottom: 0px; text-decoration: none;">
+                                        <apex:outputtext value="{0, date}">
+                                            <apex:param value="{!Home_Services__c.Bill_Start_Date__c}"></apex:param>
+                                        </apex:outputtext>
+                                    </u>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:0px,white">Billing Frequency:
+                                    <u style="display: inline-block; padding-right: 55px;border-bottom: 1px solid black;
+                                                  margin-bottom: 0px; text-decoration: none;">
+                                        {!Home_Services__c.Billing_Frequency__c}
+                                    </u>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tbody>
+                    <tr style="width: 100%;">
+                        <td align="center">
+                            <b>ACH RECURRING PAYMENT AUTHORIZATION</b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tbody>
+                    <apex:repeat var="pm" value="{!paymentMethodsServ}">
+                        <tr>
+                            <td>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "ACH","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td>
+                                                {!pm.BankAccountNumber__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Card Type:</th>
+                                            <td>
+                                                {!pm.CardType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name on Card (Account):</th>
+                                            <td>{!pm.NameOnCard__c}</td>
+                                            <th>EXP DATE:</th>
+                                            <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CSV:</th>
+                                            <td>{!pm.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>{!pm.PaymentMethodType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Name:</th>
+                                            <td>{!pm.BankName__c}</td>
+                                            <th>Bank Account Type:</th>
+                                            <td>{!pm.BankAccountType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Account Name:</th>
+                                            <td>{!pm.Bank_Account_Name__c}</td>
+                                            <th>Bank Account Number:</th>
+                                            <td>{!pm.BankAccountNumber__c}</td>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number Checking:</th>
+                                            <td>{!pm.AccountNumberChecking__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Finance Company:</th>
+                                            <td>
+                                                {!pm.FinanceCompany__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Financed Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.FinancedAmount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Lease","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <apex:variable var="count" value="{!VALUE(count)+1}" />
+                    </apex:repeat>
+                </tbody>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td style="height:75px">Authorization Signature(s)</td>
+                    <td colspan="3">#1
+                        <span class="hidden-WithBorder">____Sign_1_______________</span>
+                    </td>
+                    <td colspan="3">#2
+                        <span class="hidden-WithBorder">_____Sign_2_______________</span>
+                    </td>
+                </tr>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>
+                                <b>Here’s How Recurring Payments Work:</b>
+                            </p>
+                            <p align="justify">
+                                You authorize regularly scheduled charges to your checking or savings account. You will be charged the amount indicated above
+                                each billing period. A receipt for each payment will be emailed to you. You agree that no
+                                prior-notification will be provided unless the date or amount changes, in which case you
+                                will receive notice from Aqua Bright Water, LLC at least 10 days prior to the payment being
+                                collected. You understand that this authorization will remain in effect until you cancel
+                                it in writing, and you agree to notify Aqua Bright Water, LLC in writing of any changes in
+                                my account information or termination of this authorization at least 15 days prior to the
+                                next billing date. If the above noted periodic payment dates fall on a weekend or holiday,
+                                you understand that the payment may be executed on the next business day. You understand
+                                that because this is an electronic transaction, these funds may be withdrawn from my account
+                                as soon as the above noted periodic transaction dates. In the case of an ACH Transaction
+                                being rejected for Non Sufficient Funds (NSF) You understand that Aqua Bright Water, LLC
+                                may at its discretion attempt to process the charge again within 30 days, and agree to an
+                                additional $25.00 charge for each attempt returned NSF which will be initiated as a separate
+                                transaction from the authorized recurring payment. You acknowledge that the origination of
+                                ACH transactions to your account must comply with the provisions of U.S. law.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="1|0" width="100%" style="border-collapse: collapse;">
+                <tbody>
+                    <tr>
+                        <td align="center">
+                            <b>PLEASE READ THE TERMS AND CONDITIONS ON THE FRONT AND BACK OF THIS AGREEMENT BEFORE SIGNING.</b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+
+    </html>
+</apex:page>

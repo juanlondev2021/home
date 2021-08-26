@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Good__c</fullName>
+    <externalId>false</externalId>
+    <label>No Good</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Rehash_Status__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No money/motivation</fullName>
+                <default>false</default>
+                <label>No money/motivation</label>
+            </value>
+            <value>
+                <fullName>No interest</fullName>
+                <default>false</default>
+                <label>No interest</label>
+            </value>
+            <value>
+                <fullName>In contract</fullName>
+                <default>false</default>
+                <label>In contract</label>
+            </value>
+            <value>
+                <fullName>Has a system</fullName>
+                <default>false</default>
+                <label>Has a system</label>
+            </value>
+            <value>
+                <fullName>Window repair</fullName>
+                <default>false</default>
+                <label>Window repair</label>
+            </value>
+            <value>
+                <fullName>Wants product we don’t carry</fullName>
+                <default>false</default>
+                <label>Wants product we don’t carry</label>
+            </value>
+            <value>
+                <fullName>No showed multiple times</fullName>
+                <default>false</default>
+                <label>No showed multiple times</label>
+            </value>
+            <value>
+                <fullName>Language barrier</fullName>
+                <default>false</default>
+                <label>Language barrier</label>
+            </value>
+            <value>
+                <fullName>Duplicate lead</fullName>
+                <default>false</default>
+                <label>Duplicate lead</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>No money/motivation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>No interest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>In contract</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Has a system</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Window repair</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Wants product we don’t carry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>No showed multiple times</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Language barrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Duplicate lead</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

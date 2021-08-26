@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Water_Treatment_Service_Running</fullName>
+    <columns>NAME</columns>
+    <columns>Appt_Start_Date__c</columns>
+    <columns>Appt_End_Date__c</columns>
+    <columns>Sales_Rep__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Service__c.Water</value>
+    </filters>
+    <filters>
+        <field>Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </filters>
+    <filters>
+        <field>Appt_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Dispatched</value>
+    </filters>
+    <label>Water Treatment Service Running</label>
+    <sharedTo>
+        <role>Home_Automation_Admin</role>
+        <role>Office_Admin</role>
+        <role>Water_Admin</role>
+    </sharedTo>
+</ListView>

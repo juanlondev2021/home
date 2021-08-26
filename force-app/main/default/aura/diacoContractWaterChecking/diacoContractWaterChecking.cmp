@@ -1,0 +1,202 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water checking payment method
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component > 
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Bank_Name" type="String" />
+    <aura:attribute name="Bank_Account_Type" type="String" />
+    <aura:attribute name="Bank_Account_Name" type="String" />
+    <aura:attribute name="Bank_Account_Number_Encrypted" type="String" />
+    <aura:attribute name="Routing_Number" type="String" />
+    <aura:attribute name="Account_Number_Checking" type="String" />
+    <aura:attribute name="HomeServices" type="Home_Services__c" />
+    <aura:attribute name="options" type="String[]" default="Checking,Savings,Business Checking"/>
+    
+    <aura:attribute name="isEdit" type="Boolean" default="False"/>
+    
+    <aura:handler event="force:showToast" action="{!c.onRefresh}"/>
+    
+    <aura:attribute name="toService" type="Boolean" default="False"/>
+    
+    <aura:method name="validityCheck" action="{!c.validityCheck}">
+        <aura:attribute name="isValid" type="boolean" default="false" />
+    </aura:method>
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem>
+            <lightning:icon iconName="custom:custom17" alternativeText="My Expenses"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Information About</h1>
+                <h2 class="slds-text-heading--medium">Checking</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <div class="slds-form slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                <fieldset class="slds-box slds-theme--default ">
+                    <div class="slds-form slds-grid slds-wrap">
+                        <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Home_Services__c">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-p-horizontal_small">
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <aura:if isTrue="{!v.toService}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             name="Bank Name"
+                                                             label="Bank Name"
+                                                             required="true"
+                                                             value="{!v.HomeServices.Bank_Name_Service__c}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:input aura:id="CustomerInfo"
+                                                                 name="Bank Name"
+                                                                 label="Bank Name"
+                                                                 required="true"
+                                                                 value="{!v.HomeServices.Bank_Name__c}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <aura:if isTrue="{!v.toService}">
+                                                <lightning:outputField fieldName="Bank_Name_Service__c" />
+                                                <aura:set attribute="else">
+                                                    <lightning:outputField fieldName="Bank_Name__c" />
+                                                </aura:set>
+                                            </aura:if>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-m-bottom--small">
+                                    <lightning:buttonIcon iconName="{!v.isEdit ? 'utility:close' : 'utility:edit'}" class="slds-col_bump-left" iconClass="slds-button__icon_hint" variant="bare" alternativeText="Edit Cheking" onclick="{!c.editRecord}"/>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-horizontal_small">
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <aura:if isTrue="{!v.toService}">
+                                            <lightning:select name="Bank Account Type" aura:id="CustomerInfo"
+                                                              label="Bank Account Type"
+                                                              required="true"
+                                                              value="{!v.HomeServices.Bank_Account_Type_Service__c}">
+                                                <option value="">choose one...</option>
+                                                <aura:iteration items="{!v.options}" var="Account">
+                                                    <option value="{!Account}">{!Account}</option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                            <aura:set attribute="else">
+                                                <lightning:select name="Bank Account Type" aura:id="CustomerInfo"
+                                                                  label="Bank Account Type"
+                                                                  required="true"
+                                                                  value="{!v.HomeServices.Bank_Account_Type__c}">
+                                                    <option value="">choose one...</option>
+                                                    <aura:iteration items="{!v.options}" var="Account">
+                                                        <option value="{!Account}">{!Account}</option>
+                                                    </aura:iteration>
+                                                </lightning:select>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <lightning:outputField fieldName="{!v.toService ? 'Bank_Account_Type_Service__c' :'Bank_Account_Type__c'}"/>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                                <div class="slds-col slds-size_12-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-horizontal_small">
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <aura:if isTrue="{!v.toService}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             name="Bank Account Name" 
+                                                             label="Bank Account Name"
+                                                             required="true"
+                                                             value="{!v.HomeServices.Bank_Account_Name_Service__c}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:input aura:id="CustomerInfo"
+                                                                 name="Bank Account Name" 
+                                                                 label="Bank Account Name"
+                                                                 required="true"
+                                                                 value="{!v.HomeServices.Bank_Account_Name__c}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <lightning:outputField fieldName="{!v.toService ? 'Bank_Account_Name_Service__c' : 'Bank_Account_Name__c'}" />
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                                
+                                <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-horizontal_small">
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <aura:if isTrue="{!v.toService}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             name="Bank Account Number" 
+                                                             label="Bank Account Number"
+                                                             required="true"
+                                                             value="{!v.HomeServices.Bank_Account_Number_Service__c}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:input aura:id="CustomerInfo"
+                                                                 name="Bank Account Number" 
+                                                                 label="Bank Account Number"
+                                                                 required="true"
+                                                                 value="{!v.HomeServices.Bank_Account_Number_Encrypted__c}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <lightning:outputField fieldName="{!v.toService ? 'Bank_Account_Number_Service__c' : 'Bank_Account_Number_Encrypted__c'}" />
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_small">
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <aura:if isTrue="{!v.toService}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             name="Routing Number" 
+                                                             label="Routing Number"
+                                                             required="true"
+                                                             value="{!v.HomeServices.Routing_Number_New__c}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:input aura:id="CustomerInfo"
+                                                                 name="Routing Number" 
+                                                                 label="Routing Number"
+                                                                 required="true"
+                                                                 value="{!v.HomeServices.Routing_Number__c}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <lightning:outputField fieldName="{!v.toService ? 'Routing_Number_New__c' : 'Routing_Number__c'}" />
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_small">
+                                    <aura:if isTrue="{!v.isEdit}">
+                                        <aura:if isTrue="{!v.toService}">
+                                            <lightning:input aura:id="CustomerInfo"
+                                                             name="Account Number Checking" 
+                                                             label="Account Number Checking"
+                                                             required="true"
+                                                             value="{!v.HomeServices.Account_Number_Checking_Service__c}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:input aura:id="CustomerInfo"
+                                                                 name="Account Number Checking" 
+                                                                 label="Account Number Checking"
+                                                                 required="true"
+                                                                 value="{!v.HomeServices.Account_Number_Checking__c}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <lightning:outputField fieldName="{!v.toService ? 'Account_Number_Checking_Service__c' : 'Account_Number_Checking__c'}" />
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </lightning:recordViewForm>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</aura:component>

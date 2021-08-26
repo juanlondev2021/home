@@ -1,0 +1,214 @@
+<!--
+
+ Diaco
+ @author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering home automation contract tabs
+     
+ Changes (Version)
+ _________________________________________
+
+      No.		Date			Author					Description
+      ____	__________      __________________      _____________________________________
+@version	1.0		12/03/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+@version	1.1		18/06/2019		John Hernandez (JH)	 CheckBox Group for avoiding use of the dual list box in mobile(not displayed properly), Also new controller.
+@version	1.1		15/07/2020		John Hernandez (JH)	 Event for tab completion.
+
+-->
+
+<aura:component controller="diacoContractHAServicePackageController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="MonthlySecurityServices" type="String[]" default="Monitoring,Alarm Signal Verification,Service,Inspection,Other"/>
+    <aura:attribute name="AlarmCommunication"  type="String[]" default="Fire,Communication Failure,Power Failure,Burgalary,Panic,PERS,CO,Water Flow,Tempeture,Test,Trouble"/>
+    <aura:attribute name="CommunicationBy"  type="String[]" default="POTS,Digital,Cellular,Internet,VoIP"/>
+    <aura:attribute name="Alarmcom"  type="String[]" default="Basic Interactive,Advanced Interactive,Interactive Gold"/>
+    <aura:attribute name="Commercial" type="String[]" default="yes, no"/>
+    <aura:attribute name="AlarmcomAdditionalServices"  type="String[]" default="Weather to the Panel,Thermostat Service,Pro Video Plus 5-8 Cameras,Severe Weather Alerts,Lights Service,Doorbell Camera,Garage Door Control,LiftMaster Integration,250 MB Extra Video Storage,Pro Video 1-4 Cameras,Two-Way Voice,Lock Service"/>
+    <!--Update with multi-select checkbox for mobile views-->
+    <aura:attribute name="optionsMonthlyServices" type="List" default="[
+                                                                       {'label': 'Monitoring', 'value': 'Monitoring'},
+                                                                       {'label': 'Alarm Signal Verification', 'value': 'Alarm Signal Verification'},
+                                                                       {'label': 'Service', 'value': 'Service'},
+                                                                       {'label': 'Inspection', 'value': 'Inspection'},
+                                                                       {'label': 'Other', 'value': 'Other'}
+                                                                       ]"/>
+    <aura:attribute name="valuesMonthlyServices" type="List" />
+    <aura:attribute name="optionsCommunicationBy" type="List" default="[
+                                                                       {'label': 'POTS', 'value': 'POTS'},
+                                                                       {'label': 'Digital', 'value': 'Digital'},
+                                                                       {'label': 'Cellular', 'value': 'Cellular'},
+                                                                       {'label': 'Radio', 'value': 'Radio'},
+                                                                       {'label': 'VoIP', 'value': 'VoIP'},
+                                                                       {'label': 'Internet', 'value': 'Internet'}
+                                                                       ]"/>
+    <aura:attribute name="valuesCommunicationBy" type="List" />
+    
+     <aura:registerEvent name="tabSaved" type="c:diacoTabCompletionEvent"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:task" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Service List</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    
+                    <aura:if isTrue="{!$Browser.formFactor=='DESKTOP'}">
+                        <lightning:recordEditForm aura:id="recordViewForm"
+                                                  onsuccess="{!c.handleSuccess}"
+                                                  onerror="{!c.handleOnError}"
+                                                  recordId="{!v.recordId}"
+                                                  objectApiName="Home_Services__c"
+                                                  >
+                            <lightning:messages /> 
+                            <div class="slds-form slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 padding-right">
+                                    <lightning:inputField fieldName="Monthly_Security_Services__c" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 padding-right">
+                                    <lightning:inputField fieldName="Communication_By__c" />
+                                </div>
+                            </div>
+                            <lightning:button variant="brand" label="{!v._label}" 
+                                              class="slds-m-top--medium slds-align_absolute-center" 
+                                              title="{!v._label}" 
+                                              type="submit" />
+                        </lightning:recordEditForm>
+                    </aura:if>
+                    
+                    
+                    <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <lightning:checkboxGroup name="Monthly Security Services"
+                                                         label="Monthly Security Services"
+                                                         options="{! v.optionsMonthlyServices }"
+                                                         value="{! v.valuesMonthlyServices }"
+                                                         onchange="{! c.handleChangeMontlyService }"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <lightning:checkboxGroup name="Communication By"
+                                                         label="Communication By"
+                                                         options="{! v.optionsCommunicationBy }"
+                                                         value="{! v.valuesCommunicationBy }"
+                                                         onchange="{! c.handleChangeCommunicationBy }"/>
+                            </div>
+                            <lightning:button variant="brand" label="{!v._label}" 
+                                              class="slds-m-top-medium slds-align_absolute-center" 
+                                              title="{!v._label}" 
+                                              onclick="{! c.saveInformation}" />
+                        </div>
+                        
+                    </aura:if>
+                    
+                    
+                    <!--form class="slds-form-stacked">
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Monthly Security Services" aura:id="CustomerInfo"
+                                                      label="Monthly Security Services"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">  <!-Esto se deja quieto aun porque no se sabe que objeto se va a utilizar>
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.MonthlySecurityServices}" var="Monthly">
+                                            <option value="{!Monthly}">{!Monthly}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Alarm Communication" aura:id="CustomerInfo"
+                                                      label="Alarm Communication"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">  
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.AlarmCommunication}" var="Alarm">
+                                            <option value="{!Alarm}">{!Alarm}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Communication By" aura:id="CustomerInfo"
+                                                      label="Communication By"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">  
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.CommunicationBy}" var="Communication">
+                                            <option value="{!Communication}">{!Communication}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Alarm.com" aura:id="CustomerInfo"
+                                                      label="Alarm.com"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">  
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.Alarmcom}" var="Alarmc">
+                                            <option value="{!Alarmc}">{!Alarmc}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Commercial" aura:id="CustomerInfo"
+                                                      label="Commercial"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">  
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.Commercial}" var="Commercial">
+                                            <option value="{!Commercial}">{!Commercial}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Alarm.com Additional Services" aura:id="CustomerInfo"
+                                                      label="Alarm.com Additional Services"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">  
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.AlarmcomAdditionalServices}" var="Additional">
+                                            <option value="{!Additional}">{!Additional}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <lightning:button variant="brand" label="{!v._label}" 
+                                              class="slds-m-top-medium slds-align_absolute-center" 
+                                              title="{!v._label}" 
+                                              onclick="{! c.saveInformation}" />
+                        </div>
+                    </form-->
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

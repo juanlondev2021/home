@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SoapMonthlyExpensesInbound__c</fullName>
+    <description>Soap Monthly Expenses?</description>
+    <externalId>false</externalId>
+    <label>Soap Monthly Expenses?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>$20.00 - $30.00</fullName>
+                <default>false</default>
+                <label>$20.00 - $30.00</label>
+            </value>
+            <value>
+                <fullName>$30.00 - $40.00</fullName>
+                <default>false</default>
+                <label>$30.00 - $40.00</label>
+            </value>
+            <value>
+                <fullName>More than $40.00</fullName>
+                <default>false</default>
+                <label>More than $40.00</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

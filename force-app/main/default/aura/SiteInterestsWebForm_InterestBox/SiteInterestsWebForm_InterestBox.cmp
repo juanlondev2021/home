@@ -1,0 +1,43 @@
+<!--
+* Diaco
+* Project:			Interest Manager
+* Description:		CheckBox Interest
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		23/09/2020		Jull Quintero           Initial implementation of the class.
+-->
+<aura:component>
+    <aura:attribute name="name" type="String" default="" required="true" />
+    <aura:attribute name="checked" type="Boolean" default="false" required="true" />
+
+    <aura:registerEvent name="interestCheckBox" type="c:DiacoEventInterestsWebForm" />
+    
+    <fieldset class="slds-form-element">
+        <div class="slds-form-element__control">
+            <div class="slds-visual-picker slds-visual-picker_small">
+                <input type="checkbox" id="{!v.name}" value="{!v.name}" name="options" checked="{!v.checked}" onchange="{!c.handlerCheck}" />
+                <label for="{!v.name}">
+                    <span class="slds-visual-picker__figure slds-visual-picker__icon slds-align_absolute-center">
+                        <span class="slds-is-selected">
+                            <span class="slds-icon_container">
+                                <lightning:icon iconName="action:check" alternativeText="{! v.name + ' checked'}" title="{! v.name + ' checked'}" />
+                            </span>
+                        </span>
+                        <span class="slds-is-not-selected">
+                            <span class="slds-icon_container">
+                                <lightning:icon iconName="standard:account" alternativeText="{! v.name }" title="{! v.name }" />
+                            </span>
+                        </span>
+                    </span>
+                    <span class="slds-visual-picker__body">
+                        <span class="slds-text-title">{!v.name}</span>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </fieldset>
+
+</aura:component>

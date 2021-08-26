@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quality_Control</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Home_Services_Status__c</columns>
+    <columns>City__c</columns>
+    <columns>Sales_Rep_Personnel__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Appointment_Date_Time__c</field>
+        <operation>equals</operation>
+        <value>YESTERDAY</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>notEqual</operation>
+        <value>Closed Won,Closed Won/Canceled</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Home_Services__c.Home_Automation_Sales,Home_Services__c.Solar_Sales,Home_Services__c.Water_Treatment_Sales,012410000013G9S</value>
+    </filters>
+    <filters>
+        <field>Rehash_Status__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Sales_Rep_Personnel__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>Quality Control</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+        <role>Office_Manager</role>
+        <role>Reschedule_Rehash</role>
+    </sharedTo>
+</ListView>

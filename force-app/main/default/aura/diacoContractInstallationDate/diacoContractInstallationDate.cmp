@@ -1,0 +1,84 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water contract installation date view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component controller="DiacoWaterContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="_salesR" type="String"/>
+    <aura:attribute name="users" type="User[]"/>
+    <aura:attribute name="options" type="String[]"/>
+
+    <aura:attribute name="isLoad" type="Boolean" default="true" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+
+    <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Installation Date And Sales Rep</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked">
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_5-of-12 slds-align_absolute-center">
+                                    <lightning:select aura:id="select" name="select" 
+                                                      label="Select a Sales Rep" 
+                                                      value="{!v._salesR}" 
+                                                      onchange="{! c.onChange }"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.options}" var="option">
+                                            <option value="{!option}">{!option}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_5-of-12 slds-align_absolute-center">
+                                    <lightning:input type="datetime" aura:id="CustomerInfo"
+                                                     name="IntallationDate" 
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 "
+                                                     label="Intallation Date"
+                                                     value="{!v.Home_Services.Requested_Install_Date__c}"
+                                                     onchange="{! c.changeStatus }"/>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <lightning:button variant="brand"
+                                          class="slds-m-top--medium slds-align_absolute-center" 
+                                          label="{!v._label == 'Saving...' ? v._label : 'Save'}" 
+                                          title="{!v._label == 'Saving...' ? v._label : 'Save'}"  
+                                          disabled="{!v._label == 'Saving...'}"
+                                          onclick="{! c.saveInformation}" />
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

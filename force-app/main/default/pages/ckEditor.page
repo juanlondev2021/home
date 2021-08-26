@@ -1,0 +1,13 @@
+<apex:page standardController="DTSQuestion__c">
+    
+    <apex:form >
+        <apex:commandButton action="{!save}" value="Save and return to record"/>
+        <apex:includescript value="{!URLFOR($Resource.CKEditor, 'ckeditor/ckeditor.js')}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!DTSQuestion__c.PopupCluster__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!DTSQuestion__c.PopupPostCluster__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!DTSQuestion__c.ClusterSection3__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!DTSQuestion__c.ClusterSection4__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!DTSQuestion__c.ExpandableSection__c}" />
+    </apex:form>
+    
+</apex:page>

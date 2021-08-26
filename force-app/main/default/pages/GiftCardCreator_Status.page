@@ -1,0 +1,46 @@
+<apex:page controller="GiftCardCreator_StatusCtrl" showHeader="false" title="Gift Card Status">
+    <style>
+         .progressBar{
+            background-color: #f8f8f8;
+            border:1px solid #DDDDDD;
+            height: 19px;
+            width: 500px;
+            -moz-border-radius: 20px; 
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
+            padding: 5px;
+        }
+        .progress{
+            background-color: #F7B64B;
+            border:1px solid #E78F08;
+            height: 100%;
+            margin: -1px;
+            text-align: center;
+            -moz-border-radius: 10px; 
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            line-height: 18px;
+        }
+        body {
+            background-image: url("http://www.wallyear.com/wp-content/uploads/2014/06/neon-green-backgrounds-8.jpg");
+        }
+    </style>
+    <apex:form >
+        <br/><apex:pageMessage summary="Your request is being processed,you will be automatically redirected to the parent gift card order once completed." 
+        severity="info" id="opanel1" strength="2"/><br/>
+        <center>
+            <apex:outputPanel id="iStatus">
+                 <apex:outputpanel id="innerstatus">
+                     <span style="color:red;font-weight:bold;padding-left:5px;"> {!JobStatus}...</span>  
+                     <img src="/img/loading.gif" alt=" " />
+                     <div class="progressBar">
+                           <div class="progress" style="width: {!percentComplete}%;">
+                             {!percentComplete}% Completed
+                         </div>
+                    </div>
+                 </apex:outputpanel>
+                <apex:actionPoller action="{!incrementCounter}" rerender="iStatus,innerstatus" interval="5" enabled="{!enabled}" /> 
+             </apex:outputPanel>
+         </center>
+    </apex:form>
+</apex:page>

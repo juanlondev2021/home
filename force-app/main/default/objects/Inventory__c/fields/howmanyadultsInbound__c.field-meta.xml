@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>howmanyadultsInbound__c</fullName>
+    <description>• How many adults are there in the home?</description>
+    <externalId>false</externalId>
+    <label>how many adults are there in the home?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1 Adult.</fullName>
+                <default>false</default>
+                <label>1 Adult.</label>
+            </value>
+            <value>
+                <fullName>2 Adults.</fullName>
+                <default>false</default>
+                <label>2 Adults.</label>
+            </value>
+            <value>
+                <fullName>2-3 Adults.</fullName>
+                <default>false</default>
+                <label>2-3 Adults.</label>
+            </value>
+            <value>
+                <fullName>4+ Adults.</fullName>
+                <default>false</default>
+                <label>4+ Adults.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

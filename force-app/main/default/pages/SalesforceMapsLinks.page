@@ -1,0 +1,84 @@
+<!--
+/**
+ * Diaco
+ * @author             Fabian Pineda href=<fpineda@diaco.us>
+ * Project:            Salesforce Maps Links
+ * Description:        Displays links to an Account's billing location/address for different map apps.
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    11/11/2020        Fabian Pineda (FP)      Initial version.
+ **/
+-->
+<apex:page readOnly="true" controller="SalesforceMapsLinksController" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>{!IF(ISBLANK(accountName), 'Account', accountName)} - External Maps</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <apex:slds />
+        </head>
+        <body>
+            <div class="slds-scope">
+                <div class="slds-page-header" role="banner">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <p class="slds-text-title_caps slds-line-height_reset">Account</p>
+                            <h1 class="slds-page-header__title slds-truncate" title="{!IF(ISBLANK(accountName), 'Error', accountName)}">{!IF(ISBLANK(accountName), 'Error', accountName)}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-container slds-text-align_center">
+                    <!-- Record not available -->
+                    <apex:outputPanel layout="block" styleClass="slds-m-top_medium" rendered="{!NOT(ISBLANK(errorMessage))}">
+                        <p>{!errorMessage}</p>
+                    </apex:outputPanel>
+                    <!-- /Record not available -->
+
+                    <!-- Record available -->
+                    <apex:outputPanel layout="block" styleClass="slds-grid slds-wrap" rendered="{!ISBLANK(errorMessage)}">
+                        <section class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-m-top_medium">
+                            <h2 class="slds-text-heading_medium slds-m-bottom_medium">View Location</h2>
+
+                            <!-- Latitude and/or Longitude not available -->
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(latLngErrorMessage))}">
+                                <p>{!latLngErrorMessage}</p>
+                            </apex:outputPanel>
+                            <!-- /Latitude and/or Longitude not available -->
+
+                            <!-- Latitude and Longitude available -->
+                            <apex:outputPanel layout="block" rendered="{!ISBLANK(latLngErrorMessage)}">
+                                <div><a href="{!wazeLatLngLink}" target="_blank" class="slds-button slds-button_neutral slds-m-bottom_small">Launch Waze</a></div>
+                                <div><a href="{!googleMapsLatLngLink}" target="_blank" class="slds-button slds-button_neutral slds-m-bottom_small">Launch Google Maps</a></div>
+                                <div><a href="{!appleMapsLatLngLink}" target="_blank" class="slds-button slds-button_neutral slds-m-bottom_small">Launch Apple Maps</a></div>
+                            </apex:outputPanel>
+                            <!-- /Latitude and Longitude available -->
+                        </section>
+                
+                        <section class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-m-top_medium">
+                            <h2 class="slds-text-heading_medium slds-m-bottom_medium">Search Address</h2>
+
+                            <!-- Address not fully available -->
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(addressErrorMessage))}">
+                                <p>{!addressErrorMessage}</p>
+                            </apex:outputPanel>
+                            <!-- /Address not fully available -->
+
+                            <!-- Address fully available -->
+                            <apex:outputPanel layout="block" rendered="{!ISBLANK(addressErrorMessage)}">
+                                <div><a href="{!wazeAddressLink}" target="_blank" class="slds-button slds-button_neutral slds-m-bottom_small">Launch Waze</a></div>
+                                <div><a href="{!googleMapsAddressLink}" target="_blank" class="slds-button slds-button_neutral slds-m-bottom_small">Launch Google Maps</a></div>
+                                <div><a href="{!appleMapsAddressLink}" target="_blank" class="slds-button slds-button_neutral slds-m-bottom_small">Launch Apple Maps</a></div>
+                            </apex:outputPanel>
+                            <!-- /Address fully available -->
+                        </section>
+                    </apex:outputPanel>
+                    <!-- /Record available -->
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

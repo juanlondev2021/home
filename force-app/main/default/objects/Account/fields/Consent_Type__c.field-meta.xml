@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Consent Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Verbal</fullName>
+                <default>false</default>
+                <label>Verbal</label>
+            </value>
+            <value>
+                <fullName>Website</fullName>
+                <default>false</default>
+                <label>Website</label>
+            </value>
+            <value>
+                <fullName>Verbal &amp; Web</fullName>
+                <default>false</default>
+                <label>Verbal &amp; Web</label>
+            </value>
+            <value>
+                <fullName>SMS</fullName>
+                <default>false</default>
+                <label>SMS</label>
+            </value>
+            <value>
+                <fullName>Web</fullName>
+                <default>false</default>
+                <label>Web</label>
+            </value>
+            <value>
+                <fullName>Canvass</fullName>
+                <default>false</default>
+                <label>Canvass</label>
+            </value>
+            <value>
+                <fullName>IB Agents</fullName>
+                <default>false</default>
+                <label>IB Agents</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

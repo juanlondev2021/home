@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Home_Automation_To_Confirm1</fullName>
+    <columns>CREATED_DATE</columns>
+    <columns>Confirmation_Call_Count__c</columns>
+    <columns>Phone_Number_1__c</columns>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Home_Services__c.Home_Automation_Sales</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Scheduled,Confirmation</value>
+    </filters>
+    <filters>
+        <field>Appointment_Date_Time__c</field>
+        <operation>lessOrEqual</operation>
+        <value>TOMORROW</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>notContain</operation>
+        <value>Test</value>
+    </filters>
+    <label>001 Home Automation To Confirm</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+    </sharedTo>
+</ListView>

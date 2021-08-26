@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hot_Leads_Tier_1_Date__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( OR(
+        ISNULL(Respond_Date__c),
+        PersonDoNotCall = TRUE,
+        PersonHasOptedOutOfEmail ),
+    NUll,
+    Respond_Date__c + 3)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Hot Leads Tier 1 Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

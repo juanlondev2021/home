@@ -1,0 +1,11 @@
+.THIS {
+    
+}
+
+.THIS .slds-modal__content{
+    overflow: initial;
+}
+
+.THIS .not-rendered {
+    display: none;
+}

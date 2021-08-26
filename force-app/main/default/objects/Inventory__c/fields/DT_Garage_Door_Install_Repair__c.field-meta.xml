@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Garage_Door_Install_Repair__c</fullName>
+    <description>(Garage Doors)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Garage Doors)</inlineHelpText>
+    <label>Garage Door Install / Repair</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Close</fullName>
+                <default>false</default>
+                <label>Close</label>
+            </value>
+            <value>
+                <fullName>Garage Door - Replacement</fullName>
+                <default>false</default>
+                <label>Garage Door - Replacement</label>
+            </value>
+            <value>
+                <fullName>Garage Door - Repair</fullName>
+                <default>false</default>
+                <label>Garage Door - Repair</label>
+            </value>
+            <value>
+                <fullName>Garage Door - Insulation</fullName>
+                <default>false</default>
+                <label>Garage Door - Insulation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,116 @@
+<!--
+* Diaco
+* @author 			
+* Project:		    Appointment Recordtype Set Up
+* Description:		Setting Interest - Appointment
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		12/08/2020		Jull Quintero     		Initial implementation of the class.
+-->
+
+<aura:component controller="DiacoAppointmentRecordSetUp_ctr">
+
+    <aura:method name="init" action="{!c.doInit}" />  
+    <aura:attribute name="loaded" type="Boolean" default="false"/>
+
+    <!-- PICKLIST -->
+    <aura:attribute name="accountinterest" type="List" />
+    <aura:attribute name="recordTypeAppointment" type="List" />
+
+    <!-- DATA TABLE -->
+    <aura:attribute access="private" name="data" type="List" default="[]"/>
+    <aura:attribute access="private" name="columns" type="List" />
+    <aura:attribute access="private" name="draftValues" type="List" default="[]"/>   
+
+    <!-- MODAL ORDER INTERESTS-->
+    <aura:attribute name="modalOrderInterests" type="Boolean" />
+
+    <!-- MODAL DELETE CONFIRMATION-->
+    <aura:attribute name="openDeleteInterest" type="Boolean" default="false"/>
+    <aura:attribute name="deleteRow" type="Appointment_RecordType_mtd__c[]" />
+
+    <!-- MODAL UPDATE INTEREST-->
+    <aura:attribute name="openUpdateInterest" type="Boolean" default="false"/>
+    <aura:attribute name="updateRow" type="Appointment_RecordType_mtd__c" />
+
+    <!-- EVENT DELETE Appointment Recordtype-->
+    <aura:handler name="submit" event="c:diacoEventModalConfirmation" action="{! c.handlerDeleteInterest }" />    
+
+    <!-- EVENT DELETE  Appointment-->
+    <aura:registerEvent name="deleteAppointmentMtd" type="c:DiacoEventAppointmentRecordType_SetUp"/>
+
+    <!-- EVENT UPDATE  Appointment-->
+    <aura:registerEvent name="updateAppointmentMtd" type="c:DiacoEventAppointmentRecordType_SetUp"/>
+
+    <div class="slds-box slds-card slds-m-bottom_x-large">
+
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner />
+        </aura:if>
+
+        <!-- HEADER -->
+		<lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:relationship" />
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header ">
+                    <h1 class="slds-text-heading--label"></h1>
+                    <h2 class="slds-text-heading--medium">Interest - Appointment</h2>
+                </div>
+            </lightning:layoutItem>
+
+            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                <lightning:button label="Order" iconName="utility:sort" iconPosition="left"  onclick="{! c.handlerModalOderInterests }" />
+            </lightning:layoutItem>
+
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:button label="New" iconName="utility:new" iconPosition="left"  onclick="{! c.handlerModalCreate }" />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <!-- /HEADER -->
+
+        <!--TABLE-->
+        <aura:if isTrue="{! v.data.length > 0 }">
+            <lightning:datatable    minColumnWidth="100"
+                                    maxColumnWidth='1000'
+                                    keyField="Id"
+                                    data="{! v.data }"
+                                    columns="{! v.columns }"     
+                                    onrowaction="{! c.handleRowAction }"
+                                    draftValues='{! v.draftValues }'
+                                    onsave="{! c.handlerSaveEdition }" 
+                                    hideCheckboxColumn="true" /> 
+        </aura:if>
+        <!--/TABLE-->
+    </div>
+
+    <!-- MODAL UPDATE -->
+    <c:DiacoAppointmentRecordtype_InterestEdit  open="{!v.openUpdateInterest}"
+                                                data="{!v.data}"
+                                                appointment_mtd="{!v.updateRow}"
+                                                accountinterest="{!v.accountinterest}"
+                                                recordTypeAppointment="{!v.recordTypeAppointment}"/>
+    <!-- /MODAL UPDATE -->
+
+    <!-- MODAL ORDER -->
+    <c:DiacoAppointmentRecordType_OrderInterests    open='{! v.modalOrderInterests }' 
+                                                    appointments_mtd = '{! v.data }' />
+    <!-- MODAL ORDER -->
+
+    <!-- MODAL CONFIRMATION DELETE -->
+    <c:diacoModalConfirmation   aura:id="deleteInterest"
+                                open="{!v.openDeleteInterest}" 
+                                title="Delete" 
+                                messague="Do you neet a delete this record ?" 
+                                labelCancel="No"
+                                labelSubmit="Yes"
+                                icon="action:delete" />
+    <!-- MODAL CONFIRMATION DELETE -->
+</aura:component>

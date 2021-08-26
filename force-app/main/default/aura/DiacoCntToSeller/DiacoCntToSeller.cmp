@@ -1,0 +1,122 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering contracts
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		07/06/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component controller="DiacoCmpContractController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="HSrecordId" type="String" />
+    <aura:attribute name="HSId" type="String" />
+    <aura:attribute name="value" type="String" />
+    <aura:attribute name="recordTypes" type="RecordType[]" />
+    <aura:attribute name="Home_Services" type="Home_Services__C[]" />
+    <aura:attribute name="empty" type="Boolean" default="true" />
+    <aura:attribute name="Home_Service" type="Home_Services__C" default="{ 'sobjectType': 'Home_Services__C',
+                                                                         'Name': '',
+                                                                         'RecordTypeId': '',
+                                                                         'Account__c': '',
+                                                                         'ApptSetter__c': ''}" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="options" type="List"/>
+    
+    
+    
+    <!--fieldset class="slds-box slds-theme+-default ">
+        <lightning:layout class="slds-page-header slds-page-header+-object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:contract" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading+-label">Home Services</h1>
+                    <h2 class="slds-text-heading+-medium">Contracts</h2>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                <lightning:buttonIcon iconName="utility:add"  
+                                      variant="border-filled" 
+                                      alternativeText="Add Home Service" 
+                                      onclick="{! c.openModel }"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset-->
+    <aura:if isTrue="{!v.HSId == '' }">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_8-of-12 slds-align_absolute-center">
+            <ui:message title="Information" severity="info" closable="true">
+                There aren't contracts to show, add a home service.
+            </ui:message>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!and(v.HSId != '', v.HSId != undefined)}">
+        <c:diacoContract recordId="{!v.HSId}"/>
+    </aura:if>
+    <!--aura:if isTrue="{!v.empty }">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_8-of-12 slds-align_absolute-center">
+            <ui:message title="Information" severity="info" closable="true">
+                There aren't contracts to show, add a home service now! click on add button to create one.
+            </ui:message>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.empty == false}">
+        <lightning:tabset variant="scoped">
+            <aura:iteration items="{!v.Home_Services}" var="homeService">
+                <lightning:tab label="{! homeService.RecordType.Name }">
+                    <c:diacoContract recordId="{! homeService.Id}"/>
+                </lightning:tab>
+            </aura:iteration>
+        </lightning:tabset>
+    </aura:if-->
+    <div class="slds-m-around_xx-large">
+        <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+        <aura:if isTrue="{!v.isOpen}">
+            <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Home Service</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:radioGroup name="recordType"
+                                              label="Select An Industry:"
+                                              options="{! v.options }"
+                                              value="{! v.Home_Service.RecordTypeId }"
+                                              class="slds-m-top--medium slds-align_absolute-center"
+                                              type="radio"/>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModel }"/>
+                        <lightning:button variant="brand" 
+                                          label="New"
+                                          title="Create"
+                                          onclick="{! c.handleClick }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+        </aura:if>
+    </div>
+    
+</aura:component>

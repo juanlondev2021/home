@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OB_Campaign_Primary_Contact_Email__c</fullName>
+    <description>OB Campaign primary contact email address.  Used with automation configuration.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>OB Campaign primary contact email address.</inlineHelpText>
+    <label>Email</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Email</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inside_Outside_Sales</fullName>
+    <active>true</active>
+    <businessProcess>Case Support Process</businessProcess>
+    <description>Portal, Docusing, Salesforce1, Reporting &amp; Dashboards</description>
+    <label>Inside &amp; Outside Sales</label>
+    <picklistValues>
+        <picklist>Origin</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Self</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason</picklist>
+        <values>
+            <fullName>Complex functionality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Existing problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instructions not clear</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User didn%27t attend training</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Type__c</picklist>
+        <values>
+            <fullName>Billing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bright pattern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Changes to Art Work</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clearview</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Products%2FServices</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DNC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Data Issues</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Driver Issues</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Headsets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hot Leads</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Media - Routes to Travis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mouse%2FKey Board%2FMonitors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Art work</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Notepad</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Police Officers%2FPublic Relations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Portal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Printers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proofs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Red Line Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request for docusign</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Status Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surveys</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telemarketing%2FLead Qual</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Accounts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dashboard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Docusign</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leads</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Products</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce1</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

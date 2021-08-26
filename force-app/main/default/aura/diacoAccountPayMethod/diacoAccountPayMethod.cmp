@@ -1,0 +1,88 @@
+<aura:component controller="DiacoAccountPaymentMethod" 
+                			implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,lightning:isUrlAddressable"
+                			access="global">
+    <aura:attribute name="recordId" type="String" default='0016w000002zuwTAAQ'/>
+    <aura:attribute name="PayId" type="String" />
+    <aura:attribute name="contentModal" type="Boolean" default="false"/>
+    <aura:attribute name="deleteModal" type="Boolean" default="false"/>    
+    <aura:attribute name="header" type="String"/>
+    <aura:attribute name="body" type="Object"/>
+    
+    <aura:dependency resource="c:diacoAccountPayMethodView"/>
+    <aura:dependency resource="c:diacoAccountPayMethodCreate"/>
+    
+    <aura:attribute name="frequency" type="String" />
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="showACH" type="Boolean" default="true" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="AccPayMethod" event="c:diacoAccountPayMethodEvent" action="{!c.handleCreate}"/>
+    
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="data" type="List" />
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses" />
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Information About</h1>
+                <h2 class="slds-text-heading--medium">Payment Methods</h2>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+
+            <lightning:buttonIcon iconName="utility:add" variant="brand" alternativeText="AddPaymentMethod" onclick="{! c.openModal }" />
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+
+    <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+        <lightning:datatable keyField="id" data="{! v.data }" columns="{! v.columns }" hideCheckboxColumn="true" onrowaction="{! c.handleRowAction }" />
+    </div>
+    
+    <aura:if isTrue="{!v.contentModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.header}</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" style="weight: 700px" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">{!v.body}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+    </aura:if>
+    <!--Modal to delete Payment Methods-->
+    <aura:if isTrue="{!v.deleteModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Deletion of Payment Method</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" style="weight: 700px" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">Are you sure to Delete this Payment Method?</div>
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }" />
+                    <lightning:button variant="destructive" label="Delete" title="Delete" onclick="{! c.handleDelete}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+    </aura:if>
+</aura:component>

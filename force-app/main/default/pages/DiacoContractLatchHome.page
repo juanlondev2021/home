@@ -1,0 +1,2052 @@
+<apex:page standardController="Home_Services__c"  renderAs="PDF" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false"
+           extensions="diacoRenderContractController"
+           applyHtmlTag="false">
+    <head>
+        <title>N-ERGY</title>
+        
+        <style type="text/css">
+            @page {
+            size: Legal;
+            margin: 5mm 5mm 1mm 5mm;
+            
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            }
+
+            .white-text{
+                color: white;
+                display:inline-block;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- Page 1 -->
+        <div class="page-break">
+            <div style="width:100%; text-align:center;">
+                <h1>
+                    <b>HOME IMPROVEMENT CONTRACT</b>
+                </h1>
+            </div>
+            <div style="width:100%; display:inline-block;">
+                <div style="display:inline-block; width:33%;">
+                    <p>
+                        “Notice of Cancellation” may be sent to the contractor at the address noted below:
+                    </p>
+                </div>
+                <div style="display:inline-block; width:33%; text-align:center;">
+                    <p>
+                        This Agreement is between
+                        <br/> AND
+                    </p>
+                    
+                </div>
+                <div style="display:inline-block; width:33%; text-align:right;">
+                    <div style="display:inline-block;">
+                        Contract #
+                        <div style="display:inline-block; width:70%; border-bottom:1px solid black; text-align:center;">
+                            
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        Date
+                        <div style="display:inline-block; width:65%; border-bottom:1px solid black; text-align:center;">
+                            {!MONTH(TODAY())}/
+                            {!DAY(TODAY())}/
+                            {!YEAR(TODAY())}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border:2px solid black;">
+                            <!--
+<div style="width:100% display:inline-block; margin:5px;">
+<div style="display:inline-block; width:10%;">
+Paid by
+</div>
+<div style="display:inline-block; width:5%;">
+ACH.
+</div>
+<div style="display:inline-block;">
+ACCT. #
+</div>
+<div style="display:inline-block; width:30%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+<div style="display:inline-block;">
+ROUTING.#
+</div>
+<div style="display:inline-block; width:30%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+</div>
+<div style="width:100% display:inline-block; margin:10px; margin-bottom:6px;">
+<div style="display:inline-block; width:10%;">
+CASH
+</div>
+<div style="display:inline-block; width:5%;">
+C.C.
+</div>
+<div style="display:inline-block;">
+C.C. #
+</div>
+<div style="display:inline-block; width:33%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+<div style="display:inline-block;">
+Exp.
+</div>
+<div style="display:inline-block; width:15%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+<div style="display:inline-block;">
+Auth. #
+</div>
+<div style="display:inline-block; width:15%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+</div>
+-->
+                            
+                            <apex:repeat var="pm" value="{!paymentMethodsProd}">
+                                <div style='display:{!IF(pm.PaymentMethodType__c == null,"block", "none")};'>
+                                    <br/><br/><br/><br/>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Card Type:</th>
+                                            <td>
+                                                {!pm.CardType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name on Card (Account):</th>
+                                            <td>{!pm.NameOnCard__c}</td>
+                                            <th>EXP DATE:</th>
+                                            <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CSV:</th>
+                                            <td>{!pm.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>{!pm.PaymentMethodType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Name:</th>
+                                            <td>{!pm.BankName__c}</td>
+                                            <th>Bank Account Type:</th>
+                                            <td>{!pm.BankAccountType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Account Name:</th>
+                                            <td>{!pm.Bank_Account_Name__c}</td>
+                                            <th>Bank Account Number:</th>
+                                            <td>{!pm.BankAccountNumber__c}</td>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number Checking:</th>
+                                            <td>{!pm.AccountNumberChecking__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Finance Company:</th>
+                                            <td>
+                                                {!pm.FinanceCompany__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Financed Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.FinancedAmount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </apex:repeat>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="display:inline-block; width:100%; margin-top:15px;">
+                <div style="display:inline-block;">
+                    <B>Job Location:</B>
+                </div>
+                <div style="display:inline-block; width:89%; border-bottom:1px solid black; text-align:center;">
+                    {!Home_Services__c.Account__r.Customer_1_Employer_Address__c} 
+                </div>
+            </div>
+            <p>
+                <b>Description of the Project and Description of the Significant Material to be Used and Equipment to be installed:</b>
+                As described in the attached Specifications Sheet(s).
+            </p>
+            <div style="display:inline-block; width:100%;">
+                <div style="display:inline-block;">
+                    Substantial commencement of work under this contract is described as:
+                </div>
+                <div style="display:inline-block; width:49%; border-bottom:1px solid black; text-align:center;">
+                    
+                </div>
+            </div>
+            <div style="width:100%; margin-top:15px;">
+                <div style="width:100%; display:inline-block;">
+                    <div style="width:50%; display:inline-block;">
+                        <div style="display:inline-block; width:100%;">
+                            <div style="display:inline-block;">
+                                <b> Approximate Starting Date: </b>
+                            </div>
+                            <div style="display:inline-block; width:49%; border-bottom:1px solid black; text-align:center;">
+                                <apex:outputText value="{0, date, MM'/'d'/'yyyy}">
+                                    <apex:param value="{!Home_Services__c.Requested_Install_Date__c}" />
+                                </apex:outputText>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:49%; display:inline-block;">
+                        <div style="display:inline-block; width:100%;">
+                            <div style="display:inline-block;">
+                                <b>Approximate Completion Date:</b>
+                            </div>
+                            <div style="display:inline-block; width:51%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width:100%; display:inline-block; margin-top:13px;">
+                    <div style="width:50%; display:inline-block;">
+                        <div style="display:inline-block; width:100%;">
+                            <div style="display:inline-block;">
+                                <b> Contract Price: $ </b>
+                            </div>
+                            <div style="display:inline-block; width:64%; border-bottom:1px solid black; text-align:center;">
+                                <apex:outputField value="{!Home_Services__c.Total_Gross_Sale__c}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:49%; display:inline-block;">
+                        <div style="display:inline-block; width:100%;">
+                            <div style="display:inline-block;">
+                                <b>Down Payment: $</b>
+                            </div>
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                <apex:outputField value="{!Home_Services__c.Down_Payment__c}"/> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <b>THE DOWN PAYMENT MAY NOT EXCEED 50 PERCENT OF THE CONTRACT PRICE</b>
+                </p>
+                <p>
+                    <b>Schedule of Progress Payments: The schedule of progress payments must specifically describe each phase
+                        of work, including the type and amount of work or services scheduled to be supplied in each phase,
+                        along with the amount of each proposed progress payment.</b>
+                </p>
+            </div>
+            <div style="width:100%; margin-top:15px;">
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:40%;">
+                            1. $
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                        <td style="width:40%;" valign="bottom">
+                            <div style="display:inline-block; height:17px; width:90%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                            <div style="margin: 0; font-size: 10px">Work or Services scheduled to be supplied</div>
+                        </td>
+                        <td style="width:20%;">
+                            Date:
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40%;">
+                            2. $
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                        <td style="width:40%;" valign="bottom">
+                            <div style="display:inline-block; height:17px; width:90%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                            <div style="margin: 0; font-size: 10px">Work or Services scheduled to be supplied</div>
+                        </td>
+                        <td style="width:20%;">
+                            Date:
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40%;">
+                            3. $
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                        <td style="width:40%;" valign="bottom">
+                            <div style="display:inline-block; height:17px; width:90%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                            <div style="margin: 0; font-size: 10px">Work or Services scheduled to be supplied</div>
+                        </td>
+                        <td style="width:20%;">
+                            Date:
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40%;">
+                            4. $
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                        <td style="width:40%;" valign="bottom">
+                            <div style="display:inline-block; height:17px; width:90%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                            <div style="margin: 0; font-size: 10px">Work or Services scheduled to be supplied</div>
+                        </td>
+                        <td style="width:20%;">
+                            Date:
+                            <div style="display:inline-block; width:72%; border-bottom:1px solid black; text-align:center;">
+                                
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width:100%; margin-top:15px;">
+                <p>
+                    <b>A CONTRACTOR MAY REQUIRE DOWNPAYMENT.</b>
+                </p>
+                <p>
+                    Upon satisfactory payment being made for any portion of the work performed, the contractor shall, prior to any further payment
+                    being made, furnish to the person contracting for the home improvement work a full and unconditional
+                    release from any claim or mechanic’s lien pursuant to Section 3114 of the Civil Code for that portion
+                    of the work for which payment has been made.
+                </p>
+                <p>
+                    <b>Note about Extra Work and Change Orders:</b> Extra Work and Change Orders become part of the contract
+                    once the order is prepared in writing and signed by the parties prior to the commencement of any work
+                    covered by the new change order.The order must describe the scope of the extra work or change, the cost
+                    to be added or subtracted from the contract, and the effect the order will have on the schedule of progress
+                    payments.
+                </p>
+                <p>
+                    <b>Performance of Extra or Change Order Work:</b> You, the buyer, may not require a contractor to perform
+                    extra or change order work without providing written authorization prior to the commencement of any work
+                    covered by the new change order. Extra work or a change order is not enforceable against a buyer unless
+                    the change order also identifiesall of the following in writing prior to the commencement of any work
+                    covered by the new change order: (i) The scope of work encompassed by the order. (ii) The amount to be
+                    added or subtracted from the contract. (iii) The effect the order will make in the progress payments
+                    or the completion date. The contractor’s failure to comply with the requirements of this paragraph does
+                    not preclude the recovery of compensation for work performed based upon legal or equitable remedies designed
+                    to prevent unjust enrichment.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Page 2-->
+        <div class="page-break">
+            <div style="width:100%; text-align:center;">
+                <h1>
+                    <b>HOME IMPROVEMENT CONTRACT</b>
+                </h1>
+            </div>
+            <div style="display:inline-block; width:100%; text-align:right;">
+                <div style="display:inline-block;">
+                    Contract #
+                    <div style="display:inline-block; width:40%; border-bottom:1px solid black; text-align:center;">
+                        
+                    </div>
+                </div>
+                <div style="margin-top:10px; margin-bottom:10px">
+                    Date
+                    <div style="display:inline-block; width:15%; border-bottom:1px solid black; text-align:center;">
+                        {!MONTH(TODAY())}/
+                        {!DAY(TODAY())}/
+                        {!YEAR(TODAY())}
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border:2px solid black;">
+                            <!--
+<div style="width:100% display:inline-block; margin:5px;">
+<div style="display:inline-block; width:10%;">
+Paid by
+</div>
+<div style="display:inline-block; width:5%;">
+ACH.
+</div>
+<div style="display:inline-block;">
+ACCT. #
+</div>
+<div style="display:inline-block; width:30%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+<div style="display:inline-block;">
+ROUTING.#
+</div>
+<div style="display:inline-block; width:30%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+</div>
+<div style="width:100% display:inline-block; margin:10px; margin-bottom:6px;">
+<div style="display:inline-block; width:10%;">
+CASH
+</div>
+<div style="display:inline-block; width:5%;">
+C.C.
+</div>
+<div style="display:inline-block;">
+C.C. #
+</div>
+<div style="display:inline-block; width:33%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+<div style="display:inline-block;">
+Exp.
+</div>
+<div style="display:inline-block; width:15%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+<div style="display:inline-block;">
+Auth. #
+</div>
+<div style="display:inline-block; width:15%; border-bottom:1px solid black; text-align:center;">
+
+</div>
+</div>
+-->
+                            
+                            <apex:repeat var="pm" value="{!paymentMethodsProd}">
+                                <div style='display:{!IF(pm.PaymentMethodType__c == null,"block", "none")};'>
+                                    <br/><br/><br/><br/>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Card Type:</th>
+                                            <td>
+                                                {!pm.CardType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name on Card (Account):</th>
+                                            <td>{!pm.NameOnCard__c}</td>
+                                            <th>EXP DATE:</th>
+                                            <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CSV:</th>
+                                            <td>{!pm.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>{!pm.PaymentMethodType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Name:</th>
+                                            <td>{!pm.BankName__c}</td>
+                                            <th>Bank Account Type:</th>
+                                            <td>{!pm.BankAccountType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Account Name:</th>
+                                            <td>{!pm.Bank_Account_Name__c}</td>
+                                            <th>Bank Account Number:</th>
+                                            <td>{!pm.BankAccountNumber__c}</td>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number Checking:</th>
+                                            <td>{!pm.AccountNumberChecking__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Finance Company:</th>
+                                            <td>
+                                                {!pm.FinanceCompany__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Financed Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.FinancedAmount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </apex:repeat>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="display:inline-block; width:100%;">
+                <div style="display:inline-block; width:85%; border-bottom:1px solid black; margin-top:20px; position: absolute;
+                            right: 5px;">
+                    
+                </div>
+                <div style="display:inline-block; width:100%;margin-top:15px">
+                    <p>
+                        <b>List of Documents to be Incorporated into the Contract:</b> Terms and Conditions; A notice concerning
+                        commercial general liability insurance is attached to this contract; A notice concerning workers’
+                        compensation insurance is attached to this contract; Mechanics Lien Warning; Information about the
+                        Contractors’ Arizona Registrar of Contractors (ROC); Three-Day Right to Cancel; Notice of Cancellation;
+                        Waiver of Right to Cancel; Schedule of Work sheet(s);
+                    </p>
+                    <p>
+                        Additional documents attached:
+                    </p>
+                    <h3 style="font-size: 14px">
+                        You are entitled to a completely filled in and signed copy of this agreement before any work may be started.
+                        <div style="display:inline-block; width:80%; border-bottom:1px solid black; margin-top:0px; position: absolute;
+                                    right: 5px;">
+                            
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div style="display:inline-block; width:100%;">
+                <p>
+                    <b>
+                        The owner or tenant has the right to require the contractor to have a performance and payment bond, however, the contractor
+                        can charge you for the costs of obtaining a bond.
+                    </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:100%;">
+                <table width="100%">
+                    <tr>
+                        <td style="width:5%; text-align:center">
+                            <div style="display:inline-block; border: 1px solid black; width:10px; height:10px;">
+                                
+                            </div>
+                        </td>
+                        <td style="width:95%; padding: 2px">
+                            <h3 style="font-size: 14px">The law requires that the contractor give you a notice explaining your right to cancel. Initial
+                                the checkbox if the contractor has given you a “Notice of the Three-Day Right to Cancel.”</h3>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td style="width:45%;">
+                            <p style="margin-bottom: 85px;">
+                                <b>Authorization to Proceed with Work — </b>I hereby authorize the herein described work at
+                                the listed contract price. Unless prior arrangements are made, payment is due upon completion.
+                                In the event that collection efforts are initiated against me. I shall pay for all associated
+                                fees at the posted rates. By the addition of my signature below, I agree that I have received
+                                a copy of this contract and all documents in the List of Documents to be Incorporated into
+                                the Contract, and that I have read, understand, and agree to the terms listed herein and
+                                on the reverse side.
+                            </p>
+                            <table width="100%" style="margin-top: 20px;">
+                                <tr>
+                                    <td style="width:65%;border-bottom: 1px solid">
+                                        <b>X</b>  <div class="white-text">sign_2</div> 
+                                    </td>
+                                    <td style="width:10%;">
+                                        
+                                    </td>
+                                    <td style="width:25%;border-bottom: 1px solid;text-align:center">
+                                        <div class="white-text">date_2</div> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:65%;text-align:center">
+                                        Owner’s Signature
+                                    </td>
+                                    <td style="width:10%;">
+                                        
+                                    </td>
+                                    <td style="width:25%;text-align:center">
+                                        Date
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:10%;">
+                            
+                        </td>
+                        <td style="width:45%;">
+                            <p>
+                                <b>Authorization for Latch Home Services LLC .</b>
+                            </p>
+                            <table width="100%" style="margin-top: 20px;">
+                                <tr>
+                                    <td style="width:65%;border-bottom: 1px solid">
+                                        <b>X</b> <div class="white-text">sign_1</div> 
+                                    </td>
+                                    <td style="width:10%;">
+                                        
+                                    </td>
+                                    <td style="width:25%;border-bottom: 1px solid; text-align:center">
+                                        <div class="white-text">date_1</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:65%;text-align:center">
+                                        Representative’s Signature
+                                    </td>
+                                    <td style="width:10%;">
+                                        
+                                    </td>
+                                    <td style="width:25%;text-align:center">
+                                        Date
+                                    </td>
+                                </tr>
+                            </table>
+                            <p>
+                                <b>Acceptance of Work Performed —</b> I acknowledge satisfactory completion of the above described
+                                work, and that the premises have been left in a satisfactory condition. I understand that
+                                if my check does not clear, I could be held liable for three times the amount of the check,
+                                in no case more than $500, nor less than $100, plus the face value of the check, as set forth
+                                in Arizona Civil Code Section 12-671.
+                            </p>
+                            <table width="100%" style="margin-top: 40px;">
+                                <tr>
+                                    <td style="width:65%;border-bottom: 1px solid">
+                                        <b>X</b> <div class="white-text">sign_3</div> 
+                                    </td>
+                                    <td style="width:10%;">
+                                        
+                                    </td>
+                                    <td style="width:25%;border-bottom: 1px solid; text-align:center">
+                                        <div class="white-text"> date_3    </div>                                
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:65%;text-align:center">
+                                        Owner’s Signature
+                                    </td>
+                                    <td style="width:10%;">
+                                        
+                                    </td>
+                                    <td style="width:25%;text-align:center">
+                                        Date
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Page 3-->
+        <div class="page-break">
+            <div style="width:100%; text-align:center;">
+                <h1>
+                    <b>TERMS AND CONDITIONS</b>
+                </h1>
+            </div>
+            <table width="100%">
+                <tr>
+                    <td style="width:45%;">
+                        <p>
+                            <b>1. Incorporation:</b> Customer agrees to be subject to the terms and conditions set forth herein.
+                            In the event a conflict exists between any terms and/or conditions set forth on the signature
+                            page of the Agreement and these Terms and Conditions, these Terms and Conditions shall control,
+                            unless otherwise agreed to in a separate writing signed by the parties
+                        </p>
+                        <p>
+                            <b>2. Services:</b> Customer(s) agrees to have the work described in the Agreement and/or any Schedule
+                            of Work (“SOW”) signed by Customer(s), performed by Company or a third-party subcontractor. Customer(s)
+                            agrees that each SOW is incorporated by reference into the Agreement and is binding on Customer(s).
+                            
+                        </p>
+                        <p>
+                            <b>3. Payment Terms:</b> The Total Purchase Price of the Agreement shall be paid by Customer(s)
+                            in accordance with the terms set forth in the Agreement and any other written agreement signed
+                            by Customer. Any payment not received within 10 days of the due date (or at the latest from completion
+                            of the work) is subject to interest accruing at the rate of 1.5% per month until paid. If applicable,
+                            sales tax is included in the price. Customer(s) acknowledges and agrees that any payment made
+                            to Company hereunder shall be nonrefundable, except as otherwise provided for in writing. Customer(s)
+                            also agrees not to dispute any billed amount with its credit card company, so long as the amount
+                            charged corresponds to the amount listed in the Agreement.
+                            
+                        </p>
+                        <p>
+                            <b>4. Collection Costs and Charges:</b> Customer agrees that they shall pay all expenses incurred
+                            by Company for the collection of any delinquent accounts, whether incurred before, during or
+                            after a legal action, including, but not limited to, all attorneys’ fees, filing fees and costs.
+                            If Customer’s check does not clear, Customer could be liable for more than the check amount plus
+                            the face value of the check and court costs. A $25.00 charge for all returned check or returned
+                            credit card payments.
+                            
+                        </p>
+                        <p>
+                            <b>5. Removal of Parts:</b> All replaced parts will be removed by Company from the Customer’s premises
+                            and discarded unless specified in the Agreement.
+                        </p>
+                        <p>
+                            <b>6. Limited Warranty:</b> Standard limited warranty is 90 days on all labor and one (1) year on
+                            parts supplied by Company. Company warrants that work performed was completed in a workmanlike
+                            manner and that said work shall be free from defects in materials and workmanship for a period
+                            90 days from date said work was performed. Company’s obligation for defective products and/or
+                            workmanship or any damage caused thereby, and Customer’s exclusive remedy, shall be limited,
+                            at Company’s option, to the replacement of any defective parts or workmanship or the refund of
+                            amounts paid by Customer for said parts or services and shall be conditioned upon Company receiving
+                            actual written noticed of said defect within the applicable warranty period noted herein. All
+                            warranty issues must be allowed to be inspected and approved by Company before any repair is
+                            made or warranty is voided. Warranty is non-transferable.
+                        </p>
+                    </td>
+                    <td style="width:10%;">
+                    </td>
+                    <td style="width:45%;">
+                        <p>
+                            <b>7. Warranty Exclusions:</b> THE WARRANTIES ABOVE ARE EXCLUSIVE AND IN LIEU OF ALL OTHER EXPRESSED
+                            OR IMPLIED WARRANTIES FROM COMPANY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY
+                            AND FITNESS FOR A PARTICULAR PURPOSE. COMPANY SHALL NOT BE SUBJECT TO AND DISCLAIMS: (A) ANY
+                            OTHER OBLIGATION OR LIABILITIES ARISING OUT OF BREACH OF CONTRACT OR OF WARRANTY; (B) ANY OBLIGATIONS
+                            WHATSOEVER ARISING FROM TORT CLAIMS, INCLUDING NEGLIGENCE AND STRICT LIABILITY OR ARISING UNDER
+                            THEORIES OF LAW WITH RESPECT TO PRODUCTS SOLD OR SERVICES RENDERED BY COMPANY OR ANY UNDERTAKING,
+                            ACTS OR OMISSIONS RELATED THERETO; AND (C) ANY CONSEQUENTIAL, INCIDENTAL AND CONTIGENT DAMAGES
+                            WHATSOEVER. NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, IN NO EVENT WILL COMPANY’S AGGREGATE
+                            LIABILITY UNDER THE AGREEMENT FOR ANY AND ALL DAMAGES RESULTING FROM OR UNDER THE AGREEMENT EXCEED
+                            THE AMOUNT RECEIVED BY COMPANY UNDER THE AGREEMENT.
+                        </p>
+                        <p>
+                            <b>8. Waiver or Modification:</b> No waiver or modification of this agreement or of any covenant,
+                            condition, or limitation contained herein shall be valid unless in writing and duly executed
+                            by the party to be charged therewith. Furthermore, no evidence of any waiver or modification
+                            shall be offered or received in evidence in any proceeding, arbitration, or litigation between
+                            the parties arising out of or affecting this agreement, or the rights or obligations of any party
+                            hereunder, unless such waiver or modification is in writing, duly executed as aforesaid. The
+                            provisions of this Section may not be waived except as herein set forth
+                        </p>
+                        <p>
+                            <b>9. Cancellation:</b> Customer may cancel the Agreement within three (3) days after signing it
+                            by providing written notice to Company. Notice must be provided by completing and mailing the
+                            Cancelation Notice form to: Latch Home Services, LLC, 664 W. Warner Rd. Tempe AZ 85284, Attn:
+                            Cancellation Department. In the event Customer cancels the Agreement, after the initial three
+                            (3) day period, Customer will incur a cancel fee of up to 15% of sales cost + material(s) ordered
+                            for restocking fee. Company may cancel the Agreement without recourse, if existing conditions
+                            at the site of the work prohibit the work or add additional costs to the work that the Customer
+                            is unwilling to pay for under the change order provisions of the Agreement.
+                            
+                        </p>
+                        <p>
+                            <b>10. Completion Certificate:</b> Customer(s) agrees that they will immediately, upon completion
+                            of work, sign Company’s and or Finance Completion Certificate.
+                        </p>
+                        <p>
+                            <b>11. Liens and Waivers of Liens:</b> Company shall furnish Customer releases or waivers of lien,
+                            from all companies that have provided Customer with a Pre- Lien Notice, through the date for
+                            which any payment is being made. Customer shall promptly advise Company of its receipt of any
+                            Pre-Lien Notices.
+                            
+                        </p>
+                        <p>
+                            <b>12. Governing Law:</b> This Agreement shall be governed by the laws of the State of Arizona without
+                            regard for the choice of law principles, statutes, or regulations of this or any other jurisdiction.
+                            The parties agree to become subject to the federal and state courts located in Maricopa County,
+                            Arizona for the resolution or litigation of any disputes under this Agreement.
+                            
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Page 4-->
+        <div class="page-break">
+            <div style="width:100%; text-align:center;">
+                <h1>
+                    <b>MECHANICS LIEN WARNING:</b>
+                </h1>
+            </div>
+            <div style="width:100%;">
+                <p>
+                    Anyone who helps improve your property, but who is not paid, may record what is called a mechanics’ lien on your property.
+                    A mechanics’ lien is a claim, like a mortgage or home equity loan, made against your property and recorded
+                    with the county recorder.
+                </p>
+                <p>
+                    Even if you pay your contractor in full, unpaid subcontractors, suppliers, and laborers who helped to improve your property
+                    may record mechanics’ liens and sue you in court to foreclose the lien. If a court finds the lien is
+                    valid, you could be forced to pay twice or have a court officer sell your home to pay the lien. Liens
+                    can also affect your credit. To preserve their right to record a lien, each subcontractor and material
+                    supplier must provide you with a document called a “20- day Preliminary Notice.” This notice is not a
+                    lien. The purpose of the notice is to let you know that the person who sends you the notice has the right
+                    to record a lien on your property if he or she is not paid.
+                </p>
+                <p>
+                    <b>BE CAREFUL.</b> The Preliminary Notice can be sent up to 20 days after the subcontractor starts work
+                    or the supplier provides material. This can be a big problem if you pay your contractor before you have
+                    received the Preliminary Notices.You will not get Preliminary Notices from your prime contractor or from
+                    laborers who work on your project. The law assumes that you already know they are improving your property.
+                </p>
+                <p>
+                    <b>PROTECT YOURSELF FROM LIENS.</b> You can protect yourself from liens by getting a list from your contractor
+                    of all the subcontractors and material suppliers that work on your project. Find out from your contractor
+                    when these subcontractors started work and when these suppliers delivered goods or materials. Then wait
+                    20 days, paying attention to the Preliminary Notices you receive
+                </p>
+                <p>
+                    <b>PAYWITH JOINT CHECKS.</b> One way to protect yourself is to pay with a joint check. When your contractor
+                    tells you it is time to pay for the work of a subcontractor or supplier who has provided you with a Preliminary
+                    Notice, write a joint check payable to both the contractor and the subcontractor or material supplier.
+                </p>
+                <p>
+                    <b>REMEMBER, </b>IF YOU DO NOTHING,YOU RISK HAVING A LIEN PLACED ONYOUR HOME. This can mean that you may
+                    have to pay twice, or face the forced sale of your home to pay what you owe.
+                    
+                </p>
+            </div>
+            <div style="width:100%;border: 3px solid; margin-top: 40px; margin-bottom:20px">
+                
+            </div>
+            <div style="width:100%;">
+                <div style="width:100%; text-align:center;">
+                    <h1>
+                        <b>MECHANICS LIEN WARNING:</b>
+                    </h1>
+                </div>
+                <p>
+                    ROC is the state consumer protection agency that licenses and regulates construction contractors. Contact ROC for information
+                    about the licensed contractor you are considering, including information about disclosable complaints,
+                    disciplinary actions and civil judgments that are reported to ROC.
+                    
+                </p>
+                <p>
+                    Use only licensed contractors. If you file a complaint against a licensed contractor within the legal deadline (usually four
+                    years), ROC has authority to investigate the complaint. If you use an unlicensed contractor, ROC may
+                    not be able to help you resolve your complaint. Your only remedy may be in civil court, and you may be
+                    liable for damages arising out of any injuries to the unlicensed contractor or the unlicensed contractor’s
+                    employees.
+                </p>
+                <div style="width:100%; text-align:center;">
+                    <p>For more information:</p>
+                    <p>
+                        Visit CROC’s Web site at www.roc.az.gov
+                    </p>
+                    <p>
+                        Call ROC at 602.542.1525
+                    </p>
+                    <p>
+                        Write ROC at 1700 W. Washington St. Suite 105 Phoenix, AZ 85007-2812.
+                    </p>
+                </div>
+                <div style="width:100%;border: 3px solid; margin-top: 40px; margin-bottom:20px">
+                    
+                </div>
+            </div>
+            <div style="width:100%;">
+                <div style="width:100%; text-align:center;">
+                    <h1>
+                        <b>COMMERCIAL GENERAL LIABILITY INSURANCE (CGL)</b>
+                    </h1>
+                    <p>
+                        This contractor carries commercial general liability insurance written by Powers-Leavitt.
+                    </p>
+                </div>
+                <div style="width:100%;border: 3px solid; margin-top: 40px; margin-bottom:20px">
+                    
+                </div>
+                <div style="width:100%; text-align:center;">
+                    <h1>
+                        <b>WORKERS’ COMPENSATION INSURANCE</b>
+                    </h1>
+                    <p>
+                        This contractor carries workers’ compensation insurance for all employees.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page 5-->
+        <div class="page-break">
+            <div style="width:100%; text-align:center;">
+                <h1>
+                    <b>THREE-DAY RIGHT TO CANCEL</b>
+                </h1>
+            </div>
+            <div style="width:100%;">
+                <p>
+                    <b>
+                        You, the buyer, have the right to cancel this contract within three business days. You may cancel by e-mailing, mailing,
+                        faxing, or delivering a written notice to the contractor at the contractor’s place of business by
+                        midnight of the third business day after you received a signed and dated copy of the contract that
+                        includes this notice. Include your name, your address, and the date you received the signed copy
+                        of the contract and this notice.
+                    </b>
+                </p>
+                <p>
+                    <b>
+                        If you cancel, the contractor must return to you anything you paid within 10 days of receiving the notice of cancellation.
+                        For your part, you must make available to the contractor at your residence, in substantially as good
+                        condition as you received it, any goods delivered to you under this contract or sale. Or, you may,
+                        if you wish, comply with the contractor’s instructions on how to return the goods at the contractor’s
+                        expense and risk. If you do make the goods available to the contractor and the contractor does not
+                        pick them up within 20 days of the date of your notice of cancellation, you may keep them without
+                        any further obligation. If you fail to make the goods available to the contractor, or if you agree
+                        to return the goods to the contractor and fail to do so, then you remain liable for performance of
+                        all obligations under the contract.
+                    </b>
+                </p>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 5%"><b>I, </b></td>
+                        <td style="width:35%; border-bottom:1px solid black; text-align:center;">
+                        
+                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                        </td>
+                        <td style="width: 30%; text-align:center">
+                            <b>
+                                hereby acknowledge that on
+                            </b>
+                        </td>
+                        <td style="width:15%; border-bottom:1px solid black; text-align:center;">
+                            {!MONTH(TODAY())}/
+                            {!DAY(TODAY())}/
+                            {!YEAR(TODAY())}
+                        </td>
+                        <td style="width:15%"><b>
+                            I was provided this
+                            </b></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%">
+                         
+                        </td>
+                        <td style="width:35%; text-align:center;">
+                            Print Owner’s Name
+                        </td>
+                        <td style="width: 30%; text-align:center">
+                            
+                        </td>
+                        <td style="width:15%; text-align:center;">
+                            Date
+                        </td>
+                        <td style="width:15%"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:40%;">
+                            <b>document titled “Three-Day Right to Cancel.”</b>
+                        </td>
+                        <td style="width:15%; ">
+                            
+                        </td>
+                        <td  colspan="2" style="width:45; border-bottom:1px solid black; text-align:center;">
+                            <div class="white-text">sign_1</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:40%;">
+                        </td>
+                        <td style="width:15%;">
+                           
+                        </td>
+                        <td  colspan="2" style="width:45; text-align:center;">
+                            Buyer’s Signature
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width:100%;border: 3px solid; margin-top: 10px; margin-bottom:20px">
+                
+            </div>
+            
+            <div style="width:100%; text-align:center;">
+                <h1>
+                    <b>WAIVER OF RIGHT TO CANCEL</b>
+                </h1>
+            </div>
+            <div style="width:100%;">
+                <p>
+                    I have initiated a contract in connection with emergency repairs or service, for the immediate protection of persons or real and
+                    personal property with Latch Home Services, LLC. Waiting three days to have repairs or service would place an undue, unwanted
+                    burden upon myself. I hereby state that the following emergency situation exists, requiring immediate attention:
+                    
+                </p>
+                <div style="width:100%;height: 50px">
+                    <p>
+                        <b>
+                            
+                        </b>
+                    </p>
+                </div>
+                <p>
+                    I acknowledge and hereby waive all rights to cancel this transaction within three business days. I understand that regardless
+                    of whether work has started or not, after I waive all rights to cancel this transaction, I may not subsequently exercise this waived
+                    right.
+                </p>
+                <div style="width:100%;">
+                    I hereby waive this right. Date: <div style="width:10%; display:inline-block;border-bottom: 1px solid">
+                    
+                    </div>
+                    Buyer’s Signature: <div style="width:50%; display:inline-block;border-bottom: 1px solid">
+                        <div class="white-text">sign_1</div>
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;border: 3px dashed; margin-top: 10px; margin-bottom:20px">
+                
+            </div>
+            <div style="width:100%; text-align:center;">
+                <h1 style="margin-bottom:0px;">
+                    <b>NOTICE OF CANCELLATION</b>
+                </h1>
+            </div>
+            <div style="display:inline-block; width:33%; text-align:left;">
+                <div style="margin-top:0px;">
+                    Date
+                    <div style="display:inline-block; width:65%; border-bottom:1px solid black; text-align:center;">
+                         {!MONTH(TODAY())}/
+                            {!DAY(TODAY())}/
+                            {!YEAR(TODAY())}
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;">
+                <p style="text-indent: 1.5em;
+                          margin-top: 0 ">
+                    You may cancel this transaction, without any penalty or obligation, within three business days from the above date.
+                    If you cancel, any property traded in, any payments made by you under the contract or sale, and any negotiable instrument
+                    executed by you will be returned within 10 days following receipt by the seller of your cancellation notice, and any security interest
+                    arising out of the transaction will be canceled. If you cancel, you must make available to the seller at your residence, in substantially as good condition as when received, any goods delivered to you under this contract or sale, or you may, if you wish, comply
+                    with the instructions of the seller regarding the return shipment of the goods at the seller’s expense and risk.
+                </p>
+                <p style="text-indent: 1.5em;
+                          margin-top: 0 ">
+                    If you do make the goods available to the seller and the seller does not pick them up within 20 days of the date of your notice
+                    of cancellation, you may retain or dispose of the goods without any further obligation.If you fail to make the goods available to the
+                    seller, or if you agree to return the goods to the seller and fail to do so, then you remain liable for performance of all obligations
+                    under the contract.
+                </p>
+                <div style="width:100%;">
+                    
+                    <div style="width:100%; display:inline-block;">
+                        To cancel this transaction, mail or deliver a signed and dated copy of this cancellation notice to:
+                        
+                        <div style="width:100%; display:inline-block; position: relative; top:10px;">
+                            Latch Home Services, LLC 664 W. Warner Rd. Tempe, AZ 85284 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; not later than midnight of
+                            <div style="width:20%; display:inline-block;border-bottom: 1px solid;text-align:center">
+                                <apex:outputText value="{0, date, MM'/'d'/'yyyy}">
+                                    <apex:param value="{!notLaterThanMidnightOf}" />
+                                </apex:outputText>
+                            </div><br/>
+                            <div style="display:inline-block; position: relative; left:575px;">
+                                Date
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width:100%; margin-top:15px;">
+                    I hereby cancel this transaction. Date: <div style="width:10%; display:inline-block;border-bottom: 1px solid">
+                    
+                    </div>
+                    Buyer’s Signature: <div style="width:45%; display:inline-block;border-bottom: 1px solid">
+                    	
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- Page 6-->
+        <div class="page-break">
+            <div style="width:100%; padding-top:15px;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table> 
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div style="text-align:center; padding:20px;">
+                <b>SCHEDULE OF WORK (SOW)</b>
+            </div>
+            
+        </div>
+        
+        <!-- Page 7-->
+        <div class="page-break">
+            <div style="width:100%; padding-top:15px;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table> 
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div style="text-align:center; padding:20px;">
+                <b>SCHEDULE OF WORK (SOW)</b>
+            </div>
+            
+        </div>
+        
+        <!-- Page 8-->
+        <div class="page-break">
+            <div style="width:100%; padding-top:15px;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table> 
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div style="text-align:center; padding:20px;">
+                <b>SCHEDULE OF WORK (SOW)</b>
+            </div>
+            
+        </div>
+        
+        <!-- Page 9-->
+        <div class="page-break">
+            <div style="width:100%; padding-top:15px;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table> 
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div style="text-align:center; padding:20px;">
+                <b>SCHEDULE OF WORK (SOW)</b>
+            </div>
+            
+        </div>
+        
+        <!-- Page 10-->
+        <div class="page-break">
+            <div style="width:100%; padding-top:15px;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table> 
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div style="text-align:center; padding:20px;">
+                <b>SCHEDULE OF WORK (SOW)</b>
+            </div>
+            
+        </div>
+        
+        <!-- Page 11-->
+        <div>
+            <div style="width:100%; padding-top:15px;">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="width:50%; border:2px solid black;">
+                            <div style="margin:0px; width:100%;">
+                                <div style="text-align:center; width:60%; float:left; padding-top:15px;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogo.png')}" height="50"/>
+                                    
+                                </div>
+                                <div style="text-align:center; width:40%; float:left;">
+                                    
+                                    <apex:image url="{!URLFOR($Resource.latchHome,
+                                                     'img/latchHomeLogoAndAddress.png')}" height="85"/> 
+                                    
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        <b>SKILLED, CLEAN, HONEST</b>
+                                    </p>
+                                </div>
+                                <div style="text-align:right; width:50%; float:left;">
+                                    State License No. 324836
+                                    <br/>
+                                    <b>480.240.4054</b>
+                                </div>
+                                <div style="text-align:center; width:50%; float:left;">
+                                    <b>http://www.latchaz.com/</b>
+                                </div>
+                                <div style="text-align:center; width:100%; float:left;">
+                                    <p>
+                                        664 W. Warner Rd. Tempe, AZ 85284
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50%; border:2px solid black;">
+                            
+                            <table WIDTH="95%" style="margin: 5px; border-collapse: collapse;">
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.Street__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        Owner’s Address
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="border-bottom:1px solid black; text-align:center; padding-top:10px;">
+                                        {!Home_Services__c.Account__r.city__c} {!Home_Services__c.Account__r.state__c} {!Home_Services__c.Account__r.Zip__c}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="100%" colspan="2" style="font-size: 10px;">
+                                        City, State &amp; Zip
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Phone: {!Home_Services__c.Account__r.Phone}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:10px;">
+                                        Fax: {!Home_Services__c.Account__r.Fax}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Cell: {!Home_Services__c.Account__r.fPersonMobilePhone__c}
+                                    </td>
+                                    <td WIDTH="50%" style="border-bottom:1px solid black;padding-top:20px;">
+                                        Other:
+                                    </td>
+                                </tr>
+                            </table> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="font-size:14px;">
+                <div style="text-align:center; padding:8px; margin-bottom:10px;">
+                    <b>PROGRESS PAYMENT AUTHORIZATION</b>
+                    
+                    
+                    
+                </div>
+                <div style="width:100%;">
+                    I <div style="display:inline-block; width:30%; border-bottom:1px solid black; text-align:center;">
+                    {!hs.Account__r.Billing_First_Name__c} {!hs.Account__r.Billing_Last_Name__c}
+                    </div>
+                    authorize Latch Home Services, LLC a My Home Services Company to
+                    charge my bank account as indicated above on page 1 of the Purchase Agreement with the staged
+                    payment schedule based on the work outlined in the SOW of the Agreement dated
+                    <div style="display:inline-block; width:20%; border-bottom:1px solid black; text-align:center;">
+                        {!MONTH(TODAY())}/
+                        {!DAY(TODAY())}/
+                        {!YEAR(TODAY())}
+                    </div>
+                </div>
+                <div style="width:100%;">
+                    <p>
+                        Billing Information
+                    </p>
+                    <div style="width:100%; display:inline-block;">
+                        <div style="width:50%; display:inline-block;">
+                            <div style="display:inline-block; width:100%;">
+                                <div style="display:inline-block;">
+                                    Billing Address
+                                </div>
+                                <div style="display:inline-block; width:70%; border-bottom:1px solid black; text-align:center;">
+                                  {!hs.Account__r.Primary_Billing_Street__c}  
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:49%; display:inline-block;">
+                            <div style="display:inline-block; width:100%;">
+                                <div style="display:inline-block;">
+                                    Phone #
+                                </div>
+                                <div style="display:inline-block; width:71%; border-bottom:1px solid black; text-align:center;">
+                                   {!hs.Account__r.Billing_Phone__c}   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%; display:inline-block; margin-top:15px;">
+                        <div style="width:50%; display:inline-block;">
+                            <div style="display:inline-block; width:100%;">
+                                <div style="display:inline-block;">
+                                    City, State, Zip
+                                </div>
+                                <div style="display:inline-block; width:71%; border-bottom:1px solid black; text-align:center;">
+                                      
+                                    {!hs.Account__r.Primary_Billing_City__c}, {!hs.Account__r.Primary_Billing_State__c}, {!hs.Account__r.Primary_Billing_Zip_Code__c}          
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:49%; display:inline-block;">
+                            <div style="display:inline-block; width:100%;">
+                                <div style="display:inline-block;">
+                                    Email
+                                </div>
+                                <div style="display:inline-block; width:74%; border-bottom:1px solid black; text-align:center;">
+                                    {!hs.Account__r.Billing_Email__c}   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width:100%;">
+                    <p>
+                        Bank Details
+                    </p>
+                    <div style="width:100%; display:inline-block;">
+                        <div style="margin-right:10px; display:inline-block;">
+                            <img src='{!IF(AND(pMChecking.size>0, pMChecking[0].BankAccountType__c=="Checking"),"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                    class="changeImage" />
+                            Checking
+                        </div>
+                        <div style="margin-right:10px; display:inline-block;">
+                            <img src='{!IF(AND(pMChecking.size>0, pMChecking[0].BankAccountType__c=="Savings"),"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                    class="changeImage" />
+                            Savings
+                        </div>
+                        <div style="width:100%; display:inline-block; margin-top:20px;">
+                            <div style="display:inline-block; width:100%;">
+                                <div style="display:inline-block;">
+                                    Account Name
+                                </div>
+                                <div style="display:inline-block; width:40%; border-bottom:1px solid black; text-align:center;">
+                                    {!IF(pMChecking.size==0, "    ",pMChecking[0].Bank_Account_Name__c)}
+                                </div>
+                            </div>
+                            <div style="display:inline-block; width:100%; margin-top:4px;">
+                                <div style="display:inline-block;">
+                                    Bank Name
+                                </div>
+                                <div style="display:inline-block; width:40%; border-bottom:1px solid black; text-align:center;">
+                                    {!IF(pMChecking.size==0, "    ",pMChecking[0].BankName__c)}
+                                </div>
+                            </div>
+                            <div style="display:inline-block; width:100%; margin-top:4px;">
+                                <div style="display:inline-block;">
+                                    Account Number 
+                                </div>
+                                <div style="display:inline-block; width:40%; border-bottom:1px solid black; text-align:center;">
+                                    {!IF(pMChecking.size==0, "    ",pMChecking[0].BankAccountNumber__c)}
+                                </div>
+                            </div>
+                            <div style="display:inline-block; width:100%; margin-top:4px;">
+                                <div style="display:inline-block;">
+                                    Routing Number 
+                                </div>
+                                <div style="display:inline-block; width:40%; border-bottom:1px solid black; text-align:center;">
+                                    {!IF(pMChecking.size==0, "    ",pMChecking[0].RoutingNumber__c)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        I understand that because this is an electronic transaction, these funds may be withdrawn from my
+                        account as soon as the above noted transaction date. In the case of the payment being rejected for
+                        Non-Sufficient Funds (NSF) I understand that Latch Home Services, LLC a My Home Services, LLC
+                        may, at its discretion, attempt to process the charge again within 30 days, and I agree to an additional
+                        $25.00 charge for each attempt returned NSF, which will be initiated as a separate transaction from the
+                        authorized payment. I acknowledge that the origination of ACH transactions to my account must comply
+                        with the provisions of U.S. law. I will not dispute Latch Home Services, LLC a My Home Services, LLC,
+                        billing with my bank so long as the transaction corresponds to the terms indicated in the corresponding
+                        agreement.  
+                    </p>
+                </div> 
+                <table style="width:85%; border-collapse: collapse; margin-top:35px;">
+                    <tr>
+                        <td style="width:5%;">SIGNATURE</td>
+                        <td style="width:25%; border-bottom:1px solid black;"><div class="white-text">sign_2</div></td>
+                        <td style="width:10%; text-align:right; padding-right:5px;">DATE</td>
+                        <td style="width:25%; border-bottom:1px solid black; text-align:center"> 
+                            <div class="white-text">date_2</div></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>(Account Holder’s Signature)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>        
+            </div>
+        </div> 
+    </body>
+    
+</apex:page>

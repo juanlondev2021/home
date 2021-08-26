@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rehash_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Rehash Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sale</fullName>
+                <default>false</default>
+                <label>Sale</label>
+            </value>
+            <value>
+                <fullName>Follow Up</fullName>
+                <default>false</default>
+                <label>Follow Up</label>
+            </value>
+            <value>
+                <fullName>PM</fullName>
+                <default>false</default>
+                <label>PM</label>
+            </value>
+            <value>
+                <fullName>No Good</fullName>
+                <default>false</default>
+                <label>No Good</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

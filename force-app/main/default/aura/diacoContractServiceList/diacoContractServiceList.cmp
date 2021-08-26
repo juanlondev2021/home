@@ -1,0 +1,140 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water line items services
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the component.
+-->
+
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="LineItemProduct" type="Line_Item__c[]" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="title" type="String" />
+    <aura:attribute name="billingFrequency" type="String" />
+    <aura:attribute name="Products" type="Product__c[]" />
+    <aura:attribute name="options" type="String[]" default="Monthly,Quarterly,Annual"/>
+    <aura:attribute name="home" type="Home_Services__c"/>
+    
+    <aura:attribute name="isOpen" type="Boolean" default="false"/>
+    <aura:attribute name="temporalServiceId" type="String"/>
+    <aura:attribute name="temporalServiceName" type="String"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <div class="slds-form slds-grid slds-wrap">
+        <aura:iteration items="{!v.LineItemProduct}" var="lineitem" indexVar="indexVar">
+            <aura:if isTrue="{!lineitem.Active__c}">
+                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around_small">
+                    <div class="slds-col slds-size_1-of-2 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                        <fieldset class="slds-box slds-theme--default slds-m-top--medium">
+                            <lightning:card variant="Narrow" iconName="standard:account">
+                                <aura:set attribute="title">
+                                    <h4 class="slds-p-horizontal_x-large">Service</h4>
+                                </aura:set>
+                                <!--aura:set attribute="title">
+                                    <lightning:input  readonly="true" value="{!lineitem.Name}"/>
+                                </aura:set-->
+                                <aura:set attribute="actions">
+                                    <!--button class="base" id="{!lineitem.Id}" onclick="{!c.deleteItem}">X</button-->
+                                    <lightning:buttonIcon iconName="utility:close" aura:id="{!lineitem.Id}" value="{!indexVar}" variant="border-filled" onclick="{!c.deleteItem}" alternativeText="Show More" size="small"/>
+                                </aura:set>
+                                <div class="slds-form slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                                        <lightning:input aura:id="CustomerInfo"
+                                                         class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                                                         name="Name" 
+                                                         label="Name"
+                                                         value="{!lineitem.Name}"/>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center">
+                                            <lightning:select name="Billing Frequency" aura:id="CustomerInfo"
+                                                              label="Billing Frequency"
+                                                              class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                              onchange="{! c.changeStatus }"
+                                                              value="{!lineitem.Billing_Frequency__c}">
+                                                <option value="">choose one...</option>
+                                                <aura:iteration items="{!v.options}" var="option">
+                                                    <option value="{!option}">{!option}</option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                                        <lightning:input type="date" aura:id="CustomerInfo"
+                                                         name="Bill Start Date" 
+                                                         label="Bill Start Date"
+                                                         class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                                                         value="{!lineitem.Bill_Start_Date__c}" 
+                                                         disabled="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                                        <lightning:input aura:id="CustomerInfo" type="number"
+                                                         onchange="{! c.changeStatus }"
+                                                         formatter="currency"
+                                                         step="0.01"
+                                                         class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                                                         name="Monthly Investment" 
+                                                         label="Monthly Investment"
+                                                         min="{!lineitem.Product__r.Cost__c}"
+                                                         value="{!lineitem.Monthly_Investment__c}"/>
+                                    </div>
+                                </div>
+                            </lightning:card>
+                        </fieldset>
+                    </div>
+                </div>
+            </aura:if>
+        </aura:iteration>
+    </div>
+    <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+        <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+            <lightning:input type="number"
+                             formatter="currency"
+                             class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                             name="Total Monthly Investment" 
+                             label="Total Monthly Investment"
+                             value="{!v.home.Total_Monthly_Investment__c}"
+                             disabled="true"
+                             />
+        </div>
+    </div>
+    <lightning:button aura:id="saveButton"
+                      label="{!v.title}"
+                      variant="brand" 
+                      class="slds-m-top--medium slds-align_absolute-center"
+                      title="{!v.title}"
+                      onclick="{! c.SaveLineItems }" />
+    <aura:if isTrue="{!v.isOpen}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <h4 class="slds-p-horizontal_x-large">{!'Are you sure to delete ' + v.temporalServiceName +' service?'}</h4>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand" 
+                                      label="Aceptar"
+                                      title="Aceptar"
+                                      onclick="{! c.handleClick }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+</aura:component>

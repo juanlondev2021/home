@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsUpdated__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is used to invoke a trigger that updates call log and links lookup fields to connected object. Like searching User_Address__c.fPhone__c records for all that match the Call_Logg__c.ANI__c field then insert that records ID on the call log object.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is used to invoke a trigger that updates call log and links lookup fields to connected object. Like searching User_Address__c.fPhone__c records for all that match the Call_Logg__c.ANI__c field then insert that records ID on the call log object.</inlineHelpText>
+    <label>IsUpdated</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

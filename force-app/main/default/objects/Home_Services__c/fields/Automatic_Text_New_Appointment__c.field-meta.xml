@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Automatic_Text_New_Appointment__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  $Setup.Text_Settings_Appt__c.Sale_New_Appointment_Home_Automation__c  = TRUE, 
+&quot;Home Automation&quot;+BR(), &quot;&quot;)+
+IF(  $Setup.Text_Settings_Appt__c.Sale_New_Appointment_Pest_Control__c  = TRUE, &quot;Pest Control&quot;+BR(), &quot;&quot;)+
+IF(  $Setup.Text_Settings_Appt__c.Sale_New_Appointment_Solar__c  = TRUE,&quot;Solar&quot;+BR(), &quot;&quot;)+
+IF(  $Setup.Text_Settings_Appt__c.Sale_New_Appointment_Water__c  = TRUE,&quot;Water&quot;+BR(), &quot;&quot;)+
+IF(  $Setup.Text_Settings_Appt__c.Sale_New_Appointment_Window__c  =TRUE,&quot;Window&quot;+BR(),&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Automatic Text - New Appointment</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

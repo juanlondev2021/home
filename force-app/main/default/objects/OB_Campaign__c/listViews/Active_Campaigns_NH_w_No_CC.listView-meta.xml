@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Campaigns_NH_w_No_CC</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>OB_DBA_Name__c</columns>
+    <columns>Opportunity__c</columns>
+    <columns>NAME</columns>
+    <columns>Industry__c</columns>
+    <columns>OB_Campaign_Active__c</columns>
+    <columns>Call_Center_is_Ready_Post__c</columns>
+    <columns>OB_Campaign_Active_Date__c</columns>
+    <columns>fScheduling_Paused_Start_Date__c</columns>
+    <columns>fScheduling_Paused_End_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OB_Campaign_Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>OB_Campaign_Call_Center__c</field>
+        <operation>equals</operation>
+        <value>NuHome</value>
+    </filters>
+    <filters>
+        <field>fOB_Campaign_Call_Center__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Active Campaigns - NH w/No CC</label>
+</ListView>

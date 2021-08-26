@@ -1,0 +1,348 @@
+<aura:component controller="DiacoFinanceClass" 
+                implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome"
+                access="global">
+    
+	<aura:registerEvent name="TypeOrderEvent" type="c:DiacoFinanceOrderTypeEvent"/>
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="att_Package_Price" type="Decimal" />
+    <aura:attribute name="att_Extra_Components" type="Decimal"/>
+    <aura:attribute name="att_Monitoring" type="Decimal"/>
+    <!-- Header -->
+    <aura:attribute name="att_Package" type="String"/>
+    <aura:attribute name="att_Package_Name" type="String"/>
+    <!-- End Header -->
+    <aura:attribute name="myText" type="Decimal" default="0"/>
+    <aura:attribute name="att_Monthly_Term" type="Integer" default="60"/>
+    <aura:attribute name="att_Monthly_Renewal" type="Integer" default="12"/>
+    <aura:attribute name="att_Monthly_Renewal_Two" type="Integer" default="1"/>    
+    <aura:attribute name="att_Monthly_Term_Two" type="Integer" default="12"/>
+    <aura:attribute name="att_Customer_Owned" type="String" default="NO"/>
+    <aura:attribute name="att_Customer_Owned_Two" type="String" default="YES"/>
+    <aura:attribute name="att_Total_Payments" type="Decimal" default="0"/>    
+    <aura:attribute name="att_Yearly_Investment" type="Decimal" default="0"/>
+    <aura:attribute name="att_Promotional_Discount" type="integer" default="-1200"/>
+    <aura:attribute name="att_Equipment_And_InstallationTwo" type="integer" default="0"/> 
+    <aura:attribute name="att_Yearly_Investment_Two" type="Decimal" default="0"/>   
+    <aura:attribute name="att_Equipment_Payment_Before_Tax" type="Decimal" default="0"/>
+    <aura:attribute name="att_Months_Same_As_Cash" type="String" default="YES"/>
+    <aura:attribute name="att_total" type="Decimal" default="0"/>
+    <aura:attribute name="att_radioButtonDisabled" type="Boolean" default="false"/>
+    
+   	<aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Promotion', 'value': 'Promotion'},
+                                                        {'label': 'Finance', 'value': 'Finance'}
+                                                        ]"/>
+    <aura:attribute name="value" type="String" default="option1"/>
+    <aura:attribute name="Checkbox_options" type="List" default="[
+                                                        {'label': 'In House', 'value': 'true'}
+                                                        ]"/>
+    <aura:attribute name="Checkbox_value" type="String" default="false"/>
+    <aura:attribute name="Checkbox_Deactivate" type="Boolean" default="true"/>
+    <!-- Style -->
+    <aura:attribute name="att_Border_Select_Rent" type="String" default=""/>
+    <aura:attribute name="att_Border_Select_Buy" type="String" default=""/>
+    <!-- End Style -->
+    <aura:attribute name="att_child" type="String" default="HERE"/>
+    <aura:attribute name="att_TypeOfOrder" type="String"/>
+    <aura:attribute name="loadedTwo" type="Boolean" default="true" />
+    <aura:attribute name="att_annual" type="Decimal" default="0"/>
+    
+    
+    <aura:if isTrue="{! v.loadedTwo }">
+        <lightning:spinner variant="brand" alternativeText="Loading" />
+    </aura:if>
+    
+    <div class="slds-p-bottom_x-small">
+        <lightning:layout class="slds-page-header slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:investment_account" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">{!v.att_Package}</h1>
+                    <h2 class="slds-text-heading--medium">{!v.att_Package_Name}</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>    
+    </div>
+    
+    <div class="slds-grid slds-wrap">    
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+            <div class="slds-p-right_xx-small slds-p-left_xx-small slds-p-bottom_x-small">
+                <div class="slds-box slds-box_small" style="{!v.att_Border_Select_Rent}" draggable="false" >
+                    <div class="slds-p-bottom_x-small">
+                    <div class="slds-align_absolute-center">
+                        <div class="page-section page-header">
+                            <h2 class="slds-text-heading--medium" style="text-decoration: none; border-bottom: 1px solid #6C6B6B;">Promotion</h2>
+                        </div>
+                    </div>
+                 </div>
+                    <div class="slds-box slds-box_small"  draggable="false" >
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_7-of-12">
+                                <div class="slds-p-top_large">Equipment and Installation</div>                    
+                            </div>
+                            <div class="slds-col slds-size_5-of-12">                               
+                                <lightning:input type="number" disabled="true" value="{!v.att_Equipment_And_InstallationTwo}" placeholder="0" name="EquipmentAndInstallation" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_7-of-12">
+                                <div class="slds-p-top_large">Promotional Discount</div>                    
+                            </div>
+                            <div class="slds-col slds-size_5-of-12">                               
+                                <lightning:input type="number" disabled="true" value="{!v.att_Promotional_Discount}" placeholder="0" name="PromotionalDiscount" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_7-of-12">
+                                <div class="slds-p-top_large">Discount with 60 month agreement</div>                    
+                            </div>
+                            <div class="slds-col slds-size_5-of-12">                               
+                                <lightning:input type="number" disabled="true" value="{!v.att_total *-1}" placeholder="0" name="DiscountWith60MonthAgreement" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div> 
+                        <div class="slds-grid">                          
+                            <div class="slds-col slds-size_7-of-12">
+                                <hr style="margin-top: 10px; margin-bottom: 10px"/>
+                                <div class="slds-p-top_large">Total:</div>                    
+                            </div>                           
+                            <div class="slds-col slds-size_5-of-12">
+                                <hr style="margin-top: 10px; margin-bottom: 10px"/>
+                                <lightning:input type="number" aura:id="TotalA" disabled="true" value="{!(v.att_total*-1) + v.att_Promotional_Discount + v.att_Equipment_And_InstallationTwo}" placeholder="0" name="DiscountWith60MonthAgreement" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div>
+                    </div>                    
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Package Price</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">                               
+                            <lightning:input type="number" disabled="true" placeholder="0" aura:id="package_Price" value="{!v.att_Package_Price}" name="package_Price" formatter="currency" step="0.01"  />                           
+                        </div>   
+                    </div>                                      
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Extra Components</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">                               
+                            <lightning:input type="number" disabled="true" min="0" placeholder="0" aura:id="extra_Components" value="{!v.att_Extra_Components}" name="extra_Components" formatter="currency" step="0.01"  />                            
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monthly Monitoring Payment</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <lightning:input type="number" disabled="true" value="{!v.myText}" placeholder="0" name="MonthlyMonitoringPayment" formatter="currency" step="0.01"/>                            
+                        </div>   
+                    </div>                
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Total Payments</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <lightning:input type="number" disabled="true" value="{!v.att_Total_Payments}" placeholder="0" name="TotalPayments" formatter="currency" step="0.01"/>                                                    
+                        </div>
+                    </div>               
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monthly Term</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input  aura:id="monthlyTerm" type="number" disabled="true" value="{!v.att_Monthly_Term}" placeholder="0" name="monthly_Term"/>                                
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monthly Renewal</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input aura:id="monthlyRenewal" type="number" disabled="true" value="{!v.att_Monthly_Renewal}" placeholder="0" name="monthly_Renewal"/>            
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Customer Owned</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <div class="slds-p-top_large"><ui:outputText aura:id="CustomerOwned" value="{!v.att_Customer_Owned}"/><br/></div> 
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Yearly Investment</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input aura:id="YearlyInvestment" type="number" disabled="true"  value="{!v.att_Yearly_Investment}" placeholder="0" name="Yearly_Investment" formatter="currency" step="0.01"/>  
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+            <div class="slds-p-right_xx-small slds-p-left_xx-small slds-p-bottom_x-small">
+                <div class="slds-box slds-box_small" style="{!v.att_Border_Select_Buy}" draggable="false" >
+                    <div class="slds-p-bottom_x-small">
+                        <div class="slds-align_absolute-center">
+                            <div class="page-section page-header">
+                                <h2 class="slds-text-heading--medium" style="text-decoration: none; border-bottom: 1px solid #6C6B6B;">Finance</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-box slds-box_small" draggable="false" >
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_7-of-12">
+                                <div class="slds-p-top_large">Equipment and Installation</div>                    
+                            </div>
+                            <div class="slds-col slds-size_5-of-12">                               
+                                <lightning:input aura:id="Equipment_And_InstallationTwo" type="number" disabled="true" value="{!v.att_Equipment_And_InstallationTwo}" placeholder="0" name="EquipmentAndInstallationTwo" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_7-of-12">
+                                <div class="slds-p-top_large">Promotional Discount</div>                    
+                            </div>
+                            <div class="slds-col slds-size_5-of-12">                               
+                                <lightning:input aura:id="Promotional_Discount" type="number" disabled="true" value="{!v.att_Promotional_Discount}" placeholder="0" name="PromotionalDiscountTwo" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_7-of-12">
+                                <hr style="margin-top: 10px; margin-bottom: 10px"/>
+                                <div class="slds-p-top_large">total:</div>                    
+                            </div>
+                            <div class="slds-col slds-size_5-of-12"> 
+                                <hr style="margin-top: 10px; margin-bottom: 10px"/>
+                                <lightning:input type="number" aura:id="TotalB" disabled="true" value="{!v.att_total}" placeholder="0" name="total" formatter="currency" step="0.01"/>                            
+                            </div>   
+                        </div>                                        
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monthly Monitoring Payment</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input type="number" disabled="true" value="{!v.myText}" placeholder="0" name="total" formatter="currency" step="0.01"/>                        
+                            </div>
+                        </div>   
+                    </div> 
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monitoring</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">                               
+                            <lightning:input type="number" disabled="true" placeholder="0" aura:id="monitoring" value="{!v.att_Monitoring}" name="Monitoring" formatter="currency" step="0.01"  />                           
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Equipment Payment Before Tax</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input type="number" aura:id="EquipmentPaymentBeforeTax" disabled="true" placeholder="0" value="{!v.att_Equipment_Payment_Before_Tax}" formatter="currency" step="0.01" name="EquipmentPaymentBeforeTax"/>     
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-p-top_large">12 Months Same As Cash</div>                    
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-text-align_right">
+                                <div class="slds-p-top_large"><ui:outputText aura:id="MonthsSameAsCash" value="{!v.att_Months_Same_As_Cash}"/><br/></div> 
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monthy Term</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">                            
+                            <div class="slds-text-align_right">
+                                <lightning:input type="number" disabled="true" placeholder="0" aura:id="monthyTermTwo" value="{!v.att_Monthly_Term_Two}" name="monthy_TermTwo"/>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Monthly Renewal</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input type="number" disabled="true" placeholder="0" aura:id="monthlyRenewalTwo" value="{!v.att_Monthly_Renewal_Two}" name="MonthlyRenewal"/>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-p-top_large">Customer Owned</div>                    
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-text-align_right">
+                                <div class="slds-p-top_large"><ui:outputText aura:id="CustomerOwnedTwo" value="{!v.att_Customer_Owned_Two}"/><br/></div> 
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_7-of-12">
+                            <div class="slds-p-top_large">Yearly Investment</div>                    
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            <div class="slds-text-align_right">
+                                <lightning:input type="number" aura:id="YearlyInvestmentTwo" disabled="true" placeholder="0" value="{!v.att_Yearly_Investment_Two}" formatter="currency" step="0.01" name="Yearly_InvestmentTwo"/>
+                                
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_2-of-12">
+            
+            <div class="slds-box slds-box_small" draggable="false" >       
+                Annual Savings With Purchase               
+                <lightning:input type="number" disabled="true" placeholder="0" value="{!v.att_annual}" formatter="currency" step="0.01" name="AnnualSavingswithPurchase"/>                         
+            </div>
+            <div class="slds-p-top_x-small">
+                <div class="slds-box slds-box_small" draggable="false" >
+                    <lightning:radioGroup
+                                          aura:id="mygroup"
+                                          name="radioButtonGroup"
+                                          disabled="{! v.att_radioButtonDisabled}"
+                                          label="Type of order"
+                                          options="{! v.options }"
+                                          value="{! v.value }"
+                                          onchange="{! c.handleChange }"
+                                          required="false" />
+                </div>
+            </div>
+            
+            <div class="slds-p-top_x-small">
+                <div class="slds-box slds-box_small" draggable="false" >
+                    <lightning:checkboxGroup aura:id="InHoseCheckbox"
+                                             name="CheckboxGroup"
+                                             options="{! v.Checkbox_options }"
+                                             value="{! v.Checkbox_value }"
+                                             onchange="{! c.handleChangeCheckBox }"
+                                             disabled="{! v.Checkbox_Deactivate }"/>
+                </div>
+            </div> 
+        </div>
+    </div>
+</aura:component>

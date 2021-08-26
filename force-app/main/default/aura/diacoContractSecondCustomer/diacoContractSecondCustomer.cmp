@@ -1,0 +1,330 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water contract second Customer view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+* @version  1.0		24/06/2020		Fabian Pineda (FP)		Added stricter validation to all fields, especially to "phone" fields.
+* @version  1.1		15/07/2020		John Hernandez (FP)		Added Event for triggering Tab completion.
+* @version  1.1     09/11/2020      Fabian Pineda (FP)      Added in new fields. Added help text to some fields.
+-->
+<aura:component controller="DiacoWaterContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="customer" type="Account" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="options" type="String[]" default="AK,AL,AR,AZ,CA,CO,CT,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY"/>
+   	<aura:attribute name="optionsPer" type="String[]" default="Year,Month"/>
+    
+    <aura:attribute name="isLoad" type="Boolean" default="true" />
+     <aura:registerEvent name="tabSaved" type="c:diacoTabCompletionEvent"/><!--V1.1-->
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!--New Reload(when the Tab is Active will change this attribute and Onchange this attribute will trigger the doInit component method)--> 
+    <aura:attribute name="reload" type="Boolean" default="false" />
+    <aura:handler name="change" value="{!v.reload}" action="{!c.reloadComponent}"/>
+    
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+
+    <fieldset class="slds-box slds-theme--default "> 
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Second Customer</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked"> 
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="First_Name" 
+                                                 label="First Name"
+                                                 value="{!v.customer.Homeowner_2_First_Name__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Last_Name" 
+                                                 label="Last Name"
+                                                 value="{!v.customer.Homeowner_2_Last_Name__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="SSN" 
+                                                 label="SSN"
+                                                 value="{!v.customer.Customer_2_SSN__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 "
+                                                 name="dob" 
+                                                 label="DOB" 
+                                                 value="{!v.customer.Customer_2_DOB__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="DL" 
+                                                 label="DL #" 
+                                                 value="{!v.customer.Customer_2_Drivers_License__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select name="Drivers_license_Issuing_state" aura:id="CustomerInfo"
+                                                  label="Drivers license Issuing state"
+                                                  class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                  onchange="{! c.changeStatus }"
+                                                  value="{!v.customer.Drivers_license_Issuing_state_2__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="{!v.options}" var="color">
+                                        <option value="{!color}">{!color}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Drivers_License_Issue" 
+                                                 label="Drivers License Issue" 
+                                                 value="{!v.customer.Customer_2_Drivers_License_Issue__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Driver_License_Expiration" 
+                                                 label="Driver License Expiration" 
+                                                 value="{!v.customer.Customer_2_Drivers_License_Expiration__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <!-- The pattern below matches US phone numbers in the following format(s)
+										###-###-####
+										(###) ###-####
+										### ### ####
+           								###.###.####
+										+## (###) ###-####
+                  					 Additionally, it matches the above patterns omitting separator characters and/or whitespace. -->
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 label="Home Phone" 
+                                                 name="Home_Phone" 
+                                                 value="{!v.customer.Homeowner_2_Phone_Number__c}"
+                                                 messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                 messageWhenBadInput="Please enter a valid US phone number." />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <!-- Refer to the Second Customer's Home Phone field's comments for more information about the regex/pattern. -->
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 label="Cell Phone" 
+                                                 name="Cell_Phone" 
+                                                 value="{!v.customer.Homeowner_2_Mobile__c}"
+                                                 messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                 messageWhenBadInput="Please enter a valid US phone number." />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Income_2" 
+                                                 label="Income"
+                                                 value="{!v.customer.Customer_2_Income__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Net_Income_2" 
+                                                 label="Net Income"
+                                                 value="{!v.customer.Customer_2_Net_Income__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="email" aura:id="CustomerInfo"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Email"
+                                                 label="Email" 
+                                                 value="{!v.customer.Homeowner_2_Email__c}"/>
+                            </div>
+                        </div>
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-top--medium">
+                            <lightning:layoutItem>
+                                <lightning:icon iconName="standard:contact" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Employer</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Employer_Name" 
+                                                 label="Name"
+                                                 value="{!v.customer.Customer_2_Employer__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <!-- Refer to the Second Customer's Home Phone field's comments for more information about the regex/pattern. -->
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 label="Employer Phone" 
+                                                 name="Employer_Home_Phone" 
+                                                 value="{!v.customer.Customer_2_Employer_Phone__c}"
+                                                 messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                 messageWhenBadInput="Please enter a valid US phone number." />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Employer_Type" 
+                                                 label="Employer Type"
+                                                 value="{!v.customer.Customer_2_Employer_type__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Per_1" 
+                                                 label="Per."
+                                                 value="{!v.customer.Customer_2_Per_2__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="{!v.optionsPer}" var="op">
+                                            <option value="{!op}">{!op}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Other Income" 
+                                                 label="Other Income."
+                                                 value="{!v.customer.Customer_2_Other_Income__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="number" aura:id="datalogInfo" formatter="currency" step="0.01"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Per_Month" 
+                                                 label="Per Month."
+                                                 value="{!v.customer.Customer_2_Per_Month__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="number" aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Length_Emp" 
+                                                 label="Length Emp."
+                                                 value="{!v.customer.Customer_2_Length_of_Employment__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Position" 
+                                                 label="Position"
+                                                 value="{!v.customer.Customer_2_Employment_Position__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Hire_Date" 
+                                                  label="Hire Date"
+                                                  value="{!v.customer.Customer_2_Hire_Date__c}"/>
+                            </div>
+                        </div>
+                            <!--PREVIOUS EMPLOYER-->
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-top--medium">
+                            <lightning:layoutItem>
+                                <lightning:icon iconName="standard:contact" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Previous Employer</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <div class="slds-form slds-grid slds-wrap" style="margin-bottom:20px;">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Previous_Employer" 
+                                                 label="Employer."
+                                                 value="{!v.customer.Customer_2_Previous_Employer__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Position" 
+                                                 label="Position"
+                                                 value="{!v.customer.Customer_2_Occupation_Previous__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Previous_Employer_Phone" 
+                                                 label="Phone."
+                                                 value="{!v.customer.Customer_2_Previous_Employer_Phone__c}"/>
+                            </div>
+                        </div>
+                        <lightning:button variant="brand"
+                                          class="slds-m-top--medium slds-align_absolute-center" 
+                                          
+                                          label="{!v._label == 'Saving...' ? v._label : 'Save'}" 
+                                          title="{!v._label == 'Saving...' ? v._label : 'Save'}" 
+                                          disabled="{!v._label == 'Saving...'}" 
+                                          onclick="{! c.saveInformation}" />
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

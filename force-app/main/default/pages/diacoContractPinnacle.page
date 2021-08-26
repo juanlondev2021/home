@@ -1,0 +1,814 @@
+<apex:page applyBodyTag="false" standardController="Home_Services__c" extensions="RenderContractController" 
+           renderAs="pdf" showHeader="false" sidebar="false" 
+           standardStylesheets="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <style>
+                @page {
+                size: letter;
+                margin: 1mm 5mm 5mm 5mm;
+                padding: 5mm 1mm 5mm 1mm;
+                }
+                hr {
+                background-color: black;
+                border-top: 1px solid !important;
+                }
+                .page-break {
+                display:block;
+                page-break-after:always;
+                }
+                body {
+                font-family: Arial;
+                }
+                .cotain {
+                background-size: contain;
+                background-repeat: no-repeat;
+                }
+                li {
+                list-style-type: none;
+                display: inline;
+                float: left;
+                }
+                
+                
+                ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 70px;
+                }
+                .bold {
+                font-weight: bold
+                }
+                .border{
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                .border th{
+                border: 1px solid black;
+                }
+                .border td{
+                border: 1px solid black;
+                }
+                .margin p {
+                margin: 0;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="page-break">
+                <ul  style="display: flex; justify-content: center; margin-bottom: 40px;">
+                    <li class="cotain" style=" width: 100px; background-image: url({! $Resource.PinnacleLogo });
+                                              height: 60px; background-position: center;
+                                              position: absolute;left: 10px;">
+                    </li>
+                    <li style="margin-left: 120px; margin-top:10px;">
+                        <h4 style="font-weight: bold;">
+                            RETAIL INSTALLMENT CONTRACT &amp; SECURITY AGREEMENT
+                            <span style="font-size: 16px; font-weight: normal;">
+                                Date: <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }</u>
+                            </span>
+                        </h4>
+                        
+                    </li>
+                    <li class="cotain" style="background-image: url({! $Resource.HsYellowLogo }); width: 40px; 
+                                              height: 40px;position: absolute;right: 0;"></li>     
+                </ul>
+                <div style="margin-left:25px;margin-right:25px;">
+                    <table style="width: 100%">
+                        <tr>
+                            <th  style="width: 50%; font-weight: bold;">
+                                BUYER
+                            </th>
+                            <th  style="width: 50%; font-weight: bold;">
+                                CO-BUYER
+                            </th>
+                            
+                        </tr>
+                        <tr>
+                            <td style="min-height: 25px; max-height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                                </h6>
+                                <hr align="left" />
+                            </td>
+                            <td style="min-height: 25px; max-height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}
+                                </h6>
+                                <hr align="left" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <p style="margin: 0; font-size: 12px;">
+                                    Buyer's Name 
+                                </p>
+                            </td>
+                            <td>
+                                <p style="margin: 0; font-size: 12px;">
+                                    Co-Buyer's Name if applicable
+                                </p>
+                            </td>
+                        </tr>                      
+                    </table>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="min-height: 25px; max-height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{! IF(Home_Services__c.Street__c != '',Home_Services__c.Street__c &' ', '') }
+                                    {!IF(Home_Services__c.City__c != '',Home_Services__c.City__c &' ','')} 
+                                    {! IF(Home_Services__c.State__c != '',Home_Services__c.State__c & ' ', '')} 
+                                    {! IF(Home_Services__c.Zip__c != '', Home_Services__c.Zip__c, '')}
+                                </h6>
+                                <hr align="left" />
+                            </td>
+                            <td style="min-height: 25px; max-height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{! Home_Services__c.Account__r.Phone}</h6>
+                                <hr align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="margin: 0; font-size: 12px;">
+                                    Address (Street, city, state, zip code)
+                                </p>
+                            </td>
+                            <td >
+                                <p style="margin: 0; font-size: 12px;">
+                                    Phone Number
+                                </p>
+                            </td>
+                        </tr>                        
+                    </table>
+                    <br/>
+                    <table style="width: 100%">
+                        <tr>
+                            <th class="bold" style="width: 100%">
+                                SELLER
+                            </th>
+                            
+                        </tr>
+                        <tr>
+                            <td style="min-height: 25px; max-height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{!$User.FirstName &' '& $User.LastName}
+                                </h6>
+                                <hr align="left" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <p style="margin: 0; font-size: 12px;">
+                                    Name
+                                </p>
+                            </td>
+                        </tr>                      
+                    </table>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="min-height: 25px; max-height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{!$User.Address}
+                                </h6>
+                                <hr align="left" />
+                            </td>
+                            <td style="min-height: 25px; max-height: 25px; height: 25px;" valign="bottom">
+                                <h6 style="margin: 0; height: 14px">{! IF($User.Phone != '', $User.Phone, 
+                                    IF($User.MobilePhone != '', $User.MobilePhone, 'Number'))}</h6>
+                                <hr align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="margin: 0; font-size: 12px;">
+                                    Address (Street, city, state, zip code)
+                                </p>
+                            </td>
+                            <td >
+                                <p style="margin: 0; font-size: 12px;">
+                                    Phone Number
+                                </p>
+                            </td>
+                        </tr> 
+                    </table>
+                    <div style="font-size: 12px;">
+                        <p align="justify">
+                            In this Retail Installment Contract (the “Contract”), the terms “we,” “us” and “our” 
+                            refer to the Seller named above or, if this Contract has been assigned, to the holder 
+                            of this Contract; the terms “you” and “your” refer to the Buyer identified above; and 
+                            the term “Seller” refers to the Seller identified above. By signing below, you agree to 
+                            all terms and conditions of this Contract.
+                        </p>
+                        <p>
+                            <span><ins>CREDIT SALE AGREEMENT</ins></span> <br/>
+                            The Seller has agreed to sell and you agree to buy the following goods and/or services below:
+                        </p>
+                    </div>
+                    <table class="border" style="width: 100%; border: 1px solid;">
+                        <tr>
+                            <th align="center">
+                                Description of Goods and/or Services
+                            </th>
+                            <th align="center">
+                                Manufacturer
+                            </th>
+                            <th align="center">
+                                Serial #
+                            </th>
+                        </tr>
+                        <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepea">
+                            <tr style="min-height: 40px">
+                                <td width="20%" align="center">
+                                    <apex:outputField value="{!LineIte.Name}" />
+                                </td >
+                                <td width="20%" align="center">
+                                    <apex:outputField value="{!LineIte.Quantity__c}" />
+                                </td>
+                                <td width="20%"  align="center">
+                                    <apex:outputField value="{!LineIte.Total_Sales_Price_p__c }" />
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                    <table style="width: 100%; font-size: 12px;">
+                        <tr>
+                            <th colspan="2">
+                                ITEMIZATION OF AMOUNT FINANCED OF:
+                            </th>                    
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                1) Cash price of goods purchased
+                            </td>
+                            <td style="width: 20%">
+                                <u><apex:outputField value="{! Home_Services__c.Total_Cash_Price__c}"/></u>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                2) Down payment 
+                            </td>
+                            <td style="width: 20%">
+                                <u><apex:outputField value="{! Home_Services__c.Down_Payment__c}"/></u>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                3) Difference between 1) and 2) above (the amount financed)	 
+                            </td>
+                            <td style="width: 20%">
+                                <u><apex:outputField value="{! Home_Services__c.Balance_Due__c}"/></u>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                4) Amount given to you directly  
+                            </td>
+                            <td style="width: 20%">
+                                _____________________________
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                5) Amount paid on your account with Seller  
+                            </td>
+                            <td style="width: 20%">
+                                _____________________________
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                6) Amount paid to others on your behalf		  
+                            </td>
+                            <td style="width: 20%">
+                                _____________________________
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%">
+                                7) Prepaid finance charges			  
+                            </td>
+                            <td style="width: 20%">
+                                _____________________________
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="page-break">
+                <div style="margin-left:25px;margin-right:25px;">
+                    <table class="border" style="width: 100%">
+                        <tr>
+                            <th align="center" colspan="5">
+                                TRUTH IN LENDING DISCLOSURE ("e" means estimate)
+                            </th>
+                        </tr>
+                        <tr style="font-size: 12px;">
+                            <td>
+                                <b>ANNUAL PERCENTAGE RATE: </b>
+                                The cost of your credit as 
+                                a yearly percentage rate
+                            </td>
+                            <td>
+                                <b>FINANCE CHARGES:</b> 
+                                The dollar amount the 
+                                credit will cost you
+                            </td>
+                            <td>
+                                <b>AMOUNT FINANCED:</b> 
+                                The amount of credit 
+                                provided to you or on 
+                                your behalf:
+                            </td>
+                            <td>
+                                <b>TOTAL OF PAYMENTS:</b> 
+                                The amount you will 
+                                have paid after you have 
+                                made all payments as scheduled.
+                            </td>
+                            <td>
+                                <b>TOTAL SALES PRICE: </b>
+                                The total cost of your 
+                                purchase on credit, including 
+                                your down payment of:
+                            </td>
+                        </tr>
+                        <tr style="font-size: 12px;min-height: 40px;">
+                            <td rowspan="2">
+                                
+                            </td>
+                            <td rowspan="2">
+                                
+                            </td>
+                            <td rowspan="2">
+                                
+                            </td>
+                            <td rowspan="2">
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr style="font-size: 12px;min-height: 40px;">
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="border" style="font-size: 12px;width: 100%">
+                        <tr>
+                            <td style="width: 30%">
+                                No. of Payments 
+                            </td>
+                            <td style="width: 30%">
+                                Payment Amount (in months)
+                            </td>
+                            <td style="width: 40%">
+                                When Payments Are Due: Beginning 30 days from Contract Date unless otherwise noted 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%">
+                            </td>
+                            <td style="width: 30%">
+                            </td>
+                            <td style="width: 40%">
+                                Monthly, beginning: 
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div align="justify" class="margin" style="font-size: 12px; margin-top: 20px;">
+                        <p>
+                            <b>Security:</b> You are giving a 
+                            security interest in the equipment 
+                            being purchased.
+                        </p>
+                        <p>
+                            <b>Late Charges:</b> If any payment is more 
+                            than 10 days late, we will charge and 
+                            you agree to pay, a late charge not 
+                            to exceed $10.00.
+                        </p>
+                        <p>
+                            <b>Prepayment:</b> You can prepay 
+                            the full amount due under this contract 
+                            at any time. There is no penalty if 
+                            you elect to do so.
+                        </p>
+                        <p>
+                            <b>Additional Terms:</b> This Contract includes 
+                            the Additional Terms and Conditions below, 
+                            including, but not limited to, information about 
+                            non-payment default, the right to accelerate the 
+                            maturity of the obligation, and prepayment rebates 
+                            and penalties
+                        </p>
+                        <p>
+                            <b>Electronic Signatures:</b> This Contract may be executed 
+                            by and through electronic signature technology which is in 
+                            compliance with applicable law governing electronic signatures, 
+                            including but not limited to, DocuSign®. Electronic signatures shall 
+                            be considered as valid and binding as original, wet signatures
+                        </p>
+                    </div>
+                    <div style="padding: 20px;">
+                        
+                    </div>
+                    <table class="border" style="font-size: 12px;width: 100%">
+                        <tr>
+                            <td colspan="2">
+                                THIS BOX IS NOT PART OF THE RETAIL INSTALLMENT CONTRACT
+                                Seller hereby assigns its interest in this Contract to 
+                                the party checked below. Any assignment to Pinnacle Finance 
+                                shall be subject to Pinnacle Finance's acceptance of such assignment 
+                                and to all of the terms and conditions set forth in the Master Dealer 
+                                Agreement between Seller and Pinnacle Finance. 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; margin: 0;">
+                                <div style="width: 100%; display: inline-block;margin:0;">
+                                    <div style="width: 5%;float:left;">
+                                        <div style="border: 1px solid; width: 10px; height: 10px;margin:0;">
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="width: 90%;float:left;"><span>&nbsp;</span>Pinnacle Finance</div>
+                                </div>
+                                <pre style='display:inline'>&#09; &#09;</pre>9915 E. Bell Rd., Suite 120<br/>
+                                <pre style='display:inline'>&#09; &#09;</pre>Scottsdale, AZ 85260<br/>
+                                <pre style='display:inline'>&#09; &#09;</pre>(877) 249-5119
+                            </td>
+                            <td style="width: 50%;" valign="top">
+                                <div style="border: 1px solid; width: 10px; height: 10px;">
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="border" style="width: 100%">
+                        <tr style="height:30px;">
+                            <td style="width:40%">
+                                Seller Signature:
+                            </td>
+                            <td style="width:30%">
+                                By:
+                            </td>
+                            <td style="width:30%">
+                                Title:
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    <div align="justify" style="margin-top: 10px;">
+                        <h5 style="margin:0;">
+                            ADDITIONAL TERMS and CONDITIONS
+                        </h5>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Promise To Pay:</b> You promise to pay the 
+                            Amount Financed, together with interest figured 
+                            on the unpaid balances of the Amount Financed and 
+                            finance charges, according to the Annual Percentage 
+                            Rate and your payment schedule shown on the front of 
+                            this Contract. Interest is computed on a simple interest 
+                            basis.
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Security:</b> You give us a security interest in the 
+                            goods you are purchasing ("Collateral"). Our security interest 
+                            secures your performance of all obligations under this Contract 
+                            and any extensions, renewals or modifications of it. You also 
+                            authorize us to make any filing with respect to the Collateral 
+                            that we decide is reasonably necessary to preserve the Collateral, 
+                            or to establish priority of, perfect, continue perfected, or enforce 
+                            our interest in it or our rights under the agreement. This includes the 
+                            authorization to make a fixture filing against any real estate to which 
+                            the Collateral is affixed or attached. The decision about what is reasonably 
+                            necessary is ours alone.
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Maintenance Of Collateral:</b> You will maintain the Collateral in good 
+                            condition and repair; not permit its value to be impaired; keep it free from 
+                            all liens or encumbrances prior in right to ours; and not allow it to become a 
+                            fixture to other property without our consent. To the greatest extent permitted 
+                            by applicable law, you agree that if the Collateral is affixed or attached to any 
+                            real estate, it shall remain as personal property and shall not be deemed as a part 
+                            of the real estate. You will not sell, lease, or otherwise dispose of the Collateral 
+                            without our written permission. Loss or damage of the Collateral does not release you 
+                            of your obligation to make payments when due. We may inspect the Collateral at reasonable 
+                            times and you will assist us in such inspections to insure compliance with this Contract. 
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Assignment:</b> We may assign this Contract and any of our rights under this Contract 
+                            without your consent, and the Assignee is entitled to all of our rights under the Contract. 
+                            Your rights will not be affected by such an assignment. If you sell or transfer all or any 
+                            part of the security interest or sell or transfer the Collateral or any real property to which 
+                            the Collateral is affixed, we may, at our option, require immediate payment of all outstanding 
+                            sums under this Contract. Fee for Returned Checks/Insufficient Funds: If you give us a check in 
+                            payment of an installment on this Contract, and that check is returned unpaid by your bank, we will 
+                            charge you a fee of $25.00 or the actual charge assessed to us, whichever is greater. If we attempt 
+                            to make an electronic fund transfer, with your authorization, and there are insufficient funds we will 
+                            charge you a fee of $25.00. 
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Prepayment:</b> You may prepay your balance at any time and you will not have to pay a penalty. 
+                            You will not be entitled to a refund of part of the finance charge, except for unearned finance charges. 
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Default:</b> You are in default if you fail to make one or more payments when due, or you breach 
+                            any representation or warranty made by you in this Contract, or you take any action that materially 
+                            impairs the value of the Collateral. If you are in default, we can require you to pay the remaining 
+                            balance of this Contract all at once and immediately. If you are in default, we also have all the rights 
+                            and remedies Arizona law permits, including the right to repossess the Collateral. We may then resell the 
+                            Collateral, in accordance with the procedures and after giving any notices required pursuant to applicable law. 
+                            If the original cash price was more than $1,000 and we repossess or accept voluntary surrender of the Collateral, 
+                            you shall pay the difference between the sale proceeds and what you owe. If you are in default and we refer this Contract 
+                            to an attorney who is not our salaried employee for collection, you agree to pay our reasonable attorneys' fees. To the extent 
+                            not prohibited by law, you agree to pay any other costs and fees of repossession, collection, or realization of any security interest, 
+                            including but not limited to court costs. Credit Report Agreement and Notice: You agree we may investigate your credit, employment, and 
+                            financial status. You authorize us to obtain a credit report and any other information about your creditworthiness in connection with processing 
+                            your application for credit, and subsequently in connection with any renewal or update of your Contract, or to take collection action on this Contract, 
+                            or to investigate disputes regarding this Contract and your debt to us. At your request, we will inform you if such reports were ordered, and the names 
+                            of the credit bureaus that provided reports. You authorize the Department of Defense and the various departments and commands to verify your social security 
+                            number or other identifier and disclose your home address to the authorized holder of the contract for purposes of performing or enforcing the terms of this 
+                            Agreement. You authorize any past or present employer to confirm employment or communicate with us regarding your indebtedness to us if you fail to meet the 
+                            terms and conditions of this Agreement. We will use all information furnished solely in connection with performing or enforcing the terms of this Agreement. 
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Law Applicable:</b> The laws of the state of Arizona govern this Contract, except where preempted by federal law. 
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Entire Agreement:</b> This Contract constitutes the entire agreement between the parties and supersedes any 
+                            prior understandings, agreements or representations by or between the parties, written or oral, to the extent they 
+                            relate to the subject matter contained in this Contract.
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Entire Agreement:</b> This Contract constitutes the entire agreement between the parties and supersedes any prior 
+                            understandings, agreements or representations by or between the parties, written or oral, to the extent they relate to 
+                            the subject matter contained in this Contract.
+                        </p>
+                        <p style="font-size: 12px; margin: 0;">
+                            <b>Sharing Information:</b> You agree that we (together with any of our assignees) may share with our affiliates the 
+                            information we have about you or your purchase. This includes information contained in your application, in this contract 
+                            or from any other source. If you decide you do not want us to share this information, you will inform us by writing or calling 
+                            to the contact information below. Even if you notify us as such, you understand and agree that we may still share with our affiliates 
+                            information solely regarding transactions or experiences between you and us. You also agree that we may report your payment history with 
+                            us or our assignees to credit reporting agencies.
+                        </p>
+                        <p style="font-size: 12px; margin: 0;padding: 0">
+                            <b>Other:</b> We may waive any default without waiving any other subsequent or prior default by you. 
+                            You understand that any loss, injury, or destruction of the property will not operate as a payment and 
+                            will not release you from any of your obligations under this Contract. Any parts of this Contract contrary 
+                            to the laws of this state will not invalidate other parts of the Contract.
+                        </p>  
+                        <p style="font-weight: bold; font-size: 12px; margin: 0;">
+                            ANY HOLDER OF THIS CONSUMER CREDIT CONTRACT IS SUBJECT TO ALL CLAIMS 
+                            AND DEFENSES WHICH THE DEBTOR COULD ASSERT AGAINST THE SELLER OF GOODS OR 
+                            SERVICES OBTAINED PURSUANT HERETO OR WITH THE PROCEEDS HEREOF PROVIDED THE HOLDER 
+                            RECEIVED NOTICE FROM THE DEBTOR WITHIN 12 MONTHS OF THE NOTICE OF ASSIGNMENT. RECOVERY 
+                            HEREUNDER BY THE DEBTOR SHALL NOT EXCEED AMOUNTS PAID BY THE DEBTOR HEREUNDER.
+                            YOU MUST GIVE US NOTICE OF YOUR CLAIM OR 
+                        </p>
+                        
+                    </div>
+                    <table align="justify" style="margin: 0; width: 100%; padding: 0; border:0px;">
+                        <tr>
+                            <td colspan="2" >
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 60%;font-size: 12px; margin: 0; font-weight: bold; " valign="top">
+                                <p  style="font-size: 12px; margin: 0; font-weight: bold;text-align: justify;"  valign="top">
+                                    DEFENSE IN WRITING BY CERTIFIED
+                                    MAIL WITHIN 90 DAYS OF RECEIVING ANY GOODS OR YOU MAY WAIVE THE RIGHT TO SET-OFFS OR DEFENSE 
+                                    AGAINST ASSIGNEE IF ASSIGNEE PROVIDES YOU A NOTICE OF YOUR RIGHTS AND YOU FAIL TO EXERCISE 
+                                    THOSE RIGHTS PURSUANT TO THE TERMS OF THE NOTICE.
+                                </p>
+                                <p style="margin: 0; font-weight: normal;">
+                                    Notice: You may request that the initial disclosures prescribed in the truth in lending 
+                                    act (15 United States Code sections 1601 through 1666j) be provided in Spanish before signing 
+                                    any loan documents. Anuncio: Residentes de Arizona pueden pedir que los declaraciones iniciales 
+                                    ordenados en el Truth in Lending Act (15 United States Code §§ 1601 through 1666j) sean traducidos 
+                                    en español antes de firmar cualquier formulario de préstamo.
+                                </p>
+                            </td>
+                            <td style="width: 40%;height: 80px;" valign="top">
+                                <table class="border" style="width: 100%">
+                                    <tr>
+                                        <td valign="top">
+                                            Finance Type 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 80px;" >
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 80px;" valign="bottom">
+                                            <p style="font-size: 14px; margin: 0;">
+                                                Initials:     
+                                                <u style=" display: inline-block; padding-right: 50px;border-bottom: 1px solid black;
+                                                          margin-bottom: 10px; text-decoration: none;">
+                                                    __.
+                                                </u>  
+                                                <u style=" display: inline-block; padding-right: 50px;border-bottom: 1px solid black;
+                                                          margin-bottom: 10px; text-decoration: none;">
+                                                    ___.
+                                                </u>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="font-size: 12px;margin-left:25px;margin-right:25px;">
+                    <div class="bold" style="text-align: center">
+                        This instrument is based on a home solicitation sale, which is subject to the provisions of Title 44, Chapter 15, of
+                        the Arizona Revised Statutes. This instrument is not negotiable.
+                    </div>
+                    <div style="text-align: center;">
+                        <strong>NOTICE TO BUYER:</strong>
+                    </div>
+                    <div>
+                        1) DO NOT SIGN THIS CONTRACT IF ANY OF THE SPACES INTENDED FOR THE AGREED TERMS TO THE EXTENT OF THEN AVAILABLE 
+                        INFORMATION ARE LEFT BLANK. 2)YOU ARE ENTITLED TO A COPY OF THIS CONTRACT AT THE TIME YOU SIGN IT. 3) YOU MAY PAY 
+                        OFF THE FULL UNPAID BALANCE DUE UNDER THIS CONTRACT AT ANY TIME, AND IN SO DOING YOU SHALL BE ENTITLED TO A FULL 
+                        REBATE OF THE UNEARNED FINANCE CHARGES AND INSURANCE CHARGES. 4)YOU MAY CANCEL THIS CONTRACT AT ANY TIME PRIOR TO 
+                        MIDNIGHT OF THE THIRD BUSINESS DAY AFTER THE DATE OF THIS TRANSACTION. SEE THE ATTACHED NOTICE OF CANCELLATION FORM 
+                        FOR AN EXPLANATION OF THIS RIGHT. 5) IT SHALL NOT BE LEGAL FOR THE SELLER TO ENTER YOUR PREMISES UNLAWFULLY OR COMMIT 
+                        ANY BREACH OF THE PEACE TO REPOSSESS GOODS PURCHASED UNDER THIS CONTRACT
+                    </div>
+                    <table  style="margin: 0; margin-top: 40px; width: 100%;">
+                        <tr  style="min-height: 70px;">
+                            <td valign="top" style="width: 33.33333%;">
+                                Signature of Seller
+                                <hr align="left" style="margin-top: 40px; "/>
+                            </td>
+                            <td valign="top" style="width: 33.33333%;">
+                                Signature of Buyer
+                                <hr align="left" style="margin-top: 40px;"/>
+                            </td>
+                            <td valign="top" style="width: 33.33333%;">
+                                Signature of Co-Buyer 
+                                <hr align="left" style="margin-top: 40px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                        <table  style="margin: 0; width: 100%;">
+                        <tr style="margin-top: 40px;">
+                            <td valign="bottom" style="width: 1%;">
+                                Date
+                            </td>
+                            <td style="width: 29%;">
+                            	<h6 style="text-align: center; margin: 0; height: 14px; font-size: 12px !important;width: 60%;">
+                                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>
+                            </td>
+                            <td style="width: 1%;" valign="bottom">
+                                Date
+                            </td>
+                            <td style="width: 29%;">
+                            	<h6 style="text-align: center; margin: 0; height: 14px; font-size: 12px !important;width: 60%;">
+                                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>
+                            </td>
+                            <td valign="bottom" style="width: 1%;">
+                                Date
+                            </td>
+                            <td style="width: 29%;">
+                            	<h6 style="text-align: center; margin: 0; height: 14px; font-size: 12px !important;width: 60%;">
+                                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                
+                
+            </div>
+            <div style="font-size: 12px; margin-left:25px;margin-right:25px;">
+                <div style="margin-top: 30px;margin-bottom: 30px">
+                    Date of Transaction: ______________________________________
+                </div>
+                <div style="text-align: center;">
+                    NOTICE OF CANCELLATION
+                </div>
+                <div>
+                    <p>
+                        You may CANCEL this transaction, without any Penalty or Obligation, within THREE BUSINESS DAYS from the above date. If you cancel, any property traded in, any payments made by you under the contract or sale, and any negotiable instrument executed by you will be returned within TEN BUSINESS DAYS following receipt by the seller of your cancellation notice, and any security interest arising out of the transaction will be canceled. If you cancel, you must make available to the seller at your residence, in substantially as good condition as when received, any goods delivered to you under this contract or sale, or you may if you wish, comply with the instructions of the seller regarding the return shipment of the goods at the seller's expense and risk. If you do make the goods available to the seller and the seller does not pick them up within 20 days of the date of your notice of cancellation, you may retain or dispose of the goods without any further obligation. If you fail to make the goods available to the seller, or if you agree to return the goods to the seller and fail to do so, then you remain liable for performance of all obligations under the contract. To cancel this transaction, mail or deliver the signed and dated bottom portion of this cancellation notice or any other written notice, or send a telegram to: 
+                    </p>
+                    <p>
+                        If you cancel, you must make available to the seller at your residence, in substantially as good condition as when received, any goods delivered to you under this contract or sale, or you may if you wish, comply with the instructions of the seller regarding the return shipment of the goods at the seller's expense and risk. 
+                    </p>
+                    <p>
+                        If you do make the goods available to the seller and the seller does not pick them up within 20 days of the date of your notice of cancellation, you may retain or dispose of the goods without any further obligation. If you fail to make the goods available to the seller, or if you agree to return the goods to the seller and fail to do so, then you remain liable for performance of all obligations under the contract. To cancel this transaction, mail or deliver the signed and dated bottom portion of this cancellation notice or any other written notice, or send a telegram to: 
+                    </p>
+                    <table style="margin: 0; width: 100%; margin-top: 20px;" class="">
+                        <tr>
+                            <td valign="bottom" style="width: 19%;">
+                                <h6 style="margin: 0; height: 14px; font-size: 12px; text-align: center;width: 80%;">{!$User.FirstName &' '& $User.LastName}
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 80%;float: left;"/>&nbsp; at<br/>
+                                Name of Seller 
+                            </td>
+                            <td valign="bottom" style=" width: 38%;">
+                                <h6 style="margin: 0; height: 14px; font-size: 12px; text-align: center;width: 80%;">
+                                    {!$User.Address}
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 90%;float: left;"/>&nbsp;<br/>
+                                Seller's Address 
+                            </td>
+                            
+                            <td valign="bottom" style="width: 10%">
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>&nbsp;<br/>
+                                City
+                            </td>
+                            <td valign="bottom" style="width: 10%;">
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>&nbsp;<br/>
+                                State
+                            </td>
+                            <td valign="bottom" style="width: 10%">
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>&nbsp;<br/>
+                                Zip Code
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="margin-top:20px;">
+                        NOT LATER THAN MIDNIGHT OF ____________________________________<br/>
+                        I HEREBY CANCEL THIS TRANSACTION 
+                    </div>
+                    <div style="center">
+                        <table style="width: 100%;">
+                            <tr style="min-height:60px;">
+                                <td valign="bottom" style="width:60%">
+                                    <hr/>
+                                    Buyer's Signature
+                                </td>
+                                <td valign="bottom" style="width: 40%;">
+                                    <h6 style="text-align: center; margin: 0; height: 14px; font-size: 12px !important;">
+                                        {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }
+                                    </h6>
+                                    <hr/>
+                                    Date 
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/><br/>
+                    <table style="width: 100%;">
+                        <tr  style="min-height: 70px;">
+                            <td valign="top" style="width: 33.33333%;">
+                                Signature of Seller
+                                <p style="margin-bottom: 0;margin-top: 30px;">
+                                    ____.
+                                </p>
+                                <hr align="left" style="margin-top: 0px; "/>
+                            </td>
+                            <td valign="top" style="width: 33.33333%;">
+                                Signature of Buyer
+                                <p style="margin-bottom: 0;margin-top: 30px;">
+                                    _____.
+                                </p>
+                                <hr align="left" style="margin-top: 0px; "/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 100%;">
+                        <tr style="margin-top: 40px;">
+                            <td valign="bottom" style="height: 16px; width:1%">
+                                Date  
+                            </td>
+                            
+                            <td style="width:49%">
+                                <h6 style="text-align: center; margin: 0; height: 14px; font-size: 12px !important;width: 60%;">
+                                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>
+                            </td>
+                            <td valign="bottom" style="width:1%">
+                                Date
+                            </td>
+                            <td style="width:49%">
+                                <h6 style="text-align: center; margin: 0; height: 14px; font-size: 12px !important;width: 60%;">
+                                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) }
+                                </h6>
+                                <hr style="margin-bottom: 0;width: 60%;float: left;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </body>
+    </html>   
+</apex:page>

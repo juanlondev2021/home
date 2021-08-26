@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X4_Business_Days_From_Sale_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( CONTAINS(TEXT(Installation_Status__c),&quot;Sale&quot;), (
+IF(MOD(  DATEVALUE(CreatedDate)  - DATE(1900, 1, 6), 7) &gt; 2,
+DATEVALUE(CreatedDate) + 6,
+IF(MOD( DATEVALUE(CreatedDate) - DATE(1900, 1, 6), 7) &gt; 0,
+DATEVALUE(CreatedDate) + 4, DATEVALUE(CreatedDate) + 5
+))
+),DATEVALUE(CreatedDate))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>4 Business Days From Sale Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

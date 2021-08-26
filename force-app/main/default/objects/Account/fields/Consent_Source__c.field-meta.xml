@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Consent Source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Canvasser</fullName>
+                <default>false</default>
+                <label>Canvasser</label>
+            </value>
+            <value>
+                <fullName>Inbound</fullName>
+                <default>false</default>
+                <label>Inbound</label>
+            </value>
+            <value>
+                <fullName>Inbound 5000</fullName>
+                <default>false</default>
+                <label>Inbound 5000</label>
+            </value>
+            <value>
+                <fullName>Inbound 5050</fullName>
+                <default>false</default>
+                <label>Inbound 5050</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Phone_Mobile_Required</fullName>
+    <active>false</active>
+    <description>This validation rule for ensure the the account should have mobile or phone number</description>
+    <errorConditionFormula>AND( 
+ISBLANK(Phone), 
+ISBLANK(PersonMobilePhone) 
+)</errorConditionFormula>
+    <errorDisplayField>Phone</errorDisplayField>
+    <errorMessage>Please Enter Phone/Mobile Number.</errorMessage>
+</ValidationRule>

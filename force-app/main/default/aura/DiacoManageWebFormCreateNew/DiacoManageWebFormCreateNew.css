@@ -1,0 +1,39 @@
+.THIS {
+}
+
+.THIS .slds-accordion__list-item{
+    border-top: none;
+}
+
+.THIS .slds-progress{
+    max-width: 90%;
+}
+
+.THIS .slds-form-element{
+    width: 100%;
+}
+
+.THIS .slds-textarea{
+    height: 200px;
+}
+
+.THIS .button {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.THIS .button:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.THIS .selectedButton {
+  background-color: rgb(21, 137, 238);
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.THIS .selectedButton:hover {
+  background-color: rgb(18, 117, 204);
+}

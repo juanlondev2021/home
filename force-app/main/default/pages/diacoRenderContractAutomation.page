@@ -1,0 +1,2438 @@
+<!--
+
+Diaco
+@author       dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+Project:      DiacoContracts
+Description:    component reponsible of rendering home automation contract tabs
+
+Changes (Version)
+_________________________________________
+
+No.    Date      Author          Description
+____  __________      __________________      _____________________________________
+@version  1.0    12/03/2019    Dayana Rodriguez (DY)  Initial implementation  of the component.
+@version  1.1    04/03/2020    Giovanni Ulloque (GU)  - DiacoSign Improvement.
+@version  1.2    04/03/2020    John Hernandez (GU)  - Cancellation Notice and several fields added .
+-->
+<apex:page applyBodyTag="false" standardController="Home_Services__c" renderAs="pdf" extensions="RenderContractController,diacoRenderContractController"
+    showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false">
+
+    <apex:variable var="count" value="1" />
+
+
+    <html>
+
+    <head>
+        <!-- Compiled and minified CSS -->
+        <style>
+            @page {
+                size: letter;
+                margin: 5mm 5mm 5mm 5mm;
+                padding: 8mm 1mm 8mm 1mm;
+            }
+
+            .page-break {
+                display: block;
+                page-break-after: always;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 8pt;
+            }
+
+            .cotain {
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            li {
+                list-style-type: none;
+                display: inline;
+                float: left;
+            }
+
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 70px;
+            }
+
+            .margin p {
+                margin: 0;
+            }
+
+            .hidden {
+                color: white;
+                border-bottom: 1px solid gray;
+            }
+
+            .hidden-h {
+                color: white;
+            }
+
+            p {
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+
+            .mark-below {
+                color: white;
+                border-bottom: 1px solid gray;
+            }
+
+            .mark-below-visible {
+                color: black;
+                border-bottom: 1px solid gray;
+            }
+
+            div.cls_002::after {
+                content: "\a";
+                white-space: pre;
+            }
+
+            div.cls_002 {
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                font-size: 8px;
+                position: inherit;
+                top: 0px;
+            }
+
+            span.cls_003::after {
+                content: "\a";
+                white-space: pre;
+            }
+
+            span.cls_003 {
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                font-size: 7.8pt;
+                top: 0px;
+            }
+
+            div.cls_004 {
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                font-size: 9pt;
+                margin-left: 10px
+            }
+        </style>
+    </head>
+
+    <body>
+        <!--MAIN CONTRACT-->
+        <div style="page-break-after:always;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 33.33333%">
+                        <img src="{!URLFOR($Resource.AutomationLogo)}" class="changeImage" style="width:60%" />
+                    </td>
+                    <td style="width: 33.33333%">
+                        <div style="width:100%;text-align:center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:12px">
+                            Protection Source
+                            <br />664 W Warner Rd
+                            <br />Tempe,AZ 85284
+                            <br/>4807762574,opt#4
+                            <br/>License # ROC 201046
+                        </div>
+                    </td>
+                    <td style="width: 33.33333%">
+                        <div style="margin-top:20px;width:100%;text-align:center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:12px">
+                            {!CSIDNumber}
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
+            <div class="bold" style="margin-top:10px;width:100%;text-align:center">
+                <b>MONITORING AGREEMENT</b>
+            </div>
+            <div class="bold" border="1" style="margin-top: 10px;width:100%;">
+                This Agreement is entered into on
+                <u>
+                    <apex:outputtext value="{0, date, medium}">
+                        <apex:param value="{!TODAY()}"></apex:param>
+                    </apex:outputtext>
+                </u> between Protection Source, hereinafter referred to as “PS” and SUBSCRIBER'S listed below.
+            </div>
+
+            <table width="100%" style="margin-top: 10px; border-collapse:collapse">
+                <tr style="width: 100% ">
+                    <td style="width: 50%; border: 1px solid black;">
+                        <div class="cls_002">Subscriber #1</div>
+                        <div class="cls_004" style="text-align:center; padding:3px; ">{!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}</div>
+                    </td>
+                    <td style="width: 50%; border: 1px solid black;">
+                        <div class="cls_002">Subscriber #2</div>
+                        <div class="cls_004" style="text-align:center; padding:3px;">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</div>
+                    </td>
+                </tr>
+            </table>
+
+            <!--Name and SSN ROW-->
+            <table width="100%" style="border-collapse:collapse;">
+                <tr style="width: 100%">
+                    <td style="width:50%; border: 1px solid black;">
+                        <table width="100%" style="width: 100%;border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 33.333%;border-right: 1px solid black;">
+                                    <div class="cls_002">SSN</div>
+                                    <div class="cls_004">{!Home_Services__c.Account__r.Customer_1_SSN_E__c}</div>
+                                </td>
+                                <td style="width: 33.333%;border-right: 1px solid black;">
+                                    <div class="cls_002">DOB</div>
+                                    <div class="cls_004">
+                                        <apex:outputtext value="{0, date, medium}">
+                                            <apex:param value="{!Home_Services__c.Account__r.Customer_1_DOB__c}"></apex:param>
+                                        </apex:outputtext>
+                                    </div>
+                                </td>
+                                <td style="width: 33.334%">
+                                    <div class="cls_002">Score</div>
+                                    <div class="cls_004">{!Home_Services__c.Account__r.Score_Customer_1__c}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width:50%; border: 1px solid black;">
+                        <table width="100%" style="width: 100%;border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 33.333%;border-right: 1px solid black;">
+                                    <div class="cls_002">SSN</div>
+                                    <div class="cls_004">{!Home_Services__c.Account__r.Customer_2_SSN__c}</div>
+                                </td>
+                                <td style="width: 33.333%;border-right: 1px solid black;">
+                                    <div class="cls_002">DOB</div>
+                                    <div class="cls_004">
+                                        <apex:outputtext value="{0, date, medium}">
+                                            <apex:param value="{!Home_Services__c.Account__r.Customer_2_DOB__c}"></apex:param>
+                                        </apex:outputtext>
+                                    </div>
+                                </td>
+                                <td style="width: 33.334%">
+                                    <div class="cls_002">Score</div>
+                                    <div class="cls_004">{!Home_Services__c.Account__r.Score_Customer_2__c}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!--Phone ROW-->
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 20%; border: 1px solid black;">
+                        <div class="cls_002">Subscriber #1 Phone</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Phone}</div>
+                    </td>
+                    <td style="width: 30%; border: 1px solid black;">
+                        <div class="cls_002">Subscriber # 1 Email</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.PersonEmail}</div>
+                    </td>
+                    <td style="width: 20%; border: 1px solid black;">
+                        <div class="cls_002">Subscriber #2 Phone</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Phone_Number__c}</div>
+                    </td>
+                    <td style="width: 30%; border: 1px solid black;">
+                        <div class="cls_002">Subscriber #2 Email</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Homeowner_2_Email__c}</div>
+                    </td>
+                </tr>
+            </table>
+            <!--Employer ROW-->
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width:26%; border: 1px solid black;">
+                        <div>
+                            <div style="display:inline-block;">Employer:</div>
+                            <div style="display:inline-block;width:135px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_1_Employer__c}</div>
+                        </div>
+                        <div>
+                            <div style="display:inline-block;">Income:</div>
+                            <div style="display:inline-block;width:145px;border-bottom: 1px solid black;">
+                                <apex:outputField value="{!Home_Services__c.Account__r.Customer_1_Income__c}" />
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width:24%; border: 1px solid black;">
+                        <div>
+                            <div style="display:inline-block;">Employer Phone:</div>
+                            <div style="display:inline-block;width:85px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_1_Employer_Phone__c}</div>
+                        </div>
+                        <div>
+                            <div style="display:inline-block;">Lenght of Emp:</div>
+                            <div style="display:inline-block;width:92px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_1_Length_of_Employment__c}</div>
+                        </div>
+                        <div>
+                            <div style="display:inline-block;">Position:</div>
+                            <div style="display:inline-block;width:125px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_1_Employment_Position__c}</div>
+                        </div>
+                    </td>
+                    <td style="width:26%; border: 1px solid black;">
+                        <div>
+                            <div style="display:inline-block;">Employer:</div>
+                            <div style="display:inline-block;width:135px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_2_Employer__c}</div>
+                        </div>
+                        <div>
+                            <div style="display:inline-block;">Income:</div>
+                            <div style="display:inline-block;width:145px;border-bottom: 1px solid black;">
+                                <apex:outputField value="{!Home_Services__c.Account__r.Customer_2_Income__c}" />
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width:24%; border: 1px solid black;">
+                        <div>
+                            <div style="display:inline-block;">Employer Phone:</div>
+                            <div style="display:inline-block;width:85px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_2_Employer_Phone__c}</div>
+                        </div>
+                        <div>
+                            <div style="display:inline-block;">Lenght of Emp:</div>
+                            <div style="display:inline-block;width:92px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_2_Length_of_Employment__c}</div>
+                        </div>
+                        <div>
+                            <div style="display:inline-block;">Position:</div>
+                            <div style="display:inline-block;width:125px;border-bottom: 1px solid black;">{!Home_Services__c.Account__r.Customer_2_Employment_Position__c}</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--Adress Mortgage ROW and PRODUCT TR-->
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 40%; border:1px solid black;">
+                        <div class="cls_002">Monitored Address</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Street__c}</div>
+                    </td>
+                    <td style="width: 13%; border:1px solid black;">
+                        <div class="cls_002">City</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.city__c}</div>
+                    </td>
+                    <td style="width: 7%; border:1px solid black;">
+                        <div class="cls_002">State</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.state__c}</div>
+                    </td>
+                    <td style="width: 12%; border:1px solid black;">
+                        <div class="cls_002">Zip Code</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Zip__c}</div>
+                    </td>
+                    <td style="width: 12%; border:1px solid black;">
+                        <div class="cls_002">Install Date/Time</div>
+                        <div class="cls_004">
+                            {!MONTH(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}/ {!DAY(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}/
+                            {!YEAR(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}
+                        </div>
+                    </td>
+                    <td style="width: 20%; border:1px solid black;">
+                        <div class="cls_002">Mortgage Payment</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Mortgage_Payment__c}</div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse; ">
+                <tr style="width:100%">
+                    <td style="width:100%; border:1px solid black;">
+                        <div style="margin-left:5px;display:inline-block;border-style:solid;width:10px;height:10px;">{!IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoSameContactAddress__c,"X","")}</div>
+                        <div style="display:inline-block;margin-left:5px;">Billing Address Same As Monitored Address</div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width: 100%">
+                    <td style="width: 40%; border:1px solid black;">
+                        <div class="cls_002">Billing Address</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Street__c}</div>
+                    </td>
+                    <td style="width: 13%; border:1px solid black;">
+                        <div class="cls_002">City</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.city__c}</div>
+                    </td>
+                    <td style="width: 7%; border:1px solid black;">
+                        <div class="cls_002">State</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.state__c}</div>
+                    </td>
+                    <td style="width: 12%; border:1px solid black;">
+                        <div class="cls_002">Zip Code</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Zip__c}</div>
+                    </td>
+                    <td style="width: 32%; border:1px solid black;">
+                        <div class="cls_002">Password</div>
+                        <div class="cls_004">{!Home_Services__c.Account__r.Mortgage_Payment__c}</div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td style="width:100%; padding:4px; border:1px solid black;">
+                        <div style="display:inline-block;font-weight:bold;">Monthly Security Services:</div>
+
+                        <apex:repeat var="label" value="{!monthlySecurityServicesList}">
+                            <div style="display:inline-block; min-width:10%;">
+
+                                <div style="display:inline-block; 
+                                                border:1px solid black; 
+                                                width:10px; height:10px; 
+                                                padding-bottom:2px; 
+                                                text-align:center;
+                                                margin-left:5px; 
+                                                ">
+
+
+                                    <apex:repeat var="elementcheked" value="{!monthlySecurityServicesList}">
+
+                                        {!IF(label == elementcheked ,"X", "")}
+                                    </apex:repeat>
+
+                                </div>
+                                <span style="margin-right:20px;">{!label} </span>
+                            </div>
+
+                        </apex:repeat>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td style="width:100%; padding:4px; border:1px solid black;">
+                        <div style="display:inline-block;font-weight:bold; ">Alarm Communication:</div>
+
+                        <apex:repeat var="label" value="{!eventGroupsToForwardList}">
+                            <div style="display:inline-block; min-width:23%; margin-left:10px;">
+
+                                <div style="display:inline-block; 
+                                                border:1px solid black; 
+                                                width:10px; height:10px; 
+                                                padding-bottom:2px; 
+                                                text-align:center;
+                                                margin-left:5px; 
+                                                ">
+                                    X
+                                </div>
+                                <div style="display:inline-block; margin-right:20px;">{!label} </div>
+                            </div>
+                        </apex:repeat>
+
+
+                        <!--  <div style="display:inline-block;">{!Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoCsEventGroupsToForward__c}</div> -->
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td style="width:100%;  padding:4px; border:1px solid black;">
+                        <div style="display:inline-block; width:100%;">
+                            Communication By:
+                            <apex:repeat var="label" value="{!PickListValuesIntoListCommunication}">
+                                <div style="display:inline-block; width:10%;">
+
+                                    <div style="display:inline-block; 
+                                                    border:1px solid black; 
+                                                    width:10px; height:10px; 
+                                                    padding-bottom:2px; 
+                                                    text-align:center;">
+                                        <apex:repeat var="elementcheked" value="{!communicationByList}">
+                                            <!--
+                                                <apex:repeat var="elementcheked" value="{!CommunicationValue}">
+                                                <apex:outputpanel rendered="{!label == elementcheked}">
+                                                <span style="color: {!If(label != elementcheked ,'white','black') }">X</span>
+                                                </apex:outputpanel>
+                                                </apex:repeat>-->
+
+                                            {!IF(label == elementcheked ,"X", "")}
+                                        </apex:repeat>
+                                    </div>
+
+
+                                    {!label}
+                                </div>
+
+                            </apex:repeat>
+
+                        </div>
+                        <!--
+<div style="display:inline-block;">{!Home_Services__c.Communication_By__c}</div>
+-->
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td style="width:100%; padding:4px; border:1px solid black;">
+                        <div style="display:inline-block;font-weight:bold; ">Alarm.com:</div>
+                        <div style="display:inline-block;">
+                            {!IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='1','Wireless Signal Forwarding Package', IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c
+                            =='208','Interactive', IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='41','Comercial',
+                            IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='193','Interactive Gold',
+                            IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='42','Comercial Plus',
+                            IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='209','Interactive + Automation',''))))))}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td style="width:100%; border:1px solid black;">
+                        <div style="display:inline-block;font-weight:bold; padding:4px;">Alarm.com Additional Services:</div>
+
+                        <apex:repeat var="label" value="{!PickListValueAlarmcomAdditionalServices}">
+                            <div style="display:inline-block;min-width:30%; margin-left:10px;">
+
+                                <div style="display:inline-block; 
+                                                    border:1px solid black; 
+                                                    width:10px; height:10px; 
+                                                    padding-bottom:2px; 
+                                                    text-align:center;">
+                                    <apex:repeat var="elementcheked" value="{!alarmcomAdditionalServicesList}">
+
+
+                                        {!IF(label == elementcheked ,"X", "")}
+                                    </apex:repeat>
+                                </div>
+
+
+                                {!label}
+                            </div>
+
+                        </apex:repeat>
+
+                        <!-- <div style="display:inline-block;">{!Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoAddOnFeatures__c}</div>-->
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td style="width:100%; border:1px solid black;">
+                        <div align="justify; " style="border-collapse: collapse;margin-bottom:20px">
+                            Annexed hereto and made a part hereof are terms required by Alarm.com. By accepting Alarm.com products and services you accept
+                            these terms. The Alarm.com terms are applicable to, and they govern your relationship with, Alarm.com.
+                            Read Alarm.com’s terms annexed hereto carefully. By execution of this Rider you agree to the
+                            terms set forth in “Alarm.com Terms”.
+                        </div>
+                        <div style="display:inline-block;margin-right:10px">Subscriber Signature(s)</div>
+                        <div style="display:inline-block;margin-left:10px">#1</div>
+                        <div style="display:inline-block;min-width:30%;border-bottom: 1px solid black;">
+                            <span class="hidden" style="margin-left:20px;">sign_2</span>
+                        </div>
+                        <div style="display:inline-block;margin-left:30px;">#2</div>
+                        <div style="display:inline-block;min-width:30%;border-bottom: 1px solid black;">
+                            <span class="hidden" style="margin-left:20px;">sign_3</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr style="width:100%">
+                    <td align="center" style="width:100%; border:1px solid black;">
+                        <b>
+                            <u>AUTHORIZED INDIVIDUALS TO BE NOTIFIED</u>
+                        </b>
+                    </td>
+                </tr>
+                <tr style="width:100%">
+                    <td align="center" style="width:100%; border:1px solid black; ">
+                        <div align="center;">(Individuals to be notified in the event of an alarm condition.)</div>
+                        <div align="center;">Subscriber may select any individual he or she designates, or any PUBLIC RESPONDER in the Jurisdiction
+                            from which alarm is received.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <table style="width:100%;">
+                            <tr style="">
+                                <th style="width:20%">
+                                    Contact Name:
+                                </th>
+                                <th style="width:20%">
+                                    Telephone Number:
+                                </th>
+                                <th style="width:20%">
+                                    Contact Name:
+                                </th>
+                                <th style="width:20%">
+                                    Telephone Number:
+                                </th>
+                            </tr>
+
+                            <tr>
+
+                                <td colspan="4">
+                                    <apex:repeat var="c" value="{!contacts}">
+                                        <div style="display: inline-block; width:48%">
+                                            <span style="margin-left:10px;">{!VALUE(count)}.</span>
+                                            <div style="display: inline-block; width:42%; border-bottom:1px solid black; margin-right:10px; padding-left:5px;">
+                                                {!c.DiacoAlarm__DiacoFirstName__c + ' '+ c.DiacoAlarm__DiacoLastName__c }
+                                            </div>
+                                            <div style="display: inline-block; width:42%; border-bottom:1px solid black; padding-left:5px;">
+                                                {!c.DiacoAlarm__DiacoPhone__c}
+                                            </div>
+
+
+                                            <!--
+                                                {!VALUE(count)}.<span class="mark-below" >--</span><span class="mark-below-visible">
+                                                {!c.DiacoAlarm__DiacoFirstName__c + '    '+ c.DiacoAlarm__DiacoLastName__c }
+                                                </span><span class="mark-below">--</span>
+                                                <span class="mark-below">--</span><span class="mark-below-visible">
+                                                {!c.DiacoAlarm__DiacoPhone__c}
+                                                </span><span class="mark-below">--</span>
+-->
+                                        </div>
+                                        <apex:variable var="count" value="{!VALUE(count)+1}" />
+                                    </apex:repeat>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse; ">
+                <tr style="width:100%">
+                    <td width="70%" style="border:1px solid black; padding-left:15px;">
+                        <div style="padding-top:5px; padding-bottom:2px;">
+                            Monthly Services Fee:
+                            <span class="mark-below">----</span>
+                            <span class="mark-below-visible">
+                                {!Home_Services__c.Total_Monthly_Investment__c}
+                            </span>
+                            <span class="mark-below">----</span>
+                            , plus applicable taxes per month payable in advance each month.
+                        </div>
+                        <div style="padding-top:2px; padding-bottom:2px;">
+                            Total amount of agreement:
+                            <span class="mark-below">----</span>
+                            <span class="mark-below-visible">
+                                {!Home_Services__c.Total_Monthly_Investment__c * 12}
+                            </span>
+                            <span class="mark-below">----</span>
+                        </div>
+                        <div style="padding-top:2px; padding-bottom:2px;">
+                            The initial term of services will begin on
+                            <span class="mark-below">----</span>
+                            <span class="mark-below-visible">
+                                {!MONTH(TODAY())}/ {!DAY(TODAY())}/ {!YEAR(TODAY())}
+                            </span>
+                            <span class="mark-below">----</span>
+                            and will end on
+                            <span class="mark-below">----</span>
+                            <span class="mark-below-visible">
+                                {!MONTH(expirationDate)}/ {!DAY(expirationDate)}/ {!YEAR(expirationDate)}
+                            </span>
+                            <span class="mark-below">----</span>
+                        </div>
+                        <div style="padding-top:5px; padding-bottom:5px;">
+                            Pre Paid monthly security fee: _________________________
+                        </div>
+                    </td>
+                    <td width="30%" style="border:1px solid black; padding:20px; text-align:center;">
+
+                        <table width="100%" style="border-collapse: collapse;">
+                            <tr>
+                                <td width="50%" style="text-align:right;"> Bill Start Date:</td>
+                                <td width="50%" style="border-bottom:1px solid black;">
+                                    {!IF(toLineItems2.size >0,TEXT(MONTH(toLineItems2[0].Bill_Start_Date__c)) &'/'& TEXT(DAY(toLineItems2[0].Bill_Start_Date__c)) &'/'& TEXT(YEAR(toLineItems2[0].Bill_Start_Date__c)),'')}
+                                    <!--{!MONTH(TODAY())}/ {!DAY(TODAY())}/ {!YEAR(TODAY())}-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50%">Auto Pay Date:</td>
+                                <td width="50%" style="border-bottom:1px solid black;"> {!DAY(TODAY())} </td>
+                            </tr>
+                            <tr>
+                                <td width="50%" style="text-align:right;">Billing Frequency:</td>
+                                <td width="50%" style="border-bottom:1px solid black;">                                   
+                                     {!IF(ServiceList.size >0, ServiceList[0].Billing_Frequency__c,'')}
+                                    <!-- <apex:repeat var="pm" value="{!ServiceList}">
+                                            {!pm.Billing_Frequency__c}
+                                        </apex:repeat> -->
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td align="center" style="border:1px solid black;">
+                        <b>
+                            <u>ACH RECURRING PAYMENT AUTHORIZATION</u>
+                        </b>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tbody>
+                    <tr>
+                        <td width="100%" style="border:1px solid black;">
+
+                            <apex:repeat var="pm" value="{!paymentMethodsServ}">
+
+                                <div style='display:{!IF(pm.PaymentMethodType__c == null,"block", "none")};'>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </div>
+
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "ACH","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td>
+                                                {!pm.BankAccountNumber__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!pm.Amount__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Card Type:</th>
+                                            <td>
+                                                {!pm.CardType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name on Card (Account):</th>
+                                            <td>{!pm.NameOnCard__c}</td>
+                                            <th>EXP DATE:</th>
+                                            <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CSV:</th>
+                                            <td>{!pm.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>{!pm.PaymentMethodType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Name:</th>
+                                            <td>{!pm.BankName__c}</td>
+                                            <th>Bank Account Type:</th>
+                                            <td>{!pm.BankAccountType__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank Account Name:</th>
+                                            <td>{!pm.Bank_Account_Name__c}</td>
+                                            <th>Bank Account Number:</th>
+                                            <td>{!pm.BankAccountNumber__c}</td>
+                                            <th>Routing Number:</th>
+                                            <td>{!pm.RoutingNumber__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number Checking:</th>
+                                            <td>{!pm.AccountNumberChecking__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td>
+                                                {!pm.PaymentMethodType__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Finance Company:</th>
+                                            <td>
+                                                {!pm.FinanceCompany__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Financed Amount:</th>
+                                            <td>
+                                                <apex:outputText value="{0, Number, Currency}">
+                                                    <apex:param value="{!Home_Services__c.Total_Gross_Sale__c - Home_Services__c.Down_Payment__c}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </apex:repeat>
+
+
+
+                            <!--
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == null,"block", "none")};'>
+                                    <br/><br/><br/><br/>
+                                </div>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Checking","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {!Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td >{!Home_Services__c.Bank_Account_Number_Encrypted__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td >{!Home_Services__c.Routing_Number__c}</td>
+                                        </tr> 
+                                        
+                                    </table>
+                                    <br/>
+                                    <br/><br/>
+                                </div>
+                                
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Credit Card","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th >METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {! Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Card Type:</th>
+                                            <td >
+                                                {! Home_Services__c.Card_Type__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Name on Card (Account):</th>
+                                            <td >{!Home_Services__c.Name_on_Card__c}</td>
+                                            <th >EXP DATE:</th> 
+                                            <td >{!Home_Services__c.Card_Expiration_Month__c &"/"& Home_Services__c.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th >Account Number:</th>
+                                            <td >{!Home_Services__c.Account_Number__c}</td>                                
+                                            <th >CSV:</th>
+                                            <td >{!Home_Services__c.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                           -->
+                            <table width="100%">
+                                <tr>
+                                    <td>Authorization Signature(s)</td>
+                                    <td colspan="3" width="50%">
+                                        <!--   <span class="mark-below">_____</span><span class="hidden underline" style=" ">sign_2 </span ><span class="mark-below">_______</span>-->
+                                        <div style="display:inline-block;min-width:100%;"> #1
+                                            <div style="display:inline-block;min-width:90%;border-bottom: 1px solid black;">
+                                                <span class="hidden" style="margin-left:20px;">sign_2</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3" width="50%">
+                                        <!-- <span class="mark-below" style="margin-left: 100px " >_____</span> 
+                                             <span class="hidden underline"  >  
+											{!IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c==null && Home_Services__c.Account__r.Homeowner_2_First_Name__c=='' || Home_Services__c.Account__r.Homeowner_2_Last_Name__c==null && Home_Services__c.Account__r.Homeowner_2_Last_Name__c=='','','sign_3')} </span><span class="mark-below">_______</span>-->
+
+                                        <div style="display:inline-block;min-width:100%;"> #2
+                                            <div style="display:inline-block;min-width:90%;border-bottom: 1px solid black;">
+                                                <span class="hidden" style="margin-left:20px;">
+                                                    {!IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c==null && Home_Services__c.Account__r.Homeowner_2_First_Name__c==''
+                                                    || Home_Services__c.Account__r.Homeowner_2_Last_Name__c==null && Home_Services__c.Account__r.Homeowner_2_Last_Name__c=='','','sign_3')}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- page 2 -->
+        <div style="page-break-after:always;
+                        border-collapse: collapse; padding-top:50px; font-size:12px;">
+
+
+            <table width="100%" style="margin-bottom:30px">
+                <tr>
+                    <td width="33.3%" style="text-align:center;">
+                    </td>
+                    <td width="33.3%" style="text-align:center;">
+                        <p>
+                            Protection Source
+                            <br/> 664 W Warner Rd
+                            <br/> Tempe,AZ 85284
+                            <br/> 4807762574,opt#4
+                            <br/> License # ROC 201046
+                            <br/>
+                        </p>
+                        <p style="margin-top:10px; font-size:17px;">
+                            <b>SCHEDULE OF EQUIPMENT</b>
+                        </p>
+                    </td>
+                    <td width="33.3%" style="text-align:center;">
+                        i10126
+                    </td>
+                </tr>
+            </table>
+            <div width="100%" style="display:inline-block; padding-left:20px; margin-bottom:10px;">
+                this contract is made and entered into on
+                <div style="display:inline-block; width:20%; border-bottom:1px solid black; text-align:center;">
+                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct",
+                    11, "Nov",12, "Dec","None")} {! DAY(TODAY())}, {! YEAR(TODAY()) }
+                </div>
+                by and between
+                <div style="display:inline-block; text-align:center;">
+                    <b>Protection Source</b>
+                </div>
+                and
+                <div style="display:inline-block; width:50%; border-bottom:1px solid black; text-align:center;">
+                    {!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}{! IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c
+                    == "", "", ' & '& Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c)}
+                </div> , ("SUBSCRIBER")
+                <br/> this schedule of protection is incorporated by reference into the Monitoring Agreement made this date between
+                We, the Company and SUBSCRIBER, the terms and conditions of which fully apply to this schedule of Protection.
+            </div>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td colspan="4" style="border:1px solid black; padding-left:25px;">
+
+                        <apex:repeat var="label" value="{!PickListValuesIntoList}">
+                            <div style="display:inline-block; width:30%;">
+                                <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px; text-align:center;">
+
+                                    {!IF(label == IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='1','Wireless Signal Forwarding Package',
+                                        IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='208','Interactive',
+                                                IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='41','Comercial',
+                                                        IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='193','Interactive Gold',
+                                                                IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='42','Comercial Plus',
+                                                                        IF(Home_Services__c.Customer_Alarm__r.DiacoAlarm__DiacoPackageId__c =='209','Interactive + Automation','')))))) ,"X", "")}
+
+
+                                </div>
+                                {!label}
+                            </div>
+                        </apex:repeat>
+
+                        <!--
+
+                            
+                              <apex:repeat var="packageIdValue" value="{!PackageIdList}">
+                                                                        
+                                                                    </apex:repeat>
+
+                            <div style="display:inline-block; width:25%;text-align:center; ">
+                                <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                     {!IF(pm.PaymentMethodType__c == 'Amex',"X", "")} 
+                                </div>
+                                COMMERCIAL
+                            </div>
+                            <div style="display:inline-block; width:25%; text-align:center;">
+                                <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                    {!IF(pm.PaymentMethodType__c == 'Amex',"X", "")} 
+                                </div>
+                                WIRELESS
+                            </div>
+                            <div style="display:inline-block; width:23%; text-align:center;">
+                                <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                    {!IF(pm.PaymentMethodType__c == 'Amex',"X", "")} 
+                                </div>
+                                PREWIRE
+                            </div>
+                            -->
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="border:1px solid black; ">
+                        <div style="display:inline-block; width:30%; text-align:center;">
+                            <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                <!-- {!IF(pm.PaymentMethodType__c == 'Amex',"X", "")} -->
+                                {!IF(Home_Services__c.Account__r.Number_of_Stories__c=='1',"X", "")}
+                            </div>
+                            ONE STORY
+                        </div>
+                        <div style="display:inline-block; width:30%; text-align:center;">
+                            <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                {!IF(Home_Services__c.Account__r.Number_of_Stories__c=='2',"X", "")}
+                            </div>
+                            TWO STORY
+                        </div>
+                        <div style="display:inline-block; width:30%; text-align:center;">
+                            <div style="display:inline-block; border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                <!-- {!IF(pm.PaymentMethodType__c == 'Amex',"X", "")} -->
+                                {!IF(Home_Services__c.Account__r.Number_of_Stories__c=='3'|| Home_Services__c.Account__r.Number_of_Stories__c=='4' || Home_Services__c.Account__r.Number_of_Stories__c=='5+',
+                                "X","")}
+                            </div>
+                            OTHER
+                            <div style="display:inline-block; width:60%; border-bottom:1px solid black; text-align:center;">
+                                {!IF(Home_Services__c.Account__r.Number_of_Stories__c=='3'|| Home_Services__c.Account__r.Number_of_Stories__c=='4' || Home_Services__c.Account__r.Number_of_Stories__c=='5+',
+                                Home_Services__c.Account__r.Number_of_Stories__c,"")}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td style="border:1px solid black; ">PART #</td>
+                    <td style="border:1px solid black; ">QTY</td>
+                    <td style="border:1px solid black; ">DESCRIPTION</td>
+                    <td style="border:1px solid black; ">COST</td>
+                </tr>
+                <apex:repeat var="pm" value="{!productList}">
+                    <tr style=" height:25px;">
+                        <td style="border:1px solid black; padding:6px;">{!pm.Part_Number__c}</td>
+                        <td style="border:1px solid black; padding:6px;">{!pm.Quantity__c}</td>
+                        <td style="border:1px solid black; padding:6px;">{!pm.Name}</td>
+                        <td style="border:1px solid black; padding:6px; text-align:center;">
+                            <apex:outputField value="{!pm.Total_Price__c}" />
+                        </td>
+                    </tr>
+                </apex:repeat>
+
+            </table>
+            <div style=" width:100%; padding-left:5px; padding-right:5px;">
+                <p>
+                    You acknowledge that: (a) We have explained the full range of protection, equipment, and services available to you, (b)additional
+                    protection over and above that provided herein is available and may be obtained from us at an additional
+                    cost to you (c) you desire and have contracted for only the equipment and services itemized on this contract.
+                </p>
+            </div>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td style="border:1px solid black;">
+                        <apex:repeat var="pm" value="{!paymentMethodsProd}">
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")}'>
+                                <table>
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>
+                                            {!pm.PaymentMethodType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Card Type:</th>
+                                        <td>
+                                            {!pm.CardType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name on Card (Account):</th>
+                                        <td>{!pm.NameOnCard__c}</td>
+                                        <th>EXP DATE:</th>
+                                        <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>CSV:</th>
+                                        <td>{!pm.CSV__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")}'>
+                                <table>
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>{!pm.PaymentMethodType__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bank Name:</th>
+                                        <td>{!pm.BankName__c}</td>
+                                        <th>Bank Account Type:</th>
+                                        <td>{!pm.BankAccountType__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bank Account Name:</th>
+                                        <td>{!pm.Bank_Account_Name__c}</td>
+                                        <th>Bank Account Number:</th>
+                                        <td>{!pm.BankAccountNumber__c}</td>
+                                        <th>Routing Number:</th>
+                                        <td>{!pm.RoutingNumber__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number Checking:</th>
+                                        <td>{!pm.AccountNumberChecking__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")}'>
+                                <table>
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>
+                                            {!pm.PaymentMethodType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Finance Company:</th>
+                                        <td>
+                                            {!pm.FinanceCompany__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Financed Amount:</th>
+                                        <td>
+                                            <apex:outputText value="{0, Number, Currency}">
+                                                <apex:param value="{!Home_Services__c.Total_Gross_Sale__c}" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </apex:repeat>
+
+                        <!--
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Checking","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th>METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {!Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number:</th>
+                                        <td >{!Home_Services__c.Bank_Account_Number_Encrypted__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Routing Number:</th>
+                                        <td >{!Home_Services__c.Routing_Number__c}</td>
+                                    </tr> 
+                                    
+                                </table>
+                            </div>
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Finance","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th >METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {!Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Finance Company:</th>
+                                        <td >{!Home_Services__c.Finance_Company__c}</td>
+                                    </tr> 
+                                    <tr>
+                                        <th >Financed Amount:</th>
+                                        <td >$<apex:outputField value="{!Home_Services__c.Financed_Amount__c}"/></td>
+                                    </tr> 
+                                </table>
+                            </div>
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Credit Card","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th >METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {! Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Card Type:</th>
+                                        <td >
+                                            {! Home_Services__c.Card_Type__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Name on Card (Account):</th>
+                                        <td >{!Home_Services__c.Name_on_Card__c}</td>
+                                        <th >EXP DATE:</th> 
+                                        <td >{!Home_Services__c.Card_Expiration_Month__c &"/"& Home_Services__c.Card_Expiration_Year__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th >Account Number:</th>
+                                        <td >{!Home_Services__c.Account_Number__c}</td>                                
+                                        <th >CSV:</th>
+                                        <td >{!Home_Services__c.CSV__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            -->
+
+                        <div>
+                            <div>
+
+
+                            </div>
+                            <table width="40%">
+                                <tr>
+
+                                    <td height="30">Total Equipment Cost: </td>
+                                    <td>
+                                        <apex:outputField value="{!Home_Services__c.Total_Gross_Sale__c}" />
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td style="border:1px solid black; width:50%;" colspan="2">
+                        Install Date: {!MONTH(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}/ {!DAY(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}/
+                        {!YEAR(DATEVALUE(Home_Services__c.Requested_Install_Date__c))}
+                    </td>
+                    <td style="border:1px solid black; width:16%;">
+                        Total (inc Tax)</td>
+                    <td style="border:1px solid black; width:17%;">
+                        <p style="text-align:center;">
+                            <apex:outputField value="{!Home_Services__c.Customer_Tax__c}" />
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; width:50%; height:45px; vertical-align:top; padding-top:2px;">
+                        Sales Rep:
+                        <br/>
+                        <div style="margin-left:70px; vertical-align:center; margin-top:2px;">
+                            <p style=" color: white;">
+                                sign_1
+                            </p>
+                        </div>
+                    </td>
+                    <td style="border:1px solid black; width:17%; height:45px; vertical-align:top; padding-top:2px;">
+                        Date:
+                        <br/>
+                        <div style="text-align:center; vertical-align:center; margin-top:2px;">
+                            {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct",
+                            11, "Nov",12, "Dec","None")} {! DAY(TODAY())}, {! YEAR(TODAY()) }
+                        </div>
+                    </td>
+                    <td style="border:1px solid black; width:16%; height:45px; vertical-align:top; padding-top:2px;">
+                        Less Deposit
+                        <br/>
+                        <div style="text-align:center; vertical-align:center; margin-top:2px;">
+                            <apex:outputField value="{!Home_Services__c.Total_Down_Payment__c}" />
+                        </div>
+                    </td>
+                    <td style="border:1px solid black; width:17%; height:45px;">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; width:50%; height:45px; vertical-align:top; padding-top:2px;">
+                        Subscriber:
+                        <br/>
+                        <div style="margin-left:70px; vertical-align:center; margin-top:2px;">
+                            <p style=" color: white;">
+                                sign_2
+                            </p>
+                        </div>
+                    </td>
+                    <td style="border:1px solid black; width:17%; height:45px; vertical-align:top; padding-top:2px;">
+                        Date:
+                        <br/>
+                        <div style="text-align:center; vertical-align:center; margin-top:2px;">
+                            {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct",
+                            11, "Nov",12, "Dec","None")} {! DAY(TODAY())}, {! YEAR(TODAY()) }
+                        </div>
+                    </td>
+                    <td style="border:1px solid black; width:16%; height:45px; vertical-align:top; padding-top:2px;">
+                        Balance Due
+                        <br/>
+                        <div style="text-align:center; vertical-align:center; margin-top:2px;">
+                            <apex:outputField value="{!Home_Services__c.Total_Balance_Due__c}" />
+                        </div>
+                    </td>
+                    <td style="border:1px solid black; width:17%; height:45px;">
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+
+
+        <div style="page-break-after:always;
+                        border-collapse: collapse; padding-top:80px; font-size:12px;">
+            <div style="text-align:center">
+                <p style="margin-top:5px; font-size:17px;">
+                    <b> Cancellation Notice</b>
+                </p>
+                <p style="padding-top:35px;">
+                    <b>
+                        (hereinafter referred to as Seller) to enter date of transaction
+                    </b>
+                </p>
+                <div style="margin:auto; margin-top:35px; border-bottom:1px solid black; width:80%">
+                    {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct",
+                    11, "Nov",12, "Dec","None")} {! DAY(TODAY())}, {! YEAR(TODAY()) }
+                </div>
+                <p>
+                    <b>Date</b>
+                </p>
+                <div style="margin:auto; margin-top:25px; border-bottom:1px solid black; width:80%">
+                    {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                </div>
+                <p>
+                    <b>Suscriber Name</b>
+                </p>
+                <div style="margin:auto; margin-top:25px; border-bottom:1px solid black; width:80%">
+                    {!Home_Services__c.Account__r.Street__c &' '& Home_Services__c.Account__r.City__c &' '& Home_Services__c.Account__r.State__c
+                    &' '& Home_Services__c.Account__r.Zip__c }
+                </div>
+                <p>
+                    <b>Suscriber Address</b>
+                </p>
+            </div>
+
+
+            <p style="margin-top:20px;padding-right:20px; padding-left:20px;">
+                <b>
+                    You may cancel this transaction, without any penalty or obligation, within three business days from the above date.
+                    <br/>
+                    <br/> If you cancel, any property traded in, any payments made by you under the contract or sale and any negotiable
+                    instrument executed by you will be returned within ten business days following receipt by seller of your
+                    cancellation notice and any security interest arising out of the transaction will be cancelled.
+                    <br/>
+                    <br/> If you cancel, you must make available to seller at your residence in substantially as good condition
+                    as when received, any goods delivered to you under this contract or sale; or you may, if you wish, comply
+                    with the instructions of seller regarding the return shipment of the goods at seller s expense and risk.
+                    <br/>
+                    <br/> If you do make the goods available to seller and seller does not pick them up within twenty days of
+                    the date of your notice of cancellation, you may retain or dispose of the goods without any further obligation.
+                    If you fail to make the goods available to seller or if you agree to return the goods to seller and fail
+                    to do so, then you remain liable for performance of all obligations under the contract.
+                    <br/>
+                    <br/> To cancel this transaction, mail or deliver a signed and dated copy of this cancellation notice or any
+                    other written notice, or send a telegram to:
+                    <br/>
+                </b>
+            </p>
+            <div align="center" style="margin-bottom:20px;  width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;">
+                <p> Protection Source</p>
+                <p>664 W Warner Rd </p>
+                <p>Tempe, AZ 85284 </p>
+            </div>
+            <div style=" width:100% padding-right:20px; padding-left:20px;">
+                <b> NOT LATER THAN MIDNIGHT OF </b>
+                <div style="display:inline-block; width:60%; border-bottom:1px solid black; text-align:center;">
+                    <apex:outputText value="{0, date, MM'/'d'/'yyyy}">
+                        <apex:param value="{!notLaterThanMidnightOf}" />
+                    </apex:outputText>
+                </div>
+                <br/>
+                <b>Seller to enter date by which buyer must give notice of cancellation.</b>
+
+                <p style="margin-top:20px;">
+                    <b>I HEREBY CANCEL THIS TRANSACTION</b>
+                </p>
+                <div style="margin-top:40px; border-bottom:1px solid black; width:40%">
+
+                </div>
+                <p>
+                    <b>Date of cancellation to be entered by buyer</b>
+                </p>
+                <div style="margin-top:50px; border-bottom:1px solid black; width:40%">
+
+                </div>
+                <p>
+                    <b>Suscriber's Signature</b>
+                </p>
+            </div>
+            <div style=" width:100%;">
+
+                <div style="position: absolute;left: 400px;">
+                    <b>2 COPIES OF THIS FORM RECEIVED BY
+                        <br/> BUYER ON DATE OF TRANSACTION</b>
+                    <div style="margin-top:40px; border-bottom:1px solid black; width:60%; text-align:center;">
+                        <p style=" color: white;">
+                            initial_2
+                        </p>
+                    </div>
+                    <p>
+                        <b>Suscriber initial to acknowledge receipt of these forms</b>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BREAK.........................................................................................-->
+        <div style="page-break-after:always;border-collapse: collapse; margin-top:10px;">
+            <table style="width:100%;margin-bottom: 10px; border-collapse: collapse;">
+                <tr>
+                    <td style="border:1px solid black; padding-left:3px; padding-right:3px;">
+                        Here’s How Recurring Payments Work:
+                        <br/>
+                        <br/> You authorize regularly scheduled charges to your checking or savings account. You will be charged
+                        the amount indicated above each billing period. A receipt for each payment will be emailed to you.
+                        You agree that no prior-notification will be provided unless the date or amount changes, in which
+                        case you will receive notice from us at least 10 days prior to the payment being collected. You understand
+                        that this authorization will remain in effect until you cancel it in writing, and You agree to notify
+                        PROTECTION SOURCE in writing of any changes in your account information or termination of this authorization
+                        at least 15 days prior to the next billing date. If the above noted periodic payment dates fall on
+                        a weekend or holiday, You understand that the payment may be executed on the next business day. You
+                        understand that because this is an electronic transaction, these funds may be withdrawn from my account
+                        as soon as the above noted periodic transaction dates. In the case of an ACH Transaction being rejected
+                        for Non Sufficient Funds (NSF) I understand that PROTECTION SOURCE may at its discretion attempt
+                        to process the charge again within 30 days, and agree to an additional $25.00 charge for each attempt
+                        returned NSF which will be initiated as a separate transaction from the authorized recurring payment.
+                        You acknowledge that the origination of ACH transactions to my account must comply with the provisions
+                        of U.S. law.
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="border:1px solid black; min-height: 20px; padding-left:3px; padding-right:3px;">
+                        <b>PLEASE READ THE TERMS AND CONDITIONS ON THE FRONT AND BACK OF THIS AGREEMENT BEFORE SIGNING.</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="justify" style="border:1px solid black; padding-left:3px; padding-right:3px;">
+                        <div style="margin-bottom: 10px;">
+                            <div align="left">1. SERVICES AND CHARGES: </div>
+                            <div>
+                                (a) CENTRAL STATION MONITORING: Subscriber agrees to pay PS:
+                            </div>
+                            <div>
+                                The sum of $
+                                <span class="mark-below">----</span>
+                                <span class="mark-below-visible">
+                                    {!monitoring}</span>
+                                <span class="mark-below">----</span>
+                                , plus tax, per month, payable monthly in advance for the monitoring of the Security System for the term of this agreement
+                                commencing on the first day of the month next succeeding the date hereof, and continuing
+                                monthly thereafter, all payments being due on the first of the month.
+                            </div>
+                            <div>
+
+                                <div style="margin-bottom: 10px;">
+                                    (b) SERVICE (Strike out i or ii)
+                                </div>
+
+
+                                <div style="width: 100%;margin-bottom: 5px;">
+                                    <div style="">
+                                        <div style="display:inline-block; 
+                                                border:1px solid black; 
+                                                width:10px; height:10px; 
+                                                padding-bottom:2px; 
+                                                text-align:center;
+                                                margin-left:0px; 
+                                                ">
+                                            {!IF(existWarranty, '', 'x')}
+                                        </div>
+                                        <pre style='display:inline'></pre> (i) Subscriber agrees to pay PS on a per call basis. If this agreement provides
+                                        for service on a per call basis, Subscriber agrees to pay PS for all parts and labor
+                                        at time of service. Subscriber is not obligated to call PS for per call service and
+                                        PS is under no duty to provide service except its warranty service during warranty
+                                        period. Service by anyone other than PS during warranty period relieves PS of any
+                                        further obligations under the Limited Warranty. Initial here for per call service
+                                        option_____________
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 100%;margin-bottom: 5px;">
+                                <div style="">
+                                    <div style="display:inline-block; 
+                                                border:1px solid black; 
+                                                width:10px; height:10px; 
+                                                padding-bottom:2px; 
+                                                text-align:center;
+                                                margin-left:0px; 
+                                                ">
+                                        {!IF(existWarranty, 'x', '')}
+                                    </div>
+                                    <!--{!Home_Services__c.Security_Equipment_Amount__c} before warrantyamount-->
+                                    <pre style='display:inline'></pre> (ii) Subscriber agrees to pay PS for service of the security equipment the sum of $
+                                    <span class="mark-below">--</span>
+                                    <span class="mark-below-visible">{!warrantyAmount}</span>
+                                    <span class="mark-below">--</span> plus tax, per month, payable monthly in advance for the term of this agreement,
+                                    commencing the first day of the month next succeeding the date hereof, all payments being
+                                    due on the first of the month.
+
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            (c) INSPECTION: Subscriber agrees to pay PS $
+                            <span class="mark-below">--</span>
+                            <span class="mark-below-visible">0.00</span>
+                            <span class="mark-below">--</span>plus tax, per month, payable monthly in advance for the term of this agreement for inspection
+                            service. If this option is selected PS will make an annual inspection of the security system.
+                            Unless otherwise noted in the Schedule of Equipment and Services, inspection service includes
+                            testing of all accessible components to insure proper working order. If UL Certified the inspection
+                            will comply with UL Requirements. PS will notify Subscriber 30 days in advance of inspection
+                            date, and it is Subscriber's responsibility to reschedule or permit access. Only one scheduled
+                            inspection is included. Testing at inspection insures only that components are in proper working
+                            order at time of inspection unless otherwise reported to Subscriber at time of inspection. Inspection
+                            does not include repair. If sprinkler alarm or other device monitoring water flow is inspected
+                            the inspection does not include inspection or testing of sufficiency of water supply, for which
+                            PS has no responsibility or liability.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            2. PASSCODE TO CPU SOFTWARE REMAINS PROPERTY OF PS: Provided Subscriber performs this agreement for the full term thereof,
+                            upon termination PS shall at its option provide to Subscriber the passcode to the CPU software
+                            or change the passcode to the manufacturer's default code. Software programmed by PS is the intellectual
+                            property of PS and any unauthorized use of same, including derivative works, is strictly prohibited
+                            and may violate Federal Copyright laws, Title 17 of the United States Code, and may subject violator
+                            to civil and criminal penalties. The Equipment shall remain personal property and shall not be
+                            considered a fixture, or an addition to, alteration, conversion, improvement, modernization,
+                            remodeling, repair or replacement of any part of the realty, and Subscriber shall not permit
+                            the attachment thereto of any apparatus not furnished by PS. PS’s signs and decals remain the
+                            property of PS and must be removed upon termination of this Agreement.
+                            <br/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            3. TERM OF AGREEMENT / RENEWAL: The term of this agreement shall be for a period of
+                            <span class="mark-below">--</span>
+                            <span class="mark-below-visible">12</span>
+                            <span class="mark-below">--</span>
+                            Months and shall automatically renew for
+                            <span class="mark-below">--</span>
+                            <span class="mark-below-visible">1</span>
+                            <span class="mark-below">--</span>Months thereafter under the same terms and conditions, unless either party gives written
+                            notice to the other by certified mail, return receipt requested, of their intention not to renew
+                            the agreement at least 30 days prior to the expiration of any term. After the expiration of one
+                            year from the date hereof PS shall be permitted from time to time to increase all charges by
+                            an amount not to exceed nine percent each year and Subscriber agrees to pay such increase.
+                        </div>
+                        <div style="margin-bottom: 10px ;">
+                            4. CENTRAL OFFICE MONITORING: Upon receipt of a signal from Subscriber’s alarm system, PS or its designee central office
+                            shall make every reasonable effort to notify Subscriber and the appropriate municipal police
+                            or fire department depending upon the type of signal received. Not all signals will require notification
+                            to the authorities and Subscriber may obtain a written response policy from PS. No response shall
+                            be required for supervisory, loss of communication pathway, trouble or low battery signals. Subscriber
+                            acknowledges that signals transmitted from Subscriber's premises directly to municipal police
+                            or fire departments are not monitored by personnel of PS or PS's designee central office and
+                            PS does not assume any responsibility for the manner in which such signals are monitored or the
+                            response, if any, to such signals.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            Subscriber acknowledges that signals which are transmitted over telephone lines, wire, air waves, internet, VOIP, radio or
+                            cellular, or other modes of communication pass through communication networks wholly beyond the
+                            control of PS and are not maintained by PS except PS may own the radio network, and PS shall
+                            not be responsible for any failure which prevents transmission signals from reaching the central
+                            office monitoring center or damages arising therefrom, or for data corruption, theft or viruses
+                            to Subscriber’s computers if connected to the alarm communication equipment. Subscriber agrees
+                            to furnish PS with a written Call List of names and telephone numbers of those persons Subscriber
+                            wishes to receive notification of alarm signals. Unless otherwise provided in the Call List PS
+                            will make a reasonable effort to contact the first person reached or notified on the list either
+                            via telephone call, text or email message. No more than one call to the list shall be required
+                            and any form of notification provided for herein, including leaving a message on an answering
+                            machine, shall be deemed reasonable compliance with PS’s notification obligation. All changes
+                            and revisions shall be supplied to PS in writing. Subscriber authorizes PS to access the control
+                            panel to input or delete data and programming. If the equipment contains video or listening devices
+                            permitting central office to monitor video or sound then upon receipt of an alarm signal central
+                            office shall monitor video or sound for so long as central office in its sole discretion deems
+                            appropriate to confirm an alarm condition. If Subscriber requests PS to remotely activate or
+                            deactivate the system, change combinations, openings or closings, or re-program system functions,
+                            Subscriber shall pay PS $90.00 for each such service. PS may, without prior notice, suspend or
+                            terminate its services, in central office’s sole discretion, in event of Subscriber’s default
+                            in performance of this agreement or in event central office facility or communication network
+                            is nonoperational or Subscriber’s alarm system is sending excessive false alarms. Central office
+                            is authorized to record and maintain audio and video transmissions, data and communications,
+                            and shall be the exclusive owner of such property. All Subscriber information and data shall
+                            be maintained confidentially by PS.
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            5. SERVICE: Service pursuant to paragraph 1 includes all parts and labor, and PS shall service upon Subscriber's request
+                            the security system installed in Subscriber's premises between the hours of 9 a.m. and 5 p.m.
+                            Monday through Friday, within reasonable time after receiving notice from Subscriber that service
+                            is required, exclusive of Saturdays, Sundays and legal holidays. All repairs, replacement or
+                            alteration to the security system made by reason of alteration to Subscriber's premises, or caused
+                            by unauthorized intrusion, lightning or electrical surge, or caused by any means other than normal
+                            usage, wear and tear, shall be made at the cost of the Subscriber. Batteries, electrical surges,
+                            lightning damage, software upgrades and repairs, communication devices no longer supported by
+                            communication pathways, obsolete components and components exceeding manufacturer’s useful life
+                            are not included in service and will be repaired or replaced at Subscriber’s expense payable
+                            at time of service. No apparatus or device shall be attached to or connect with the security
+                            system as originally installed without PS's written consent.
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            6. WIRELESS AND INTERNET ACCESS CAPABILITIES: Subscriber is responsible for supplying high speed Internet access at Subscriber’s
+                            premises. PS does not provide Internet service, maintain Internet connection, wireless access
+                            or communication pathways, computer, smart phone, electric current connection or supply, or in
+                            all cases the remote video server. In consideration of Subscriber making its monthly payments
+                            for remote access to the system PS will authorize Subscriber access. PS is not responsible for
+                            Subscriber’s access to the Internet or any interruption of service or down time of remote access
+                            caused by loss of Internet service, radio or cellular or any other mode of communication used
+                            by Subscriber to access the system. Subscriber acknowledges that Subscriber's security system
+                            can be compromised if the codes or devices used for access are lost or accessed by others and
+                            PS shall have no liability for such third party unauthorized access. PS is not responsible for
+                            the security or privacy of any wireless network system or router. Wireless systems can be accessed
+                            by others, and it is the Subscriber's responsibility to secure access to the system with pass
+                            codes and lock out codes. PS is not responsible for access to wireless networks or devices that
+                            may not be supported by communication carriers and upgrades to Subscriber’s system will be at
+                            Subscriber’s expense
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            7. LIMITED WARRANTY ON SALE: In the event that any part of the security system becomes defective, or in the event that any
+                            repairs are required, PS agrees to make all repairs and replacement of parts without costs to
+                            the Subscriber for a period of one (1) year from the date of installation. PS reserves the option
+                            to either replace or repair the alarm equipment, and reserves the right to substitute materials
+                            of equal quality at time of replacement, or to use reconditioned parts in fulfillment of this
+                            warranty. This warranty does not include batteries, electrical surges, lightning damage, software
+                            upgrades and repairs, communication devices that are no longer supported by communication pathways,
+                            obsolete components and components exceeding manufacturer’s useful life. PS is not the manufacturer
+                            of the equipment and other than PS’s limited warranty Subscriber agrees to look exclusively to
+                            the manufacturer of the equipment for repairs under its warranty coverage if any. Except as set
+                            forth in this agreement, PS makes no express warranties as to any matter whatsoever, including,
+                            without limitation, the condition of the equipment, its merchantability, or its fitness for any
+                            particular purpose. PS does not represent nor warrant that the security system may not be compromised
+                            or circumvented, or that the system will prevent any loss by burglary, hold-up, fire or otherwise;
+                            or that the system will in all cases provide the protection for which it is installed. PS expressly
+                            disclaims any implied warranties, including implied warranties of merchantability or fitness
+                            for a particular purpose. The warranty does not cover any damage to material or equipment caused
+                            by accident, misuse, attempted or unauthorized repair service, modification, or improper installation
+                            by anyone other than PS. PS shall not be liable for consequential damages. Subscriber acknowledges
+                            that any affirmation of fact or promise made by PS shall not be deemed to create an express warranty
+                            unless included in this agreement in writing; that Subscriber is not relying on PS's skill or
+                            judgment in selecting or furnishing a system suitable for any particular purpose and that there
+                            are no warranties which extend beyond those on the face of this agreement, and that PS has offered
+                            additional and more sophisticated equipment for an additional charge which Subscriber has declined.
+                            Subscriber's exclusive remedy for PS's breach of this agreement or negligence to any degree under
+                            this agreement is to require PS to repair or replace, at PS's option, any equipment which is
+                            non-operational. This Limited Warranty is independent of and in addition to service contracted
+                            under paragraph 1(b)(ii) of this agreement. This Limited Warranty gives you specific legal rights
+                            and you may also have other rights which vary from state to state. If required by law, PS will
+                            procure all permits required by local law and will provide certificate of workman's compensation
+                            prior to starting work.
+                        </div>
+                        <div class="bold" align="center" style="margin-top: 10px; margin-bottom: 10px;">
+                            <b>GENERAL PROVISIONS</b>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            8. FIRE ALARMS: Unless the Schedule of Equipment and Services provides for a fire alarm system to code PS makes no representation
+                            that the fire alarm equipment meets local code requirements or constitutes a fire alarm system
+                            as that term is defined by the Authority Having Jurisdiction [AHJ] over fire alarm systems in
+                            Subscriber’s premises. If a fire alarm system to code is specified in the Schedule of Equipment
+                            and Services then PS will install fire alarm equipment pursuant to AHJ requirements. Subscriber
+                            agrees that any equipment required by the AHJ not specified in the Schedule of Equipment and
+                            Services shall be an extra to this agreement to be paid for by Subscriber at time said additional
+                            equipment is requested.
+                        </div>
+                        <div style="">
+                            9. DELAY IN DELIVERY / INSTALLATION / RISK OF LOSS OF MATERIAL: PS shall not be liable for any damage or loss sustained by
+                            Subscriber as a result of delay in delivery and/or installation of equipment, equipment failure,
+                            or for interruption of service due to electric failure, strikes, walk-outs, war, acts of God,
+                            or other causes, including PS's negligence or failure to perform any obligation. The estimated
+                            date work is to be substantially completed is not a definite completion date and time is not
+                            of the essence. In the event the work is delayed through no fault of PS, PS shall have such additional
+                            time for performance as may be reasonably necessary under the circumstances. Subscriber agrees
+                            to pay PS the sum of $1,000 per day for each business day the work is re-scheduled or delayed
+                            by Subscriber or others engaged by Subscriber through no fault of PS on less than 24 hour notice
+                            to PS.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+
+                            If installation is delayed for more than one year from date hereof by Subscriber or other contractors engaged by Subscriber
+                            and through no fault of PS, Subscriber agrees to pay an additional 5% of the contract Purchase
+                            Price upon installation. Subscriber assumes all risk of loss of material once delivered to the
+                            job site.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            10. TESTING OF SECURITY SYSTEM: Security System, once installed, is in the exclusive possession and control of the Subscriber,
+                            and it is Subscriber's sole responsibility to test the operation of the Security System and to
+                            notify PS if it is in need of repair. Service if provided is pursuant to paragraph 1.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            11. CARE AND SERVICE OF SECURITY SYSTEM: Subscriber agrees not to tamper with, remove or otherwise interfere with the Security
+                            System which shall remain in the same location as installed. All repairs, replacement or alteration
+                            to the security system made by reason of alteration to Subscriber's premises, or caused by unauthorized
+                            intrusion, lightning or electrical surge, or caused by any means other than normal usage, wear
+                            and tear, shall be made at the cost of the Subscriber. Batteries, electrical surges, lightning
+                            damage, software upgrades and repairs, communication devices that are no longer supported by
+                            communication pathways, obsolete components and components exceeding manufacturer’s useful life,
+                            are not included in warranty or service under paragraph 1(b)(ii) and will be repaired or replaced
+                            at Subscriber’s expense payable at time of service. No apparatus or device shall be attached
+                            to or connect with the security system as originally installed without PS's written consent.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            12. ALTERATION OF PREMISES FOR INSTALLATION: PS is authorized to make preparations such as drilling holes, driving nails,
+                            making attachments or doing any other thing necessary in PS's sole discretion for the installation
+                            and service of the security system, and PS shall not be responsible for any condition created
+                            thereby as a result of such installation, service, or removal of the security system, and Subscriber
+                            represents that the owner of the premises, if other than Subscriber, authorizes the installation
+                            of the security system under the terms of this agreement.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            13. SUBSCRIBER'S DUTY TO SUPPLY ELECTRIC AND TELEPHONE SERVICE: Subscriber agrees to furnish, at Subscriber's expense, all
+                            110 Volt AC power, electrical outlet, ARC Type circuit breaker and dedicated receptacle, internet
+                            connection, high speed broadband cable or DSL and IP Address, telephone hook-ups, RJ31x Block
+                            or equivalent, as deemed necessary by PS.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            14. INDEMNITY / WAIVER OF SUBROGATION RIGHTS / ASSIGNMENTS: Subscriber agrees to indemnify and hold harmless PS, its employees,
+                            agents and subcontractors, from and against all claims, lawsuits, including those brought by
+                            third-parties or by Subscriber, including reasonable attorneys' fees and losses, asserted against
+                            and alleged to be caused by PS's performance, negligence or failure to perform any obligation
+                            under this agreement. Subscriber on its behalf and any insurance carrier waives any right of
+                            subrogation Subscriber's insurance carrier may otherwise have against PS or PS's subcontractors
+                            arising out of this agreement or the relation of the parties hereto. Subscriber shall not be
+                            permitted to assign this agreement without written consent of PS. PS shall have the right to
+                            assign this agreement and shall be relieved of any obligations herein upon such assignment
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            15. EXCULPATORY CLAUSE: PS and Subscriber agree that PS is not an insurer and no insurance coverage is offered herein. The
+                            security equipment and PS’s services are designed to reduce certain risks of loss, though PS
+                            does not guarantee that no loss will occur. PS is not assuming liability, and, therefore, shall
+                            not be liable to Subscriber for any loss, data corruption or inability to retrieve data, personal
+                            injury or property damage sustained by Subscriber as a result of intrusion, burglary, theft,
+                            hold-up, fire, equipment failure, smoke, or any other cause whatsoever, regardless of whether
+                            or not such loss or damage was caused by or contributed to by PS’s negligent performance to any
+                            degree in furtherance of this agreement, any extra contractual or legal duty, strict products
+                            liability, or negligent failure to perform any obligation pursuant to this contract or any other
+                            legal duty. In the event of any loss or injury to any person or property, Subscriber agrees to
+                            look exclusively to Subscriber’s insurer to recover damages. Subscriber releases PS from any
+                            claims for contribution, indemnity or subrogation.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            16. INSURANCE: The Subscriber shall maintain a policy of public liability, property damage, burglary and theft insurance
+                            under which PS is named as additional insured. PS shall not be responsible for any portion of
+                            any loss or damage which is recovered or recoverable by the Subscriber from insurance covering
+                            such loss or damage or for such loss or damage against which the Subscriber is indemnified or
+                            insured. In the event of any loss or injury to any person or property, Subscriber agrees to look
+                            exclusively to Subscriber’s insurer to recover damages. Subscriber shall obtain insurance to
+                            cover any loss the security services are intended to detect to one hundred percent of the insurable
+                            value, and Subscriber and all those claiming rights under Subscriber waive all rights against
+                            PS and its subcontractors for loss or damages caused by burglary, theft, water, smoke, fire or
+                            other perils intended to be detected by the security services or covered by insurance to be obtained
+                            by Subscriber, except such rights as they may have to the proceeds of insurance.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            17. LIMITATION OF LIABILITY: Subscriber agrees that should there arise any liability on the part of PS as a result of PS's
+                            negligent performance to any degree or negligent failure to perform any of PS's obligations pursuant
+                            to this agreement or any other legal duty, equipment failure, or strict products liability, that
+                            PS's liability shall be limited to the sum of $250.00 or 5% of the sales price or 6 times the
+                            aggregate of monthly payments for services being provided at time of loss, whichever is greater.
+                            If Subscriber wishes to increase PS's amount of limitation of liability, Subscriber may, as a
+                            matter of right, at any time, by entering into a supplemental agreement, obtain a higher limit
+                            by paying an annual payment consonant with PS's increased liability. This shall not be construed
+                            as insurance coverage.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            18. LEGAL ACTION / EARLY TERMINATION / AGREEMENT TO ARBITRATE: The parties agree that due to the nature of the services to
+                            be provided by PS, the payments to be made by the Subscriber for the term of the services part
+                            of this agreement form an integral part of PS's anticipated profits; that in the event of Subscriber's
+                            default it would be difficult if not impossible to fix PS's actual damages. Therefore, in the
+                            event Subscriber defaults in any payment or charges to be paid to PS, the balance of all payments
+                            for the entire term herein shall immediately become due and payable, and Subscriber shall be
+                            liable for 80% thereof as liquidated damages and PS shall be permitted to terminate all its services,
+                            including but not limited to terminating monitoring service, under this agreement and to remotely
+                            re-program or delete any programming without relieving Subscriber of any obligation herein. If
+                            PS prevails in any litigation or arbitration between the parties, Subscriber shall pay PS’s legal
+                            fees. In any action commenced by PS against Subscriber, Subscriber shall not be permitted to
+                            interpose any counterclaim. The parties agree that they may bring claims against the other only
+                            in their individual capacity, and not as a class action plaintiff or class action member in any
+                            purported class or representative proceeding. Subject to Subscriber’s right to bring any claim
+                            against PS for up to $1,000 in small claims court having jurisdiction, any dispute between the
+                            parties or arising out of this agreement, including issues of arbitrability, shall, at the option
+                            of any party, be determined by arbitration before a single arbitrator administered by Arbitration
+                            Services Inc., under its Arbitration Rules www.ArbitrationServicesInc.com, except that no punitive
+                            damages may be awarded. The arbitrator is authorized to conduct proceedings by telephone, video
+                            or by submission of papers. The arbitrator is authorized to conduct proceedings by telephone,
+                            video or by submission of papers. Service of process or papers in any legal proceeding or arbitration
+                            between the parties may be made by First-Class Mail delivered by the U.S. Postal Service addressed
+                            to the party's address in this agreement or another address provided by the party in writing
+                            to the party making service. Subscriber submits to the jurisdiction and laws of Arizona and agrees
+                            that any litigation or arbitration between the parties must be commenced and maintained in the
+                            county where PS’s principal place of business is located. The parties waive trial by jury in
+                            any action between them unless prohibited by law. Any action by Subscriber against PS must be
+                            commenced within one year of the accrual of the cause of action or shall be barred. </div>
+                        <div style="margin-bottom: 10px;">
+                            All actions or proceedings against PS must be based on the provisions of this agreement. Any other action that Subscriber
+                            may have or bring against PS in respect to other services rendered in connection with this agreement
+                            shall be deemed to have merged in and be restricted to the terms and conditions of this agreement,
+                            and this consent to arbitrate shall survive the termination of this agreement.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            19. PS'S RIGHT TO SUBCONTRACT SPECIAL SERVICES: Subscriber agrees that PS is authorized and permitted to subcontract any
+                            services to be provided by PS to third parties who may be independent of PS, and that PS shall
+                            not be liable for any loss or damage sustained by Subscriber by reason of fire, theft, burglary
+                            or any other cause whatsoever caused by the negligence of third parties. Subscriber appoints
+                            PS to act as Subscriber’s agent with respect to such third parties, except that PS shall not
+                            obligate Subscriber to make any payments to such third parties. Subscriber acknowledges that
+                            this agreement, and particularly those paragraphs relating to PS's disclaimer of warranties,
+                            exemption from liability, even for its negligence, limitation of liability and indemnification,
+                            inure to the benefit of and are applicable to any assignees, subcontractors, manufacturers, vendors
+                            and central offices of PS.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            20. MOLD, OBSTACLES AND HAZARDOUS CONDITIONS: Subscriber shall notify PS in writing of any undisclosed, concealed or hidden
+                            conditions in any area where installation is planned, and Subscriber is responsible for removal
+                            of such conditions. In the event PS discovers the presence of suspected asbestos or other hazardous
+                            material, PS shall stop all work immediately and notify Subscriber. It shall be Subscriber’s
+                            sole obligation to remove such conditions from the premises, and if the work is delayed due to
+                            the discovery of suspected asbestos or other hazardous material or conditions then an extension
+                            of time to perform the work shall be allowed and Subscriber agrees to compensate PS for any additional
+                            expenses caused by the delay but not less than $1000.00 per day until work can resume. If PS,
+                            in its sole discretion, determines that continuing the work poses a risk to PS or its employees
+                            or agents, PS may elect to terminate this agreement on 3 day notice to Subscriber and Subscriber
+                            shall compensate PS for all services rendered and material provided to date of termination. PS
+                            shall be entitled to remove all its equipment and uninstalled equipment and material from the
+                            job site. Under no circumstances shall PS be liable to Subscriber for any damage caused by mold
+                            or hazardous conditions or remediation thereof.
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            21. NON-SOLICITATION: Subscriber agrees that it will not solicit for employment for itself, or any other entity, or employ,
+                            in any capacity, any employee of PS assigned by PS to perform any service for or on behalf of
+                            Subscriber for a period of two years after PS has completed providing service to Subscriber.
+                            In the event of Subscriber's violation of this provision, in addition to injunctive relief, PS
+                            shall recover from Subscriber an amount equal to such employee's salary based upon the average
+                            three months preceding employee's termination of employment with PS, times twelve, together with
+                            PS's counsel and expert witness fees.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            22. FALSE ALARMS / PERMIT FEES: Subscriber is responsible for all alarm permits and fees, agrees to file for and maintain
+                            any permits required by applicable law and indemnify or reimburse PS for any fines relating to
+                            permits or false alarms. PS shall have no liability for permit fees, false alarms, false alarm
+                            fines, police or fire response, any damage to personal or real property or personal injury caused
+                            by police or fire department response to alarm, whether false alarm or otherwise, or the refusal
+                            of the police or fire department to respond. In the event of termination of police or fire response
+                            by the municipal police or fire department this agreement shall nevertheless remain in full force
+                            and Subscriber shall remain liable for all payments provided for herein. Should PS be required
+                            by existing or hereafter enacted law to perform any service or furnish any material not specifically
+                            covered by the terms of this agreement Subscriber agrees to pay PS for such service or material.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            23. FAIR CREDIT REPORTING ACT: In compliance with the Fair Credit Reporting Act (“FCRA”), the Subscriber hereby authorizes
+                            PS to obtain a consumer credit report. Subscriber has the right, by contacting the provider of
+                            this information, to dispute the information on the report or request additional disclosures
+                            as provided under Section 606 of the FCRA. Written request must be given from the Subscriber
+                            to PS to request additional credit information. Subscriber releases all persons involved in the
+                            credit investigation from liability in connection with such investigation.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            24. FULL AGREEMENT / SEVERABILITY: This agreement along with the Schedule of Equipment and Services constitutes the full
+                            understanding of the parties and may not be amended, modified or canceled, except in writing
+                            signed by both parties, except PS’s requirements regarding items of protection provided for in
+                            this agreement imposed by Authority Having Jurisdiction. Subscriber acknowledges and represents
+                            that Subscriber has not relied on any representation, assertion, guarantee, warranty, collateral
+                            agreement or other assurance, except those set forth in this Agreement. Subscriber hereby waives
+                            all rights and remedies, at law or in equity, arising, or which may arise, as the result of Subscriber’s
+                            reliance on such representation, assertion, guarantee, warranty, collateral agreement or other
+                            assurance. Should any provision of this agreement be deemed void, the remaining parts shall not
+                            be affected. This agreement shall run concurrently with and shall not terminate or supersede
+                            any existing agreement between the parties unless specified herein.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            DO NOT SIGN THIS AGREEMENT IF ANY OF THE SPACES INTENDED FOR THE AGREED TERMS TO THE EXTENT OF THEN AVAILABLE INFORMATION
+                            ARE LEFT BLANK. YOU ARE ENTITLED TO A COPY OF THIS AGREEMENT AT THE TIME YOU SIGN IT. YOU MAY
+                            PAY OFF THE FULL UNPAID BALANCE DUE UNDER THIS AGREEMENT AT ANY TIME, AND IN SO DOING YOU SHALL
+                            BE ENTITLED TO A FULL REBATE OF THE UNEARNED FINANCE AND INSURANCE CHARGES. IT SHALL NOT BE LEGAL
+                            FOR PS TO ENTER YOUR PREMISES UNLAWFULLY OR COMMIT ANY BREACH OF THE PEACE TO REPOSSESS GOODS
+                            PURCHASED UNDER THIS AGREEMENT.
+                        </div>
+                        <table class="no-border" style="width: 100%;">
+                            <tr>
+                                <td style="width: 50%;">
+
+                                </td>
+                                <td valign="top" class="bold" align="justify" style="width: 50%; padding-left: 30px;height: 100px; text-align:center">
+                                    <b> NOTICE OF CANCELLATION YOU, THE BUYER, MAY CANCEL THIS TRANSACTION AT ANY TIME PRIOR
+                                        TO MIDNIGHT OF THE THIRD BUSINESS DAY AFTER THE DATE OF THIS TRANSACTION. SEE THE
+                                        ATTACHED NOTICE OF CANCELLATION FORM FOR AN EXPLANATION OF THIS RIGHT.
+                                    </b>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td align="center" style="width: 50%; height: 30px;"></td>
+                                <td valign="top" align="center" style="width: 50%; padding-left: 30px;height: 25px;">
+
+                                    <p class="hidden-h" align="left" style="margin-top: 30px;">
+                                        sign_2
+                                    </p>
+                                    <hr align="left" style="margin-top: 0px;" />
+                                    <div align="center">{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}
+                                        {! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun",
+                                        7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{!
+                                        YEAR(TODAY()) }</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="width: 50%;">
+                                    <p class="hidden-h" align="left" style="margin-top: 30px;">
+                                        sign_1
+                                    </p>
+                                    <hr align="left" style="margin-bottom: 0px;margin-top: 5px;" />
+                                    <div style="margin: 0px;">AUTHORIZED PS REPRESENTATIVE</div>
+                                </td>
+
+                                <td align="center" style="width: 50%; padding-left: 30px;">
+                                    <p class="hidden-h" align="left" style="margin-top: 30px;">
+                                        {!IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c==null && Home_Services__c.Account__r.Homeowner_2_First_Name__c==''
+                                        || Home_Services__c.Account__r.Homeowner_2_Last_Name__c==null && Home_Services__c.Account__r.Homeowner_2_Last_Name__c=='','','sign_3')}
+                                    </p>
+                                    <hr align="left" style="margin-bottom: 0px;margin-top: 0px;" />
+                                    <div style='display:{!IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c == "", "none", "block")}; margin-bottom: 0px;'>
+                                        {!IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c==null && Home_Services__c.Account__r.Homeowner_2_First_Name__c==''
+                                        || Home_Services__c.Account__r.Homeowner_2_Last_Name__c==null && Home_Services__c.Account__r.Homeowner_2_Last_Name__c=='','',
+                                        Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c)}
+                                        {!CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun",
+                                        7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{!
+                                        YEAR(TODAY()) }
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div align="justify">
+            <br/>
+            <br/>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="border:1px solid black; padding-left:3px; padding-right:3px;">
+                        <div style="text-align:center; margin-bottom:10px;">
+                            <b> Alarm.com</b>
+                            <br/>
+                            <b>***IMPORTANT -- see for additional terms ***</b>
+                            <br/>
+                            <b> Alarm.com Terms</b>
+                            <br/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            IMPORTANT -- READ CAREFULLY: You have agreed to purchase residential or commercial security, video, still-photo imaging and/or
+                            home automation products and services from an independently owned and operated security services
+                            dealer (“Dealer”) pursuant to an agreement with the Dealer (“Dealer Agreement”). Alarm.com Incorporated,
+                            a Delaware corporation (“Alarm.com” or “us” or “we”), has authorized the Dealer to market and
+                            sell Alarm.com’s services (“Services”) to you with certain hardware and other products, including
+                            communication modules, video, imaging and/or home automation devices (“Equipment”) that enable
+                            the Services. Sections A1 through A12 herein constitute the terms and conditions of Alarm.com’s
+                            offering of the Equipment and Services (“Terms”) and are part of your agreement with the Dealer
+                            and contain, among other things, important warranty disclaimers (Section A4) and limitations
+                            of liability (Section A5) applicable to the Services and the Equipment. By signing your agreement
+                            with the Dealer, accessing the Alarm.com customer website or mobile applications, or using any
+                            other part of the Services and/or Equipment, you agree to be bound by these Alarm.com Terms.
+                            You agree that these Alarm.com Terms may be enforced by us directly.
+
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A1. Pursuant to the Dealer Agreement, you have agreed to purchase the Services and/or Equipment from the Dealer. The Dealer
+                            is an independent contractor and not an agent of Alarm.com. You acknowledge and agree that (a)
+                            you have had the opportunity to read and review these Alarm.com Terms before entering into the
+                            Dealer Agreement, (b) you accept the Alarm.com Terms and agree to be bound by them, and (c) if,
+                            for any reason, you don’t remain an Alarm.com subscriber or if the Services become unavailable
+                            to you for any reason, you will have no right of refund, return or deinstallation with respect
+                            to any Services or any Equipment, except if and to the extent otherwise required by law. We may
+                            modify these Alarm.com Terms from time to time to comply with applicable law.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A2. The Equipment may contain proprietary software of Alarm.com that is embedded in the Equipment. Alarm.com solely owns
+                            and retains all rights, including all intellectual property rights, in the embedded software
+                            and all other Alarm.com materials (together, “Materials”) and Services. You will not (a) use,
+                            or cause or permit any other person or entity to use, any Materials or Services to design, build,
+                            market, or sell any similar or substitute product or service, or (b) cause, perform, or permit
+                            (i) the copying, decompilation, disassembly, or other reverse engineering of any Materials, (ii)
+                            the transferring or purported resale, licensing or sublicensing of any Materials, or (iii) the
+                            removal, delivery, or exportation of any Materials outside the United States or any other act
+                            in violation of any relevant export laws or regulations.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A3. If your Services include emergency two-way voice over a cellular or internet connection, you acknowledge that the two-way
+                            voice connection may be interrupted or unable to connect, that the call may be dropped, and that
+                            the sound quality may be distorted or impossible to understand. By accepting the emergency two-way
+                            voice service you understand and accept the limitations inherent in cellular and internet technology
+                            and the consequences if the technology does not operate as designed. If your Services include
+                            video or still-photo image cameras, the video clips and still-photo images generated from such
+                            cameras are stored on our servers and may be viewed by you only for a limited time based on the
+                            quantity of storage you have ordered from your Dealer. We have no control over and take no responsibility
+                            for the placement of cameras and their view. You agree to use the cameras and associated video
+                            and still-photo imaging features of the Services in compliance with all laws, including privacy
+                            and consumer protection laws, and not for any illegal purposes, including invasion of privacy
+                            or illicit conduct, and we may disconnect the cameras from the Services if you, in our sole determination,
+                            breach this covenant. We do not guarantee the receipt, clarity or quality of any images that
+                            may be adversely impacted by, for example, lighting, Internet and wireless communication facilities
+                            and transmission quality, electrical interference, weather and other conditions beyond our control.
+                            We may disclose stored video clips and still-photo images in response to a subpoena or a government
+                            request or order. If the Equipment provided by your Dealer includes an Alarm.com image sensor
+                            device that also is being used as a motion sensor, then you understand and accept that the motion
+                            sensor may not operate as designed and may be affected by conditions outside our control, which
+                            may cause the device to malfunction or provide false readings. If the Equipment provided by your
+                            Dealer includes home automation devices (such as thermostats, lighting controls and door locks),
+                            you understand that such devices may not work together with the Equipment and Alarm.com Services,
+                            and you may be unable to control the devices using the Equipment or Alarm.com Services. Alarm.com
+                            makes no representations or warranties regarding the quality, function or effectiveness of any
+                            such home automation devices.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A4. THE SOLE WARRANTY PROVIDED BY ALARM.COM WITH RESPECT TO THE SERVICES, MATERIALS AND EQUIPMENT IS A LIMITED WARRANTY TO
+                            USE COMMERCIALLY REASONABLE EFFORTS TO CORRECT OR BYPASS A MATERIAL DEFECT IN THE SERVICES, IN
+                            ACCORDANCE WITH THE TERMS AND CONDITIONS SET FORTH IN THESE ALARM.COM TERMS (“LIMITED WARRANTY”).
+                            THE LIMITED WARRANTY IS NOT EXTENDED TO YOU UNLESS YOU HAVE ACCEPTED THESE ALARM.COM TERMS AND
+                            REMAIN BOUND BY THESE TERMS AND CONDITIONS. THE LIMITED WARRANTY IS FOR YOUR BENEFIT ONLY AND
+                            MAY NOT BE ENFORCED BY ANY OTHER PERSON OR ENTITY. EXCEPT FOR THE LIMITED WARRANTY WITH RESPECT
+                            TO SERVICES, ALL SERVICES, EQUIPMENT AND MATERIALS THAT ARE OR MAY BE PROVIDED BY US ARE PROVIDED
+                            “AS IS,” WITH ALL FAULTS. TO THE MAXIMUM EXTENT PERMITTED BY LAW, ALARM.COM DISCLAIMS (a) ALL
+                            EXPRESS WARRANTIES TO YOU, OTHER THAN THIS LIMITED WARRANTY, (b) ALL IMPLIED WARRANTIES TO YOU
+                            OF ANY KIND, AND (c) ALL WARRANTIES TO OR FOR THE BENEFIT OF ANY OTHER PERSON OR ENTITY, WHETHER
+                            EXPRESS OR IMPLIED. THE IMPLIED WARRANTIES DISCLAIMED HEREIN, TO THE MAXIMUM EXTENT PERMITTED
+                            BY LAW, INCLUDE ALL WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY,
+                            SYSTEMS INTEGRATION, QUIET ENJOYMENT, OR NON-INFRINGEMENT. EXCEPT FOR THE LIMITED WARRANTY, THE
+                            ENTIRE RISK AS TO SATISFACTORY QUALITY, PERFORMANCE, ACCURACY, AND EFFORT OF ALL SERVICES, ALL
+                            EQUIPMENT AND ALL ALARM.COM MATERIALS SHALL BE WITH YOU. ALARM.COM SHALL HAVE NO RESPONSIBILITY
+                            FOR EQUIPMENT WHICH IS MANUFACTURED BY THIRD PARTIES
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A5. (A) YOU AGREE THAT ALARM.COM IS NOT AN INSURER OF YOUR PROPERTY OR THE PERSONAL SAFETY OF PERSONS IN OR AROUND YOUR PREMISES.
+                            THE PRICES THAT WE CHARGE FOR THE SERVICES AND EQUIPMENT REFLECT THE VALUE OF THE GOODS AND SERVICES
+                            WE PROVIDE AND NOT THE VALUE OF YOUR PREMISES OR ITS CONTENTS OR ANY LOSSES ASSOCIATED WITH PERSONAL
+                            INJURY OR DEATH. INSURANCE, IF ANY, COVERING PERSONAL INJURY AND PROPERTY LOSS OR DAMAGE ON YOUR
+                            PREMISES SHALL BE OBTAINED BY YOU FROM A THIRD PARTY.
+
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            (B) ALARM.COM IS NOT ASSUMING RESPONSIBILITY FOR ANY LOSSES (DIRECT OR INDIRECT), IRRESPECTIVE OF CAUSE, THAT MAY OCCUR EVEN
+                            IF DUE TO ALARM.COM’S NEGLIGENT PERFORMANCE OR FAILURE TO PERFORM ANY OBLIGATION UNDER THESE
+                            TERMS OR ANY DEALER AGREEMENT OR OTHER BASIS.
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            IF, NOTWITHSTANDING THESE TERMS, ALARM.COM IS HELD TO BE LIABLE TO YOU, OR ANY INVITEES, AGENTS, EMPLOYEES OR OTHERS, FOR
+                            BREACH OF CONTRACT, NEGLIGENCE, GROSS NEGLIGENCE, OR UNDER ANY OTHER THEORY OF LEGAL LIABILITY
+                            FOR ANY FAILURE OF THE SERVICES, MATERIALS OR EQUIPMENT, THEN THE LIMITATION OF ALARM.COM’S LIABILITY
+                            FOR ANY AND ALL HARM, DAMAGES, INJURY OR LOSS SHALL BE THE GREATER OF ONE THOUSAND DOLLARS ($1,000.00)
+                            OR THE ANNUAL AMOUNT THAT ALARM.COM RECEIVES FOR YOUR USE OF THE SERVICES.
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            (C) YOU HEREBY WAIVE ANY AND ALL CLAIMS FOR DAMAGES EXCEEDING THE LIMITS SET FORTH HEREIN FOR ALL HARM, DAMAGES, INJURY OR
+                            LOSS INCURRED, INCLUDING BUT NOT LIMITED TO ACTUAL, DIRECT, PUNITIVE, INCIDENTAL OR CONSEQUENTIAL
+                            DAMAGES, PROPERTY DAMAGE AND LOSSES DUE TO BUSINESS INTERRUPTION, LOSS OF PROFITS, PERSONAL INJURY
+                            OR DEATH. UNDER NO CIRCUMSTANCES WILL ALARM.COM BE LIABLE TO YOU FOR ANY CONSEQUENTIAL DAMAGES
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            (D) YOU MAY OBTAIN FROM ALARM.COM A HIGHER LIMITATION OF LIABILITY BY PAYING AN ADDITIONAL FEE TO US. IF YOU ELECT THIS OPTION,
+                            A RIDER WILL BE ATTACHED TO THESE ALARM.COM TERMS WHICH WILL SET FORTH THE AMOUNT OF THE HIGHER
+                            LIMITATION OF LIABILITY AND THE AMOUNT OF THE FEE. AGREEING TO THE HIGHER LIMITATION OF LIABILITY
+                            DOES NOT MEAN THAT ALARM.COM IS AN INSURER. YOU WAIVE ALL SUBROGATION AND OTHER RIGHTS OF RECOVERY
+                            AGAINST US THAT ANY INSURER OR OTHER PERSON MAY HAVE AS A RESULT OF PAYING ANY CLAIM FOR HARM,
+                            DAMAGES, INJURY OR LOSS TO YOU OR ANY OTHER PERSON OR ENTITY.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A6. You agree and acknowledge that the Services, Materials and Equipment may not detect, observe, view, or prevent an unauthorized
+                            intrusion onto the premises or any other emergency condition such as fire, smoke, carbon monoxide,
+                            medical emergencies or water damage. You agree and acknowledge that the use of the Services,
+                            Materials and/or Equipment is voluntary.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A7. If any of your employees, guests, relatives, invitees, or insurers, or any other person or entity connected to you, or
+                            any person or entity who seeks to assert rights they claim are derived from your relationship
+                            with Alarm.com, attempts to hold Alarm.com responsible for any harm, damages, injury or loss
+                            (including property damage, personal injury or death) connected with or resulting from any alleged
+                            (a) failure of the Services, Materials or Equipment, (b) negligence (including gross negligence),
+                            (c) improper or careless activity of Alarm.com, or (d) claim for indemnification or contribution,
+                            then you will repay to us (i) any amount that we are required to pay or that we agree to pay
+                            in settlement of the claim, and (ii) the amount of our reasonable attorney’s fees and any other
+                            losses and costs that we may incur in connection with the harm, damages, injury or loss
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A8. You understand and agree that these Alarm.com Terms, and particularly Sections A4, A5, A6, A7, and A8, shall (a) apply
+                            to and protect the employees, officers, shareholders, parent companies, directors, agents, licensors,
+                            representatives, subcontractors, affiliates and assignees of Alarm.com, and (b) be binding on
+                            your heirs, administrators, custodians, trustees, agents and successors.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A9. TO THE EXTENT PERMITTED BY LAW, YOU AGREE THAT NO LAWSUIT OR ANY OTHER LEGAL PROCEEDING CONNECTED WITH THE SERVICES OR
+                            EQUIPMENT SHALL BE BROUGHT OR FILED BY YOU MORE THAN ONE (1) YEAR AFTER THE INCIDENT GIVING RISE
+                            TO THE CLAIM OCCURRED. IN ADDITION, TO THE EXTENT PERMITTED BY LAW, ANY SUCH LEGAL PROCEEDING
+                            SHALL NOT BE HEARD BEFORE A JURY, AND EACH PARTY GIVES UP ANY RIGHT TO A JURY TRIAL. TO THE EXTENT
+                            PERMITTED BY LAW, YOU AGREE THAT YOU WILL NOT BRING ANY CLASS ACTION LAWSUIT AGAINST ALARM.COM
+                            OR BE A REPRESENTATIVE PLAINTIFF OR PLAINTIFF CLASS MEMBER IN ANY SUCH LAWSUIT.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A10. These Alarm.com Terms shall be governed by the law of the State of Delaware, without giving effect to its rules of conflict
+                            of laws. If you are a resident or business located in the State of California, the following
+                            applies to you: If either you or Alarm.com commences a lawsuit for a dispute arising under or
+                            related to these Alarm.com Terms or in any way relating to the Services, such suit shall be submitted
+                            to general judicial reference in Los Angeles, California pursuant to California Code of Civil
+                            Procedure section 638 et seq. and 641 through 645.1 or any successor statutes thereto.
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            A11. If any provision of these Alarm.com Terms or the application of any such provision to any person, entity or circumstance
+                            shall be held invalid, illegal, or unenforceable in any respect, such invalidity, illegality,
+                            or unenforceability shall not affect any other provision of these Alarm.com Terms. The parties
+                            intend that all disclaimers of warranties, limitations of liability, and exclusions of damages
+                            in these Alarm.com Terms shall be upheld and applied to the maximum extent permitted by law.
+                            Alarm.com is an intended third-party beneficiary of these Alarm.com Terms and shall have the
+                            right to enforce and/or otherwise invoke any and all provisions set forth in any of these Alarm.com
+                            Terms directly. The words “include,” “includes” and “including” shall be deemed to be followed
+                            by the phrase “without limitation.”
+                        </div>
+                        <div style="margin-bottom: 40px;">
+                            A12. YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOU HAVE NO CONTRACTUAL RELATIONSHIP WHATSOEVER WITH THE UNDERLYING WIRELESS
+                            SERVICE PROVIDER OR ITS AFFILIATES OR CONTRACTORS AND THAT YOU ARE NOT A THIRD PARTY BENEFICIARY
+                            OF ANY AGREEMENT BETWEEN ALARM.COM AND THE UNDERLYING CARRIER. IN ADDITION, YOU ACKNOWLEDGE AND
+                            AGREE THAT THE UNDERLYING CARRIER AND ITS AFFILIATES AND CONTRACTORS SHALL HAVE NO LEGAL, EQUITABLE,
+                            OR OTHER LIABILITY OF ANY KIND TO YOU AND YOU HEREBY WAIVE ANY AND ALL CLAIMS OR DEMANDS THEREFOR.
+                        </div>
+                        <div class="bold" align="center" style="margin-bottom: 20px;">
+                            <b>SUBSCRIBER ACKNOWLEDGES RECEIVING A FULLY EXECUTED COPY
+                                <br/> OF THIS AGREEMENT AND SCHEDULE OF EQUIPMENT AND SERVICES AT TIME OF EXECUTION</b>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="page-break">
+        	<apex:include pagename="CompletionCertEquiFinancing_Doc"/>
+        </div>
+        <!--SCHEDULE OF EQUIPMENT
+            <div style="page-break-after:always;margin-top:200px">
+                <table class="border" style="width: 100%;">
+                    <div class="cotain" style=" width: 100%; background-image: url({! $Resource.AutomationLogo });
+                                               height: 100px; background-position: center;
+                                               position: absolute;left: 10px;">
+                        
+                    </div>
+                </table>
+                
+                <br/>
+                <div class="bold" border="1" style="margin-top: 90px;width:100%;text-align:center">
+                    
+                    Protection Source<br />
+                    AZROC #201046<br />
+                    4340 W. Chandler Blvd., #9 • Chandler, AZ 85226 <br />
+                    602-875-0717 <br />
+                    MONITORING AGREEMENT
+                    
+                </div>
+                
+                <table style="width: 100%;margin-top: 20px;">
+                    <tr style="margin-top: 25px;">
+                        <th style="width: 50%">
+                            Monthly Security Services:
+                        </th>
+                    </tr>
+                    <tr>
+                        
+                        <td style="width: 50%">
+                            {!Home_Services__c.Monthly_Security_Services__c}
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="bold" border="1" style="margin-top: 20px;width:100%" align="center" >
+                    
+                    <u>SCHEDULE OF EQUIPMENT</u>
+                    
+                </div>
+                
+                <br/>
+                <!--  <div class="bold" border="1" style="margin-top: 10px;width:100%;" align="center">Your report  is entered into on  <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u> between Protection Source, hereinafter referred to as “PS” and SUBSCRIBER'S listed below.</div> 
+                
+                
+                <div  border="1" style="margin-top: 10px;width:100%;" align="justify"><!--{!IF(campo == "", "", "&")} para la condicion del suscriber 2 recuerda
+                    This contract is made and entered into on <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u>
+                    by and between <u>Protection Source</u> and <u>{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}{! IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c == "", "", ' & '& Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c)}</u>, (“SUBSCRIBER”)
+                    This Schedule of Equipment is incorporated by reference into the Agreement made this date between We, the Company and SUBSCRIBER, 
+                    the terms and conditions of which fully apply to this Schedule of Equipment.  
+                </div>
+                <div>
+                    <table border="1|0" width="95%" style="border-collapse: collapse; margin: 20px 15px 20px 15px" >
+                        <tr> <!--cada <tr> es una linea horizontal de la tabla
+                            
+                            <th height="30" align="center">QTY</th> 
+                            <th height="30" align="center">DESCRIPTION</th>
+                            <th height="30" align="center">COST</th>
+                            
+                        </tr>
+                        
+                        <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepea">
+                            <tr>
+                                <td height="30" align="center">
+                                    <apex:outputField value="{!LineIte.Quantity__c}" />
+                                </td>
+                                <td height="30" align="center">
+                                    <apex:outputField value="{!LineIte.Name}" />
+                                </td>
+                                <td height="30" align="center">
+                                    <apex:outputField value="{!LineIte.Total_Sales_Price_p__c }" />
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                        
+                    </table>
+                </div>
+                
+                <div  border="1" style="margin-top: 10px;width:100%;" align="justify">
+                    You acknowledge that: (a) We have explained the full range of protection, equipment, and services available to you, (b) additional protection over and above that provided herein is available and maybe obtained from us at an additional cost to you (c) you desire and have contracted for only the equipment and services itemized on this contract
+                </div>
+                <br/>
+                <br/>
+                <table border="1" width="95%" style="border-collapse: collapse" align="center">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Checking","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {!Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td >{!Home_Services__c.Bank_Account_Number_Encrypted__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td >{!Home_Services__c.Routing_Number__c}</td>
+                                        </tr> 
+                                        
+                                    </table>
+                                </div>
+                                
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Finance","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th >METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {!Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Finance Company:</th>
+                                            <td >{!Home_Services__c.Finance_Company__c}</td>
+                                        </tr> 
+                                        <tr>
+                                            <th >Financed Amount:</th>
+                                            <td >$<apex:outputField value="{!Home_Services__c.Financed_Amount__c}"/></td>
+                                        </tr> 
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Credit Card","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th >METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {! Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Card Type:</th>
+                                            <td >
+                                                {! Home_Services__c.Card_Type__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Name on Card (Account):</th>
+                                            <td >{!Home_Services__c.Name_on_Card__c}</td>
+                                            <th >EXP DATE:</th> 
+                                            <td >{!Home_Services__c.Card_Expiration_Month__c &"/"& Home_Services__c.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th >Account Number:</th>
+                                            <td >{!Home_Services__c.Account_Number__c}</td>                                
+                                            <th >CSV:</th>
+                                            <td >{!Home_Services__c.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <div>
+                                        
+                                        
+                                    </div>
+                                    
+                                    <table width="40%">
+                                        <tr> 
+                                            
+                                            <td height="30">Total Equipment Cost: </td>
+                                            <td><u><apex:outputField value="{!Home_Services__c.Total_Cash_Selling_Price__c}"/></u></td>
+                                            
+                                        </tr>  
+                                    </table>
+                                </div> 
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>  
+                <div>
+                    
+                    <!--table border="1" width="96%" style="border-collapse: collapse; margin: 20px 15px 20px 14px"  align="center"
+                    <table width="98%" style="border-collapse: collapse; margin: 27px 14px 20px 20px"  align="center" >
+                        
+                        
+                        <tr>
+                            
+                            <td height="51" >Sales Rep Signature: <span align="left" class="mark-below"> sign_1 ..........</span></td>    
+                            <td height="30" >Date:  <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u></td>
+                            <td height="30" >Less Deposit:<u><apex:outputField value="{!Home_Services__c.Down_Payment__c}"/></u></td>
+                        </tr>
+                        <tr>
+                            
+                            <td height="51">Subscriber Signature:<span align="left" class="mark-below"> sign_2 ..........</span></td>   
+                            <td height="30">Date:<u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u></td>
+                            <td height="30">Balance Due: <u><apex:outputField value="{!Home_Services__c.Balance_Due__c}"/> </u></td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div> 
+        
+        -->
+
+        <!--CANCELLATION 
+            <div style="page-break-before: always;">
+                <table class="border" style="width: 100%;">
+                    <div class="cotain" style=" width: 100%; background-image: url({! $Resource.AutomationLogo });
+                                               height: 100px; background-position: center;
+                                               position: absolute;left: 10px;">
+                        
+                    </div>
+                </table>
+                
+                <br/>
+                <div class="bold" border="1" style="margin-top: 100px;width:100%" align="center" >
+                    <u>CANCELLATION NOTICE</u>
+                </div>
+                <br/>
+                <div class="bold" border="1" style="margin-top: 10px;width:100%;" align="center">
+                    PROTECTION SOURCE(hereinafter referred to as Seller) to enter date of transaction
+                </div>
+                <br/>
+                <br/>
+                <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;" >
+                    <div >
+                        {!MONTH(TODAY())}/
+                        {!DAY(TODAY())}/
+                        {!YEAR(TODAY())}
+                        <hr align="left" style="margin-top: 0px;"/>
+                    </div>
+                    <div style="margin-top:0px;">
+                        Date
+                    </div>
+                </div><br/>
+                <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;" >
+                    <div > 
+                        {!Home_Services__c.Account__r.FirstName &' '& Home_Services__c.Account__r.LastName}
+                        <hr align="left" style="margin-top: 0px;"/>
+                    </div>
+                    <div style="margin-top:0px;">
+                        Subscriber Name
+                    </div>
+                </div><br/>
+                
+                
+                <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;" >
+                    <div > 
+                        {!Home_Services__c.Account__r.Street__c &'  '& Home_Services__c.Account__r.City__c &'  '& Home_Services__c.Account__r.State__c &' '& Home_Services__c.Account__r.Zip__c }
+                        <hr align="left" style="margin-top: 0px;"/>
+                    </div>
+                    <div style="margin-top:0px;">
+                        Subscriber Address
+                    </div>
+                </div>     <br/>       
+                
+                <div style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                    You may cancel this transaction, without any penalty or obligation, within three business days from the above date.
+                </div>
+                <div  style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                    If  you  cancel,  any  property  traded  in,  any  payments made  by  you  under  the  contract  or  sale  and  any  negotiable
+                    instrument executed by you will be returned within ten business days following receipt by PS of your cancellation notice
+                    and any security interest arising out of the transaction will be cancelled.
+                </div>
+                
+                <div align="justify; " style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                    If you cancel, you must make available to PSat your residence in substantially as good condition as when received, any
+                    goods delivered to you under this contract or sale; or you may, if you wish, comply with the instructions of PS regarding 
+                    the return shipment of the goods at PS's expense and risk.
+                </div>
+                
+                <div align="justify; " style="border-collapse: collapse;margin-top:20px;text-align:justify;">
+                    If you do make the goods available to PS and PS does not pick them up within twentydays of the date of your notice of
+                    cancellation,  you  may  retain  or  dispose  of  the  goods  without  any  further  obligation.    If  you  fail  to  make  the  goods 
+                    available to PS, or if you agree to return the goods to PS and fail to do so, then you remain liable for performance of all 
+                    obligations under the contract.
+                </div>
+                
+                <div align="justify; " style="border-collapse: collapse;margin-top:20px;">
+                    To cancel this transaction, mail or deliver a signed and dated copy of this cancellation notice or any other written notice,
+                    or send a telegram to: 
+                </div>
+                <div align="center" style="width: 50%; margin-left:auto;margin-right:auto;padding-botttom: 0; text-align:center;" >
+                    <p> Protection Source</p>
+                    <p>4340 West Chandler Boulevard</p>
+                    <p>Chandler,AZ 85226 </p>
+                </div>
+                <br/>
+                <div style="width: 50%;margin-botttom: 0; text-align:left;" >
+                    <div style="display:inline-block">
+                        NOT LATER THAN MIDNIGHT OF 
+                    </div>
+                    <div style="display:inline-block;">
+                        {!MONTH(TODAY()+4)}/
+                        {!DAY(TODAY()+4)}/
+                        {!YEAR(TODAY()+4)}
+                        <hr align="left" style="margin-top: 0px; "/>
+                    </div>
+                    
+                </div>
+                <p>PS to enter date by which buyer must give notice of cancellation.</p>
+                <br/>
+                
+                <div>I HEREBY CANCEL THIS TRANSACTION</div>
+                <br/><br/>
+                
+                <div style="width: 40%;padding-botttom: 0; text-align:center;" >
+                    <div ><hr align="left" style="margin-top: 0px;"/> </div>
+                    <div style="margin-top:0px;">Date of Cancellation to be entered by buyer</div>
+                </div>
+                <br/><br/>
+                <div style="width: 40%;padding-botttom: 0; text-align:center;" >
+                    <!--<p align="center" class="hidden-h"> sign_2</p>
+                    <div ><hr align="left" style="margin-top: 5px;"/> </div>
+                    <div style="margin-top:0px;">Subscriber's Signature</div>
+                </div>
+                <br/><br/>
+                <div align="right">
+                    <div>
+                        <p>2 COPIES OF THIS FORM RECEIVED BY </p>
+                        <p>BUYER ON DATE OF TRANSACTION </p>
+                    </div>
+                    <br />
+                    <div align="right" style="float:right; margin-top:80px">
+                        <div>
+                            <p align="left " class="hidden-h"> sign_2</p>
+                            <hr style="margin-top: 5px; " />
+                        </div>
+                        <div style=" margin-top:0px;float:right;">Subscriber initial to acknowledge receipt of these forms</div>
+                    </div>
+                </div>
+            </div> 
+    
+    -->
+    </body>
+
+    </html>
+</apex:page>

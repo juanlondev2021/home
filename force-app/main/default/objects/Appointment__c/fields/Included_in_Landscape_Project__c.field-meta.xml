@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Included_in_Landscape_Project__c</fullName>
+    <externalId>false</externalId>
+    <label>Included in Landscape Project</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sprinkler System</fullName>
+                <default>false</default>
+                <label>Sprinkler System</label>
+            </value>
+            <value>
+                <fullName>Grass</fullName>
+                <default>false</default>
+                <label>Grass</label>
+            </value>
+            <value>
+                <fullName>Trees/Shrubs</fullName>
+                <default>false</default>
+                <label>Trees/Shrubs</label>
+            </value>
+            <value>
+                <fullName>Drainage System</fullName>
+                <default>false</default>
+                <label>Drainage System</label>
+            </value>
+            <value>
+                <fullName>Wood Structure(s), Deck(s), Gazebo(s), etc</fullName>
+                <default>false</default>
+                <label>Wood Structure(s), Deck(s), Gazebo(s), etc</label>
+            </value>
+            <value>
+                <fullName>Concrete Patio/Walkway, etc</fullName>
+                <default>false</default>
+                <label>Concrete Patio/Walkway, etc</label>
+            </value>
+            <value>
+                <fullName>Masonry/Brick/Stone work</fullName>
+                <default>false</default>
+                <label>Masonry/Brick/Stone work</label>
+            </value>
+            <value>
+                <fullName>Fencing</fullName>
+                <default>false</default>
+                <label>Fencing</label>
+            </value>
+            <value>
+                <fullName>Retaining wall</fullName>
+                <default>false</default>
+                <label>Retaining wall</label>
+            </value>
+            <value>
+                <fullName>Landscape lighting</fullName>
+                <default>false</default>
+                <label>Landscape lighting</label>
+            </value>
+            <value>
+                <fullName>Pool/Spa</fullName>
+                <default>false</default>
+                <label>Pool/Spa</label>
+            </value>
+            <value>
+                <fullName>Storage Shed</fullName>
+                <default>false</default>
+                <label>Storage Shed</label>
+            </value>
+            <value>
+                <fullName>Built in BBQ</fullName>
+                <default>false</default>
+                <label>Built in BBQ</label>
+            </value>
+            <value>
+                <fullName>Pergola</fullName>
+                <default>false</default>
+                <label>Pergola</label>
+            </value>
+            <value>
+                <fullName>Firepit: Gas</fullName>
+                <default>false</default>
+                <label>Firepit: Gas</label>
+            </value>
+            <value>
+                <fullName>Firepit: Electric</fullName>
+                <default>false</default>
+                <label>Firepit: Electric</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

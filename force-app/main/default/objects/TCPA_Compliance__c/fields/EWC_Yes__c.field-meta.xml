@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EWC_Yes__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(RecordTypeId = &quot;012j0000001139t&quot;, IF(CONTAINS( Name , &quot;Yes&quot;), &quot;EWC - Yes&quot;, &quot;EWC - No&quot;),
+    IF( Date_of_Expiration_Date__c  &gt;=  TODAY() ,&quot;EBR - Yes&quot;, &quot;ERB - Expired&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>TCPA Report</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

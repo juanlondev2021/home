@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Panel_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Panel Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>2GIG</fullName>
+                <default>false</default>
+                <label>2GIG</label>
+            </value>
+            <value>
+                <fullName>Advisor</fullName>
+                <default>false</default>
+                <label>Advisor</label>
+            </value>
+            <value>
+                <fullName>Building36</fullName>
+                <default>false</default>
+                <label>Building36</label>
+            </value>
+            <value>
+                <fullName>CatM1</fullName>
+                <default>false</default>
+                <label>CatM1</label>
+            </value>
+            <value>
+                <fullName>Command</fullName>
+                <default>false</default>
+                <label>Command</label>
+            </value>
+            <value>
+                <fullName>Concord</fullName>
+                <default>false</default>
+                <label>Concord</label>
+            </value>
+            <value>
+                <fullName>ElkGuard</fullName>
+                <default>false</default>
+                <label>ElkGuard</label>
+            </value>
+            <value>
+                <fullName>Go Control 3</fullName>
+                <default>false</default>
+                <label>Go Control 3</label>
+            </value>
+            <value>
+                <fullName>Go Control 4</fullName>
+                <default>false</default>
+                <label>Go Control 4</label>
+            </value>
+            <value>
+                <fullName>Greybox</fullName>
+                <default>false</default>
+                <label>Greybox</label>
+            </value>
+            <value>
+                <fullName>HxGW</fullName>
+                <default>false</default>
+                <label>HxGW</label>
+            </value>
+            <value>
+                <fullName>Impassa</fullName>
+                <default>false</default>
+                <label>Impassa</label>
+            </value>
+            <value>
+                <fullName>iotega</fullName>
+                <default>false</default>
+                <label>iotega</label>
+            </value>
+            <value>
+                <fullName>IQPanel</fullName>
+                <default>false</default>
+                <label>IQPanel</label>
+            </value>
+            <value>
+                <fullName>IQ Panel 2</fullName>
+                <default>false</default>
+                <label>IQ Panel 2</label>
+            </value>
+            <value>
+                <fullName>IQ Panel 3</fullName>
+                <default>false</default>
+                <label>IQ Panel 3</label>
+            </value>
+            <value>
+                <fullName>Neo</fullName>
+                <default>false</default>
+                <label>Neo</label>
+            </value>
+            <value>
+                <fullName>No Security Panel (e.g. Video)</fullName>
+                <default>false</default>
+                <label>No Security Panel (e.g. Video)</label>
+            </value>
+            <value>
+                <fullName>NotSet</fullName>
+                <default>false</default>
+                <label>NotSet</label>
+            </value>
+            <value>
+                <fullName>Nucleus</fullName>
+                <default>false</default>
+                <label>Nucleus</label>
+            </value>
+            <value>
+                <fullName>NX</fullName>
+                <default>false</default>
+                <label>NX</label>
+            </value>
+            <value>
+                <fullName>OneLink</fullName>
+                <default>false</default>
+                <label>OneLink</label>
+            </value>
+            <value>
+                <fullName>Panel16</fullName>
+                <default>false</default>
+                <label>Panel16</label>
+            </value>
+            <value>
+                <fullName>PointHub</fullName>
+                <default>false</default>
+                <label>PointHub</label>
+            </value>
+            <value>
+                <fullName>PowerSeries Neo/Pro</fullName>
+                <default>false</default>
+                <label>PowerSeries Neo/Pro</label>
+            </value>
+            <value>
+                <fullName>SEMPowerSeries</fullName>
+                <default>false</default>
+                <label>SEMPowerSeries</label>
+            </value>
+            <value>
+                <fullName>SEMVista</fullName>
+                <default>false</default>
+                <label>SEMVista</label>
+            </value>
+            <value>
+                <fullName>Simon</fullName>
+                <default>false</default>
+                <label>Simon</label>
+            </value>
+            <value>
+                <fullName>Simon XT/XTi</fullName>
+                <default>false</default>
+                <label>Simon XT/XTi</label>
+            </value>
+            <value>
+                <fullName>Touchlink</fullName>
+                <default>false</default>
+                <label>Touchlink</label>
+            </value>
+            <value>
+                <fullName>Vario</fullName>
+                <default>false</default>
+                <label>Vario</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

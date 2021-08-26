@@ -1,0 +1,125 @@
+<apex:page controller="GiftCardCreator_Ctrl" id="pg"  sidebar="false">	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
+	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	  <link rel="stylesheet" href="/resources/demos/style.css"/>
+	  <style>
+	  #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+	  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.2em; height: 18px; }
+	  #sortable li span { position: absolute; margin-left: -1.3em; }
+	  #sortable1{ list-style-type: none; margin: 0; padding: 0; width: 100%; }
+	  #sortable1 li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.2em; height: 25px; }
+	  #sortable1 li span { position: absolute; margin-left: -1.3em; }
+	  .nn {position: absolute;}
+	 th {
+		    display: table-cell;
+		    vertical-align: inherit;
+		    font-weight: bold;
+		    color:black;
+		    text-align: center;
+		}
+	  </style>
+	<script>
+		 $(function() {
+		    $( "#sortable" ).sortable();
+		    $( "#sortable" ).disableSelection();
+		  });
+		function processOnSelect(){
+			var selBranch = document.getElementById("pg:frm:pgblk:sec1:selBranch").value;
+			processOnSelectAF(selBranch);
+		}
+		function resetDrag(){
+			 $( "#sortable" ).sortable();
+		    $( "#sortable" ).disableSelection();
+		}
+		function processOrder(){
+			var oppIds='';
+			$(".nn").each(function(index){
+						oppIds+=$(this).html().split("value=")[1].replace('\">',',').replace('\"','');
+						console.log($(this).html().split("value=")[1].replace('\">','').replace('\"',''));
+			});
+			//alert(oppIds);
+			saveOrderAf(oppIds);
+		}
+	</script>
+	<apex:form id="frm">
+		<apex:pageMessages id="msgs"/>
+		<apex:actionFunction action="{!processSelection}" name="processOnSelectAF" rerender="sec1,opanel" status="LoadStatusPart" oncomplete="resetDrag();">
+			<apex:param name="selBranch" value=""/>
+		</apex:actionFunction>
+		<apex:actionFunction action="{!saveOrder}" name="saveOrderAf" rerender="sec1,opanel,msgs" status="LoadStatusPart" oncomplete="resetDrag();"> 
+			<apex:param name="oppIds" value=""/>
+		</apex:actionFunction>
+		<apex:pageBlock id="pgblk">
+			<apex:pageblockSection title="Branch information" columns="1" id="sec1">
+				<apex:outputPanel >
+					<b>Select Branch</b> &nbsp; 
+					<apex:selectlist id="selBranch" value="{!selectedBranch}" size="1" multiselect="false" onchange="processOnSelect();">
+						<apex:selectOptions value="{!branchOptions}"/>
+					</apex:selectlist>
+					<apex:actionStatus id="LoadStatusPart">
+			           <apex:facet name="start">
+			                   <apex:image value="/img/loading.gif"/> &nbsp;<font color="red">Working, Please Wait....</font>
+			            </apex:facet>
+			        </apex:actionStatus>
+				</apex:outputPanel>
+				<b>Quantity</b> &nbsp;<apex:inputText value="{!qnty}"/>
+				<apex:outputPanel rendered="{!showOptions}">
+				   <table cellspacing="15">
+						<tr>
+							<th>Location</th>
+							<th>Batch#</th>
+							<th>Card#</th>
+							<th>Box#</th>
+							<th>Date Odered</th>
+						</tr>
+						<tr>
+						     <td>
+						     <apex:outputPanel rendered="{!if(Not(Contains(location,'admin')),true,false)}">
+						    	 {!location}
+						     </apex:outputPanel>
+						      <apex:outputPanel rendered="{!if(Contains(location,'admin'),true,false)}">
+						    	 <font color="red">{!location}</font>
+						     </apex:outputPanel>
+						     </td>
+							 <td>{!batchNumber}</td>
+							 <td>0000<br/></td>
+							 <td>0000<br/></td>
+							 <td>0{!MONTH(TODAY())}-0{!DAY(TODAY())}-{!YEAR(TODAY())}</td>
+						 </tr>
+				   </table>
+				</apex:outputPanel>
+				 <input type="button" class="btn" value="Create Gift Card Orders" onclick="processOrder();"/>
+			</apex:pageblockSection>
+			<apex:pageblockSection title="Opportunities for this branch" />
+		</apex:pageBlock>
+		<apex:outputPanel id="opanel">
+			<ul id="sortable" >
+				<table  width="100%">
+			        		<tr>
+					 			<th width="20%" align="left">Name</th>
+					 			<th width="20%" align="left">Account Name</th>
+					 			<th width="20%" align="left">Prime Front Cards Included?</th>
+					 			<th width="20%" align="left">Operations Stage</th>
+					 			<th width="0%" align="left"></th>
+					 		</tr>
+			        	</table>
+			    <apex:repeat value="{!oppList}" var="opp">
+			        <li class="ui-state-default">
+			        	<span class="ui-icon ui-icon-arrowthick-2-n-s"/>
+			        	
+			        	<table width="100%">
+					 		<tr>
+					 			<td width="20%" align="center">{!opp.name}</td>	
+					 			<td width="20%" align="center">{!opp.account.name}</td>
+					 			<td width="20%" align="center"><apex:inputcheckbox value="{!opp.Prime_Front__c}" disabled="true"/></td>
+					 			<td width="20%" align="center">{!opp.Operational_Stages__c}</td>
+					 			<td class="nn" width="0%"><apex:inputHidden value="{!opp.Id}"/></td>
+					 		</tr>
+				 		</table>
+			         </li>
+			    </apex:repeat>
+			 </ul>
+	  </apex:outputPanel>
+	</apex:form>
+</apex:page>

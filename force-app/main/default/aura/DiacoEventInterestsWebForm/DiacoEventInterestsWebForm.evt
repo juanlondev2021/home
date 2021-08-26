@@ -1,0 +1,12 @@
+<aura:event type="COMPONENT" description="Event template">
+
+    <aura:attribute name="interestBox" type="Map" />
+    <aura:attribute name="appointment" type="Appointment__c" />
+    <aura:attribute name="interest" type="String" />
+    <aura:attribute name="startDate" type="List" />
+    <aura:attribute name="endHour" type="Integer" />
+
+
+    <aura:attribute name="interestSelected" type="List" default="[]"/> 
+
+</aura:event>

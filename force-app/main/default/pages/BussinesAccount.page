@@ -1,0 +1,206 @@
+<apex:page lightningStylesheets="true" showHeader="false" standardController="Account" docType="html-5.0" readonly="false" extensions="businessAccountClass">
+   <apex:form >
+    <apex:pageBlock title="New Account: Business Accounts" id="PageSetting" >
+        <apex:pageMessages />
+         <apex:pageBlockSection title="Read">
+                
+                    
+                    <p align="justify">
+                      I’m calling from DealerAlly, a program designed by security dealers for security dealers. 
+                      The founders of our firm have 50+ years of combined Industry experience. 
+                      We focus on providing dealer options and create the most equity in new accounts, 
+                      while providing the best back-office support value with the industry’s most reputable vendors of products, 
+                      services and capital. We are in position to save you time and money! We can get you the highest multiples 
+                      for your accounts and/or provide loans if you want to finance an acquisition, consolidate debt or expand 
+                      your business. We have the Best, most likely the only, consumer- based finance program, like Verizon or AT&amp;T, that allows you to sell a monthly payment on a small to large residential or small commercial customer with no recourse, no holdbacks, no pass -throughs, no guarantee periods, no replacements, high upfront daily payouts, All customer RMR minus the pass-through and 100% equity.
+
+					  I’m calling on behalf of our president, Tim Meekin, a 27 - year veteran of our industry, to see if there is a potential fit for a future partnership. Do you have some time for a brief discussion? I promise to be concise and not waste your time or mine.
+
+					Let me ask you a few questions to see if our services are a good fit for you or your business. Based on your answers I will schedule a call with Tim.
+                    </p>
+                    <p align="justify">
+                    <strong><u>IDEAL DEALER</u></strong><br/></p>
+                    <ul align="justify">
+                        <strong><li>Wants to create wealth for Retirement</li></strong>
+                        <strong><li>Wants to sell business or accounts</li></strong>
+                        <strong><li>Need capital now</li></strong>
+                        <li>See the value of RMR and in housing accounts</li>
+                        <li>Want to manage their business better and be more organized (CRM and automate)</li>
+                        <li>Need back-office help so they can grow and sell more</li>
+                        <li>Want to save on product and service pricing</li>
+                    </ul>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Account Information" columns="1">
+                
+                		<apex:outputField value="{!Account.Name}" />
+                		<apex:inputField value="{!Account.City__c}" />
+                        <apex:inputField value="{!Account.State__c }"/>
+                        <apex:inputField value="{!Account.Zip__c}" /> 
+                
+            </apex:pageBlockSection>
+        	
+            <apex:pageBlockSection title="General Questions" columns="1">
+                
+                <apex:inputField label="How long have you owned your Security Business?" value="{!Account.Years_of_Security_Business__c }"/>
+                <apex:inputField label="What segments are you targeting?" value="{!Account.Segments_Targeting__c }"/>
+                <apex:inputField label="Commercial Percent:" value="{!Account.Commercial_Percent__c }"/>
+                <apex:inputField label="Residential/home automation Percent:" value="{!Account.Residential_Percent__c }"/>
+                <apex:inputField label="Estimated new Residential/small commercial accounts per month?" value="{!Account.New_R_SC_Accounts_Per_Month__c }"/>
+                <apex:inputField label="Are you focused on growing residential or commercial?" value="{!Account.Focused_On_Growing__c }"/>
+                <apex:inputField label="What capital source are you using today?" value="{!Account.Capital_Source__c }"/>
+                <apex:inputField label="Please provide details: " value="{!Account.Capital_Source_Details__c }"/>
+                <apex:inputField label="Capital Needs are: " value="{!Account.Capital_Needs__c }"/>
+                <apex:pageBlockSectionItem >
+                    <p align="justify"><strong>Another probing question</strong><br/> -What is your ideal exit strategy? i.e. double your accounts, buy a competitor? Keep building for another 10 years then sell and hit the beach?<br/>
+                                        <strong>A)</strong> We will get you the highest multiples by selling in-house accounts<br/>
+                                        <strong>B) &amp; C)</strong> Finance an acquisition OR consolidate debt– Dealers need “monthly RMR”. Use this collateral to consolidate debt via a loan or sell some in-house accounts
+                                        <br/><strong>D)</strong> Expand business growth- Best finance program, like Verizon, ATT, and Vivint (high daily payouts, all RMR minus the pass-through, 100% equity)</p>
+                    <apex:inputField label=""
+                                   value="{!Account.Probing_Questions__c }" style="width:21%;" />
+                </apex:pageBlockSectionItem>
+                
+                		
+                <apex:inputField label="Would you like to have an option to pitch a MONTHLY PAYMENT like the low down/ high volume dealers and OWN 100% of your accounts with NO RECOURSE and GROWING MONTHLY RMR (CASH FLOW)?" value="{!Account.Option_To_Pitch_A_Monthly__c }"/>	
+               	<apex:inputField label="Do you currently" value="{!Account.Do_You_Currently__c }"/>	
+                
+            </apex:pageBlockSection>
+        
+            <apex:pageBlockSection title="In-Houses Accounts" columns="1">
+                <apex:inputField label="How many Accounts do you own?" value="{!Account.Number_Of_Accounts__c }"/>
+                <apex:inputField label="How much monthly RMR do you have?<br /> i.e. 100 accounts averaging $40 per month = $4,000" value="{!Account.Monthly_RMR__c }"/>
+                <h4 align="center" style="color:red;">
+                                Who is your interactive services provider? Check all that apply
+                </h4>
+                <apex:inputField label="Alarm.Com" value="{!Account.Alarm_Com__c }"/>
+                <apex:inputField label="SecureNet" value="{!Account.SecureNet__c }"/>
+                <apex:inputField label="Total Connect" value="{!Account.Total_Connect__c }"/>
+                <apex:inputField label="IPDatatel" value="{!Account.IPDatatel__c }"/>
+                <apex:inputField label="other" value="{!Account.Other_ISP__c }"/>
+                <apex:inputField label="How much do you pay for basic interactive services?" value="{!Account.Cost_Basic_Interactive_Services__c }"/>
+                <apex:inputField label="Who do you use for Central Station monitoring?" value="{!Account.Central_Station_Monitoring__c }"/>
+                <apex:inputField label="What services do you use and what is your monthly fee?" value="{!Account.Services_And_Monthly_Fee__c }"/>
+                <apex:inputField label="Do you use a CRM? If yes or no -" value="{!Account.CRM__c }"/>
+                <apex:inputField label="Who do you use" value="{!Account.Who_Do_You_Use_In_Houses_Accounts__c }"/>
+                <apex:inputField label="How much does it cost a month?" value="{!Account.Cost_A_Month__c }"/>
+                <apex:inputField label="What is your average upfront price of a customer transaction?" value="{!Account.Average_Upfront_Price_Of_A_Customer_Tran__c }"/>
+                <apex:inputField label="How do you bill and process your in-house customers?" value="{!Account.Bill_And_Process_In_House_Customers__c }"/>
+                <apex:inputField label="How much does billing cost per customer?" value="{!Account.Billing_Cost_Per_Customer__c }"/>
+                <apex:inputField label="What manufacturer(s) do you use for Residential?<br /> (intrusion, detection system) Check all that apply" value="{!Account.Manufacturers_For_Residential__c }"/>
+                <apex:inputField label="Other" value="{!Account.Other_MFR__c }"/>
+                <h4 align="center" style="color:red;">
+                                Which products do you sell?
+                </h4>
+                <apex:inputField label="Cameras" value="{!Account.Cameras__c }"/>
+                <apex:inputField label="Doorbell" value="{!Account.Doorbell__c }"/>
+                <apex:inputField label="Lights" value="{!Account.Lights__c }"/>
+                <apex:inputField label="Locks" value="{!Account.Locks__c }"/>
+                <apex:inputField label="Garage Operation" value="{!Account.Garage_Operation__c }"/>
+                
+            </apex:pageBlockSection>
+        
+            <apex:pageBlockSection title="Only If They Sell Account Every Month" columns="1">
+                
+                <apex:inputField label="who do you use?<br /> Check all that apply" value="{!Account.Who_Do_You_Use_Sell_Account__c }"/>
+                <apex:inputField label="Other" value="{!Account.Other_WDYU_SA__c }"/>
+                <apex:inputField label="what do you like and dislike about your dealer program?" value="{!Account.Dealer_Program_Opinion__c }"/>
+                <apex:inputField label="Other" value="{!Account.Other_WDYU_SA__c }"/>	
+                
+            </apex:pageBlockSection>
+        
+            <apex:pageBlockSection title="Which Back-Office Functions Could You Improve?" columns="1">
+                
+                <apex:inputField label="Answering customer calls during and after business hours" value="{!Account.Answering_Customer_Calls__c }"/>
+                <apex:inputField label="Opening and closing service tickets" value="{!Account.Opening_And_Closing_Service_Tickets__c }"/>
+                <apex:inputField label="Onboarding accounts" value="{!Account.Onboarding_Accounts__c }"/>
+                <apex:inputField label="Qa Call" value="{!Account.Qa_Call__c }"/>
+                <apex:inputField label="Do you remotely service your customers?" value="{!Account.Remotely_Service_To_Customers__c }"/>
+                <apex:inputField label="Running service appointments?" value="{!Account.Running_Service_Appointments__c }"/>
+                <apex:inputField label="Collections?" value="{!Account.Collections__c }"/>
+                <apex:inputField label="Running Reports?" value="{!Account.Running_Reports__c }"/>
+                <apex:inputField label="Accounting?" value="{!Account.Accounting__c }"/>
+                
+            </apex:pageBlockSection>
+        
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{! save }" value="Save" />        
+            </apex:pageBlockButtons>
+    </apex:pageBlock>
+   </apex:form>
+    
+    <apex:pageBlock title="Contacts" >
+        <apex:pageMessages />
+           <apex:form >
+                <apex:pageBlockSection title="Add Account Contact" columns="1">
+                            <apex:inputField value="{!Contacts.FirstName}" />
+                            <apex:inputField value="{!Contacts.LastName}" />
+                            <apex:inputField value="{!Contacts.Phone}" />
+                            <apex:inputField label="cell phone" value="{!Contacts.MobilePhone}" />
+                            <apex:inputField label="email address" value="{!Contacts.Email}" />	
+                    		<apex:pageBlockSectionItem >
+                                <apex:commandButton action="{! SaveContact }" value="Add Contact" />
+                    		</apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                
+           </apex:form>
+           <apex:form id="formContact">
+        	<apex:pageBlockSection title="Account Contacts" columns="1">
+                		<apex:pageBlockTable value="{!ListContacts}" var="row" width="700">
+                             <apex:column >
+                               <apex:outputLink title="" value="/{!row.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold">Edit</apex:outputLink>&nbsp;|&nbsp;
+                       		   <a href="javascript:if (window.confirm('Are you sure?')) DeleteContact('{!row.Id}');" style="font-weight:bold">Del</a>
+                             </apex:column>
+                             <apex:column value="{!row.Name}"/>
+                             <apex:column value="{!row.Phone}"/>
+                             <apex:column value="{!row.MobilePhone}"/>
+                            <apex:column value="{!row.Email}"/>
+                        </apex:pageBlockTable>
+                        <apex:actionFunction action="{!DeleteContact}" name="DeleteContact" reRender="formContact" >
+                           <apex:param name="accountid" value="" assignTo="{!SelectedChatId}"/>
+                        </apex:actionFunction>
+            </apex:pageBlockSection>
+           </apex:form>
+       </apex:pageBlock>
+  
+    
+    <apex:form id="appointment">
+    <apex:pageBlock title="appointments" >
+        <apex:pageMessages />
+            <apex:pageBlockSection title="Add appointments" columns="1">
+                <apex:inputField value="{!Appoint.Subject}" />
+                <!--<apex:inputField value="{!Appoint.StartDateTime}" />-->
+                <h4 align="center" style="color:red;">
+                                Date And Hour
+                </h4>
+                <apex:selectList value="{!day}" label="day" size="1">
+                    <apex:selectOptions value="{!days}"/>
+                </apex:selectList>
+                <apex:selectList value="{!month}" label="Month" size="1">
+                    <apex:selectOptions value="{!items}"/>
+                </apex:selectList>
+                <apex:inputText value="{!year}" label="Year"/>
+                <apex:selectList value="{!hour}" label="Hour" size="1">
+                    <apex:selectOptions value="{!hours}"/>
+                </apex:selectList>
+                <apex:inputField value="{!Appoint.OwnerId}" />
+                <apex:inputField value="{!Appoint.Location}" /> 
+            </apex:pageBlockSection>
+        	<apex:pageBlockSection title="Appointments" columns="1">
+                <apex:pageBlockTable value="{!ListEvents}" var="row" width="700">
+                             <apex:column >
+                               <apex:outputLink title="" value="/{!row.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold">Edit</apex:outputLink>
+                             </apex:column>
+                             <apex:column value="{!row.Subject}"/>
+                             <apex:column value="{!row.StartDateTime}"/>
+                             <apex:column value="{!row.EndDateTime}"/>
+                             <apex:column value="{!row.IsAllDayEvent}"/>
+                    		 <apex:column title="Contact Name" value="{!row.WhoId}"/>
+                             <apex:column value="{!row.OwnerId}"/>
+                             <apex:column value="{!row.Location}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        	<apex:pageBlockButtons >
+                <apex:commandButton action="{! SaveEvent }" value="Add Event" />        
+            </apex:pageBlockButtons>
+       </apex:pageBlock>
+   </apex:form> 
+</apex:page>

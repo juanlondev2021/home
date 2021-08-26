@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Multiple_Attempts__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The field stores the information for allowing multiple attempts for the Delivery Object</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Unchecking this box will turn off the multiple attempts based on hung status field value on delivery.</inlineHelpText>
+    <label>Allow Multiple Attempts</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

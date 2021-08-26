@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Recording_Link__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&quot;http://nuhome.brightpattern.com:8080/admin/?cdrId=097FE7CEF89D475AA15B7F30A7300221&amp;stepId=&quot;&amp;	interactionStepId__c, &quot;Call Recording&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Link to Bright Pattern call recording.</inlineHelpText>
+    <label>Call Recording Link</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

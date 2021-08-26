@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>I_am_aware_there_is_up_to_a_99_00_Activ__c</fullName>
+    <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
+    <label>I am aware there is up to a $99.00 Activ</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

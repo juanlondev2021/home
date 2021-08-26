@@ -1,0 +1,73 @@
+<aura:component controller="diacoContractHA" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="filesContractId" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sendContract" type="Boolean" />
+    <aura:attribute name="label" type="String" default="Send to Docusign" />
+    
+    <aura:attribute name="loading" type="Boolean" default="true" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+   <aura:attribute name="reload" type="Boolean" default="false" />
+    <aura:handler name="change" value="{!v.reload}" action="{!c.reloadComponent}"/>
+
+
+    <aura:attribute name="utilityContractName" type="String" />
+    <!---->
+    <aura:attribute name="utilityContractVFP" type="String" />
+    <!---->
+    <aura:attribute name="PreDesignName" type="String" />
+    <!---->
+    <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+        <aura:if isTrue="{!v.loading}">
+            <lightning:spinner alternativeText="Loading" size="small" />
+            <aura:set attribute="else">
+                <div class="slds-align_absolute-center slds-size_1-of-1">
+                    <lightning:fileCard fileId="{!v.filesContractId}" description="Solar/Energy Utility Contract" />
+                </div>
+                <div class="slds-align_absolute-center slds-size_1-of-1">
+                    <lightning:button label="Generate Contract" variant="brand" class="slds-m-top--medium slds-align_absolute-center" title="Generate Contract" onclick="{! c.generateContractAgain }" />
+                </div>
+            </aura:set>
+        </aura:if>
+
+        <aura:set attribute="else">
+
+            <aura:if isTrue="{!v.utilityContractName=='SRP'}">
+                <iframe src="{! '/apex/DiacoContractPDF_Solar_UtilitySRP?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0" />
+            </aura:if>
+            <aura:if isTrue="{!v.utilityContractName=='APS'}">
+                <iframe src="{! '/apex/ContractSolarAPS?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0" />
+
+            </aura:if>
+            <aura:if isTrue="{!v.utilityContractName=='ED3'}">
+                <iframe src="{! '/apex/DiacoFatherDE3VF?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0" />
+
+            </aura:if>
+
+
+        </aura:set>
+    </aura:if>
+    <div style="text-align: center; margin: 2em 0;">
+        <lightning:input 
+        type="checkbox" 
+        aura:id="sendContract"
+        checked="{!v.sendContract}"
+        label="Send Utility Contract with Solar  contract"
+        onchange="{! c.handleChangeCheck }"
+         name="input1"/>
+    </div>
+    <c:DiacoSignedContract aura:id="DiacoSignedContract" recordId="{!v.recordId}" isUtilityContract="true" />
+    <div class="slds-align_absolute-center slds-size_1-of-1">
+        <aura:if isTrue="{!v.utilityContractName!=null}">
+            <lightning:button variant="success" label="{!v.label}" class="slds-m-top--medium slds-align_absolute-center" title="Brand action" disabled="{!v.label == 'Sending...' }" onclick="{! c.ToDocusign}" />
+            <aura:set attribute="else">
+                <div class="slds-text-body_regular">Please select a utility Company first </div>
+            </aura:set>
+        </aura:if>
+
+    </div>
+    <lightning:notificationsLibrary aura:id="notifLib" />
+
+
+</aura:component>

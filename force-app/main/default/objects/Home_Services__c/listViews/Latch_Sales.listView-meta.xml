@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Latch_Sales</fullName>
+    <columns>Phone_Number_1__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Industry_Formula__c</field>
+        <operation>equals</operation>
+        <value>Flooring,Garage Floor Coating,Window</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Closed Won</value>
+    </filters>
+    <filters>
+        <field>Appointment_Date__c</field>
+        <operation>lessThan</operation>
+        <value>1/1/2019</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>notEqual</operation>
+        <value>Test</value>
+    </filters>
+    <label>Latch Sales</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+    </sharedTo>
+</ListView>

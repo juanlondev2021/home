@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pest_Service</fullName>
+    <columns>NAME</columns>
+    <columns>Appt_Start_Date__c</columns>
+    <columns>Appt_End_Date__c</columns>
+    <columns>Services_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Service__c.Pest_Control</value>
+    </filters>
+    <filters>
+        <field>Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </filters>
+    <filters>
+        <field>Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </filters>
+    <label>Pest Service</label>
+</ListView>

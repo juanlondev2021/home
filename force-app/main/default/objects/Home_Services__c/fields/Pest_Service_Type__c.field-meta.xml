@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pest_Service_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Service Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pest Control</fullName>
+                <default>false</default>
+                <label>Pest Control</label>
+            </value>
+            <value>
+                <fullName>Weed Control</fullName>
+                <default>false</default>
+                <label>Weed Control</label>
+            </value>
+            <value>
+                <fullName>Pest/WeedControl</fullName>
+                <default>false</default>
+                <label>Pest/Weed Control</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

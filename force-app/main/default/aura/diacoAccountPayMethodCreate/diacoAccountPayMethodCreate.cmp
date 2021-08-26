@@ -1,0 +1,84 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="AccId" type="String" />
+    <aura:registerEvent name="AccPayMethod" type="c:diacoAccountPayMethodEvent"/>
+    <aura:attribute name="paymentType" type="String" />
+    <aura:attribute name="Cardtypes" type="List" default="Visa,Mastercard,American Express,Discover"/>
+    
+    <lightning:recordEditForm Aura:id="recordForm" recordId="{!v.recordId == null? '': v.recordId}" onload="{!c.handleLoad}" 
+                              onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}" objectApiName="PaymentMethod__c">
+        <lightning:messages aura:id="MessageError"/>
+        <div class="slds-form-element slds-form-element_horizontal">
+            <div class="slds-grid slds-wrap slds-m-top_small container-box">
+                
+                <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                    <lightning:select aura:id="selectType" name="selectType" label="Payment method type" value="{!v.paymentType}" required="true">
+                        <option value="">choose one...</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="ACH">ACH</option>
+                    </lightning:select>
+                </div>
+               
+                
+                <aura:if isTrue="{!v.paymentType == 'Credit Card'}">
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <!--<lightning:inputField fieldName="CardType__c" aura:id="CardType__c" />-->
+                        <lightning:select aura:id="CardType__c" name="CardType__c" label="Card Type" required="true">
+                            <option value="">choose one...</option>
+                            <aura:iteration items="{!v.Cardtypes}" var="Cardtype">
+                                <option text="{!Cardtype}"></option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="NameOnCard__c" aura:id="NameOnCard__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="CardNumber__c" label="Card Number" required="true" maxlength="19"
+                                         messageWhenPatternMismatch="Enter a valid Card Number" pattern="\d*"/>
+                    </div>
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="CSV__c" label="CSV" maxlength="4" minlength="3" required="true" 
+                                         messageWhenPatternMismatch="Enter a valid code" pattern="\d*"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="CardExpirationMonth__c" name="CardExpirationMonth__c" label="Card Expiration Month" 
+                                         maxlength="2" minlength="2" required="true" onchange="{!c.handleChange}" 
+                                         messageWhenPatternMismatch="Enter a valid Month" pattern="\d*" placeholder="11"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="Card_Expiration_Year__c" label="Card Expiration Year" maxlength="4" minlength="4" 
+                                         required="true" onchange="{!c.handleChange}" messageWhenPatternMismatch="Enter a valid Year" pattern="\d*"
+                                         placeholder="2023"/>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.paymentType == 'ACH'}">
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="BankName__c" aura:id="BankName__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="Bank_Account_Name__c" aura:id="Bank_Account_Name__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:inputField fieldName="BankAccountType__c" aura:id="BankAccountType__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="BankAccountNumber__c" label="Bank Account Number" required="true" 
+                                         messageWhenPatternMismatch="Enter a valid Account Number" pattern="\d*"/>                    
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                        <lightning:input type="text" aura:id="RoutingNumber__c" label="Routing Number" required="true"
+                                         messageWhenPatternMismatch="Enter a valid Routing Number" pattern="\d*"/>
+                    </div>
+                </aura:if>
+                
+                <div class="slds-col slds-size_12-of-12">
+                    <div class="slds-float_right">
+                        <lightning:button label="Save" title="Save" type="submit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning:recordEditForm>
+</aura:component>

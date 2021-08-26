@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appt_Window_Time__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+ISBLANK(Appointment_Start_Time__c ),&quot;&quot;,
+ 
+IF(
+OR(
+VALUE( MID( TEXT( Appointment_Start_Time__c - 7/24), 12, 2 ) ) = 0,
+VALUE( MID( TEXT( Appointment_Start_Time__c - 7/24 ), 12, 2 ) ) = 12
+),
+&quot;12&quot;,
+TEXT( VALUE( MID( TEXT( Appointment_Start_Time__c - 7/24), 12, 2 ) )
+-
+IF(
+VALUE( MID( TEXT( Appointment_Start_Time__c - 7/24), 12, 2 ) ) &lt; 12,
+0,
+12
+)
+)
+)
+&amp; &quot;:&quot; &amp;
+MID( TEXT( Appointment_Start_Time__c - 7/24 ), 15, 2 )
+&amp; &quot; &quot; &amp;
+IF(
+VALUE( MID( TEXT( Appointment_Start_Time__c - 7/24), 12, 2 ) ) &lt; 12,
+&quot;AM&quot;,
+&quot;PM&quot;)
+
++ &quot; - &quot; +
+ 
+IF(
+OR(
+VALUE( MID( TEXT( Appointment_End_Time__c - 7/24), 12, 2 ) ) = 0,
+VALUE( MID( TEXT( Appointment_End_Time__c - 7/24 ), 12, 2 ) ) = 12
+),
+&quot;12&quot;,
+TEXT( VALUE( MID( TEXT( Appointment_End_Time__c - 7/24), 12, 2 ) )
+-
+IF(
+VALUE( MID( TEXT( Appointment_End_Time__c - 7/24), 12, 2 ) ) &lt; 12,
+0,
+12
+)
+)
+)
+&amp; &quot;:&quot; &amp;
+MID( TEXT( Appointment_End_Time__c - 7/24 ), 15, 2 )
+&amp; &quot; &quot; &amp;
+IF(
+VALUE( MID( TEXT( Appointment_End_Time__c - 7/24), 12, 2 ) ) &lt; 12,
+&quot;AM&quot;,
+&quot;PM&quot;
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Appt Window Time</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

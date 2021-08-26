@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Lead Source</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Salesforce</fullName>
+                <default>true</default>
+                <label>Salesforce</label>
+            </value>
+            <value>
+                <fullName>Sales Rabbit</fullName>
+                <default>false</default>
+                <label>Sales Rabbit</label>
+            </value>
+            <value>
+                <fullName>Call Center</fullName>
+                <default>false</default>
+                <label>Call Center</label>
+            </value>
+            <value>
+                <fullName>WebSite</fullName>
+                <default>false</default>
+                <label>WebSite</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>Referral</fullName>
+                <default>false</default>
+                <label>Referral</label>
+            </value>
+            <value>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+                <label>Social Media</label>
+            </value>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>Text</fullName>
+                <default>false</default>
+                <label>Text</label>
+            </value>
+            <value>
+                <fullName>Self Gen</fullName>
+                <default>false</default>
+                <label>Self Gen</label>
+            </value>
+            <value>
+                <fullName>Gravel Call Center</fullName>
+                <default>false</default>
+                <label>Gravel Call Center</label>
+            </value>
+            <value>
+                <fullName>Networx</fullName>
+                <default>false</default>
+                <label>Networx</label>
+            </value>
+            <value>
+                <fullName>Thumbtack</fullName>
+                <default>false</default>
+                <label>Thumbtack</label>
+            </value>
+            <value>
+                <fullName>Google PPC</fullName>
+                <default>false</default>
+                <label>Google PPC</label>
+            </value>
+            <value>
+                <fullName>Yelp</fullName>
+                <default>false</default>
+                <label>Yelp</label>
+            </value>
+            <value>
+                <fullName>Facebook</fullName>
+                <default>false</default>
+                <label>Facebook</label>
+            </value>
+            <value>
+                <fullName>Automation</fullName>
+                <default>false</default>
+                <label>Automation</label>
+            </value>
+            <value>
+                <fullName>Canvas</fullName>
+                <default>false</default>
+                <label>Canvas</label>
+            </value>
+            <value>
+                <fullName>Salesforce Site</fullName>
+                <default>false</default>
+                <label>Salesforce Site</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Good_Reasons_Confirmation__c</fullName>
+    <externalId>false</externalId>
+    <label>No Good Reasons</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Confirmation_Status__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No interest</fullName>
+                <default>false</default>
+                <label>No interest</label>
+            </value>
+            <value>
+                <fullName>In contract</fullName>
+                <default>false</default>
+                <label>In contract</label>
+            </value>
+            <value>
+                <fullName>Dead Lead</fullName>
+                <default>false</default>
+                <label>Dead Lead</label>
+            </value>
+            <value>
+                <fullName>Language barrier</fullName>
+                <default>false</default>
+                <label>Language barrier</label>
+            </value>
+            <value>
+                <fullName>Duplicate lead</fullName>
+                <default>false</default>
+                <label>Duplicate lead</label>
+            </value>
+            <value>
+                <fullName>Had System</fullName>
+                <default>false</default>
+                <label>Had System</label>
+            </value>
+            <value>
+                <fullName>Bought System</fullName>
+                <default>false</default>
+                <label>Bought System</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>No interest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>In contract</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Dead Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Language barrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No Good</controllingFieldValue>
+            <valueName>Duplicate lead</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

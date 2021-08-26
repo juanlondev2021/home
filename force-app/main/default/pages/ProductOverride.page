@@ -1,0 +1,163 @@
+<!--
+This page overwrites the standard [Add Product] button functionalities. It would display 
+Products based on the State,City, Industry selected on the page. 
+If user selects products and hit [Save] button, it will create lineitems under Opportunity.
+-->
+<apex:page id="thePage" standardController="Opportunity" extensions="ProductOverrideController">
+    
+      <style>
+        .search{
+            font-size:14pt;
+            margin-right: 20px;    
+        }
+        .fyi{
+            color:red;
+            font-style:italic;
+        }
+        .label{
+            margin-right:10px;
+            font-weight:bold;
+        }
+    </style>
+    <apex:form id="formId">
+    <apex:outputPanel rendered="{!Opportunity.Pricebook2Id == NULL}" >
+    <apex:sectionHeader title="Choose Price Book for" subtitle="{!Opportunity.Name}" description="Select a price book for this opportunity. You can add products only from a single price book. Changing a selected price book will delete all existing products from this opportunity."/>
+        <apex:pageBlock title="Choose Pricebook for: {!Opportunity.Name}" >
+                <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputlabel value="Price Book"/>
+                        <apex:selectList value="{!selectedPriceBookId}" size="1">
+                            <apex:selectOptions value="{!priceBookOptions}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save" action="{!savePriceBook}" reRender="formId" />
+                    <apex:commandButton value="Cancel" action="{!cancel}"/>
+                </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:outputPanel>
+    
+    <apex:outputPanel rendered="{!Opportunity.Pricebook2Id != NULL}">
+     <apex:sectionHeader Title="Manage {!$ObjectType.Product2.LabelPlural}" subtitle="{!opportunity.Name}"/>
+         
+         <apex:outputPanel id="priceBookSection">
+            <apex:outputLabel styleClass="label" value="PriceBook : "/>
+            <apex:outputText value="{!theBook.Name}"/>
+         </apex:outputPanel>
+         <br/>
+         
+            <!-- notice we use a lot of $ObjectType merge fields... I did that because if you have changed the labels of fields or objects it will reflect your own lingo -->
+            <apex:pageBlock title="Selected {!$ObjectType.Product2.LabelPlural}" id="selected">
+                       
+                <apex:pageblockTable value="{!shoppingCart}" var="s">
+                
+                    <apex:column headerValue="Remove">
+                        <apex:commandButton image="/img/func_icons/remove12_on.gif"  action="{!removeFromShoppingCart}" reRender="selected" immediate="true">
+                            <apex:param value="{!s.PriceBookEntryId}" assignTo="{!toUnselect}" name="toUnselect"/>
+                        </apex:commandButton>
+                    </apex:column>
+                    
+                    <apex:column headerValue="{!$ObjectType.Product2.LabelPlural}" value="{!s.PriceBookEntry.Product2.Name}"/>
+                    
+                    <apex:column headerValue="{!$ObjectType.OpportunityLineItem.Fields.Quantity.Label}">
+                        <apex:inputField value="{!s.Quantity}" style="width:70px" required="true" onkeyup="refreshTotals();"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="{!$ObjectType.OpportunityLineItem.Fields.UnitPrice.Label}">
+                        <apex:inputField value="{!s.UnitPrice}" style="width:70px" required="true" onkeyup="refreshTotals();"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="{!$ObjectType.OpportunityLineItem.Fields.Description.Label}">
+                        <apex:inputField value="{!s.Description}" required="false"/>
+                    </apex:column>
+                    
+                </apex:pageblockTable>
+            
+            
+                <apex:pageBlockButtons location="top" >
+                    <apex:commandButton action="{!onSave}" value="Save"/>
+                    <apex:commandButton action="{!onCancel}" value="Cancel" immediate="true"/>
+                </apex:pageBlockButtons>
+            
+            </apex:pageBlock>
+    
+    
+    
+         <apex:pageBlock title="Search for Products" id="pgBlk">
+                <apex:outputPanel id="filters">
+                    <apex:outputLabel styleClass="label" value="Location / Market"/>
+                    <apex:selectList value="{!selectedState}" multiselect="false" size="1"> 
+                        <apex:selectOptions value="{!states}"/>
+                        <apex:actionSupport event="onchange" reRender="cities" status="status"/>
+                    </apex:selectList>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:selectList value="{!selectedCity}" multiselect="false" size="1" id="cities">
+                        <apex:selectOptions value="{!cities}"/>
+                    </apex:selectList>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputLabel styleClass="label" value="Industry"/>
+                    <apex:selectList value="{!selectedIndustry}" multiselect="false" size="1" id="industries">
+                        <apex:selectOptions value="{!industries}"/>
+                    </apex:selectList>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:actionStatus id="status">
+                        <apex:facet name="start">
+                            <apex:commandButton value="Loading..." disabled="true"/>                      
+                        </apex:facet>
+                        <apex:facet name="stop">
+                            <apex:commandButton value="Search..." action="{!search}" reRender="ptable" status="status"/>
+                        </apex:facet>
+                    </apex:actionStatus>
+                     &nbsp;&nbsp;
+                     <apex:actionStatus id="clearStatus">
+                        <apex:facet name="start">
+                            <apex:commandButton value="Loading..." disabled="true"/>                      
+                        </apex:facet>
+                        <apex:facet name="stop">
+                    <apex:commandButton value="Clear" action="{!clear}" reRender="pgBlk" status="clearStatus" />                       
+                        </apex:facet>
+                    </apex:actionStatus>
+                    
+                </apex:outputPanel>
+                <apex:outputpanel id="ptable">
+                <br/><br/>
+                    
+                
+                    <apex:pageblock title="Results : {!total_size}">
+                     <apex:outputtext id="navlabel" value="Showing Page {!pageNumber} of {!totalPages}" /><br/><br/>
+                     <apex:pageBlockButtons location="top">
+                       <apex:outputPanel id="myButtons">
+                            <apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>
+                            <apex:commandButton action="{!Previous}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>        
+                            <apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>
+                            <apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>        
+                            &nbsp;&nbsp;&nbsp;&nbsp;<apex:actionStatus id="navStatus" startText="Loading ..." stopText=""/>
+                       </apex:outputPanel>
+                       </apex:pageBlockButtons>
+                    
+                    <apex:outputPanel id="myPanel">
+                    <apex:pageBlockTable value="{!prodList }" var="item" >
+                        <apex:column headerValue="Select">
+                             <apex:commandButton image="/img/feeds/follow12.png" action="{!addToShoppingCart}" reRender="selected" immediate="true" >
+                                <apex:param value="{!item.prod.Id}" assignTo="{!toSelect}" name="toSelect"/>
+                            </apex:commandButton>
+                        </apex:column>
+                        <apex:column headerValue="Product Name" value="{!item.prod.Product2.name}"/>
+                        <apex:column headerValue="PriceBookId" value="{!item.prod.id}"/>
+                         <apex:column headerValue="ProductCode" value="{!item.prod.Product2.ProductCode}"/>
+                          <apex:column headerValue="Description" value="{!item.prod.Product2.Description}"/>
+                           <apex:column headerValue="Product Family" value="{!item.prod.Product2.Family}"/>
+                           <apex:facet name="footer"></apex:facet> 
+                    </apex:pageBlockTable>
+                    </apex:outputPanel> 
+                    
+                    </apex:pageblock>
+                </apex:outputpanel>
+               
+         </apex:pageBlock>
+             
+       </apex:outputPanel>           
+ </apex:form>
+</apex:page>

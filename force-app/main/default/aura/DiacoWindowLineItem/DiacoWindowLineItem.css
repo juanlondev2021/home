@@ -1,0 +1,16 @@
+.THIS .totalColor {
+   background-color: #f0f0f0;    
+   font-weight: bold;
+}
+
+.THIS .toSize {
+   min-Width: 900px;
+}
+
+.THIS.container {
+   background-color: white;
+}
+
+.THIS lightning-primitive-header-actions {
+    display: none;
+}

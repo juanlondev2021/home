@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fVerbal_Consent_Flag__c</fullName>
+    <externalId>false</externalId>
+    <formula>If( 
+Verbal_Consent__c = &quot;Yes&quot; 
+|| Verbal_Consent__c = &quot;Phone Only&quot;
+|| Verbal_Consent__c = &quot;Full&quot;, True, Null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Verbal Consent Flag</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

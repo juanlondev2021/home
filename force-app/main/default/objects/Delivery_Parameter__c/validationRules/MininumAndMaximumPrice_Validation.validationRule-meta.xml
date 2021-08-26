@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MininumAndMaximumPrice_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(Min_Sales_Price__c &gt;  Max_Sales_Price__c, true, false)</errorConditionFormula>
+    <errorMessage>Minimum Sales Price shouldn&apos;t be greater than the Maximum Sales Price.</errorMessage>
+</ValidationRule>

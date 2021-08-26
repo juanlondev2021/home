@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DTS_Questions</fullName>
+    <active>true</active>
+    <label>DTS Questions</label>
+    <picklistValues>
+        <picklist>DTSQuestion_Type__c</picklist>
+        <values>
+            <fullName>Inbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Section__c</picklist>
+        <values>
+            <fullName>Confirm Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Section 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Section 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Section 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Section 4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Section 5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Verbiage_Type__c</picklist>
+        <values>
+            <fullName>Inbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

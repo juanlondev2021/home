@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Manufacturers_For_Residential__c</fullName>
+    <externalId>false</externalId>
+    <label>Manufacturers For Residential</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Qolsys</fullName>
+                <default>false</default>
+                <label>Qolsys</label>
+            </value>
+            <value>
+                <fullName>2GIG</fullName>
+                <default>false</default>
+                <label>2GIG</label>
+            </value>
+            <value>
+                <fullName>Interlogix</fullName>
+                <default>false</default>
+                <label>Interlogix</label>
+            </value>
+            <value>
+                <fullName>DSC</fullName>
+                <default>false</default>
+                <label>DSC</label>
+            </value>
+            <value>
+                <fullName>Honeywell</fullName>
+                <default>false</default>
+                <label>Honeywell</label>
+            </value>
+            <value>
+                <fullName>Other – Please Provide</fullName>
+                <default>false</default>
+                <label>Other – Please Provide</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rooms_to_be_Installed__c</fullName>
+    <externalId>false</externalId>
+    <label>Rooms to be Installed</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Living Room</fullName>
+                <default>false</default>
+                <label>Living Room</label>
+            </value>
+            <value>
+                <fullName>Dining Room</fullName>
+                <default>false</default>
+                <label>Dining Room</label>
+            </value>
+            <value>
+                <fullName>Family Room</fullName>
+                <default>false</default>
+                <label>Family Room</label>
+            </value>
+            <value>
+                <fullName>Kitchen</fullName>
+                <default>false</default>
+                <label>Kitchen</label>
+            </value>
+            <value>
+                <fullName>Hallway(s)</fullName>
+                <default>false</default>
+                <label>Hallway(s)</label>
+            </value>
+            <value>
+                <fullName>Stairs/Landing</fullName>
+                <default>false</default>
+                <label>Stairs/Landing</label>
+            </value>
+            <value>
+                <fullName>Entryway</fullName>
+                <default>false</default>
+                <label>Entryway</label>
+            </value>
+            <value>
+                <fullName>Bedroom(s)</fullName>
+                <default>false</default>
+                <label>Bedroom(s)</label>
+            </value>
+            <value>
+                <fullName>Bathroom(s)</fullName>
+                <default>false</default>
+                <label>Bathroom(s)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

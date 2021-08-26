@@ -1,0 +1,87 @@
+<!--
+
+ Diaco
+ @author 			Esnayder Morales Corpas href=<esnaydermorales25@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering solar contract tabs
+     
+ Changes (Version)
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		01/03/2019		Esnayder Morales (ES)	Initial implementation  of the component.
+-->
+
+<aura:component controller="diacoTabsInformationCompletion">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:attribute name="toReloadContract" type="Boolean" default="false" />
+    <aura:attribute name="toReloadPayments" type="Boolean" default="false" />
+
+    <aura:attribute name="toReloadUtilityInformation" type="Boolean" default="false" />
+    <aura:attribute name="toReloadUtilityContract" type="Boolean" default="false" />
+    <aura:attribute name="toReloadFirstCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadSecondCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadPricing" type="Boolean" default="true" />
+
+    <!--Information checked-->
+    <aura:attribute name="firstCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="secondCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="InstallationProductCompletion" type="Boolean" default="false" />
+    <aura:attribute name="generalInfoCompletion" type="Boolean" default="false" />
+    <aura:attribute name="paymentsCompletion" type="Boolean" default="false" />
+    <aura:attribute name="utilityInfoCompletion" type="Boolean" default="false" />
+    
+    
+    <aura:handler name="tabSaved" event="c:diacoTabCompletionEvent"
+                  action="{!c.handleTabSaved}"/>
+
+    <lightning:tabset>
+        <!--
+        <lightning:tab label="Home Owner Information">
+            <c:diacoContractHomeOwnerSolar recordId="{!v.recordId}"/>
+        </lightning:tab>-->
+
+        <lightning:tab id="firstCustomer" label="First Customer" onactive="{! c.reload}" endIconName="{!v.firstCustomerCompletion?'utility:check':''}">
+            <c:diacoContractFirstCustomer recordId="{!v.recordId}" showAddress="true" showHOA="true" reload="{!v.toReloadFirstCustomer}" />
+        </lightning:tab>
+        <lightning:tab id="secondCustomer" label="Second Customer" onactive="{! c.reload}" endIconName="{!v.secondCustomerCompletion?'utility:check':''}">
+            <c:diacoContractSecondCustomer recordId="{!v.recordId}" reload="{!v.toReloadSecondCustomer}" />
+        </lightning:tab>
+
+        <lightning:tab label="Installation Product" id="Product" onactive="{! c.reload}" endIconName="{!v.InstallationProductCompletion?'utility:check':''}">
+            <div class="slds-box slds-theme--default">
+                <c:diacoLineItems recordId="{!v.recordId}" />
+            </div>
+        </lightning:tab>
+
+        <lightning:tab label="Pricing" id="Pricing" onactive="{!c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+            <c:diacoContractSummary toReload="{!v.toReloadPricing}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab id="generalInfo" label="General Information" onactive="{!c.reload}" endIconName="{!v.generalInfoCompletion?'utility:check':''}">
+            <c:diacoContractLocationAndPayments recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Payments" id="Payments" onactive="{!c.reload}" endIconName="{!v.paymentsCompletion?'utility:check':''}">
+            <c:diacoContractSummary toReload="{!v.toReloadPayments}" recordId="{!v.recordId}" recordType="Solar" />
+            <c:diacoContractServices recordId="{!v.recordId}" recordType="Solar" />
+            <c:DiacoContractPayMethod recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Utility Information" id="UtilityInformation" onactive="{!c.reload}" endIconName="{!v.utilityInfoCompletion?'utility:check':''}">
+            <c:diacoSolarUtilityInformation toReload="{!v.toReloadUtilityInformation}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Utility Contract" id="UtilityContract" onactive="{! c.reload}">
+
+            <c:diacoSolarUtilityContractsVisual reload="{!v.toReloadUtilityContract}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Contract" id="Contract" onactive="{! c.reload}">
+            <c:diacoContractSolarVisual toReload="{!v.toReloadContract}" recordId="{!v.recordId}" />
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

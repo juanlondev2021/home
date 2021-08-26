@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Installation_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Installation Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sale</fullName>
+                <default>true</default>
+                <label>Sale</label>
+            </value>
+            <value>
+                <fullName>Pre Installation</fullName>
+                <default>false</default>
+                <label>Pre Installation</label>
+            </value>
+            <value>
+                <fullName>Demo</fullName>
+                <default>false</default>
+                <label>Demo</label>
+            </value>
+            <value>
+                <fullName>Installation</fullName>
+                <default>false</default>
+                <label>Installation</label>
+            </value>
+            <value>
+                <fullName>Post Installation</fullName>
+                <default>false</default>
+                <label>Post Installation</label>
+            </value>
+            <value>
+                <fullName>Installed</fullName>
+                <default>false</default>
+                <label>Installed</label>
+            </value>
+            <value>
+                <fullName>Presubmission</fullName>
+                <default>false</default>
+                <label>Presubmission</label>
+            </value>
+            <value>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <label>Submitted</label>
+            </value>
+            <value>
+                <fullName>Site Survey</fullName>
+                <default>false</default>
+                <label>Site Survey</label>
+            </value>
+            <value>
+                <fullName>Plans</fullName>
+                <default>false</default>
+                <label>Plans</label>
+            </value>
+            <value>
+                <fullName>Permitting</fullName>
+                <default>false</default>
+                <label>Permitting</label>
+            </value>
+            <value>
+                <fullName>Glass Install</fullName>
+                <default>false</default>
+                <label>Glass Install</label>
+            </value>
+            <value>
+                <fullName>Battery Install</fullName>
+                <default>false</default>
+                <label>Battery Install</label>
+            </value>
+            <value>
+                <fullName>Certificate of Completion</fullName>
+                <default>false</default>
+                <label>Certificate of Completion</label>
+            </value>
+            <value>
+                <fullName>Inspections and Commissioning</fullName>
+                <default>false</default>
+                <label>Inspections and Commissioning</label>
+            </value>
+            <value>
+                <fullName>PTO</fullName>
+                <default>false</default>
+                <label>PTO</label>
+            </value>
+            <value>
+                <fullName>Framing</fullName>
+                <default>false</default>
+                <label>Framing</label>
+            </value>
+            <value>
+                <fullName>HVAC/Plumbing/Electrical</fullName>
+                <default>false</default>
+                <label>HVAC/Plumbing/Electrical</label>
+            </value>
+            <value>
+                <fullName>Drywall/Tile</fullName>
+                <default>false</default>
+                <label>Drywall/Tile</label>
+            </value>
+            <value>
+                <fullName>Punch List/Final Walk Thru</fullName>
+                <default>false</default>
+                <label>Punch List/Final Walk Thru</label>
+            </value>
+            <value>
+                <fullName>Windows</fullName>
+                <default>false</default>
+                <label>Windows</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

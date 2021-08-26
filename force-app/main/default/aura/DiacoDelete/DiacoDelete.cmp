@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String"/>
+    <div class="slds-p-around_large" id="modal-content-id-1">
+        <div class="slds-col slds-size_12-of-12" >
+            <h1>Are you sure delete this record?</h1>
+        </div>
+    </div>
+</aura:component>

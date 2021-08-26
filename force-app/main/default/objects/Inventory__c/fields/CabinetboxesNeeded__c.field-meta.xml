@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CabinetboxesNeeded__c</fullName>
+    <description>How many Cabinet boxes will you Need to do?</description>
+    <externalId>false</externalId>
+    <label>How many Cabinet boxes will you Need to</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>5-10 Cabinets.</fullName>
+                <default>false</default>
+                <label>5-10 Cabinets.</label>
+            </value>
+            <value>
+                <fullName>10-15 Cabinets.</fullName>
+                <default>false</default>
+                <label>10-15 Cabinets.</label>
+            </value>
+            <value>
+                <fullName>More than 15 Cabinets.</fullName>
+                <default>false</default>
+                <label>More than 15 Cabinets.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,83 @@
+<!--
+    
+     Diaco
+     @author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+     Project:			DiacoContracts
+     Description:		component reponsible of rendering customer alarm contract tabs
+         
+     Changes (Version)
+     _________________________________________
+    
+       No.		Date			Author					Description
+       ____	__________      __________________      _____________________________________
+    @version	1.0			05/04/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+    -->
+
+<!-- Aca esta etiqueta permite mostrar los campos pero hay que pasarle, el recordid de la info que se va a mostrar donde estan los campos
+             ya estan llenos, ademas como buscar ese record id , se busca y se tiene en cuenta la relacion que hay entre los documentos, en este caso la relacion es de home services y customer y se toma el record id de la vista donde estan los campos que se quieren mostrar,  y se cambia el El nombre del objeto donde se encuentran los campos -->    
+
+<aura:component>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+        <lightning:recordEditForm aura:id="recordViewForm"
+                                  recordId="{!v.recordId}"
+                                  onsuccess="{!c.handleSuccess}"
+                                  onerror="{!c.handleOnError}"
+                                  objectApiName="DiacoAlarm__Diaco_Customer_Alarm__c">
+            <lightning:messages />
+            
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Address</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>          
+            <div class="slds-form slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12">
+                        <lightning:inputField fieldName="DiacoAlarm__DiacoStateAddressWithName__c" onchange="{! c.changeStatus }"/>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning:inputField fieldName="DiacoAlarm__DiacoCityAddressWithName__c" onchange="{! c.changeStatus }"
+                                          class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12">
+                        <lightning:inputField fieldName="DiacoAlarm__DiacoInstallationTimeZone__c" onchange="{! c.changeStatus }"/> 
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning:inputField fieldName="DiacoAlarm__DiacoZipCodeAddressWithName__c" onchange="{! c.changeStatus }"
+                                          class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12">
+                        <lightning:inputField fieldName="DiacoAlarm__DiacoStreet1AddressWithName__c" onchange="{! c.changeStatus }"/>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                    <lightning:inputField fieldName="DiacoAlarm__DiacoStreet2AddressWithName__c" onchange="{! c.changeStatus }"
+                                          class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-10 slds-large-size_6-of-10">
+                    <lightning:inputField fieldName="DiacoAlarm__DiacoPhoneAddress__c"  onchange="{! c.changeStatus }"
+                                          class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12"/>
+                </div>
+            </div>
+            
+            <lightning:button aura:id="submit" 
+                              type="submit"
+                              label="{!v._label}"
+                              variant="brand"
+                              class="slds-m-top--medium slds-align_absolute-center" />
+        </lightning:recordEditForm>
+    </div>
+</aura:component>

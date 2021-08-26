@@ -1,0 +1,43 @@
+<aura:component controller="DiacoCmpFlowController" implements="flexipage:availableForRecordHome,force:hasRecordId"
+                access="global">
+
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="loaded" type="Boolean" default="true"/>
+    
+    <aura:attribute name="account" type="Account" />
+    <aura:attribute name="appointments" type="list" />
+    <aura:attribute name="homeservices" type="list" />
+    <aura:attribute name="appintmentsRecordTypes" type="List" />
+    <aura:attribute name="assiged" type="Boolean" default="false" description="FILTER APPOINTMENT FOR assigned__C"/>
+        
+    <!-- EVENT REFRESH -->
+    <aura:handler name="refresh" event="c:DiacoEventHomeServicesFlow" action="{! c.doInit }" />
+
+    <div class="slds-card slds-box">
+        
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner />
+        </aura:if>
+
+        <lightning:tabset selectedTabId="1">
+
+            <lightning:tab label='Appointment' id="1" onactive="{! c.doInit }">
+    
+            <c:DiacoHomeServicesFlow_Appointment    aura:id="appointmentId" 
+                                                    recordsType='{!v.appintmentsRecordTypes}' 
+                                                    data="{!v.appointments}" 
+                                                    account="{!v.account}"
+                                                    assiged="{!v.assiged}" />
+            </lightning:tab>
+    
+            <lightning:tab label="Home Services" id="2" onactive="{! c.doInit }">
+    
+                <c:DiacoHomeServicesFlow_HomeService    aura:id="homeserviceId" 
+                                                        recordId="{!v.recordId}" 
+                                                        data="{!v.homeservices}"/>
+    
+            </lightning:tab>
+    
+        </lightning:tabset>
+    </div>
+</aura:component>

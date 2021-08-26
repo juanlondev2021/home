@@ -1,0 +1,54 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Site Home Service
+ * TestClass:          
+ * Description:        Modal Message - Site Lightning Out
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    23/09/2020         Jull Quintero D         Initial implementation of the class.
+ *
+-->
+<aura:component >    
+    <aura:attribute name="show" type="Boolean"/>
+    <aura:attribute name="variant" type="string"/>
+    <aura:attribute name="title" type="string"/>
+    <aura:attribute name="message" type="string"/>
+       
+    <aura:if isTrue="{!v.show}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close black"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium" style="{!v.variant == 'error' ? 'color:red;': v.variant == 'success' ? 'color:green;' :  v.variant == 'warning' ? 'color:orange;' : 'color:'}">{! v.title }</h2>
+
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                
+                <div class="slds-modal__content" id="modal-content-id-1">
+                    <div class="{!v.variant == 'error' ? 'slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error': v.variant == 'success' ? 'slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success' : v.variant == 'warning' ? 'slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning' : 'width:'}" role="alert">
+                        <h2>{!v.message}</h2>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                        label="Ok"
+                                        title="OK"
+                                        onclick="{! c.closeModel }"/>
+                </footer>
+            </div>
+        </section>
+        <!--###### MODAL BOX Part END Here ######-->    
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+	
+</aura:component>

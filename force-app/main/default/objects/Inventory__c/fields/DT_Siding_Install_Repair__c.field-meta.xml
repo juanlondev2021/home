@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Siding_Install_Repair__c</fullName>
+    <description>(Siding)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Siding)</inlineHelpText>
+    <label>Siding Install /Repair</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Siding - New</fullName>
+                <default>false</default>
+                <label>Siding - New</label>
+            </value>
+            <value>
+                <fullName>Siding - Repair</fullName>
+                <default>false</default>
+                <label>Siding - Repair</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

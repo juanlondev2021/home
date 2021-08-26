@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Not_Ran__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(AND( ActivityDate &lt; TODAY(), CONTAINS(TEXT(Confirmation_Status__c), &quot;Confirmed&quot;), Owner:User.Id &lt;&gt; &quot;005410000063Ajs&quot;, Owner:User.Id &lt;&gt; &quot;00541000005Hdpd&quot;,TEXT(Appointment_results__c) = &quot;&quot; ),AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;CVT&quot;, Owner:User.Id &lt;&gt; &quot;005410000063Ajs&quot;, Owner:User.Id &lt;&gt; &quot;00541000005Hdpd&quot;,TEXT(Appointment_results__c) = &quot;&quot; ), AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;CV&quot;, Owner:User.Id &lt;&gt; &quot;00541000005Hdpd&quot;, Owner:User.Id &lt;&gt; &quot;005410000063Ajs&quot;,TEXT(Appointment_results__c) = &quot;&quot; ),AND( ActivityDate &lt; TODAY(), TEXT(Confirmation_Status__c) = &quot;CRB&quot;, Owner:User.Id &lt;&gt; &quot;00541000005Hdpd&quot;, Owner:User.Id &lt;&gt; &quot;005410000063Ajs&quot;,TEXT(Appointment_results__c) = &quot;&quot; ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Not Ran</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commission_Amount_and_Percent</fullName>
+    <active>true</active>
+    <errorConditionFormula>Commission_Amount__c &gt; 0 &amp;&amp;  Commission__c  &gt; 0</errorConditionFormula>
+    <errorDisplayField>Commission__c</errorDisplayField>
+    <errorMessage>You must add one commission parameter.</errorMessage>
+</ValidationRule>

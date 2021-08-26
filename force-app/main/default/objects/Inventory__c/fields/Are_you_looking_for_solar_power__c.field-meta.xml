@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Are_you_looking_for_solar_power__c</fullName>
+    <description>(Solar Power)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Solar Power)</inlineHelpText>
+    <label>Are you looking for solar power?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Solar Power</fullName>
+                <default>false</default>
+                <label>Solar Power</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

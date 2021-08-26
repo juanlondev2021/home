@@ -1,0 +1,1138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Garage_Doors</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>WebForm</compactLayoutAssignment>
+    <label>Garage Doors</label>
+    <picklistValues>
+        <picklist>AC_Units_1__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Amount_spent_on_Bottled_Water__c</picklist>
+        <values>
+            <fullName>%2425</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2435</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2445</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>above %2445</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Amount_spent_on_Soaps__c</picklist>
+        <values>
+            <fullName>%2425</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2435</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2445</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>above %2445</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Average_Electric_Bill_2__c</picklist>
+        <values>
+            <fullName>%24165 - %24200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24200 - %24250</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24250 - %24300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Over  %24300</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under %24165</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Average_Utility_Bill_Start__c</picklist>
+        <values>
+            <fullName>%24141 - %24155</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24156 - %24165</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24166 - %24170</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24171 - %24175</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24176 - %24180</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24181 %3C</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3C %24140</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Bath_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Blinds_Shutters_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Blinds__c</picklist>
+        <values>
+            <fullName>Faux</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Cell_Phone_Type__c</picklist>
+        <values>
+            <fullName>Android</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Iphone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credit_Score_1__c</picklist>
+        <values>
+            <fullName>620 - 650</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>650 - 700</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Over 700</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under  620</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Current_Window_Coverings_Blinds__c</picklist>
+        <values>
+            <fullName>NO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Current_Window_Coverings__c</picklist>
+        <values>
+            <fullName>Blinds</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Drapes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shutters</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Electric_Company__c</picklist>
+        <values>
+            <fullName>APS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mesa Electric</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NV Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SRP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Electric_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Existing_Keypad__c</picklist>
+        <values>
+            <fullName>2 Gig</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DSC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demco</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Don%E2%80%99t Know</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Floor_Cleaning_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Flooring_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Garage_Door_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Garage_Floot_Coating_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Garage_Organization_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Gate_to_Backyard__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HVAC_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Handyman_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>House_Cleaning_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>House_Square_Footage_1__c</picklist>
+        <values>
+            <fullName>1200 - 1500</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1500 - 2000</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Over 2000</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under 1200</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Interests__c</picklist>
+        <values>
+            <fullName>Bath</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds %26 Shutters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electric</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Floor Cleaning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garage Door</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garage Floor Coating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garage Organization</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HVAC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handyman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>House Cleaning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kitchen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Landscaping</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locksmith</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maid Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pest Control</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumbing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pool</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roofing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Smart Home Automation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TV %26 Internet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Water Filtration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weed Removal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Kinds_Of_Pets_Pest__c</picklist>
+        <values>
+            <fullName>Both</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cat%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Kinds_Of_Pets__c</picklist>
+        <values>
+            <fullName>Cat%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Kitchen_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Landscaping_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Locksmith_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Maid_Service_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Main_Area_of_Concern__c</picklist>
+        <values>
+            <fullName>Automation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fire</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Security</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Paint_Or_Stained__c</picklist>
+        <values>
+            <fullName>Flat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stained</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Painting_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Type__c</picklist>
+        <values>
+            <fullName>Check</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Card</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pest_Control_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pets_Pest__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pets_Running_Loose_Backyard__c</picklist>
+        <values>
+            <fullName>NO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pets__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Plumbing_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pool_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Roofing_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Smart_Home_Automation_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Solar_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In process</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tv_Internet_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Under_Contract__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Water_Filtration_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WebForm_Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Process</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Incomplete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Email</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Weed_Removal_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Window_Count_Window__c</picklist>
+        <values>
+            <fullName>10-12</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7-9</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Over 12</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Window_Count__c</picklist>
+        <values>
+            <fullName>10-12</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7-9</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Over 12</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Window_Coverings_Wanted__c</picklist>
+        <values>
+            <fullName>Blinds</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Faux</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shutters</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Windows_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Appt Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>of_Entry_Exit_Doors_1__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>of_Stories_1__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

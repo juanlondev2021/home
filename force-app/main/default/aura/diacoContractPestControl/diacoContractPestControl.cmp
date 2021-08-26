@@ -1,0 +1,56 @@
+<!--@version	1.1		15/07/2020		John Hernandez (JH)	    Tab completion events, flags and controllers. -->
+<aura:component controller="diacoTabsInformationCompletion">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:attribute name="toReloadFirstCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadSecondCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadServices" type="Boolean" default="false" />
+    <aura:attribute name="toReloadAddress" type="Boolean" default="false" />
+    <aura:attribute name="toReloadInstallation" type="Boolean" default="false" />
+    <aura:attribute name="toReloadPayments" type="Boolean" default="false" />
+    <aura:attribute name="toReloadContract" type="Boolean" default="false" />
+    <aura:attribute name="toReloadPricing" type="Boolean" default="true" />
+
+    <!--Information checked-->
+    <aura:attribute name="firstCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="secondCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="ProductServiceCompletion" type="Boolean" default="false" />
+    <aura:attribute name="generalInfoCompletion" type="Boolean" default="false" />
+    <aura:attribute name="paymentsCompletion" type="Boolean" default="false" />
+
+    <aura:handler name="tabSaved" event="c:diacoTabCompletionEvent" action="{!c.handleTabSaved}" />
+    <lightning:tabset>
+
+        <lightning:tab label="First Customer" id="FirstCustomer" onactive="{!c.reload}" endIconName="{!v.firstCustomerCompletion?'utility:check':''}">
+            <c:diacoContractFirstCustomer recordId="{!v.recordId}" showAddress="true" showHOA="true" reload="{!v.toReloadFirstCustomer}" />
+        </lightning:tab>
+
+        <lightning:tab label="Second Customer" id="SecondCustomer" onactive="{!c.reload}" endIconName="{!v.secondCustomerCompletion?'utility:check':''}">
+            <c:diacoContractSecondCustomer recordId="{!v.recordId}" reload="{!v.toReloadSecondCustomer}" />
+        </lightning:tab>
+
+        <lightning:tab label="Services" id="Services" onactive="{!c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+            <div class="slds-box slds-theme--default">
+                <c:DiacoLineItemsServices recordId="{!v.recordId}" />
+            </div>
+        </lightning:tab>
+
+        <lightning:tab label="Installation Information" id="Address" onactive="{! c.reload}" endIconName="{!v.generalInfoCompletion?'utility:check':''}">
+            <c:diacoContractLocationAndPayments recordId="{!v.recordId}" reload="{!v.toReloadAddress}" />
+        </lightning:tab>
+
+        <lightning:tab label="Pricing" id="Pricing" onactive="{!c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+            <c:diacoContractSummary toReload="{!v.toReloadPricing}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Payments" id="Payments" onactive="{! c.reload}" endIconName="{!v.paymentsCompletion?'utility:check':''}">
+            <c:diacoContractPestCtrlPaymentMethod toReload="{!v.toReloadPayments}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Contract" id="Contract" onactive="{! c.reload}">
+            <c:diacoContractPestCtrlVisual toReload="{!v.toReloadContract}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+    </lightning:tabset>
+</aura:component>

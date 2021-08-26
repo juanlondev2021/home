@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Address_Type__c</fullName>
+    <description>holds the type of address</description>
+    <externalId>false</externalId>
+    <label>User Address Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Primary Owner</fullName>
+                <default>false</default>
+                <label>Primary Owner</label>
+            </value>
+            <value>
+                <fullName>Secondary Owner</fullName>
+                <default>false</default>
+                <label>Secondary Owner</label>
+            </value>
+            <value>
+                <fullName>Mailing Address</fullName>
+                <default>false</default>
+                <label>Mailing Address</label>
+            </value>
+            <value>
+                <fullName>Billing Address</fullName>
+                <default>false</default>
+                <label>Billing Address</label>
+            </value>
+            <value>
+                <fullName>Renter</fullName>
+                <default>false</default>
+                <label>Renter</label>
+            </value>
+            <value>
+                <fullName>Un-validated Homeowner</fullName>
+                <default>false</default>
+                <label>Un-validated Homeowner</label>
+            </value>
+            <value>
+                <fullName>Family of Renter</fullName>
+                <default>false</default>
+                <label>Family of Renter</label>
+            </value>
+            <value>
+                <fullName>Family of Un-validated Homeowner</fullName>
+                <default>false</default>
+                <label>Family of Un-validated Homeowner</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

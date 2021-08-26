@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Product__c</fullName>
+    <description>This field will do a look up to the Products</description>
+    <externalId>false</externalId>
+    <label>Delivery Product</label>
+    <referenceTo>Delivery_Product__c</referenceTo>
+    <relationshipLabel>Hung Status</relationshipLabel>
+    <relationshipName>Hung_Status</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

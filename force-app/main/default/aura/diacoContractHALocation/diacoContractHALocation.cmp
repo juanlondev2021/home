@@ -1,0 +1,57 @@
+<!--
+Diaco
+@author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+Project:			DiacoContracts
+Description:		component reponsible of rendering home automation contract tabs
+     
+Changes (Version)
+_________________________________________
+
+      		No.		Date			Author					Description
+      		____	__________      __________________      _____________________________________
+@version	1.0		12/03/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+@version	1.0		23/06/2020		Fabian Pineda (FP)		Relocated address information to diacoContractFirstCustomer.cmp.
+-->
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="customer" type="Account" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:address" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Installation</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <div class="slds-form slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <lightning:input type="datetime" aura:id="CustomerInfo"
+                                             name="IntallationDate" 
+                                             class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center"
+                                             label="Intallation Date"
+                                             messageWhenBadInput="Your entry does not match the allowed format MM/DD/YYYY"  
+                                             dateStyle="short" 
+                                             format ="MM/DD/YYYY"
+                                             value="{!v.Home_Services.Requested_Install_Date__c}"
+                                             onchange="{! c.changeStatus }"/>
+                        </div>
+                    </div>
+                    <lightning:button variant="brand" label="Save" 
+                                      class="slds-m-top--medium slds-align_absolute-center" 
+                                      title="Brand action" 
+                                      onclick="{! c.saveInformation}" />
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

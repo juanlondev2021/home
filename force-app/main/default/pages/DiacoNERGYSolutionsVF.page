@@ -1,0 +1,2744 @@
+<apex:page standardController="Home_Services__c" renderAs="pdf" extensions="DiacoNERGYSolutionsVF,DiacoContractAPS"
+           showHeader="false" sidebar="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false">
+    
+    <head>
+        <title>N-ERGY</title>
+        
+        <style type="text/css">
+            
+            @page {
+            size: Legal;
+            margin: 5mm 2mm 2mm 2mm;
+            
+            }
+            
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            table, th, td {
+            border: 1px solid black;
+            }
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+            .radio{
+            border-radius: 50%;   
+            border:1px solid black; 
+            padding:2px; width:4px; 
+            height:4px;  
+            }
+            
+        </style>
+        
+    </head>
+    <div class="page-break" style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+        
+        
+        <div style="display: inline-block;">                       
+            
+            <div style="width:20%; text-align:center; display: inline-block;">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/nergylogo.png')}" height="70"/>
+                <!-- <apex:image url="{!$Resource.nergyimgs/}" width="50" height="50"/> -->
+            </div>
+            
+            <div style="width:60%; text-align:center; display: inline-block;">
+                <div> 
+                    <b style=" font-size: 14px; line-height: 25px;">N-ERGY Solutions LLC</b> <br/>
+                    
+                    <span style=" font-size: 13px; line-height: 18px;">664 W. Warner Rd. Tempe, AZ 85284 <br/>
+                        480-776-5088<br/>
+                    </span>
+                    Energy Reduction Purchanse Agreement<br/>
+                </div>
+            </div>
+            <div style="width:20%; text-align:center; display: inline-block;">
+            </div>
+        </div>
+        <div style="padding-left:20px; padding-right:20px;">
+            <span>
+                This Agreement is entered into on <u>{!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY()) } </u> by <u>{!Home_Services__c.Full_Name_Customer_1__c}</u> and between N-ERGY LLC, (664 W. Warner Rd. Tempe AZ 85284), hereinafter referred to as “COMPANY” and “CUSTOMER” listed below")
+            </span>
+        </div>
+        <table WIDTH="100%">
+            <tr style="height: 45px;">
+                <td colspan="3" style="vertical-align:top; padding-top:8px">    
+                    <span>Customer #1</span>
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}
+                    </div>
+                </td>
+                <td colspan="3" style="vertical-align:top; padding-top:8px;">    
+                    Customer #2
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Homeowner_2_Name__c}
+                    </div>
+                </td>            
+            </tr> 
+            <tr style="height: 45px;">
+                <td style="vertical-align:top; padding-top:1px">    
+                    SSN
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.Customer_1_SSN_E__c}
+                    </div>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">    
+                    DOB
+                     <div style="text-align:center; vertical-align:center; margin">
+                        <apex:outputText value="{0, date, yyyy/MM/dd }"><apex:param value="{!Home_Services__c.Account__r.Customer_1_DOB__c + timezoneOffset}" /></apex:outputText>
+                    </div>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">    
+                    DL # 
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.Customer_1_Drivers_License__c}
+                    </div>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">    
+                    SSN
+                     <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.Customer_2_SSN__c}
+                    </div>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">    
+                    DOB
+                     <div style="text-align:center; vertical-align:center;">
+                         <apex:outputText value="{0, date, yyyy/MM/dd }"><apex:param value="{!Home_Services__c.Account__r.Customer_2_DOB__c + timezoneOffset}" /></apex:outputText>
+                    </div>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">    
+                    DL # 
+                     <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.Customer_2_Drivers_License__c}
+                    </div>
+                </td>            
+            </tr> 
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 25px;">
+                <td >    
+                    DL Issue Date <span style="padding-left: 5px"><apex:outputText value="{0, date, yyyy/MM/dd }"><apex:param value="{!Home_Services__c.Account__r.Customer_1_Drivers_License_Issue_Date__c + timezoneOffset}" /></apex:outputText></span>
+                </td>
+                <td >    
+                    DL Experation Date <span style="padding-left: 5px"><apex:outputText value="{0, date, yyyy/MM/dd }"><apex:param value="{!Home_Services__c.Account__r.Customer_1_Drivers_License_Expiration__c + timezoneOffset}" /></apex:outputText></span>
+                </td>
+                <td>    
+                    DL Issue Date <span style="padding-left: 5px"><apex:outputText value="{0, date, yyyy/MM/dd }"><apex:param value="{!Home_Services__c.Account__r.Customer_2_Drivers_License_Issue__c + timezoneOffset}" /></apex:outputText></span>
+                </td> 
+                <td>    
+                    DL Experation Date <span style="padding-left: 5px"><apex:outputText value="{0, date, yyyy/MM/dd }"><apex:param value="{!Home_Services__c.Account__r.Customer_2_Drivers_License_Expiration__c + timezoneOffset}" /></apex:outputText></span>
+                </td>             
+            </tr>
+            <tr style="height: 25px;">
+                <td >
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Home Phone 
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Phone_1__c}
+                        </div>
+                    </div>   
+                </td>
+                <td >    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Cell Phone 
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.PersonMobilePhone}
+                        </div>
+                    </div>  
+                </td>
+                <td>  
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Home Phone 
+                        </div>
+                        <div style="display:inline-block;">
+                          {!Home_Services__c.Homeowner_2_Phone__c}
+                        </div>
+                    </div> 
+                </td> 
+                <td>    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Cell Phone 
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Homeowner_2_Mobile__c}
+                        </div>
+                    </div>  
+                </td>           
+            </tr>
+            <tr style="height: 25px;">
+                <td colspan="2">
+                    <div style="width:100%; display:inline-block">
+                        <div style="width:29%; display:inline-block">
+                            #1 Email
+                        </div>
+                        <div style="width:70%; display:inline-block;">
+                            {!Home_Services__c.Femail__c}
+                        </div>
+                    </div>   
+                </td>
+                <td colspan="2">  
+                    <div style="width:100%; display:inline-block">
+                        <div style="width:29%; display:inline-block">
+                            #2 Email 
+                        </div>
+                        <div style="width:70%; display:inline-block;">
+                            {!Home_Services__c.Homeowner_2_Email__c}
+                        </div>
+                    </div>    
+                </td>
+                
+            </tr> 
+            <tr style="height: 30px;">
+                <td >    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Employer 
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_1_Employer__c}
+                        </div>
+                    </div> 
+                </td>
+                <td >    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Employer Phone 
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_1_Employer_Phone__c}
+                        </div>
+                    </div>
+                </td>
+                <td>    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Employer
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_2_Employer__c}
+                        </div>
+                    </div>
+                </td> 
+                <td>    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Employer Phone
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_2_Employer_Phone__c}
+                        </div>
+                    </div>
+                </td>             
+            </tr>
+            <tr style="height: 30px;">
+                <td >    
+                    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                           Income
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_1_Income__c}
+                        </div>
+                    </div>
+                </td>
+                <td >    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Length of Emp.
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_1_Length_of_Employment__c}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Income
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_2_Income__c}
+                        </div>
+                    </div>
+                </td> 
+                <td>    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Length of Emp.
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_2_Length_of_Employment__c}
+                        </div>
+                    </div>
+                </td>             
+            </tr>
+            <tr style="height: 30px;">
+                <td >    
+                    
+                </td>
+                <td >    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Position
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_1_Employment_Position__c}
+                        </div>
+                    </div>
+                </td>
+                <td>    
+                    
+                </td> 
+                <td>    
+                    <div style="width:100%; display:inline-block">
+                        <div style="display:inline-block; padding-right:5px;">
+                            Position
+                        </div>
+                        <div style="display:inline-block;">
+                            {!Home_Services__c.Account__r.Customer_2_Employment_Position__c}
+                        </div>
+                    </div>
+                </td>             
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 41px;">
+                <td WIDTH="50%" style="vertical-align:top; padding-top:6px">    
+                    <span>Address</span>
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.Street__c} {!Home_Services__c.Account__r.City__c} {!Home_Services__c.Account__r.State__c} {!Home_Services__c.Account__r.Zip__c}
+                    </div>
+                </td>
+                <td WIDTH="17%" style="vertical-align:top; padding-top:6px">    
+                    <span>Mortgage Payment</span>
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Account__r.Mortgage_Payment__c}
+                    </div>
+                </td>
+                <td WIDTH="17%" style="vertical-align:top; padding-top:6px">    
+                    <span>Install Date/Time</span>
+                      <div style="text-align:center; vertical-align:center;">
+                        <apex:outputText value="{0, date, yyyy/MM/dd HH:mm:ss}"><apex:param value="{!Home_Services__c.Requested_Install_Date__c + timezoneOffset}" /></apex:outputText>
+                    </div>
+                </td> 
+                <td WIDTH="16%" style="vertical-align:top; padding-top:6px">    
+                    <span>Sales Rep.</span>
+                    <div style="text-align:center; vertical-align:center;">
+                        {!Home_Services__c.Sales_Representative__c}
+                    </div>
+                </td>             
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 41px;">
+                <td colspan="3" style="text-align:center;">    
+                    <span><b>ITEMIZATION OF WORK DETAIL </b></span>
+                </td>             
+            </tr>
+            <tr style="height: 35px; text-align:center;">
+                <td WIDTH="69%">    
+                    PRODUCT AND PRODUCT DISCRIPTION 
+                </td>
+                <td WIDTH="10%">    
+                    QUANTITY
+                </td>
+                <td WIDTH="15%">    
+                    SALES PRICE
+                </td>                 
+            </tr>
+            <apex:repeat var="pm" value="{!Products}">
+                <tr style="height: 28px;" >
+                    <td WIDTH="69%" style="padding-left:20px">    
+                        {!pm.Name} 
+                    </td>
+                    <td WIDTH="10%"  style="text-align:center;">    
+                        {!pm.Quantity__c} 
+                    </td>
+                    <td WIDTH="15%"  style="text-align:center;">  
+                        <apex:outputField value="{!pm.Total_Price__c} "/> 
+                    </td>                 
+                </tr>
+            </apex:repeat>
+            
+            <tr>
+                <td colspan="3" >
+                    <div style="width:100%; text-align:right;  display:inline-block;">
+                        
+                        <table WIDTH="20%" style="border:0px; margin:10px; display:inline-block;">
+                            
+                            <tr>
+                                <td style="border:0px;">DEPOSIT </td>
+                                <td WIDTH="50%" style="border:0px; border-bottom:1px solid black; text-align:center">{!Home_Services__c.Down_Payment__c}</td>
+                            </tr>
+                            <tr>
+                                <td style="border:0px; padding-top:5px;">TOTAL SALES TAX </td>
+                                <td WIDTH="50%" style="border:0px; border-bottom:1px solid black; padding-top:5px; text-align:center"> {!Home_Services__c.Customer_Tax__c}</td>
+                            </tr>
+                            <tr>
+                                <td style="border:0px; padding-top:5px;">BALANCE DUE </td>
+                                <td WIDTH="50%" style="border:0px; border-bottom:1px solid black; padding-top:5px; text-align:center"> {!Home_Services__c.Balance_Due__c}</td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                </td>  
+            </tr>
+        </table>
+        <table WIDTH="100%">
+          <apex:repeat var="pm" value="{!PaymentMethods}">
+            <tr style=" border-top: 0px; border-bottom: 0px;">
+                <td style=" border-top: 0px; padding-top:20px;  border-bottom: 0px;">
+                    <div style="margin-right:40px">
+                        <table WIDTH="100%">
+                            <tbody>
+                                
+                                <tr style="border-top: 0px; border-bottom: 0px;">
+                                    <td WIDTH="20%" style="border:0px;">
+                                        METHOD OF PAYMENT:
+                                    </td>
+                                    <td WIDTH="14%" style="border:0px;  text-align:center;">
+                                         <div style="display: inline-block; width:100%">
+                                            <div style="display:inline-block;">
+                                                <div style="border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                                      {!IF(pm.PaymentMethodType__c == 'Visa',"X", "")} 
+                                                </div>
+                                            </div>
+                                            <div style="display:inline-block; padding-left:10px;">
+                                                    VISA               
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td WIDTH="14%" style="border:0px;  text-align:center;">                                         
+                                          <div style="display: inline-block; width:100%">
+                                            <div style="display:inline-block;">
+                                                <div style="border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                                      {!IF(pm.PaymentMethodType__c == 'Mastercard',"X", "")} 
+                                                </div>
+                                            </div>
+                                            <div style="display:inline-block; padding-left:10px;">
+                                               
+                                                    MASTERCARD   
+                                               
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td WIDTH="14%" style="border:0px;  text-align:center;">
+                                         <div style="display: inline-block; width:100%">
+                                            <div style="display:inline-block;">
+                                                <div style="border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                                      {!IF(pm.PaymentMethodType__c == 'Amex',"X", "")} 
+                                                </div>
+                                            </div>
+                                            <div style="display:inline-block; padding-left:10px;">                                 
+                                                    AMEX     
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td WIDTH="14%" style="border:0px;  text-align:center;">     
+                                      <div style="display: inline-block; width:100%">
+                                            <div style="display:inline-block;">
+                                                <div style="border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                                      {!IF(pm.PaymentMethodType__c == 'Discover',"X", "")} 
+                                                </div>
+                                            </div>
+                                            <div style="display:inline-block; padding-left:10px;">
+                                               
+                                                   DISCOVER  
+                                               
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td WIDTH="14%" style="border:0px;  text-align:center;">
+                                      <div style="display: inline-block; width:100%">
+                                            <div style="display:inline-block;">
+                                                <div style="border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                                      {!IF(pm.PaymentMethodType__c == 'Checking',"X", "")} 
+                                                </div>
+                                            </div>
+                                            <div style="display:inline-block; padding-left:10px;">
+                                               
+                                                   CHECKING  
+                                               
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td WIDTH="14%" style="border:0px;  text-align:center;">
+                                        <div style="display: inline-block; width:100%">
+                                            <div style="display:inline-block;">
+                                                <div style="border:1px solid black; width:10px; height:10px; padding-bottom:2px">
+                                                      {!IF(pm.PaymentMethodType__c == 'Finance',"X", "")} 
+                                                </div>
+                                            </div>
+                                            <div style="display:inline-block; padding-left:10px;">
+                                               
+                                                   FINANCE 
+                                               
+                                            </div>
+                                        </div>  
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </td> 
+            </tr>        
+            <tr style=" border-top: 0px; border-bottom: 0px;">
+                <td style=" border-top: 0px; border-bottom: 0px; padding-top:15px; padding-bottom:15px;">
+                    <div style="margin-right:40px">                
+                        <table WIDTH="100%" >
+                            <tr style="border-top: 0px; ">
+                                <td WIDTH="20%" style="border:0px;">
+                                    Finance Company: 
+                                </td>
+                                <td WIDTH="46%" style="border:0px; border-bottom:1px solid black;">
+                                   {!pm.FinanceCompany__c} 
+                                </td>
+                                <td WIDTH="12%" style="border:0px;">
+                                    Financed Amount: 
+                                </td>
+                                <td colspan="2" WIDTH="22%" style="border:0px; border-bottom:1px solid black;">
+                                    {!pm.FinancedAmount__c} 
+                                </td>
+                            </tr>
+                            <tr style="border-top: 0px; border-bottom: 0px; ">
+                                <td WIDTH="20%" style="border:0px; padding-top:10px;">
+                                    Name on Card (Account):
+                                </td>
+                                <td WIDTH="46%" style="border:0px; border-bottom:1px solid black;">
+                                    {!pm.NameOnCard__c}                                     
+                                </td>
+                                <td WIDTH="12%" style="border:0px;"> 
+                                </td>
+                                <td colspan="2" WIDTH="22%" style="border:0px;">               
+                                </td>
+                            </tr>
+                            <tr style="border-top: 0px; border-bottom: 0px; ">
+                                <td WIDTH="20%" style="border:0px; padding-top:10px;">
+                                    Account Number:
+                                </td>
+                                <td WIDTH="46%" style="border:0px; border-bottom:1px solid black;">
+                                     {!pm.AccountNumberChecking__c}  
+                                </td>
+                                <td WIDTH="12%" style="border:0px; text-align:right;">
+                                    EXP DATE:
+                                </td>
+                                <td WIDTH="11%" style="border:0px; border-bottom:1px solid black; text-align:center;">               
+                                    {!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}
+                                </td>
+                                <td WIDTH="11%" style="border:0px; border-bottom:1px solid black;">               
+                                    CSV: {!pm.CSV__c}
+                                </td>
+                            </tr>
+                            <tr style="border-top: 0px; border-bottom: 0px; ">
+                                <td WIDTH="20%" style="border:0px; padding-top:10px;">
+                                    Routing Number:
+                                </td>
+                                <td WIDTH="46%" style="border:0px; border-bottom:1px solid black;">
+                                    {!pm.RoutingNumber__c}
+                                </td>
+                                <td WIDTH="12%" style="border:0px;"> 
+                                </td>
+                                <td colspan="2" WIDTH="22%" style="border:0px;">               
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td> 
+            </tr>
+            </apex:repeat>
+            <tr style="border-top: 0px;">
+                <td style="border-top: 0px;">
+                    <div style="margin-right:20px;  margin-bottom:10px; ">                
+                        <table WIDTH="100%" >
+                            <tr style="border:0px">
+                                <td  WIDTH="20%" style="border:0px;  ">
+                                    Authorization Signature(s) #1                            
+                                </td>
+                                <td WIDTH="35%" style=" border:0px;border-bottom:1px solid black">
+                                    
+                                </td>
+                                <td WIDTH="5%" style="border:0px; text-align:right;">
+                                    #2                        
+                                </td>
+                                <td WIDTH="40%" style="border:0px;border-bottom:1px solid black ">
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+           
+        </table>
+        <div style="margin-bottom:30px; ">     
+            <table WIDTH="100%">
+                <tr style="border:0px;">
+                    <td style="border:0px; padding-top:10px; font-size:80%;">
+                        By signing below you certify that all information above is true and complete. You authorize us to confirm the information in this application and to request and receive credit information about you in order to determine creditworthiness. You further authorize us to furnish information about your account to credit reporting agencies. 
+                        Credit Reports: By submitting your application, you agree that we may obtain at any time your credit report s for any legitimate purpose associated with your application, account or other requests, including but not limited to reviewing, modifying, renewing or collecting on your account. At your request you will be informed if such a report was obtained by us, 
+                        and you will be given contact information for the consumer reporting agency that furnished the report.  *"Us" N-ERGY LLC a MyHome Service company
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table WIDTH="95%" style="margin: auto;">
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="border:0px;">
+                    
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+                    
+                </td>
+                <td  WIDTH="47%" style="font-size:14px;  font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;">
+                    <span style="color:white;" >sign_2</span>  
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td  WIDTH="47%" style="border:0px;">
+                    
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+                    
+                </td>
+                <td  WIDTH="47%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    CUSTOMER SIGNATURE
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;">
+                    N-ERGY  LLC
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+                    
+                </td>
+                <td  WIDTH="47%" style="font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;">
+                     <span style="color:white;" >sign_3</span>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    AUTHORIZED COMPANY REPRESENTATIVE  
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+                    
+                </td>
+                <td  WIDTH="47%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    CUSTOMER SIGNATURE
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}" >                       
+        
+        <div style="width:20%; text-align:center; display: inline-block;">    
+            <div style="width:20%; text-align:center; display: inline-block;">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/nergylogoOUT.png')}" height="60"/>
+                <!-- <apex:image url="{!$Resource.nergyimgs/}" width="50" height="50"/> -->
+            </div>
+        </div>
+        <div style="width:60%; text-align:center; display: inline-block;">
+            <div> 
+                <b style=" font-size: 14px; line-height: 25px;">Purchase Contract</b> <br/>
+                
+                <span style=" font-size: 13px; line-height: 18px;">664 W. Warner Rd. Tempe, AZ 85284 <br/>
+                    ROC# 318524<br/>
+                </span>
+            </div>
+        </div>
+        <div style="width:20%; text-align:center; display: inline-block;">
+        </div>
+        
+    </div>
+   <div class="page-break" style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+    <table WIDTH="95%" style="margin: auto;">
+        <tr style="">
+            <td style="">
+                <div style="padding:20px 20px 10px 20px;">
+                    
+                    
+                    <table WIDTH="100%" style="margin: auto; font-size:11px">
+                        <tr style="border:0px">
+                            <td WIDTH="60%" style="border:0px; font-size:13px; border-bottom:1px solid black;padding-top:10px">
+                                {!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}
+                            </td>
+                            <td WIDTH="40%" style="border:0px; font-size:13px; border-bottom:1px solid black; padding-top:10px">
+                                {!Home_Services__c.Account__r.Phone}
+                            </td>
+                        </tr>
+                        <tr style="border:0px">
+                            <td WIDTH="55%" style="border:0px; text-align:left;">
+                                HOMEOWNER(S)
+                            </td>
+                            <td WIDTH="45%" style="border:0px; text-align:left;">
+                                PHONE NUMBER 
+                            </td>
+                        </tr>
+                        <tr style="border:0px; ">
+                            <td WIDTH="60%" style="border:0px; font-size:13px; border-bottom:1px solid black; padding-top:15px">
+                                {!Home_Services__c.Account__r.Street__c}
+                            </td>
+                            <td WIDTH="40%" style="border:0px; font-size:13px; border-bottom:1px solid black; padding-top:15px">
+                                {!Home_Services__c.Account__r.City__c&', '& Home_Services__c.Account__r.State__c &', '& Home_Services__c.Account__r.Zip__c  }
+                            </td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td WIDTH="55%" style="border:0px; text-align:left;">
+                                STREET ADDRESS
+                            </td>
+                            <td WIDTH="45%" style="border:0px; text-align:left;">
+                                CITY, STATE, ZIP CODE 
+                            </td>
+                        </tr>
+                        <tr style="border:0px; ">
+                            <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:20px; font-size:13px;">
+                                {!Home_Services__c.Account__r.PersonEmail}
+                            </td>
+                            <td WIDTH="40%" style="border:0px;">
+                                <table WIDTH="100%" style="margin: auto;">
+                                    <tr style="border:0px;">
+                                        <td WIDTH="30%" style="border:0px; padding-top:10px; text-align:right; font-size:13px">
+                                            Lead Source
+                                        </td>
+                                        <td WIDTH="70%" style="border:0px; padding-top:10px; text-align:center;  border-bottom:1px solid black; font-size:13px;">
+                                            {!Home_Services__c.Utility_Company__c}
+                                        </td>
+                                    </tr>
+                                </table>                               
+                            </td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td WIDTH="55%" style="border:0px; text-align:left;">
+                                EMAIL ADDRESS
+                            </td>
+                            <td WIDTH="45%" style="border:0px; text-align:center;">
+                                <span style="">
+                                    UTILITY CO.&nbsp;&nbsp; &nbsp;
+                                    SRP&nbsp;&nbsp;&nbsp; 
+                                    APS &nbsp;&nbsp;&nbsp;
+                                    TEP &nbsp;&nbsp;&nbsp;
+                                    ED3
+                                </span> 
+                            </td>
+                        </tr>
+                        <tr style="border:0px">
+                            <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:13px; font-size:13px;">
+                               {!Home_Services__c.hoaName__c} 
+                            </td>
+                            <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:13px; font-size:13px;">
+                                {!Home_Services__c.hoaPhoneNumber__c}
+                            </td>
+                        </tr>
+                        <tr style="border:0px">
+                            <td WIDTH="55%" style="border:0px; text-align:left; ">
+                                HOA NAME 
+                            </td>
+                            <td WIDTH="45%" style="border:0px; text-align:left;">
+                                PHONE NUMBER
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <table WIDTH="95%" style="margin: auto; margin-top:18px; padding: 10px 20px 10px 20px;">
+        <tr style="">
+            <td style="padding-top:10px; font-size:13px">
+                <table WIDTH="95%" style="margin: auto;">
+                    <tr style="border:0px;">
+                        <td WIDTH="60%" style="border:0px; font-size:14px">
+                            Residential Photovoltaic Solar System (“the Products”) 
+                        </td>
+                        <td WIDTH="40%" style=" padding-top: 10px; padding-bottom: 10px;  padding-right: 5px;">
+                            <table WIDTH="100%" style="margin: auto;">
+                                <tr  WIDTH="50%"  style="border:0px;">
+                                    <td style="border:0px;">
+                                        <b>PURCHASE PRICE:$ </b>
+                                    </td>
+                                    <td  WIDTH="50%" style="border:0px; border-bottom:1px solid black;">
+                                        {!Home_Services__c.Total_Gross_Sale__c}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="border:0px;">
+                        <td style="border:0px; padding-top:10px;">
+                            <table WIDTH="95%" style="margin: auto;">
+                                <tr style="border:0px;">
+                                    <td WIDTH="10%" style="border:0px;">
+                                        
+                                    </td>
+                                    <td WIDTH="43%" style="border:0px; border-bottom:1px solid black;">
+                                        {!Home_Services__c.System_Size__c}
+                                    </td>
+                                    <td WIDTH="47%" style="border:0px;">
+                                        KW (System Size) 
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="border:0px;">
+                        <td colspan="2" style="border:0px; padding-top:8px;">
+                            <table WIDTH="95%" style="margin: auto;">
+                                <tr style="border:0px;">
+                                    <td WIDTH="5%" style="border:0px;">
+                                        
+                                    </td>
+                                    <td WIDTH="63%" style="border:0px; border-bottom:1px solid black;">
+                                        <apex:repeat value="{!productsModules}" var="productM" id="modules">
+                                     		{!productM.Product__r.Part_Number__c&", "}
+                                    	</apex:repeat>
+                                    </td>
+                                    <td WIDTH="32%" style="border:0px;">
+                                        <span>(Module &amp; Model Number)</span>  
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="border:0px; ">
+                        <td colspan="2" style="border:0px; padding-top:8px;">
+                            <table WIDTH="95%" style="margin: auto; ">
+                                <tr style="border:0px;">
+                                    <td WIDTH="5%" style="border:0px;">
+                                        
+                                    </td>
+                                    <td WIDTH="63%" style="border:0px; border-bottom:1px solid black;">
+                                    	<apex:repeat value="{!productsInverter}" var="productI" id="inverter">
+                                    		{!productI.Product__r.Part_Number__c&", "}
+                                  		</apex:repeat>
+                                    </td>
+                                    <td WIDTH="42%" style="border:0px;">
+                                        <span>(Inverter &amp; Model Number) </span>  
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="border:0px;">
+                        <td colspan="2" style="border:0px; padding-top:8px;">
+                            <table WIDTH="95%" style="margin: auto;">
+                                <tr style="border:0px;">
+                                    <td WIDTH="5%" style="border:0px;">
+                                        
+                                    </td>
+                                    <td WIDTH="63%" style="border:0px; border-bottom:1px solid black;">
+                                        <apex:repeat value="{!productsBatteryStorage}" var="productB" id="battery">
+                                     		{!productB.Product__r.Part_Number__c&", "}
+                                    	</apex:repeat>
+                                    </td>
+                                    <td WIDTH="42%" style="border:0px;">
+                                        <span>(Energy Storage)  </span>  
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="border:0px;">
+                        <td colspan="2" style="border:0px; padding-top:8px; padding-bottom:13px;">
+                            <table WIDTH="95%" style="margin: auto;">
+                                <tr style="border:0px;">
+                                    <td WIDTH="5%" style="border:0px;">
+                                        
+                                    </td>
+                                    <td WIDTH="63%" style="border:0px; border-bottom:1px solid black;">
+                                        {!Home_Services__c.Additional_Materials__c}
+                                    </td>
+                                    <td WIDTH="42%" style="border:0px;">
+                                        <span>(Additional Materials) </span>  
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+    <table WIDTH="95%" class="border-white" style="border:0px; margin: auto; margin-top:18px; padding: 10px 20px 10px 20px;">
+        <tr style="height: 30px;">
+            <td style="width:38%;">
+                Payment Options: <img src='{!IF(cash ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                                      class="changeImage" /> CASH(See reverse)__________
+            </td>
+            <td style="width:22%;">
+                <img src='{!IF(finance ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                     class="changeImage" /> FINANCE Co.__________
+            </td>
+            <td style="width:20%;">
+                <img src='{!IF(lease ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                     class="changeImage" /> LEASE Co.__________
+            </td>
+            <td style="width:20%;">
+                <img src='{!IF(other ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                     class="changeImage" /> OTHER.__________
+            </td>
+        </tr>    
+    </table>
+    
+    <p style="text-align:center; margin-top:18px">     
+        <b>TERMS AND CONDITIONS</b>
+    </p>
+    <div style=" margin: auto; border:1px solid black; width:95%;">
+        <ol style="margin-left:20px">
+            <li> <b>ARS 44-1763:</b> NERGY LLC has provided a copy of ARS 44-1763 contract with regards to Financing, Sale or Lease Agreements for Distributed Energy Generation Systems.</li>
+            <li><b>Compliance with applicable Codes and Laws:</b> All work shall be performed in a workmanlike manner and in full compliance with all applicable building codes and other applicable laws. 
+                NERGY LLC shall at its own expense obtain and possess all necessary licenses, permits, and other things necessary and required for the proper performance of the work. </li>
+            <li><b>Use of Subcontractors:</b> NERGY LLC may utilize subcontractors to perform portions of the work. If subcontractors are utilized NERGY LLC shall fully pay for their services. </li>
+            <li><b>Liability Insurance:</b> At all times during the actual installation NERGY LLC shall keep in force a Commercial General Liability Insurance policy with limits of not less than One Million Dollars, 
+                and excess insurance coverage of not less than Three Million Dollars, to insure for injury to Contractor’s employees, and others, incurring loss or injury as a result of the acts of NERGY LLC, its employees and subcontractors. </li>
+            <li><b>Taxes:</b> NERGY LLC shall pay all taxes required by any taxing authority having jurisdiction over the project.</li> 
+            <li><b>Delays:</b> NERGY LLC shall not be liable for delays due to circumstances beyond its control. Any starting or completion dates provided by NERGY LLC are its best estimates and subject to change. 
+                NERGY Solar Power’s performance is based upon the prompt, complete, and accurate fulfillment of all of Customer`s obligations including payment. </li>
+            <li><b>Warranties</b>  NERGY LLC warrants that all labor and materials will be free from defects for a period of ten (10) years from the date of completion. 
+                Customer will be provided with the standard warranties from major equipment manufacturers. NERGY LLC warrants Your roof against damage and water infiltration at each roofing penetration in connection with the installation of the System and the surrounding area of each such penetration for a period of five (5) years from the date of completion. </li>
+            <li><b>Disclaimer:</b> NERGY LLC disclaims any liability for direct or indirect damages resulting from improper use, modifications, alterations, repairs, misuse, abuse, vandalism, damage caused by the serving utility company, fire, storm, flood or other acts of God. 
+                NERGY LLC shall not be liable for any direct, indirect or consequential damages, losses, costs or other expenses, however arising, in contract or in tort, including without limitation any economic losses of any kind, losses or damage to property or personal injury. NERGY LLC disclaims any responsibility for the systems use or its operation for any intended purpose. </li>
+            <li><b>Liens and Waivers of Liens: </b> NERGY LLC shall furnish Customer releases or waivers of lien, from all companies that have provided Customer with a PreLien Notice, through the date for which payment is being made. 
+                Customer shall promptly advise NERGY LLC of its receipt of any Pre-Lien Notices. </li>
+            <li><b> Change Orders: </b>  NERGY LLC and the Customer recognize that unforeseen conditions or factors may become known subsequent to the time that this contract is signed. 
+                In addition, Customer may desire a change that would add time and cost to the work. If these or other events, within or beyond the control of the parties, require adjustment to this contract, the parties shall make a good faith attempt to agree on all particulars including cost. Such agreements shall be put in writing, signed by the parties and amended to this contract.</li>
+            <li><b> Dispute Resolution: ANY CONTROVERSY OR CLAIM ARISING OUT OF, OR RELATING TO, THIS CONTRACT, 
+                OR ANY BREACH THEREOF, SHALL BE SETTLED BY ARBITRATION ADMINISTERED BY THE AMERICAN ARBITRATION ASSOCIATION UNDER ITS CONSTRUCTION INDUSTRY ARBITRATION RULES, AND JUDGMENT ON THE AWARD RENDERED BY THE ARBITRATOR(S) MAY BE ENTERED IN ANY COURT HAVING JURISDICTION THEREOF. A COPY OF SUCH RULES CAN BE EXAMINED AT WWW.ADR.ORG. IF THE CUSTOMER DOES NOT HAVE INTERNET ACCESS, OR UPON REQUEST, A COPY OF THE RULES HAVE BEEN PROVIDED TO THE CUSTOMER.
+                IF THE CUSTOMER DOES NOT HAVE INTERNET ACCESS, OR UPON REQUEST, A COPY OF THE RULES HAVE BEEN PROVIDED TO THE CUSTOMER. (CUSTOMER INITIALS) <span style="color: white; border-bottom: 1px solid black; width: 200px; display: inline-block;">initial_1</span></b></li>
+        </ol>
+    </div>	
+    
+    <p style="text-align:center; margin-top:18px">     
+        <b>I HAVE READ AND UNDERSTAND THE ABOVE </b>
+    </p>
+    <p style="text-align:center; margin-top:10px; margin-bottom:20px; font-size:9px;">
+        All agreements regarding performance of the work are stated herein. All modifications to this agreement shall be in writing and signed by NERGY LLC and the Customer. This Contract entered into as of the date indicated above is by and between NERGY LLC and the undersigned Homeowner(s) hereinafter referred to as “Customer”.
+    </p>
+    
+    <table  WIDTH="95%" style=" border:0px; margin:auto">
+        <tr style=" border:0px;">
+            <td WIDTH="60%" style=" border:0px; border-bottom:1px solid black;">
+                <span style="color: white;">sign_1</span>
+            </td>
+            <td WIDTH="8%" style=" border:0px; ">
+                DATE:
+            </td>
+            <td WIDTH="32%" style=" border:0px; border-bottom:1px solid black;">
+            	<span style="color: white;">date_1</span>
+            </td>
+        </tr>
+        
+        <tr style=" border:0px;">
+            <td colspan="3" WIDTH="60%" style=" border:0px;">
+                <span style="color: white;">sign_2</span>
+            </td>
+        </tr>
+        <tr style=" border:0px;">
+            <td colspan="3" WIDTH="60%" style=" border:0px; padding-bottom:20px;">
+                Customer(s) Signature
+            </td>
+        </tr>
+        <tr style=" border:0px;">
+            <td colspan="3" WIDTH="60%" style=" border:0px; padding-bottom:10px; border-bottom:1px solid black;">
+                <span style="color: white;">sign_2</span>
+            </td>
+        </tr>
+        <tr style=" border:0px;">
+            <td colspan="3" WIDTH="60%" style=" border:0px; padding-bottom:20px">
+                Customer(s) Signature
+            </td>
+        </tr>
+        <tr style=" border:0px;">
+            <td WIDTH="60%" style=" border:0px; border-bottom:1px solid black;">
+                <span style="color: white;">sign_3</span>
+            </td>
+            <td WIDTH="8%" style=" border:0px; ">
+                DATE:
+            </td>
+            <td WIDTH="32%" style=" border:0px; border-bottom:1px solid black;">
+                <span style="color: white;">date_3</span>
+            </td>
+        </tr>
+        <tr style=" border:0px;">
+            <td colspan="3" WIDTH="60%" style=" border:0px; padding-bottom:10px">
+                Energy Consultant Signature
+            </td>
+        </tr>
+    </table>
+
+        
+    </div>
+    <br/>
+    <br/>
+    <div style="font-size: 11px;{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">      
+        <div style="text-align:center; font-size: 17px;">
+            <b>NOTICE TO BUYER </b>
+        </div>
+        <div style="width:95%">
+            <ol>
+                <li> <b>You may file a complaint with the AZ Register or Contractors www.roc.az.gov or by calling 602-542-1525, you have 24 months after installtion of your project to file. </b></li>
+                <li> You are entitled to a copy of this contract at the time you sign it. </li>
+                <li> TAX CREDITS AND REBATES: Buyer understands that NERGY LLC and its representatives are not tax professionals. 
+                    Buyer understands that the tax credits offered by the Federal and State governments are credits against the buyer’s income tax liability. Should you have any questions relating to or pertaining to your ability to acquire the abovementioned credits, you should seek counsel of a tax professional. Furthermore, buyer understands that rebates and credits are estimated at time of purchase. </li>
+                <li><b>NERGY LLC AGREES TO PAINT CONDUIT, THE DAY OF THE INSTALLATION, ONLY WITH CUSTOMER SUPPLIED PAINT AND MATERIALS.</b></li>
+                <li><b> THE AMOUNT OF USAGE AND SAVINGS ARE ESTIMATES ONLY AND ARE NOT GURANTEED</b></li>
+            </ol>
+        </div>
+        <div style="text-align:center; font-size: 17px;">
+            <b> ADDITIONAL TERMS AND CONDITIONS </b>
+        </div>
+        <ol>
+            <li>The Customer shall afford access to the Customer’s residence to NERGY LLC or its designee(s) to install the Products. </li>
+            <li> NERGY LLC assumes no responsibility or liability for payments made by Customer to any of NERGY Solar Power’s salesmen or employees unless any such payments is/are made by check payable to NERGY LLC. </li>
+            <li>Customer agrees that he/she will sign a Contractors Completion Certificate, as well as any other documents deemed necessary by any financial institution which provides financing to Customer in order to acquire the Products. </li>
+            <li> Purchaser understands there is no written or implied warranty on Customer’s existing Electrical System(s). </li>
+            <li> Actual production/reduction of usage and customer savings may vary based on size of the system, orientation, and rate plans. Utility rates and funding program levels are subject to change. NERGY LLC has no control over Utility rates and/or fees associated with the energy devices or Product’s sold.</li>
+        </ol>
+        
+        <div style="text-align:center; font-size: 17px;">
+            <b>PAYMENT</b> 
+        </div>
+        
+        <div style=" margin: auto; border:1px solid black; width:95%; padding:10px">
+            <p>
+                Payments on cash purchases are to be made as follows (payment terms with third parties vary depending on funding source):<br/> 
+                The first Payment, of $<span style="display: inline-block; width: 80px; border-bottom: 1px solid black; text-align: center">{!Home_Services__c.FirstPayment__c}</span> is due at the time of Contract Execution. Drawings may not be prepared for Utility Company and Authority having Jurisdiction, if applicable, until this payment is received.<br/><br/>
+                The second payment, in the amount of $<span style="display: inline-block; width: 80px; border-bottom: 1px solid black; text-align: center">{!Home_Services__c.SecondPayment__c}</span> (equal to or greater than 50% of the contract amount) is due upon receipt of approval from the Utility Company and Authority having Jurisdiction, if applicable. Materials and Equipment may not be purchased until this payment is received.<br/><br/>
+                All payments not received when due will be charged a 1.5% monthly service charge. Credit card payments are a valid and acceptable form of payment. However, payments made with credit cards are subject to additional merchant fees.            
+            </p>
+        </div>
+        <br/>
+        <br/>
+        <div style="text-align:center; font-size: 17px;">
+            <b>WARRANTIES</b>
+        </div>
+        <div style="margin: auto; width:95%;">
+            <p>
+                ARS 44-1762. <u>Solar energy device warranties; installation standards; inspections</u> A. The collectors, heat exchangers and storage units of a solar energy device that is sold or installed in this state, and the installation, shall be warranted for a period of at least two years.
+                The remaining components of the solar energy device and their installation shall be warranted for a period of at least one year. B. Any person who manufactures, furnishes for installation or installs a solar energy device shall provide with such device a written statement of warranty, responsibilities assumed or disclaimed and performance data of the solar energy device and components of the solar energy device.
+                The form of the statement required by this subsection is subject to approval by the registrar of contractors after consultation with the governor’s energy office. T he registrar of contractors shall adopt rules governing the readability and understandability of the statement. The statement shall specify the source of any performance data it contains. A copy of the statement shall be delivered to the registrar of contractors where it shall be kept on public file.<b> C. A person who sells a solar energy device in this state shall furnish a certificate to the buyer that the solar energy device complies with the requirements of this section</b> D. A solar energy device that is sold or installed in this state shall comply with any consumer protection, rating, certification, performance, marking, installation and safety standards that have been adopted by the governor’s energy office. E. An individual who installs a solar energy device in this state, in addition to being a licensed solar contractor under title 32, chapter 10, article 4, shall: 1. Possess the general license that is appropriate to the type of solar energy device that is installed. Installers of a solar water heater or a photovoltaic device shall possess an appropriate contractor’s license.2. Meet any education and training standards that have been adopted by the registrar of contractors after consultation with the governor’s energy office.3. Pass an examination on the installation of the type of device to be installed, if the registrar of contractors after consultation with the governor’s energy office has adopted such an examination. F. Solar energy devices that are designed or installed by the final owner are exempt from the requirements of subsections A through E.G. The installation of a solar energy device shall meet the requirements of: 1. All applicable fire, safety and building codes.2. Consumer protection standards, including freeze protection and temperature related damage standards adopted by the governor’s energy office.3. All other applicable federal, state and local laws. H. Solar energy devices are subject to random inspections by the registrar of contractors. Installers who fail to meet safety, installation or<b> other prescribed standards</b> are subject to disciplinary action under title 32, chapter 10, Article<b><u> 3.Statement of warranty coverage:</u></b>  The warranty requirements for the installation company will be as follows (this warranty supersedes all other warranties for the time periods stated):  The installation company will provide a full parts and labor warranty for the entire system for ten (10) years from the date of installatio
+                n. Full parts and labor warranty includes, but is not limited to, any and all component failures(s), whether it is covered by the original manufacturer or not, and any and all installation-related malfunction(s). And manufacturer’s warranty(ies) are in addition to, not in lieu of, the installation warranty.  Warranty is not required to cover problems resulting from exposure to harmful materials and chemical, fire, flood, lighting, hurricane, tornado, hailstorm, earthquake, or other acts of God, vandalism, alteration of system by anyone not authorized by the installation company, or any other cause beyond the control of the installation company.  NERGY LLC MAKES NO OTHER WARRANTIES, EXPRESSED OR IMPLIED, EXCEPT AS SPECIFICALLY PROVIDED IN THIS AGREEMENT AND NERGY LLC WILL NOT BE RESPONSIBLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL PROPERTY OR COMMERCIAL DAMAGE OF ANY NATURE WHATSOEVER. 
+            </p>
+        </div>
+        <div style="text-align:center; font-size: 17px; padding-bottom:20px;">
+            <b>NOTICE OF CANCELLATION</b>
+        </div>
+        <div style=" margin: auto; border:1px solid black; width:95%; padding:10px; marggin-bottom:20px;" >
+            <p>
+                Customer may cancel this Contract within three (3) days after signing by notifying NERGY LLC of such in writing cancellation could incur a cancel fee of up to $2500.00. NERGY LLC may cancel this agreement if existing conditions at the site of the work prohibit the work or add additional costs to the work that the Customer is unwilling to pay for under the change order provisions of this Contract. To cancel this transaction, mail or deliver a signed and dated copy of this cancelation notice or any <br/>
+                other written notice to: 664 W. Warner Rd. Tempe AZ 85284<br/><br/>
+                I hereby cancel this transaction: DATE: _________/______/_______   Customer(s) Signature________________________________________
+            </p>
+        </div>
+    </div>
+    <div style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+        <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    </div>
+    
+    
+    <table  WIDTH="95%" style=" border:0px; margin:auto; margin-top:50px;{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+        <tr style="border:10px solid black;">
+            <td WIDTH="20%" style="border:4px solid black; padding:10px;">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/nergylogoOUT.png')}" height="60"/>
+            </td>
+            <td  WIDTH="10%" style="border:4px solid black;">
+                
+            </td>
+            <td colspan="2" WIDTH="70%" style=" font-size: 20px; border:4px solid black; padding-top:20px;">
+                <b>Back-Up Circuits</b>
+            </td>
+        </tr>
+        <tr style="border:4px solid black;">
+            <td WIDTH="20%" style="border:1px solid black; padding-top:20px;">
+                
+            </td>
+            <td  WIDTH="10%" style="border:1px solid black; padding-top:20px;">
+                
+            </td>
+            <td WIDTH="10%" style="border:1px solid black; padding-top:20px;">
+                
+            </td>
+            <td WIDTH="60%" style="border:1px solid black; padding-top:20px;">
+                
+            </td>
+        </tr>
+        <tr style="border:4px solid black;">
+            <td WIDTH="20%" style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Item</b>
+            </td>
+            <td  WIDTH="10%" style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Yes</b>
+            </td>
+            <td WIDTH="10%" style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>No</b>
+            </td>
+            <td WIDTH="60%" style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Comments</b>
+            </td>
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Refrigerator</b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                x
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+                Standard
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Garage</b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                x
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+                Standard
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Kitchen</b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                x
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">       
+                Standard
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Living Room</b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">       
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Master Bedroom</b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">       
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Durable Medical </b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">       
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Freezer </b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">       
+            </td> 
+        </tr>
+        <tr style="border:4px solid black;">
+            <td style="border:4px solid black; padding-top:17px; font-size: 18px;">
+                <b>Other </b>
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px; text-align:center;">
+                
+            </td>  
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">
+            </td>
+            <td style="border:4px solid black; padding-top:17px; font-size: 15px;">       
+            </td> 
+        </tr>        
+    </table>
+    <br/>
+    <br/>
+    <div style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')} font-size:15px; margin: auto; border:2px solid black; width:93%; padding:10px; marggin-bottom:20px; marggin-top:50px;" >
+        <p>
+            By signing this disclaimer, you confirm your understanding that the economics behind your decision to   buy this solar system may change.  You further understand that any potential savings are based on  historic usage and your ability to maintain historic usage under the “prescribed” demand threshold.
+            <br/><br/>
+            Neither Nergy Solutions or its affiliates have made any guarantees relating to savings.  Any   estimates of savings are purely “estimates” and are in no way guaranteed by Nergy Solutions  or its affiliates.
+        </p>
+    </div>
+    
+    <table  WIDTH="95%" style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')} border:0px; margin:auto; margin-top:120px;  margin-bottom:410px;">
+        <tr>
+            <td WIDTH="40%"  style=" border:0px; border-bottom:2px solid black;">
+                <span style="color: white;">sign_1</span>
+            </td>
+            <td WIDTH="10%" style=" border:0px;">
+            </td>
+            <td WIDTH="50%" style=" border:0px; border-bottom:2px solid black;">
+                <span style="color: white;">sign_3</span>
+            </td>
+        </tr> 
+        <tr>
+            <td WIDTH="40%"  style=" border:0px; padding-top:15px; font-size:15px;">
+                Customer Signature 
+            </td>
+            <td WIDTH="10%" style=" border:0px;">
+            </td>
+            <td WIDTH="50%" style=" border:0px; padding-top:15px; font-size:15px;">
+                Nergy Solutions Representative
+            </td>
+        </tr> 
+    </table>
+
+    <div style=" font-size:15px; margin: auto; width:89%; padding:10px; margin-bottom:360px;" >
+        
+        <div style="display:inline-block; width:100%">
+            <div style="display:inline-block;  width:14%">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/electricallogo.png')}" height="47px" />
+            </div>
+          <div style="display:inline-block; width:85%; ">
+              <div style="font-size:16px; color:#1679c4; display:inline-block; width:80%; text-align:center">
+                  <b> Distributed Generation Interconnection Process<br/>
+                      for Residential and Small General Service<br/>
+                      OVERVIEW<br/>
+                  </b>
+              </div> 
+          </div>
+            <br/>
+            <div style="font-size:17px;  display:inline-block; width:50%; text-align:left; color:#1679c4; ">
+                <b>REVISION NO.:  9 </b>
+            </div>
+            <div style="font-size:17px;  display:inline-block;  width:49%; text-align:right; color:#1679c4;">
+                <b>EFFECTIVE:  09/16/2019 </b> 
+            </div>
+        </div> 
+        
+        <p>
+            Required Steps for ED3’s Distributed Generation Interconnection Process for Residential and Small General Service:
+        </p>
+        
+        <ul>
+            <li>Customer to submit an “Application for Operation of Customer Owned Distributed Generation” form to ED3 for review and approval.<br/><br/> </li>
+            <li>Contractor / Customer is notified by email of any errors on your Application and the Application is corrected by the Contractor.  <br/><br/></li>
+            <li>The Revised / Corrected Application is re-evaluated by ED3 and if errors are all corrected, it is then approved.<br/><br/></li>
+            <li>Contractor / Customer will receive a Letter of Approval for Interconnection via email from ED3. <br/><br/></li>
+            <li>Contractor is responsible for providing copy of Letter of Approval for Interconnection to the City of Maricopa (if within City limits) to set up City inspection. <br/><br/></li>
+            <li>Once the Letter of Approval for Interconnection has been received, the Customer may proceed with the installation of the Distributed Generation (DG) System.   <br/><br/></li>
+            <li>Once installation is complete, Customer / Contractor is responsible for scheduling an inspection by a City of Maricopa or Pinal County Electrical Inspector.   <br/><br/></li>
+            <li>When the system passes the City of Maricopa or Pinal County electrical inspection, the Inspection Department provides ED3 with a Clearance for Connection via email. <br/><br/></li>
+            <li>Upon receipt of the Clearance for Connection, the ED3 Solar Coordinator will contact the Customer’s Contractor to schedule an appointment for the Commissioning Inspection. <br/><br/></li>
+            <li>Once the Commissioning Inspection is complete, ED3 installs a new electric meter which connects the DG System to ED3’s electrical grid. <b> The Commissioning Inspection is the final step required PRIOR to connecting the DG System to ED3’s electric grid. </b> </li>
+        </ul>
+               <table width="100%" style="margin-top:10px;">
+            <tr style="border:0px">
+                <td  width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>
+                <td  width="75%" style="border:0px">
+                    ED3 is <b>not</b> responsible for the workmanship or materials of the customer’s installation contractor.  <br/><br/>
+                    ED3 does <b>not</b> inspect the installation of the system on your roof.  <br/> <br/>
+                    
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>  
+                <td width="75%" style="border:0px; color:red;">
+                    <b>CUSTOMER APPLICATIONS THAT ARE PLACED IN THE QUEUE ARE SUBJECT TO ALL REVISIONS AND CHANGES TO THIS PROGRAM DURING THEIR TIME IN THE QUEUE.  </b>
+                </td> 
+            </tr>
+        </table>
+        <br/>
+        <div style="text-align:center">
+             <p style="color:#1679c4"><b> If you have any questions about any of the items listed above,<br/>  please contact our Solar Coordinator at (520) 316-6527 or solar@ed-3.org.</b></p>
+        </div>
+    </div>
+    
+    <div class="page-break">
+        
+        
+        <div style=" font-size:15px; margin: auto; width:89%; margin-bottom:10px;" >
+            
+            <div style="display:inline-block; width:100%">
+                <div style="display:inline-block;  width:14%">
+                    <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                     'img/electricallogo.png')}" height="47px" />
+                </div>
+                <div style="display:inline-block; width:85%; ">
+                    <div style="font-size:18px; color:#1679c4; display:inline-block; width:80%; text-align:center">
+                        <b> Customer Owned Distributed Generation <br/>
+                            CHECKLIST <br/>
+                        </b>
+                    </div> 
+                </div>
+                <br/>
+                <br/>
+                <div style="font-size:17px;  display:inline-block; width:50%; text-align:left; color:#1679c4; ">
+                    <b>REVISION NO.:  16 </b>
+                </div>
+                <div style="font-size:17px;  display:inline-block;  width:49%; text-align:right; color:#1679c4;">
+                    <b>EFFECTIVE:  09/16/2019 </b> 
+                </div>
+            </div>
+            <br/>
+            <!--
+            <b>
+                Before submitting your application for Customer Owned Distributed Generation, 
+                please make sure you have completed the following steps and included <u style="color:red;">ALL</u> the following: 
+            </b>
+            <br/>
+            <br/>
+            <table width="100%">
+                <tr>
+                    <td style="width:5%; text-align:center; vertical-align: top;">
+                        <div style="border:1px solid black; padding:2px; width:5px; height:5px; ">
+                            
+                        </div >
+                    </td>
+                    <td style="width:95%;">
+                        <span>The “Guidelines for Customer Owned Distributed Generation” form - be sure to include: </span>
+                         
+                        <div style="height: 25px;
+                                    width: 25px;
+                                    background-color: #bbb;
+                                    border-radius: 50%;
+                                    display: inline-block;">
+                            
+                        </div>
+                    </td>
+                </tr>
+                
+            </table>
+            -->
+            <div style="width:100%">
+                <div style="width:5%; text-align:center; float:left;">
+                    
+                   
+                </div>
+                <div style="width:95% float:right;">
+                   
+                </div>
+            </div>
+            </div> 
+        
+        <div style="text-align:center;">
+            <apex:image url="{!URLFOR($Resource.nergyimgs,
+                             'img/customer/bodyonecustomerodgc.png')}" height="415"/>
+        </div>
+        
+        <div style="text-align:center;">
+            <apex:image url="{!URLFOR($Resource.nergyimgs,
+                             'img/customer/bodytwocustomerodgc.png')}" height="415"/>
+        </div>
+        
+    </div>
+    
+    <div style=" font-size:16px; margin: auto; width:89%;" class="page-break" >
+        
+         <div style="display:inline-block; width:100%">
+            <div style="display:inline-block;  width:14%">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/electricallogo.png')}" height="47px" />
+            </div>
+            <div style="display:inline-block; width:85%; ">
+                <div style="font-size:18px; color:#1679c4; display:inline-block; width:80%; text-align:center">
+                    <b> GUIDELINES for Customer Owned Distributed Generation </b>
+                </div> 
+            </div>
+            <br/>
+            <br/>
+            <div style="font-size:17px;  display:inline-block; width:50%; text-align:left; color:#1679c4; ">
+                <b>REVISION NO.:  14 </b>
+            </div>
+            <div style="font-size:17px;  display:inline-block;  width:49%; text-align:right; color:#1679c4;">
+                <b>EFFECTIVE:  09/16/2019 </b> 
+            </div>
+        </div> 
+        
+        
+        
+        
+        <p><b><u>INTRODUCTION</u></b> </p>
+        <p>
+            ED3 has created a policy to allow safe connection and export for customer owned distributed energy to the ED3 distribution system.  At this time, ED3 will only accept applications for the addition of distributed Solar Photovoltaic (PV) Generation Systems of a maximum of 
+            ten kilowatts (10 kW) or less for Residential accounts, and twenty kilowatts (20 kW) or less for Small General Service accounts, with appropriate integral voltage conversion, synchronization, power quality, and protection circuitry.<br/><br/> 
+            All Distributed Generation (“DG”) Systems coupled with or without energy storage must meet certain electrical criteria to be approved for connection to the ED3 distribution system.<br/><br/>
+            You must work with your contractor to ensure that your generation equipment is installed in a proper and safe manner, and in accordance with all applicable codes, standards, regulations, laws and insurance requirements.  
+            In many cases, you will also need to coordinate the installation and approval of your System with the local code inspection authority (City of Maricopa or Pinal County).<br/><br/> 
+            DG System interconnections may require a System Engineering Analysis, the cost of which will be borne by the Customer.  An initial System Engineering Analysis Fee of $500 (five hundred dollars) will be required to begin the study. 
+            Any additional analysis costs will be billed to the Customer in advance and any unused amounts will be returned upon completion of the analysis.<br/><br/> 
+        </p>
+        <p><b><u>APPLICATION PROCESS </u></b> </p>
+        <div style=" font-size:15px; margin: auto;margin-left:70px; width:89%;" >
+            <p><b><u>To be Interconnected  </u></b> </p>
+            <p>
+                If you are planning to interconnect your generator with the ED3 electric power distribution system, 
+                you will need to complete the ED3 “Application for Operation of Customer Owned Distributed Generation” form and submit it to ED3 for approval.  
+                You will also need to sign the ED3 “Agreement for Interconnection of Customer Owned Distributed Generation” form. 
+            </p>
+            <p><b><u>NOT to be Interconnected</u></b> </p>
+            <p>
+                If your small DG System is NOT to be interconnected with ED3’s electric power system, you will need to contact ED3 and provide information including the electrical capacity, manufacturer and name of your electrical installer. 
+                ED3 may require you to send a copy of your manufacturer information and installation plans.  There is no formal application or fee required, but you may use the ED3 “Application for Operation of Customer Owned Distributed Generation” form to provide information to ED3.   
+            </p>
+            <apex:image url="{!URLFOR($Resource.nergyimgs,
+                             'img/guidelines/red.png')}" height="50"/>
+        </div>
+        <p><b><u>INTERCONNECTING TO THE ED3 DISTRIBUTION SYSTEM  </u></b> </p>
+        <p>    
+            ED3 will process, review and approve your application to ensure that ED3 personnel safety and ED3 electric system reliability will not be compromised.  As part of ED3’s review of your “Application for Operation of Customer Owned Distributed Generation,” ED3 may request additional information regarding your planned installation and may require special steps to be taken during the installation process. 
+        </p>
+        
+        <div style="font-size:11px; display:inline-block; margin-top:100px;">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    <b>GUIDELINES for Customer Owned Distributed Generation (Rev. 14 09/16/2019) </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 1 of 3  
+                </p>
+            </div>
+        </div>
+        
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <p>
+            You may contact our office at any time during this review process to find out the status of your application.  If your application is not approved, ED3 will explain the reason or be available to discuss your plans. 
+        </p>
+        <p>
+            As part of our application review process, ED3 will examine the ability of the ED3 electric distribution system to accept your new power generation unit.  On certain parts of our system, ED3 may need to replace existing equipment or add some new equipment in order to accommodate your System’s generation. 
+        </p>
+        <p>
+            If additional hardware is required, ED3 will not incur costs beyond what is normally required to operate and maintain its electrical system.  Therefore, to be fair to other customers, you will be charged for any electrical system upgrades that will be needed to support the addition of your planned System. 
+        </p>
+        <p>
+            If this is the case for your System installation, ED3 will advise you of the additional cost and seek your agreement before approving your application.  You will also be asked to sign the “System Upgrade Estimate” and the “Agreement for Interconnection of Customer Owned Distributed Generation”. 
+        </p>
+        <div style="margin: auto; width:89%;" >
+            <p>
+                <b><i>Technical Requirements</i></b> <br/>
+                All DG Systems that will be interconnected with ED3 electric distribution system must meet the following requirements: 
+            </p>
+            <ul>
+                <li>Hardware should be UL approved (when available) </li>
+                <li>System design for interconnection should meet the applicable standards set forth in Institute of Electrical and Electronics Engineers (IEEE) 1547 “Standard for Interconnecting Distributed Resources with Electric Power Systems” </li>
+                <li>National Electrical Code (NEC) </li>
+                <li>National Electric Safety Code (NESC) </li>
+                <li>ED3 Electric Service Guidelines. </li>
+            </ul>
+            <p> <b><i>Power Export to ED3</i></b> <br/>
+                If you interconnect your DG system to ED3 electrical grid, you may provide excess power that your system generates to ED3.  Our current Program provides for the purchase of power from residential customers up to a maximum of 10 kW DC generation capacity and Small General Service customers up to 20 kW DC generation capacity. 
+                ED3 is not willing to wheel excess power for you to sell to other utilities. 
+            </p>
+            <p style="color:red;">
+                <b>ED3 retains the right to refuse generation interconnection by any customer. </b> 
+            </p>
+            <b><i>Inspections Required </i></b>  
+            <ul>
+                <li>City of Maricopa or Pinal County Electrical Inspection – when the system passes, the City or County will issue a Clearance for Connection of Solar System. </li>
+                <li>ED3 Commissioning Inspection – Upon receipt by ED3 of the City or County Clearance, a Commissioning Inspection will be conducted by ED3 solely to verify the size of the system which was installed by the Customer’s installation contractor.  This is required by ED3 and upon verification of the system size; 
+                    the ED3 electrical meter will be installed.  This is the FINAL step required PRIOR to connecting the DG System to ED3’s electrical grid. </li>
+                <li>If the DG System is coupled with an energy storage system and both systems were installed at the same time, ED3 will allow for one City or County clearance covering both; however, there may be circumstances in which ED3 must require additional clearances for added systems. </li>
+            </ul>
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+        <div style="font-size:11px; display:inline-block; margin-top:100px;">
+                <div style="display:inline-block; width:79%">
+                    <p>
+                        <b>GUIDELINES for Customer Owned Distributed Generation (Rev. 14 09/16/2019) </b>
+                    </p>
+                </div>
+                <div style="display:inline-block; width:20%; text-align:right;">
+                    <p>
+                        Page 2 of 3   
+                    </p>
+                </div>
+            </div>
+        
+        <table width="100%" style="margin-top:130px;">
+            <tr style="border:0px">
+                <td  width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>
+                <td  width="75%" style="border:0px">
+                    ED3 is <b>not</b> responsible for the workmanship or materials of the Customer’s installation contractor. <br/><br/>
+                    ED3 does <b>not</b> inspect the installation of the system on your roof. <br/> <br/>
+                    ED3 inspects solely to verify the system size.  <br/> <br/>
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>  
+                <td width="75%" style="border:0px; color:red;">
+                    <b>CUSTOMER APPLICATIONS THAT ARE PLACED IN THE QUEUE ARE SUBJECT TO ALL REVISIONS AND CHANGES TO THIS PROGRAM DURING THEIR TIME IN THE QUEUE.  </b>
+                </td> 
+            </tr>
+        </table>
+        <br/>
+        <p style="color:#1679c4"><b> Submit your application to the ED3 Solar Coordinator:</b></p>
+        
+        <table width="100%">
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px">
+                    Address:
+                </td>
+                <td  width="73%" style="border:0px">
+                    Electrical District No. 3 of Pinal County (ED3) <br/>
+                    41630 W. Louis Johnson Drive <br/>
+                    Maricopa, AZ  85138-5402 <br/>
+                    <br/>
+                </td>
+            </tr>
+            
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px">
+                    Direct Line: 
+                </td>
+                <td  width="73%" style="border:0px">
+                    (520) 316-6527<br/><br/>
+                </td>
+            </tr>
+            
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px">
+                    Fax: 
+                </td>
+                <td  width="73%" style="border:0px">
+                    (520) 423-4949 <br/><br/>
+                </td>
+            </tr>
+            
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px">
+                    E-mail: 
+                </td>
+                <td  width="73%" style="border:0px">
+                    solar@ed-3.org <br/><br/> 
+                </td>
+            </tr>
+        </table>
+        <p>
+            <b>AGREED TO BY:</b>
+        </p>
+        <p>
+            <b>DG OWNER / OPERATOR: </b>
+        </p>
+        <table width="60%">
+            <tr style="border:0px">
+                <td width="35%" style="border:0px;">
+                    Name:<br/>
+                    (Please Print)
+                </td>
+                <td width="65%" style="border:0px; border-bottom:1px solid black; padding-top:30px;">
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="35%" style="border:0px;">
+                    Address: 
+                </td>
+                <td width="65%" style="border:0px; border-bottom:1px solid black; padding-top:30px;">
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="35%" style="border:0px;">
+                    
+                </td>
+                <td width="65%" style="border:0px; border-bottom:1px solid black; padding-top:30px;">
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="35%" style="border:0px;">
+                    Email Address:<br/>
+                    (Required)
+                </td>
+                <td width="65%" style="border:0px; border-bottom:1px solid black; padding-top:30px;">
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="35%" style="border:0px;">
+                    Signature: 
+                </td>
+                <td width="65%" style="border:0px; border-bottom:1px solid black; padding-top:30px;">
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="35%" style="border:0px;">
+                    Date:
+                </td>
+                <td width="65%" style="border:0px; border-bottom:1px solid black; padding-top:30px;">
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <div style="font-size:11px; display:inline-block; margin-top:380px;">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    <b>GUIDELINES for Customer Owned Distributed Generation (Rev. 14 09/16/2019)  </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 3 of 3    
+                </p>
+            </div>
+        </div>
+    </div>
+  
+    <div style=" font-size:13px; margin: auto;width:81%;" >
+        
+        <div style="display:inline-block; width:100%">
+            <div style="display:inline-block;  width:20%">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/electricallogo.png')}" height="47px" />
+            </div>
+            <div style="display:inline-block; width:79%; ">
+                <div style="font-size:18px; color:#1679c4; display:inline-block; width:80%; text-align:center">
+                    <b> APPLICATION for Operation of <br/> 
+                        Customer Owned Distributed Generation </b>
+                </div> 
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div style="font-size:17px;  display:inline-block; width:50%; text-align:left; color:#1679c4; ">
+                <b>REVISION NO.:  19 </b>
+            </div>
+            <div style="font-size:17px;  display:inline-block;  width:49%; text-align:right; color:#1679c4;">
+                <b>EFFECTIVE:  09/16/2019 </b> 
+            </div>
+        </div> 
+        <p>
+            <b>
+                SEE: GUIDELINES FOR CUSTOMER OWNED DISTRIBUTED GENERATION for additional  information. 
+            </b>
+        </p>
+        <table width="100%">
+            <tr>
+                <td width="15%" style="border:0px; vertical-align: top;">
+                    <b>INFORMATION: </b>
+                </td>
+                <td width="85%" style="border:0px">
+                    This Application is used by ED3 to determine the required equipment configuration for the Customer interface.  Every effort should be made to supply as much information as possible. 
+                </td>
+            </tr>   
+        </table>
+        
+        <hr style="display: block;
+                   margin-top: 25px;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 3px;
+                   border-color: #1679c4" />
+        <div style="text-align:center; margin-bottom:15px">
+            <span style="color:#1679c4; font-size:18px;"><b>PART 1</b> </span>
+        </div>
+        
+        <p style="color:#1679c4; font-size:14px;">
+            <b>SERVICE LOCATION </b> 
+        </p>
+        <table width="100%">
+            <tr>
+                <td width="20%" style="border:0px;">
+                    Service Address:   
+                </td>
+                <td width="80%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.Street__c}
+                </td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px; margin-bottom:20px">
+            <tr>
+                <td width="8%" style="border:0px;">
+                    City:   
+                </td>
+                <td width="20%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.City__c}
+                </td>
+                <td width="8%" style="border:0px;">
+                    County:  
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;">
+                	{!Home_Services__c.Account__r.County__c}
+                </td>
+                <td width="8%" style="border:0px;">
+                    State:   
+                </td>
+                <td width="10%" style="border:0px; border-bottom:2px solid black;">
+                	{!Home_Services__c.Account__r.State__c}
+                </td>
+                <td width="10%" style="border:0px;">
+                    Zip Code:    
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;">
+                	{!Home_Services__c.Account__r.Zip__c}
+                </td>
+            </tr>
+        </table>
+        <p style="margin-top:10px">
+            Designated Meter Type / ED3 Rate:  Standard / Residential 
+        </p>
+        <hr style="display: block;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 2px;"/>        
+        
+        <p style="color:#1679c4; font-size:14px;">
+            <b>OWNER / APPLICANT INFORMATION </b> 
+        </p>
+        <table width="100%">
+            <tr>
+                <td width="15%" style="border:0px;">
+                    Customer:    
+                </td>
+                <td width="85%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}
+                </td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="20%" style="border:0px;">
+                    Mailing Address:     
+                </td>
+                <td width="80%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.Street__c}
+                </td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="8%" style="border:0px;">
+                    City:   
+                </td>
+                <td width="20%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.City__c}
+                </td>
+                <td width="8%" style="border:0px;">
+                    County:  
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.County__c}
+                </td>
+                <td width="8%" style="border:0px;">
+                    State:   
+                </td>
+                <td width="10%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.State__c}
+                </td>
+                <td width="10%" style="border:0px;">
+                    Zip Code:    
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.Zip__c}
+                </td>
+            </tr>
+        </table>
+        <table width="100%" style="margin-top:10px; margin-bottom:20px">
+            <tr>
+                <td width="15%" style="border:0px;">
+                    Phone Number: 
+                </td>
+                <td width="35%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.Phone}
+                </td>
+                <td width="25%" style="border:0px;">
+                    Email Address <b>(Required)</b>: 
+                </td>
+                <td width="25%" style="border:0px; border-bottom:2px solid black;">
+                    {!Home_Services__c.Account__r.PersonEmail}
+                </td>
+            </tr>
+        </table>
+        <hr style="display: block;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 2px;"/>
+        
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">PROJECT DESIGN / ENGINEERING (ARCHITECT)</b> 
+            (as applicable) 
+        </p>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="15%" style="border:0px;">
+                    Company:    
+                </td>
+                <td width="85%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="15%" style="border:0px;" >
+                    ROC#:    
+                </td>
+                <td width="85%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="20%" style="border:0px;">
+                    Mailing Address:    
+                </td>
+                <td width="80%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="8%" style="border:0px;">
+                    City:   
+                </td>
+                <td width="20%" style="border:0px; border-bottom:2px solid black;"></td>
+                <td width="8%" style="border:0px;">
+                    County:  
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;"></td>
+                <td width="8%" style="border:0px;">
+                    State:   
+                </td>
+                <td width="10%" style="border:0px; border-bottom:2px solid black;"></td>
+                <td width="10%" style="border:0px;">
+                    Zip Code:    
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+        </table>
+        <table width="100%" style="margin-top:10px; margin-bottom:20px">
+            <tr>
+                <td width="15%" style="border:0px;">
+                    Phone Number: 
+                </td>
+                <td width="35%" style="border:0px; border-bottom:2px solid black;">
+                </td>
+                <td width="15%" style="border:0px;">
+                    Representative: 
+                </td>
+                <td width="35%" style="border:0px; border-bottom:2px solid black;">
+                </td>
+            </tr>
+        </table>
+        
+        <hr style="display: block;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 2px;"/>
+        
+        
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">ELECTRICAL CONTRACTOR </b> 
+            (as applicable) 
+        </p>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="15%" style="border:0px;">
+                    Company:    
+                </td>
+                <td width="85%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="15%" style="border:0px;" >
+                    ROC#:    
+                </td>
+                <td width="85%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="20%" style="border:0px;">
+                    Mailing Address:    
+                </td>
+                <td width="80%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+            
+        </table>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td width="8%" style="border:0px;">
+                    City:   
+                </td>
+                <td width="20%" style="border:0px; border-bottom:2px solid black;"></td>
+                <td width="8%" style="border:0px;">
+                    County:  
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;"></td>
+                <td width="8%" style="border:0px;">
+                    State:   
+                </td>
+                <td width="10%" style="border:0px; border-bottom:2px solid black;"></td>
+                <td width="10%" style="border:0px;">
+                    Zip Code:    
+                </td>
+                <td width="18%" style="border:0px; border-bottom:2px solid black;"></td>
+            </tr>
+        </table>
+        <table width="100%" style="margin-top:10px; margin-bottom:20px">
+            <tr>
+                <td width="15%" style="border:0px;">
+                    Phone Number: 
+                </td>
+                <td width="35%" style="border:0px; border-bottom:2px solid black;">
+                </td>
+                <td width="15%" style="border:0px;">
+                    Representative: 
+                </td>
+                <td width="35%" style="border:0px; border-bottom:2px solid black;">
+                </td>
+            </tr>
+        </table>
+        <hr style="display: block;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 2px;"/>
+        
+        
+        
+         <div style="font-size:11px; display:inline-block; margin-top:220px;">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    <b>APPLICATION for Operation of Customer Owned Distributed Generation (Rev. 19 09/16/2019)   </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 1 of 3    
+                </p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div style=" font-size:14px; margin: auto;width:88%; margin-top:140px">
+        <hr style="display: block;
+                   margin-top: 25px;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 3px;
+                   border-color: #1679c4" />
+        <div style="text-align:center; margin-bottom:15px">
+            <span style="color:#1679c4; font-size:18px;"><b>PART 2 </b> </span>
+        </div>
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">ESTIMATED LOAD, GENERATOR RATING AND MODE OF OPERATION INFORMATION </b> 
+        </p>
+        <p style="font-size:14px;">
+            (The following information will be used to help properly design the ED3 customer interconnection.  This information is not intended as a commitment or contract for billing purposes.) 
+        </p>
+        <table width="100%" style="margin-top:10px">
+            <tr>
+                <td style="border:0px">Total Site Load (DC): </td>
+                <td width="20%" style="border:0px; border-bottom:1px solid black;">{!Home_Services__c.System_Size__c}</td>
+                <td width="10%" style="border:0px"> (kW) </td>
+                <td style="border:0px">Inverter Rating (AC):  </td>
+                <td width="20%" style="border:0px; border-bottom:1px solid black;"></td>
+                <td width="10%" style="border:0px"> (kW) </td>
+            </tr>
+        </table> 
+        
+        <table width="100%" style="margin-top:10px">
+            <tr>      
+                <td width="28%" style="border:0px; padding-top:10px">
+                    Annual Estimated Generation: 
+                </td>
+                <td width="30%" style="border:0px; border-bottom:1px solid black;">
+                    {!Home_Services__c.Annual_Estimated_Generation__c}
+                </td>
+                <td width="43%" style="border:0px">(kWh)</td>
+            </tr>
+        </table>
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">Mode of Operation </b> 
+        </p>
+        <table width="90%" style="margin-top:10px">
+            <tr>
+                <td width="5%" style="border:0px">Isolated: </td>
+                <td width="20%" style="border:0px; border-bottom:1px solid black;"></td>
+                <td width="25%" style="border:0px; padding-left:20px">Interconnected Power Export:  </td>
+                <td width="20%" style="border:0px; border-bottom:1px solid black;"></td>
+            </tr>
+        </table> 
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">Module Info: </b> 
+        </p>
+        <table width="90%" style="margin-top:10px">
+            <tr>
+                <td width="5%" style="border:0px">Manufacturer </td>
+                <td width="20%" style="border:0px; border-bottom:1px solid black;">
+                    {!moduleLineItem.Product__r.Manufacture__c}
+                </td>
+                <td width="10%" style="border:0px; padding-left:20px">Model # </td>
+                <td width="20%" style="border:0px; border-bottom:1px solid black;">
+                    {!moduleLineItem.Product__r.Part_Number__c}
+                </td>
+            </tr>
+        </table> 
+        <table width="90%" style="margin-top:10px; margin-top:15px; font-size:13px;">
+            <tr>
+                <td width="18%" style="border:0px">DC W-STC Rating </td>
+                <td width="13%" style="border:0px; border-bottom:1px solid black;">
+                    {!moduleLineItem.Product__r.Max_power_rating_watts__c}
+                </td>
+                <td width="20%" style="border:0px; padding-left:7px">Number of Modules</td>
+                <td width="13%" style="border:0px; border-bottom:1px solid black;">
+                    {!moduleLineItem.Quantity__c}
+                </td>
+                <td width="23%" style="border:0px; padding-left:7px;">Listed to UL 1703?</td>
+                <td width="14%" style="border:0px;"> __Yes __No</td>
+            </tr>
+        </table> 
+        
+        <div style="display:inline-block; width:90%;">
+            <div style="display:inline-block; width:48%;">
+                <p style="font-size:14px;">
+                    <b style="color:#1679c4; ">INVERTER / BATTERY #1 INFO:</b> 
+                </p>
+            	<div>
+                    <div style=" display:inline-block;">
+                        Manufacturer: 
+                    </div>
+                    <div style="width:65%; display:inline-block; border-bottom:1px solid black;">
+                        {!IF(ISBLANK(firstInverterLineItem.Product__r.Manufacture__c), nbsp, firstInverterLineItem.Product__r.Manufacture__c)}
+                    </div>
+				</div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Model #:  
+                    </div>
+                    <div style="width:70%; display:inline-block; border-bottom:1px solid black;">
+                        {!IF(ISBLANK(firstInverterLineItem.Product__r.Part_Number__c), nbsp, firstInverterLineItem.Product__r.Part_Number__c)}
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Rated Voltage (Volts):   
+                    </div>
+                    <div style="width:20%; display:inline-block; border-bottom:1px solid black;">
+                        {!IF(ISBLANK(firstInverterLineItem.Product__r.Nameplate_rating_kW_AC__c), nbsp, firstInverterLineItem.Product__r.Nameplate_rating_kW_AC__c)}
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Rated Power Factor (%):    
+                    </div>
+                    <div style="width:30%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Rated Amperes:     
+                    </div>
+                    <div style="width:50%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        UL Rating:      
+                    </div>
+                    <div style="width:50%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Harmonic Distortion:      
+                    </div>
+                    <div style="width:50%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Maximum Total Harmonic (%):     
+                    </div>
+                    <div style="width:30%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div style="display:inline-block; width:48%;">
+                <p style="font-size:14px;">
+                    <b style="color:#1679c4; ">INVERTER / BATTERY #2 INFO:</b> 
+                </p>
+            	<div>
+                    <div style=" display:inline-block;">
+                        Manufacturer: 
+                    </div>
+                    <div style="width:65%; display:inline-block; border-bottom:1px solid black;">
+                        {!IF(ISBLANK(secondInverterLineItem.Product__r.Manufacture__c), nbsp, secondInverterLineItem.Product__r.Manufacture__c)}
+                    </div>
+				</div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Model #:  
+                    </div>
+                    <div style="width:70%; display:inline-block; border-bottom:1px solid black;">
+                        {!IF(ISBLANK(secondInverterLineItem.Product__r.Part_Number__c), nbsp, secondInverterLineItem.Product__r.Part_Number__c)}
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Rated Voltage (Volts):   
+                    </div>
+                    <div style="width:20%; display:inline-block; border-bottom:1px solid black;">
+                        {!IF(ISBLANK(secondInverterLineItem.Product__r.Nameplate_rating_kW_AC__c), nbsp, secondInverterLineItem.Product__r.Nameplate_rating_kW_AC__c)}
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Rated Power Factor (%):    
+                    </div>
+                    <div style="width:30%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Rated Amperes:     
+                    </div>
+                    <div style="width:50%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        UL Rating:      
+                    </div>
+                    <div style="width:50%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Harmonic Distortion:      
+                    </div>
+                    <div style="width:50%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                    <div style=" display:inline-block;">
+                        Maximum Total Harmonic (%):     
+                    </div>
+                    <div style="width:30%; display:inline-block; border-bottom:1px solid black;">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div style="padding-top: 6px">
+            <div style="display:inline-block;">
+                Storage Capacity:      
+            </div>
+            <div style="width:20%; display:inline-block; border-bottom:1px solid black;">
+                &nbsp;
+            </div>
+            <div style="width:10%; display:inline-block;">
+                (kWh) 
+            </div>
+        </div>
+        <p><i><b><b style="color:red;">NOTE: </b>
+            Please attach a detailed one-line or three-line diagram of the proposed facility, all applicable elementary diagrams, major equipment (generators, transformers, inverters, circuit breakers, protective relays, etc.) In addition, include all specifications, such as AC disconnect and rating, breaker sizes, wire and inverter sizes, grounding, production meter socket (meter supplied by customer), and subpanel with load center breaker sizes, and/or any other applicable drawings or documents necessary for the proper design of the interconnection.  An electrical note will be required for Current Transformers (CTs). 
+            </b></i></p>
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">DESCRIPTION OF PROPOSED INSTALLATION AND OPERATION </b> 
+        </p>
+        <p><i><b>
+            Give a general description of the proposed installation, including a detailed description of its planned location and when you plan to operate the generator. </b></i></p>
+        <table WIDTH="100%" style="margin: auto;">
+            <tr style="border:0px ">
+                <td style="border:0px; border-bottom:1px solid black;  padding-top:20px"></td>
+            </tr>
+            <tr style="border:0px ">
+                <td style="border:0px; border-bottom:1px solid black;  padding-top:20px"></td>
+            </tr>
+            <tr style="border:0px ">
+                <td style="border:0px; border-bottom:1px solid black;  padding-top:20px"></td>
+            </tr>
+            <tr style="border:0px ">
+                <td style="border:0px; border-bottom:1px solid black;  padding-top:20px"></td>
+            </tr>
+            <tr style="border:0px ">
+                <td style="border:0px; border-bottom:1px solid black;  padding-top:20px"></td>
+            </tr>
+        </table>
+        <div style="font-size:11px; display:inline-block; margin-top:180px;">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    <b>APPLICATION for Operation of Customer Owned Distributed Generation (Rev. 19 09/16/2019)  </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 2 of 3     
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style=" font-size:15px; margin: auto;width:88%; margin-top:140px">
+        <hr style="display: block;
+                   margin-top: 25px;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 3px;
+                   border-color: #1679c4" />
+        <div style="text-align:center; margin-bottom:15px">
+            <span style="color:#1679c4; font-size:18px;"><b>PART 3 </b> </span>
+        </div>
+        <p><i><b>
+            The Customer agrees to provide ED3 with any additional information required to complete the Interconnection.  The Customer shall operate his equipment within the Guidelines set forth by ED3.
+            </b></i></p>
+        
+        <table WIDTH="100%" style="margin: auto; text-align:center;">
+            <tr>
+                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:60px;"></td>
+                <td WIDTH="10%" style="border:0px;"></td>
+                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:60px;"></td>
+            </tr>
+            <tr>
+                <td WIDTH="40%" style="border:0px;">Applicant Name – Please Print </td>
+                <td WIDTH="10%" style="border:0px;"></td>
+                <td WIDTH="40%" style="border:0px;">Signature</td>
+            </tr>
+            <tr>
+                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:60px;"></td>
+                <td WIDTH="10%" style="border:0px;"></td>
+                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:70px;"></td>
+            </tr>
+            <tr>
+                <td WIDTH="40%" style="border:0px;">Applicant Name – Please Print </td>
+                <td WIDTH="10%" style="border:0px;"></td>
+                <td WIDTH="40%" style="border:0px;">Signature</td>
+            </tr>
+            <tr>
+                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:60px;"></td>
+                <td WIDTH="10%" style="border:0px;"></td>
+                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:60px;"></td>
+            </tr>
+            <tr>
+                <td WIDTH="40%" style="border:0px;">Date</td>
+                <td WIDTH="10%" style="border:0px;"></td>
+                <td WIDTH="40%" style="border:0px;">Date</td>
+            </tr>
+        </table>
+        <table width="100%" style="margin-top:30px;">
+            <tr style="border:0px">
+                <td  width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>
+                <td  width="75%" style="border:0px">
+                    ED3 is <b>not</b>  responsible for the workmanship or materials of the Customer’s installation contractor.  <br/><br/>
+                    ED3 does <b>not</b> inspect the installation of the system on your roof.  <br/> <br/>
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>  
+                <td width="75%" style="border:0px; color:red;">
+                    <b>CUSTOMER APPLICATIONS THAT ARE PLACED IN THE QUEUE ARE SUBJECT TO ALL REVISIONS AND CHANGES TO THIS PROGRAM DURING THEIR TIME IN THE QUEUE.  </b>
+                </td> 
+            </tr>
+        </table>
+        <hr style="display: block;
+                   margin-top: 25px;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-style: dashed;
+                   border-width: 3px;
+                   border-color: #1679c4" />
+        
+        <p style="font-size:14px;">
+            <b style="color:#1679c4; ">CONTACT OUR ED3 SOLAR COORDINATOR FOR APPLICATION 
+                SUBMISSION AND ADDITIONAL INFORMATION:</b> 
+        </p>
+        
+        <table width="100%">
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px; vertical-align: top;">
+                    <b>ADDRESS: </b>
+                </td>
+                <td  width="73%" style="border:0px">
+                    41630 W. Louis Johnson Drive  <br/>
+                    Maricopa, AZ  85138-5402 <br/>
+                    <br/>
+                </td>
+            </tr>
+            
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px; vertical-align: top;">
+                    <b>DIRECT LINE:</b> 
+                </td>
+                <td  width="73%" style="border:0px">
+                    (520) 316-6527 <br/><br/>
+                </td>
+            </tr>
+            
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px; vertical-align: top;">
+                    <b>FAX:  </b>
+                </td>
+                <td  width="73%" style="border:0px; ">
+                    (520) 423-4949 <br/><br/>
+                </td>
+            </tr>
+            
+            <tr style="border:0px">
+                <td  width="28%" style="border:0px; vertical-align: top;">
+                    <b>EMAIL:</b>  
+                </td>
+                <td  width="73%" style="border:0px">
+                    solar@ed-3.org <br/><br/> 
+                </td>
+            </tr>
+        </table>
+        
+        
+        <div style="font-size:11px; display:inline-block; margin-top:320px;">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    <b>APPLICATION for Operation of Customer Owned Distributed Generation (Rev. 19 09/16/2019)   </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 3 of 3     
+                </p>
+            </div>
+        </div>
+        
+    </div >
+    
+    
+    <div style=" font-size:15px; margin: auto;width:88%; margin-top:130px">
+        
+        <div style="display:inline-block; width:100%">
+            <div style="display:inline-block;  width:20%">
+                <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                 'img/electricallogo.png')}" height="47px" />
+            </div>
+            <div style="display:inline-block; width:79%;">
+                <div style="font-size:18px; color:#1679c4; display:inline-block; width:80%; text-align:center">
+                    <b> AGREEMENT FOR INTERCONNECTION<br/> 
+                        of Customer Owned Distributed Generation </b>
+                </div> 
+            </div>
+            <br/>
+            <div style="font-size:17px;  display:inline-block; width:50%; text-align:left; color:#1679c4; ">
+                <b>REVISION NO.:  13 </b>
+            </div>
+            <div style="font-size:17px;  display:inline-block;  width:49%; text-align:right; color:#1679c4;">
+                <b>EFFECTIVE:  06/12/2019 </b> 
+            </div>
+        </div>    
+        <br/>
+        <div style="display:inline-block; margin-bottom:10px;">
+            <div style="display:inline-block;">
+                Date
+            </div>
+            <div style="display:inline-block;  width:50%; border-bottom:1px solid black;">
+                
+            </div>
+        </div>
+        <div style="display:inline-block;">
+            This Agreement for Interconnection of Customer Owned Distributed Generation (“Agreement”) is made and entered into this 
+            <div style="display:inline-block; width:7%; border-bottom:1px solid black;"></div> day of <div style="display:inline-block; width:10%; border-bottom:1px solid black;"></div> 
+            ,20 <div style="display:inline-block; width:7%; border-bottom:1px solid black;"></div>, 
+            by Electrical District No. 3 of Pinal County, Arizona, (“ED3”), a political subdivision of the State of Arizona, an electrical district organized under Chapter 12 of Title 48 of the Arizona Revised Statutes, 
+            and Customer (please print name) <div style="display:inline-block; width:80%; border-bottom:1px solid black;"></div>  , a Distributed Generation Owner / Operator (“DG Owner / Operator”), each hereinafter sometimes referred to individually as “Party” or both referred to collectively as the “Parties”. 
+            In consideration of the mutual covenants set forth herein, the Parties agree as follows:  
+        </div>
+        <p>
+            This Agreement provides for the safe and orderly operation of the electrical facilities interconnecting the DG Owner / Operator’s facility at service location stated below and the electrical distribution facility owned by ED3.
+        </p>
+        <div style="display:inline-block; margin-bottom:15px;">
+            <div style="display:inline-block;">
+                Service Location: 
+            </div>
+            <div style="display:inline-block;  width:79%; border-bottom:1px solid black;">
+                
+            </div>
+        </div>
+        <div style="display:inline-block; margin-bottom:15px;">
+            <div style="display:inline-block; width:25%">
+                Type of Service:
+            </div> 
+            <div style="display:inline-block; width:25%">
+                __ Residential
+            </div>
+            <div style="display:inline-block; width:10%">
+                <b>OR</b>
+            </div>
+            <div style="display:inline-block; width:30%">
+                __ Small General Service
+            </div> 
+        </div>
+        <p>
+            This Agreement does not supersede any requirements of any by-laws, applicable tariffs, rates, rules and regulations in place between the DG Owner / Operator and ED3. 
+        </p>
+        <ol>
+            <li><p>
+                <b>Intent of Parties:</b>  It is the intent of the DG Owner / Operator to interconnect a Customer Owned Distributed Generation (DG) System to ED3’s electrical grid in order to offset electric power supplied by ED3.
+                </p>
+                <p>
+                    It is the intent of DG Owner / Operator to operate the DG facilities in a way that ensures the safety of the public and the ED3 personnel. 
+                </p>
+                <p>
+                    It is the intent of ED3 to operate the ED3 distribution system to maintain a high level of service to their customers and to maintain a high level of power quality. 
+                </p>
+            </li>
+            <li><p>
+                <b>Operating Authority:</b> The DG Owner / Operator is responsible for understanding operating procedures and standards for the Distributed Generation System. 
+                The DG Owner / Operator is responsible for operating and maintaining the generator facility in accordance with all applicable safety and electrical codes, applicable laws, and ED3 operational standards. 
+                </p>
+                <p>
+                    ED3 shall ensure that the DG Owner / Operator is aware of the provisions of any applicable ED3 operating procedures and regulations relating to the safe operation of the ED3 electrical power system.
+                </p>
+                <p>
+                    The operating authority for the DG System is: 
+                </p>
+                <table width="100%" style="margin:auto; margin-bottom:10px;">
+                    <tr>
+                        <td width="25%"  style=" border:0px; padding-top:5px"> Name: </td>
+                        <td width="100%" style=" border:0px; border-bottom:1px solid black; padding-top:5px"></td>
+                    </tr>
+                    <tr>
+                        <td width="25%"  style=" border:0px; padding-top:20px"> Mailing Address:  </td>
+                        <td width="100%" style=" border:0px; border-bottom:1px solid black; padding-top:20px"></td>
+                    </tr>
+                    <tr>
+                        <td width="25%"  style=" border:0px; padding-top:20px"> Phone Number:  </td>
+                        <td width="100%" style=" border:0px; border-bottom:1px solid black; padding-top:20px"></td>
+                    </tr>
+                </table>
+            </li>
+            <li><p style="margin-bottom:10px;">
+                <b>Suspension of Interconnection:</b>It is intended that the interconnection should not compromise ED3’s protection or operational requirements.  
+                The operation of the DG Owner / Operator’s System and the quality of electric energy supplied by DG Owner / Operator shall meet the standards as specified by ED3.  
+                If the operation of the DG Owner / Operator’s system or quality of electric energy supplied (in the case of power export) does not meet the standards as specified, then ED3 will notify DG Owner / Operator to take reasonable and expedient corrective action.  
+                ED3 shall have the right to disconnect the DG Owner / Operator’s System, until compliance is reasonably demonstrated.  Notwithstanding, ED3 may in its sole discretion disconnect the DG Owner / Operator’s generating plant from the Distribution Facility without notice if the operation of the generating plant imposes a threat, in the District’s sole judgment, to life or property. 
+                </p>
+                <div style="font-size:10px; display:inline-block; margin-bottom:80px;">
+                    <div style="display:inline-block; width:79%">
+                        <p>
+                            <b>AGREEMENT FOR INTERCONNECTION of Customer Owned Distributed Generation (Rev. 13 06/12/2019)    </b>
+                        </p>
+                    </div>
+                    <div style="display:inline-block; width:20%; text-align:right;">
+                        <p>
+                            Page 1 of 2      
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li><p>
+                
+                <b>Rates and Fees:</b>  ED3’s electricity rates and all other fees are subject to change.  These changes may positively or negatively impact any potential economic attributes of your DG System. 
+                As is the case for all customers, the DG Owner / Operator is subject to any and all of these changes. <b> Any projections of the economic attributes of your system, regardless of the source, are not approved by or binding on ED3.</b></p>
+                <p style="text-align:right; color:#1679c4;">
+                    <b> DG Owner / Operator Initials: _________</b>
+                </p>
+            </li>
+            
+            <li><p>
+                <b>Maintenance Outages:</b>  Maintenance outages will occasionally be required on ED3’s system, and the District will provide as much notice and planning as practical to minimize downtime.  It is noted that in some emergency cases such notice may not be practical.  Compensation will not be made for unavailability of ED3’s facilities due to outages. 
+                </p> 
+            </li>
+            <li>
+                <p>
+                    <b>Access: </b> Access is required at all times by ED3 to the DG Owner / Operator’s plant site for maintenance, operating and meter reading.  ED3 reserves the right, but not the obligation, to inspect the DG Owner / Operator’s facilities.   
+                </p>
+                
+            </li>
+            <li>
+                <p>
+                    <b>Liability and Indemnification: </b>DG Owner / Operator shall assume all liability for and shall indemnify ED3 for any claims, losses, costs, and expenses of any kind or character to the extent that they result from DG Owner / Operator’s negligence or other wrongful conduct in connection with the design, construction or operation of DG Owner / Operator’s facility.  
+                </p>
+            </li>
+            <li>
+                <p>
+                    <b>Term:</b>This document is intended to be valid for the period of time that the DG Owner / Operator’s System is connected to ED3’s distribution system.  It may be canceled by either party with not less than thirty (30) days’ notice to the other party.  The DG Owner / Operator’s System will be disconnected from ED3’s system if the contract is canceled.   
+                    
+                </p>
+            </li>
+            <li>
+                <p>
+                    <b>Governing Law and Attorney’s Fees:</b>  This Agreement shall be governed by Arizona law and if any Party brings any action in respect to its rights under this Agreement, the prevailing Party shall be entitled to reasonable fees and court costs, as determined by the court. 
+                </p>
+            </li>
+            <li>
+                <p>
+                    <b>Assignment.</b>  ED3 has to consent to the "Assignment" of this Agreement as a condition of its transfer to “Assignee” 
+                </p>
+            </li>
+        </ol>
+        <table width="100%" style="margin-top:10px;">
+            <tr style="border:0px">
+                <td  width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>
+                <td  width="75%" style="border:0px">
+                    ED3 is <b>not</b> responsible for the workmanship or materials of the Customer’s installation contractor. <br/><br/>
+                    ED3 does <b>not</b> inspect the installation of the system on your roof. <br/> <br/>
+                </td>
+            </tr>
+            <tr style="border:0px">
+                <td width="25%" style="border:0px; vertical-align: top;">
+                    <b style="color:red; ">PLEASE NOTE: </b>
+                </td>  
+                <td width="75%" style="border:0px; color:red;">
+                    <b>CUSTOMER APPLICATIONS THAT ARE PLACED IN THE QUEUE ARE SUBJECT TO ALL REVISIONS AND CHANGES TO THIS PROGRAM DURING THEIR TIME IN THE QUEUE. </b>
+                </td> 
+            </tr>
+        </table>
+        
+        <table width="100%" style="margin-top:10px;">
+            <tr>
+                <td width="50%" style="border:0px; padding-right:20px">
+                    <p>
+                      <b> AGREED TO BY DG OWNER / OPERATOR:</b> 
+                    </p>
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" style="border:0px"> 
+                                Name: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%" style="border:0px; padding-top:10px"> 
+                                Address: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black; padding-top:10px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%" style="border:0px; padding-top:25px"> 
+                                
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black; padding-top:25px">
+                            </td>
+                        </tr>
+                      
+                    </table>
+                    
+                </td>
+                <td width="50%" style="border:0px;">
+                   <p>
+                     <b>ELECTRICAL DISTRICT NO. 3: </b> 
+                    </p> 
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" style="border:0px"> 
+                                Name: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%" style="border:0px; padding-top:10px"> 
+                                Address: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black; padding-top:10px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%" style="border:0px; padding-top:25px"> 
+                                
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black; padding-top:25px">
+                            </td>
+                        </tr>
+                      
+                    </table>  
+                </td>
+            </tr>            
+        </table>
+       <div style="display:inline-block; margin-bottom:10px;">
+            <div style="display:inline-block; padding-top:13px;">
+                Email Address <b>(Required):</b>
+            </div>
+            <div style="display:inline-block;padding-top:13px;  width:34%; border-bottom:1px solid black;">
+                
+            </div>
+        </div>
+         <table width="100%">
+            <tr>
+                <td width="50%" style="border:0px; padding-right:20px">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" style="border:0px"> 
+                                Signature: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black;">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%" style="border:0px; padding-top:10px"> 
+                                Date: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black; padding-top:10px">
+                            </td>
+                        </tr>                      
+                    </table>                   
+                </td>
+                <td width="50%" style="border:0px;">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" style="border:0px"> 
+                                Signature: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%" style="border:0px; padding-top:10px"> 
+                                Date: 
+                            </td>
+                            <td width="80%" style="border:0px; border-bottom:1px solid black; padding-top:10px">
+                            </td>
+                        </tr>                   
+                    </table>  
+                </td>
+            </tr>            
+        </table>
+        <div style="text-align:center;">
+            <p style="font-size:11px;">
+                <b>Internal Distribution:  &nbsp; &nbsp; &nbsp; &nbsp;  Engineering &amp; Operations / Finance Dept. / Customer Service </b>
+            </p>
+        </div>
+        <div style="font-size:10px; display:inline-block; margin-top:200px;">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    <b>AGREEMENT FOR INTERCONNECTION of Customer Owned Distributed Generation (Rev. 13 06/12/2019)     </b>
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 2 of 2      
+                </p>
+            </div>
+        </div>
+    </div>
+</apex:page>

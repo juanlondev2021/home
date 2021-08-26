@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consumer_Request_for_DNC_Policy_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Consumer Request for DNC Policy</label>
+    <queue>Consumer_Request_for_DNC_Policy</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

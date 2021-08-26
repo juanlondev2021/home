@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forward_To_Number</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+ISBLANK(   Forward_to_number__c   ), 
+OR(
+RecordType.Name = &quot;CPL Spec Card Prod&quot;,
+RecordType.Name = &quot;nuHome SPEC CPL&quot;,
+
+RecordType.Name = &quot;nuHome nuCard SUB&quot;))</errorConditionFormula>
+    <errorDisplayField>Forward_to_number__c</errorDisplayField>
+    <errorMessage>Please add the Forward To Number on the Opportunity</errorMessage>
+</ValidationRule>

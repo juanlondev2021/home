@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distribution_Flag__c</fullName>
+    <externalId>false</externalId>
+    <formula>IMAGE( CASE( Distribution_Status__c , 
+  &quot;Lead Distributed&quot;, &quot;/img/msg_icons/confirm16.png&quot;, 
+  &quot;Distribution Process Incomplete&quot;, &quot;/img/msg_icons/error16.png&quot;,
+  &quot;A valid customer needs to be attached to this record&quot;, &quot;/img/msg_icons/warning16.png&quot;,
+&quot;/img/msg_icons/error16.png&quot;) , &quot;Distribution Flag&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Distribution Flag</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

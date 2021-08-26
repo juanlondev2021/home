@@ -1,0 +1,64 @@
+<!--
+* Diaco
+* @author             Jull Quintero Daza
+* Project:            Maps Delivery
+* Description:        Visual force page - Site Lightning In 
+*
+* Changes (Version)
+* _________________________________________
+*            No.        Date            Author                    Description
+*            ____    __________        __________________      _____________________________________
+* @version    1.0    25/01/2021         Jull Quintero D         Initial implementation of the class.
+*
+-->
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Map Delivery</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            <apex:includeLightning />
+            <style>
+
+            </style>
+        </head>
+        <body>
+            <div id="lightning">
+            </div>
+            <script>
+            try {
+                let link = document.URL;
+                if( link.includes('%')){
+                    link = link.replace(/[%]/g, "");
+                    console.log(link);
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToURL(link);
+                    } else {
+                        window.location.href = link;
+                    }
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+            let c__DeliveryId = "{!$CurrentPage.parameters.RecordId}";
+            $Lightning.use("c:DiacoMapsDriverApp", function () {
+                $Lightning.createComponent(
+                        "c:DiacoMapsDriverCmp",
+                    {
+                        pageReference:{
+                            state:{
+                                "c__DeliveryId": c__DeliveryId,
+                            }
+                        }
+                    },
+                    "lightning"
+                );
+            });
+            </script>
+        </body>
+</html>
+</apex:page>

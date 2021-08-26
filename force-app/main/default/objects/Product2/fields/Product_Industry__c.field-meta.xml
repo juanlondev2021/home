@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Industry__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Industry</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Air Duct Cleaning</fullName>
+                <default>false</default>
+                <label>Air Duct Cleaning</label>
+            </value>
+            <value>
+                <fullName>Appliance Store</fullName>
+                <default>false</default>
+                <label>Appliance Store</label>
+            </value>
+            <value>
+                <fullName>Auto Repair</fullName>
+                <default>false</default>
+                <label>Auto Repair</label>
+            </value>
+            <value>
+                <fullName>Awnings</fullName>
+                <default>false</default>
+                <label>Awnings</label>
+            </value>
+            <value>
+                <fullName>Blinds/Shutters</fullName>
+                <default>false</default>
+                <label>Blinds/Shutters</label>
+            </value>
+            <value>
+                <fullName>Cable/Satellite TV/Internet</fullName>
+                <default>false</default>
+                <label>Cable/Satellite TV/Internet</label>
+            </value>
+            <value>
+                <fullName>Carpet/Tile Cleaning</fullName>
+                <default>false</default>
+                <label>Carpet/Tile Cleaning</label>
+            </value>
+            <value>
+                <fullName>Chimney Sweep</fullName>
+                <default>false</default>
+                <label>Chimney Sweep</label>
+            </value>
+            <value>
+                <fullName>Chiropractor</fullName>
+                <default>false</default>
+                <label>Chiropractor</label>
+            </value>
+            <value>
+                <fullName>Closet Organizing/Garage Shelving</fullName>
+                <default>false</default>
+                <label>Closet Organizing/Garage Shelving</label>
+            </value>
+            <value>
+                <fullName>Computer Repair</fullName>
+                <default>false</default>
+                <label>Computer Repair</label>
+            </value>
+            <value>
+                <fullName>Day/Med Spas</fullName>
+                <default>false</default>
+                <label>Day/Med Spas</label>
+            </value>
+            <value>
+                <fullName>Day Care Provider/Pre-School</fullName>
+                <default>false</default>
+                <label>Day Care Provider/Pre-School</label>
+            </value>
+            <value>
+                <fullName>Deck/Patio Build</fullName>
+                <default>false</default>
+                <label>Deck/Patio Build</label>
+            </value>
+            <value>
+                <fullName>Dentist</fullName>
+                <default>false</default>
+                <label>Dentist</label>
+            </value>
+            <value>
+                <fullName>Disaster Recovery</fullName>
+                <default>false</default>
+                <label>Disaster Recovery</label>
+            </value>
+            <value>
+                <fullName>Dog Grooming/Boarding</fullName>
+                <default>false</default>
+                <label>Dog Grooming/Boarding</label>
+            </value>
+            <value>
+                <fullName>Electrician</fullName>
+                <default>false</default>
+                <label>Electrician</label>
+            </value>
+            <value>
+                <fullName>Energy Audit/Radiant Barrier/Insulation</fullName>
+                <default>false</default>
+                <label>Energy Audit/Radiant Barrier/Insulation</label>
+            </value>
+            <value>
+                <fullName>Fencing</fullName>
+                <default>false</default>
+                <label>Fencing</label>
+            </value>
+            <value>
+                <fullName>Fireplaces</fullName>
+                <default>false</default>
+                <label>Fireplaces</label>
+            </value>
+            <value>
+                <fullName>Flooring/Carpeting</fullName>
+                <default>false</default>
+                <label>Flooring/Carpeting</label>
+            </value>
+            <value>
+                <fullName>Garage Doors</fullName>
+                <default>false</default>
+                <label>Garage Doors</label>
+            </value>
+            <value>
+                <fullName>Granite/Marble</fullName>
+                <default>false</default>
+                <label>Granite/Marble</label>
+            </value>
+            <value>
+                <fullName>Gutters</fullName>
+                <default>false</default>
+                <label>Gutters</label>
+            </value>
+            <value>
+                <fullName>Hair Salons/Barber</fullName>
+                <default>false</default>
+                <label>Hair Salons/Barber</label>
+            </value>
+            <value>
+                <fullName>Handyman</fullName>
+                <default>false</default>
+                <label>Handyman</label>
+            </value>
+            <value>
+                <fullName>Health Insurance</fullName>
+                <default>false</default>
+                <label>Health Insurance</label>
+            </value>
+            <value>
+                <fullName>Home Entertainment</fullName>
+                <default>false</default>
+                <label>Home Entertainment</label>
+            </value>
+            <value>
+                <fullName>Home Protection/Warranty</fullName>
+                <default>false</default>
+                <label>Home Protection/Warranty</label>
+            </value>
+            <value>
+                <fullName>Home Remodeling</fullName>
+                <default>false</default>
+                <label>Home Remodeling</label>
+            </value>
+            <value>
+                <fullName>House Cleaning</fullName>
+                <default>false</default>
+                <label>House Cleaning</label>
+            </value>
+            <value>
+                <fullName>HVAC Services</fullName>
+                <default>false</default>
+                <label>HVAC Services</label>
+            </value>
+            <value>
+                <fullName>Identity Theft</fullName>
+                <default>false</default>
+                <label>Identity Theft</label>
+            </value>
+            <value>
+                <fullName>Insulation Service</fullName>
+                <default>false</default>
+                <label>Insulation Service</label>
+            </value>
+            <value>
+                <fullName>Insurance (Auto/Home)</fullName>
+                <default>false</default>
+                <label>Insurance (Auto/Home)</label>
+            </value>
+            <value>
+                <fullName>Interior Design</fullName>
+                <default>false</default>
+                <label>Interior Design</label>
+            </value>
+            <value>
+                <fullName>Junk Removal</fullName>
+                <default>false</default>
+                <label>Junk Removal</label>
+            </value>
+            <value>
+                <fullName>Kitchen Cabinetry</fullName>
+                <default>false</default>
+                <label>Kitchen Cabinetry</label>
+            </value>
+            <value>
+                <fullName>Landscape (Install)</fullName>
+                <default>false</default>
+                <label>Landscape (Install)</label>
+            </value>
+            <value>
+                <fullName>Landscape (maintenance)</fullName>
+                <default>false</default>
+                <label>Landscape (maintenance)</label>
+            </value>
+            <value>
+                <fullName>Lawn &amp; Sod</fullName>
+                <default>false</default>
+                <label>Lawn &amp; Sod</label>
+            </value>
+            <value>
+                <fullName>Lighting</fullName>
+                <default>false</default>
+                <label>Lighting</label>
+            </value>
+            <value>
+                <fullName>Locksmiths</fullName>
+                <default>false</default>
+                <label>Locksmiths</label>
+            </value>
+            <value>
+                <fullName>Mattresses</fullName>
+                <default>false</default>
+                <label>Mattresses</label>
+            </value>
+            <value>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+                <label>Newspaper</label>
+            </value>
+            <value>
+                <fullName>Nursery/Gardening</fullName>
+                <default>false</default>
+                <label>Nursery/Gardening</label>
+            </value>
+            <value>
+                <fullName>Optometrist</fullName>
+                <default>false</default>
+                <label>Optometrist</label>
+            </value>
+            <value>
+                <fullName>Outdoor Playground Equipment</fullName>
+                <default>false</default>
+                <label>Outdoor Playground Equipment</label>
+            </value>
+            <value>
+                <fullName>Painting (Exterior/Interior)</fullName>
+                <default>false</default>
+                <label>Painting (Exterior/Interior)</label>
+            </value>
+            <value>
+                <fullName>Patio Sunroom Installation</fullName>
+                <default>false</default>
+                <label>Patio Sunroom Installation</label>
+            </value>
+            <value>
+                <fullName>Pest Control</fullName>
+                <default>false</default>
+                <label>Pest Control</label>
+            </value>
+            <value>
+                <fullName>Plumber</fullName>
+                <default>false</default>
+                <label>Plumber</label>
+            </value>
+            <value>
+                <fullName>Pool Installation/Remodeling</fullName>
+                <default>false</default>
+                <label>Pool Installation/Remodeling</label>
+            </value>
+            <value>
+                <fullName>Pool Maintenance</fullName>
+                <default>false</default>
+                <label>Pool Maintenance</label>
+            </value>
+            <value>
+                <fullName>Roofing</fullName>
+                <default>false</default>
+                <label>Roofing</label>
+            </value>
+            <value>
+                <fullName>Rugs (not flooring)</fullName>
+                <default>false</default>
+                <label>Rugs (not flooring)</label>
+            </value>
+            <value>
+                <fullName>Satellite Providers</fullName>
+                <default>false</default>
+                <label>Satellite Providers</label>
+            </value>
+            <value>
+                <fullName>Security Systems/Home Automation</fullName>
+                <default>false</default>
+                <label>Security Systems/Home Automation</label>
+            </value>
+            <value>
+                <fullName>Sheds</fullName>
+                <default>false</default>
+                <label>Sheds</label>
+            </value>
+            <value>
+                <fullName>Siding</fullName>
+                <default>false</default>
+                <label>Siding</label>
+            </value>
+            <value>
+                <fullName>Solar Power</fullName>
+                <default>false</default>
+                <label>Solar Power</label>
+            </value>
+            <value>
+                <fullName>Spa Dealers</fullName>
+                <default>false</default>
+                <label>Spa Dealers</label>
+            </value>
+            <value>
+                <fullName>Storage Unit</fullName>
+                <default>false</default>
+                <label>Storage Unit</label>
+            </value>
+            <value>
+                <fullName>Veterinarian</fullName>
+                <default>false</default>
+                <label>Veterinarian</label>
+            </value>
+            <value>
+                <fullName>Water Softener Filtration</fullName>
+                <default>false</default>
+                <label>Water Softener Filtration</label>
+            </value>
+            <value>
+                <fullName>Window Cleaning</fullName>
+                <default>false</default>
+                <label>Window Cleaning</label>
+            </value>
+            <value>
+                <fullName>Windows/Doors</fullName>
+                <default>false</default>
+                <label>Windows/Doors</label>
+            </value>
+            <value>
+                <fullName>Window Tinting</fullName>
+                <default>false</default>
+                <label>Window Tinting</label>
+            </value>
+            <value>
+                <fullName>Attorney</fullName>
+                <default>false</default>
+                <label>Attorney</label>
+            </value>
+            <value>
+                <fullName>Auto Detailing</fullName>
+                <default>false</default>
+                <label>Auto Detailing</label>
+            </value>
+            <value>
+                <fullName>Auto Glass</fullName>
+                <default>false</default>
+                <label>Auto Glass</label>
+            </value>
+            <value>
+                <fullName>Bathroom Remodeling</fullName>
+                <default>false</default>
+                <label>Bathroom Remodeling</label>
+            </value>
+            <value>
+                <fullName>Bedding/Linens/Drapes</fullName>
+                <default>false</default>
+                <label>Bedding/Linens/Drapes</label>
+            </value>
+            <value>
+                <fullName>Billiard</fullName>
+                <default>false</default>
+                <label>Billiard</label>
+            </value>
+            <value>
+                <fullName>Cabinetry / Carpentry</fullName>
+                <default>false</default>
+                <label>Cabinetry / Carpentry</label>
+            </value>
+            <value>
+                <fullName>Computer Setup</fullName>
+                <default>false</default>
+                <label>Computer Setup</label>
+            </value>
+            <value>
+                <fullName>Custom BBQ</fullName>
+                <default>false</default>
+                <label>Custom BBQ</label>
+            </value>
+            <value>
+                <fullName>Driveways/Repaving</fullName>
+                <default>false</default>
+                <label>Driveways/Repaving</label>
+            </value>
+            <value>
+                <fullName>Dry Cleaners</fullName>
+                <default>false</default>
+                <label>Dry Cleaners</label>
+            </value>
+            <value>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+                <label>Entertainment</label>
+            </value>
+            <value>
+                <fullName>Furniture (Inside)</fullName>
+                <default>false</default>
+                <label>Furniture (Inside)</label>
+            </value>
+            <value>
+                <fullName>Furniture (Patio)</fullName>
+                <default>false</default>
+                <label>Furniture (Patio)</label>
+            </value>
+            <value>
+                <fullName>Garage Floor Coating</fullName>
+                <default>false</default>
+                <label>Garage Floor Coating</label>
+            </value>
+            <value>
+                <fullName>Grocery Store</fullName>
+                <default>false</default>
+                <label>Grocery Store</label>
+            </value>
+            <value>
+                <fullName>Health Club/CrossFit</fullName>
+                <default>false</default>
+                <label>Health Club/CrossFit</label>
+            </value>
+            <value>
+                <fullName>Heating</fullName>
+                <default>false</default>
+                <label>Heating</label>
+            </value>
+            <value>
+                <fullName>Home Automation</fullName>
+                <default>false</default>
+                <label>Home Automation</label>
+            </value>
+            <value>
+                <fullName>Hot Tub</fullName>
+                <default>false</default>
+                <label>Hot Tub</label>
+            </value>
+            <value>
+                <fullName>Kitchen Remodeling</fullName>
+                <default>false</default>
+                <label>Kitchen Remodeling</label>
+            </value>
+            <value>
+                <fullName>Lawn &amp; Weed Control</fullName>
+                <default>false</default>
+                <label>Lawn &amp; Weed Control</label>
+            </value>
+            <value>
+                <fullName>Mason</fullName>
+                <default>false</default>
+                <label>Mason</label>
+            </value>
+            <value>
+                <fullName>Massage Therapist</fullName>
+                <default>false</default>
+                <label>Massage Therapist</label>
+            </value>
+            <value>
+                <fullName>Misting Systems</fullName>
+                <default>false</default>
+                <label>Misting Systems</label>
+            </value>
+            <value>
+                <fullName>Mortgage Protection</fullName>
+                <default>false</default>
+                <label>Mortgage Protection</label>
+            </value>
+            <value>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+                <label>Not For Profit</label>
+            </value>
+            <value>
+                <fullName>Old Data no nuCard</fullName>
+                <default>false</default>
+                <label>Old Data no nuCard</label>
+            </value>
+            <value>
+                <fullName>Old Data nuCard</fullName>
+                <default>false</default>
+                <label>Old Data nuCard</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Pet Doors</fullName>
+                <default>false</default>
+                <label>Pet Doors</label>
+            </value>
+            <value>
+                <fullName>Pet Sitter/Center/Boarding</fullName>
+                <default>false</default>
+                <label>Pet Sitter/Center/Boarding</label>
+            </value>
+            <value>
+                <fullName>Portable Dumpster Service</fullName>
+                <default>false</default>
+                <label>Portable Dumpster Service</label>
+            </value>
+            <value>
+                <fullName>Pressure Washing</fullName>
+                <default>false</default>
+                <label>Pressure Washing</label>
+            </value>
+            <value>
+                <fullName>Primary</fullName>
+                <default>false</default>
+                <label>Primary</label>
+            </value>
+            <value>
+                <fullName>Restaurants</fullName>
+                <default>false</default>
+                <label>Restaurants</label>
+            </value>
+            <value>
+                <fullName>Secondary</fullName>
+                <default>false</default>
+                <label>Secondary</label>
+            </value>
+            <value>
+                <fullName>Security (Gates/Doors)</fullName>
+                <default>false</default>
+                <label>Security (Gates/Doors)</label>
+            </value>
+            <value>
+                <fullName>Self Storage</fullName>
+                <default>false</default>
+                <label>Self Storage</label>
+            </value>
+            <value>
+                <fullName>Shovel/Gravel</fullName>
+                <default>false</default>
+                <label>Shovel/Gravel</label>
+            </value>
+            <value>
+                <fullName>Skylights</fullName>
+                <default>false</default>
+                <label>Skylights</label>
+            </value>
+            <value>
+                <fullName>Solar Pool Heater</fullName>
+                <default>false</default>
+                <label>Solar Pool Heater</label>
+            </value>
+            <value>
+                <fullName>Solar Water Evaluation</fullName>
+                <default>false</default>
+                <label>Solar Water Evaluation</label>
+            </value>
+            <value>
+                <fullName>Sprinkler System</fullName>
+                <default>false</default>
+                <label>Sprinkler System</label>
+            </value>
+            <value>
+                <fullName>Sunscreens</fullName>
+                <default>false</default>
+                <label>Sunscreens</label>
+            </value>
+            <value>
+                <fullName>Synthetic Grass/Putting Green</fullName>
+                <default>false</default>
+                <label>Synthetic Grass/Putting Green</label>
+            </value>
+            <value>
+                <fullName>Test-Use for Training only</fullName>
+                <default>false</default>
+                <label>Test-Use for Training only</label>
+            </value>
+            <value>
+                <fullName>Tree Trimming</fullName>
+                <default>false</default>
+                <label>Tree Trimming</label>
+            </value>
+            <value>
+                <fullName>Vehicle Purchase</fullName>
+                <default>false</default>
+                <label>Vehicle Purchase</label>
+            </value>
+            <value>
+                <fullName>Vehicle Registration/Title</fullName>
+                <default>false</default>
+                <label>Vehicle Registration/Title</label>
+            </value>
+            <value>
+                <fullName>Water (Bottled)</fullName>
+                <default>false</default>
+                <label>Water (Bottled)</label>
+            </value>
+            <value>
+                <fullName>Water/Smoke Damage</fullName>
+                <default>false</default>
+                <label>Water/Smoke Damage</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

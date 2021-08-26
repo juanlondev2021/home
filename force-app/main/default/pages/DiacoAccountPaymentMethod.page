@@ -1,0 +1,28 @@
+<apex:page showHeader="false" docType="html-5.0" standardController="Account"> 
+    <apex:includeLightning />
+    <div id='App'/>
+    <script>
+    $Lightning.use('c:DiacoAccountPayMethodApp', function() {
+        $Lightning.createComponent(
+            'c:diacoAccountPayMethod',
+            {recordId:'{!Account.id}'},
+            'App',
+            function(cmp) {
+                
+                $A.eventService.addHandler({
+                    event: 'force:showToast',
+                    handler: function(event) {
+                        sforce.one.showToast({
+                            "title": event.getParam("title"),
+                            "message": event.getParam("message"),
+                            "type": event.getParam("type")
+                        });
+                        
+                    }
+                });
+                console.log('Component is created!');
+                console.log(cmp);
+            });
+    });        
+    </script>
+</apex:page>

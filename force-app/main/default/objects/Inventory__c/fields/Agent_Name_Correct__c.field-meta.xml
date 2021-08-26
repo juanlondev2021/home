@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agent_Name_Correct__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>I have listened to the call and the agent name on the object is the correct Call Center agent.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>I have listened to the call and the agent name on the object is the correct Call Center agent.</inlineHelpText>
+    <label>Agent Name Correct</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

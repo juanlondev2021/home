@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Service__c</fullName>
+    <externalId>false</externalId>
+    <label>Type of Service</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pool</fullName>
+                <default>false</default>
+                <label>Pool</label>
+            </value>
+            <value>
+                <fullName>Spa</fullName>
+                <default>false</default>
+                <label>Spa</label>
+            </value>
+            <value>
+                <fullName>Interior</fullName>
+                <default>false</default>
+                <label>Interior</label>
+            </value>
+            <value>
+                <fullName>Exterior</fullName>
+                <default>false</default>
+                <label>Exterior</label>
+            </value>
+            <value>
+                <fullName>Both</fullName>
+                <default>false</default>
+                <label>Both</label>
+            </value>
+            <value>
+                <fullName>Tile</fullName>
+                <default>false</default>
+                <label>Tile</label>
+            </value>
+            <value>
+                <fullName>Stone</fullName>
+                <default>false</default>
+                <label>Stone</label>
+            </value>
+            <value>
+                <fullName>Carpet</fullName>
+                <default>false</default>
+                <label>Carpet</label>
+            </value>
+            <value>
+                <fullName>Waterproof Vinyl</fullName>
+                <default>false</default>
+                <label>Waterproof Vinyl</label>
+            </value>
+            <value>
+                <fullName>Wood Laminate</fullName>
+                <default>false</default>
+                <label>Wood Laminate</label>
+            </value>
+            <value>
+                <fullName>Rock</fullName>
+                <default>false</default>
+                <label>Rock</label>
+            </value>
+            <value>
+                <fullName>Grass</fullName>
+                <default>false</default>
+                <label>Grass</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Smooth</fullName>
+                <default>false</default>
+                <label>Smooth</label>
+            </value>
+            <value>
+                <fullName>Rough</fullName>
+                <default>false</default>
+                <label>Rough</label>
+            </value>
+            <value>
+                <fullName>Roll Up</fullName>
+                <default>false</default>
+                <label>Roll Up</label>
+            </value>
+            <value>
+                <fullName>Vertical</fullName>
+                <default>false</default>
+                <label>Vertical</label>
+            </value>
+            <value>
+                <fullName>Ground level addition</fullName>
+                <default>false</default>
+                <label>Ground level addition</label>
+            </value>
+            <value>
+                <fullName>Second story addition</fullName>
+                <default>false</default>
+                <label>Second story addition</label>
+            </value>
+            <value>
+                <fullName>Detached</fullName>
+                <default>false</default>
+                <label>Detached</label>
+            </value>
+            <value>
+                <fullName>Shelving</fullName>
+                <default>false</default>
+                <label>Shelving</label>
+            </value>
+            <value>
+                <fullName>Drawers</fullName>
+                <default>false</default>
+                <label>Drawers</label>
+            </value>
+            <value>
+                <fullName>Cabinets</fullName>
+                <default>false</default>
+                <label>Cabinets</label>
+            </value>
+            <value>
+                <fullName>Hanging Storage</fullName>
+                <default>false</default>
+                <label>Hanging Storage</label>
+            </value>
+            <value>
+                <fullName>Deadbolt</fullName>
+                <default>false</default>
+                <label>Deadbolt</label>
+            </value>
+            <value>
+                <fullName>Keyless Entry</fullName>
+                <default>false</default>
+                <label>Keyless Entry</label>
+            </value>
+            <value>
+                <fullName>Cable</fullName>
+                <default>false</default>
+                <label>Cable</label>
+            </value>
+            <value>
+                <fullName>Satellite</fullName>
+                <default>false</default>
+                <label>Satellite</label>
+            </value>
+            <value>
+                <fullName>Internet</fullName>
+                <default>false</default>
+                <label>Internet</label>
+            </value>
+            <value>
+                <fullName>Laminate</fullName>
+                <default>false</default>
+                <label>Laminate</label>
+            </value>
+            <value>
+                <fullName>Wood</fullName>
+                <default>false</default>
+                <label>Wood</label>
+            </value>
+            <value>
+                <fullName>Vinyl</fullName>
+                <default>false</default>
+                <label>Vinyl</label>
+            </value>
+            <value>
+                <fullName>Replace/New</fullName>
+                <default>false</default>
+                <label>Replace/New</label>
+            </value>
+            <value>
+                <fullName>Repair</fullName>
+                <default>false</default>
+                <label>Repair</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,51 @@
+<aura:component controller="DiaAlarmComCodeWord">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="site" type="DiacoAlarm__DiacoSiteAvantguard__c"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="codeWordId" type="ID" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="isUpdate" type="boolean" default="false"/>
+    <aura:handler name="change" value="{!v.isUpdate}" action="{!c.init}"/>
+    <aura:handler name="init" action="{!c.init}" value="{!this}"/>
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:portal" alternativeText="Code Word"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Information About</h1>
+                <h2 class="slds-text-heading--medium">Code Word</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <lightning:button class="slds-m-vertical_medium slds-align_absolute-center" 
+                      label="Add Code Word" 
+                      title="Add_Code" 
+                      onclick="{! c.openModel }" />
+    <div style="height: 300px">
+        <lightning:datatable
+                             columns="{! v.columns }"
+                             data="{! v.data }"
+                             keyField="id"
+                             errors="{! v.errors }"
+                             draftValues="{! v.draftValues }"
+                             onsave="{! c.handleSaveEdition }"
+                             hideCheckboxColumn="true"
+                             onrowaction="{! c.handleRowAction }"
+                             />
+    </div>
+    <lightning:button class="slds-m-vertical_medium slds-align_absolute-center" 
+                      label="Add Code Word" 
+                      title="Add_Code" 
+                      onclick="{! c.openModel }" />
+    <c:diacoAlarmComCodeWordCreate 	
+                               isOpen="{! v.isOpen }"
+                               recordId="{!v.recordId}"
+                               site="{!v.site}"
+                               codeWordId="{!v.codeWordId}"
+                               isUpdate="{!v.isUpdate}"/>
+    
+</aura:component>

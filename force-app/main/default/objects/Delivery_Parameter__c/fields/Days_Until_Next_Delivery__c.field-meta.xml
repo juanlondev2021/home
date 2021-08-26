@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Days_Until_Next_Delivery__c</fullName>
+    <description>Used to send next delivery to the customers, if he doesn&apos;t respond for delivery 1 with status Hung.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Days between this delivery and next if this delivery is completed (Status = Hung). Organizational default value is 7 days.</inlineHelpText>
+    <label>Days Until Next Delivery</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

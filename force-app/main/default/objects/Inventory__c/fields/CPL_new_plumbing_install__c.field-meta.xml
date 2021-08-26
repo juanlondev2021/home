@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_new_plumbing_install__c</fullName>
+    <description>(Plumber)What type of plumbing service are you in need of?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Plumber)What type of plumbing service are you in need of?</inlineHelpText>
+    <label>What type of plumbing service need</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Plumber - Existing Repair?</fullName>
+                <default>false</default>
+                <label>Plumber - Existing Repair?</label>
+            </value>
+            <value>
+                <fullName>Plumber - Leak Detection?</fullName>
+                <default>false</default>
+                <label>Plumber - Leak Detection?</label>
+            </value>
+            <value>
+                <fullName>Plumber - New Install?</fullName>
+                <default>false</default>
+                <label>Plumber - New Install?</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

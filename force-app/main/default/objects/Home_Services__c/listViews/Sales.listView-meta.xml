@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales</fullName>
+    <columns>Industry_Formula__c</columns>
+    <columns>City__c</columns>
+    <columns>Account__c</columns>
+    <columns>Electric_Company__c</columns>
+    <columns>Zip__c</columns>
+    <columns>COC_Completed__c</columns>
+    <columns>contractDocument__c</columns>
+    <columns>Document_Status__c</columns>
+    <columns>Energy_Efficiencies__c</columns>
+    <columns>Finance_Company__c</columns>
+    <columns>hoaName__c</columns>
+    <columns>Module__c</columns>
+    <columns>Permitting_Status__c</columns>
+    <columns>Plans_Status__c</columns>
+    <columns>System_Size__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Closed Won</value>
+    </filters>
+    <filters>
+        <field>Closed_Won_Date__c</field>
+        <operation>lessThan</operation>
+        <value>1/1/2019 12:00 AM</value>
+    </filters>
+    <label>All Industry Sales</label>
+    <sharedTo>
+        <role>Office_Admin</role>
+        <role>Office_Manager</role>
+    </sharedTo>
+</ListView>

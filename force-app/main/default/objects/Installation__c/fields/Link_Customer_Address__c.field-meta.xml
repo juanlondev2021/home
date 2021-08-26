@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Link_Customer_Address__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&quot;http://maps.google.com/maps?f=q&amp;hl=en&amp;q= &quot;&amp;Home_Service__r.Street__c &amp;&quot; &quot;&amp; Home_Service__r.City__c &amp;&quot; &quot;&amp; 
+
+     Home_Service__r.State__c &amp;&quot; &quot;&amp; Home_Service__r.Zip__c, Home_Service__r.Street__c +&apos; &apos;+ Home_Service__r.City__c +&apos; &apos;+
+ 
+         Home_Service__r.State__c +&apos; &apos;+ Home_Service__r.Zip__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Link Customer Address</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,73 @@
+<aura:component>
+
+<aura:attribute name="open" type="Boolean" default="false" required="true"/>
+<aura:attribute name="title" type="String" required="true" />
+<aura:attribute name="messague" type="String" required="true" />
+<aura:attribute name="labelCancel" type="String" required="true" />
+<aura:attribute name="labelSubmit" type="String" required="true" />
+<aura:attribute name="icon" type="String"  default="" required="false" />
+
+<aura:registerEvent name="submit" type="c:diacoEventModalConfirmation" />
+
+<aura:if isTrue="{!v.open}" >
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+        <div class="slds-modal__container">
+        
+            <!-- HEADER -->
+            <header class="slds-modal__header">
+                <lightning:buttonIcon   iconName="utility:close"
+                                        onclick="{! c.closeModel }"
+                                        alternativeText="close"
+                                        variant="bare-inverse"
+                                        class="slds-modal__close"/>
+            <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header_vertical slds-align_absolute-center">
+    
+                <lightning:layoutItem padding="horizontal-small">
+                    <lightning:icon iconName="{! v.icon }" />
+                </lightning:layoutItem>
+        
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="slds-page-header__name">
+                        <div class="slds-page-header__name-title">
+                            <h1>
+                                <span></span>
+                                <span class="slds-page-header__title slds-truncate" title="Recently Viewed">{!v.title}</span>
+                            </h1>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>                    
+            </header>    
+            <!-- /HEADER -->        
+            
+            <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+    
+                <div class="slds-grid">
+                    <div class="slds-col slds-p-horizontal_medium">
+                        <ui:message title="Confirmation" severity="confirm" closable="false">
+                            {!v.messague}
+                        </ui:message>
+                    </div>
+                </div>
+    
+            </div>
+                                    
+            
+            <footer class="slds-modal__footer">
+                <lightning:button   variant="neutral" 
+                                    label="{!v.labelCancel}"
+                                    title="labelCancel"
+                                    onclick="{! c.closeModel }"/>
+                
+                <lightning:button   variant="brand" 
+                                    label="{!v.labelSubmit}" 
+                                    title="labelSubmit" 
+                                    onclick="{! c.handlerSubmit }" />
+            </footer>
+        </div>
+    </section>
+    
+</aura:if>
+
+</aura:component>

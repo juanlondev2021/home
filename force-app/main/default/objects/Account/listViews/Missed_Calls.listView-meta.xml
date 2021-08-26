@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Missed_Calls</fullName>
+    <columns>Phone_Rep_Email__c</columns>
+    <columns>Respond_Date__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ACCOUNT.PHONE1</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Phone_Rep_Email__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Respond_Date__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>YESTERDAY</value>
+    </filters>
+    <label>Missed Calls</label>
+</ListView>

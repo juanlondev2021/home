@@ -1,0 +1,43 @@
+.THIS {
+}
+
+.THIS lightning-primitive-header-actions {
+    display: none;
+}
+
+.THIS .slds-modal__container {
+    max-width: 80rem !important;
+    width:75% !important;
+}
+
+.THIS .slds-dueling-list__column_responsive .slds-dueling-list__options {
+    width: 100% !important;
+}
+
+.THIS .slds-dueling-list__column {
+    min-width: 15% !important;
+}
+
+.THIS .slds-dueling-list__column.slds-dueling-list__column_responsive {
+    min-width: 35% !important;
+}
+
+@media only screen and (min-width: 400px) {
+    .THIS .slds-dueling-list__column {
+        min-width: 12.5% !important;
+    }
+    
+    .THIS .slds-dueling-list__column.slds-dueling-list__column_responsive {
+        min-width: 37.5% !important;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .THIS .slds-dueling-list__column {
+        min-width: 5% !important;
+    }
+    
+    .THIS .slds-dueling-list__column.slds-dueling-list__column_responsive {
+        min-width: 45% !important;
+    }
+}

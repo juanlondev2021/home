@@ -1,0 +1,89 @@
+<aura:component controller="DiacoFinanceClass" 
+                implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome"
+                access="global">
+    <aura:attribute name="isHomeAuto" type="Boolean" default="false"/>
+	<aura:attribute name="label" type="String" default="Send to Docusign"/>	
+    <aura:attribute name="itWasSigned" type="Boolean" default="true"/>
+    <aura:attribute name="AlarmEmpty" type="Boolean" default="false"/>
+    
+    <aura:handler name="TypeOrderEvent" event="c:DiacoFinanceOrderTypeEvent" action="{!c.getRecordType}"/>
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>    
+    <aura:attribute name="loaded" type="Boolean" default="true" />
+    <aura:attribute name="item_select" type="String" default="" />
+    <aura:attribute name="att_package_name" type="String" default="" />
+    <aura:attribute name="att_type_of_order" type="String" default="" />
+   
+    <aura:attribute name="moretabs" type="Aura.Component[]"/>
+    
+    <aura:attribute name="att_package_list" type="List" default="[]"/>
+      
+    <aura:if isTrue="{! v.loaded }">
+        <lightning:spinner alternativeText="Loading" />
+    </aura:if>
+    
+    <div class="slds-box slds-box_small" draggable="false" >
+        
+       
+        <lightning:tabset aura:id="selectPackage" onselect="{! c.printParent }" selectedTabId="{!v.item_select}">
+            {!v.moretabs}
+        </lightning:tabset>
+        
+         <!-- onselect="{! c.printParent }" selectedTabId="{!v.item_select}"-->
+
+    </div>
+    <div>
+        <aura:if isTrue="{!v.itWasSigned}">
+                <div class="slds-align_absolute-center slds-size_1-of-1">
+                    <c:DiacoSignedContract aura:id="DiacoSignedContract" IsPinnacleFinance="true" recordId="{!v.recordId}"/>
+                </div>
+            </aura:if>
+        <aura:if isTrue="{!v.isHomeAuto}">
+            <div class="slds-align_absolute-center slds-size_1-of-1">
+                <lightning:button variant="success" 
+                              label="{!v.label}" 
+                              class="slds-m-top--medium slds-align_absolute-center" 
+                              title="{!v.label}" 
+                              disabled="{!v.label == 'Sending...' }"
+                              onclick="{!c.AlarmToDocusign}" />
+            </div>
+            <!-- Modal To display Alert about empty Field on Custom Alarm object -->
+            <aura:if isTrue="{!v.AlarmEmpty}">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" 
+                         class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- ###### MODAL BOX HEADER Start ######-->
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Empty Fields</h2>
+                        </header>
+                        <!--###### MODAL BOX BODY Part Start######--> 
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">The following fields may be empty, "Panel Type, Modem Serial Number" in Customer Alarm, Are you sure you want to continue?</div> 
+                            </div>
+                        </div>
+                        <!--###### MODAL BOX FOOTER Part Start ######-->
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" 
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{! c.closeModel }"/>
+                            <lightning:button variant="brand" 
+                                              label="{!v.label}"
+                                              title="Delete" onclick="{! c.ToDocusign}"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                <!--###### MODAL BOX Part END Here ######-->
+            </aura:if>
+        </aura:if>
+    </div>
+ <!-- <c:DiacoFinancePackageComponent aura:id="XT and landline" recordId="{!v.recordId}" att_Package="Package A" att_Package_Name="XT and landline" att_Package_Price="34.99" att_Monitoring="14.99" att_child="{!v.att_package_name}" att_TypeOfOrder="{!v.att_type_of_order}"/>-->
+</aura:component>

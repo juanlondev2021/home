@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inactive_Campaigns_LQ</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>Opportunity__c</columns>
+    <columns>NAME</columns>
+    <columns>OB_Campaign_Call_Center__c</columns>
+    <columns>OB_Campaign_Active__c</columns>
+    <columns>Call_Center_is_Ready_Post__c</columns>
+    <columns>OB_Campaign_Active_Date__c</columns>
+    <columns>Opp_OB_Operation_Stage__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OB_Campaign_Active__c</field>
+        <operation>notEqual</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>OB_Campaign_Call_Center__c</field>
+        <operation>equals</operation>
+        <value>LeadQual</value>
+    </filters>
+    <label>Inactive Campaigns - LQ</label>
+</ListView>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Person_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This lookup field is creatd for associating Door Tag Script Compliance.</description>
+    <externalId>false</externalId>
+    <label>Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Door Tag Compliance</relationshipLabel>
+    <relationshipName>Door_Tag_Compliance</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

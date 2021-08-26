@@ -1,0 +1,267 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering Pest control contract payment view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the component.
+-->
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="customer" type="Account" />
+    <aura:attribute name="checkFi" type="Boolean" />
+    <aura:attribute name="home" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String" />
+    <aura:attribute name="options" type="String[]" default="Client 1,Client 2,Other" />
+    <aura:attribute name="states" type="String[]" default="AK,AL,AR,AZ,CA,CO,CT,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <aura:attribute name="toReload" type="Boolean" />
+    <aura:handler name="change" value="{!v.toReload}" action="{!c.doInit}" />
+
+    <fieldset class="slds-theme--default ">
+        <!-- Header-->
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:service_contract" alternativeText="My Expenses" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Service</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <div class="slds-form slds-grid slds-wrap slds-m-top--medium">
+            <lightning:recordViewForm recordId="{!v.customer.Id}" objectApiName="Account">
+                <div class="slds-form slds-grid slds-wrap slds-m-top--medium">
+
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_4-of-12 slds-m-top--medium">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                            <fieldset class="slds-box slds-theme--default ">
+                                <!--First Customer Header-->
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:client" alternativeText="My Expenses" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">First Customer</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <!--First Customer Information-->
+                                <lightning:layout horizontalAlign="center">
+                                    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12">
+
+                                        <div aria-labelledby="FirstCustomerInformation">
+                                            <form class="slds-form--stacked">
+                                                <div class="slds-form slds-grid slds-wrap">
+
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="FirstName" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="LastName" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Phone" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="PersonEmail" />
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_4-of-12 slds-m-top--medium">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                            <fieldset class="slds-box slds-theme--default ">
+                                <!--Second Customer Header-->
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:client" alternativeText="My Expenses" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">Second Customer</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <!--Second Customer information-->
+                                <lightning:layout horizontalAlign="center">
+                                    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12">
+                                        <div aria-labelledby="SecondCustomerInformation">
+                                            <form class="slds-form--stacked">
+                                                <div class="slds-form slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Homeowner_2_First_Name__c" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Homeowner_2_Last_Name__c" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Homeowner_2_Phone_Number__c" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Homeowner_2_Email__c" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_4-of-12 slds-m-top--medium">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                            <fieldset class="slds-box slds-theme--default ">
+                                <!--Address Header-->
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:address" alternativeText="My Expenses" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">Service Address</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <!--Address Header-->
+                                <lightning:layout horizontalAlign="center">
+                                    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12">
+                                        <div aria-labelledby="FirstCustomerInformation">
+                                            <form class="slds-form--stacked">
+                                                <div class="slds-form slds-grid slds-wrap">
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Street__c" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="City__c" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="State__c" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_12-of-12">
+                                                        <lightning:outputField fieldName="Zip__c" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </lightning:recordViewForm>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+                <lightning:tabset variant="scoped">
+                    <lightning:tab label="Services">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                            <fieldset class="slds-theme--default ">
+                                <!--Billing Header-->
+                                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                    <lightning:layoutItem>
+                                        <lightning:icon iconName="standard:address" alternativeText="My Expenses" />
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem padding="horizontal-small">
+                                        <div class="page-section page-header">
+                                            <h1 class="slds-text-heading--label">Information About</h1>
+                                            <h2 class="slds-text-heading--medium">Billing Information</h2>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="center">
+                                    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12">
+                                        <div aria-labelledby="FirstCustomerInformation">
+                                            <form class="slds-form--stacked">
+                                                <lightning:messages />
+                                                <!--Billing content-->
+                                                <div class="slds-form slds-grid slds-wrap slds-grid_align-center slds-gutters_small ">
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12  slds-align-middle">
+                                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center">
+                                                            <lightning:select name="Billing_Information_From" aura:id="CustomerInfo" label="Billing Information From" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" onchange="{! c.BillingInformationService }" value="{!v.customer.Billing_Information_From_Service__c}">
+
+                                                                <aura:iteration items="{!v.options}" var="color">
+                                                                    <option value="{!color}">{!color}</option>
+                                                                </aura:iteration>
+                                                            </lightning:select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-align-middle " style="display:block;">
+                                                        <lightning:input type="toggle" checked="{!v.customer.Billing_Address_Same_As_Product__c}" messageToggleActive="" messageToggleInactive="" onchange="{!c.serviceAsProduct}" label="Billing Address Same As Service Address" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 " name="input1" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1  slds-align-middle text-align:center">
+
+                                                    </div>
+
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Billing_First_Name" label="First Name" value="{!v.customer.Billing_First_Name_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_Last_Name" label="Last Name" value="{!v.customer.Billing_Last_Name_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_Phone" label="Phone" value="{!v.customer.Billing_Phone_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" name="Billing_Email" label="Email" value="{!v.customer.Billing_Email_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_Fax" label="Fax" value="{!v.customer.Billing_Fax_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_Company" label="Company" value="{!v.customer.Billing_Company_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_Street" label="Street" value="{!v.customer.Primary_Billing_Street_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_city" label="city" value="{!v.customer.Primary_Billing_City_Service__c}" />
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:select name="Billing_State" aura:id="Drivers_license_Issuing_state" label="state" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" onchange="{! c.changeStatus }" value="{!v.customer.Primary_Billing_State_Service__c}">
+                                                            <option value="">choose one...</option>
+                                                            <aura:iteration items="{!v.states}" var="state">
+                                                                <option value="{!state}">{!state}</option>
+                                                            </aura:iteration>
+                                                        </lightning:select>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12">
+                                                        <lightning:input aura:id="CustomerInfo" onchange="{! c.changeStatus }" class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-align_absolute-center" name="Billing_Zip" label="Zip Code" value="{!v.customer.Primary_Billing_Zip_Code_Service__c}" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:button variant="brand" label="Save" class="slds-m-top--medium slds-align_absolute-center" title="Brand action" onclick="{! c.saveInformation}" />
+                            </fieldset>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <c:DiacoContractPayMethod recordId="{!v.recordId}" />
+                        <!-- <c:diacoContractPaymentMethodServices recordId="{!v.recordId}" />-->
+                    </lightning:tab>
+                </lightning:tabset>
+            </div>
+        </div>
+
+    </fieldset>
+</aura:component>

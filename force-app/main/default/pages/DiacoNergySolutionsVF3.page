@@ -1,0 +1,607 @@
+<apex:page renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    
+    <head>
+        <title>N-ERGY</title>
+        <!--
+        <style type="text/css">
+            
+            @page {
+            size: A4;
+            margin: 5mm 2mm 10mm 2mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            }
+            div.footer {
+            align-text: justify;
+            font-size: 6pt;
+            margin: 0mm 12mm 0mm 17mm;
+            position: running(footer);
+            }
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.9pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .left {
+            font-size: 9pt; 
+            float: left;
+            text-align: left;
+            padding-right: 10px;
+            }
+            .right {
+            font-size: 9pt; 
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+            }
+            #page15{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.5pt; 
+            margin: 5mm 10mm 5mm 15mm;
+            }
+            .page16{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt; 
+            margin: 5mm 10mm 5mm 15mm;
+            }
+            .blue-color{
+            color: #0070C0;
+            }
+            .pagenumber:before {
+            content: counter(page);
+            }
+            .pagecount:before {
+            content: counter(pages);
+            }
+            ul.checkmark {
+            list-style-type:none;
+            }
+            ul.checkmark li:before {
+            content:"\2713\0020";
+            font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+            }
+        </style>
+        -->
+        
+        <style type="text/css">
+            
+            @page {
+            size: Legal;
+            margin: 5mm 2mm 2mm 2mm;
+            
+            }
+            
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            table, th, td {
+            border: 1px solid black;
+            }
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+             
+              div.footer {
+            align-text: justify;
+            font-size: 6pt;
+            margin: 0mm 12mm 0mm 17mm;
+            position: running(footer);
+            
+            .blue-color{
+            color: #0070C0;
+            }
+            
+            }
+            
+        </style>
+        
+    </head>
+    
+    
+    <div  style="width:91%; margin:auto; font-size:15px;" class="page16 page-break">
+        <div width="100%" height="90vh">
+            
+            <div width="100%" >
+                <table width="100%">
+                    <tr>
+                        <td width="20%" style="border:0px;">
+                            <div width="100%">
+                                <center>
+                                    <apex:image url="{!URLFOR($Resource.nergyimgs,
+                                                     'img/electricallogo.png')}"  width="40px" height="40px"/>
+                                </center>
+                            </div>
+                        </td>
+                        <td width="80%" style="border:0px;">
+                            <div width="100%">
+                                <center>
+                                    <h2 style="color: #0070C0; font-size:16px;">
+                                        Customer Owned Distributed Generation<br/>POLICY SUMMARY 
+                                    </h2>
+                                </center>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div style="width:100%">
+                    <div style="color: #0070C0; width:50%; float:left; font-size:15px;"><h3><b>REVISION NO.: 7</b></h3></div>
+                    <div style="color: #0070C0; width:40%; float:right; text-align:right; font-size:15px;"><h3><b>EFFECTIVE: 03/26/18</b></h3></div>
+                </div>
+               
+            </div>
+            <br/><br/><br/>
+            <div width="100%">
+                <p align="justify">
+                    The Customer Owned Distributed Generation Policy serves to provide a framework for Residential and Small General Service Customers to establish on-site Distributed Generation (DG) Systems to be interconnected to the Electrical District No. 3 (ED3) Electrical Distribution System.
+                </p>
+                <p align="justify"> 
+                    A Distributed Generation (DG) System, as defined for the purposes of this Policy, pertains to all applicable distributed energy resources and coupled power generating technologies with or without energy storage, whether or not the Systems are interconnected to ED3’s electrical grid.
+                </p>
+                <p align="justify"> 
+                    All District Policies are subject to revisions approved at a properly-noticed ED3 Board of Directors Meeting without prior notification to or written consent from the Customer.
+                </p>
+                <p align="justify">                
+                    All Customers may be subject to future rate changes in accordance with the terms and policies of ED3’s Electric System Guidelines. These changes may positively or negatively impact any potential economic attributes of your DG System. As is the case for all Customers, the DG Owner / Operator is subject to any and all of these changes.         
+                </p>
+            </div>
+            <div width="100%">
+                <h2>
+                    <b style="font-size:15px;">
+                        GENERATION CAPACITY STANDARDS LIMITS
+                    </b>
+                </h2>
+                <table width="100%" style="font-size: 12pt">
+                    <tr>
+                        <td  style="border:0px;">
+                            Minimum Size Limit:
+                        </td>
+                        <td style="border:0px;">
+                            1,000 Watts DC
+                        </td>
+                    </tr>
+                    <tr >
+                        <td style="border:0px;">
+                            <p style="margin-top: 10px">
+                                Residential Interconnections Maximum Size Limit:
+                            </p>
+                        </td>
+                        <td style="border:0px;">
+                            <p style="margin-top: 10px">
+                                Ten kilowatts (10 kW) DC
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:0px;">
+                            Small General Service Interconnections Maximum Size Limit: 
+                        </td>
+                        <td style="border:0px;">
+                            Twenty kilowatts (20 kW) DC
+                        </td>
+                    </tr>
+                </table>
+                <div width="100%">
+                    <h2>
+                        <b style="font-size:15px;">
+                            APPLICATION PROCESS
+                        </b>
+                    </h2>
+                    <ul style="list-style: none;">
+                        <li>
+                            <h3>
+                                <b><u>To Be Interconnected:</u></b>
+                            </h3>
+                        </li>
+                        <li>
+                            <p align="justify">
+                                Customers will need to complete the ED3 “Application for Operation of Customer Owned Distributed Generation” form, sign the “Agreement for Interconnection of Customer Owned Distributed Generation” form, the “Guidelines for Customer Owned Distributed Generation” form, and include their design package to interconnect a DG System with ED3’s Electrical Distribution System. Customers shall submit all the documents for ED3’s review and approval via email to solar@ed-3.org.
+                            </p>
+                        </li>
+                        <li>
+                            <p align="justify">
+                                ED3 must review all DG System Projects to ensure the safety of ED3 personnel and that ED3’s Electrical System reliability will not be compromised.
+                            </p>
+                        </li>
+                        <li>
+                            <p align="justify">
+                                To accommodate your DG System’s generation, ED3 may need to replace existing equipment or add new equipment to the Electrical System. If additional equipment is required to specifically support the addition of your planned Project, ED3 will incur only the costs of what is normally required to operate and maintain the Electrical System to benefit all ED3 Customers, therefore, the DG Owner may be required to pay for any system upgrades that will be needed and will be required to sign a “System Upgrade Estimate.”
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> 
+        
+         <div style="font-size:11px; display:inline-block; margin-top:40px">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    Customer Owned Distributed Generation <b>POLICY SUMMARY</b> (Rev. 7 03/26/18)
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 1 of 6  
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div style="width:91%; margin:auto; font-size:15px;" class="page16 page-break">
+        <div width="100%">
+            <ul style="list-style: none;">
+                <li>
+                    <h3>
+                        <b><u>NOT to be Interconnected:</u></b>
+                    </h3>
+                </li>
+                <li>
+                    <p align="justify">
+                        If your small DG System will NOT be interconnected to ED3’s Electrical Distribution System, you will still need to contact ED3 and provide information including the electrical capacity, manufacturer and name of your electrical installer. Use the ED3 “Application for Operation of Customer Owned Distributed Generation” form to provide this information to ED3.
+                        <b style="color: red;">The system must be completely isolated from the ED3 Electrical Distribution System under all circumstances.</b>
+                        
+                    </p>
+                </li>
+            </ul>
+            <b>SYSTEM ENGINEERING ANALYSIS</b>
+            <p align="justify">
+                DG System Projects as defined herein may require a System Engineering Analysis. Upon review of the application documentation, it may be necessary for ED3 to examine the ability of the ED3 Electrical Distribution System to take on additional new power generation. Fees associated with this System Engineering Analysis and any costs incurred by ED3 for the addition or replacement of equipment in order to accommodate a DG System’s generation will be borne by the Customer.
+            </p>
+            <p align="justify">
+                Fees are listed in the Electric Service Guidelines, Rules and Regulations, <b>Section 26 – Schedule of Charges and Fees</b>. All DG System Projects will be subject to requirements and any additional costs as identified in the System Engineering Analysis.
+            </p>
+            
+            <b>INSTALLATION, OPERATIONS AND MAINTENANCE AND OTHER TERMS</b>
+            <p align="justify">
+                The Customer’s DG System must meet or exceed the requirements of the Institute of Electrical and Electronics Engineers Inc. (IEEE) “Standard for Interconnecting Distributed Resources with Electric Power Systems”.
+            </p>
+            <ul style="list-style: none;">
+                <li>
+                    <h3><b><u>DG Customer MUST:</u></b></h3>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    Adhere to the technical requirements listed in the “Guidelines for Customer Owned Distributed Generation.”
+                </li>
+                <li>
+                    Follow the procedures to complete all Program agreements and forms.
+                </li>
+                <li>
+                    Be approved by ED3 prior to any installation or interconnection to ED3’s Electrical Distribution System.
+                </li>
+                <li>
+                    Pay all deposits and fees associated with the cost of interconnection to ED3’s Electrical Distribution System.
+                </li>
+                <li>
+                    Obtain all the applicable approvals and releases from either the City of Maricopa or Pinal County as applicable.
+                </li>
+                <li>
+                    Receive a Final Commissioning Inspection from ED3 before the System can be turned on.
+                </li>
+            </ul>
+            <b>OPERATING AUTHORITY</b>
+            <p align="justify">
+                The DG Owner / Operator is responsible for understanding the operating procedures and standards for their DG System. The DG Owner / Operator is responsible for operating and maintaining the generator facility in accordance with all applicable safety and electrical codes, applicable laws, and ED3 operational standards.
+            </p>
+            <p align="justify">
+                ED3 policy does not supersede any requirements of any by-laws, applicable tariffs, rates, rules and regulations in place between the DG Owner / Operator and ED3. It provides for the safe and orderly operation of the electrical facilities interconnecting the Electrical Distribution facility owned by ED3 to the DG Owner / Operator’s DG System at the service location as identified in the “Application for Operation of Customer Owned Distributed Generation” and all associated documentation.
+            </p>
+        </div>
+          <div style="font-size:11px; display:inline-block; margin-top:40px">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    Customer Owned Distributed Generation <b>POLICY SUMMARY</b> (Rev. 7 03/26/18)
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 2 of 6  
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="width:91%; margin:auto; font-size:15px;" class="page16 page-break">
+        <p align="justify">
+            It is the intent of the DG Owner / Operator to interconnect a Distributed Generation System to ED3’s Electrical grid in order to offset electric power supplied by ED3. It is the intent of ED3 to operate its Electrical Distribution System to maintain a high level of service and power quality to all Customers. It is the intent of the DG Owner / Operator and ED3 to operate their DG facilities in a way that ensures the safety of the public and ED3 personnel.
+        </p>
+        <b>SUSPENSION OF INTERCONNECTION</b>
+        <p align="justify">
+            It is intended that the DG System’s interconnection should not compromise ED3’s protection or operational requirements. The operation of the Customer’s System and the quality of electric energy supplied shall meet all standards as specified by ED3.
+        </p>
+        <p align="justify">
+            If the operation of the DG System or quality of electric energy supplied (in the case of power export) does not meet the standards as specified, then ED3 will notify the DG Owner / Operator to take reasonable and expedient corrective action. ED3 shall have the right to disconnect the DG System from its Electrical Distribution System until such compliance is reasonably demonstrated. Notwithstanding, ED3 in its sole discretion may disconnect any DG System from the ED3 Distribution System without notice if the operation of the DG System imposes a threat to life or property.
+        </p>
+        <b>MAINTENANCE OUTAGES</b>
+        <p align="justify">
+            Maintenance outages will occasionally be required on ED3’s Electrical Distribution System, and ED3 will provide as much notice and planning as practical to minimize downtime. It is noted that in some emergency cases such notice may not be practical. Compensation will not be made for the unavailability of ED3’s facilities due to outages.
+        </p>
+        <b>ACCESS</b>
+        <p align="justify">
+            Access is required at all times by ED3 to the Customer Owned DG System for maintenance, operating, and meter reading. ED3 reserves the right, but not the obligation, to inspect the DG Owner / Operator’s facilities.
+        </p>
+        <b>LIABILITY AND INDEMNIFICATION</b>
+        <p align="justify">
+            The DG Owner / Operator shall assume all liability for and shall indemnify ED3 for any claims, losses, costs, and expenses of any kind or character to the extent that they result from the DG Owner / Operator’s negligence or other wrongful conduct in connection with the design, construction, or operation of the Customer’s DG System.
+        </p>
+        <b>TERM</b>
+        <p align="justify">
+            The policies in this Summary are intended to be valid for the period of time that the Customer Owned DG System is connected to ED3’s Electrical Distribution System. It may be cancelled by either party with not less than thirty (30) days’ notice to the other party. The DG System <b><u> must</u></b> be disconnected from ED3’s Electrical Distribution System if the contract is cancelled and an ED3 Site Inspection <b><u> will</u></b> be mandatory upon removal of the DG System. Please contact ED3’s Solar Department at (520) 424-0418 to schedule an inspection following the removal of the DG System. Fees for this service are listed in ED3’s Electric Service Guidelines, Rules and Regulations – <b> Section 26 – Schedule of Charges and Fees</b>.
+        </p>
+         <div style="font-size:11px; display:inline-block; margin-top:40px">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    Customer Owned Distributed Generation <b>POLICY SUMMARY</b> (Rev. 7 03/26/18)
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 3 of 6  
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="width:91%; margin:auto; font-size:15px;" class="page16 page-break">
+        <b>GOVERNING LAW AND ATTORNEY’S FEES</b>
+        <p align="justify">
+            ED3’s Customer Owned Distributed Generation Policy shall be governed by Arizona law and if any party brings any action in respect to its rights under this policy, the prevailing party shall be entitled to reasonable fees and court costs, as determined by the court.
+        </p>
+        <b>BILLING, GREEN CREDITS AND OTHER CONDITIONS</b>
+        <p align="justify">
+            Under the current <b>Rider No. 8</b>, Customer energy usage (kWh) will be netted with the Customer Distributed Generation kWh each month. If Customer energy usage exceeds generation, the monthly net will be billed according to the applicable retail Residential or Small General Service rate. If generation exceeds Customer usage, ED3 will pay the Customer based on the ED3 avoided cost for energy1 (for the monthly net energy amount).
+        </p>
+        <p align="justify">
+            Under Closed Rider Nos. 3 and 4, Customer energy usage (kWh) will be netted with the Customer’s Distributed Generation kWh each month. If Customer energy usage exceeds generation, the monthly net will be billed according to the applicable retail Residential and Small General Service rate. If the Customer’s generation exceeds the energy usage, a kWh credit will be carried forward to apply to future month’s usage. If the Customer disconnects the DG System, the excess generation credit kWh remaining will be paid to the Customer at the avoided cost of energy rate in effect at the time.
+        </p>
+        The Distributed Generation Fixed Cost Recovery (DGFCR) monthly surcharge will be applied based on the nameplate kW-DC power rating of the distributed generation facility. DG Systems require the use of multiple registers, therefore, the Customer charge will be equivalent to those of Time of Use rates.
+        <p align="justify">
+            Title to and ownership of any and all environmental / green credits associated with the Customer Owned DG System shall pass from the Customer to ED3 upon initiation of service and ED3 shall maintain title to and ownership of all such environmental / green credits, benefits, emissions reductions, offsets, and allowances, howsoever entitled, attributable to the generation of energy from the DG System. The calculation, use, and retirement of any and all environmental / green credits shall be in the sole and exclusive discretion of ED3. Any funds derived from these green credits will be added to the ED3 Solar Program funds.
+        </p>
+        <p align="justify">
+            All Customers may be subject to future rate changes in accordance with the terms and policies of ED3’s Electric Service Guidelines.
+        </p>
+        <b>POWER EXPORT TO ED3</b>
+        <p align="justify">
+            Customers interconnected to ED3’s Electrical Distribution System will provide all of the excess power that the DG System generates to ED3. ED3 is not willing to wheel excess power for the Customer to sell to other utilities and retains the right to refuse DG System interconnection to any Customer.
+        </p>
+        <b>REMOVAL OR RELOCATION OF A CUSTOMER OWNED DG SYSTEM</b>
+        <p align="justify">
+            The DG System’s current Rider will remain effective regardless of ownership or location. Through ED3’s application, approval, and inspection process, these Systems can be moved from one location to another at the sole expense of the Customer.
+        </p>
+        <table width="100%" style="margin-top: 90px;">
+            <tr>
+                <td width="20%" style="border:0px; padding: 0px;"><hr style="height:1px;border-width:0;color:gray;background-color:gray" /></td>
+                <td width="80%" style="border:0px; padding: 0px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border:0px; padding: 0px;">
+                    <p style="font-size: 9pt;">
+                        1. ED3 avoided energy costs will be periodically evaluated and the amount paid under this rider will change accordingly. The generation / purchased power cost component included in ED3’s retail rates can change based on actual costs incurred by ED3.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <div style="font-size:11px; display:inline-block; margin-top:10px">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    Customer Owned Distributed Generation <b>POLICY SUMMARY</b> (Rev. 7 03/26/18)
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 4 of 6  
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="width:91%; margin:auto; font-size:15px;" class="page16 page-break">
+        <p align="justify">
+            Removal of any DG System will be subject to an ED3 Site Inspection designed to verify and ensure safe removal of the System. The fee for this service is listed in ED3’s Electric Service Guidelines, Rules and Regulations – <b>Section 26 – Schedule of Charges and Fees</b>.
+        </p>
+        
+        <b>TRANSFER OF OWNERSHIP ASSIGNMENT</b>
+        <p align="justify">
+            By establishing and turning on electrical services for an existing DG System location, the new DG Owner / Operator, as described herein will <b>assume</b> and <b>agree</b> to the terms, regulations and policies of the ED3 “Agreement for Interconnection of Customer Owned Distributed Generation” and in addition, to the associated Rider and rates effective on the Interconnection Date of the DG System. The operation of the DG System and the quality of electric energy supplied shall meet all standards as specified by ED3. The DG Owner / Operator is responsible for operating and maintaining the generator facility in accordance with all applicable safety and electrical codes, applicable laws, and ED3 operational standards. Liability and Indemnification of ED3 as described herein the Policy shall also apply. Please contact the Solar Department at (520) 424-0418 for a copy of the Agreement, the appropriate Rider, and rate description applicable to your DG System.
+        </p>
+        <p align="justify">
+            Customers who purchase a home from a builder with a DG System within the ED3 service territory will need to complete the ED3 “Application for Operation of Customer Owned Distributed Generation” form for ED3’s review and approval, and schedule a transfer of service by calling ED3’s Solar Department at (520) 424-0418.
+            <b style="color: red;">ED3 may disconnect service should this process fail to be completed.</b> 
+        </p>
+        
+        <b>UPGRADING A DG SYSTEM</b>
+        <p align="justify">
+            Customers who wish to increase the size of an existing DG System will be required to complete the ED3 “Application for Operation of Customer Owned Distributed Generation” form and submit all appropriate documentation for ED3’s review and approval.
+        </p>
+        <p align="justify">
+            The existing system size including the increased kilowatts cannot exceed the Residential Interconnection Maximum Limit of ten kilowatts (10 kW) DC or the Small General Service Interconnection Maximum Limit of twenty kilowatts (20 kW) DC.
+        </p>
+        <p align="justify">
+            The Rider effective at the time of the original interconnection of the DG System will remain effective regardless of any System upgrades.  However, all costs associated with a System upgrade or costs ED3 will incur to support the addition of a planned DG System shall be borne by the Customer.
+        </p>
+        <table>
+            <tr>
+                <td style="border:0px;">
+                    <p style="padding-bottom: 20px;">
+                        <b>NOTE:</b> 
+                    </p>
+                </td >
+                <td style="border:0px;">Clearance from the City or County is required <b>before</b> the Final ED3 Commissioning Inspection can be scheduled.</td>
+            </tr>
+        </table>
+        <b>METERING</b>
+        <p align="justify">
+            The Customer’s production meter reads energy generated by their DG System.
+        </p>
+        <p align="justify">
+            ED3’s meter reads energy delivered from the electric grid and any energy delivered onto the electric grid from the DG System.
+        </p>
+        <p align="justify">
+            ED3’s meter does <b>NOT</b> read energy generated by the DG System that is used by the Customer’s home or business.
+        </p>
+        
+         <div style="font-size:11px; display:inline-block; margin-top:40px">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    Customer Owned Distributed Generation <b>POLICY SUMMARY</b> (Rev. 7 03/26/18)
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 5 of 6  
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="width:91%; margin:auto; font-size:15px;" class="page16">
+        <center>
+            <b>METERING METHOD</b>
+            <br/>
+            <apex:image url="{!URLFOR($Resource.nergyimgs,
+                             'img/pagina18.png')}"/>
+        </center>
+        <b>APPLICANTS IN QUEUE</b>
+        <p align="justify">
+            DG applications are limited to thirty (30) per month on a first-come, first-served basis. Any additional applications received will be placed in the Queue to be approved the following month.
+        </p>
+        <table>
+            <tr>
+                <td style="border:0px;">
+                    <p style="padding-bottom: 20px;">
+                        <b>NOTE:</b> 
+                    </p>
+                </td>
+                <td style="border:0px;">Customer applications that are placed in the Queue are subject to all revisions and changes made to this Program during the Customer’s time in the Queue.</td>
+            </tr>
+        </table>
+        <b>PROGRAM FORMS</b>
+        <p align="justify">
+            The following Forms are subject to revisions in accordance with the terms of ED3’s Electrical Service Guidelines. Completion of all Forms and approvals <b>are required</b> to participate in the ED3 Customer Owned Distributed Generation Program.
+        </p>
+        <ul class="checkmark">
+            <li>Distributed Generation Interconnection Process Overview for Residential and Small General Service</li>
+            <li>Customer Owned Distributed Generation Checklist</li>
+            <li>Guidelines for Customer Owned Distributed Generation</li>
+            <li>Application for Operation of Customer Owned Distributed Generation</li>
+            <li>Agreement for Interconnection of Customer Owned Distributed Generation</li>
+            <li>Rider No. 8 – Solar Program – Buyback – Residential / Small General Service </li>
+        </ul>
+        
+        ED3 is <b>NOT</b> responsible for:
+        <ul>
+            <li>
+                The maintenance of the Customer’s actual DG System, nor does ED3 provide an inspection of the system installed on the Customer’s property by their Contractor.
+            </li>
+            <li>
+                The workmanship or materials of the Customer’s Installation Contractor.
+            </li>
+            <li>
+                The financial arrangements made between the Customer and the Customer’s Contractor.
+            </li>
+            <li>
+                Any projections of the economic attributes of the DG System, regardless of the source, are not approved or binding on ED3.
+            </li>
+        </ul>
+        <div style="font-size:11px; display:inline-block; margin-top:40px">
+            <div style="display:inline-block; width:79%">
+                <p>
+                    Customer Owned Distributed Generation <b>POLICY SUMMARY</b> (Rev. 7 03/26/18)
+                </p>
+            </div>
+            <div style="display:inline-block; width:20%; text-align:right;">
+                <p>
+                    Page 6 of 6  
+                </p>
+            </div>
+        </div>
+    </div>
+</apex:page>

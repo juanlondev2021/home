@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Welcome_Gift_Received__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>No welcome gift was received on the 1st delivery</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Only check if there was no welcome gift was received on the 1st delivery</inlineHelpText>
+    <label>No Welcome Gift Received</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

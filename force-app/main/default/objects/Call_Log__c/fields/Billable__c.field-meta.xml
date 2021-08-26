@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billable__c</fullName>
+    <description>Formula to flag trigger to create billable inventory record when a call is forwarded to a company after activation or after hours.</description>
+    <externalId>false</externalId>
+    <formula>AND( 
+Answered_Duration__c &gt;= 0, 
+OR(Record_Type__c = &quot;nuHome nuCard CPL&quot;,Record_Type__c = &quot;nuHome nuCard SUB&quot;,Record_Type__c = &quot;nuHome nuCard SPEC&quot;) 
+, 
+Account__c != NULL, 
+Record_Type__c != NULL
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Formula to flag trigger to create billable inventory record when a call is forwarded to a company after activation or after hours.</inlineHelpText>
+    <label>Billable?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

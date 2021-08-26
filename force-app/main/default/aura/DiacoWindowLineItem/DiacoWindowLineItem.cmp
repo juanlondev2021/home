@@ -1,0 +1,224 @@
+<!--
+* Diaco
+* @author 			Álvaro Ortega href=<aovargas05@gmail.com>
+* Project:			To Windows
+* Description:		Component to manage Products and Line Item on Window Industry
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		20/12/2019		Alvaro Ortega (AO)		Component.
+* @version	2.0		14/02/2020		Alvaro Ortega (AO)		Changes
+* @version  2.0		02/11/2020      Fabian Pineda (FP)      Added lightning:isUrlAddressable support.
+-->
+
+<aura:component controller="DiacoWindowLineItemController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,lightning:isUrlAddressable"
+                access="global" >
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="data" type="List"/>
+    
+    <aura:attribute name="isChecked" type="boolean" default='false'/>
+    
+    <aura:attribute name="isLoad" type="boolean" default='true'/>
+    <aura:attribute name="isLoadCCO" type="boolean" default='false'/>
+    
+    <aura:attribute name="isOpen" type="boolean" default='false'/>
+    <aura:attribute name="isOpenDelete" type="boolean" default='false'/>
+    
+    <aura:attribute name="COtoDelete" type="Object"/>
+    <aura:attribute name="lenCO" type="integer" />
+    
+    <aura:attribute name="COtoEdit" type="Object"/>
+    
+    <aura:attribute name="thereAreProducts" type="boolean" default='false'/>
+    <aura:attribute name="thereAreServices" type="boolean" default='false'/>
+    
+    <aura:attribute name="selectedCategory" type="String" />
+    
+    <aura:attribute name="totalSR" type="String" />
+    <aura:attribute name="totalSRI" type="String" />
+    
+    <aura:attribute name="labelFields" type="String"/>
+    
+    <aura:attribute name="dealerNumberField" type="Integer"/>
+    <aura:attribute name="retailMultiplierField" type="Integer"/>
+    
+    <aura:attribute name="isInitialLoadComplete" type="boolean" default='false'/>
+    
+    <aura:attribute name="productTypes" type="List"/>
+    
+    <div class="container">
+    
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Summary</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <aura:if isTrue="{!v.isLoad}">
+            <div class="slds-align_absolute-center">
+                <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+            </div>
+            <aura:set attribute="else"><!--52
+      
+                <lightning:buttonIcon class="slds-m-around_x-small" iconName="utility:refresh" variant="border-filled" onclick="{! c.doInit }" />-->
+                
+                <!--div class="slds-align_absolute-center slds-m-around_x-small">
+                    <lightning:button  label="New" onclick="{! c.openModel }"/>
+                </div-->
+                <div style="width: 250px" class="slds-grid slds-wrap slds-align_absolute-center ">
+                    <div class="slds-m-top_xxx-small slds-col slds-size_10-of-12 slds-m-bottom_x-small">
+                        <lightning:select aura:id="selectToCategory" name="Remodel Category" label="Remodel Category" required="true" value="{!v.selectedCategory}">
+                            <option value="">Choose one...</option>
+                            <aura:iteration items="{!v.productTypes}" var="item">
+                                <option value="{!item}">{!item}</option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <div style="margin: 23px auto  auto auto" class="slds-col slds-size_1-of-12">
+                        <lightning:button variant="brand" label="Open" onclick="{! c.selectCategory}"/>
+                    </div>
+                </div>
+                <lightning:recordEditForm aura:id="editForm"
+                                          onsuccess="{!c.handleSuccess}"
+                                          onload="{!c.handleLoad}"
+                                          onerror="{!c.handleError}"
+                                          objectApiName="Home_Services__c"
+                                          recordId="{!v.recordId}"
+                                          >
+                    <div style="max-width: 90%" class="slds-grid slds-wrap slds-m-bottom_x-small slds-align_absolute-center">
+                        <div class="slds-m-top_small slds-p-horizontal_x-small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                        	<div style="color:gray; margin-top: 0px" class="slds-text-title">{!v.labelFields}</div>
+                        </div>  
+                        <div class="slds-p-horizontal_x-small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--5-of-12 slds-large-size--5-of-12">
+                            <lightning:inputField aura:id="dealerNumber" fieldName="Dealer_Number__c" onchange="{!c.handleChangeFields}" required="true"/>
+                        </div>
+                        <div class="slds-p-horizontal_x-small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--5-of-12 slds-large-size--5-of-12">
+                            <lightning:inputField aura:id="retailMultiplier" fieldName="Retail_Multiplier__c" onchange="{!c.handleChangeFields}" required="true"/>
+                        </div>
+                        <div class="slds-m-top_small slds-p-horizontal_x-small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                            <aura:if isTrue="{!v.isInitialLoadComplete}">
+                            	<lightning:button aura:id="buttonToSaveFields" variant="brand" label="Save" onclick="{! c.savingFields}"/>
+                            </aura:if>
+                        </div>
+                        
+                    </div>
+                </lightning:recordEditForm>  
+                
+                <div  class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                    <lightning:datatable 
+                                         keyField="id"
+                                         data="{! v.data }"
+                                         columns="{! v.columns }"
+                                         hideCheckboxColumn="true"
+                                         onrowaction="{! c.handleRowAction }"/>
+                    <!--lightning:datatable keyField="id"
+                                         data="{! v.data }"
+                                         columns="{! v.columns }"
+                                         hideCheckboxColumn="true"
+                                         hideTableHeader="true"
+                                         onrowaction="{! c.handleRowAction }"/-->
+                </div>
+                <!--div class="slds-grid slds-wrap">
+    
+                    <div class="slds-col slds-size_5-of-12">
+                        <lightning:input type="text" readonly="true" value="TOTAL" />
+                    </div>
+                    <div class="slds-col slds-size_4-of-12">
+                        <lightning:input type="number" formatter="currency" readonly="true" value="{!v.totalSR}" />
+                    </div>
+                    <div class="slds-col slds-size_3-of-12 ">
+                        <lightning:input type="number" formatter="currency" readonly="true"  value="{!v.totalSRI}" />
+                    </div>
+                </div-->
+                <!--div class="slds-align_absolute-center slds-m-around_x-small">
+                    <lightning:button  label="New" onclick="{! c.openModel }"/>
+                </div-->
+                    <aura:if isTrue="{!v.isOpen}">
+                        <!--###### MODAL BOX Start######--> 
+                        <section role="dialog" tabindex="-1" style="width: 100% !important;" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container" style="max-width: 110% !important; width: 85% !important">
+                                <!-- ###### MODAL BOX HEADER Start ######-->
+                                <header class="slds-modal__header">
+                                    <lightning:buttonIcon iconName="utility:close"
+                                                          onclick="{! c.closeModel }"
+                                                          alternativeText="close"
+                                                          variant="bare-inverse"
+                                                          class="slds-modal__close"/>
+                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.COtoEdit.Remodel_Category__c} </h2>
+                                </header>
+                                <!--###### MODAL BOX BODY Part Start######-->
+                                    <!-- the messages component is for error messages -->
+                                    <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" style="height: 500px" id="modal-content-id-1">
+                                        <aura:if isTrue="{!v.isLoadCCO}">
+                                            <div class="slds-align_absolute-center">
+                                                <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+                                            </div>
+                                            <aura:set attribute="else">
+                                                <c:DiacoWindowLineItemCategory recordId="{!v.recordId}" category="{!v.COtoEdit.Remodel_Category__c}"/>
+                                            </aura:set>
+                                        </aura:if>  
+                                        
+                                    </div>
+                                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                                    <footer class="slds-modal__footer">
+                                        <lightning:button variant="brand" 
+                                                          label="Close"
+                                                          title="Close"
+                                                          onclick="{! c.closeModel }"
+                                                          disabled="{!v.isLoadCCO}"/>
+                                    </footer> 
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                        <!--###### MODAL BOX Part END Here ######-->
+                        
+                    </aura:if>
+            </aura:set>
+        </aura:if>
+        <!--aura:if isTrue="{!v.isOpenDelete}">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container"
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModelDelete }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Line Item</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-align_absolute-center slds-m-around_x-small">
+                            {!'Are you sure you want to delete '+v.COtoDelete.Name+'?'}
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModelDelete }"/>
+                        <lightning:button variant="brand" 
+                                          label="Delete"
+                                          title="Delete"
+                                          onclick="{! c.deletingChangeOrder }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            
+        </aura:if-->
+    </div>
+	
+</aura:component>

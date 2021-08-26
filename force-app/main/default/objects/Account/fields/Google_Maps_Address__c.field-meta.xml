@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Google_Maps_Address__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&apos;https://www.google.com/maps/dir/?api=1&amp;destination=&apos;+ BillingStreet +&apos;%2C&apos;+ BillingCity +&apos;%2C&apos;+ BillingState +&apos;%2C&apos;+ BillingPostalCode+&apos;&amp;travelmode= transit&apos;, &apos;Google Maps - Address&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Google Maps - Address</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

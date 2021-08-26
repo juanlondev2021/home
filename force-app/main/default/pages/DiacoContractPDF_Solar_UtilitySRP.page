@@ -1,0 +1,311 @@
+<apex:page renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false"
+    standardController="Home_Services__c" extensions="DiacoContractAPS">
+    <html>
+
+    <head>
+        <title>Energy Reduction Purchase Agreement</title>
+        <style>
+            @page {
+                size: legal;
+                margin: 1mm 5mm 5mm 5mm;
+
+            }
+
+            .page-break {
+                display: block;
+                page-break-after: always;
+            }
+
+            body {
+                font-family: Arial;
+                font-size: 12px;
+            }
+
+            .hidden {
+                color: white;
+            }
+
+            .hidden-WithBorder {
+                color: white;
+                border-bottom: 1px solid black;
+            }
+
+            .hidden-h {
+                color: white;
+            }
+
+            <!--NEW-->.cotain {
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+
+
+            .bold {
+                font-weight: bold
+            }
+
+            .border {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            .border th {
+                border: 1px solid black;
+            }
+
+            .border td {
+                border: 1px solid black;
+            }
+
+            .no-border {
+                border: 0px solid black;
+                border-collapse: collapse;
+            }
+
+            .no-border th {
+                border: 0px solid black;
+            }
+
+            .no-border td {
+                border: 0px solid black;
+            }
+
+            .margin p {
+                margin: 0;
+            }
+
+
+            .mark-below {
+                color: white;
+                border-bottom: 1px solid gray;
+            }
+
+            .mark-below-visible {
+                color: black;
+                border-bottom: 1px solid gray;
+            }
+
+            span.cls_002::after {
+                content: "\a";
+                white-space: pre;
+            }
+
+            span.cls_002 {
+                font-family: "Calibri", serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                font-size: 8px;
+                position: inherit;
+                top: 0px;
+            }
+
+            span.cls_003::after {
+                content: "\a";
+                white-space: pre;
+            }
+
+            span.cls_003 {
+                font-family: "Calibri", serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                position: inherit;
+                top: 0px;
+            }
+
+            span.cls_004 {
+                font-family: Arial, serif;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none;
+                margin-left: 5px
+            }
+
+            div.footersrp {
+                display: block;
+                padding: -15px;
+                position: running(footer);
+            }
+
+            #count-Page:after {
+                counter-increment: page;
+                content: "Page " counter(page);
+            }
+
+            div [class*="underline"] {
+                display: inline-block;
+                border-bottom: 1px solid black;
+                line-height: 70%;
+                padding: 0 50px;
+            }
+
+            #square {
+                margin: 0 5px;
+                padding: 0px 5px;
+                border: 1px solid black;
+                background: #fff;
+                color: #000;
+                font-size: 1em;
+                text-align: center;
+            }
+
+            .triangulo {
+                display: inline-block;
+                margin: 0 5px;
+            }
+
+            .triangulo-derecha {
+                border-left: solid 5px black;
+                border-top: solid 5px transparent;
+                border-bottom: solid 5px transparent;
+            }
+
+            .border-complet {
+                border: solid 0.8px black;
+            }
+
+            .border-top {
+                border-top: solid 0.8px black;
+            }
+
+            .border-right {
+                border-right: solid 0.8px black;
+            }
+
+            .border-left {
+                border-left: solid 0.8px black;
+            }
+
+            .border-bottom {
+                border-bottom: solid 0.8px black;
+            }
+
+            .cuart-table {
+                border: solid 0.8px black;
+                padding: 8px 10px;
+            }
+
+            .guion-table {
+                font-size: 16px;
+                padding: 8px 5px;
+                color: black;
+            }
+
+            #table-border td {
+                border: 0.3px solid black;
+                margin: auto;
+                width: 50%;
+            }
+
+            #table-border td ul {
+                margin-left: 10px;
+            }
+
+            .sheet5-ol li {
+                margin-bottom: 10px;
+            }
+
+            /*Styles for New page Customer generation price plan*/
+
+            span.cls_sRiverDocument__002 {
+                font-family: Arial, serif;
+                font-size: 17.7px;
+                color: rgb(0, 0, 0);
+                font-weight: bold;
+                font-style: normal;
+                text-decoration: none
+            }
+
+            div.cls_sRiverDocument__002 {
+                font-family: Arial, serif;
+                font-size: 17.7px;
+                color: rgb(0, 0, 0);
+                font-weight: bold;
+                font-style: normal;
+                text-decoration: none
+            }
+
+            span.cls_sRiverDocument_004 {
+                font-family: Arial, serif;
+                font-size: 15.8px;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: italic;
+                text-decoration: none
+            }
+
+            div.cls_sRiverDocument_004 {
+                font-family: Arial, serif;
+                font-size: 15.8px;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: italic;
+                text-decoration: none
+            }
+
+            span.cls_sRiverDocument_005 {
+                font-family: Arial, serif;
+                font-size: 15.8px;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none
+            }
+
+            div.cls_sRiverDocument_005 {
+                font-family: Arial, serif;
+                font-size: 15.8px;
+                color: rgb(0, 0, 0);
+                font-weight: normal;
+                font-style: normal;
+                text-decoration: none
+            }
+            
+            span.checkbox {
+            	font-family: "Arial Unicode MS";
+            	margin: 0 5px;
+                padding: 0px 8px;
+                border: 1px solid black;
+                background: #fff;
+                color: #000;
+                font-size: 1em;
+                text-align: center;
+            }
+            
+            span.checkbox.checked {
+            	padding: 0 4px;
+            }
+            .purchase_Contract * {
+                font-family: Arial Unicode MS;
+            }
+            
+            span.circled {
+				background-color: #AFE0EA;
+            	display: inline-block;
+            	border-radius: 5px;
+            	padding: 3px;
+            }
+        </style>
+    </head>
+
+    </html>
+
+    <body>
+        <!--div class="" style='display: {!IF(Home_Services__c.Send_Utility_Solar__c ==true, "block", "none")}; font-family: Arial Unicode MS !important; font-size: 20px !important;'>
+            {!Home_Services__c.Send_Utility_Solar__c}
+        {!IF(Home_Services__c.Send_Utility_Solar__c ==true, 'block', 'none')}
+            <apex:include pageName="Purchase_Contract" />
+        </div-->
+        <apex:include pageName="Nergi_Solutions_LLC_SRP"/>
+        <apex:include pageName="diacoSolarContractSRPRequest" />
+    </body>
+
+
+
+
+</apex:page>

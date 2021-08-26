@@ -1,0 +1,2056 @@
+<apex:page renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false"
+    standardController="Home_Services__c" extensions="DiacoContractAPS">
+    <apex:variable var="count" value="1" />
+    <apex:variable var="index" value="0" />
+    <head>
+        <title>N-ERGY</title>
+
+        <style type="text/css">
+            @page {
+                size: Legal;
+                margin: 5mm 2mm 2mm 2mm;
+
+            }
+
+            .page-break {
+                display: block;
+                clear: both;
+                page-break-after: always;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 8pt;
+            }
+
+            .text-font {
+                font-size: 90%;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+
+            .table-page-two {
+                height: 15px;
+            }
+
+            .white-font {
+                color: white;
+            }
+
+            .output-text {
+                text-decoration: underline;
+                font-weight: bolder;
+            }
+
+            .td-Borders {
+                border-top: 0px;
+                border-right: 0px;
+                border-bottom: 1px solid black;
+                border-left: 0px;
+            }
+
+            .td-Borders-right-left {
+                border-top: 0px;
+                border-right: 1px solid black;
+                border-bottom: 0px;
+                border-left: 1px solid black;
+            }
+
+            .border-white,
+            .border-white td,
+            .border-white th {
+                border: 0px;
+            }
+
+            .table-price td {
+                padding: 5px 0 5px 0;
+                border: 0px
+            }
+
+            .term-list li p {
+                margin: 1px !important;
+            }
+
+            ul.a {
+                list-style-type: circle;
+            }
+
+            .hidden-WithBorder {
+                color: white;
+                border-bottom: 1px solid black;
+            }
+        </style>
+
+    </head>
+    <div class="page-break" style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+        <div style="display: inline-block;">
+
+            <div style="width:20%; text-align:center; display: inline-block;">
+                <div style='float:left;width: 250px;'>
+                    <img src="{!URLFOR($Resource.nergy,'nergy/nergy-s.png')}" style='float:right;' class="changeImage" />
+                </div>
+            </div>
+            <div style="width:60%; text-align:center; display: inline-block;">
+                <div>
+                    <b style=" font-size: 14px; line-height: 25px;">N-ERGY Solutions LLC</b>
+                    <br/>
+
+                    <span style=" font-size: 13px; line-height: 18px;">664 W. Warner Rd. Tempe, AZ 85284
+                        <br/> 480-776-5088
+                        <br/>
+                    </span>
+                    Energy Reduction Purchanse Agreement
+                    <br/>
+                </div>
+            </div>
+            <div style="width:20%; text-align:center; display: inline-block;">
+            </div>
+
+        </div>
+        <div style="padding-left:20px; padding-right:20px;">
+            <span>
+                This Agreement is entered into on
+                <u>{!MONTH(TODAY())}/ {!DAY(TODAY())}/ {!YEAR(TODAY()) } </u> by
+                <u>{!Home_Services__c.Full_Name_Customer_1__c}</u> and between N-ERGY LLC, (664 W. Warner Rd. Tempe AZ 85284),
+                hereinafter referred to as “COMPANY” and “CUSTOMER” listed below")
+            </span>
+        </div>
+        <table WIDTH="100%">
+            <tr style="height: 45px;">
+                <td colspan="3" width="50%" style="vertical-align:top; padding-top:8px">
+                    <span>Customer #1</span>
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.First_Name__c} {!Home_Services__c.Last_Name__c}</p>
+                </td>
+                <td colspan="3"  width="50%" style="vertical-align:top; padding-top:8px">
+                    Customer #2
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Homeowner_2_Name__c}</p>
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td style="vertical-align:top; padding-top:1px">
+                    SSN
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Account__r.Customer_1_SSN_E__c}</p>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">
+                    DOB
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">
+                        {!MONTH(Home_Services__c.Account__r.Customer_1_DOB__c)}/ {!DAY(Home_Services__c.Account__r.Customer_1_DOB__c)}/ {!YEAR(Home_Services__c.Account__r.Customer_1_DOB__c)}
+                    </p>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">
+                    DL #
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Account__r.Customer_1_Drivers_License__c}</p>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">
+                    SSN
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Account__r.Customer_2_SSN__c}</p>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">
+                    DOB
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">
+                        {!MONTH(Home_Services__c.Account__r.Customer_2_DOB__c)}/ {!DAY(Home_Services__c.Account__r.Customer_2_DOB__c)}/ {!YEAR(Home_Services__c.Account__r.Customer_2_DOB__c)}
+                    </p>
+                </td>
+                <td style="vertical-align:top; padding-top:1px">
+                    DL #
+                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Account__r.Customer_2_Drivers_License__c}</p>
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 25px;">
+                <td>
+                    Home Phone
+                    <label>{!Home_Services__c.Phone_1__c}</label>
+                </td>
+                <td>
+                    Cell Phone
+                    <label>{!Home_Services__c.Account__r.PersonMobilePhone}</label>
+                </td>
+                <td>
+                    Home Phone
+                    <label>{!Home_Services__c.Homeowner_2_Phone__c}</label>
+                </td>
+                <td>
+                    Cell Phone
+                    <label>{!Home_Services__c.Account__r.Homeowner_2_Mobile__c}</label>
+                </td>
+            </tr>
+            <tr style="height: 25px;">
+                <td colspan="2">
+                    #1 Email
+                    <label>{!Home_Services__c.Femail__c}</label>
+                </td>
+                <td colspan="2">
+                    #2 Email
+                    <label>{!Home_Services__c.Homeowner_2_Email__c}</label>
+                </td>
+
+            </tr>
+            <tr style="height: 30px;">
+                <td>
+                    Employer
+                    <label>{!Home_Services__c.Account__r.Customer_1_Employer__c}</label>
+                </td>
+                <td>
+                    Employer Phone
+                    <label>{!Home_Services__c.Account__r.Customer_1_Employer_Phone__c}</label>
+                </td>
+                <td>
+                    Employer
+                    <label>{!Home_Services__c.Account__r.Customer_2_Employer__c}</label>
+                </td>
+                <td>
+                    Employer Phone
+                    <label>{!Home_Services__c.Account__r.Customer_2_Employer_Phone__c}</label>
+                </td>
+            </tr>
+            <tr style="height: 30px;">
+                <td>
+                    Income
+                    <label>{!Home_Services__c.Account__r.Customer_1_Income__c}</label>
+                </td>
+                <td>
+                    Length of Emp.
+                    <label>{!Home_Services__c.Account__r.Customer_1_Length_of_Employment__c}</label>
+                </td>
+                <td>
+                    Income
+                    <label>{!Home_Services__c.Account__r.Customer_2_Income__c}</label>
+                </td>
+                <td>
+                    Length of Emp.
+                    <label>{!Home_Services__c.Account__r.Customer_2_Length_of_Employment__c}</label>
+                </td>
+            </tr>
+            <tr style="height: 30px;">
+                <td>
+
+                </td>
+                <td>
+                    Position
+                    <label>{!Home_Services__c.Account__r.Customer_1_Employment_Position__c}</label>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    Position
+                    <label>{!Home_Services__c.Account__r.Customer_2_Employment_Position__c}</label>
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 41px;">
+                <td WIDTH="50%" style="vertical-align:top; padding-top:6px">
+                    <span>Address</span>
+                    <p style="margin-bottom: 0; padding-left: 12px;font-size: 12px">{!Home_Services__c.Account__r.FAddress__c}</p>
+                </td>
+                <td WIDTH="17%" style="vertical-align:top; padding-top:6px">
+                    <span>Mortgage Payment</span>
+                    <p style="margin-bottom: 0; padding-left: 12px;font-size: 12px">{!Home_Services__c.Account__r.Mortgage_Payment__c}</p>
+                </td>
+                <td WIDTH="17%" style="vertical-align:top; padding-top:6px">
+                    <span>Install Date/Time</span>
+                    <p style="margin-bottom: 0; padding-left: 12px;font-size: 12px">
+                        <apex:outputField value="{!Home_Services__c.Requested_Install_Date__c}" id="FillDate"/>
+                    </p>
+                </td>
+                <td WIDTH="16%" style="vertical-align:top; padding-top:6px">
+                    <span>Sales Rep.</span>
+                    <p style="margin-bottom: 0; padding-left: 12px;font-size: 12px">{!hs.Sales_Representative__c}</p>
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr>
+                <td>
+                    <table WIDTH="100%" class="border-white">
+                        <tr style="height: 20px;">
+                            <td>
+                        
+                        <apex:repeat value="{!products}" var="product" id="theRepeat">
+                            <img src='/img/checkbox_checked.gif' style=''
+                            class="changeImage" /> {!product.Product__r.Name}
+                        </apex:repeat>
+                            </td>
+                        </tr>
+                        <!--tr style="height: 20px;">
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Solar</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Insulation</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Hard Start</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Flow Wall</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Window Coverings</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Air Purifier</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Painting</td>
+                        </tr>
+                        <tr style="height: 20px;border:0px;">
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Solar</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Insulation</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Hard Start</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Flow Wall</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Windows__c}" />Windows</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Air Purifier</td>
+                            <td>
+                                <apex:outputField value="{!Home_Services__c.Solar__c}" />Painting</td>
+                        </tr-->
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 41px;">
+                <td></td>
+            </tr>
+        </table>
+        <table WIDTH="100%">
+            <tr style="height: 200px;">
+                <td valign="top" style="width: 70%; padding: 10px">
+                    Notes:
+                    <p style="margin-bottom: 0; padding-left: 12px;font-size: 14px">{!Home_Services__c.Notes__c}</p>
+                </td>
+                <td style="width: 30%">
+                    <table width="95%" style="font-size:10px;" class="table-price">
+                        <tr style="">
+                            <td style="border: 0px; ">
+                                Total Cash Selling Price
+                            </td>
+                            <td style="width:40%; ">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Total_Cash_Selling_Price__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="">
+                            <td style="border: 0px; ">
+                                Total Sales Tax
+                            </td>
+                            <td style="width:40%; ">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Customer_Tax__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 15px">
+                            <td style="border: 0px; ">
+                                Total Cash Price
+                            </td>
+                            <td style="width:40%; ">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Total_Cash_Price__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 15px">
+                            <td style="border: 0px">
+                                Down Payment
+                            </td>
+                            <td style="width:40%;">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Down_Payment__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 15px">
+                            <td style="border: 0px">
+                                Trade in Allowance
+                            </td>
+                            <td style="width:40%;">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Trade_in_Allowance__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 15px">
+                            <td style="border: 0px">
+                                Total Down Payment
+                            </td>
+                            <td style="width:40%;">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Total_Down_Payment__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 15px">
+                            <td style="border: 0px">
+                                Balance Due
+                            </td>
+                            <td style="width:40%;">
+                                <div style="border: 1px solid; height:20px; margin: 5px;padding: 5px">
+                                    <label style="font-size: 12px;">{!Home_Services__c.Total_Balance_Due__c}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table border="1|0" width="100%" style="border-collapse: collapse;" class="border-white">
+            <tbody>
+                <apex:repeat var="pm" value="{!PaymentMethods}">
+                    <tr>
+                        <td>
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "ACH","block", "none")};border:1px solid;margin:0'>
+                                <table class="border-white">
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>
+                                            {!pm.PaymentMethodType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number:</th>
+                                        <td>
+                                            {!pm.BankAccountNumber__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Routing Number:</th>
+                                        <td>{!pm.RoutingNumber__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "Credit Card","block", "none")};border:1px solid;margin:0'>
+                                <table class="border-white">
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>
+                                            {!pm.PaymentMethodType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Card Type:</th>
+                                        <td>
+                                            {!pm.CardType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name on Card (Account):</th>
+                                        <td>{!pm.NameOnCard__c}</td>
+                                        <th>EXP DATE:</th>
+                                        <td>{!pm.CardExpirationMonth__c}/{!pm.Card_Expiration_Year__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>CSV:</th>
+                                        <td>{!pm.CSV__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "Checking","block", "none")};border:1px solid;margin:0'>
+                                <table class="border-white">
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>{!pm.PaymentMethodType__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bank Name:</th>
+                                        <td>{!pm.BankName__c}</td>
+                                        <th>Bank Account Type:</th>
+                                        <td>{!pm.BankAccountType__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bank Account Name:</th>
+                                        <td>{!pm.Bank_Account_Name__c}</td>
+                                        <th>Bank Account Number:</th>
+                                        <td>{!pm.BankAccountNumber__c}</td>
+                                        <th>Routing Number:</th>
+                                        <td>{!pm.RoutingNumber__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number Checking:</th>
+                                        <td>{!pm.AccountNumberChecking__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!IF(pm.PaymentMethodType__c == "Finance","block", "none")};border:1px solid;margin:0'>
+                                <table class="border-white">
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>
+                                            {!pm.PaymentMethodType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Finance Company:</th>
+                                        <td>
+                                            {!pm.FinanceCompany__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Financed Amount:</th>
+                                        <td>
+                                            <apex:outputText value="{0, Number, Currency}">
+                                                <apex:param value="{!pm.Amount__c}" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!IF(OR(pm.PaymentMethodType__c == "Lease",pm.PaymentMethodType__c == "Cash"),"block", "none")};border:1px solid;margin:0'>
+                                <table class="border-white">
+                                    <tr>
+                                        <th>METHOD OF PAYMENT {!VALUE(count)}:</th>
+                                        <td>
+                                            {!pm.PaymentMethodType__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Financed Amount:</th>
+                                        <td>
+                                            <apex:outputText value="{0, Number, Currency}">
+                                                <apex:param value="{!pm.Amount__c}" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <apex:variable var="count" value="{!VALUE(count)+1}" />
+                </apex:repeat>
+                <tr>
+                    <td>
+                        <table width="100%">
+                            <tr style="height: 40px">
+                                <td valign="bottom" width="20%">
+                                    Authorization Signature(s) #1
+                                </td>
+                                <td valign="bottom" width="30%" style="border-bottom:1px solid black;">
+                                    <span style="margin-left:20px" class="white-font">sign_1</span>
+                                </td>
+                                <td valign="bottom" width="20%" style="text-align: right">
+                                    #2
+                                </td>
+                                <td valign="bottom" width="30%" style="border-bottom:1px solid black;">
+                                    <span style="margin-left:20px" class="white-font">sign_2</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--apex:repeat value="{!PaymentMethods}" var="pay">
+            <table WIDTH="100%" style="width: 100%">
+
+                <tr style="border: 1px solid">
+                    <td style="border: 1px solid">
+                        <table WIDTH="100%" class="border-white" style="border: 0;width: 100%">
+                            <tr style="border: 0; width: 100%">
+                                <td style="border: 0;width: 45%">
+                                    METHOD OF PAYMENT:
+                                </td>
+                                <td style="border: 0;width: 55%;">
+                                    {!pay.PaymentMethodType__c}
+                                    <hr/>
+                                </td>
+                            </tr>
+                            <apex:outputpanel rendered="{!pay.PaymentMethodType__c == 'Finance'}">
+                                <tr style="border: 0">
+                                    <td style="width: 15%;border: 0">
+                                        Finance Company:
+                                    </td>
+                                    <td valing="bottom" style="width: 40%; border: 0">
+                                        {!pay.FinanceCompany__c}
+                                        <hr/>
+                                    </td>
+                                    <td style="width: 15%; border: 0">
+                                        Financed Amount:
+                                    </td>
+                                    <td valing="bottom" style="width: 30%; border: 0">
+                                        {!pay.Amount__c}
+                                        <hr/>
+                                    </td>
+                                </tr>
+                            </apex:outputpanel>
+                            <apex:outputpanel rendered="{!pay.PaymentMethodType__c == 'Credit Card'}">
+                                <tr>
+                                    <td style="width: 15%">
+                                        Name on Card (Account):
+                                    </td>
+                                    <td valing="bottom" style="width: 40%">
+                                        <hr/>
+                                    </td>
+                                    <td style="width: 15%">
+                                    </td>
+                                    <td valing="bottom" style="width: 30%">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 15%">
+                                        Account Number:
+                                    </td>
+                                    <td valing="bottom" style="width: 40%">
+                                        <hr/>
+                                    </td>
+                                    <td style="width: 15%">
+                                        EXP DATE:
+                                    </td>
+                                    <td valing="bottom" style="width: 30%">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 15%">
+                                        Routing Number:
+                                    </td>
+                                    <td valing="bottom" style="width: 40%">
+                                        <hr/>
+                                    </td>
+                                    <td style="width: 15%">
+                                    </td>
+                                    <td valing="bottom" style="width: 30%">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 15%">
+                                        Authorization Signature(s) #1
+                                    </td>
+                                    <td valing="bottom" style="width: 40%">
+                                        <hr/>
+                                    </td>
+                                    <td style="width: 15%">
+                                        #2
+                                    </td>
+                                    <td valing="bottom" style="width: 30%">
+                                        <hr/>
+                                    </td>
+                                </tr>
+                            </apex:outputpanel>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </apex:repeat-->
+        <p style="font-size: 8px; margin-bottom: 35px">
+            By signing below you certify that all information above is true and complete. You authorize us to confirm the information
+            in this application and to request and receive credit information about you in order to determine creditworthiness.
+            You further authorize us to furnish information about your account to credit reporting agencies. Credit Reports:
+            By submitting your application, you agree that we may obtain at any time your credit report s for any legitimate
+            purpose associated with your application, account or other requests, including but not limited to reviewing,
+            modifying, renewing or collecting on your account. At your request you will be informed if such a report was
+            obtained by us, and you will be given contact information for the consumer reporting agency that furnished the
+            report. *"Us" N-ERGY LLC a MyHome Service company
+        </p>
+
+        <table WIDTH="95%" style="margin: auto;">
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="border:0px;">
+
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+
+                </td>
+                <td WIDTH="47%" style="font-size:14px;  font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height: 35px">
+                    <span style="margin-left:20px" class="white-font">sign_1</span>
+                    <span style="float: right" class="white-font">date_1</span>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="border:0px;">
+
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+
+                </td>
+                <td WIDTH="47%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    CUSTOMER SIGNATURE
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;">
+                    N-ERGY LLC
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+
+                </td>
+                <td WIDTH="47%" style="font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height: 35px;">
+                    <span style="margin-left:20px" class="white-font">sign_2</span>
+                    <span style="float: right;" class="white-font">date_2</span>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="47%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    AUTHORIZED COMPANY REPRESENTATIVE
+                </td>
+                <td WIDTH="6%" style="border:0px;">
+
+                </td>
+                <td WIDTH="47%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    CUSTOMER SIGNATURE
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--purchase contract-->
+    <div class="page-break" style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+        <div style="display: inline-block;">
+
+            <div style="width:20%; text-align:center; display: inline-block;">
+                <div style='float:left;width: 250px;'>
+                    <img src="{!URLFOR($Resource.nergy,'nergy/nergy-s.png')}" style='float:right;' class="changeImage" />
+                </div>
+            </div>
+            <div style="width:60%; text-align:center; display: inline-block;">
+                <div>
+                    <b style=" font-size: 14px; line-height: 25px;">Purchase Contract</b>
+                    <br/>
+
+                    <span style=" font-size: 13px; line-height: 18px;">664 W. Warner Rd. Tempe, AZ 85284
+                        <br/> ROC# 318524
+                        <br/>
+                    </span>
+                </div>
+            </div>
+            <div style="width:20%; text-align:center; display: inline-block;">
+            </div>
+
+        </div>
+
+        <table WIDTH="95%" style="margin: auto;">
+            <tr style="">
+                <td style="">
+                    <div style="padding:0px 20px 10px 20px;">
+
+
+                        <table WIDTH="100%" style="margin: auto; font-size:11px">
+                            <tr style="border:0px">
+                                <td WIDTH="60%" style="border:0px; border-bottom:1px solid black;padding-top:10px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.First_Name__c &" "& Home_Services__c.Last_Name__c}</p>
+                                </td>
+                                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:10px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Phone_1__c}</p>
+                                </td>
+                            </tr>
+                            <tr style="border:0px">
+                                <td WIDTH="55%" style="border:0px; text-align:left;">
+                                    HOMEOWNER(S)
+                                </td>
+                                <td WIDTH="45%" style="border:0px; text-align:left;">
+                                    PHONE NUMBER
+                                </td>
+                            </tr>
+                            <tr style="border:0px; ">
+                                <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:0px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Street__c}</p>
+                                </td>
+                                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:0px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.City__c& ", " &Home_Services__c.State__c& ", " &Home_Services__c.Zip__c}</p>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;">
+                                <td WIDTH="55%" style="border:0px; text-align:left;">
+                                    STREET ADDRESS
+                                </td>
+                                <td WIDTH="45%" style="border:0px; text-align:left;">
+                                    CITY, STATE, ZIP CODE
+                                </td>
+                            </tr>
+                            <tr style="border:0px; ">
+                                <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:0px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Femail__c}</p>
+                                </td>
+                                <td WIDTH="40%" style="border:0px;">
+                                    <table WIDTH="100%" style="margin: auto;">
+                                        <tr style="border:0px;">
+                                            <td WIDTH="30%" style="border:0px; padding-top:0px; text-align:right; font-size:13px">
+                                                Lead Source
+                                            </td>
+                                            <td WIDTH="70%" style="border:0px; border-bottom:1px solid black;">
+                                                <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.Lead_Source__c}</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="border:0px;">
+                                <td WIDTH="55%" style="border:0px; text-align:left;">
+                                    EMAIL ADDRESS
+                                </td>
+                                <td WIDTH="45%" style="border:0px; text-align:center;">
+                                    <span style="">
+                                        UTILITY CO.&nbsp;&nbsp; &nbsp; SRP&nbsp;&nbsp;&nbsp; APS &nbsp;&nbsp;&nbsp; TEP &nbsp;&nbsp;&nbsp; ED3
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr style="border:0px">
+                                <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:0px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.hoaName__c}</p>
+                                </td>
+                                <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:0px">
+                                    <p style="margin-bottom: 0; padding-left: 10px;font-size: 14px">{!Home_Services__c.hoaPhoneNumber__c}</p>
+                                </td>
+                            </tr>
+                            <tr style="border:0px">
+                                <td WIDTH="55%" style="border:0px; text-align:left;">
+                                    HOA NAME
+                                </td>
+                                <td WIDTH="45%" style="border:0px; text-align:left;">
+                                    PHONE NUMBER
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div style="width:100%; height: 20px;"></div>
+        <table class="" WIDTH="95%" style="margin: auto;">
+            <tr>
+                <td style="padding-top: 10px;padding-left:20px; padding-bottom: 10px">
+                    <table class="border-white" WIDTH="100%" style="margin: auto;">
+                        <tr style="height: 30px;">
+                            <td style="width:50%;">
+                                <h5 style="font-weight:normal; font-size:14px">Residential Photovoltaic Solar System (“the Products”)</h5>
+                            </td>
+                            <td style="width:50%;" rowspan="2">
+                                <div style="border: 1px solid; width: 90%; height:50px; display: flex;justify-content: center; align-items: flex-end;">
+                                    <table WIDTH="100%" style="margin: auto;">
+                                        <tr  WIDTH="50%" valign="end"  style="border:0px;">
+                                            <td style="border:0px;height:50px;">
+                                                <b> PURCHASE PRICE:$ </b>
+                                            </td>
+                                            <td  WIDTH="50%" valign="end" style="border: 0px !important;" >
+                                                <div style="border:0px; width:90%; border-bottom:1px solid black;">
+                                                    <apex:outputField value="{!Home_Services__c.Total_Cash_Selling_Price__c}" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                
+
+                                <!--div style="border: 1px solid; width: 90%; height:50px; display: flex;justify-content: center; align-items: flex-end;">
+                                    <b style="text-align:center;margin-top:30px">PURCHASE PRICE: </b>
+                                    <span style="border:0px; border-bottom:1px solid black;width:20px">
+                                        $ <apex:outputField value="{!Home_Services__c.Total_Cash_Selling_Price__c}" />
+                                    </span>
+                                </div-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:normal; font-size:12px;height:10px" colspan="2">
+                                <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px;width:15px" >
+                                    {!IF(Home_Services__c.System_Size__c==null,'_____________',Home_Services__c.System_Size__c)}</span> KW (System Size)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:normal; font-size:12px; height:10px" colspan="2">
+                                <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px;width:15px" >
+                                    <apex:repeat value="{!productsModules}" var="productM" id="modules">
+                                     {!productM.Product__r.Part_Number__c&", "}
+                                    </apex:repeat> 
+                                </span>
+                                (Module &amp; Model Number)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:normal; font-size:12px; height:10px" colspan="2">
+                                <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px;width:15px" >
+                                    <apex:repeat value="{!productsInverter}" var="productI" id="inverter">
+                                     {!productI.Product__r.Part_Number__c&", "}
+                                    </apex:repeat>
+                                </span>
+                                (Inverter &amp; Model Number)
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:normal; font-size:12px; height:10px" colspan="2">
+                                <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px;width:15px">
+                                    <apex:repeat value="{!productsBatteryStorage}" var="productB" id="battery">
+                                     {!productB.Product__r.Part_Number__c&", "}
+                                    </apex:repeat>
+                                </span>
+                                (Energy Storage)
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:normal; font-size:12px; height:10px" colspan="2">
+                                <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px;width:15px">
+                                    {!IF(Home_Services__c.Additional_Materials__c==null, '_____________',Home_Services__c.Additional_Materials__c) }
+                                </span>
+                                (Additional Materials)
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table class="border-white" WIDTH="95%" style="margin: auto;">
+            <tr style="height: 30px;">
+                <td style="width:38%;">
+                    Payment Options: <img src='{!IF(cash ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                    class="changeImage" /> CASH(See reverse)__________
+                </td>
+                <td style="width:22%;">
+                    <img src='{!IF(finance ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                    class="changeImage" /> FINANCE Co.__________
+                </td>
+                <td style="width:20%;">
+                    <img src='{!IF(lease ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                    class="changeImage" /> LEASE Co.__________
+                </td>
+                <td style="width:20%;">
+                    <img src='{!IF(other ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' 
+                    class="changeImage" /> OTHER.__________
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <h3 style="text-align:center;">TERMS AND CONDITIONS</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="border: 1px solid; width: 100%;">
+                        <ol type="1" class="term-list">
+                            <li>
+                                <p>
+                                    <b>ARS 44-1763:</b> NERGY LLC has provided a copy of ARS 44-1763 contract with regards to
+                                    Financing, Sale or Lease Agreements for Distributed Energy Generation Systems.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Compliance with applicable Codes and Laws:</b> All work shall be performed in a workmanlike
+                                    manner and in full compliance with all applicable building codes and other applicable
+                                    laws. NERGY LLC shall at its own expense obtain and possess all necessary licenses, permits,
+                                    and other things necessary and required for the proper performance of the work.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Use of Subcontractors:</b> NERGY LLC may utilize subcontractors to perform portions of
+                                    the work. If subcontractors are utilized NERGY LLC shall fully pay for their services
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Liability Insurance:</b> At all times during the actual installation NERGY LLC shall
+                                    keep in force a Commercial General Liability Insurance policy with limits of not less
+                                    than One Million Dollars, and excess insurance coverage of not less than Three Million
+                                    Dollars, to insure for injury to Contractor’s employees, and others, incurring loss or
+                                    injury as a result of the acts of NERGY LLC, its employees and subcontractors.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Taxes:</b> NERGY LLC shall pay all taxes required by any taxing authority having jurisdiction
+                                    over the project
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Delays:</b> NERGY LLC shall not be liable for delays due to circumstances beyond its
+                                    control. Any starting or completion dates provided by NERGY LLC are its best estimates
+                                    and subject to change. NERGY Solar Power’s performance is based upon the prompt, complete,
+                                    and accurate fulfllment of all of Customer`s obligations including payment
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Warranties:</b> NERGY LLC warrants that all labor and materials will be free from defects
+                                    for a period of ten (10) years from the date of completion. Customer will be provided
+                                    with the standard warranties from major equipment manufacturers. NERGY LLC warrants Your
+                                    roof against damage and water infiltration at each roofing penetration in connection
+                                    with the installation of the System and the surrounding area of each such penetration
+                                    for a period of five (5) years from the date of completion.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Disclaimer:</b> NERGY LLC disclaims any liability for direct or indirect damages resulting
+                                    from improper use, modifcations, alterations, repairs, misuse, abuse, vandalism, damage
+                                    caused by the serving utility company, fre, storm, food or other acts of God. NERGY LLC
+                                    shall not be liable for any direct, indirect or consequential damages, losses, costs
+                                    or other expenses, however arising, in contract or in tort, including without limitation
+                                    any economic losses of any kind, losses or damage to property or personal injury. NERGY
+                                    LLC disclaims any responsibility for the systems use or its operation for any intended
+                                    purpose
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Liens and Waivers of Liens:</b> NERGY LLC shall furnish Customer releases or waivers
+                                    of lien, from all companies that have provided Customer with a PreLien Notice, through
+                                    the date for which payment is being made. Customer shall promptly advise NERGY LLC of
+                                    its receipt of any Pre-Lien Notices.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Change Orders:</b> NERGY LLC and the Customer recognize that unforeseen conditions or
+                                    factors may become known subsequent to the time that this contract is signed. In addition,
+                                    Customer may desire a change that would add time and cost to the work. If these or other
+                                    events, within or beyond the control of the parties, require adjustment to this contract,
+                                    the parties shall make a good faith attempt to agree on all particulars including cost.
+                                    Such agreements shall be put in writing, signed by the parties and amended to this contract.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <b>Dispute Resolution:</b> ANY CONTROVERSY OR CLAIM ARISING OUT OF, OR RELATING TO, THIS
+                                    CONTRACT, OR ANY BREACH THEREOF, SHALL BE SETTLED BY ARBITRATION ADMINISTERED BY THE
+                                    AMERICAN ARBITRATION ASSOCIATION UNDER ITS CONSTRUCTION INDUSTRY ARBITRATION RULES, AND
+                                    JUDGMENT ON THE AWARD RENDERED BY THE ARBITRATOR(S) MAY BE ENTERED IN ANY COURT HAVING
+                                    JURISDICTION THEREOF. A COPY OF SUCH RULES CAN BE EXAMINED AT WWW.ADR.ORG. IF THE CUSTOMER
+                                    DOES NOT HAVE INTERNET ACCESS, OR UPON REQUEST, A COPY OF THE RULES HAVE BEEN PROVIDED
+                                    TO THE CUSTOMER.</p>
+                                <div style="font-size: 12px;margin-top:10px;">
+                                    <span>(CUSTOMER INITIALS)
+                                        <span style="font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;" class="white-font ">
+                                            ------initial_1-----
+                                        </span>
+                                    </span>
+
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <h3 style="text-align:center">I HAVE READ AND UNDERSTAND THE ABOVE</h3>
+                    <p style="text-align:center; font-size: 9px">All agreements regarding performance of the work are stated herein. All modifications to this agreement
+                        shall be in writing and signed byNERGY LLC and the Customer. This Contract entered into as of the
+                        date indicated above is by and between NERGY LLC and the undersigned Homeowner(s) hereinafter referred
+                        to as “Customer”.</p>
+                </td>
+            </tr>
+        </table>
+
+        <table WIDTH="95%" style="margin: auto;">
+            <tr style="border:0px;">
+                <td WIDTH="60%" style="font-size:14px;  font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height:35px">
+                    <span class="white-font">sign_1</span>
+
+                </td>
+                <td WIDTH="1%" style="border:0px;height:30px">
+
+                </td>
+                <td WIDTH="39%" valign="bottom" style="font-size:14px;  font-size:14px; border:0px; border-bottom:0; text-align:center;height:25px">
+                    DATE:
+                    <u><span class="white-font">date_1</span></u>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="60%" valign="top" style="border:0px;">
+                    <h4 style="margin:0">Customer(s) Signature</h4>
+                </td>
+                <td WIDTH="1%" style="border:0px;">
+
+                </td>
+                <td WIDTH="39%" style="border:0px; padding-bottom:0px; text-align:center;">
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="100%" colspan="3" style="font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height:35px;padding-right:105px;">
+
+                    <span class="white-font">sign_2</span>
+                        <span style="float:right;right:20px" class="white-font">date_2</span>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="100%" colspan="3" style="border:0px; padding-bottom:20px; text-align:center;">
+                    <h4 style="margin:0; text-align:left">Customer(s) Signature</h4>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="60%" style="font-size:14px;  font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height:35px">
+                    <span class="white-font">sign_3</span>
+                </td>
+                <td WIDTH="1%" style="border:0px;">
+
+                </td>
+                <td WIDTH="39%" valign="bottom" style="font-size:14px;  font-size:14px; border:0px; border-bottom:0; text-align:center;">
+                    DATE:
+                    <u><span class="white-font">date_3</span></u>
+                </td>
+            </tr>
+            <tr style="border:0px;">
+                <td WIDTH="60%" valign="top" style="border:0px;">
+                    <h4 style="margin:0">Energy Consultant Signature</h4>
+                </td>
+                <td WIDTH="1%" style="border:0px;">
+
+                </td>
+                <td WIDTH="39%" style="border:0px; padding-bottom:0px; text-align:center;">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-break" style="{!IF(Home_Services__c.Send_Utility_Solar__c,'', 'display: none;')}">
+        <table class="border-white">
+            <tr>
+                <td>
+                    <h2 style="text-align:center;font-size: 16px">NOTICE TO BUYER</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ol type="1" class="term-list">
+                        <li>
+                            <p>
+                                <b>You may file a complaint with the AZ Register or Contractors www.roc.az.gov or by calling
+                                    602-542-1525, you have 24 months after installtion of your project to file. </b>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                You are entitled to a copy of this contract at the time you sign it
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                TAX CREDITS AND REBATES: Buyer understands that NERGY LLC and its representatives are not tax professionals. Buyer understands
+                                that the tax credits ofered by the Federal and State governments are credits against the
+                                buyer’s income tax liability. Should you have any questions relating to or pertaining to
+                                your ability to acquire the abovementioned credits, you should seek counsel of a tax professional.
+                                Furthermore, buyer understands that rebates and credits are estimated at time of purchase
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <b>NERGY LLC AGREES TO PAINT CONDUIT, THE DAY OF THE INSTALLATION, ONLY WITH CUSTOMER SUPPLIED
+                                    PAINT AND MATERIALS</b>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <b>. THE AMOUNT OF USAGE AND SAVINGS ARE ESTIMATES ONLY AND ARE NOT GURANTEED</b>
+                            </p>
+                        </li>
+                    </ol>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2 style="text-align:center;font-size: 16px;margin:0">ADDITIONAL TERMS AND CONDITIONS</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ol type="1" class="term-list">
+                        <li>
+                            <p>
+                                The Customer shall aford access to the Customer’s residence to NERGY LLC or its designee(s) to install the Products.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                NERGY LLC assumes no responsibility or liability for payments made by Customer to any of NERGY Solar Power’s salesmen or
+                                employees unless any such payments is/are made by check payable to NERGY LLC.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Customer agrees that he/she will sign a Contractors Completion Certifcate, as well as any other documents deemed necessary
+                                by any fnancial institution which provides fnancing to Customer in order to acquire the Products.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Purchaser understands there is no written or implied warranty on Customer’s existing Electrical System(s).
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Actual production/reduction of usage and customer savings may vary based on size of the system, orientation, and rate plans.
+                                Utility rates and funding program levels are subject to change. NERGY LLC has no control
+                                over Utility rates and/or fees associated with the energy devices or Product’s sold.
+                                <!--  <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height:40px">initial_2</span>-->
+                            </p>
+                        </li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2 style="text-align:center;font-size: 16px;margin:0">ADDITIONAL TERMS AND CONDITIONS</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="border: 1px solid;padding: 20px; font-size: 12px">
+                        <p>
+                            Payments on cash purchases are to be made as follows (payment terms with third parties vary depending on funding source):
+                        </p>
+                        <p>
+                            The frst Payment, of $___________ is due at the time of Contract Execution. Drawings may not be prepared for Utility Company
+                            and Authority having Jurisdiction, if applicable, until this payment is received.
+                        </p>
+                        <p>
+                            The second payment, in the amount of $___________ (equal to or greater than 50% of the contract amount) is due upon receipt
+                            of approval from the Utility Company and Authority having Jurisdiction, if applicable. Materials
+                            and Equipment may not be purchased until this payment is received.
+                        </p>
+                        <p>
+                            All payments not received when due will be charged a 1.5% monthly service charge. Credit card payments are a valid and acceptable
+                            form of payment. However, payments made with credit cards are subject to additional merchant
+                            fees
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2 style="text-align:center;font-size: 16px;margin:0">WARRANTIES</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        ARS 44-1762.
+                        <u>Solar energy device warranties; installation standards; inspections</u> A. The collectors, heat exchangers
+                        and storage units of a solar energy device that is sold or installed in this state, and the installation,
+                        shall be warranted for a period of at least two years. The remaining components of the solar energy
+                        device and their installation shall be warranted for a period of at least one year. B. Any person
+                        who manufactures, furnishes for installation or installs a solar energy device shall provide with
+                        such device a written statement of warranty, responsibilities assumed or disclaimed and performance
+                        data of the solar energy device and components of the solar energy device. The form of the statement
+                        required by this subsection is subject to approval by the registrar of contractors after consultation
+                        with the governor’s energy ofce. T he registrar of contractors shall adopt rules governing the readability
+                        and understandability of the statement. The statement shall specify the source of any performance
+                        data it contains. A copy of the statement shall be delivered to the registrar of contractors where
+                        it shall be kept on public fle.
+                        <b>C. A person who sells a solar energy device in this state shall furnish a certifcate to the buyer
+                            that the solar energy device complies with the requirements of this section.</b> D. A solar energy
+                        device that is sold or installed in this state shall comply with any consumer protection, rating,
+                        certifcation, performance, marking, installation and safety standards that have been adopted by the
+                        governor’s energy ofce. E. An individual who installs a solar energy device in this state, in addition
+                        to being a licensed solar contractor under title 32, chapter 10, article 4, shall: 1. Possess the
+                        general license that is appropriate to the type of solar energy device that is installed. Installers
+                        of a solar water heater or a photovoltaic device shall possess an appropriate contractor’s license.2.
+                        Meet any education and training standards that have been adopted by the registrar of contractors
+                        after consultation with the governor’s energy ofce.3. Pass an examination on the installation of
+                        the type of device to be installed, if the registrar of contractors after consultation with the governor’s
+                        energy ofce has adopted such an examination. F. Solar energy devices that are designed or installed
+                        by the fnal owner are exempt from the requirements of subsections A through E.G. The installation
+                        of a solar energy device shall meet the requirements of: 1. All applicable fre, safety and building
+                        codes.2. Consumer protection standards, including freeze protection and temperature related damage
+                        standards adopted by the governor’s energy ofce.3. All other applicable federal, state and local
+                        laws. H. Solar energy devices are subject to random inspections by the registrar of contractors.
+                        Installers who fail to meet safety, installation or other prescribed standards are subject to disciplinary
+                        action under title 32, chapter 10, Article
+                        <b>
+                            <u>3.Statement of warranty coverage:</u>
+                        </b> The warranty requirements for the installation company will be as follows (this warranty supersedes
+                        all other warranties for the time periods stated): The installation company will provide a full parts
+                        and labor warranty for the entire system for ten (10) years from the date of installation. Full parts
+                        and labor warranty includes, but is not limited to, any and all component failures(s), whether it
+                        is covered by the original manufacturer or not, and any and all installation-related malfunction(s).
+                        And manufacturer’s warranty(ies) are in addition to, not in lieu of, the installation warranty. Warranty
+                        is not required to cover problems resulting from exposure to harmful materials and chemical, fre,
+                        food, lighting, hurricane, tornado, hailstorm, earthquake, or other acts of God, vandalism, alteration
+                        of system by anyone not authorized by the installation company, or any other cause beyond the control
+                        of the installation company. NERGY LLC MAKES NO OTHER WARRANTIES, EXPRESSED OR IMPLIED, EXCEPT AS
+                        SPECIFICALLY PROVIDED IN THIS AGREEMENT AND NERGY LLC WILL NOT BE RESPONSIBLE FOR ANY SPECIAL, INDIRECT
+                        OR CONSEQUENTIAL PROPERTY OR COMMERCIAL DAMAGE OF ANY NATURE WHATSOEVER.
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2 style="text-align:center;font-size: 16px;">NOTICE OF CANCELLATION</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="border: 1px solid;padding: 20px; font-size: 12px">
+                        <p>
+                            Customer may cancel this Contract within three (3) days after signing by notifying NERGY LLC of such in writing cancellation
+                            could incur a cancel fee of up to $2500.00. NERGY LLC may cancel this agreement if existing conditions
+                            at the site of the work prohibit the work or add additional costs to the work that the Customer
+                            is unwilling to pay for under the change order provisions of this Contract. To cancel this transaction,
+                            mail or deliver a signed and dated copy of this cancelation notice or any other written notice
+                            to: 664 W. Warner Rd. Tempe AZ 85284
+                        </p>
+                        <p>
+                            I hereby cancel this transaction: DATE:
+                            <u><span class="white-font">date_1</span></u> Customer(s) Signature:
+                            <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px" class="white-font">
+                                _sign_1________</span>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-break" style="">
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="padding: 80px 50px 0px 50px">
+                    <h2 style="text-align:center;font-size: 18px;margin:0">APS Arizona Public Service</h2>
+                    <h2 style="text-align:center;font-size: 18px;margin:0">Solar – (Post Net Metering</h2>
+                    <h2 style="text-align:center;font-size: 18px;margin:0">Consumer Acknowledgement Statement)</h2>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 50px;font-size: 16px;">
+                    <p>
+                        By signing this disclaimer, you confirm your understanding that the economics behind your decision to buy this solar system
+                        may change. Also, the solar rate plans proposed by APS are a time of usage plan or a demand based
+                        plan. Any potential savings will depend on a customer’s ability to use power in a way that conforms
+                        to these plans. You further understand that even with a “load controller” you could potentially exceed
+                        the demand set for the home due to uncontrolled loads such as a stove or added loads after the system
+                        is installed
+                    </p>
+                    <p>
+                        Any power generated that is sent out to the grid is subject to be purchased back by APS at a rate of $.116 per kWh (not the
+                        same “retail” rate that is charged for buying power from APS)
+
+                    </p>
+                    <p>
+                        You further acknowledge neither Nergy Solutions nor its affiliates have made any guarantees relating to savings. Any estimates
+                        of saving are purely “estimates” and are in no way guaranteed by Nergy Solutions or its affiliates.
+
+                    </p>
+                    <div style="height: 40px"></div>
+                    <p>
+                        Printed Name:
+                        <u>&nbsp;&nbsp;&nbsp; {!Home_Services__c.First_Name__c &" "&Home_Services__c.Last_Name__c}&nbsp;&nbsp;&nbsp;</u>
+                    </p>
+                    <p>
+                        Signature:
+                        <span style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px" class="white-font">--sign_1---------</span>
+                    </p>
+                    <p>
+                        Date:
+                        <u><span class="white-font">date_1</span></u>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 80px 50px 0px 50px">
+                    <h4 style="text-align:center;font-size: 16px;margin:0">Nergy Solutions</h4>
+                    <h4 style="text-align:center;font-size: 16px;margin:0">664 W. Warner Rd., Tempe, AZ 85284 </h4>
+                    <h4 style="text-align:center;font-size: 16px;margin:0">Consumer Acknowledgement Statement)</h4>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--Aditional Request-->
+    <div class="page-break" style="">
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="padding: 80px 50px 50px 50px">
+                    <div style="border: 2px solid; background: #00ade6; height: 30px; display: flex; align-items: center">
+                        <h2 style="text-align:center;font-size: 18px;margin:0">APS Program Additional Requirements </h2>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 70px 50px 70px;font-size: 16px;">
+                    <p>
+                        We at Nergy Solutions will be processing all the documents for your Solar System. In order to do this, we will access your
+                        online utility account to download a copy of your most recent utility bill and make a solar reservation
+                        on your behalf. Please provide your utility company online account user name and password below.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:left; font-size: 14px;padding: 0px 100px 50px 100px;font-size: 16px;">
+                    <p>
+                        <b>Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>
+                        <span style="width:250px;border-bottom: 1px solid black;display:inline-block;">
+                            {!Home_Services__c.Username__c}
+                        </span>
+                    </p>
+                    <p>
+                        <b>APS Password:&nbsp;&nbsp;&nbsp;&nbsp; <span style="width:250px;border-bottom: 1px solid black;display:inline-block;">
+                            <apex:outputField value="{!Home_Services__c.Password__c}"/>
+                        </span></b>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 70px 50px 70px;font-size: 16px;">
+                    <p>
+                        *Application must be made in the name of the homeowner. For Landlord/tenant situations, the homeowner must create reservation
+                        under their APS account. For homeowners without an APS account, a non‐billed customer account must
+                        be created to submit the application:
+                        <u style="color:blue">https://www.aps.com/en/_layouts/APScom/RPMRegistration/RPMCreateAccount.aspx</u>
+                    </p>
+                    <p>
+                        What is the best location in your home for placement of the battery storage unit?
+                    </p>
+                    <p>
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 50px 0px 0px 80px;font-size: 16px; text-align:left">
+                    <spam style="border: 1px solid;font-size:16px">
+                        &nbsp;&nbsp;&nbsp;Are you the property owner at the site location?&nbsp;&nbsp;&nbsp;
+                    </spam>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Property_Owner__c ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                            class="changeImage" /> YES
+                    </p>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Property_Owner__c ==false,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                            class="changeImage" />NO</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 50px 0px 0px 80px;font-size: 16px;text-align:left">
+                    <spam style="border: 1px solid;font-size:16px">
+                        &nbsp;&nbsp;&nbsp;☐ Do you have any pets on site?&nbsp;&nbsp;&nbsp;
+                    </spam>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Pets__c =="Yes","/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                            class="changeImage" /> YES
+                    </p>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Pets__c !="Yes","/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                            class="changeImage" />NO</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 50px 0px 0px 80px;font-size: 16px;text-align:left">
+                    <spam style="border: 1px solid;font-size:16px">
+                        &nbsp;&nbsp;&nbsp; Is your electric meter located behind a fence?&nbsp;&nbsp;&nbsp;
+                    </spam>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Electric_Behind_Fence__c ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                            style='float:left;' class="changeImage" /> YES
+                    </p>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Electric_Behind_Fence__c ==false,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                            style='float:left;' class="changeImage" />NO</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 50px 0px 0px 80px;font-size: 16px;text-align:left">
+                    <spam style="border: 1px solid;font-size:16px">
+                        &nbsp;&nbsp;&nbsp;Is this an expansion to an existing generating solar system?&nbsp;&nbsp;&nbsp;
+                    </spam>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Existing_Generating_Solar_System__c ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                            style='float:left;' class="changeImage" /> YES
+                    </p>
+                    <p style="padding-left: 100px;">
+                        <img src='{!IF(Home_Services__c.Existing_Generating_Solar_System__c ==false,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                            style='float:left;' class="changeImage" />NO</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-break">
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="">
+                    <div style="height: 133px;width:200px;margin:auto ">
+                        <img style="height: 133px;width:200px " src="{!URLFOR($Resource.nergy,'nergy/APS-Arizona-utility.png')}" class="changeImage"
+                        />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <h4 style="text-align:center;font-size: 16px">APPENDIX IIA</h4>
+                    <h4 style="text-align:center;font-size: 16px">DISCLAIMER</h4>
+                    <h4 style="text-align:center;font-size: 16px">POSSIBLE FUTURE RULES and/or RATE CHANGES AFFECTING YOUR ROOFTOP PHOTOVOLTAIC SYSTEM </h4>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 14px;padding: 0px 80px 0px 80px">
+                    <p>
+                        The following is a supplement to paragraph 10.6 of the Interconnection Agreement you signed with the Arizona Public Service
+                        Company (APS).
+                    </p>
+                    <p style="padding-left: 40px">
+                        <ol type="1" class="">
+                            <li>
+                                <p>
+                                    APS electricity rates, basic charges and service fees are subject to change. Future adjustments to these items may positively
+                                    or negatively impact any potential savings or the value of your rooftop photovoltaic
+                                    system.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    . You will be responsible for paying any future increases to electricity rates, basic charges or service fees from APS.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Your rooftop photovoltaic system is subject to the current rates, rules and regulations established by the Arizona Corporation
+                                    Commission (“Commission”). The Commission may alter its rules and regulations and/or
+                                    change rates in the future, and if this occurs, your system is subject to those changes
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Any future electricity rate projections presented to you are not approved by APS or the Commission. They are based on projections
+                                    formulated by external third parties not affiliated with APS or the Commission.
+                                </p>
+                            </li>
+                        </ol>
+                    </p>
+                    <p>
+                        By signing below, you acknowledge that you have read and understood the above disclaimer.
+                    </p>
+                    <p>
+                        Signed,
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="95%" class="border-white" style="margin: auto;">
+            <tr>
+                <td WIDTH="50%" style="font-size:14px; font-size:14px; border:0px; border-bottom:1px solid black; text-align:left;height:40px">
+                    <span class="white-font" style="  text-align:center;">sign_1</span>
+                </td>
+                <td WIDTH="50%" rowspan="4" style="">
+                    <div style="width: 100%;display:flex; justify-content: center;align-items: end;">
+                        <div style="border: 2px solid; width: 60%; font-size:16px; padding: 10px;margin: auto;">
+                            By signing this disclaimer, you confirm your understanding that the economics behind your decision to buy or lease solar
+                            may change. You are signing up for a long-term agreement with a thirdparty NOT affiliated with
+                            APS, whose numbers are based on their own predictions about rates and policies that are subject
+                            to change.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td WIDTH="50%" valign="top" style="border:0px;">
+                    <h4 style="margin:0">Name/signature</h4>
+                </td>
+            </tr>
+            <tr>
+                <td WIDTH="50%" style="font-size:14px; border:0px; border-bottom:1px solid black; height:30px">
+                    <span class="white-font">date_1</span>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" WIDTH="50%" style="border:0px; padding-bottom:20px; text-align:center;">
+                    <h4 style="margin:0; text-align:left">Date</h4>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-break">
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="">
+                    <div style="height: 133px;width:200px;margin:auto ">
+                        <img style="height: 133px;width:200px " src="{!URLFOR($Resource.nergy,'nergy/APS-Arizona-utility.png')}" class="changeImage"
+                        />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <h4 style="text-align:center;font-size: 18px">CONSUMER ACKNOWLEDGEMENT</h4>
+                    <h4 style="text-align:center;font-size: 18px">Financing, Sale or Lease Agreements for Distributed Energy Generation Systems</h4>
+                    <h4 style="text-align:center;font-size: 18px">Adherence A.R.S. § to
+                        <u style="color:blue">44-1763</u>
+                    </h4>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 16px; padding: 10px 80px 10 80px">
+                    <p>
+                        Consumers buying, financing or leasing a solar distributed energy generation system (“System”) must receive certain disclosures
+                        from the manufacturer and solar installers regarding warranties, payment obligations, performance
+                        data and major System components as set forth in A.R.S
+                        <u style="color:blue">§ 44-1763</u>.
+                    </p>
+                    <p>
+                        As part of the installer’s interconnection application process for the purchase or lease of a System, consumers must acknowledge
+                        below that they have had the opportunity to review their contract documentation to ensure that it
+                        contains all the required information set forth on the attached Table 1, A.R.S §
+                        <u style="color:blue">44-1763</u> Contract Requirements.
+                    </p>
+                    <p>
+                        APS will reject interconnection applications which do not include a signed copy of this acknowledgement
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <div style="border: 1px solid blue !important; Padding: 20px">
+            <table width="100%" class="border-white">
+                <tr style="font-size: 16px">
+                    <td style="padding: 20px">
+                        <h4>I, CONSUMER:</h4>
+                        <ul>
+                            <li>Have read the attached Table 1,
+                                <u style="color:blue">A.R.S § 44-1763</u> Contract Requirements</li>
+                            <li>
+                                <p>
+                                    Have been given the opportunity to review the contract documentation for the purchase or lease of my System to ensure that
+                                    it contains all the required information set forth on the attached Table 1,
+                                    <u style="color:blue">A.R.S § 44-1763</u> Contract Requirements.
+                                </p>
+                            </li>
+                        </ul>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="font-size: 16px">
+                        <div style="border-bottom: 1px solid; width: 80%; margin: 20px auto;">
+                            <b>Consumer Signature:
+                                <span class="white-font" style=" font-size:14px; border:0px; border-bottom:1px solid black; text-align:center;height:20px">--sign_1--</span>
+                            </b>
+                        </div>
+                        <div style="border-bottom: 1px solid; width: 80%; margin: 20px auto;">
+                            <b>Consumer Printed Name:</b> {!Home_Services__c.First_Name__c &" "&Home_Services__c.Last_Name__c}
+                        </div>
+                        <div style="border-bottom: 1px solid; width: 80%; margin: 20px auto;">
+                            <b>Address:</b> {!Home_Services__c.Street__c}
+                        </div>
+                        <div style="border-bottom: 1px solid; width: 80%; margin: 20px auto;">
+                            <b style="">City/State/Zip:</b> {!Home_Services__c.City__c& ", " &Home_Services__c.State__c& ", " &Home_Services__c.Zip__c}
+                        </div>
+                        <div style="border-bottom: 1px solid; width: 80%; margin: 20px auto;">
+                            <b style="">APS Account #:</b> {!Home_Services__c.APS_Account__c}
+                        </div>
+                        <div style="border-bottom: 1px solid; width: 80%; margin: 20px auto;">
+                            <b>Date:</b> <span class="white-font">date_1</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="page-break">
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <h4 style="text-align:center;font-size: 18px">
+                        <u>TABLE 1.</u>
+                    </h4>
+                    <h4 style="text-align:center;font-size: 18px">
+                        <u>
+                            <span style="color:blue">§ 44-1763</span> CONTRACT REQUIREMENTS</u>
+                    </h4>
+                    <h4 style="text-align:center;font-size: 18px">Financing, Sale or Lease Agreements for Distributed Energy Generation Systems</h4>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 16px">
+                    <p>An agreement governing the financing, sale or lease of a distributed energy generation System to any
+                        person or a political subdivision of this state must include:</p>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" style="font-size: 14px">
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            No blank spaces affecting the timing, value or obligations of the agreement at the time of installation
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            At least ten-point type
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            The right to rescind the contract for a period of not less than three (3) business days after the contract is signed by the
+                            buyer or lessee and before the distributed energy generation system is installed.
+
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            A description of the make and model of the System’s major components, or a guarantee of the energy production that the System
+                            will provide over the life of the Contract.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            For purchases, a breakdown of the following (if applicable):
+                            <ul class="a">
+                                <li>Total purchase price or cost of the lifetime of the Contract</li>
+                                <li>Any interest, installation fee, doc prep fees, service fees or other costs to be paid</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            For financed or leased Systems, a breakdown of the following (if applicable):
+                            <ul class="a">
+                                <li>Total number of payments</li>
+                                <li>Payment frequency</li>
+                                <li>The amount of each payment</li>
+                                <li> Payment due date</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            The current and applicable tax incentives, rebates or other state or federal incentives, and any conditions or requirements
+                            needed to obtain these incentives
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            The current tax obligations, including the assessed value and property tax assessments, as applicable and calculated in the
+                            year the contract was signed, transaction privilege taxes, and any obligations for transfer tax
+                            credits or tax incentives
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            How warranty or maintenance information obligations may be sold to or transferred to a 3rd-party.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            A written warranty statement that includes responsibilities assumed or disclaimed and performance data of the System and
+                            components.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            Any restrictions on the ability to modify or transfer ownership of the System, including whether any modification or transfer
+                            is subject to review or approval by a third party, and such third party’s full contact information
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            Any third-party review requirements in the event of a modification or transfer of ownership of the real property to which
+                            the System is or will be affixed, including such third-party’s full contact information
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            A summary of the total financing, operating, maintenance and construction costs of the System costs of System.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            The contact information of the entity that may assume the obligation of maintenance, or warranty, should it be transferred.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            If the agreement estimates future utility charges and the System is installed, it must also estimate utility charges during
+                            the same period with at least a plus or minus 5% range from current utility rates
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 80px 0px 80px">
+                    <ul style="margin: 0">
+                        <li>
+                            A statement that utility rates, structures, and projected savings are subject to change. Also, that any tax incentives may
+                            change or be terminated by executive, legislative or regulatory action
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="">
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="width: 50%">
+                    <img style="height: 133px;width:200px; float:left " src="{!$Resource.DiacoContractsNergyLogo}" class="changeImage" />
+                </td>
+                <td></td>
+                <td style="width: 50%">
+                    <img style="height: 133px;width:200px; float:right " src="{!URLFOR($Resource.nergy,'nergy/western.png')}" class="changeImage"
+                    />
+
+
+                </td>
+            </tr>
+            <tr>
+                <td valign="bottom" style="border-bottom: 1px solid; height: 80px;font-size: 12px">
+                    {!Home_Services__c.First_Name__c &' '&Home_Services__c.Last_Name__c}
+                </td>
+                <td valign="bottom" style="border-bottom: 1px solid; height: 80px">
+                </td>
+                <td valign="bottom" style="border-bottom: 1px solid; height: 80px;text-align: center;font-size: 12px">
+                    {!Home_Services__c.Phone_1__c}
+                </td>
+            </tr>
+            <tr style="font-size: 14px">
+                <td valign="top">
+                    HOME OWNER(S)
+                </td>
+                <td>
+
+                </td>
+                <td valign="top" style="text-align: center">
+                    PHONE NUMBER
+                </td>
+            </tr>
+            <tr>
+                <td valign="bottom" style="border-bottom: 1px solid;height: 80px;font-size: 12px">
+                    {!Home_Services__c.Street__c}
+                </td>
+                <td valign="bottom" style="border-bottom: 1px solid;height: 80px">
+                </td>
+                <td valign="bottom" style="border-bottom: 1px solid;height: 80px; text-align: center;font-size: 12px">
+                    {!Home_Services__c.City__c& ", " &Home_Services__c.State__c& ", " &Home_Services__c.Zip__c}
+                </td>
+            </tr>
+            <tr style="font-size: 14px">
+                <td valign="top">
+                    STREET ADDRESS
+                </td>
+                <td>
+                </td>
+                <td valign="top" style="text-align: center">
+                    CITY&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; STATE&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; ZIP
+                </td>
+            </tr>
+            <tr>
+                <td valign="bottom" style="border-bottom: 1px solid;width:30%; height: 80px; padding-right: 5px;font-size: 12px">
+                    {!Home_Services__c.Femail__c}
+                </td>
+                <td style="width:10%; height: 80px;">
+                </td>
+                <td valign="bottom" style="border-bottom: 1px solid;width:30%; height: 80px;padding-left: 5px">
+                    {!Home_Services__c.Requested_Install_Date__c}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    EMAIL ADDRESS
+                </td>
+                <td></td>
+                <td>
+                    REQUESTED VISIT DATE/TIME
+                </td>
+            </tr>
+        </table>
+        <table width="100%" class="border-white">
+            <tr>
+                <td style="width: 45%">
+                    <h5>Energy Efficiency Upgrades</h5>
+                </td>
+                <td style="width: 45%">
+                    <h5>Home Description</h5>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>R-38 Insulation</p>
+                </td>
+                <td rowspan="6">
+                    <div style="border: 2px solid; width: 80%; font-size:16px; padding: 10px;">
+                        Square Feet: <u>{!Home_Services__c.House_Square_Footage__c}</u>
+                        <ol type="1" style="list-style-type:none;">
+                            <li>1. Story</li>
+                            <li>2. Story</li>
+                            <li>Tri-Level</li>
+                            <li>Current Insulation Fiberglas</li>
+                            <li>Current Insulation Cellulose</li>
+                        </ol>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Radiant Barrier</td>
+            </tr>
+            <tr>
+                <td>Attic Air Seal</td>
+            </tr>
+            <tr>
+                <td>Duct Seal</td>
+            </tr>
+            <tr>
+                <td>Air Handler Seal # of units</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <b>Energy Star Total </b>$
+                        <u>&nbsp;&nbsp; &nbsp;Included w/solar
+                        </u>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-size: 14px">
+                    <h4 style="text-align:center">Changes</h4>
+                    <p>
+                        Any changes made to plans, materials used, time needed or any other portion of the work must be discussed with Owner prior
+                        to any decisions. If the Owner wishes to make any changes to this contract (additions or subtractions),
+                        the owner must discuss the changes with the contractor and both the owner and contractor must mutually
+                        agree upon the changes by completing a Change Order Form provided by the contractor.
+                    </p>
+                    <h4 style="text-align:center">Permits</h4>
+                    <p>
+                        Contractor agrees to secure any permits necessary so that this work will be done within the parameters of the laws of Arizona.
+                        Contractor agrees that any fees for these permits are already included in the total amount charged
+                        to the Owner.
+                    </p>
+                    <h4 style="text-align:center">Workers</h4>
+                    <p>
+                        Contractor agrees that any laborer, subcontractor and/or employee that he/she hires for the purposes of this job is legally
+                        permitted to work in this function in this country.
+                    </p>
+                    <h4 style="text-align:center">Subcontractors</h4>
+                    <p>
+                        Owner agrees that the Contractor may hire subcontractors at his/her discretion, provided that Contractor agrees that the
+                        payment for said subcontractors is entirely the Contractor's responsibility. Owner is not in any
+                        way liable for a subcontractor's missed payment.
+
+                    </p>
+                    <h4 style="text-align:center">Insurance</h4>
+                    <p>
+                        Owner agrees to maintain the appropriate insurance on the reference in section one. Contractor agrees to maintain an insurance
+                        policy that covers himself/herself, any employees or subcontractors, his/her equipment, and any damage
+                        caused by the work.
+                    </p>
+                    <p style="text-align: center">
+                        I HAVE READ AND UNDERSTAND THE ABOVE
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" class="border-white">
+            <tr>
+                <td valign="bottom" style="height: 40px;width: 50%;border-bottom: 1px solid;">
+                    <span class="white-font">sign_1</span>
+                </td>
+                <td style="height: 40px;width: 10%;"></td>
+                <td valign="bottom" style="height: 30px;width: 40%;">Date:
+                    <span class="white-font">date_1</span>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" colspan="3">Customer(s) Signature</td>
+            </tr>
+
+            <tr>
+                <td style="height: 40px;width: 30%;border-bottom: 1px solid;padding-right: 5px">
+                    <span class="white-font">sign_2</span>
+                </td>
+                <td style="height: 40px;width: 10%"></td>
+                <td valign="bottom" style="height: 30px;width: 40%;">Date:
+                    <span class="white-font">date_2</span>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" colspan="3">Sales Rep Signature</td>
+            </tr>
+        </table>
+    </div>
+    <!--table WIDTH="100%" class="border-white">
+        <tr style="height: 50px; text-align: center;" >
+            <td>
+
+            </td>
+            <td valign="bottom">
+                <hr/>
+                CUSTOMER SIGNATURE
+            </td>
+        </tr>
+        <tr style="text-align: center;">
+            <td>
+                N-ERGY LLC
+                <hr/>
+                AUTHORIZED COMPANY REPRESENTATIVE
+            </td>
+            <td valign="bottom">
+                <hr/>
+                CUSTOMER SIGNATURE
+            </td>
+        </tr>
+    </table-->
+
+    <div style=" font-size:80%;">
+
+    </div>
+</apex:page>

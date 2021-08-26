@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HowmanyWindowDoorsInbound__c</fullName>
+    <description>How many Windows &amp; Doors will you Need to do?</description>
+    <externalId>false</externalId>
+    <label>How many Windows &amp; Doors will you Need t</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1-2 Windows.</fullName>
+                <default>false</default>
+                <label>1-2 Windows.</label>
+            </value>
+            <value>
+                <fullName>3-5 Windows.</fullName>
+                <default>false</default>
+                <label>3-5 Windows.</label>
+            </value>
+            <value>
+                <fullName>6+ Windows.</fullName>
+                <default>false</default>
+                <label>6+ Windows.</label>
+            </value>
+            <value>
+                <fullName>1-2 Doors.</fullName>
+                <default>false</default>
+                <label>1-2 Doors.</label>
+            </value>
+            <value>
+                <fullName>2-3 Doors.</fullName>
+                <default>false</default>
+                <label>2-3 Doors.</label>
+            </value>
+            <value>
+                <fullName>3+ Doors.</fullName>
+                <default>false</default>
+                <label>3+ Doors.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

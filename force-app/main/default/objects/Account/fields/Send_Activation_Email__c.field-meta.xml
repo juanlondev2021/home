@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Activation_Email__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If Unchecked : Check this to send an activations E-mail and enter the Person into a drip campaign that sends them e-mails until the activate.
+If Checked : They have been entered into a Activations drip.</description>
+    <externalId>false</externalId>
+    <label>Send Activation Email</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

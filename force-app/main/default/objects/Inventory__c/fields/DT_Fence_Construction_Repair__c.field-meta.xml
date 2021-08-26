@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Fence_Construction_Repair__c</fullName>
+    <description>(Fencing)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Fencing)</inlineHelpText>
+    <label>Fence Construction /Repair</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fencing - Complete Wood</fullName>
+                <default>false</default>
+                <label>Fencing - Complete Wood</label>
+            </value>
+            <value>
+                <fullName>Fencing - Complete Iron</fullName>
+                <default>false</default>
+                <label>Fencing - Complete Iron</label>
+            </value>
+            <value>
+                <fullName>Fencing - Complete Vinyl</fullName>
+                <default>false</default>
+                <label>Fencing - Complete Vinyl</label>
+            </value>
+            <value>
+                <fullName>Fencing - Complete Brick</fullName>
+                <default>false</default>
+                <label>Fencing - Complete Brick</label>
+            </value>
+            <value>
+                <fullName>Fencing - Complete Concrete</fullName>
+                <default>false</default>
+                <label>Fencing - Complete Concrete</label>
+            </value>
+            <value>
+                <fullName>Fencing - Partial Wood</fullName>
+                <default>false</default>
+                <label>Fencing - Partial Wood</label>
+            </value>
+            <value>
+                <fullName>Fencing - Partial Iron</fullName>
+                <default>false</default>
+                <label>Fencing - Partial Iron</label>
+            </value>
+            <value>
+                <fullName>Fencing - Partial Vinyl</fullName>
+                <default>false</default>
+                <label>Fencing - Partial Vinyl</label>
+            </value>
+            <value>
+                <fullName>Fencing - Partial Brick</fullName>
+                <default>false</default>
+                <label>Fencing - Partial Brick</label>
+            </value>
+            <value>
+                <fullName>Fencing - Partial Concrete</fullName>
+                <default>false</default>
+                <label>Fencing - Partial Concrete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Disposition__c</fullName>
+    <description>The system or agent disposition for this call record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The system or agent disposition for this call record.</inlineHelpText>
+    <label>Call Disposition</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+                <label>Announcement</label>
+            </value>
+            <value>
+                <fullName>Answering Machine</fullName>
+                <default>false</default>
+                <label>Answering Machine</label>
+            </value>
+            <value>
+                <fullName>Appointment Set</fullName>
+                <default>false</default>
+                <label>Appointment Set</label>
+            </value>
+            <value>
+                <fullName>Busy</fullName>
+                <default>false</default>
+                <label>Busy</label>
+            </value>
+            <value>
+                <fullName>Call Back Appointment</fullName>
+                <default>false</default>
+                <label>Call Back Appointment</label>
+            </value>
+            <value>
+                <fullName>Call Back Later</fullName>
+                <default>false</default>
+                <label>Call Back Later</label>
+            </value>
+            <value>
+                <fullName>DNC</fullName>
+                <default>false</default>
+                <label>DNC</label>
+            </value>
+            <value>
+                <fullName>Dropped while talking</fullName>
+                <default>false</default>
+                <label>Dropped while talking</label>
+            </value>
+            <value>
+                <fullName>Fast busy</fullName>
+                <default>false</default>
+                <label>Fast busy</label>
+            </value>
+            <value>
+                <fullName>Fax or modem</fullName>
+                <default>false</default>
+                <label>Fax or modem</label>
+            </value>
+            <value>
+                <fullName>Has Provider</fullName>
+                <default>false</default>
+                <label>Has Provider</label>
+            </value>
+            <value>
+                <fullName>Invalid number</fullName>
+                <default>false</default>
+                <label>Invalid number</label>
+            </value>
+            <value>
+                <fullName>Network announcement</fullName>
+                <default>false</default>
+                <label>Network announcement</label>
+            </value>
+            <value>
+                <fullName>No answer</fullName>
+                <default>false</default>
+                <label>No answer</label>
+            </value>
+            <value>
+                <fullName>No disposition</fullName>
+                <default>false</default>
+                <label>No disposition</label>
+            </value>
+            <value>
+                <fullName>No English</fullName>
+                <default>false</default>
+                <label>No English</label>
+            </value>
+            <value>
+                <fullName>No numbers left to call</fullName>
+                <default>false</default>
+                <label>No numbers left to call</label>
+            </value>
+            <value>
+                <fullName>Not Answered</fullName>
+                <default>false</default>
+                <label>Not Answered</label>
+            </value>
+            <value>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+                <label>Not Interested</label>
+            </value>
+            <value>
+                <fullName>Number matches DNC</fullName>
+                <default>false</default>
+                <label>Number matches DNC</label>
+            </value>
+            <value>
+                <fullName>Other connection issue</fullName>
+                <default>false</default>
+                <label>Other connection issue</label>
+            </value>
+            <value>
+                <fullName>Persons Work Phone</fullName>
+                <default>false</default>
+                <label>Persons Work Phone</label>
+            </value>
+            <value>
+                <fullName>Person&apos;s Work Phone</fullName>
+                <default>false</default>
+                <label>Person&apos;s Work Phone</label>
+            </value>
+            <value>
+                <fullName>QC Call</fullName>
+                <default>false</default>
+                <label>QC Call</label>
+            </value>
+            <value>
+                <fullName>Silence</fullName>
+                <default>false</default>
+                <label>Silence</label>
+            </value>
+            <value>
+                <fullName>Skipped</fullName>
+                <default>false</default>
+                <label>Skipped</label>
+            </value>
+            <value>
+                <fullName>System failure</fullName>
+                <default>false</default>
+                <label>System failure</label>
+            </value>
+            <value>
+                <fullName>Warm Transfer</fullName>
+                <default>false</default>
+                <label>Warm Transfer</label>
+            </value>
+            <value>
+                <fullName>Wrong Number</fullName>
+                <default>false</default>
+                <label>Wrong Number</label>
+            </value>
+            <value>
+                <fullName>Wrong person</fullName>
+                <default>false</default>
+                <label>Wrong person</label>
+            </value>
+            <value>
+                <fullName>Forward to Business</fullName>
+                <default>false</default>
+                <label>Forward to Business</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

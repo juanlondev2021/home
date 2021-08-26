@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fActive_Industry_Card__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+ AND(
+  IsWon ,
+  ISPICKVAL(Stage_Types__c, &quot;Gift Card&quot;),  
+  NOT( ISPICKVAL(Operational_Stages__c, &quot;&quot;))  ,
+  NOT( ISPICKVAL(Operational_Stages__c, &quot;Deactivated Customer&quot;))),
+  TEXT(NuCard_Industry__c) , 
+ &quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fActive Industry Card</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

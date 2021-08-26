@@ -1,0 +1,168 @@
+<!--
+* Diaco
+* @author             Jull Quintero D
+* Project:            SMS Security campaing
+* Description:        Show Call attempt count so Agent can determine when to send out SMS.
+* Description:        SMS Security campaing - Cmp
+*
+* Changes (Version)
+* _________________________________________
+*            No.        Date            Author                    Description
+*            ____    __________        __________________      _____________________________________
+* @version    1.0   17/02/2021         Jull Quintero D          Initial implementation of the class.
+-->
+
+<aura:component controller="DiacoSMSCallAttemptController"
+                implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,forceCommunity:availableForAllPageTypes" 
+                access="GLOBAL">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="confirmationNum" type="String" access="global"/>
+    <aura:attribute name="loaded" type="Boolean" default="false"/>
+
+    <!-- Object-->
+    <aura:attribute name="account" type="Account" />
+    <aura:attribute name="homeService" type="Home_Services__c" />
+
+    <!-- DATA TABLE -->
+    <aura:attribute name="data" type="List" />
+    <aura:attribute name="columns" type="List" />
+
+    <!-- Modal Detail-->
+    <aura:attribute name="openDetail" type="Boolean" default="false"/>
+
+    <!-- Links-->
+    <aura:attribute name="urlBase" type="String"/> 
+    <aura:attribute name="urlAccount" type="String"/> 
+
+    <aura:if isTrue="{!v.loaded}">
+        <lightning:spinner />
+    </aura:if>
+
+    <div class="slds-card slds-box">
+        <!-- HEADER -->
+        <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="utility:log_a_call" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header ">
+                    <h1 class="field-title slds-text-title_caps">
+                        <a href="{!'/lightning/r/' + v.account.Id + '/view'}" target="_blank">
+                            {!v.account.Name}
+                        </a>
+                    </h1>
+                    <h2 class="slds-text-heading--medium">OB Security Campaigns</h2>
+                </div>
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <!-- /HEADER -->
+
+        <!--TABLE-->
+        <aura:if isTrue="{! v.data.length > 0 }">
+            <div class="myUniqueTable">
+                <lightning:datatable    minColumnWidth="100"
+                                        maxColumnWidth='1000'
+                                        keyField="Id"
+                                        data="{! v.data }"
+                                        onrowaction="{! c.handleRowAction }"
+                                        columns="{! v.columns }"     
+                                        hideCheckboxColumn="true" /> 
+            </div>
+            <aura:set attribute="else">
+                <div class="slds-modal__content" id="modal-content-id-1">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                        <h2>SMS OB Security Campaig Not Found</h2>
+                    </div>
+                </div>
+            </aura:set>
+        </aura:if>
+        <!--/TABLE-->
+    </div>
+
+
+    <!-- MODAL DETAIL -->
+    <aura:if isTrue="{! v.openDetail }">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon   iconName="utility:close"
+                                            onclick="{! c.closeModel }"
+                                            alternativeText="close"
+                                            variant="bare-inverse"
+                                            class="slds-modal__close black"/>
+                    <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home">
+
+                        <lightning:layoutItem padding="horizontal-small">
+                            <lightning:icon iconName="custom:custom33"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="horizontal-small">
+                            <div class="page-section page-header ">
+                                <h1 class="field-title slds-text-title_caps">Info</h1>
+                                <h2 class="field-title slds-text-title_caps">
+                                    <a href="{!'/lightning/r/' + v.homeService.Id + '/view'}" target="_blank">
+                                        {!v.homeService.Name}                                    
+                                    </a>
+                                </h2>
+                            </div>
+                        </lightning:layoutItem>
+
+                        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                            <lightning:button class="slds-m-top_small" label="Send SMS" iconName="utility:send" onclick="{!c.sendSMS}"/>
+                        </lightning:layoutItem>
+            
+                    </lightning:layout>
+                
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+                    <lightning:layout multipleRows="true">
+                        <lightning:layoutItem padding="around-small">
+                            <div class="header-column">
+                                <p class="field-title slds-text-title_caps" title="Confirmation Call Count">Confirmation Call Count</p>
+                                <p>
+                                    <lightning:badge class="slds-badge slds-m-top_small" label="{!v.homeService.Confirmation_Call_Count__c}" iconName="utility:number_input"/>
+                                </p>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small">
+                            <div class="header-column">
+                                <p class="field-title slds-text-title_caps" title="Confirmation Call Notes">Confirmation Call Notes</p>
+                                <p>
+                                    <lightning:textarea aura:id='fieldId' value="{!v.homeService.Confirmation_Call_Notes__c}" disabled="true"/>
+                                </p>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small">
+                            <div class="header-column">
+                                <p class="field-title slds-text-title_caps" title="Confirmation Call Status">Confirmation Call Status</p>
+                                <p>
+                                    <span class="slds-badge slds-col" title=""></span>
+                                    <lightning:badge class="slds-badge slds-m-top_small" label="{!v.homeService.Confirmation_Call_Status__c}" iconName="utility:success"/>
+                                </p>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                        label="Cancel"
+                                        title="Cancel"
+                                        onclick="{! c.closeModel }"/>
+                    <lightning:button   label="Send SMS" 
+                                        iconName="utility:send" 
+                                        onclick="{!c.sendSMS}"/>
+
+                </footer>
+            </div>
+        </section>
+        <!--###### MODAL BOX Part END Here ######-->    
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- /MODAL DETAIL -->
+
+
+</aura:component>

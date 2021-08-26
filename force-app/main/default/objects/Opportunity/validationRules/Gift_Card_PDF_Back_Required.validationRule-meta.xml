@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gift_Card_PDF_Back_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISBLANK(Back_pdf__c),
+OR(
+ISPICKVAL( Operational_Stages__c, &quot;Gift Card Proof Approved&quot;),
+ISPICKVAL( Operational_Stages__c, &quot;Gift Card Ordered&quot;),
+ISPICKVAL( Operational_Stages__c, &quot;Gift Card Received &amp; in Fulfillment&quot;),
+ISPICKVAL( Operational_Stages__c, &quot;Gift Card Active Customer&quot;)))</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Please Input a Number on the Back PDF Field</errorMessage>
+</ValidationRule>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dialer_Campaign__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(fResDate_NumOfDays__c &lt; 8), &apos;A&apos;,
+IF(AND(fResDate_NumOfDays__c &lt;= 29), &apos;B&apos;,
+IF(AND(fResDate_NumOfDays__c &gt;= 30), &apos;C&apos;, &apos;C&apos;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dialer Campaign</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

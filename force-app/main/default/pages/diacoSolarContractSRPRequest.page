@@ -1,0 +1,1441 @@
+<!--
+        Jull Quintero D (JD)		       
+    -->
+<apex:page renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+
+    <head>
+        <!--style>
+                #count-Page:after {
+                    counter-increment: page;
+                    content: "Page " counter(page);
+                }
+                div [class*="underline"] { 
+                    display: inline-block;
+                    border-bottom: 1px solid black;
+                    line-height: 70%;
+                    padding: 0 50px;
+                }
+                #square {
+                    margin:0 5px;
+                    padding: 0px 5px;
+                    border: 1px solid black;
+                    background: #fff;
+                    color: #000;
+                    font-size: 1em;
+                    text-align: center;
+                }
+                .triangulo {
+                    display: inline-block;
+                    margin: 0 5px;                
+                }
+                .triangulo-derecha {
+                    border-left: solid 5px black;
+                    border-top: solid 5px transparent;
+                    border-bottom: solid 5px transparent;
+                }
+                .border-complet {
+                    border: solid 0.8px black;
+                }
+                .border-top {
+                    border-top: solid 0.8px black;
+                }
+                .border-right {
+                    border-right: solid 0.8px black;
+                }
+                .border-left {
+                    border-left: solid 0.8px black;
+                }
+                .border-bottom {
+                    border-bottom: solid 0.8px black;
+                }
+                .cuart-table {
+                    border: solid 0.8px black;
+                    padding: 8px 10px;
+                }
+                .guion-table {
+                    font-size: 16px;
+                    padding: 8px 5px;
+                    color:black;
+                }
+                #table-border  td {
+                    border: 0.3px solid black;
+                
+                }
+                #table-border td ul{
+                    margin-left: 10px;
+                }
+                .sheet5-ol li {
+                    margin-bottom: 10px;
+                }
+
+            </style-->
+    </head>
+
+    <body>
+        <div style="font-family: Arial; font-size: 10px">
+
+            <!-- SHEET 1 -->
+            <div style="margin:30px; 0 0 0; page-break-after: always;font-size: 9px">
+
+                <!-- HEADER -->
+                <table style="border-bottom: 1.5px solid black;">
+                    <tr>
+                        <td style="border-right: 0.5px solid black; height: 5em">
+                            <p style="line-height:0px">Form
+                                <span style="font-family: Impact, Charcoal, sans-serif; font-size: 30px">W-9</span>
+                            </p>
+                            <P>(Rev. October 2018) Department of the Treasury Internal Revenue Servic</P>
+                        </td>
+                        <td style="width:40em;">
+                            <h2 style="line-height:0px; text-align:center">Request for Taxpayer</h2>
+
+                            <div style="padding:0 7em">
+                                <h2 style="text-align:center">Identification Number and Certification</h2>
+                            </div>
+                            <div style="padding:0 0 0 5em">
+                                <b>
+                                    <span class="triangulo triangulo-derecha"></span>Go to
+                                    <i>
+                                        <a href="www.irs.gov/FormW9" target="_blank">www.irs.gov/FormW9</a>
+                                    </i> for instructions and the latest information.</b>
+                            </div>
+                        </td>
+                        <td style="padding-left: 10px; border-left: 0.5px solid black">
+                            <h3>Give Form to the requester. Do not send to the IRS</h3>
+                        </td>
+                    </tr>
+                </table>
+                <!-- /HEADER -->
+
+                <!--PRINT OR TYPE TABLE -->
+
+                <div style="margin:0 0mm">
+                    <table>
+                        <tr>
+                            <td rowspan="6" class="border-right">
+                                <apex:image alt="header table " width="25px" height="" url="{! URLFOR($Resource.Contract_SRP_Request, '/print_or_type.png')}">
+                                </apex:image>
+                            </td>
+                            <td colspan="2" class="border-bottom" style="padding-bottom:20px;">
+                                <b>1</b> Name (as shown on your income tax return). Name is required on this line; do not leave
+                                this line blank.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="border-bottom" style="padding-bottom:20px;">
+                                <b>2</b> Business name/disregarded entity name, if different from above
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 490px">
+                                <b>3</b>
+                                <div style="margin: -12px 0 0 10px">Check appropriate box for federal tax classification of the person whose name is entered
+                                    on line 1. Check only
+                                    <b>one</b> of the following seven boxes.</div>
+
+                                <div style="margin-top:10px">
+                                    <span id="square">x</span>
+                                    <p style="margin: -10px 0 0 28px; width: 150px">Individual/sole proprietor or single-member LLC</p>
+                                </div>
+                                <div style="margin: -20px 0 0 142px;">
+                                    <span id="square"></span> C Corporation
+                                    <span id="square"></span> S Corporatio
+                                    <span id="square"></span> Partnership
+                                    <span id="square"></span> Trust/estate
+                                </div>
+
+                                <div style="margin:20px 0 10px 0">
+                                    <span id="square"></span>
+                                    <p style="margin: 0 0 0 28px; width: 490px">
+                                        Limited liability company. Enter the tax classification (C=C corporation, S=S corporation, P=Partnership)
+                                        <span class='triangulo triangulo-derecha'></span>
+                                        <span class='underline' style="padding: 0 35px"></span>
+
+                                        <b>Note:</b> Check the appropriate box in the line above for the tax classification
+                                        of the single-member owner. Do not check Exemption from FATCA reporting LLC if the
+                                        LLC is classified as a single-member LLC that is disregarded from the owner unless
+                                        the owner of the LLC is code (if any) another LLC that is not disregarded from the
+                                        owner for U.S. federal tax purposes. Otherwise, a single-member LLC that is disregarded
+                                        from the owner should check the appropriate box for the tax classification of its
+                                        owne
+                                    </p>
+                                </div>
+                                <span id="square"></span> Other (see instructions)
+                                <span class='triangulo triangulo-derecha'></span>
+                            </td>
+                            <td class="border-left">
+                                <p>
+                                    <b>4</b> Exemptions (codes apply only to certain entities, not individuals; see instructions
+                                    on page 3):
+                                    <br/>
+                                    <br/> Exempt payee code (if any)
+                                    <span class="underline" style="padding: 0 15px"></span>
+                                    <br/>
+                                    <br/> Exemption from FATCA reporting
+                                    <br/> code (if any)
+                                    <span class="underline" style="padding:0 30px;"></span>
+                                    <br/>
+                                    <br/>
+                                    <span style="font-size: 7px">
+                                        <i>(Applies to accounts maintained outside the U.S.)</i>
+                                    </span>
+                                </p>
+                                <p>
+
+                                </p>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-top border-bottom" style="padding-bottom:20px;">
+                                <b>5</b> Address (number, street, and apt. or suite no.) See instructions.
+                            </td>
+                            <td class="border-top border-left" style="padding-bottom: 20px">
+                                Requester’s name and address (optional)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-bottom" style="padding-bottom:20px;">
+                                <b>6</b> City, state, and ZIP code
+                            </td>
+                            <td class="border-left border-bottom"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding-bottom:20px;">
+                                <b>7</b> List account number(s) here (optional)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /PRINT OR TYPE TABLE -->
+
+                <!--PART I -->
+                <div>
+                    <table class="border-top" style="margin-top: 0px">
+                        <tr>
+                            <td class="border-bottom" style="font-size:13px;" colspan="2">
+                                <b style="padding: 0 6px; background-color:black; color:white">Part I</b>
+                                <b style="margin-left:20px">Taxpayer Identification Number (TIN)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right:12px; width: 480px">
+                                <p>
+                                    Enter your TIN in the appropriate box. The TIN provided must match the name given on line 1 to avoid backup withholding.
+                                    For individuals, this is generally your social security number (SSN). However, for a
+                                    resident alien, sole proprietor, or disregarded entity, see the instructions for Part
+                                    I, later. For other entities, it is your employer identification number (EIN). If you
+                                    do not have a number, see How to get a
+                                    <i>TIN,</i> later.
+                                    <br/>
+                                    <br/>
+                                    <b>Note:</b> If the account is in more than one name, see the instructions for line 1. Also
+                                    see What Name and Number To Give the Requester for guidelines on whose number to enter
+                                </p>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+
+                            </td>
+                            <td>
+                                <div class="border-complet" style="">
+                                    <b style="margin-left:5px">Social security number</b>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="guion-table">-</td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="guion-table">-</td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                    </tr>
+                                </table>
+                                <h3>Or</h3>
+                                <div class="border-complet" style="width: 230px">
+                                    <b style="margin-left:5px">Employer identification number</b>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="guion-table">-</td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                        <td class="cuart-table"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /PART I -->
+
+                <!-- PART II -->
+                <div>
+                    <div class="border-top border-bottom" style="font-size:13px; width:700px">
+                        <b style="padding: 0 6px; background-color:black; color:white">Part II</b>
+                        <b style="margin-left:20px">Certification</b>
+                    </div>
+                    <div>
+                        Under penalties of perjury, I certify that:
+                        <ol style="margin-left:15px">
+                            <li>
+                                The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to
+                                me); and
+                            </li>
+                            <li>
+                                I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified
+                                by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result
+                                of a failure to report all interest or dividends, or (c) the IRS has notified me that I am
+                                no longer subject to backup withholding; and
+                            </li>
+                            <li>
+                                I am a U.S. citizen or other U.S. person (defined below); and
+                            </li>
+                            <li>
+                                The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct.
+                            </li>
+                        </ol>
+                        <b>Certification</b> instructions. You must cross out item 2 above if you have been notified by the
+                        IRS that you are currently subject to backup withholding because you have failed to report all interest
+                        and dividends on your tax return. For real estate transactions, item 2 does not apply. For mortgage
+                        interest paid, acquisition or abandonment of secured property, cancellation of debt, contributions
+                        to an individual retirement arrangement (IRA), and generally, payments other than interest and dividends,
+                        you are not required to sign the certification, but you must provide your correct TIN. See the instructions
+                        for Part II, later.
+
+                    </div>
+                    <!--previous P-->
+                </div>
+                <!-- /PART II -->
+
+                <!-- SIGN HARE -->
+                <table class="border-top border-bottom" style="width: 700px; padding: 0; margin: 0; border-spacing: 0;">
+                    <tr>
+                        <td class="border-right" style="width:40px;">
+                            <h3 style="">Sign Here</h3>
+                        </td>
+                        <td style="width: 500px">
+                            <b>Signature of U.S. person</b>
+                            <span class="triangulo triangulo-derecha"></span>
+                        </td>
+                        <td>
+                            <b>Date</b>
+                            <span class="triangulo triangulo-derecha"></span>
+                        </td>
+                    </tr>
+                </table>
+                <!-- /SIGN HARE -->
+
+                <!-- GENERAR INST -->
+                <table class="border-bottom">
+                    <tr>
+                        <td style="width: 300px">
+                            <h2 style="line-height: 0px">General Instructions</h2>
+
+                            <div style="line-height: 15px">
+                                Section references are to the Internal Revenue Code unless otherwise noted
+                            </div>
+
+                            <div>
+                                <b>Future developments.</b> For the latest information about developments related to Form W-9
+                                and its instructions, such as legislation enacted after they were published, go to www.irs.gov/FormW9.
+                            </div>
+
+                            <h3 style="line-height: 0px">Purpose of Form</h3>
+                            <p>
+                                An individual or entity (Form W-9 requester) who is required to file an information return with the IRS must obtain your
+                                correct taxpayer identification number (TIN) which may be your social security number (SSN),
+                                individual taxpayer identification number (ITIN), adoption taxpayer identification number
+                                (ATIN), or employer identification number (EIN), to report on an information return the amount
+                                paid to you, or other amount reportable on an information return. Examples of information
+                                returns include, but are not limited to, the following.
+                            </p>
+                            <ul style="margin:10px">
+                                <li>
+                                    Form 1099-INT (interest earned or paid)
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>
+                                    Form 1099-DIV (dividends, including those from stocks or mutual funds
+                                </li>
+                                <li>
+                                    Form 1099-MISC (various types of income, prizes, awards, or gross proceeds)
+                                </li>
+                                <li>
+                                    Form 1099-B (stock or mutual fund sales and certain other transactions by brokers)
+                                </li>
+                                <li>
+                                    Form 1099-S (proceeds from real estate transactions)0
+                                </li>
+                                <li>
+                                    Form 1099-K (merchant card and third party network transactions
+                                </li>
+                                <li>
+                                    Form 1098 (home mortgage interest), 1098-E (student loan interest), 1098-T (tuition)
+                                </li>
+                                <li>
+                                    Form 1099-C (canceled debt)
+                                </li>
+                                <li>
+                                    Form 1099-A (acquisition or abandonment of secured property)
+                                </li>
+                            </ul>
+                            <p style="margin-left:35px;">
+                                Use Form W-9 only if you are a U.S. person (including a resident alien), to provide your correct TIN.
+                                <br/> If you do not return Form W-9 to the requester with a TIN, you might be subject to backup
+                                withholding. See What is backup withholding, later.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <!-- /GENERAR INST -->
+
+                <!-- FOOTER-->
+                <div style="width:700px; font-size: 8px">
+                    <span style="margin-left: 270px">Cat. No. 10231X</span>
+                    <span style="margin-left:290px">Form
+                        <b>W-9</b>(Rev. 10-2018)</span>
+                </div>
+                <!-- /FOOTER -->
+
+            </div>
+            <!-- /SHEET 1 -->
+
+            <!-- SHEET 2 -->
+
+            <!-- HEADER -->
+            <div class="border-bottom" style="margin-top:30px;width:700px; font-size: 8px">
+                <span>Form W-9 (Rev. 10-2018)</span>
+                <span id="count-Page" style="margin-left:580px"> </span>
+            </div>
+            <!-- /HEADER -->
+
+            <div style="margin:2mm 0 0 0; page-break-after: always;">
+                <table>
+                    <tr>
+                        <td style="width:330px; padding: 0 20px 0 0">
+                            <p>By signing the filled-out form, you:</p>
+                            <ol>
+                                <li>
+                                    Certify that the TIN you are giving is correct (or you are waiting for a number to be issued)
+                                </li>
+                                <li>
+                                    Certify that you are not subject to backup withholding, or
+                                </li>
+                                <li>
+                                    Claim exemption from backup withholding if you are a U.S. exempt payee. If applicable, you are also certifying that as a
+                                    U.S. person, your allocable share of any partnership income from a U.S. trade or business
+                                    is not subject to the withholding tax on foreign partners' share of effectively connected
+                                    income, and
+                                </li>
+                                <li>
+                                    Certify that FATCA code(s) entered on this form (if any) indicating that you are exempt from the FATCA reporting, is correct.
+                                    See What is
+                                    <i>FATCA</i>reporting, later, for further information.
+                                </li>
+                            </ol>
+                            <p>
+                                <i>Note:</i> If you are a U.S. person and a requester gives you a form other than Form W-9 to
+                                request your TIN, you must use the requester’s form if it is substantially similar to this
+                                Form W-9.
+                                <i>Definition of a U.S.</i>person. For federal tax purposes, you are considered a U.S. person
+                                if you are
+                            </p>
+                            <ul>
+                                <li>
+                                    An individual who is a U.S. citizen or U.S. resident alien;
+                                </li>
+                                <li>
+                                    A partnership, corporation, company, or association created or organized in the United States or under the laws of the United
+                                    States;
+                                </li>
+                                <li>
+                                    An estate (other than a foreign estate); or
+                                </li>
+                                <li>
+                                    A domestic trust (as defined in Regulations section 301.7701-7).
+                                </li>
+                            </ul>
+                            <p>
+                                <i>Special rules for partnerships.</i> Partnerships that conduct a trade or business in the
+                                United States are generally required to pay a withholding tax under section 1446 on any foreign
+                                partners’ share of effectively connected taxable income from such business. Further, in certain
+                                cases where a Form W-9 has not been received, the rules under section 1446 require a partnership
+                                to presume that a partner is a foreign person, and pay the section 1446 withholding tax.
+                                Therefore, if you are a U.S. person that is a partner in a partnership conducting a trade
+                                or business in the United States, provide Form W-9 to the partnership to establish your U.S.
+                                status and avoid section 1446 withholding on your share of partnership income.
+                            </p>
+                            <p>
+                                In the cases below, the following person must give Form W-9 to the partnership for purposes of establishing its U.S. status
+                                and avoiding withholding on its allocable share of net income from the partnership conducting
+                                a trade or business in the United States.
+                            </p>
+                            <ul>
+                                <li>
+                                    In the case of a disregarded entity with a U.S. owner, the U.S. owner of the disregarded entity and not the entity;
+                                </li>
+                                <li>
+                                    In the case of a grantor trust with a U.S. grantor or other U.S. owner, generally, the U.S. grantor or other U.S. owner of
+                                    the grantor trust and not the trust; and
+                                </li>
+                                <li>
+                                    In the case of a U.S. trust (other than a grantor trust), the U.S. trust (other than a grantor trust) and not the beneficiaries
+                                    of the trust.
+                                </li>
+                            </ul>
+                            <p>
+                                <b>Foreign person.</b>If you are a foreign person or the U.S. branch of a foreign bank that
+                                has elected to be treated as a U.S. person, do not use Form W-9. Instead, use the appropriate
+                                Form W-8 or Form 8233 (see Pub. 515, Withholding of Tax on Nonresident Aliens and Foreign
+                                Entities)
+                            </p>
+                            <p>
+                                <b>Nonresident alien who becomes a resident alien.</b> Generally, only a nonresident alien individual
+                                may use the terms of a tax treaty to reduce or eliminate U.S. tax on certain types of income.
+                                However, most tax treaties contain a provision known as a “saving clause.” Exceptions specified
+                                in the saving clause may permit an exemption from tax to continue for certain types of income
+                                even after the payee has otherwise become a U.S. resident alien for tax purposes.
+                                <br/> If you are a U.S. resident alien who is relying on an exception contained in the saving
+                                clause of a tax treaty to claim an exemption from U.S. tax on certain types of income, you
+                                must attach a statement to Form W-9 that specifies the following five items.
+                            </p>
+                            <ol>
+                                <li>
+                                    The treaty country. Generally, this must be the same treaty under which you claimed exemption from tax as a nonresident alien.
+                                </li>
+                                <li>
+                                    The treaty article addressing the income.
+                                </li>
+                                <li>
+                                    he article number (or location) in the tax treaty that contains the saving clause and its exceptions.
+                                </li>
+                                <li>
+                                    The type and amount of income that qualifies for the exemption from tax
+                                </li>
+                                <li>
+                                    Sufficient facts to justify the exemption from tax under the terms of the treaty article.
+                                </li>
+                            </ol>
+                            <br/>
+                        </td>
+
+                        <td>
+                            <p>
+                                <b>
+                                    <i>Example.</i>
+                                </b>Article 20 of the U.S.-China income tax treaty allows an exemption from tax for scholarship
+                                income received by a Chinese student temporarily present in the United States. Under U.S.
+                                law, this student will become a resident alien for tax purposes if his or her stay in the
+                                United States exceeds 5 calendar years. However, paragraph 2 of the first Protocol to the
+                                U.S.-China treaty (dated April 30, 1984) allows the provisions of Article 20 to continue
+                                to apply even after the Chinese student becomes a resident alien of the United States. A
+                                Chinese student who qualifies for this exception (under paragraph 2 of the first protocol)
+                                and is relying on this exception to claim an exemption from tax on his or her scholarship
+                                or fellowship income would attach to Form W-9 a statement that includes the information described
+                                above to support that exemption.
+                                <br/> If you are a nonresident alien or a foreign entity, give the requester the appropriate completed
+                                Form W-8 or Form 8233.
+                            </p>
+                            <h2>Backup Withholding</h2>
+                            <p>
+                                What is backup withholding? Persons making certain payments to you must under certain conditions withhold and pay to the
+                                IRS 24% of such payments. This is called “backup withholding.” Payments that may be subject
+                                to backup withholding include interest, tax-exempt interest, dividends, broker and barter
+                                exchange transactions, rents, royalties, nonemployee pay, payments made in settlement of
+                                payment card and third party network transactions, and certain payments from fishing boat
+                                operators. Real estate transactions are not subject to backup withholding.
+                                <br/> You will not be subject to backup withholding on payments you receive if you give the requester
+                                your correct TIN, make the proper certifications, and report all your taxable interest and
+                                dividends on your tax return.
+                            </p>
+                            <h4>Payments you receive will be subject to backup withholding if:</h4>
+                            <ol>
+                                <li>
+                                    You do not furnish your TIN to the requester,
+                                </li>
+                                <li>
+                                    You do not certify your TIN when required (see the instructions for Part II for details),
+                                </li>
+                                <li>
+                                    The IRS tells the requester that you furnished an incorrect TIN,
+                                </li>
+                                <li>
+                                    The IRS tells you that you are subject to backup withholding because you did not report all your interest and dividends on
+                                    your tax return (for reportable interest and dividends only), or
+                                </li>
+                                <li>
+                                    You do not certify to the requester that you are not subject to backup withholding under 4 above (for reportable interest
+                                    and dividend accounts opened after 1983 only).
+                                </li>
+                            </ol>
+                            <p>
+                                Certain payees and payments are exempt from backup withholding. See Exempt payee code, later, and the separate Instructions
+                                for the Requester of Form W-9 for more information. Also see
+                                <i>Special rules for partnerships,</i> earlier.
+                            </p>
+                            <h2>What is FATCA Reporting?</h2>
+                            <p>
+                                The Foreign Account Tax Compliance Act (FATCA) requires a participating foreign financial institution to report all United
+                                States account holders that are specified United States persons. Certain payees are exempt
+                                from FATCA reporting. See Exemption from FATCA reporting code, later, and the Instructions
+                                for the Requester of Form W-9 for more information.
+                            </p>
+                            <h2> Updating Your Information </h2>
+                            <p>
+                                You must provide updated information to any person to whom you claimed to be an exempt payee if you are no longer an exempt
+                                payee and anticipate receiving reportable payments in the future from this person. For example,
+                                you may need to provide updated information if you are a C corporation that elects to be
+                                an S corporation, or if you no longer are tax exempt. In addition, you must furnish a new
+                                Form W-9 if the name or TIN changes for the account; for example, if the grantor of a grantor
+                                trust dies.
+                            </p>
+                            <h2>Penalties</h2>
+                            <p>
+                                <b>Failure to furnish TIN.</b> If you fail to furnish your correct TIN to a requester, you are
+                                subject to a penalty of $50 for each such failure unless your failure is due to reasonable
+                                cause and not to willful neglect. Civil penalty for false information with respect to withholding.
+                                If you make a false statement with no reasonable basis that results in no backup withholding,
+                                you are subject to a $500 penalty
+                                <br/>
+                                <b>Civil penalty for false information with respect to withholding.</b> If you make a false
+                                statement with no reasonable basis that results in no backup withholding, you are subject
+                                to a $500 penalty.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /SHEET 2 -->
+
+            <!-- SHEET 3 -->
+            <!-- HEADER -->
+            <div class="border-bottom" style="margin-top:30px;width:700px; font-size: 8px">
+                <span>Form W-9 (Rev. 10-2018)</span>
+                <span id="count-Page" style="margin-left:580px"> </span>
+            </div>
+            <!-- /HEADER -->
+
+            <div style="margin:2mm 0 0 0; page-break-after: always;">
+                <table>
+                    <!--CuadroZ.-->
+                    <tr style="">
+                        <td style="width:330px; padding: 0 10px 0 0" valign="top">
+                            <p>
+                                <b>Criminal penalty for falsifying information.</b> Willfully falsifying certifications or affirmations
+                                may subject you to criminal penalties including fines and/or imprisonment.
+                                <br/>
+                                <b>Misuse of TINs.</b> If the requester discloses or uses TINs in violation of federal law,
+                                the requester may be subject to civil and criminal penaltie
+                            </p>
+                            <h2>Specific Instructions</h2>
+                            <h3>Line 1</h3>
+                            <p>
+                                You must enter one of the following on this line; do not leave this line blank. The name should match the name on your tax
+                                return.
+                                <br/> If this Form W-9 is for a joint account (other than an account maintained by a foreign financial
+                                institution (FFI)), list first, and then circle, the name of the person or entity whose number
+                                you entered in Part I of Form W-9. If you are providing Form W-9 to an FFI to document a
+                                joint account, each holder of the account that is a U.S. person must provide a Form W-9.
+                            </p>
+                            <ul>
+                                <li>
+                                    <b>Individual.</b> Generally, enter the name shown on your tax return. If you have changed
+                                    your last name without informing the Social Security Administration (SSA) of the name
+                                    change, enter your first name, the last name as shown on your social security card, and
+                                    your new last name.
+                                    <br/>
+                                    <b>Note: ITIN applicant</b>: Enter your individual name as it was entered on your Form W-7
+                                    application, line 1a. This should also be the same as the name you entered on the Form
+                                    1040/1040A/1040EZ you filed with your application.
+                                </li>
+                                <li>
+                                    <b> Sole proprietor or single-member LLC.</b> Enter your individual name as shown on your
+                                    1040/1040A/1040EZ on line 1. You may enter your business, trade, or “doing business as”
+                                    (DBA) name on line 2.
+                                </li>
+                                <li>
+                                    <b>Partnership, LLC that is not a single-member LLC, C corporation, or S corporation.</b>
+                                    Enter the entity's name as shown on the entity's tax return on line 1 and any business, trade, or DBA name on line 2.
+                                </li>
+                                <li>
+                                    <b>Other entities.</b> Enter your name as shown on required U.S. federal tax documents on
+                                    line 1. This name should match the name shown on the charter or other legal document
+                                    creating the entity. You may enter any business, trade, or DBA name on line 2.
+                                </li>
+                                <li>
+                                    <b>Disregarded entity.</b> For U.S. federal tax purposes, an entity that is disregarded
+                                    as an entity separate from its owner is treated as a “disregarded entity.” See Regulations
+                                    section 301.7701-2(c)(2)(iii). Enter the owner's name on line 1. The name of the entity
+                                    entered on line 1 should never be a disregarded entity. The name on line 1 should be
+                                    the name shown on the income tax return on which the income should be reported. For example,
+                                    if a foreign LLC that is treated as a disregarded entity for U.S. federal tax purposes
+                                    has a single owner that is a U.S. person, the U.S. owner's name is required to be provided
+                                    on line 1. If the direct owner of the entity is also a disregarded entity, enter the
+                                    first owner that is not disregarded for federal tax purposes. Enter the disregarded entity's
+                                    name on line 2, “Business name/disregarded entity name.” If the owner of the disregarded
+                                    entity is a foreign person, the owner must complete an appropriate Form W-8 instead of
+                                    a Form W-9. This is the case even if the foreign person has a U.S. TIN
+                                </li>
+                            </ul>
+                            <div style="margin-top:30px;">
+                                <h3>Line 2</h3>
+                                <p>
+                                    If you have a business name, trade name, DBA name, or disregarded entity name, you may enter it on line 2
+                                </p>
+                                <h3>Line 3</h3>
+                                <p>
+                                    Check the appropriate box on line 3 for the U.S. federal tax classification of the person whose name is entered on line 1.
+                                    Check only one box on line 3.
+                                </p>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </td>
+                        <td>
+                            <table id="table-border">
+                                <tr>
+                                    <td>
+                                        <b>IF the entity/person on line 1 is a(n) . . .</b>
+                                    </td>
+                                    <td>
+                                        <b>THEN check the box for . . .</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>Corporation</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        Corporation
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>Individual</li>
+                                            <li>Sole proprietorship, or</li>
+                                            <li>
+                                                Single-member limited liability company (LLC) owned by an individual and disregarded for U.S. federal tax purposes.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        Individual/sole proprietor or single- member LLC
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                LLC treated as a partnership for U.S. federal tax purposes,
+                                            </li>
+                                            <li>
+                                                LLC that has filed Form 8832 or 2553 to be taxed as a corporation, or
+                                            </li>
+                                            <li>
+                                                LLC that is disregarded as an entity separate from its owner but the owner is another LLC that is not disregarded for U.S.
+                                                federal tax purposes.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        Limited liability company and enter the appropriate tax classification. (P= Partnership; C= C corporation; or S= S corporation)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Partnership
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        Partnership
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Trust/estate
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        Trust/estate
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <h3>Line 4, Exemptions</h3>
+                            <p>
+                                If you are exempt from backup withholding and/or FATCA reporting, enter in the appropriate space on line 4 any code(s) that
+                                may apply to you.
+                            </p>
+                            <h4>Exempt payee code.</h4>
+                            <ul>
+                                <li>
+                                    Generally, individuals (including sole proprietors) are not exempt from backup withholding.
+                                </li>
+                                <li>
+                                    Except as provided below, corporations are exempt from backup withholding for certain payments, including interest and dividends
+                                </li>
+                                <li>
+                                    Corporations are not exempt from backup withholding for payments made in settlement of payment card or third party network
+                                    transactions.
+                                </li>
+                                <li>
+                                    Corporations are not exempt from backup withholding with respect to attorneys’ fees or gross proceeds paid to attorneys,
+                                    and corporations that provide medical or health care services are not exempt with respect
+                                    to payments reportable on Form 1099-MISC.
+                                    <br/>
+                                    <br/> The following codes identify payees that are exempt from backup withholding. Enter the
+                                    appropriate code in the space in line 4.
+                                </li>
+                            </ul>
+                            <ol>
+                                <li>
+                                    —An organization exempt from tax under section 501(a), any IRA, or a custodial account under section 403(b)(7) if the account
+                                    satisfies the requirements of section 401(f)(2)
+                                </li>
+                                <li>
+                                    —The United States or any of its agencies or instrumentalities
+                                </li>
+                                <li>
+                                    —A A state, the District of Columbia, a U.S. commonwealth or possession, or any of their political subdivisions or instrumentalities
+                                </li>
+                                <li>
+                                    —A foreign government or any of its political subdivisions, agencies, or instrumentalities
+                                </li>
+                                <li>
+                                    —A corporation
+                                </li>
+                                <li>
+                                    —A dealer in securities or commodities required to register in the United States, the District of Columbia, or a U.S. commonwealth
+                                    or possession
+                                </li>
+                                <li>
+                                    —A futures commission merchant registered with the Commodity Futures Trading Commission
+                                </li>
+                                <li>
+                                    —A real estate investment trust
+                                </li>
+                                <li>
+                                    —An entity registered at all times during the tax year under the Investment Company Act of 1940
+                                </li>
+                                <li>
+                                    —A common trust fund operated by a bank under section 584(a) 11—A financial institution
+                                </li>
+                                <li>
+                                    —A financial institution
+                                </li>
+                                <li>
+                                    —A middleman known in the investment community as a nominee or custodian
+                                </li>
+                                <li>
+                                    —A trust exempt from tax under section 664 or described in section 4947
+                                </li>
+                            </ol>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <!-- /SHEET 3 -->
+
+            <!-- SHEET 4 -->
+            <!-- HEADER -->
+            <div class="border-bottom" style="margin-top:30px;width:700px; font-size: 8px">
+                <span>Form W-9 (Rev. 10-2018)</span>
+                <span id="count-Page" style="margin-left:580px"> </span>
+            </div>
+            <!-- /HEADER -->
+
+            <div style="margin:2mm 0 0 0; page-break-after: always;">
+                <table>
+                    <tr>
+                        <td style="width:330px; padding: 0 20px 0 0">
+                            <p>
+                                The following chart shows types of payments that may be exempt from backup withholding. The chart applies to the exempt payees
+                                listed above, 1 through 13.
+                            </p>
+                            <table class="border-top">
+                                <tr>
+                                    <td class="border-right border-bottom" style="width:160px">
+                                        <b>IF the payment is for...</b>
+                                    </td>
+                                    <td class="border-bottom">
+                                        <b>THEN the payment is exempt for...</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right border-bottom">
+                                        Interest and dividend payments
+                                    </td>
+                                    <td class="border-bottom">
+                                        All exempt payees except for 7
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right border-bottom">
+                                        Broker transactions
+                                    </td>
+                                    <td class="border-bottom">
+                                        Exempt payees 1 through 4 and 6 through 11 and all C corporations. S corporations must not enter an exempt payee code because
+                                        they are exempt only for sales of noncovered securities acquired prior to 2012.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right border-bottom">
+                                        Barter exchange transactions and patronage dividends
+                                    </td>
+                                    <td class="border-bottom">
+                                        Exempt payees 1 through 4
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right border-bottom">
+                                        Payments over $600 required to be reported and direct sales over $5,000
+                                        <sup>1</sup>
+                                    </td>
+                                    <td class="border-bottom">
+                                        Generally, exempt payees 1 through 5
+                                        <sup>2</sup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right border-bottom">
+                                        Payments made in settlement of payment card or third party networ transactions
+                                    </td>
+                                    <td class="border-bottom">
+                                        Exempt payees 1 through 4
+                                    </td>
+                                </tr>
+                            </table>
+                            <ol>
+                                <li>
+                                    See Form 1099-MISC, Miscellaneous Income, and its instructions.
+                                </li>
+                                <li>
+                                    However, the following payments made to a corporation and reportable on Form 1099-MISC are not exempt from backup withholding:
+                                    medical and health care payments, attorneys’ fees, gross proceeds paid to an attorney
+                                    reportable under section 6045(f), and payments for services paid by a federal executive
+                                    agency
+                                </li>
+                            </ol>
+                            <p>
+                                <b>Exemption from FATCA reporting code.</b> The following codes identify payees that are exempt
+                                from reporting under FATCA. These codes apply to persons submitting this form for accounts
+                                maintained outside of the United States by certain foreign financial institutions. Therefore,
+                                if you are only submitting this form for an account you hold in the United States, you may
+                                leave this field blank. Consult with the person requesting this form if you are uncertain
+                                if the financial institution is subject to these requirements. A requester may indicate that
+                                a code is not required by providing you with a Form W-9 with “Not Applicable” (or any similar
+                                indication) written or printed on the line for a FATCA exemption code.
+                            </p>
+                            <ul>
+                                <li>
+                                    —An organization exempt from tax under section 501(a) or any individual retirement plan as defined in section 7701(a)(37)
+                                </li>
+                                <li>
+                                    —The United States or any of its agencies or instrumentalities
+                                </li>
+                                <li>
+                                    —A state, the District of Columbia, a U.S. commonwealth or possession, or any of their political subdivisions or instrumentalities
+                                </li>
+                                <li>
+                                    —A corporation the stock of which is regularly traded on one or more established securities markets, as described in Regulations
+                                    section 1.1472-1(c)(1)(i)
+                                </li>
+                                <li>
+                                    —A corporation that is a member of the same expanded affiliated group as a corporation described in Regulations section 1.1472-1(c)(1)(i)
+                                </li>
+                                <li>
+                                    —A dealer in securities, commodities, or derivative financial instruments (including notional principal contracts, futures,
+                                    forwards, and options) that is registered as such under the laws of the United States
+                                    or any state
+                                </li>
+                                <li>
+                                    —A real estate investment trust
+                                </li>
+                                <li>
+                                    —A regulated investment company as defined in section 851 or an entity registered at all times during the tax year under
+                                    the Investment Company Act of 1940
+                                </li>
+                                <li>
+                                    —A common trust fund as defined in section 584(a)
+                                </li>
+                                <li>
+                                    —A bank as defined in section 581
+                                </li>
+                                <li>
+                                    —A broker
+                                </li>
+                                <li>
+                                    —A trust exempt from tax under section 664 or described in section 4947(a)(1)
+                                </li>
+                            </ul>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </td>
+                        <td>
+                            <p>
+                                M—A tax exempt trust under a section 403(b) plan or section 457(g) plan
+                                <br/>
+                                <b>Note:</b>You may wish to consult with the financial institution requesting this form to determine
+                                whether the FATCA code and/or exempt payee code should be completed.
+                            </p>
+                            <h3>Line 5</h3>
+                            <p>
+                                Enter your address (number, street, and apartment or suite number). This is where the requester of this Form W-9 will mail
+                                your information returns. If this address differs from the one the requester already has
+                                on file, write NEW at the top. If a new address is provided, there is still a chance the
+                                old address will be used until the payor changes your address in their records.
+                            </p>
+                            <h3>Line 6</h3>
+                            <p>
+                                Enter your city, state, and ZIP code.
+                            </p>
+                            <h2>Part I. Taxpayer Identification Number (TIN)</h2>
+                            <p>
+                                <b>Enter your TIN in the appropriate box.</b>If you are a resident alien and you do not have
+                                and are not eligible to get an SSN, your TIN is your IRS individual taxpayer identification
+                                number (ITIN). Enter it in the social security number box. If you do not have an ITIN, see
+                                How to get a TIN below.
+                                <br/> If you are a sole proprietor and you have an EIN, you may enter either your SSN or EIN.
+                                <br/> If you are a single-member LLC that is disregarded as an entity separate from its owner,
+                                enter the owner’s SSN (or EIN, if the owner has one). Do not enter the disregarded entity’s
+                                EIN. If the LLC is classified as a corporation or partnership, enter the entity’s EIN.
+                            </p>
+                            <p>
+                                <b>Note:</b>See
+                                <i>What Name and Number</i>To Give the Requester, later, for further clarification of name and
+                                TIN combinations.
+                                <br/>
+                                <b>How to get a TIN.</b>If you do not have a TIN, apply for one immediately. To apply for an
+                                SSN, get Form SS-5, Application for a Social Security Card, from your local SSA office or
+                                get this form online at www.SSA.gov. You may also get this form by calling 1-800-772-1213.
+                                Use Form W-7, Application for IRS Individual Taxpayer Identification Number, to apply for
+                                an ITIN, or Form SS-4, Application for Employer Identification Number, to apply for an EIN.
+                                You can apply for an EIN online by accessing the IRS website at www.irs.gov/Businesses and
+                                clicking on Employer Identification Number (EIN) under Starting a Business. Go to www.irs.gov/Forms
+                                to view, download, or print Form W-7 and/or Form SS-4. Or, you can go to www.irs.gov/OrderForms
+                                to place an order and have Form W-7 and/or SS-4 mailed to you within 10 business days.
+                            </p>
+                            <p>
+                                If you are asked to complete Form W-9 but do not have a TIN, apply for a TIN and write “Applied For” in the space for the
+                                TIN, sign and date the form, and give it to the requester. For interest and dividend payments,
+                                and certain payments made with respect to readily tradable instruments, generally you will
+                                have 60 days to get a TIN and give it to the requester before you are subject to backup withholding
+                                on payments. The 60-day rule does not apply to other types of payments. You will be subject
+                                to backup withholding on all such payments until you provide your TIN to the requester.
+                                <br/>
+                                <b>Note:</b> Entering “Applied For” means that you have already applied for a TIN or that you
+                                intend to apply for one soon.
+                                <br/>
+                                <b>Caution:</b> A disregarded U.S. entity that has a foreign owner must use the appropriate
+                                Form W-8.
+                            </p>
+                            <h2>Part II. Certification</h2>
+                            <p>
+                                To establish to the withholding agent that you are a U.S. person, or resident alien, sign Form W-9. You may be requested
+                                to sign by the withholding agent even if item 1, 4, or 5 below indicates otherwise.
+                                <br/>
+                                <br/> For a joint account, only the person whose TIN is shown in Part I should sign (when required).
+                                In the case of a disregarded entity, the person identified on line 1 must sign. Exempt payees,
+                                see Exempt payee code, earlier.
+                                <br/>
+                                <br/>
+                                <b>Signature requirements.</b>Complete the certification as indicated in items 1 through 5 below.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /SHEET 4 -->
+
+            <!-- SHEET 5 -->
+            <!-- HEADER -->
+            <div class="border-bottom" style="margin-top:30px;width:700px; font-size: 8px">
+                <span>Form W-9 (Rev. 10-2018)</span>
+                <span id="count-Page" style="margin-left:580px"> </span>
+            </div>
+
+            <!-- /HEADER -->
+            <div style="margin:2mm 0 0 0; page-break-after: always;">
+                <table>
+                    <tr>
+                        <td style="width:330px; padding: 0 20px 0 0">
+                            <ol class="sheet5-ol" style="margin-bottom:20px">
+                                <li>
+                                    <b>Interest, dividend, and barter exchange accounts opened before 1984 and broker accounts
+                                        considered active during 1983.</b>
+                                    You must give your correct TIN, but you do not have to sign the certification.
+                                </li>
+                                <li>
+                                    <b> Interest, dividend, broker, and barter exchange accounts opened after 1983 and broker
+                                        accounts considered inactive during 1983.</b>
+                                    You must sign the certification or backup withholding will apply. If you are subject to backup withholding and you are merely
+                                    providing your correct TIN to the requester, you must cross out item 2 in the certification
+                                    before signing the form
+                                </li>
+                                <li>
+                                    <b>Real estate transactions.</b> You must sign the certification. You may cross out item
+                                    2 of the certification.
+                                </li>
+                                <li>
+                                    <b>Other payments.</b> You must give your correct TIN, but you do not have to sign the certification
+                                    unless you have been notified that you have previously given an incorrect TIN. “Other
+                                    payments” include payments made in the course of the requester’s trade or business for
+                                    rents, royalties, goods (other than bills for merchandise), medical and health care services
+                                    (including payments to corporations), payments to a nonemployee for services, payments
+                                    made in settlement of payment card and third party network transactions, payments to
+                                    certain fishing boat crew members and fishermen, and gross proceeds paid to attorneys
+                                    (including payments to corporations).
+                                </li>
+                                <li>
+                                    <b> Mortgage interest paid by you, acquisition or abandonment of secured property, cancellation
+                                        of debt, qualified tuition program payments (under section 529), ABLE accounts (under
+                                        section 529A), IRA, Coverdell ESA, Archer MSA or HSA contributions or distributions,
+                                        and pension distributions.</b>
+                                    You must give your correct TIN, but you do not have to sign the certification.
+                                </li>
+                            </ol>
+                            <h2>What Name and Number To Give the Requester</h2>
+                            <table class="border-top border-bottom">
+                                <tr>
+                                    <td class="border-right border-bottom" style="width: 160px; padding-left: 20px">
+                                        <b>For this type of account:</b>
+                                    </td>
+                                    <td class="border-bottom">
+                                        <b>Give name and SSN of:</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        1.Individual
+                                    </td>
+                                    <td>
+                                        The individual
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        2. Two or more individuals (joint account) other than an account maintained by an FFI
+                                    </td>
+                                    <td>
+                                        The actual owner of the account or, if combined funds, the first individual on he account
+                                        <sup>1</sup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        3. Two or more U.S. persons (joint account maintained by an FFI)
+                                    </td>
+                                    <td>
+                                        Each holder of the account
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        4. Custodial account of a minor (Uniform Gift to Minors Act)
+                                    </td>
+                                    <td>
+                                        The minor
+                                        <sup>2</sup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        5 a. The usual revocable savings trust (grantor is also trustee)
+                                        <br/> b. So-called trust account that is not a legal or valid trust under state law
+                                    </td>
+                                    <td>
+                                        <p>The grantor-trustee
+                                            <sup>1</sup>
+                                        </p>
+                                        <p>The actual owner
+                                            <sup>1</sup>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        6. Sole proprietorship or disregarded entity owned by an individual
+                                    </td>
+                                    <td>
+                                        The owner
+                                        <sup>3</sup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        7. Grantor trust filing under Optional Form 1099 Filing Method 1 (see Regulations section 1.671-4(b)(2)(i)(A))
+                                    </td>
+                                    <td>
+                                        The grantor
+                                        <sup>*</sup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-top border-right border-bottom">
+                                        <b>For this type of account:</b>
+                                    </td>
+                                    <td class="border-top border-bottom">
+                                        <b>Give name and EIN of:</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        8. Disregarded entity not owned by an individual
+                                    </td>
+                                    <td>
+                                        The owner
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        9. A valid trust, estate, or pension trust
+                                    </td>
+                                    <td>
+                                        Legal entity
+                                        <sup>4</sup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        10. Corporation or LLC electing corporate status on Form 8832 or Form 2553
+                                    </td>
+                                    <td>
+                                        The corporation
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        11. Association, club, religious, charitable, educational, or other tax-exempt organization
+                                    </td>
+                                    <td>
+                                        The organization
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        12. Partnership or multi-member LLC
+                                    </td>
+                                    <td>
+                                        The partnership
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        13. A broker or registered nominee
+                                    </td>
+                                    <td>
+                                        The broker or nominee
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="border-top border-bottom">
+                                <tr>
+                                    <td class="border-right border-bottom" style="width: 160px; padding-left: 20px">
+                                        <b>For this type of account:</b>
+                                    </td>
+                                    <td class="border-bottom">
+                                        <b>Give name and EIN of:</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        14. Account with the Department of Agriculture in the name of a public entity (such as a state or local government, school
+                                        district, or prison) that receives agricultural program payments.
+                                    </td>
+                                    <td>
+                                        The public entity
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right">
+                                        15. Grantor trust filing under the Form 1041 Filing Method or the Optional Form 1099 Filing Method 2 (see Regulations section
+                                        1.671-4(b)(2)(i)(B))
+                                    </td>
+                                    <td>
+                                        The trust
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <ol>
+                                <li>
+                                    List first and circle the name of the person whose number you furnish. If only one person on a joint account has an SSN,
+                                    that person’s number must be furnished.
+                                </li>
+                                <li>
+                                    Circle the minor’s name and furnish the minor’s SSN.
+                                </li>
+                                <li>
+                                    You must show your individual name and you may also enter your business or DBA name on the “Business name/disregarded entity”
+                                    name line. You may use either your SSN or EIN (if you have one), but the IRS encourages
+                                    you to use your SSN.
+                                </li>
+                                <li>
+                                    ist first and circle the name of the trust, estate, or pension trust. (Do not furnish the TIN of the personal representative
+                                    or trustee unless the legal entity itself is not designated in the account title.) Also
+                                    see Special rules for partnerships, earlier.
+                                </li>
+                            </ol>
+                            <p>
+                                <b>*Note:</b> The grantor also must provide a Form W-9 to trustee of trust.
+                                <br/>
+                                <br/>
+                                <b>Note:</b>If no name is circled when more than one name is listed, the number will be considered
+                                to be that of the first name listed.
+                            </p>
+                            <h2>Secure Your Tax Records From Identity Theft</h2>
+                            <p>
+                                Identity theft occurs when someone uses your personal information such as your name, SSN, or other identifying information,
+                                without your permission, to commit fraud or other crimes. An identity thief may use your
+                                SSN to get a job or may file a tax return using your SSN to receive a refund.
+                                <br/>
+                                <br/> To reduce your risk:
+                            </p>
+                            <ul>
+                                <li>Protect your SSN,</li>
+                                <li>Ensure your employer is protecting your SSN, and</li>
+                                <li>Be careful when choosing a tax preparer.</li>
+                            </ul>
+                            <p>
+                                If your tax records are affected by identity theft and you receive a notice from the IRS, respond right away to the name
+                                and phone number printed on the IRS notice or letter.
+                                <br/>
+                                <br/> If your tax records are not currently affected by identity theft but you think you are at
+                                risk due to a lost or stolen purse or wallet, questionable credit card activity or credit
+                                report, contact the IRS Identity Theft Hotline at 1-800-908-4490 or submit Form 14039.
+                                <br/>
+                                <br/> For more information, see Pub. 5027, Identity Theft Information for Taxpayers.
+                                <br/>
+                                <br/> Victims of identity theft who are experiencing economic harm or a systemic problem, or are
+                                seeking help in resolving tax problems that have not been resolved through normal channels,
+                                may be eligible for Taxpayer Advocate Service (TAS) assistance. You can reach TAS by calling
+                                the TAS toll-free case intake line at 1-877-777-4778 or TTY/TDD 1-800-829-4059.
+                            </p>
+
+                            <h4>Protect yourself from suspicious emails or phishing schemes.</h4>
+                            <p>
+                                Phishing is the creation and use of email and websites designed to mimic legitimate business emails and websites. The most
+                                common act is sending an email to a user falsely claiming to be an established legitimate
+                                enterprise in an attempt to scam the user into surrendering private information that will
+                                be used for identity theft.
+                            </p>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /SHEET 5 -->
+
+            <!-- SHEET 6 -->
+            <!-- HEADER -->
+            <div class="border-bottom" style="margin-top:30px;width:700px; font-size: 8px">
+                <span>Form W-9 (Rev. 10-2018)</span>
+                <span id="count-Page" style="margin-left:580px"> </span>
+            </div>
+            <!-- /HEADER -->
+
+            <div style="margin:2mm 0 0 0;">
+                <table>
+                    <tr>
+                        <td style="width:330px; padding: 0 20px 0 0">
+                            <p>
+                                The IRS does not initiate contacts with taxpayers via emails. Also, the IRS does not request personal detailed information
+                                through email or ask taxpayers for the PIN numbers, passwords, or similar secret access information
+                                for their credit card, bank, or other financial accounts
+                            </p>
+                            <p>
+                                If you receive an unsolicited email claiming to be from the IRS, forward this message to phishing@irs.gov. You may also report
+                                misuse of the IRS name, logo, or other IRS property to the Treasury Inspector General for
+                                Tax Administration (TIGTA) at 1-800-366-4484. You can forward suspicious emails to the Federal
+                                Trade Commission at spam@uce.gov or report them at www.ftc.gov/complaint. You can contact
+                                the FTC at www.ftc.gov/idtheft or 877-IDTHEFT (877-438-4338). If you have been the victim
+                                of identity theft, see www.IdentityTheft.gov and Pub. 5027.
+                            </p>
+                            <p>
+                                Visit www.irs.gov/IdentityTheft to learn more about identity theft and how to reduce your risk.
+                            </p>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </td>
+                        <td>
+                            <h2>Privacy Act Notice</h2>
+                            <p>
+                                Section 6109 of the Internal Revenue Code requires you to provide your correct TIN to persons (including federal agencies)
+                                who are required to file information returns with the IRS to report interest, dividends,
+                                or certain other income paid to you; mortgage interest you paid; the acquisition or abandonment
+                                of secured property; the cancellation of debt; or contributions you made to an IRA, Archer
+                                MSA, or HSA. The person collecting this form uses the information on the form to file information
+                                returns with the IRS, reporting the above information. Routine uses of this information include
+                                giving it to the Department of Justice for civil and criminal litigation and to cities, states,
+                                the District of Columbia, and U.S. commonwealths and possessions for use in administering
+                                their laws. The information also may be disclosed to other countries under a treaty, to federal
+                                and state agencies to enforce civil and criminal laws, or to federal law enforcement and
+                                intelligence agencies to combat terrorism. You must provide your TIN whether or not you are
+                                required to file a tax return. Under section 3406, payers must generally withhold a percentage
+                                of taxable interest, dividend, and certain other payments to a payee who does not give a
+                                TIN to the payer. Certain penalties may also apply for providing false or fraudulent information.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /SHEET 6 -->
+        </div>
+    </body>
+
+    </html>
+
+
+</apex:page>

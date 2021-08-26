@@ -1,0 +1,108 @@
+<apex:page controller="diacoSettingPageSalesRabbitController"
+    showHeader="false" standardStylesheets="false"
+    docType="html-5.0" applyHtmlTag="false" applyBodyTag="false" >
+    <html>
+        <head>
+            <title>diacoSalesRabbit</title>
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css" />
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js">
+            </script>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        </head>
+        <body>
+            <div class="navbar-fixed">
+                <nav class="red darken-4">
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo">
+                            <img src="{!URLFOR($Resource.DiacoSRlogo,'logo/logo.png')}" class="changeImage"/>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="container">
+                <apex:form >
+                    <div class="row">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="input-field col s5 m3 l3 offset-s7 offset-m9 offset-l9">
+                                    <p style="font-family: 'Comic Sans MS', Times, serif; font-size: 12px;">updated: {!lastTime}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                <div class="input-field col s7 m7 l7">
+                                    <i class="material-icons prefix">schedule</i>
+                                    <apex:inputText value="{!scheduleTime}" styleClass="validate"/>
+                                    <label for="icon_prefix">how often?</label>
+                                </div>
+                                <div class="input-field col s5 m5 l5">
+                                    <apex:selectList value="{!option}" size="1">
+                                        <apex:selectOptions value="{!Options}"/>
+                                    </apex:selectList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                <div class="input-field col s7 m7 l7">
+                                    <i class="material-icons prefix">schedule</i>
+                                    <apex:inputText value="{!deleteAfter}" styleClass="validate"/>
+                                    <label for="icon_prefix">Delete After </label>
+                                </div>
+                                <div class="input-field col s5 m5 l5">
+                                    <apex:selectList value="{!deleteAfterOptions}" size="1">
+                                        <apex:selectOptions value="{!OptionsDelete}"/>
+                                    </apex:selectList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">keyboard_arrow_right</i>
+                                    <apex:inputText value="{!minSalePrice}" styleClass="validate"/>
+                                    <label for="icon_prefix">minimum sale price </label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">keyboard_arrow_left</i>
+                                    <apex:inputText value="{!maxSalePrice}" styleClass="validate"/>
+                                    <label for="icon_prefix">maximum sale price </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="material-icons prefix">keyboard_arrow_left</i>
+                                    <apex:inputText value="{!knockCounter}" styleClass="validate"/>
+                                    <label for="icon_prefix">Knock Counter</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="material-icons prefix">vpn_key</i>
+                                    <apex:inputText value="{!token}" styleClass="validate"/>
+                                    <label for="icon_prefix">Token</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s5 m3 l3 offset-s3 offset-m5 offset-l5">
+                                <apex:commandLink value="Update" action="{!updateSchedule}" styleClass="btn btn-large center"/>
+                            </div>
+                        </div>
+                    </div>
+                </apex:form>
+            </div>
+            <!--comentario en el pc-->
+           <script>
+            M.AutoInit();
+           </script>
+        </body>
+    </html>
+</apex:page>

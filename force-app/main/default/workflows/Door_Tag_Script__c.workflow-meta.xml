@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Door_Tag_Script_Consumer_Summary_Email</fullName>
+        <description>Door Tag Script: Consumer Summary Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Person_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Door_Tag_Script_Consumer_Email_Notification_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Door_Tag_Script_Consumer_Summary_Email_for_Create</fullName>
+        <description>Door Tag Script: Consumer Summary Email for Create</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Person_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Door_Tag_Script_Consumer_Email_Notification_Template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Update_Create_Task</fullName>
+        <field>Create_Task_Update__c</field>
+        <literalValue>Email Sent</literalValue>
+        <name>Update Create Task</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Door Tag Script%3A Consumer Summary Email Alert</fullName>
+        <actions>
+            <name>Door_Tag_Script_Consumer_Summary_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Update_Create_Task</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>(Person_Email__c != Null) &amp;&amp; (ISCHANGED(Appointment_Summary__c)) &amp;&amp; (Text( Create_Task_Update__c)=&apos;DTS Updated&apos;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Door Tag Script%3A Consumer Summary Email Alert for Create</fullName>
+        <actions>
+            <name>Door_Tag_Script_Consumer_Summary_Email_for_Create</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Update_Create_Task</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>(Person_Email__c != Null) &amp;&amp; (Text( Create_Task_Update__c)=&apos;DTS Updated&apos;) &amp;&amp; (Text(Consent__c) = &apos;Yes&apos;)</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

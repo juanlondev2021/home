@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Operational_Stage_Hot_Leads__c</fullName>
+    <externalId>false</externalId>
+    <label>Operational Stage - Hot Leads</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Stage_Types__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Docusign Received</fullName>
+                <default>false</default>
+                <label>Docusign Received</label>
+            </value>
+            <value>
+                <fullName>Billing Setup</fullName>
+                <default>false</default>
+                <label>Billing Setup</label>
+            </value>
+            <value>
+                <fullName>Active Tier 1</fullName>
+                <default>false</default>
+                <label>Active Tier 1</label>
+            </value>
+            <value>
+                <fullName>Active Tier 2</fullName>
+                <default>false</default>
+                <label>Active Tier 2</label>
+            </value>
+            <value>
+                <fullName>Active Tier 3</fullName>
+                <default>false</default>
+                <label>Active Tier 3</label>
+            </value>
+            <value>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+                <label>Deactivated</label>
+            </value>
+            <value>
+                <fullName>Hot Leads Active</fullName>
+                <default>false</default>
+                <label>Hot Leads Active</label>
+            </value>
+            <value>
+                <fullName>Hot Leads Portal Complete</fullName>
+                <default>false</default>
+                <label>Hot Leads Portal Complete</label>
+            </value>
+            <value>
+                <fullName>Hot Leads Portal Setup</fullName>
+                <default>false</default>
+                <label>Hot Leads Portal Setup</label>
+            </value>
+            <value>
+                <fullName>Call Center DID</fullName>
+                <default>false</default>
+                <label>Call Center DID</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Docusign Received</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Billing Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Active Tier 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Active Tier 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Active Tier 3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Deactivated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Hot Leads Active</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Hot Leads Portal Complete</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Hot Leads Portal Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hot Lead</controllingFieldValue>
+            <valueName>Call Center DID</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

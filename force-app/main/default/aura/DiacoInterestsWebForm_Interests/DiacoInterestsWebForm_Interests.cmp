@@ -1,0 +1,103 @@
+<!--
+* Diaco
+* Project:			Interest Manager
+* Description:		Modal select interests
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		25/08/2020		Jull Quintero           Initial implementation of the class.
+-->
+<aura:component>
+    <aura:handler name="change" value="{!v.open}" action="{!c.doInit}" />
+    <aura:attribute name="open"  type="Boolean" default="false" required="true"/>
+
+    <aura:attribute name="interests" type="List" default="[]" required="true"/>
+    <aura:attribute name="interestSelected" type="List" default="[]"/>    
+    
+    <!-- EVENT SELECT INTEREST CHECKBOX -->
+    <aura:handler name="interestCheckBox" event="c:DiacoEventInterestsWebForm" action="{! c.handlerSelectInterest }" />
+    
+    <!-- EVENT LIST INTEREST SELECTED-->
+    <aura:registerEvent name="listInterestSelected" type="c:DiacoEventInterestsWebForm" />
+    
+    <aura:if isTrue="{!v.open}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon   iconName="utility:close"
+                                            onclick="{! c.closeModel }"
+                                            alternativeText="close"
+                                            variant="bare-inverse"
+                                            class="slds-modal__close"/>
+                <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header_vertical slds-align_absolute-center">
+    
+                    <lightning:layoutItem padding="horizontal-small">
+                        <lightning:icon iconName="action:new" />
+                    </lightning:layoutItem>
+            
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span></span>
+                                    <span class="slds-page-header__title slds-truncate" title="Recently Viewed">Interests</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>                    
+                </header>    
+                <!-- /HEADER -->        
+                
+                <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+    
+                    <div class="slds-grid slds-wrap" >
+                        <aura:if isTrue="{!v.interests.length > 0 }">
+
+                            <aura:iteration items="{!v.interests}" var="item">
+                                <div class="slds-col slds-size_1-of-3 slds-small-size--1-of-4 slds-medium-size--1-of-6 slds-large-size--1-of-8">
+                                    <c:DiacoInterestsWebForm_InterestBox    name="{!item.name}"
+                                                                            checked = "{!item.checked}"  />
+                                </div>
+                            </aura:iteration>
+
+                            <aura:set attribute="else">
+
+                                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info slds-align_absolute-center" role="alert">
+                                        <span class="slds-assistive-text">Information</span>
+                                        <span class="slds-icon_container slds-icon-utility-user slds-m-right_x-small" title="Description of icon when needed">
+                                            <lightning:icon class="white" iconName="utility:alert" size="large"/>
+                                        </span>
+                                        <h2 class="slds-text-title_caps slds-text-color_inverse">No available interests found</h2>
+                                    </div>
+                                </div>
+
+                            </aura:set>
+
+                        </aura:if>
+                    </div>
+    
+                </div>
+                
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                        label="Cancel"
+                                        title="Cancel"
+                                        onclick="{! c.closeModel }"/>
+                    <aura:if isTrue="{!v.interests.length > 0 }">
+                        <lightning:button   variant="brand" 
+                                            label="Select" 
+                                            title="Select" 
+                                            onclick="{! c.handlerSubmit }" />
+                    </aura:if>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+</aura:component>

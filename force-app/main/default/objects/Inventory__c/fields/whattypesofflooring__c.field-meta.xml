@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>whattypesofflooring__c</fullName>
+    <description>When you eventually Upgrade your Flooring… Just to make sure my Representative brings the right samples, what all types of flooring would you like to see?</description>
+    <externalId>false</externalId>
+    <label>When you eventually Upgrade your Floorin</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Carpet-1-2 Rooms.</fullName>
+                <default>false</default>
+                <label>Carpet-1-2 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Carpet-3-4 Rooms.</fullName>
+                <default>false</default>
+                <label>Carpet-3-4 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Carpet-5 or more Rooms.</fullName>
+                <default>false</default>
+                <label>Carpet-5 or more Rooms.</label>
+            </value>
+            <value>
+                <fullName>Laminate-1-2 Rooms.</fullName>
+                <default>false</default>
+                <label>Laminate-1-2 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Laminate-3-4 Rooms.</fullName>
+                <default>false</default>
+                <label>Laminate-3-4 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Laminate-5 or more Rooms.</fullName>
+                <default>false</default>
+                <label>Laminate-5 or more Rooms.</label>
+            </value>
+            <value>
+                <fullName>Tile-1-2 Rooms.</fullName>
+                <default>false</default>
+                <label>Tile-1-2 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Tile-3-4 Rooms.</fullName>
+                <default>false</default>
+                <label>Tile-3-4 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Tile-5 or more Rooms.</fullName>
+                <default>false</default>
+                <label>Tile-5 or more Rooms.</label>
+            </value>
+            <value>
+                <fullName>Resilient &amp; LVT-1-2 Rooms.</fullName>
+                <default>false</default>
+                <label>Resilient &amp; LVT-1-2 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Resilient &amp; LVT-3-4 Rooms.</fullName>
+                <default>false</default>
+                <label>Resilient &amp; LVT-3-4 Rooms.</label>
+            </value>
+            <value>
+                <fullName>Resilient &amp; LVT-5 or more Rooms.</fullName>
+                <default>false</default>
+                <label>Resilient &amp; LVT-5 or more Rooms.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

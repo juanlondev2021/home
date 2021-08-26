@@ -1,0 +1,174 @@
+<aura:component controller="DiacoCmpFlowController" implements="flexipage:availableForRecordHome,force:hasRecordId"
+                access="global">
+
+    <aura:method name="init" action="{!c.doInit}" />   
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:attribute name="recordsType" type="List" />
+    <aura:attribute name="data" type="list" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="HomeServiceId" type="String" />
+    <aura:attribute name="EventId" type="String" />
+    <aura:attribute name="webForm" type="webForm__c" />
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <aura:attribute name="isOpen" type="boolean" default="false" />
+    <aura:attribute name="hasEventInfo" type="boolean" default="false" />
+    <aura:attribute name="isOpenAction" type="boolean" default="false" />
+    <aura:attribute name="isOpenEvent" type="boolean" default="false" />
+    <aura:attribute name="recordtypeId" type="RecordType" />
+    <aura:handler name="change" value="{!v.isOpen}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.isOpenAction}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.isOpenEvent}" action="{!c.doInit}" />
+
+    <aura:attribute name="phoneRep" type="String" />
+
+    <aura:attribute name="showContract" type="boolean" default="false" />
+    <aura:attribute name="HSContract" type="String" />
+
+    <aura:attribute name="event" type="Event" />
+
+    <!--New Attribute for Header Title-->
+    <aura:attribute name="title" type="String" default="Home Services"/>
+    <aura:if isTrue="{!v.recordId}">
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner />
+        </aura:if>
+
+        <!-- HEADER -->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                <lightning:icon iconName="standard:record_create" alternativeText="record_create" />
+                                <span class="slds-assistive-text">New</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Home Services">{!v.title}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta">Create and Update</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /HEADER -->
+
+        <aura:if isTrue="{!v.showContract}">
+
+            <!-- CONTRACT CMP  -->
+            <div>
+                <div style="margin-top: 12px; margin-left: 5px; display: flex; align-items: center;">
+                    <div onclick="{! c.handleBack }">
+                        <lightning:icon iconName="action:back" alternativeText="Back" title="Back" size="xx-small" />
+                    </div>
+                    <span class="slds-page-header__title slds-truncate" style="font-size: 16px; margin-left: 5px;" title="{!v.HSContract.Name}">{!v.HSContract.Name}</span>
+                </div>
+
+                <c:diacoContract recordId="{!v.HSContract.Id}" />
+            </div>
+            <!-- CONTRACT CMP  -->
+
+            <aura:set attribute="else">
+
+                <aura:if isTrue="{!!v.saved}">
+
+                    <!-- EVENT INFO -->
+                    <aura:if isTrue="{!v.hasEventInfo}">
+
+                        <div class="slds-page-header">
+                            <div class="slds-page-header__row">
+                                <div class="slds-page-header__col-title">
+                                    <div class="slds-media">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-opportunity"
+                                                title="opportunity">
+                                                <lightning:icon iconName="standard:event" alternativeText="event" />
+                                                <span class="slds-assistive-text">Event</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <div class="slds-page-header__name">
+                                                <div class="slds-page-header__name-title">
+                                                    <h1>
+                                                        <span class="slds-page-header__title slds-truncate"
+                                                            title="Home Services">Webform</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <p class="slds-page-header__name-meta">Event Information</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <lightning:recordViewForm recordId="{!v.webForm.Id}" objectApiName="webForm__c">
+                                <div class="slds-grid slds-wrap slds-m-top_small">
+                                    <div class="slds-col slds-size_6-of-12">
+                                        <lightning:outputField fieldName="Start_DateTime__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_6-of-12">
+                                        <lightning:outputField fieldName="End_DateTime__c" />
+                                    </div>
+                                </div>
+                            </lightning:recordViewForm>
+                        </div>
+                        
+                    </aura:if>
+                    <!-- EVENT INFO -->
+
+                    <!-- MODAL CREATE HS -->
+                    <c:DiacoCreateHomeServiceModalFlow  isOpen="{!v.isOpen}" 
+                                                        recordtypeId="{!v.recordtypeId}"
+                                                        accountId="{!v.recordId}" 
+                                                        phoneRep="{!v.phoneRep}" />
+                    <!-- /MODAL CREATE HS -->
+
+                    <!-- MODAL EDIT HS -->
+                    <c:DiacoModalHomeServiceActionFlow  isOpenAction="{!v.isOpenAction}"
+                                                        HomeServiceId="{!v.HomeServiceId}" 
+                                                        EventId="{!v.EventId}" 
+                                                        event="{!v.event}" />
+                    <!-- MODAL EDIT HS -->
+
+                    <!-- MODAL CREATE EVENT  -->
+                    <c:DiacoCreateEventFlow isOpenEvent="{!v.isOpenEvent}" 
+                                            HomeServiceId="{!v.HomeServiceId}" />
+                    <!-- MODAL CREATE EVENT  -->
+
+                    
+                    <!-- DATA TABLE HS -->
+                    <div class="slds-grid slds-wrap">
+                        <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                            <lightning:datatable    keyField="id" 
+                                                    data="{! v.data }" 
+                                                    onrowaction="{! c.handleRowAction }"
+                                                    columns="{! v.columns }" 
+                                                    hideCheckboxColumn="true" />
+                        </div>
+                    </div>
+                    <!-- DATA TABLE HS -->
+
+                </aura:if>
+
+            </aura:set>
+
+        </aura:if>
+
+        <aura:set attribute="else">
+            There is no account
+        </aura:set>
+    </aura:if>
+
+
+
+</aura:component>

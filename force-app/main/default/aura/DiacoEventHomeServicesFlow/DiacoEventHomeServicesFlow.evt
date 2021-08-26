@@ -1,0 +1,8 @@
+<aura:event type="COMPONENT" description="Event template">
+
+    <aura:attribute name="assigned" type="Boolean" />
+    <aura:attribute name="appointment" type="Appointment__c" />
+    <aura:attribute name="startDate" type="List" />
+    <aura:attribute name="endHour" type="Integer" />
+    
+</aura:event>

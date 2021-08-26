@@ -1,0 +1,224 @@
+<!--
+* Diaco
+* @author 			Álvaro Ortega href=<aovargas05@gmail.com>
+* Project:			Products
+* Description:		Component to create Line Items to Services
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		06/03/2020		Alvaro Ortega (AO)		Component.
+* @version	1.1		25/05/2020		John Hernandez (JH)		Optimization of mobile view
+* @version	1.1		16/10/2020		Fabian Pineda (FP)		Adjusted sizes of the modal windows and the dual list box.
+-->
+
+<aura:component controller="DiacoLineItemsController" implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="data" type="List" />
+    <aura:attribute name="originalData" type="List" />
+    <aura:attribute name="draftValues" type="List" default="[]" />
+    <aura:attribute name="AllDraftValues" type="List" default="[]" />
+
+    <aura:attribute name="isLoad" type="boolean" default='true' />
+    <aura:attribute name="isLoadP" type="boolean" default='true' />
+    <aura:attribute name="isLoadUpdateService" type="boolean" default='true' />
+    <!--Update modal' Spinner v(1.1)-->
+
+    <aura:attribute name="isOpen" type="boolean" default='false' />
+    <aura:attribute name="isOpenDelete" type="boolean" default='false' />
+    <aura:attribute name="isOpenViewService" type="boolean" default='false' />
+    <!--Open modal to View and Edit Service(V 1.1)-->
+    <aura:attribute name="updateBillingFrecuency" type="boolean" default='false' />
+    <!--new Button to update billing Frecuency-->
+
+    <aura:attribute name="COtoDelete" type="Object" />
+
+    <aura:attribute name="options" type="boolean" default='false' />
+    <aura:attribute name="selectedOptions" type="List" default="[]" />
+    <aura:attribute name="serviceRowId" type="String" default="" />
+    <!--the Id of the selected Service in the Service(V 1.1)-->
+
+    <aura:attribute name="selectedFrequency" type="String" default='' />
+    <aura:attribute name="originalSelectedFrequency" type="String" default='' />
+
+    <aura:attribute name="billStartDate" type="Date" description="Auto populate bill start date column in all items"/>
+
+    <aura:attribute name="totalInvestment" type="String" default='' />
+    <aura:attribute name="originalTotalInvestment" type="String" default='' />
+
+    <aura:attribute name="device" type="String" default='' />
+    <!--V 1.1 Attribute to identify the Device (desktop or Mobile)-->
+    <aura:registerEvent name="tabSaved" type="c:diacoTabCompletionEvent" />
+    <!--Event for firing check of completion-->
+
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses" />
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Information About</h1>
+                <h2 class="slds-text-heading--medium">Services</h2>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+            <lightning:buttonIcon iconName="utility:add" variant="brand" alternativeText="AddService" onclick="{! c.openModel }" disabled='{!v.draftValues.length > 0}' />
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <aura:if isTrue="{!v.isLoad}">
+        <div class="slds-align_absolute-center">
+            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small" />
+        </div>
+        <aura:set attribute="else">
+            <aura:if isTrue="{!v.data.length > 0}">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-p-horizontal_x-small slds-m-horizontal_x-smallslds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <lightning:select aura:id="selectBillingFrequency" name="Billing Frequency" label="Billing Frequency" value="{!v.selectedFrequency}" onchange="{! c.onChangeFrequency }">
+                            <option value="">Choose one...</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Quarterly">Quarterly</option>
+                            <option value="Yearly">Yearly</option>
+
+                            <!--option value="Once">Once</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Bimonthly">Bimonthly</option>
+                            <option value="Semiannual">Semiannual</option>
+                            <option value="Biennial">Biennial</option-->
+                        </lightning:select>
+                    </div>
+                    <div class="slds-p-horizontal_x-small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <lightning:input type="number" disabled='true' name="{!'Total '+ v.selectedFrequency +' Investment'}" label="{!'Total '+ v.selectedFrequency +' Investment'}" formatter="currency" value='{!v.totalInvestment}' step="0.01" />
+                    </div>
+
+                    <div class="slds-p-horizontal_x-small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <lightning:input type="date" name="BillStartDate" label="Bill Start Date" value="{!v.billStartDate}"  onchange="{!c.onChangeBillStartDate}"/>
+                    </div>
+                </div>
+            </aura:if>
+
+            <div style="height: 300px" class="slds-box slds-scrollable_y slds-m-top_medium">
+                <lightning:datatable keyField="id" data="{! v.data }" columns="{! v.columns }" draftValues="{! v.AllDraftValues }" hideCheckboxColumn="true" onrowaction="{! c.handleRowAction }" onsave="{! c.handleSaveEdition }" oncancel="{! c.handleCancelEdition }" oncellchange="{! c.handleCellEdition }" />
+            </div>
+        </aura:set>
+    </aura:if>
+
+    <aura:if isTrue="{!v.isOpen}">
+        <!--###### MODAL BOX Start######-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Services List</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <aura:if isTrue="{!v.isLoadP}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small" />
+                        </div>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!$Browser.formFactor=='DESKTOP'}">
+                                <lightning:dualListbox aura:id="listBoxP" name="languages" class="slds-m-top--medium slds-align_absolute-center" label="Select Services" sourceLabel="Available" selectedLabel="Selected" fieldLevelHelp="Select all services that you want" value="{!v.selectedOptions}" options="{!v.options}" />
+                            </aura:if>
+                            <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+                                <lightning:checkboxGroup name="Checkbox Group" label="Select Products" options="{! v.options }" value="{! v.selectedOptions }" />
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }" disabled="{!v.isLoadP}" />
+                    <lightning:button variant="brand" label="Add" title="Add" onclick="{! c.addServices }" disabled="{!v.isLoadP}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+
+    </aura:if>
+
+    <aura:if isTrue="{!v.isOpenDelete}">
+        <!--###### MODAL BOX Start######-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModelDelete }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Services</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-align_absolute-center slds-m-around_x-small">
+                        {!v.draftValues.length > 0 ? ('Save the changes first') : ('Are you sure you want to delete '+v.COtoDelete.Name+'?')}
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <aura:if isTrue="{!!(v.draftValues.length > 0)}">
+                        <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModelDelete }" />
+                    </aura:if>
+                    <lightning:button variant="brand" label="{! v.draftValues.length > 0 ? 'Accept' : 'Delete' }" title="{! v.draftValues.length > 0 ? 'Accept' : 'Delete' }" onclick="{! v.draftValues.length > 0 ? c.closeModelDelete : c.deletingOrderItem }" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+
+    </aura:if>
+
+    <!--Modal to View the fields of the selected item and in Given case Edit and Update V1.1-->
+    <aura:if isTrue="{!v.isOpenViewService}">
+        <!--###### MODAL BOX Start######-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Service Information</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" style="weight: 700px" id="modal-content-id-1">
+
+                    <!--CONTENT-->
+                    <lightning:recordEditForm recordId="{!v.serviceRowId}" objectApiName="Line_Item__c" aura:id='ViewServiceEditForm' onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}">
+                        <lightning:messages />
+                        <aura:if isTrue="{!v.isLoadUpdateService}">
+                            <lightning:inputField fieldName="Name" disabled="true" />
+                            <lightning:inputField fieldName="Bill_Start_Date__c" disabled="true" />
+                            <lightning:inputField fieldName="Billing_Frequency__c" disabled="true" />
+                            <lightning:inputField fieldName="Monthly_Investment__c" />
+                        </aura:if>
+                    </lightning:recordEditForm>
+
+
+                    <aura:if isTrue="{!v.isLoadUpdateService ==false}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small" />
+                        </div>
+                    </aura:if>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Close" title="Close" onclick="{! c.closeModel }" />
+                    <lightning:button variant="brand" label="Update" title="Update" onclick="{! c.updateService}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+
+    </aura:if>
+
+    <lightning:notificationsLibrary aura:id="notifLib" />
+
+</aura:component>

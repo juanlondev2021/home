@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>IsProcessed__c</columns>
+    <columns>CallDisposition__c</columns>
+    <columns>User_Address__c</columns>
+    <columns>Account__c</columns>
+    <columns>Agent_Email__c</columns>
+    <columns>CallCenterCampaign__c</columns>
+    <columns>Duration__c</columns>
+    <columns>User__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

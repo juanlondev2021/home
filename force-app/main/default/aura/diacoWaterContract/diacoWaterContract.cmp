@@ -1,0 +1,68 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water contract tabs
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+* @version	1.0		15/07/2020		John Hernandez (JM)		Add event and flags for checking tabs completion.
+-->
+<aura:component controller="diacoTabsInformationCompletion">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="userId" type="String" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <aura:attribute name="toReloadContract" type="Boolean" default="false" />
+    <aura:attribute name="toReloadPricing" type="Boolean" default="false" />
+    <aura:attribute name="toReloadServices" type="Boolean" default="false" />
+    <aura:attribute name="toReloadProducts" type="Boolean" default="false" />
+
+    <aura:attribute name="toReloadGeneralInformation" type="Boolean" default="false" />
+    <aura:attribute name="toReloadFirstCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadSecondCustomer" type="Boolean" default="false" />
+
+    <!--Information checked-->
+    <aura:attribute name="firstCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="secondCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="ProductServiceCompletion" type="Boolean" default="false" />
+    <aura:attribute name="generalInfoCompletion" type="Boolean" default="false" />
+    <aura:attribute name="paymentsCompletion" type="Boolean" default="false" />
+
+    <aura:handler name="tabSaved" event="c:diacoTabCompletionEvent" action="{!c.handleTabSaved}" />
+
+    <lightning:tabset>
+        <lightning:tab id="firstCustomer" label="First Customer" class="tabj" onactive="{!c.reload}" endIconName="{!v.firstCustomerCompletion?'utility:check':''}">
+            <c:diacoContractFirstCustomer recordId="{!v.recordId}" showAddress="true" showHOA="true" reload="{!v.toReloadFirstCustomer}" />
+        </lightning:tab>
+        <lightning:tab id="secondCustomer" label="Second Customer" onactive="{! c.reload}" endIconName="{!v.secondCustomerCompletion?'utility:check':''}">
+            <c:diacoContractSecondCustomer recordId="{!v.recordId}" reload="{!v.toReloadSecondCustomer}" />
+        </lightning:tab>
+
+        <lightning:tab id="generalInfo" label="General Information" onactive="{! c.reload}" endIconName="{!v.generalInfoCompletion?'utility:check':''}">
+            <c:diacoContractLocationAndPayments recordId="{!v.recordId}" reload="{!v.toReloadGeneralInformation}" />
+            <c:diacoContractAnalysis recordId="{!v.recordId}" />
+        </lightning:tab>
+        <lightning:tab label="Products and Services" id="Products" onactive="{! c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+            <div class="slds-box slds-theme--default">
+                <c:diacoLineItems recordId="{!v.recordId}" />
+                <c:DiacoLineItemsServices recordId="{!v.recordId}" />
+            </div>
+        </lightning:tab>
+        <lightning:tab label="Pricing" id="Pricing" onactive="{! c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+
+            <c:diacoContractSummary toReload="{!v.toReloadPricing}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Payment Method" endIconName="{!v.paymentsCompletion?'utility:check':''}">
+            <c:diacoContractServices recordId="{!v.recordId}" />
+            <c:DiacoContractPayMethod recordId="{!v.recordId}" />
+        </lightning:tab>
+        <lightning:tab label="Contract" id="Contract" onactive="{! c.reload}">
+            <c:diacoContractWaterVisual toReload="{!v.toReloadContract}" recordId="{!v.recordId}" />
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

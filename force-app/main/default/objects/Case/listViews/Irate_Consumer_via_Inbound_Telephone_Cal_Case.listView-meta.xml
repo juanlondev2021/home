@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Irate_Consumer_via_Inbound_Telephone_Cal_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Irate Consumer via Inbound Telephone Cal</label>
+    <queue>Irate_Consumer_via_Inbound_Telephone_Cal</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

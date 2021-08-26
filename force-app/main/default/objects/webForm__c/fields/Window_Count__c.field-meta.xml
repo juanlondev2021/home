@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Window_Count__c</fullName>
+    <externalId>false</externalId>
+    <label>Window Count</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>4-6</fullName>
+                <default>false</default>
+                <label>4-6</label>
+            </value>
+            <value>
+                <fullName>7-9</fullName>
+                <default>false</default>
+                <label>7-9</label>
+            </value>
+            <value>
+                <fullName>10-12</fullName>
+                <default>false</default>
+                <label>10-12</label>
+            </value>
+            <value>
+                <fullName>Over 12</fullName>
+                <default>false</default>
+                <label>Over 12</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

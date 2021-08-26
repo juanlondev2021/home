@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description_of_closet__c</fullName>
+    <externalId>false</externalId>
+    <label>Description of closet(s)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Walk in Closet</fullName>
+                <default>false</default>
+                <label>Walk in Closet</label>
+            </value>
+            <value>
+                <fullName>Media Closet</fullName>
+                <default>false</default>
+                <label>Media Closet</label>
+            </value>
+            <value>
+                <fullName>Reach in Closet</fullName>
+                <default>false</default>
+                <label>Reach in Closet</label>
+            </value>
+            <value>
+                <fullName>Home office</fullName>
+                <default>false</default>
+                <label>Home office</label>
+            </value>
+            <value>
+                <fullName>Laundry Room</fullName>
+                <default>false</default>
+                <label>Laundry Room</label>
+            </value>
+            <value>
+                <fullName>Basement</fullName>
+                <default>false</default>
+                <label>Basement</label>
+            </value>
+            <value>
+                <fullName>Kitchen Pantry</fullName>
+                <default>false</default>
+                <label>Kitchen Pantry</label>
+            </value>
+            <value>
+                <fullName>Family Room</fullName>
+                <default>false</default>
+                <label>Family Room</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

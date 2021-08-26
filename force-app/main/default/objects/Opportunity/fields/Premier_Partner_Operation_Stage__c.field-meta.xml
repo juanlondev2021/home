@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Premier_Partner_Operation_Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>Premier Partner Operation Stage</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Stage_Types__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Docusign Received</fullName>
+                <default>false</default>
+                <label>Docusign Received</label>
+            </value>
+            <value>
+                <fullName>Billing Setup</fullName>
+                <default>false</default>
+                <label>Billing Setup</label>
+            </value>
+            <value>
+                <fullName>Setup</fullName>
+                <default>true</default>
+                <label>Setup</label>
+            </value>
+            <value>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <label>Active</label>
+            </value>
+            <value>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+                <label>Deactivated</label>
+            </value>
+            <value>
+                <fullName>Call Center DID</fullName>
+                <default>false</default>
+                <label>Call Center DID</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Premier Partner Fee</controllingFieldValue>
+            <valueName>Docusign Received</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Premier Partner Fee</controllingFieldValue>
+            <valueName>Billing Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Premier Partner Fee</controllingFieldValue>
+            <valueName>Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Premier Partner Fee</controllingFieldValue>
+            <valueName>Active</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Premier Partner Fee</controllingFieldValue>
+            <valueName>Deactivated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Premier Partner Fee</controllingFieldValue>
+            <valueName>Call Center DID</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

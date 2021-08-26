@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Manufacture__c</fullName>
+    <externalId>false</externalId>
+    <label>Manufacture</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Alarm.com</fullName>
+                <default>false</default>
+                <label>Alarm.com</label>
+            </value>
+            <value>
+                <fullName>Ameriflow</fullName>
+                <default>false</default>
+                <label>Ameriflow</label>
+            </value>
+            <value>
+                <fullName>CFA Cabinetry</fullName>
+                <default>false</default>
+                <label>CFA Cabinetry</label>
+            </value>
+            <value>
+                <fullName>DSC</fullName>
+                <default>false</default>
+                <label>DSC</label>
+            </value>
+            <value>
+                <fullName>Energy Shield</fullName>
+                <default>false</default>
+                <label>Energy Shield</label>
+            </value>
+            <value>
+                <fullName>Flowwall</fullName>
+                <default>false</default>
+                <label>Flowwall</label>
+            </value>
+            <value>
+                <fullName>Hague</fullName>
+                <default>false</default>
+                <label>Hague</label>
+            </value>
+            <value>
+                <fullName>Kwikset</fullName>
+                <default>false</default>
+                <label>Kwikset</label>
+            </value>
+            <value>
+                <fullName>Mohawk</fullName>
+                <default>false</default>
+                <label>Mohawk</label>
+            </value>
+            <value>
+                <fullName>MSI</fullName>
+                <default>false</default>
+                <label>MSI</label>
+            </value>
+            <value>
+                <fullName>Premier Custom Coating</fullName>
+                <default>false</default>
+                <label>Premier Custom Coating</label>
+            </value>
+            <value>
+                <fullName>Qolsys</fullName>
+                <default>false</default>
+                <label>Qolsys</label>
+            </value>
+            <value>
+                <fullName>Signature</fullName>
+                <default>false</default>
+                <label>Signature</label>
+            </value>
+            <value>
+                <fullName>Sonos</fullName>
+                <default>false</default>
+                <label>Sonos</label>
+            </value>
+            <value>
+                <fullName>Stone Quarry</fullName>
+                <default>false</default>
+                <label>Stone Quarry</label>
+            </value>
+            <value>
+                <fullName>Simon</fullName>
+                <default>false</default>
+                <label>Simon</label>
+            </value>
+            <value>
+                <fullName>Ring</fullName>
+                <default>false</default>
+                <label>Ring</label>
+            </value>
+            <value>
+                <fullName>Z-Wave</fullName>
+                <default>false</default>
+                <label>Z-Wave</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

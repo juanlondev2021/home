@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QC_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>QC Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Dashboard Picture</fullName>
+                <default>false</default>
+                <label>Dashboard Picture</label>
+            </value>
+            <value>
+                <fullName>Hand Delivery</fullName>
+                <default>false</default>
+                <label>Hand Delivery</label>
+            </value>
+            <value>
+                <fullName>No Box</fullName>
+                <default>false</default>
+                <label>No Box</label>
+            </value>
+            <value>
+                <fullName>No Picture</fullName>
+                <default>false</default>
+                <label>No Picture</label>
+            </value>
+            <value>
+                <fullName>No Separation(Tag &amp; Box)</fullName>
+                <default>false</default>
+                <label>No Separation(Tag &amp; Box)</label>
+            </value>
+            <value>
+                <fullName>No Tag</fullName>
+                <default>false</default>
+                <label>No Tag</label>
+            </value>
+            <value>
+                <fullName>Picture Correct</fullName>
+                <default>false</default>
+                <label>Picture Correct</label>
+            </value>
+            <value>
+                <fullName>Picture wrong</fullName>
+                <default>false</default>
+                <label>Picture wrong</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

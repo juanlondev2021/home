@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DTS_Type_of_Stone__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>(Granite/Marble)</inlineHelpText>
+    <label>Type of Stone</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Granite - Countertops</fullName>
+                <default>false</default>
+                <label>Granite - Countertops</label>
+            </value>
+            <value>
+                <fullName>Granite - Bathroom</fullName>
+                <default>false</default>
+                <label>Granite - Bathroom</label>
+            </value>
+            <value>
+                <fullName>Granite - Fireplace</fullName>
+                <default>false</default>
+                <label>Granite - Fireplace</label>
+            </value>
+            <value>
+                <fullName>Marble - Countertops</fullName>
+                <default>false</default>
+                <label>Marble - Countertops</label>
+            </value>
+            <value>
+                <fullName>Marble - Bathroom</fullName>
+                <default>false</default>
+                <label>Marble - Bathroom</label>
+            </value>
+            <value>
+                <fullName>Marble - Fireplace</fullName>
+                <default>false</default>
+                <label>Marble - Fireplace</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

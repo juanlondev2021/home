@@ -1,0 +1,100 @@
+<aura:component controller="diacoAlarmComController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable" 
+                access="global" >
+
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="_label" type="String"/>
+    
+    <aura:attribute name="customer" type="DiacoAlarm__Diaco_Customer_Alarm__c"/>
+    
+    <aura:attribute name="_recordType" type="String" default="None"/>
+    
+    <aura:attribute name="isUpdate" type="Boolean" default='false'/>
+        
+    <aura:handler name="change" value="{!v.isUpdate}" action="{!c.doInit}"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:handler name="CustomerAlarmInHomeServiceEvent" event="c:DiacoCustomerAlarmInHomeServiceEvent" action="{!c.handleComponentEvent}"/>
+    
+    <aura:handler event="force:showToast" action="{!c.toastInfo}" />
+    
+    <aura:attribute name="toPackageService" type="Boolean" default='false'/>
+    <aura:attribute name="toSynchronize" type="Boolean" default='false'/>
+    <aura:attribute name="isCASynchronized" type="Boolean" default='false'/>
+    
+    <aura:attribute name="id2" type="String"/>
+    <aura:attribute name="id3" type="String"/>
+    <aura:attribute name="id4" type="String"/>
+    <aura:attribute name="id5" type="String"/>
+    <aura:attribute name="id6" type="String"/>
+    <aura:attribute name="id7" type="String"/>
+        
+    <aura:if isTrue="{!v._recordType == 'Home Automation'}">
+        
+        <lightning:tabset variant="scoped" onselect="{!c.onSelect}">
+            
+            <lightning:tab label="Customer alarm" id="1">
+                <aura:if isTrue="{!v.recordId != undefined}">
+                    <c:diacoAlarmCom recordId="{!v.recordId}" isUpdate="{!v.isUpdate}"/>
+                </aura:if> 
+            </lightning:tab>
+            
+            <aura:if isTrue="{!v.toPackageService}">
+                <lightning:tab label="Package Service">
+                    <DiacoAlarm:DiacoChangePackageService recordId="{!v.id2}"/>
+                </lightning:tab>
+            </aura:if>
+
+            <aura:if isTrue="{!v.isCASynchronized}">
+                <lightning:tab label="Site Avantguard" id="3">
+                    <aura:if isTrue="{!v.id3 != undefined}">
+                        <c:diacoAlarmComSiteAvantguard recordId="{!v.id3}"/>
+                    </aura:if>
+                </lightning:tab>
+            </aura:if>
+
+            <aura:if isTrue="{!v.isCASynchronized}">
+                <lightning:tab label="Site Contacts">
+                    <c:diacoAlarmComSiteContacts recordId="{!v.id4}"/>
+                </lightning:tab>
+            </aura:if>
+
+            <aura:if isTrue="{!v.isCASynchronized}">
+                <lightning:tab label="Code Words">
+                    <c:diacoAlarmComCodeWord recordId="{!v.id5}"/>
+                </lightning:tab>
+            </aura:if>
+
+            <aura:if isTrue="{!v.isCASynchronized}">
+                <lightning:tab label="Devices" id='5'>
+                    <!--c:diacoAlarmComDevice recordId="{!v.id5}"/-->
+                    <aura:if isTrue="{!v.id5 != undefined}">
+                        <DiacoAlarm:DiacoAlarmDevicesCustomer recordId="{!v.id5}"/> 
+                    </aura:if>
+                </lightning:tab>
+            </aura:if>
+
+            <aura:if isTrue="{!v.toSynchronize}">
+                <lightning:tab label="Synchronize" id="7">
+                    <aura:if isTrue="{!v.id7 != undefined}">
+                        <DiacoAlarm:DiacoAlarmDevicesAndHistoryTab recordId="{!v.id7}"/>
+                    </aura:if>
+                </lightning:tab>
+            </aura:if>
+            
+        </lightning:tabset>
+
+        <aura:set attribute="else">
+            <aura:if isTrue="{!v._recordType == 'None'}">
+                <div class="slds-card slds-box">
+                    <lightning:spinner alternativeText="Loading" size="small" />
+                    <aura:set attribute="else">
+                        <h1 class="slds-text-heading--label">This page is not available for this record type</h1>
+                    </aura:set>
+                </div>
+            </aura:if> 
+        </aura:set>
+
+    </aura:if>
+</aura:component>

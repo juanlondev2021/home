@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agreement_Term_in_Months</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+ISPICKVAL(  Agreement_Term_in_Months__c , &quot;&quot; ),
+OR(
+ISPICKVAL(StageName, &quot;Send Docusign&quot;),
+ISPICKVAL(StageName, &quot;Gift Card Docusign Received&quot;),
+ISPICKVAL(StageName, &quot;Gift Card Initial Payment Received&quot;)))</errorConditionFormula>
+    <errorDisplayField>Agreement_Term_in_Months__c</errorDisplayField>
+    <errorMessage>Please Add the Agreement Term in Months on the opportunity</errorMessage>
+</ValidationRule>

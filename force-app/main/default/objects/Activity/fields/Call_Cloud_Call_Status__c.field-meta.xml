@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Cloud_Call_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Call Cloud: Call Status</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No Answer</fullName>
+                <default>false</default>
+                <label>No Answer</label>
+            </value>
+            <value>
+                <fullName>Call Back</fullName>
+                <default>false</default>
+                <label>Call Back</label>
+            </value>
+            <value>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+                <label>Not Interested</label>
+            </value>
+            <value>
+                <fullName>Reschedule</fullName>
+                <default>false</default>
+                <label>Reschedule</label>
+            </value>
+            <value>
+                <fullName>Rehashed</fullName>
+                <default>false</default>
+                <label>Rehashed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

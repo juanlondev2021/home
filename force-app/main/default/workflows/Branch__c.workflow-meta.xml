@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Date_Stamp_Delivering</fullName>
+        <field>Date_Stamp_Delivering__c</field>
+        <formula>Today()</formula>
+        <name>Date Stamp: Delivering</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Date_Stamp_Market_Launch</fullName>
+        <field>Date_Stamp_Market_Launch__c</field>
+        <formula>Today()</formula>
+        <name>Date Stamp: Market Launch</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Date_Stamp_Ordered</fullName>
+        <field>Date_Stamp_Ordered__c</field>
+        <formula>Today()</formula>
+        <name>Date Stamp: Ordered</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Date_Stamp_Post_Planning</fullName>
+        <field>Date_Stamp_Post_Planning__c</field>
+        <formula>Today()</formula>
+        <name>Date Stamp: Post-Planning</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Date Stamp%3A Delivering</fullName>
+        <actions>
+            <name>Date_Stamp_Delivering</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>And( 
+ISCHANGED( Branch_Stage__c ) , 
+ISPICKVAL(Branch_Stage__c, &quot;Delivering&quot;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Date Stamp%3A Market Launch</fullName>
+        <actions>
+            <name>Date_Stamp_Market_Launch</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>And( 
+ISCHANGED( Branch_Stage__c ) , 
+ISPICKVAL(Branch_Stage__c, &quot;Market Launch&quot;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Date Stamp%3A Ordered</fullName>
+        <actions>
+            <name>Date_Stamp_Ordered</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>And( 
+ISCHANGED( Branch_Stage__c ) , 
+ISPICKVAL(Branch_Stage__c, &quot;Ordered&quot;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Date Stamp%3A Post Planning</fullName>
+        <actions>
+            <name>Date_Stamp_Post_Planning</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>And( 
+ISCHANGED( Branch_Stage__c ) , 
+ISPICKVAL(Branch_Stage__c, &quot;Post-Planning&quot;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

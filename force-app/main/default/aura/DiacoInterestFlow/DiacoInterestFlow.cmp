@@ -1,0 +1,338 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                <lightning:icon iconName="standard:record_update" alternativeText="record_create"/>
+                                <span class="slds-assistive-text">New or Edit</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Home Services">Interest</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta">Create or Update</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <lightning:recordEditForm
+                                  onload="{!c.handleLoad}"
+                                  onsubmit="{!c.handleSubmit}"
+                                  onsuccess="{!c.handleSuccess}"
+                                  recordId="{!v.recordId==null?'':v.recordId}"
+                                  objectApiName="webForm__c">
+            <!-- the messages component is for error messages -->
+            <lightning:messages />
+            <div class="slds-col slds-size_12-of-12 slds-m-vertical_medium slds-align_absolute-center">
+                    <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+                </div>
+            <div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Smart_Home_Automation__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Smart_Home_Automation_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Smart_Home_Automation_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Windows__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Windows_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Windows_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Solar__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Solar_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Solar_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Pest_Control__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Pest_Control_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Pest_Control_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Landscaping__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Landscaping_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Landscaping_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Blinds_Shutters__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Blinds_Shutters_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Blinds_Shutter_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Bath__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Bath_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Bath_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Flooring__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Flooring_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Flooring_Notes__c" />
+                    </div>
+                 </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Floor_Coating__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Floot_Coating_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Floor_Coating_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="House_Cleaning__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="House_Cleaning_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="House_Cleaning_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Locksmith__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Locksmith_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Locksmith_Notes__c" />
+                    </div>
+                    
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Floor_Cleaning__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Floor_Cleaning_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Floor_Cleaning_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Roofing__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Roofing_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Roofing_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="HVAC__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="HVAC_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="HVAC_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Handyman__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Handyman_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Handyman_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Kitchen__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Kitchen_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Kitchen_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Electric__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Electric_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Electric_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Water_Filtration__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Water_Filtration_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Water_Filtration_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Organization__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Organization_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Organization_Notes__c" />
+                    </div>
+                 </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Painting__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Painting_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Painting_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Pool__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Pool_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Pool_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="TV_Internet__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Tv_Internet_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="TV_Internet_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Door__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Door_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Garage_Door_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Weed_Removal__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Weed_Removal_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Weed_Removal_Notes__c" />
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Plumbing__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Plumbing_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Plumbing_Notes__c" />
+                	</div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Maid_Service__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Maid_Service_Status__c" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3">
+                        <lightning:inputField fieldName="Maid_Service_Notes__c" />
+                	</div>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-m-top_medium slds-align_absolute-center">
+                    <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+                </div>
+            </div>
+        </lightning:recordEditForm>
+</aura:component>

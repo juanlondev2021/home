@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Water_Softener_Install_Repair__c</fullName>
+    <description>(Water Softener Filtration)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Water Softener Filtration)</inlineHelpText>
+    <label>Water Softener Install /Repair</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Water Softener Filtration - Installation</fullName>
+                <default>false</default>
+                <label>Water Softener Filtration - Installation</label>
+            </value>
+            <value>
+                <fullName>Water Softener Filtration - Maintenance</fullName>
+                <default>false</default>
+                <label>Water Softener Filtration - Maintenance</label>
+            </value>
+            <value>
+                <fullName>Water Softener Filtration - Repair</fullName>
+                <default>false</default>
+                <label>Water Softener Filtration - Repair</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commission_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  fBilling_Opp_Account__c = &quot;1-800 Remodel - OB&quot;,
+ CASE( fBilling_Opp_Industry__c , 
+     &quot;Bathroom Remodeling&quot;, &quot;Home Depot: Cluster B&quot;,
+     &quot;Gutters&quot;, &quot;Home Depot: Cluster A&quot;,
+     &quot;Roofing&quot;, &quot;Home Depot: Cluster A&quot;,
+     &quot;Siding&quot;, &quot;Home Depot: Cluster A&quot;,
+     &quot;Windows/Doors&quot;, &quot;Home Depot: Cluster A&quot;,
+     &quot;Kitchen Remodeling&quot;, &quot;Home Depot: Cluster B&quot;,
+     &quot;Home Depot: &quot; + fBilling_Opp_Industry__c),
+ IF(  fBilling_Opp_Account__c = &quot;Sears Home Services-OB&quot;,
+     CASE( fBilling_Opp_Industry__c ,  
+          &quot;Bathroom Remodeling&quot;, &quot;Sears: Interior&quot;,
+          &quot;Granite/Marble&quot;, &quot;Sears: Interior&quot;,
+          &quot;Flooring/Carpeting&quot;, &quot;Sears: Interior&quot;,
+          &quot;Roofing&quot;, &quot;Sears: Exterior&quot;,
+          &quot;Siding&quot;, &quot;Sears: Exterior&quot;,
+          &quot;Windows/Doors&quot;, &quot;Sears: Exterior&quot;,
+          &quot;Kitchen Remodeling&quot;, &quot;Sears: Interior&quot;,
+          &quot;Cabinetry / Carpentry&quot;, &quot;Sears: Interior&quot;,
+          &quot;HVAC Services&quot;, &quot;Sears: Interior&quot;,
+          &quot;Painting (Exterior/Interior)&quot;, &quot;Sears: Exterior&quot;,
+          &quot;Sears: &quot; + fBilling_Opp_Industry__c),
+fBilling_Opp_Industry__c ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Commission Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Suggested_Retail_Pricing_Method__c</fullName>
+    <externalId>false</externalId>
+    <label>Suggested Retail Pricing Method</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Product Driven</fullName>
+                <default>false</default>
+                <label>Product Driven</label>
+            </value>
+            <value>
+                <fullName>Payment Driven</fullName>
+                <default>false</default>
+                <label>Payment Driven</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

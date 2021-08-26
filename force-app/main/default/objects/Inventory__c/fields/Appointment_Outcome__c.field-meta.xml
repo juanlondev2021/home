@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appointment_Outcome__c</fullName>
+    <description>This filed will contains Appointment Outcome value</description>
+    <externalId>false</externalId>
+    <label>Appointment Outcome</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Verified Lead</fullName>
+                <default>false</default>
+                <label>Verified Lead</label>
+            </value>
+            <value>
+                <fullName>Appointment Set</fullName>
+                <default>false</default>
+                <label>Appointment Set</label>
+            </value>
+            <value>
+                <fullName>Call Back</fullName>
+                <default>false</default>
+                <label>Call Back</label>
+            </value>
+            <value>
+                <fullName>Network Lead</fullName>
+                <default>false</default>
+                <label>Network Lead</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

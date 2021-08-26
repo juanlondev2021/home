@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inventory_Status</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Inventory Status</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>https://dev01.intacct.com/users/avaishnav/p10/acct/sforcerouter.phtml?.action=SHOW_INVSTATUS&amp;.itemid={! Product2.ProductCode }&amp;.sforcekey={!API.Session_ID}&amp;.endpoint={!API.Partner_Server_URL_70}}&amp;.mega=shared&amp;.root=ss sfdc atlas&amp;.userentity={!$User.Intacct_Company_ID__c}&amp;.objectentity={!Opportunity.Intacct_Entity__c}</url>
+</WebLink>

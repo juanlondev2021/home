@@ -1,0 +1,112 @@
+<apex:page standardController="Delivery_Parameter__c" extensions="DeliveryParameterUI">
+    <head>
+        <style>
+            .labelFont{
+                Font-Family:Arial,Helvetica,sans-serif; 
+                Font-Size:11px; 
+                Font-Weight:Bold;
+                color:#4a4a56;
+                margin-left: 172px;
+                padding-right: 19px;
+            }
+        </style> 
+        <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/jquery-1.12.0.min.js')}" />
+    </head>
+    
+    <apex:form id="theForm"> 
+        <apex:sectionHeader title="Update Delivery Parameter" subtitle="Delivery Parameter"/>       
+        <apex:pageBlock rendered="{!AND(!isError,!isSaved)}" id="thePageBlock">
+            <apex:pageMessages />
+            <apex:pageBlockSection title="Update Delivery Parameters" collapsible="false" columns="2" id="theSection">
+                <apex:outputPanel >
+                    <apex:outputLabel styleClass="labelFont">Branch</apex:outputLabel>
+                    <apex:outputLink value="/{!delivery.Branch__c}" target="_blank">{!branchName}</apex:outputLink>
+                </apex:outputPanel>
+                <apex:inputField value="{!delivery.Min_Sales_Price__c}" required="true"/> 
+                <apex:inputField value="{!delivery.Delivery_Number__c}" required="true"/>  
+                <apex:inputField value="{!delivery.Max_Sales_Price__c}" required="true"/>  
+                <apex:inputField value="{!delivery.Active__c}" onchange="display(this)"/> 
+                <apex:inputField value="{!delivery.Close_Date__c}" required="true"/> 
+                <apex:inputField value="{!delivery.Allow_Multiple_Attempts__c}" />
+                <apex:inputField value="{!delivery.Create_Date_in_SFDC__c}" required="true"/>  
+                <apex:inputField value="{!delivery.Days_Until_Next_Delivery__c}" onblur="doConfirm(this)" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Add / Remove Zipcode" collapsible="false" columns="1" id="zipcodeSection" >
+                <apex:outputPanel id="outPutPanel">
+                    <apex:inputText label="Input" html-placeholder="Search Zipcode" id="theSearch" size="30"/>
+                    <apex:actionStatus id="actStatusId"> 
+                        <apex:facet name="start" > 
+                            <img src="/img/loading.gif" /> 
+                        </apex:facet> 
+                    </apex:actionStatus><br/><br/>
+                    <c:MultiselectPicklist leftLabel="Excluded ZipCodes"
+                                           leftOption="{!excludedZipCodes}"
+                                           rightLabel="Included ZipCodes "
+                                           rightOption="{!includedZipCodes}"
+                                           size="14"
+                                           width="150px" id="multiSelect"/>
+                </apex:outputPanel>  
+                <apex:outputPanel >
+                    <apex:outputLabel ><b>Note:</b> Zip codes in the excluded zip codes column will NOT receive deliveries for this delivery number.</apex:outputLabel>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Add / Remove Product" collapsible="false" columns="1" id="productSection">
+                <c:MultiselectPicklist leftLabel="Available Products"
+                                       leftOption="{!allProducts}"
+                                       rightLabel="Selected Products "
+                                       rightOption="{!selectedProducts}"
+                                       size="14"  
+                                       width="150px" id="multiSelectProduct"/>
+                <apex:outputPanel >
+                    <apex:outputLabel ><b>Note:</b> All selected products will be included in this delivery number. Place the most important delivery at the top of the list to ensure that multiple attempts are made accurately.</apex:outputLabel>
+                </apex:outputPanel>
+            </apex:pageBlockSection>   
+            <apex:pageblockButtons > 
+                <apex:commandButton value="Save" action="{!Save}" id="btn"/>
+                <apex:commandButton value="Cancel" action="{!redirect}"/>
+            </apex:pageblockButtons>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!OR(isError,isSaved)}"> 
+            <apex:pageMessages />
+            <apex:pageblockButtons location="bottom"> 
+                <apex:commandButton value="Back" action="{!Cancel}" rendered="{!isError}"/>
+                <apex:commandButton value="Ok" action="{!redirect}" rendered="{!AND(isSaved,!isConfirm)}"/>
+                <apex:commandButton value="Ok" action="{!refresh}" rendered="{!isConfirm}"/>
+            </apex:pageblockButtons>
+        </apex:pageBlock> 
+        <apex:actionFunction name="updateNextAttemptDays" action="{!updateBranchNextAttemptDays}" reRender="thePageBlock">
+            <apex:param name="activeCheckBox" value="" assignTo="{!isChanged}"/>
+        </apex:actionFunction>
+    </apex:form>
+    <script type="text/javascript">
+    function doConfirm(val){
+        if(val.value != ''){
+            if(confirm("You are changing the organizational default value for 'Days Until Next Delivery', click OK if you would like to continue...")){
+                return true;
+            }
+            else{
+                updateNextAttemptDays(false);
+            }
+        }
+    }
+    function display(checkVal){
+        if(confirm("Are you sure you want to turn off this delivery parameter?")){
+                return true;
+            }
+        else{
+            updateNextAttemptDays(true);
+        }
+    }
+    $j = jQuery.noConflict();
+    $j(document).ready(function(){
+        document.getElementById('{!$Component.theForm.thePageBlock.zipcodeSection.theSearch}').addEventListener("keyup", function(){
+            var searchContent = this.value;
+            $j('.multilist option').prop('selected',false);     
+            $j('.multilist option:contains(' + searchContent + ')').prop('selected',true);
+            if(!searchContent){
+                $j('.multilist option').prop('selected',false);
+            }         
+        });
+    });
+    </script>
+</apex:page>

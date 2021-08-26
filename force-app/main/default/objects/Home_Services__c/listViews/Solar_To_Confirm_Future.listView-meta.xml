@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solar_To_Confirm_Future</fullName>
+    <columns>CREATED_DATE</columns>
+    <columns>Confirmation_Call_Count__c</columns>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>Solar</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Scheduled,Confirmation</value>
+    </filters>
+    <label>Solar - To Confirm Future</label>
+</ListView>

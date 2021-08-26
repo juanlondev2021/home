@@ -1,0 +1,147 @@
+<!-- It will display person account edit page for creating person account from Bright pattern console-->
+
+<apex:page controller="BrightPatternAddressCreation_AC" tabStyle="Account">
+    <apex:form id="frm">
+        <style>
+        .createAddressdup{
+            display:none;
+            }
+            .errorStyle{
+            color: #D8000C;
+            font-weight:bold;
+            padding:5px;
+                text-align: center;
+            }
+            .requird{
+                border-left: 3px solid #ff0000;
+            }
+        </style>
+       <apex:pageMessages id="errMsg"/>
+        
+        <apex:pageBlock >
+              
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Create Address" action="{!SearchAddress}" styleClass="createAddress" onclick="return validate();"/>
+                <apex:commandButton value="Create Address" styleClass="createAddressdup" onclick="return false;" style="color:grey"/>
+                <apex:commandButton value="Cancel" action="{!GotoAccSearchPage}" immediate="true"/>
+            </apex:pageBlockButtons>   
+            <div class="errorMsg"/>
+            <apex:outputText value="{!acknowledge}" /> 
+            <apex:pageblocksection Columns="1" Title="Search Address" collapsible="false">
+          
+             <apex:pageblocksectionitem > 
+                <apex:outputlabel value="First Name" />
+                <apex:inputText value="{!firstName}" styleClass="requird"/>
+             </apex:pageblocksectionitem>  
+      
+             <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Last Name" />
+                <apex:inputText value="{!lastName}"  styleClass="requird"/>
+             </apex:pageblocksectionitem>
+             
+              <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Phone" />
+                <apex:inputText value="{!Phone}" styleClass="phone requird"/>
+             </apex:pageblocksectionitem>
+             
+              <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Email" />
+                <apex:inputText value="{!personEmail}"  styleClass="email"/>
+             </apex:pageblocksectionitem>
+             
+               
+             <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Street Name"/>
+                <apex:inputText value="{!streetName}" styleClass="requird"/>
+             </apex:pageblocksectionitem>
+          
+             <apex:pageblocksectionitem > 
+                <apex:outputlabel value="City"/>
+                <apex:inputText value="{!city}" styleClass="requird"/>
+             </apex:pageblocksectionitem>
+             
+              <apex:pageblocksectionitem > 
+                <apex:outputlabel value="State"/>
+                <apex:selectList value="{!state}" size="1" multiselect="false" styleClass="requird">
+                  <apex:selectOptions value="{!States}" />
+                </apex:selectList>
+             </apex:pageblocksectionitem>
+             
+           <!--  <apex:pageblocksectionitem > 
+                <apex:outputlabel value="State"/>
+                <apex:inputText value="{!state}" required="true" style="border-left: thick solid #ff0000;"/>
+             </apex:pageblocksectionitem> -->
+             
+              <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Zip Code"/>
+                <apex:inputText value="{!zipCode}" styleClass="requird"/>
+             </apex:pageblocksectionitem>
+             
+             <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Country"/>
+                <apex:inputText value="{!country}" />
+             </apex:pageblocksectionitem>
+             
+             <apex:pageblocksectionitem > 
+                <apex:outputlabel value="Address Type" />
+                <apex:selectList value="{!addType}" size="1" multiselect="false">
+                  <apex:selectOptions value="{!AddressType}" />
+                </apex:selectList>
+             </apex:pageblocksectionitem>
+             
+            </apex:pageblockSection>
+       
+        </apex:pageBlock>
+        
+      
+       <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/jquery-1.12.0.min.js')}"/>
+        <Script>
+                function validate() {
+            $('.errMsg').hide();
+            $('.createAddress').hide();
+            $('.createAddressdup').show();
+            var phone = $('.phone').val();
+            var email = $('.email').val();
+            var pattern = /^\d{10}$/;
+            var patternEmail = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+            if (pattern.test(phone)) {
+                if (patternEmail.test(email) || email == '') {
+                    var flag = 'false';
+                    $('.requird').each(function() {
+                        if ($(this).val() == '') {
+                            flag = 'true';
+                            $(this).css('border', '1px solid #c00');
+                        } else {
+                            $(this).css('border', '1px solid grey');
+                            $(this).css('border-left', '3px solid #ff0000');
+                        }
+                    });
+                    if (flag == 'true') {
+                        $('.errorMsg').html('<p class="errorStyle">Error: Invalid Data. <br/>Please Enter required fields.</p>');
+                        $('.createAddress').show();
+                        $('.createAddressdup').hide();
+                        return false;
+                    } else {
+                        return true;
+                    }
+
+                } else {
+                    $('.errorMsg').html('<p class="errorStyle">Error: Invalid Data. <br/>Please Enter valid email address.</p>');
+                    $('.createAddress').show();
+                    $('.createAddressdup').hide();
+                    return false;
+                }
+
+            } else {
+                $('.errorMsg').html('<p class="errorStyle">Error: Invalid Data. <br/>Please enter valid 10 digit phone number.</p>');
+                $('.createAddress').show();
+                $('.createAddressdup').hide();
+                return false;
+            }
+
+        }
+
+        </Script>
+        
+    </apex:form>
+</apex:page>

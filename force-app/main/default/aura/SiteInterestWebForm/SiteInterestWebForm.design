@@ -1,0 +1,5 @@
+<design:component>
+	<design:attribute name="recordId" label="RecordId" />
+	<design:attribute name="hideInterests" label="HideInterests" />
+	<design:attribute name="leadSource" label="LeadSource" />
+</design:component>

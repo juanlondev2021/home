@@ -1,0 +1,38 @@
+<!--
+ * Diaco
+ * @author             Jeison Hernandez Sanchez
+ * Project:            Maps Delivery
+ * TestClass:          
+ * Description:        Aura Cmp - Delivery tutorials 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    25/01/2020         Jull Quintero D         Initial implementation of the class.
+ *-->
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+    <div class="slds-grid slds-wrap slds-box slds-theme_default" style="min-height: 90vh;">
+        <div class=" slds-col slds-size_12-of-12 ">
+            <lightning:tabset aura:id="tabs">
+                <lightning:tab aura:id="Manager" label="Manager">
+                    <div>
+                        <h2>1) Making Layer to show data</h2>
+                        <hr/>
+                        <iframe style="height: 720px; width: 100%; max-width: 1280px;"  src="https://s3-us-west-1.amazonaws.com/cdn.myhomeservices.com/Map+Tuto/Driver+Manager+(1).mp4"></iframe>
+                        <hr/>
+                        <h2>2) Assign routes to a driver</h2>
+                        <iframe style="height: 720px; width: 100%; max-width: 1280px;"  src="https://s3-us-west-1.amazonaws.com/cdn.myhomeservices.com/Map+Tuto/Assign+route.mp4"></iframe>
+                    </div>
+                </lightning:tab>
+                <lightning:tab aura:id="Driver"  label="Driver">
+                    <div>
+                        <h2>Driver instructions</h2>
+                        <hr/>
+                        <iframe style="height: 720px; width: 100%; max-width: 1280px;" src="https://s3-us-west-1.amazonaws.com/cdn.myhomeservices.com/Map+Tuto/Driver.mp4"></iframe>
+                    </div>
+                </lightning:tab>
+            </lightning:tabset>
+        </div>
+    </div>
+</aura:component>

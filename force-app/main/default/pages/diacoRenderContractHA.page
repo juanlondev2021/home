@@ -1,0 +1,219 @@
+<!--
+
+Diaco
+@author       dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+Project:      DiacoContracts
+Description:    component reponsible of rendering home automation contract tabs
+
+Changes (Version)
+_________________________________________
+
+No.    Date      Author          Description
+____  __________      __________________      _____________________________________
+@version  1.0    12/03/2019    Dayana Rodriguez (DY)  Initial implementation  of the component.
+-->
+<apex:page applyBodyTag="false" standardController="Home_Services__c" 
+           renderAs="pdf" extensions="RenderContractController"
+           showHeader="false" sidebar="false" 
+           standardStylesheets="false" applyHtmlTag="false"> 
+    <html>
+        <head>
+            <!-- Compiled and minified CSS --> 
+            <style>
+                @page {
+                size: letter;
+                margin: 1mm 5mm 5mm 5mm;
+                padding: 5mm 1mm 5mm 1mm;
+                }
+                
+                .page-break {
+                display:block;
+                page-break-after:always;
+                }
+                body {
+                font-family: Arial;
+                font-size: 12px;
+                }
+                .cotain {
+                background-size: contain;
+                background-repeat: no-repeat;
+                }
+                .bold {
+                font-weight: bold
+                }
+                
+                
+                
+                
+                
+            </style>
+        </head>
+        <body>
+            
+            <table class="border" style="width: 100%;">
+                <div class="cotain" style=" width: 100%; background-image: url({! $Resource.AutomationLogo });
+                                           height: 100px; background-position: center;
+                                           position: absolute;left: 10px;">
+                    
+                </div>
+            </table>
+            
+            <br/>
+            <div class="bold" border="1" style="margin-top: 100px;width:100%" align="center" >
+                
+                <u>SCHEDULE OF EQUIPMENT</u>
+                
+            </div>
+            <br/>
+            <div class="bold" border="1" style="margin-top: 10px;width:100%;" align="center">
+                Your report  is entered into on  <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u> between Protection Source, hereinafter referred to as “PS” and SUBSCRIBER'S listed below.
+            </div>
+            <br/>
+            
+            <div  border="1" style="margin-top: 10px;width:100%;" align="justify"><!--{!IF(campo == "", "", "&")} para la condicion del suscriber 2 recuerda-->
+                This contract is made and entered into on <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u>
+                by and between <u>Protection Source</u> and <u>{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}{! IF(Home_Services__c.Account__r.Homeowner_2_First_Name__c == "", "", ' & '& Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c)}</u>, (“SUBSCRIBER”)
+                This Schedule of Equipment is incorporated by reference into the Agreement made this date between We, theCompany and SUBSCRIBER, 
+                the terms and conditions of which fully apply to this Schedule of Equipment.  
+            </div>
+            <div>
+                <table border="1|0" width="95%" style="border-collapse: collapse; margin: 20px 15px 20px 15px" >
+                    <tr> <!--cada <tr> es una linea horizontal de la tabla-->
+                        
+                        <th height="30" align="center">QTY</th> 
+                        <th height="30" align="center">DESCRIPTION</th>
+                        <th height="30" align="center">COST</th>
+                        
+                    </tr>
+                    
+                    <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepea">
+                        <tr>
+                            <td height="30" align="center">
+                                <apex:outputField value="{!LineIte.Quantity__c}" />
+                            </td>
+                            <td height="30" align="center">
+                                <apex:outputField value="{!LineIte.Name}" />
+                            </td>
+                            <td height="30" align="center">
+                                <apex:outputField value="{!LineIte.Total_Sales_Price_p__c }" />
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    
+                </table>
+            </div>
+            
+            <div  border="1" style="margin-top: 10px;width:100%;" align="justify">
+                You acknowledge that: (a) We have explained the full range of protection, equipment, and services available to you, (b) additional protection over and above that provided herein is available and maybe obtained from us at an additional cost to you (c) you desire and have contracted for only the equipment and services itemized on this contract
+            </div>
+            <br/>
+            <br/>
+            <table border="1" width="95%" style="border-collapse: collapse" align="center">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Checking","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th>METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {!Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Number:</th>
+                                        <td >{!Home_Services__c.Bank_Account_Number_Encrypted__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Routing Number:</th>
+                                        <td >{!Home_Services__c.Routing_Number__c}</td>
+                                    </tr> 
+                                    
+                                </table>
+                            </div>
+                            
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Finance","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th >METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {!Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Finance Company:</th>
+                                        <td >{!Home_Services__c.Finance_Company__c}</td>
+                                    </tr> 
+                                    <tr>
+                                        <th >Financed Amount:</th>
+                                        <td >$<apex:outputField value="{!Home_Services__c.Financed_Amount__c}"/></td>
+                                    </tr> 
+                                </table>
+                            </div>
+                            <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Credit Card","block", "none")};'>
+                                <table>
+                                    <tr>
+                                        <th >METHOD OF PAYMENT:</th>
+                                        <td >
+                                            {! Home_Services__c.Method_Of_Payment__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Card Type:</th>
+                                        <td >
+                                            {! Home_Services__c.Card_Type__c}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th >Name on Card (Account):</th>
+                                        <td >{!Home_Services__c.Name_on_Card__c}</td>
+                                        <th >EXP DATE:</th> 
+                                        <td >{!Home_Services__c.Card_Expiration_Month__c &"/"& Home_Services__c.Card_Expiration_Year__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <th >Account Number:</th>
+                                        <td >{!Home_Services__c.Account_Number__c}</td>                                
+                                        <th >CSV:</th>
+                                        <td >{!Home_Services__c.CSV__c}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div>
+                                <table width="40%">
+                                    <tr> 
+                                        
+                                        <td height="30">Total Equipment Cost: </td>
+                                        <td><u><apex:outputField value="{!Home_Services__c.Total_Cash_Selling_Price__c}"/></u></td>
+                                        
+                                    </tr>  
+                                </table>
+                            </div> 
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>  
+            <div>
+                
+                <!--table border="1" width="96%" style="border-collapse: collapse; margin: 20px 15px 20px 14px"  align="center"-->
+               <table width="98%" style="border-collapse: collapse; margin: 27px 14px 20px 20px"  align="center" >
+                       
+           
+                    <tr>
+                        
+                        <td height="51" >Sales Rep Signature: ______________________ </td>    
+                        <td height="30" >Date:  <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u></td>
+                        <td height="30" >Less Deposit:<u><apex:outputField value="{!Home_Services__c.Down_Payment__c}"/></u></td>
+                    </tr>
+                    <tr>
+                        
+                        <td height="51">Subscriber Signature:  _____________________ </td> 
+                        <td height="30">Date:<u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u></td>
+                        <td height="30">Balance Due: <u><apex:outputField value="{!Home_Services__c.Balance_Due__c}"/> </u></td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </body>
+    </html>
+</apex:page>

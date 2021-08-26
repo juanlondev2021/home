@@ -1,0 +1,765 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water Contract first customer view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+* @version  1.0     17/06/2020      Fabian Pineda (FP) 		Separated address info into its own section and added Account County picklist. Moved Utility Company picklist to diacoSolarUtilityInformation.
+* @version  1.0		24/06/2020		Fabian Pineda (FP)		Added stricter validation to all fields, especially to "phone" and ZIP code fields.
+* @version  1.0     15/10/2020      Fabian Pineda (FP)      Added input field for Credit_Score_1.
+* @version  1.0     09/11/2020      Fabian Pineda (FP)      Added help text to some fields.
+ -->
+<aura:component controller="DiacoWaterContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="customer" type="Account" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="options" type="String[]" default="AK,AL,AR,AZ,CA,CO,CT,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY"/>
+    <aura:attribute name="optionsPer" type="String[]" default="Year,Month"/>
+    <aura:attribute name="emplTermTypeList" type="String[]" default="M,A"/>
+    <aura:attribute name="payFrequencyList" type="List" default="[
+                                                                 {id:'W',value:'Weekly'},
+                                                                 {id:'B',value:'Bi-Weekly'},
+                                                                 {id:'S',value:'Semi-monthly or Twice a month'},
+                                                                 {id:'M',value:'Once a month'},
+                                                                 {id:'Q',value:'Quarterly'},
+                                                                 {id:'T',value:'Semi-Yearly'},
+                                                                 {id:'Y',value:'Yearly'}
+                                                                 ]"/>
+    
+    
+    <aura:attribute name="homeTypeList" type="List" default="[
+                                                                 {id:'M',value:'Own with Mortgage'},
+                                                                 {id:'P',value:'Own free and clear'}
+                                                                 ]"/>
+    
+    <aura:attribute name="currentResidenceTypeList" type="List" default="[{id:'M',value:'Own with Mortgage'},{id:'P',value:'Own free and clear'}]"/>
+    
+    <aura:attribute name="hs" type="Home_Services__c"/>
+    <aura:attribute name="isLoad" type="Boolean" default="true" />
+    <aura:attribute name="selectedLookUpRecord" type="sObject" default="{}"/>
+    <aura:attribute name="showCustomLookup" type="Boolean" default="true" />
+    
+    <aura:attribute name="reload" type="Boolean" default="false" />
+    
+    <aura:registerEvent name="tabSaved" type="c:diacoTabCompletionEvent"/>
+    
+    <!--If to show specific information for solar contract-->
+    <aura:attribute name="showAddress" type="Boolean" default="false" />
+    <aura:attribute name="showHOA" type="Boolean" default="false" />
+    
+    <!-- Attributes related to Account "County" information -->
+    <aura:attribute name="loadingCountyData" type="Boolean" default="true" />
+    <aura:attribute name="countyData" type="List" />
+    
+    <!-- Attributes related to the HOA sub-form. -->
+    <aura:attribute name="hoaFormLoaded" type="Boolean" default="false" />
+    <aura:attribute name="hoaPhoneNumber" type="String" />
+    
+    <!--User profile validation-->
+    <aura:attribute name="userInfo" type="Object" />
+    <force:recordData aura:id="recordLoader" recordId="{!$SObjectType.CurrentUser.Id}"
+                      fields="Profile.Name" targetFields="{!v.userInfo}"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!--Register the component level event-->
+    <aura:registerEvent name="oSelectedRecordEvent" type="c:selectedsObjectRecordEvent"/>
+    <aura:handler event="c:clearEvent" action="{!c.handleClearEvent}"/>
+    
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+    
+    <fieldset class="slds-box slds-theme--default ">
+        
+        
+        <!--First Customer-->
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">First Customer</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked"> 
+                        <div class="slds-form slds-grid slds-wrap" style="margin-bottom:20px;">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="First_Name" 
+                                                 label="First Name"
+                                                 value="{!v.customer.FirstName}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Last_Name" 
+                                                 label="Last Name"
+                                                 value="{!v.customer.LastName}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="SSN" 
+                                                 label="SSN"
+                                                 value="{!v.customer.Customer_1_SSN_E__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 "
+                                                 name="dob" 
+                                                 label="DOB" 
+                                                 value="{!v.customer.Customer_1_DOB__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="DL" 
+                                                 label="DL #" 
+                                                 value="{!v.customer.Customer_1_Drivers_License__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select name="Drivers_license_Issuing_state" aura:id="Drivers_license_Issuing_state"
+                                                  label="Drivers license Issuing state"
+                                                  class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                  onchange="{! c.changeStatus }"
+                                                  value="{!v.customer.Drivers_license_Issuing_state_1__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="{!v.options}" var="state">
+                                        <option value="{!state}">{!state}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Drivers_License_Issue" 
+                                                 label="Drivers License Issue" 
+                                                 value="{!v.customer.Customer_1_Drivers_License_Issue_Date__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Driver_License_Expiration" 
+                                                 label="Driver License Expiration" 
+                                                 value="{!v.customer.Customer_1_Drivers_License_Expiration__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <!-- The pattern below matches US phone numbers in the following format(s)
+										###-###-####
+										(###) ###-####
+										### ### ####
+           								###.###.####
+										+## (###) ###-####
+                                       Additionally, it matches the above patterns omitting separator characters and/or whitespace. -->
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 label="Home Phone" 
+                                                 name="Home_Phone" 
+                                                 value="{!v.customer.Phone}"
+                                                 messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                 messageWhenBadInput="Please enter a valid US phone number." />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <!-- Refer to the First Customer's Home Phone field's comments for more information about the regex/pattern. -->
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 label="Cell Phone" 
+                                                 name="Cell_Phone" 
+                                                 value="{!v.customer.PersonMobilePhone}"
+                                                 messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                 messageWhenBadInput="Please enter a valid US phone number." />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="email" aura:id="CustomerInfo"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 onchange="{!c.changeStatus}"
+                                                 name="Email"
+                                                 label="Email" 
+                                                 value="{!v.customer.PersonEmail}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="number" aura:id="CustomerInfo" formatter="currency" step="0.01"
+                                                 onchange="{!c.changeStatus}"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="MortgagePayment" 
+                                                 label="Mortgage Payment"
+                                                 value="{!v.customer.Mortgage_Payment__c}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="number" aura:id="CustomerInfo" step="0"
+                                                 onchange="{!c.changeStatus}"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="YearsAtAddress" 
+                                                 label="Years at Address"
+                                                 value="{!v.customer.WA_YearsAtAddress__c}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="number" aura:id="CustomerInfo" step="0"
+                                                 onchange="{!c.changeStatus}"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="MonthsAtAddress" 
+                                                 label="Months at Address"
+                                                 value="{!v.customer.WA_MonthsAtAddress__c}" />
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:select name="CurrentResidenceType" aura:id="Current_Residence_Type"
+                                                  label="Current Residence Type"
+                                                  class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                  onchange="{! c.changeStatus }"
+                                                  value="{!v.customer.WP_CurrentResidenceType__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="{!v.currentResidenceTypeList}" var="type">
+                                        <option value="{!type.id}">{!type.value}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:select name="CurrentResidenceType" aura:id="Current_Residence_Type"
+                                                  label="Home Type"
+                                                  class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                  onchange="{! c.changeStatus }"
+                                                  value="{!v.customer.WP_HomeType__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="{!v.homeTypeList}" var="type">
+                                        <option value="{!type.id}">{!type.value}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="text"
+                                                 aura:id="CustomerInfo"
+                                                 onchange="{!c.changeStatus}"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="CreditScore1" 
+                                                 label="Credit Score"
+                                                 maxlength="100"
+                                                 value="{!v.customer.Credit_Score_1__c}" />
+                            </div>
+                        </div>
+                        
+                        <!-- Address information for those contracts who need it -->
+                        <aura:renderIf isTrue="{!v.showAddress}">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem>
+                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">Address</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            <div class="slds-form slds-grid slds-wrap" style="margin-bottom:20px;">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     onchange="{! c.changeStatus }"
+                                                     label="Street" 
+                                                     name="Street" 
+                                                     value="{!v.customer.Street__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     onchange="{! c.changeStatus }"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="City" 
+                                                     label="City"
+                                                     value="{!v.customer.City__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                    <lightning:select name="state" aura:id="state"
+                                                      label="State"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.State__c}">
+                                        <option value="">Choose one...</option>
+                                        <aura:iteration items="{!v.options}" var="state">
+                                            <option value="{!state}">{!state}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     pattern="[0-9]*"
+                                                     maxlength="6"
+                                                     messageWhenPatternMismatch="Only numbers can be entered."
+                                                     messageWhenBadInput="Only numbers can be entered."
+                                                     onchange="{! c.changeStatus }"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Zip" 
+                                                     label="Zip"
+                                                     value="{!v.customer.Zip__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:select aura:id="CountyInfo"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                      name="CountyInfo"
+                                                      label="County"
+                                                      value="{!v.customer.County__c}"
+                                                      onchange="{!c.handleCountyPicklistChange}">
+                                        <aura:renderIf isTrue="{!v.loadingCountyData == false}">
+                                            <aura:if isTrue="{!v.customer.County__c == undefined || v.customer.County__c == null || v.customer.County__c == ''}">
+                                                <option value="" selected="selected">Select an option</option>
+                                            <aura:set attribute="else">
+                                                <option value="">Select an option</option>
+                                            </aura:set>
+                                            </aura:if>
+                                            <aura:iteration items="{!v.countyData}" var="item">
+                                                <aura:if isTrue="{!v.customer.County__c == item.value}">
+                                                    <option value="{!item.value}" selected="selected">{!item.key}</option>
+                                                <aura:set attribute="else">
+                                                    <option value="{!item.value}">{!item.key}</option>
+                                                </aura:set>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </aura:renderIf>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     onchange="{!c.changeStatus}"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="GateCode" 
+                                                     label="Gate Code"
+                                                     maxlength="16"
+                                                     value="{!v.customer.Gate_Code__c}" />
+                                </div>
+                            </div>
+                        </aura:renderIf>
+                        <!-- House Information -->
+
+                          <!--  
+                        <div class="slds-form slds-grid slds-wrap" style="margin-bottom:20px;">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Year_Built" 
+                                                 label="Year Built."
+                                                 value="{!v.customer.Year_Built__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Pool" 
+                                                 label="Pool."
+                                                 value="{!v.customer.Pool__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="Yes, No" var="op">
+                                            <option value="{!op}">{!op}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Number_of_AC_Units" 
+                                                 label="Number of AC Units."
+                                                 value="{!v.customer.Number_of_AC_Units__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="1,2,3,+4" var="op">
+                                            <option value="{!op}">{!op}</option>
+                                    </aura:iteration>   
+                                
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Number_of_Stories" 
+                                                 label="Number of Stories."
+                                                 value="{!v.customer.Number_of_Stories__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="1,2,3,4,5+" var="op">
+                                            <option value="{!op}">{!op}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+
+                        </div>
+						-->                        
+                        <!--HOA-->
+                        <aura:if isTrue="{!v.showHOA}">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem>
+                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">HOA</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <lightning:recordEditForm aura:id="recordViewFormHOA"
+                                                      recordId="{!v.recordId}"
+                                                      onload="{!c.handleHOAFormLoad}"
+                                                      objectApiName="Home_Services__c">
+                                <lightning:messages />
+                                
+                                <div class="slds-form slds-grid slds-wrap" style="margin-top:15px;">
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                        <lightning:inputField fieldName="hoaName__c" onchange="{! c.changeStatus}" />
+                                    </div>
+                                    
+                                    <!-- PHONE NUMBER -->
+                                    <!-- This is the real hoaPhoneNumber__c field and it's never displayed. Instead,
+                                         a fake lightning:input is displayed instead. This component will always
+										 automatically take the lightning:input's value whenever it's edited. When the
+                                         form is submitted, this field (and not the lightning:input) is uploaded Salesforce. -->
+                                    <div class="not-rendered slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                        <lightning:inputField aura:id="hoaPhoneNumberInputField" fieldName="hoaPhoneNumber__c" onchange="{! c.changeStatus }" />
+                                    </div>
+                                    <!-- This is the "fake" HOA phone number field. It's a lightning:input because unlike 
+                                         lightning:inputField, it supports type="tel" and also regex pattern validation.
+										 Whenever this field is modified, the (real) lightning:inputField takes this field's value.
+										 This component is rendered only after the rest of the HOA form has finished loading. -->
+                                    <aura:renderIf isTrue="{!v.hoaFormLoaded}">
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                            <!-- Refer to the First Customer's Home Phone field's comments for more information about the regex/pattern. -->
+                                            <lightning:input type="tel"
+                                                             aura:id="hoaPhoneNumberInput"
+                                                             pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                             class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                             onchange="{!c.handleHOAPhoneNumberChange}"
+                                                             label="HOA Phone Number" 
+                                                             name="hoaPhoneNumberInput"
+                                                             value="{!v.hoaPhoneNumber}"
+                                                             messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                             messageWhenBadInput="Please enter a valid US phone number." />
+                                        </div>
+                                    </aura:renderIf>
+
+                                    <!-- Utility Company field moved to diacoSolarUtilityInformation.cmp -->
+                                </div>
+                                
+                                
+                            </lightning:recordEditForm>
+                            
+                            
+                            
+                        </aura:if>
+
+
+                        
+                        <!--EMPLOYER-->
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-top--medium">
+                            <lightning:layoutItem>
+                                <lightning:icon iconName="standard:contact" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Employer</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <div class="slds-form slds-grid slds-wrap" style="margin-bottom:20px;">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Employer_Name" 
+                                                 label="Name"
+                                                 value="{!v.customer.Customer_1_Employer__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <!-- Refer to the First Customer's Home Phone field's comments for more information about the regex/pattern. -->
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 onchange="{! c.changeStatus }"
+                                                 label="Employer Phone" 
+                                                 name="Employer_Home_Phone" 
+                                                 value="{!v.customer.Customer_1_Employer_Phone__c}"
+                                                 messageWhenPatternMismatch="Please enter a valid US phone number."
+                                                 messageWhenBadInput="Please enter a valid US phone number." />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="number" aura:id="datalogInfo" formatter="currency" step="0.01"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Income" 
+                                                 label="Income"
+                                                 value="{!v.customer.Customer_1_Income__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Per_1" 
+                                                 label="Per."
+                                                 value="{!v.customer.Customer_1_Per_1__c}">
+                                    <option value="">Choose one...</option>
+                                    <aura:iteration items="{!v.optionsPer}" var="op">
+                                            <option value="{!op}">{!op}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo" 
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Other Income" 
+                                                 label="Other Income."
+                                                 value="{!v.customer.Customer_1_Other_Income__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:select name="EmplTermType" aura:id="CustomerInfo"
+                                                      label="Empl Term Type"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.WA_EmplTermType__c}">
+                                        <option value="">Choose one...</option>
+                                        <aura:iteration items="{!v.emplTermTypeList}" var="emplTerm">
+                                            <option value="{!emplTerm}">{!emplTerm}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:select name="EmplTermType" aura:id="CustomerInfo"
+                                                      label="Pay Frequency"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.WP_PayFrequency__c}">
+                                        <option value="">Choose one...</option>
+                                        <aura:iteration items="{!v.payFrequencyList}" var="pay">
+                                            <option value="{!pay.id}">{!pay.value}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="number" aura:id="datalogInfo" formatter="currency" step="0.01"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Per_Month" 
+                                                 label="Per Month."
+                                                 value="{!v.customer.Customer_1_Per_Month__c}"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="{!if($Browser.formFactor == 'DESKTOP', 'helpText left-column', 'helpText')}" /></div>
+                                <lightning:input type="number" aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Length_Emp" 
+                                                 label="Length Emp."
+                                                 value="{!v.customer.Customer_1_Length_of_Employment__c}"/>
+                            </div>
+                           
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="number" aura:id="datalogInfo" step="0"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Per_Month" 
+                                                 label="Months Employed"
+                                                 value="{!v.customer.WA_MonthsEmployed__c}"/>
+                            </div> 
+                            <!-- ok -->
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Position" 
+                                                 label="Position"
+                                                 value="{!v.customer.Customer_1_Employment_Position__c}"/>
+                            </div>
+
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                <lightning:input type="date" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Hire_Date" 
+                                                  label="Hire Date"
+                                                  value="{!v.customer.Hire_Date__c}"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Street_Employer" 
+                                                 label="Street."
+                                                 value="{!v.customer.Customer_1_Street_Employer__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="City_Employer" 
+                                                 label="City."
+                                                 value="{!v.customer.Customer_1_City_Employer__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:select name="State_Employer" aura:id="CustomerInfo"
+                                                      label="State."
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.customer.Customer_1_State_Employer__c}">
+                                        <option value="">Choose one...</option>
+                                        <aura:iteration items="{!v.options}" var="state">
+                                            <option value="{!state}">{!state}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Zip_Employer" 
+                                                 label="Zip."
+                                                 value="{!v.customer.Customer_1_Zip_Employer__c}"/>
+                            </div>
+                        </div>
+                            <!--PREVIOUS EMPLOYER-->
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-top--medium">
+                            <lightning:layoutItem>
+                                <lightning:icon iconName="standard:contact" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Previous Employer</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <div class="slds-form slds-grid slds-wrap" style="margin-bottom:20px;">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Previous_Employer" 
+                                                 label="Employer."
+                                                 value="{!v.customer.Customer_1_Previous_Employer__c}"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="datalogInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Position" 
+                                                 label="Position"
+                                                 value="{!v.customer.Customer_1_Occupation_Previous__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input type="tel" aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                 name="Previous_Employer_Phone" 
+                                                 label="Phone."
+                                                 value="{!v.customer.Customer_1_Previous_Employer_Phone__c}"/>
+                            </div>
+                        </div>
+                        
+                        <!--SALESREP-->
+                        
+                        <aura:if isTrue="{! and(v.userInfo.Profile.Name!='MHS - Solar Sales',
+                                         v.userInfo.Profile.Name!='MHS - Home Automation Sales',
+                                         v.userInfo.Profile.Name!='MHS - Pest Control Sales',
+                                         v.userInfo.Profile.Name!='MHS - Water Sales' ,
+                                         v.userInfo.Profile.Name!='MHS - Window Sales'
+                                         ) }">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem>
+                                    <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">Sales Rep.</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            <lightning:layout horizontalAlign="center">
+                                <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                                    <div aria-labelledby="SalesRepInformation">
+                                        <div class="slds-form slds-grid slds-wrap  slds-gutters_medium" style="padding:0px;">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                <aura:if isTrue="{!v.showCustomLookup}">
+                                                    <c:customLookup objectAPIName="user" IconName="standard:user" label="Sales Representative" selectedRecord="{!v.selectedLookUpRecord}"/>
+                                                </aura:if>
+                                                
+                                                
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                
+                                                <lightning:recordViewForm recordId="{!v.hs.Sales_Rep__c}" objectApiName="User">
+                                                    <lightning:outputField fieldName="Email" />
+                                                    
+                                                </lightning:recordViewForm>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </aura:if>
+                        
+                        <lightning:button variant="brand"
+                                          class="slds-m-top--medium slds-align_absolute-center"
+                                          
+                                          label="{!v._label == 'Saving...' ? v._label : 'Save'}" 
+                                          title="{!v._label == 'Saving...' ? v._label : 'Save'}"  
+                                          disabled="{!v._label == 'Saving...'}"
+                                          onclick="{! c.saveInformation}" />
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

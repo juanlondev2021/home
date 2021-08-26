@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(RecordType.Name = &quot;Sales&quot;,RecordType.Name = &quot;Walk-Through&quot; ) ,(
+IF(
+AND(ActivityDateTime &lt;= Now()+ 1,ISBLANK( TEXT(Confirmation_Status__c )),TEXT(Appointment_results__c) = &quot;&quot;),&quot;Confirmation&quot;,
+IF(
+AND(
+ISBLANK( TEXT(Confirmation_Status__c )),TEXT(Appointment_results__c) = &quot;&quot;,ActivityDateTime &gt; Now()+ 1),&quot;Scheduled&quot;,
+IF(
+AND( Owner:User.Id &lt;&gt; &quot;005410000063Ajs&quot;,TEXT(Appointment_results__c) = &quot;&quot;, NOT( ISBLANK( TEXT(Confirmation_Status__c ))) ),&quot;Dispatched&quot;,
+IF(
+AND(
+OR(TEXT(Confirmation_Status__c) = &quot;Confirmed Running Blind&quot;,TEXT(Confirmation_Status__c) = &quot;Confirmed via Text&quot;, TEXT(Confirmation_Status__c) = &quot;Confirmed Voice&quot;),TEXT(Appointment_results__c) = &quot;&quot;) ,&quot;Dispatch&quot;,
+IF(
+AND(
+OR(TEXT(Confirmation_Status__c) = &quot;DNR&quot;, TEXT(Confirmation_Status__c) = &quot;Reschedule&quot;,TEXT(Confirmation_Status__c) = &quot;No Show to Confirm&quot;, TEXT(Confirmation_Status__c) = &quot;Cancelled In Transit&quot;),TEXT(Appointment_results__c) = &quot;&quot;) ,&quot;Reschedule&quot;,
+IF(
+AND(
+OR(TEXT(Confirmation_Status__c) = &quot;No Good&quot;,TEXT(Confirmation_Status__c) = &quot;Not Qualified&quot;),TEXT(Appointment_results__c) = &quot;&quot;) ,&quot;Closed Lost&quot;,
+IF(
+AND(
+OR(TEXT(Appointment_results__c) = &quot;Reschedule&quot;,TEXT(Appointment_results__c) = &quot;NS&quot;, TEXT(Appointment_results__c) = &quot;1 Leg&quot;), NOT( ISBLANK( TEXT(Confirmation_Status__c)))), &quot;Reschedule&quot;,
+IF(
+AND(TEXT(Appointment_results__c) = &quot;Reset&quot;, NOT( ISBLANK( TEXT(Confirmation_Status__c)))) ,&quot;Rescheduled&quot;,
+IF(
+AND(
+OR(TEXT(Appointment_results__c) = &quot;NG&quot;, TEXT(Appointment_results__c) = &quot;Sale Cancelled&quot;, TEXT(Appointment_results__c) = &quot;NQ&quot;, TEXT(Appointment_results__c) = &quot;Sale Turn Down&quot;), NOT( ISBLANK( TEXT(Confirmation_Status__c)))) ,&quot;Closed Lost&quot;,
+IF(
+AND(TEXT(Appointment_results__c) = &quot;PM&quot;, NOT( ISBLANK( TEXT(Confirmation_Status__c)))) ,&quot;Rehash&quot;,
+IF(
+AND(TEXT(Appointment_results__c) = &quot;Quote&quot;, NOT( ISBLANK( TEXT(Confirmation_Status__c)))) ,&quot;Quote&quot;,
+IF(
+AND(TEXT(Appointment_results__c) = &quot;Bid Submitted&quot;, NOT( ISBLANK( TEXT(Confirmation_Status__c)))) ,&quot;Bid Submitted&quot;,
+IF(
+TEXT(Appointment_results__c) = &quot;Sale Pending&quot; ,&quot;Sale Pending&quot;,
+IF(
+TEXT(Appointment_results__c) = &quot;Pending Cancel&quot; ,&quot;Pending Cancel&quot;,
+IF(
+TEXT(Appointment_results__c) = &quot;Sale Approved&quot; ,&quot;Closed Won&quot;,
+IF(
+TEXT(Appointment_results__c) = &quot;Sale Cancelled&quot; ,&quot;Closed Lost&quot;,
+IF(
+TEXT(Appointment_results__c) = &quot;Sale Turn Down&quot; ,&quot;Closed Lost&quot;,&quot;&quot;
+)))))))))))))))))), &quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Current Status</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

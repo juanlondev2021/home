@@ -1,0 +1,103 @@
+<!--
+Diaco
+@author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+Project:			DiacoContracts
+Description:		component reponsible of rendering home automation contract tabs
+     
+Changes (Version)
+_________________________________________
+
+      		No.		Date			Author					Description
+  			____	__________      __________________      _____________________________________
+@version	1.0		12/03/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+@version	1.0		23/06/2020		Fabian Pineda (FP)		Replaced First and Second Subscriber tabs (diacoContractHAFirstSuscriber.cmp & diacoContractHASecondSuscriber.cmp) for First and Second Customer (diacoContractFirstCustomer.cmp & diacoContractSecondCustomer.cmp) tabs.
+@version	1.0		15/07/2020		John Hernandez (JH)	    Tab completion events, flags and controllers.
+-->
+<aura:component controller="diacoTabsInformationCompletion">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isOpen" type="boolean" default="false" />
+
+    <aura:attribute name="toReloadFirstCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadSecondCustomer" type="Boolean" default="false" />
+    <aura:attribute name="toReloadProducts" type="Boolean" default="false" />
+    <aura:attribute name="toReloadContract" type="Boolean" default="true" />
+    <aura:attribute name="toReloadPricing" type="Boolean" default="true" />
+
+    <!--Information checked-->
+    <aura:attribute name="firstCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="secondCustomerCompletion" type="Boolean" default="false" />
+    <aura:attribute name="ProductServiceCompletion" type="Boolean" default="false" />
+    <aura:attribute name="generalInfoCompletion" type="Boolean" default="false" />
+    <aura:attribute name="paymentsCompletion" type="Boolean" default="false" />
+    <aura:attribute name="servicePackageCompletion" type="Boolean" default="false" />
+
+    <aura:handler name="tabSaved" event="c:diacoTabCompletionEvent" action="{!c.handleTabSaved}" />
+
+    <lightning:tabset>
+
+        <lightning:tab id="firstCustomer" label="First Customer" endIconName="{!v.firstCustomerCompletion?'utility:check':''}">
+            <c:diacoContractFirstCustomer recordId="{!v.recordId}" showAddress="true" showHOA="true" reload="{!v.toReloadFirstCustomer}" />
+        </lightning:tab>
+
+        <lightning:tab id="secondCustomer" label="Second Customer" endIconName="{!v.secondCustomerCompletion?'utility:check':''}">
+            <c:diacoContractSecondCustomer recordId="{!v.recordId}" reload="{!v.toReloadSecondCustomer}" />
+        </lightning:tab>
+
+        <lightning:tab label="Installation" endIconName="{!v.generalInfoCompletion?'utility:check':''}">
+            <!--<c:diacoContractHALocation recordId="{!v.recordId}" />-->
+            <c:diacoContractLocationAndPayments recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Products And Services" id="Products" onactive="{! c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+            <div class="slds-box slds-theme--default">
+                <c:diacoLineItems recordId="{!v.recordId}" />
+                <c:DiacoLineItemsServices recordId="{!v.recordId}" />
+            </div>
+        </lightning:tab>
+
+        <lightning:tab label="Pricing" id="Pricing" onactive="{!c.reload}" endIconName="{!v.ProductServiceCompletion?'utility:check':''}">
+            <c:diacoContractSummary toReload="{!v.toReloadPricing}" recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Service Package" endIconName="{!v.servicePackageCompletion?'utility:check':''}">
+            <c:diacoContractHAServicePackage recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Payment Method" endIconName="{!v.paymentsCompletion?'utility:check':''}">
+            <c:diacoContractServices recordId="{!v.recordId}" />
+            <c:DiacoContractPayMethod recordId="{!v.recordId}" />
+        </lightning:tab>
+
+        <lightning:tab label="Contract" onactive="{! c.reload}" id="Contract">
+            <aura:if isTrue="{!v.toReloadContract}">
+                <c:diacoContractHAVisual recordId="{!v.recordId}" />
+            </aura:if>
+        </lightning:tab>
+
+        <!--aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+            <lightning:tab label="Customer Alarm">
+                <c:diacoCustomerAlarmInHomeService recordId="{!v.recordId}"/>
+            </lightning:tab>
+        </aura:if-->
+
+        <!--lightning:tab label="Customer Alarm">
+            <c:diacoContractAlamrs recordId="{!v.recordId}"/>
+        </lightning:tab-->
+    </lightning:tabset>
+    <lightning:buttonIcon class="fixed" size="xxx-large" onclick="{! c.openModel }" iconName="utility:shield" variant="brand" title="Brand action" />
+    <aura:if isTrue="{!v.isOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Customer Alarm</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <c:diacoCustomerAlarmInHomeService recordId="{!v.recordId}" />
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

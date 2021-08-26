@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Additional_Delivery__c</fullName>
+    <externalId>false</externalId>
+    <label>Additional Delivery</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DirCode-012881 Tampa, FL</fullName>
+                <default>false</default>
+                <label>DirCode-012881 Tampa, FL</label>
+            </value>
+            <value>
+                <fullName>DirCode-018887	CHICAGO, IL</fullName>
+                <default>false</default>
+                <label>DirCode-018887	CHICAGO, IL</label>
+            </value>
+            <value>
+                <fullName>Nothing</fullName>
+                <default>false</default>
+                <label>Nothing</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

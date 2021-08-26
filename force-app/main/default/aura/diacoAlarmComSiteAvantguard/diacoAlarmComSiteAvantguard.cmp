@@ -1,0 +1,170 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Add Site Avantguard
+* Description:		Lightening components for add Customer Alarm
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		04/01/2020	Álvaro Ortega (AO)		Initial implementation of Lightening components.
+**/-->
+<aura:component controller="diacoAlarmComController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" 
+                access="global" >
+
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="siteAvanguard" type="DiacoAlarm__DiacoSiteAvantguard__c"/>
+    
+    <aura:attribute name="instanceSValue" type="String"/>
+    
+    <aura:attribute name="deviceTypes" type="list" default='[]'/>
+    <aura:attribute name="originalDeviceTypes" type="list" default='[]'/>
+    <aura:attribute name="deviceTypesValue" type="String"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="isLoad" type="boolean" default='true'/>
+    <aura:attribute name="isLoadSave" type="boolean" default='false'/>
+    
+    <aura:attribute name="isDeviceTypeAvailable" type="boolean" default='false'/>
+    
+    <!-- PICKLIST -->
+    <aura:attribute name="apiNames" type="List" default="[  'DiacoAlarm__DiacoAuthority__c','DiacoAlarm__DiacoSiteLanguage__c',
+                                                            'DiacoAlarm__DiacoTimeZoneNum__c','DiacoAlarm__DiacoSiteType__c',
+                                                            'DiacoAlarm__DiacoRegion__c']" />
+    <aura:attribute name="DiacoAlarm__DiacoAuthority__c" type="list" default='[]'/>
+    <aura:attribute name="DiacoAlarm__DiacoSiteLanguage__c" type="list" default='[]'/>
+    <aura:attribute name="DiacoAlarm__DiacoTimeZoneNum__c" type="list" default='[]'/>
+    <aura:attribute name="DiacoAlarm__DiacoSiteType__c" type="list" default='[]'/>
+    <aura:attribute name="DiacoAlarm__DiacoRegion__c" type="list" default='[]'/>
+
+    <!-- LOOKUP CMP -->
+    <aura:attribute name="isRenderDone" type="Boolean" default="false"/>
+    
+    <aura:if isTrue="{!v.isLoad}">
+
+        <div class="slds-align_absolute-center">
+            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+        </div>
+
+        <aura:set attribute="else">
+
+            <div class="c-container">
+                <!--Site Avantguard Information -->
+                <div class="slds-p-around_x-small">
+
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header- -object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:avatar" class="blueOnwhite" alternativeText="My Expenses"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Site Avantguard Information</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Transmitter Code" value="{!v.siteAvanguard.DiacoAlarm__DiacoTransmitterCode__c}" disabled="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Status" value="{!v.siteAvanguard.DiacoAlarm__Diaco_Customer_Alarm__r.DiacoAlarm__DiacoMonitoringStatitionStatus__c}" disabled="true"/>
+                        </div>
+                        <!--div class="slds-col slds-size_1-of-1 slds-small-size- -1-of-1 slds-medium-size- -1-of-2 slds-large-size- -1-of-2">
+                            <c:diacoLookup  objectAPIName="DiacoAlarm__DiacoDeviceType__c"                                      
+                                            value="{! v.siteAvanguard.DiacoAlarm__DiacoDeviceType__c }"
+                                            IconName="custom:custom53" 
+                                            label="DeviceType" 
+                                            required='false' 
+                                            isRenderDone='{! v.isRenderDone }'/> 
+                        </div-->
+                    </div>
+
+                </div>
+                <!-- /Site Avantguard Information -->
+            </div>
+
+            <div class="c-container">
+                <!--Site Location-->
+                <div class="slds-p-around_x-small">
+
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:address" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Site Location</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-horizontal_xxx-small">
+                            <lightning:select  aura:id='fieldId' label="Time Zone" value="{! v.siteAvanguard.DiacoAlarm__DiacoTimeZoneNum__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoTimeZoneNum__c}" var="tz" >
+                                    <option value="{!tz.key}" selected="{! v.siteAvanguard.DiacoAlarm__DiacoTimeZoneNum__c == tz.key}">
+                                        {!tz.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-horizontal_xxx-small">                                
+                            <lightning:select  aura:id='fieldId' label="Site Type" value="{! v.siteAvanguard.DiacoAlarm__DiacoSiteType__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoSiteType__c}" var="st" >
+                                    <option value="{!st.key}" selected="{! v.siteAvanguard.DiacoAlarm__DiacoSiteType__c == st.key}">
+                                        {!st.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:select  aura:id='fieldId' label="Region" value="{! v.siteAvanguard.DiacoAlarm__DiacoRegion__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoRegion__c}" var="rg" >
+                                    <option value="{!rg.key}" selected="{! v.siteAvanguard.DiacoAlarm__DiacoRegion__c == rg.key}">
+                                        {!rg.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+                    </div>
+                </div>
+                <!--/Site Location-->
+            </div>
+            
+            <!-- BUTTOM -->
+            <lightning:button   variant="brand" 
+                                class="slds-align_absolute-center" 
+                                label="Update" 
+                                title="Update" 
+                                iconName="utility:save" 
+                                iconPosition="left"  
+                                onclick="{! c.handleSubmit }" 
+                                disabled="{!v.isLoadSave}"/>
+            <!-- /BUTTOM -->
+
+            <div class="toSpinnerSave">
+                <aura:if isTrue="{!v.isLoadSave}">
+                    <lightning:spinner alternativeText="Loading" size="small" />
+                </aura:if>
+            </div>
+
+        </aura:set>
+    </aura:if>
+    
+    
+	
+</aura:component>

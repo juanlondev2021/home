@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rejected_Post__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The opportunity field value that doesn’t match one of the values listed with call center.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The opportunity field value that doesn’t match one of the values listed with call center.</inlineHelpText>
+    <label>Rejected</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

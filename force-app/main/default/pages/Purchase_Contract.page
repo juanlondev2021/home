@@ -1,0 +1,560 @@
+<apex:page renderAs="pdf" standardController="Home_Services__c" extensions="RenderContractController"
+           showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <title>Solar Contract</title>
+            
+            <style>
+                @page {
+                size: legal;
+                margin: 1mm 5mm 5mm 5mm;
+                }
+                .page-break {
+                display:block;
+                page-break-after:always;
+                }
+                body {
+                font-family: Arial Unicode MS;
+                }
+                .hidden {
+                    color: white;
+                }
+            </style>
+        </head> 
+        <body>
+        
+            <div style="margin-top: 0px;" class="page-break">
+                <div style='clear:left;margin-top:0px;'>
+                    <div style='float:left;width: 240px; margin-top:20px;'>
+                        <img src="{!URLFOR($Resource.nergy,'nergy/nergy.jpg')}" style='float:right;' class="changeImage"/>
+                    </div>
+                    <div style='float:left;width: 300px;' >
+                        <p align="center">   
+                            <strong style="font-size:1.3em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">Purchase Contract</strong><br/>
+                            664 W. Warner Rd. Tempe AZ 85284<br/>
+                            ROC# 318524<br/>
+                        </p>
+                    </div>
+                </div> 
+                
+                <div style='clear:left;margin-top:5px;'></div>
+                
+                <div style='border-top: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px solid black;
+                            border-left: 2px solid black;' width="100%">
+                    <div style="margin: 0px;
+                                padding: 0px 0px 0px 0px;">
+                        
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 20px 0px 0px 20px;" >
+                            <tbody>
+                                <tr>
+                                    <td width="60%">{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</td>
+                                    <td width="40%"><apex:outputField value="{!Home_Services__c.Account__r.Phone}"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="height: 0em;
+                                   width: 95%;
+                                   background-color: black;margin:-0.3% 0 0 2%;"/>
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <thead>
+                                <tr>
+                                    <td width="60%">HOMEOWNER(S)</td>
+                                    <td width="40%">PHONE NUMBER</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                    <div style="margin: 0px;
+                                padding: 5px 0px 0px 0px;">
+                        
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <tbody>
+                                <tr>
+                                    <td width="60%">{!Home_Services__c.Account__r.Street__c}</td>
+                                    <td width="40%">{!Home_Services__c.Account__r.City__c&', '& Home_Services__c.Account__r.State__c &', '& Home_Services__c.Account__r.Zip__c  }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="height: 0em;
+                                   width: 95%;
+                                   background-color: black;margin:-0.3% 0 0 2%;"/>
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <thead>
+                                <tr>
+                                    <td width="60%">STREET ADDRESS</td>
+                                    <td width="40%">CITY, STATE, ZIP CODE</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                    <div style="margin: 0px;
+                                padding: 5px 0px 0px 0px;">
+                        
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <tbody>
+                                <tr>
+                                    <td width="60%">{!Home_Services__c.Account__r.PersonEmail}</td>
+                                    <td width="40%">{!Home_Services__c.Utility_Company__c}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="height: 0em;
+                                   width: 95%;
+                                   background-color: black;margin:-0.3% 0 0 2%;"/>
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <thead>
+                                <tr>
+                                    <td width="60%">EMAIL ADDRESS</td>
+                                    <td width="40%">UTILITY CO.</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                    <div style="margin: 0px;
+                                padding: 5px 0px 20px 0px;">
+                        
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <tbody>
+                                <tr>
+                                    <td width="60%">{!Home_Services__c.hoaName__c}</td>
+                                    <td width="40%">{!Home_Services__c.hoaPhoneNumber__c}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="height: 0em;
+                                   width: 95%;
+                                   background-color: black;margin:-0.3% 0 0 2%;"/>
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <thead>
+                                <tr>
+                                    <td width="60%">HOA NAME</td>
+                                    <td width="40%">PHONE NUMBER</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                </div>
+                
+                <div style='clear:left;margin-top:10px;'></div>
+                
+                <div style='border-top: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px solid black;
+                            border-left: 2px solid black;' width="100%">
+                    <table width="100%" >
+                        <tbody>
+                            <tr>
+                                <td width="60%" style="text-align:center;">
+                                    <h4>
+                                        Residential Photovoltaic Solar System ("the Products")
+                                    </h4>
+                                    
+                                </td>
+                                <td width="40%">
+                                    <div style='border-top: 2px solid black;
+                                                border-right: 2px solid black;
+                                                border-bottom: 2px solid black;
+                                                border-left: 2px solid black; text-align:center;' width="100%" height="50px">
+                                        <p style="font-size:0.9em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                            <strong>PURCHASE PRICE: <u><apex:outputField value="{!Home_Services__c.Balance_Due__c}"/></u></strong>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th align="center">Name</th>
+                                            <th align="center">Quantity</th>
+                                            <th align="right">Total Sales Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepea">
+                                            <tr>
+                                                <td width="20%" align="center">
+                                                    <apex:outputField value="{!LineIte.Name}" />
+                                                </td >
+                                                <td width="20%" align="center">
+                                                    <apex:outputField value="{!LineIte.Quantity__c}" />
+                                                </td>
+                                                <td width="20%" align="center">
+                                                    <apex:outputField value="{!LineIte.Total_Sales_Price_p__c }" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <!--tr>
+                                <td colspan="2" >
+                                    <p style="margin: 0em 0em 0em 4em">
+                                        ________ . ________ KW (System Size)
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  colspan="2" >
+                                    <p style="margin: 0em 0em 0em 4em">
+                                        __________ x __________________ (Module &amp; Model Number)
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p style="margin: 0em 0em 0em 4em">
+                                        ______________________________ (Inverter &amp; Model Number) 
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p style="margin: 0em 0em 0em 4em">
+                                        ______________________________ (Energy Storage)
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p style="margin: 0em 0em 0em 4em">
+                                        ______________________________ (Additional Materials)
+                                    </p>
+                                </td>
+                            </tr-->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style='clear:left;margin: 10px 0px 10px 0px'>
+                    <table  width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style='display:{!IF(homeService.Method_Of_Payment__c =="Checking","block","none")};'>
+                                        <table style="font-size:15px;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                            <tr>
+                                                <td width="25%">Payment Option: <u>{!Home_Services__c.Method_Of_Payment__c}</u></td>
+                                                <!--
+                                                <td width="25%">Amount: <u><apex:outputField value="{!Home_Services__c.checkAmount__c}"/></u></td>
+                                                <td width="25%">Number: <u>{!Home_Services__c.checkNumber__c}</u></td>
+                                                <td width="25%">Co.__________________________</td>
+												-->	
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div style='display:{!IF(homeService.Method_Of_Payment__c =="Finance","block","none")};'>
+                                        <table style="font-size:13px;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                            <tr align="left">
+                                                <td width="25%">Payment Option: <u>{!Home_Services__c.Method_Of_Payment__c}</u></td>
+                                                <td width="30%">Company: <u>{!Home_Services__c.Finance_Company__c}</u></td>
+                                                <td width="30%">Amount: <u><apex:outputField value="{!Home_Services__c.Financed_Amount__c}"/></u></td>
+                                               <!-- <td width="15%">Co.__________________________</td>-->
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div style='display:{!IF(homeService.Method_Of_Payment__c =="Credit Card","block","none")};'>
+                                        <table style="font-size:13px;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                            <tr align="left">
+                                                <td width="25%">Payment Option: <u>{!Home_Services__c.Method_Of_Payment__c}</u></td>
+                                                <td width="20%">Type: <u>{! Home_Services__c.Card_Type__c}</u></td>
+                                                <td width="30%">Number: <u>{!Home_Services__c.Account_Number__c}</u></td>
+                                               <!-- <td width="20%" >Co.__________________________</td>-->
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div style='display:{!IF(homeService.Method_Of_Payment__c =="Lease","block","none")};'>
+                                        <table style="font-size:13px;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                            <tr align="left">
+                                                <td >Payment Option: <u>{!Home_Services__c.Method_Of_Payment__c}</u></td>
+                                               <!-- <td >Co.__________________________</td>-->
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div style='display:{!IF(homeService.Method_Of_Payment__c =="ACH","block","none")};'>
+                                        <table style="font-size:12px;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                            <tr>
+                                                <td width="20%">Payment Option: <u>{!Home_Services__c.Method_Of_Payment__c}</u></td>
+                                                <td width="30%">R. Number: <u>{!Home_Services__c.Routing_Number__c}</u></td>
+                                                <td width="30%">A. Number: <u>{!Home_Services__c.Account_Number__c}</u></td>
+                                              <!--  <td width="15%">Co.__________________________</td>-->
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+                <div style='border-top: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px solid black;
+                            border-left: 2px solid black;' width="100%">
+                    <ol style="font-size:0.6em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                        <li>
+                            
+                            <strong>ARS 44-1763</strong>: NERGY LLC has provided a copy of ARS 44-1763 contract with regards to Financing, Sale or Lease Agreements for Distributed Energy Generation Systems.
+                            
+                        </li>
+                        <li><strong>Compliance with applicable Codes and Laws:</strong> All work shall be performed in a workmanlike manner and in full compliance with all applicable
+                            building codes and other applicable laws. NERGY LLC shall at its own expense obtain and possess all necessary licenses, permits, and other things
+                            necessary and required for the proper performance of the work.</li>
+                        <li><strong>Use of Subcontractors:</strong> NERGY LLC may utilize subcontractors to perform portions of the work. If subcontractors are utilized NERGY LLC shall fully
+                            pay for their services.</li>
+                        <li><strong>Liability Insurance:</strong> At all times during the actual installation NERGY LLC shall keep in force a Commercial General Liability Insurance policy with
+                            limits of not less than One Million Dollars, and excess insurance coverage of not less than Three Million Dollars, to insure for injury to Contractor’s
+                            employees, and others, incurring loss or injury as a result of the acts of NERGY LLC, its employees and subcontractors.</li>
+                        <li><strong>Taxes:</strong> NERGY LLC shall pay all taxes required by any taxing authority having jurisdiction over the project.</li>
+                        <li><strong>Delays:</strong> NERGY LLC shall not be liable for delays due to circumstances beyond its control. Any starting or completion dates provided by NERGY LLC
+                            are its best estimates and subject to change. NERGY Solar Power’s performance is based upon the prompt, complete, and accurate fulfllment of all
+                            of Customer`s obligations including payment.</li>
+                        <li><strong>Warranties:</strong> NERGY LLC warrants that all labor and materials will be free from defects for a period of ten (10) years from the date of completion.
+                            Customer will be provided with the standard warranties from major equipment manufacturers.</li>
+                        <li><strong>Disclaimer:</strong> NERGY LLC disclaims any liability for direct or indirect damages resulting from improper use, modifcations, alterations, repairs, misuse,
+                            abuse, vandalism, damage caused by the serving utility company, fre, storm, food or other acts of God. NERGY LLC shall not be liable for any direct,
+                            indirect or consequential damages, losses, costs or other expenses, however arising, in contract or in tort, including without limitation any economic
+                            losses of any kind, losses or damage to property or personal injury. NERGY LLC disclaims any responsibility for the systems use or its operation for
+                            any intended purpose.</li>
+                        <li><strong>Liens and Waivers of Liens:</strong> NERGY LLC shall furnish Customer releases or waivers of lien, from all companies that have provided Customer with a
+                            Pre-Lien Notice, through the date for which payment is being made. Customer shall promptly advise NERGY LLC of its receipt of any Pre-Lien
+                            Notices.</li>
+                        <li><strong>Change Orders:</strong> NERGY LLC and the Customer recognize that unforeseen conditions or factors may become known subsequent to the time that
+                            this contract is signed. In addition, Customer may desire a change that would add time and cost to the work. If these or other events, within
+                            or beyond the control of the parties, require adjustment to this contract, the parties shall make a good faith attempt to agree on all particulars
+                            including cost. Such agreements shall be put in writing, signed by the parties and amended to this contract.</li>
+                        <li><strong>Dispute Resolution:</strong> ANY CONTROVERSY OR CLAIM ARISING OUT OF, OR RELATING TO, THIS CONTRACT, OR ANY BREACH THEREOF, SHALL BE
+                            SETTLED BY ARBITRATION ADMINISTERED BY THE AMERICAN ARBITRATION ASSOCIATION UNDER ITS CONSTRUCTION INDUSTRY
+                            ARBITRATION RULES, AND JUDGMENT ON THE AWARD RENDERED BY THE ARBITRATOR(S) MAY BE ENTERED IN ANY COURT HAVING
+                            JURISDICTION THEREOF. A COPY OF SUCH RULES CAN BE EXAMINED AT WWW.ADR.ORG. IF THE CUSTOMER DOES NOT HAVE INTERNET ACCESS,
+                            OR UPON REQUEST, A COPY OF THE RULES HAVE BEEN PROVIDED TO THE CUSTOMER.(CUSTOMER INITIALS).<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span style="margin-left: 20px;" class="hidden">initial_2</span>________.</li>
+                    </ol>
+                </div>
+                <p align="center">   
+                    <strong style="font-size:1em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">I HAVE READ AND UNDERSTAND THE ABOVE</strong><br/>
+                </p>
+                <p align="center" style="font-size:0.5em;font-family:'Helvetica','Verdana','Monaco',sans-serif;margin:-2.5% 0;">
+                    All agreements regarding performance of the work are stated herein. All modifications to this agreement shall be in writing and signed by NERGY LLC and the Customer. This Contract entered into as of the
+                    date indicated above is by and between NERGY LLC and the undersigned Homeowner(s) hereinafter referred to as “Customer”.
+                </p>
+                
+                
+                <div width="100%">
+                    <div style='clear:left;margin-top:70px;'>
+                        <div style='float:left;width: 70%;'>
+                            <table width="100%" style="margin-bottom: 0px;
+                                                       padding: 0px 0px 0px 20px;" >
+                                <tbody>
+                                    <tr>
+                                        <td width="100%"><span class="hidden">sign_2</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr style="height: 0em;
+                                       width: 92%;
+                                       background-color: black;margin:-0.3% 0 0 3%;"/>
+                            <table width="100%" style="margin: 0px;
+                                                       padding: 0px 0px 0px 20px;" >
+                                <thead>
+                                    <tr>
+                                        <th width="100%">customer(s) Signature</th>
+                                        
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div style='float:left;width: 30%;' >
+                            <p>   
+                                DATE: <u>{!CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "Apr", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")} / {!Day(TODAY())} / {!Year(TODAY())}</u>
+                            </p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 40px;
+                                padding: 30px 0px 0px 0px;">
+                        
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <tbody>
+                                <tr>
+                                    <td width="100%">{! $User.FirstName & ' ' & $User.LastName }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="height: 0em;
+                                   width: 95%;
+                                   background-color: black;margin:-0.3% 0 0 2%;"/>
+                        <table width="100%" style="margin: 0px;
+                                                   padding: 0px 0px 0px 20px;" >
+                            <thead>
+                                <tr>
+                                    <th width="100%">Energy Consultant Name &amp; Company(Please print legibly)</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                    <div style='clear:left;margin-top:30px;'>
+                        <div style='float:left;width: 70%;'>
+                            <table width="100%" style="margin-bottom: 0px;
+                                                       padding: 0px 0px 0px 20px;" >
+                                <tbody>
+                                    <tr>
+                                        <td width="100%" ><span class="hidden">sign_1</span></td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr style="height: 0em;
+                                       width: 92%;
+                                       background-color: black;margin:-0.3% 0 0 3%;"/>
+                            <table width="100%" style="margin: 0px;
+                                                       padding: 0px 0px 0px 20px;" >
+                                <thead>
+                                    <tr>
+                                        <th width="100%">Energy Consultant Signature</th>
+                                        
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div style='float:left;width: 30%;' >
+                            <p>   
+                                DATE: <u>{!CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "Apr", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")} / {!Day(TODAY())} / {!Year(TODAY())}</u>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div style='clear:left;margin: 40px 0px 0px 0px'>
+                <p align="center">   
+                    <strong style="font-size:1em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">NOTICE TO BUYER</strong><br/>
+                </p>
+                <ol style="font-size:0.8em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                    <li>Do not sign this agreement if any of the spaces are left blank.</li>
+                    <li>You are entitled to a copy of this contract at the time you sign it.</li>
+                    <li>TAX CREDITS AND REBATES: Buyer understands that NERGY LLC and its representatives are not tax professionals. Buyer
+                        understands that the tax credits ofered by the Federal and State governments are credits against the
+                        buyer’s income tax liability. Should you have any questions relating to or pertaining to your ability to acquire the
+                        abovementioned credits, you should seek counsel of a tax professional. Furthermore, buyer understands that rebates
+                        and credits are estimated at time of purchase.</li>
+                    <li><strong>NERGY LLC AGREES TO PAINT CONDUIT, THE DAY OF THE INSTALLATION, ONLY WITH CUSTOMER SUPPLIED
+                        PAINT AND MATERIALS.</strong></li>
+                </ol>
+                <p align="center">   
+                    <strong style="font-size:1em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">ADDITIONAL TERMS AND CONDITIONS</strong><br/>
+                </p>
+                <ol style="font-size:0.8em;font-family:'Helvetica','Verdana','Monaco',sans-serif;margin: 1em 1em 1em 1em;">
+                    <li>The Customer shall aford access to the Customer’s residence to NERGY LLC or its designee(s) to install the Products.</li>
+                    <li>NERGY LLC assumes no responsibility or liability for payments made by Customer to any of NERGY Solar Power’s
+                        salesmen or employees unless any such payments is/are made by check payable to NERGY LLC.</li>
+                    <li>Customer agrees that he/she will sign a Contractors Completion Certifcate, as well as any other documents deemed
+                        necessary by any fnancial institution which provides fnancing to Customer in order to acquire the Products.
+                    </li>
+                    <li>Purchaser understands there is no written or implied warranty on Customer’s existing Electrical System(s).</li>
+                    <li>Actual production/reduction of usage and customer savings may vary based on size of the system, orientation, and
+                        rate plans. Utility rates and funding program levels are subject to change. NERGY LLC has no control over Utility rates
+                        and/or fees associated with the energy devices or Product’s sold</li>
+                </ol>
+                <p align="center">   
+                    <strong style="font-size:1em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">PAYMENT</strong><br/>
+                </p>
+                <div style='border-top: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px solid black;
+                            border-left: 2px solid black;' width="100%">
+                    <p align="left" style="font-size:0.7em;font-family:'Helvetica','Verdana','Monaco',sans-serif;margin: 1em 1em 1em 1em">
+                        Payments on cash purchases are to be made as follows (payment terms with third parties vary depending on
+                        funding source):<br/>
+                        The frst Payment, of <u><apex:outputField value="{!Home_Services__c.FirstPayment__c}"/></u> is due at the time of Contract Execution. Drawings may not be prepared for Utility
+                        Company and Authority having Jurisdiction, if applicable, until this payment is received.<br/><br/>
+                        The second payment, in the amount of <u><apex:outputField value="{!Home_Services__c.SecondPayment__c}"/></u> (equal to or greater than 50% of the contract amount) is due upon
+                        receipt of approval from the Utility Company and Authority having Jurisdiction, if applicable. Materials and Equipment may
+                        not be purchased until this payment is received.<br/><br/>
+                        The third payment, in the amount of <u><apex:outputField value="{!Home_Services__c.ThirdPayment__c}"/></u> (equal to or greater than 50% of the contract amount) is due when the
+                        installation is complete and the system is able to function in accordance with its intended purpose. Commissioning by the
+                        Utility Company may not be scheduled until this payment is received.<br/><br/>
+                        The Final Payment, in the amount of $1,000 is due upon commissioning by the utility company. Please note that while
+                        NERGY LLC will work diligently to schedule the Utility Company we have no control over when the Utility Company will
+                        actually commission the system.<br/><br/>
+                        All payments not received when due will be charged a 1.5% monthly service charge.
+                        Credit card payments are a valid and acceptable form of payment. However, payments made with credit cards are subject
+                        to additional merchant fees.
+                    </p>
+                </div>
+                <p align="center">   
+                    <strong style="font-size:1em;font-family:'Helvetica','Verdana','Monaco',sans-serif;"> WARRANTIES</strong><br/>
+                </p>
+                <p align="justify" style="font-size:0.6em;font-family:'Helvetica','Verdana','Monaco',sans-serif;margin: 1em 1em 1em 1em">
+                    ARS 44-1762. <u>Solar energy device warranties; installation standards; inspections</u> A. The collectors, heat exchangers and storage units of a solar energy
+                    device that is sold or installed in this state, and the installation, shall be warranted for a period of at least two years. The remaining components of the
+                    solar energy device and their installation shall be warranted for a period of at least one year. B. Any person who manufactures, furnishes for installation
+                    or installs a solar energy device shall provide with such device a written statement of warranty, responsibilities assumed or disclaimed and performance
+                    data of the solar energy device and components of the solar energy device. The form of the statement required by this subsection is subject to approval
+                    by the registrar of contractors after consultation with the governor’s energy ofce. T he registrar of contractors shall adopt rules governing the readability
+                    and understandability of the statement. The statement shall specify the source of any performance data it contains. A copy of the statement shall be
+                    delivered to the registrar of contractors where it shall be kept on public fle.<strong> C. A person who sells a solar energy device in this state shall furnish a
+                    certifcate to the buyer that the solar energy device complies with the requirements of this section.</strong> D. A solar energy device that is sold or installed
+                    in this state shall comply with any consumer protection, rating, certifcation, performance, marking, installation and safety standards that have been
+                    adopted by the governor’s energy ofce. E. An individual who installs a solar energy device in this state, in addition to being a licensed solar contractor
+                    under title 32, chapter 10, article 4, shall: 1. Possess the general license that is appropriate to the type of solar energy device that is installed. Installers
+                    of a solar water heater or a photovoltaic device shall possess an appropriate contractor’s license.2. Meet any education and training standards that have
+                    been adopted by the registrar of contractors after consultation with the governor’s energy ofce.3. Pass an examination on the installation of the type of
+                    device to be installed, if the registrar of contractors after consultation with the governor’s energy ofce has adopted such an examination. F. Solar energy
+                    devices that are designed or installed by the fnal owner are exempt from the requirements of subsections A through E.G. The installation of a solar energy
+                    device shall meet the requirements of: 1. All applicable fre, safety and building codes.2. Consumer protection standards, including freeze protection
+                    and temperature related damage standards adopted by the governor’s energy ofce.3. All other applicable federal, state and local laws. H. Solar energy
+                    devices are subject to random inspections by the registrar of contractors. Installers who fail to meet safety, installation or <strong>other prescribed standards</strong>
+                    are subject to disciplinary action under title 32, chapter 10, Article <strong><u>3.Statement of warranty coverage:</u></strong> The warranty requirements for the installation
+                    company will be as follows (this warranty supersedes all other warranties for the time periods stated): The installation company will provide a full parts
+                    and labor warranty for the entire system for ten (10) years from the date of installation. Full parts and labor warranty includes, but is not limited to, any
+                    and all component failures(s), whether it is covered by the original manufacturer or not, and any and all installation-related malfunction(s). And
+                    manufacturer’s warranty(ies) are in addition to, not in lieu of, the installation warranty. Warranty is not required to cover problems resulting from
+                    exposure to harmful materials and chemical, fre, food, lighting, hurricane, tornado, hailstorm, earthquake, or other acts of God, vandalism, alteration of
+                    system by anyone not authorized by the installation company, or any other cause beyond the control of the installation company. NERGY LLC MAKES NO
+                    OTHER WARRANTIES, EXPRESSED OR IMPLIED, EXCEPT AS SPECIFICALLY PROVIDED IN THIS AGREEMENT AND NERGY LLC WILL NOT BE RESPONSIBLE FOR
+                    ANY SPECIAL, INDIRECT OR CONSEQUENTIAL PROPERTY OR COMMERCIAL DAMAGE OF ANY NATURE WHATSOEVER.
+                </p>
+                <p align="center">   
+                    <strong style="font-size:1em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">NOTICE OF CANCELLATION</strong><br/>
+                </p>
+                <div style='border-top: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px solid black;
+                            border-left: 2px solid black;' width="100%">
+                    <p align="justify" style="font-size:0.6em;font-family:'Helvetica','Verdana','Monaco',sans-serif;margin: 1em 1em 2em 1em">
+                        Customer may cancel this Contract within three (3) days after signing by notifying NERGY LLC of such in writing. NERGY LLC may cancel this
+                        agreement if existing conditions at the site of the work prohibit the work or add additional costs to the work that the Customer is unwilling to pay for
+                        under the change order provisions of this Contract. To cancel this transaction, mail or deliver a signed and dated copy of this cancelation notice or any
+                        other written notice to: 664 W. Warner Rd. Tempe AZ 85284 
+                    </p>
+                    <p align="justify" style="font-size:0.6em;font-family:'Helvetica','Verdana','Monaco',sans-serif;margin: 1em 1em 1em 1em">
+                        I hereby cancel this transaction: DATE: _______/ _______/ ____________ Customer(s) Signature: 
+                    </p>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

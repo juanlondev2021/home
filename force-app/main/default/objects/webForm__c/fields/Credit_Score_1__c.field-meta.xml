@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Credit_Score_1__c</fullName>
+    <externalId>false</externalId>
+    <label>Credit Score</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Under  620</fullName>
+                <default>false</default>
+                <label>Under  620</label>
+            </value>
+            <value>
+                <fullName>620 - 650</fullName>
+                <default>false</default>
+                <label>620 - 650</label>
+            </value>
+            <value>
+                <fullName>650 - 700</fullName>
+                <default>false</default>
+                <label>650 - 700</label>
+            </value>
+            <value>
+                <fullName>Over 700</fullName>
+                <default>false</default>
+                <label>Over 700</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

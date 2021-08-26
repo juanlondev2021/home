@@ -1,0 +1,221 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Create And Update Account
+* Description:		Create or update an account from User Address or Evenr
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		06/08/2019		Álvaro Ortega (AO)		Initial implementation of Lightening components.
+* @version	1.0		19/06/2020		Fabian Pineda (FP)		Added County (County__c) field.
+* @version  1.0     25/06/2020		Fabian Pineda (FP)		Fixed duplicate "Account" tab bug under certain conditions.
+**/-->
+<aura:component controller="DiacoCmpFlowController" implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="_label" type="String" default='None'/>
+    <aura:attribute name="objectType" type="String" default='None'/>
+    <aura:attribute name="customer" type="Account"/>
+    
+    <aura:attribute name="newAccountId" type="String"/>
+    
+    <aura:attribute name="phoneRep" type="String"/>
+    <aura:attribute name="apptSetter" type="String"/>
+    <aura:attribute name="callerId" type="String"/>
+    <aura:attribute name="sameDataToShow" type="boolean" default='false'/>
+    
+    <aura:attribute name="fn" type="String"/>
+    <aura:attribute name="ln" type="String"/>
+    <aura:attribute name="st" type="String"/>
+    <aura:attribute name="ct" type="String"/>
+    <aura:attribute name="sta" type="String"/>
+    <aura:attribute name="zp" type="String"/>
+    <aura:attribute name="em" type="String"/>
+    
+    <aura:attribute name="isLoadingRecordEditForm" type="Boolean" default="true" />
+
+    <aura:attribute name="isLoadingCountyData" type="Boolean" default="true" />    
+    <aura:attribute name="renderCounty" type="Boolean" default="false" />
+    <aura:attribute name="countyData" type="List" />
+    <aura:attribute name="county" type="String" default="" />
+    
+    <aura:attribute name="toDecision" type="boolean" default='false'/>
+    
+    <aura:attribute name="isLoadingSave" type="boolean" default='false'/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:if isTrue="{!v._label == 'None'}">
+        <lightning:spinner alternativeText="Loading" size="small" />
+        <aura:set attribute="else">
+            <lightning:recordEditForm aura:id="editForm" onsuccess="{!c.handleSuccess}" 
+                              onerror="{!c.handleError}" 
+                              onload="{!c.handleLoad}"
+                              objectApiName="Account"
+                              recordId="{!v._label == 'Saved'? (v.customer.Id != null ? v.customer.Id : v.newAccountId) : (v._label == 'savedInNew' ? v.newAccountId : '')}">
+				<lightning:messages />
+                <div class="slds-p-around_small">
+                    <aura:if isTrue="{!v.sameDataToShow == true}">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom"> 
+                            <aura:if isTrue="{!v.phoneRep != undefined}">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <h3 class="slds-text-body_small">Appt Setter</h3>
+                                    <h4 class="slds-text-title">{!v.apptSetter}</h4>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.callerId != undefined}">
+                                <div class="{!v.phoneRep != undefined?'slds-col slds-size_1-of-2':'slds-col slds-size_1-of-1'}">
+                                    <h3 class="slds-text-body_small">Caller Id</h3>
+                                    <h4 class="slds-text-title">{!v.callerId}</h4>
+                                </div>
+                            </aura:if>  
+                        </lightning:layout>
+                    </aura:if>
+                    <div class="slds-p-around_small">
+                        <div class="slds-p-bottom_medium">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <lightning:icon iconName="standard:avatar" class="blueOnwhite" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">Account</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField aura:id="firstNameField" fieldName="FirstName" disabled="{!v.toDecision}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <div class="slds-form-element__control">
+                                	<lightning:inputField aura:id="lastNameField" fieldName="LastName" disabled="{!v.toDecision}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Phone" disabled="{!v.toDecision}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField aura:id="emailField" fieldName="PersonEmail" disabled="{!v.toDecision}" />
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField aura:id="streetField" fieldName="Street__c" disabled="{!v.toDecision}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField aura:id="zipField" fieldName="Zip__c" disabled="{!v.toDecision}"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField aura:id="stateField" fieldName="State__c" disabled="{!v.toDecision}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField aura:id="cityField" fieldName="City__c" disabled="{!v.toDecision}"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <!-- This is the real County field and it's never displayed.
+								 Whenever the component with Aura ID of CountyInfo is updated, this component takes its value.
+								 When the form is submitted, this field's value (and not CountyInfo's value) is sent to Salesforce. -->
+                            <div class="not-rendered">
+                                <lightning:inputField aura:id="countyField" fieldName="County__c" disabled="{!v.toDecision}" />
+                            </div>
+                            <!-- This is an editable County field. Whenever its value is updated, component countyField's value is set to this component's.
+							     When the form is submitted, only countyField's value (and not this field's value) is sent to Salesforce.
+								 It's displayed only after the rest of the form has finished loading. -->
+                            <div class="{!v.renderCounty ? 'slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2' : 'not-rendered'}">
+                                <lightning:select aura:id="CountyInfo"
+                                                  name="CountyInfo"
+                                                  label="County"
+                                                  value="{!v.county}"
+                                                  disabled="{!v.toDecision}"
+                                                  onchange="{!c.handleCountyPicklistChange}">
+                                    <aura:renderIf isTrue="{!v.isLoadingCountyData == false}">
+                                        <aura:if isTrue="{!v.county == undefined || v.county == null || v.county == ''}">
+                                            <option value="" selected="selected">Select an option</option>
+                                            <aura:set attribute="else">
+                                                <option value="">Select an option</option>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:iteration items="{!v.countyData}" var="item">
+                                            <aura:if isTrue="{!v.county == item.value}">
+                                                <option value="{!item.value}" selected="selected">{!item.key}</option>
+                                                <aura:set attribute="else">
+                                                    <option value="{!item.value}">{!item.key}</option>
+                                                </aura:set>
+                                            </aura:if>
+                                        </aura:iteration>
+                                    </aura:renderIf>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="PersonMobilePhone" disabled="{!v.toDecision}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Year_Built__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Pool__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Number_of_AC_Units__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Number_of_Stories__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Cross_Streets__c" />
+                            </div>
+                        </div>
+                        
+                        <div class="slds-p-bottom_medium slds-p-top_medium">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <lightning:icon iconName="standard:avatar" class="blueOnwhite" alternativeText="My Expenses"/>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">Homeowner</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </div>
+                        
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_First_Name__c" disabled="{!v.toDecision}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Last_Name__c" disabled="{!v.toDecision}"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Email__c" disabled="{!v.toDecision}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Phone_Number__c" disabled="{!v.toDecision}"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:inputField fieldName="Homeowner_2_Mobile__c" disabled="{!v.toDecision}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <aura:if isTrue="{!v.toDecision==false}">
+                       <lightning:button variant="brand" class="slds-m-around_small" onclick="{!c.onSubmit}" label="{!v._label == 'Saved'? 'Update' :(v._label == 'savedInNew'? 'Update':'Create New')}" disabled="{!v.isLoadingSave}"/>
+                   </aura:if>
+               </div>
+               
+           </lightning:recordEditForm>
+        </aura:set>
+    </aura:if>
+</aura:component>

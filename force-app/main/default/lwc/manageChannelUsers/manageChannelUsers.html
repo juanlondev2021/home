@@ -1,0 +1,114 @@
+<template>
+
+
+    <lightning-card variant="narrow"
+                    title="Search users" >
+
+        <lightning-input  label="Complete Name" name="completeName"
+                          type="text"  value={channelUsersInput.user.Name}
+                          onchange={handleCompleteNameValueChanged} >
+        </lightning-input>
+
+        <lightning-input  label="FirstName" name="firstName"
+                          type="text"  value={channelUsersInput.user.FirstName}
+                          onchange={handleFirstNameValueChanged} >
+        </lightning-input>
+
+        <lightning-input  label="LastName" name="lastName"
+                          type="text"  value={channelUsersInput.user.LastName}
+                          onchange={handleLastNameValueChanged} >
+        </lightning-input>
+
+        <lightning-input  label="Username" name="username"
+                          type="text"  value={channelUsersInput.user.Username}
+                          onchange={handleUsernameValueChanged} >
+        </lightning-input>
+
+
+
+        <lightning-button variant="brand-outline" label="Search"
+                          name='search'
+                          title="Search Users" onclick={handleSearchUser}
+                          class="slds-p-around_x-small">
+        </lightning-button>
+        <lightning-card>
+
+
+            <template if:true={tooMuchResults}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert">
+                    <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+                    </svg>
+                    </span>
+                    <h2>{maxResults}</h2>
+                </div>
+                <br>
+            </template>
+            <!-- Urgent CheckBox-->
+
+            <template if:true={data}>
+                <div style="height: 300px;">
+                    <lightning-datatable
+                            key-field="Id"
+                            data={data}
+                            show-row-number-column
+                            suppress-bottom-bar
+                            max-row-selection=1
+                            columns={columns}
+                            onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </div>
+            </template>
+            <template if:true={noResults}>
+                <div class="slds-text-heading_medium slds-align_absolute-center margin">Records not found</div>
+                <div class="slds-box">
+                    <lightning-card>
+                        <lightning-formatted-rich-text value={messageNotFound}>
+                        </lightning-formatted-rich-text>
+                    </lightning-card>
+                </div>
+            </template>
+            <br>
+
+            <template if:true={showEditRow}>
+                <p>Mostrar Contenido</p>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                         aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <h2 id="header" class="slds-text-heading&#45;&#45;medium">Edit Slack Channels</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around&#45;&#45;medium" data-id="recordFieldContainer">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning-combobox name="channel1" class="slds-size_6-of-12" label="Installation Slack Channel" value={record.Installation_Slack_Channel__c} placeholder="Select Channel" options={optionsChannels} onchange={handleChannelChange1} ></lightning-combobox>
+                            </div>
+                        </div>
+
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning-combobox name="channel2" class="slds-size_6-of-12" label="Sales Slack Channel" value={record.Slack_Channel__c} placeholder="Select Channel" options={optionsChannels} onchange={handleChannelChange2} ></lightning-combobox>
+                            </div>
+                        </div>
+
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning-combobox name="channel3" class="slds-size_6-of-12" label="Service Slack Channel" value={record.Service_Slack_Channel__c} placeholder="Select Channel" options={optionsChannels} onchange={handleChannelChange3} ></lightning-combobox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-modal__footer">
+                        <lightning-button variant="brand" label="Update" title="Update" onclick={handleSaveClick} class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button variant="brand" label="Cancel" title="Cancel" onclick={handleCancelClick} class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+                </section>
+            </div>
+            </template>
+
+        </lightning-card>
+    </lightning-card>
+    
+</template>

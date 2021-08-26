@@ -1,0 +1,21 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Congratulations</h1>
+  This is your new Page
+  <apex:form >
+  <apex:commandButton action="{!save}" value="tansferSuccess" id="trasnferButton"/>
+  </apex:form>
+  <script>
+        window.onbeforeunload = function(evt) {
+            var message = 'HAVE YOU CLICKED TRANSFER SUCCESSFUL??';
+            if (typeof evt == 'undefined') {
+                evt = window.event;
+            }       
+            if (evt) {
+                evt.returnValue = message;
+            }
+            return message;
+        } 
+  </script>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

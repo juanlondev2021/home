@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Water_Treatment_to_Dispatch</fullName>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Street__c</columns>
+    <columns>City__c</columns>
+    <columns>Zip__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Dispatch</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Home_Services__c.Water_Treatment_Sales</value>
+    </filters>
+    <label>005 Water Treatment To Dispatch</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+    </sharedTo>
+</ListView>

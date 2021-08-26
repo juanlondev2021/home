@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Occupancy_of_House__c</fullName>
+    <externalId>false</externalId>
+    <label>Occupancy of House</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Furnished and Occupied</fullName>
+                <default>false</default>
+                <label>Furnished and Occupied</label>
+            </value>
+            <value>
+                <fullName>Furnished and Unoccupied</fullName>
+                <default>false</default>
+                <label>Furnished and Unoccupied</label>
+            </value>
+            <value>
+                <fullName>Unfurnished and Unoccupied</fullName>
+                <default>false</default>
+                <label>Unfurnished and Unoccupied</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

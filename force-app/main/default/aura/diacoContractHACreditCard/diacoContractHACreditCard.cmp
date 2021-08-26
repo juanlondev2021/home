@@ -1,0 +1,171 @@
+<!--
+
+ Diaco
+ @author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering home automation contract tabs
+     
+ Changes (Version)  
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		12/03/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+-->
+<aura:component >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="HomeServices" type="Home_Services__c" />
+    <aura:attribute name="options" type="String[]" default="Visa,Mastercard,Discover,American Express,MC Eurocard,UK Maestro,JCB Card,Diners Club"/>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+        <fieldset class="slds-box slds-theme--default ">
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="custom:custom17" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Credit Card</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-form slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                        <fieldset class="slds-box slds-theme--default ">
+                            <div class="slds-form slds-grid slds-wrap">
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Card Type"
+                                                     label="Card Type"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.Credit_Card_Type_System__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Name on Card"
+                                                     label="Name on Card"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.Name_On_Card_System__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Card Number"
+                                                     label="Card Number"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.Card_Number__c}"/>
+                                    
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="CSV"
+                                                     label="CSV"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.Credit_Card_CSV__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Card Last 4"
+                                                     label="Card Last 4"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.last4numbers__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     name="Expiration Month"
+                                                     label="Expiration Month"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.Card_Expiration_Month__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Expiration Year"
+                                                     label="Expiration Year"
+                                                     readonly="true"
+                                                     value="{!v.HomeServices.Card_Expiration_Year__c}"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <!--Lo que sigue es la parte visual donde se piden los campos-->
+                
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                        <fieldset class="slds-box slds-theme--default ">
+                            <div class="slds-form slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 ">
+                                    <lightning:select name="Card Type" aura:id="Card_Type"
+                                                      label="Card Type"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.Credit_Card_Type_System__c}">
+                                        
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.options}" var="card">
+                                            <option value="{!card}">{!card}</option>
+                                            
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Name on Card"
+                                                     onchange="{!c.changeStatus}"
+                                                     label="Name on Card"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Card Number" 
+                                                     label="Card Number"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="16"/>
+                                </div>
+                                
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="CSV" 
+                                                     label="CSV"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="3"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                     name="Expiration Month" 
+                                                     label="Expiration Month"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="2"/>
+                                </div>
+                                <div class="slds-col slds-size_2-of-2 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--xx-small">
+                                    <lightning:input aura:id="CustomerInfo"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="Expiration Year" 
+                                                     label="Expiration Year"
+                                                     onchange="{!c.changeStatus}"
+                                                     maxlength="4"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                
+            </div>
+        </fieldset>
+    </div>
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+        <fieldset class="slds-box slds-theme--default ">
+            <c:diacoContractHAChecking recordId="{!v.recordId}" HomeServices="{!v.HomeServices}" />
+        </fieldset>
+    </div>
+</aura:component>

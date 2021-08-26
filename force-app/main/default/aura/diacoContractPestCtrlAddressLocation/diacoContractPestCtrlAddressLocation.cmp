@@ -1,0 +1,63 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering Pest Control Contract Address Location view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		17/05/2019		Jorge Martinez (JM)		Initial implementation of the class.
+* @version	1.0		23/06/2020		Fabian Pineda (FP)		Relocated address information to diacoContractFirstCustomer.cmp.
+-->
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="toReload" type="Boolean"/>
+    <aura:handler name="change" value="{!v.toReload}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+    
+    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="margin-top:15px">
+        <lightning:recordEditForm aura:id="recordViewForm"
+                                  recordId="{!v.recordId}"
+                                  onload="{!c.handleLoad}"
+                                  onsuccess="{!c.handleSuccess}"
+                                  onerror="{!c.handleOnError}"
+                                  objectApiName="Home_Services__c">
+            <lightning:messages />
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="standard:service_appointment" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Installation</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-form slds-grid slds-wrap slds-m-top--medium">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                        <lightning:inputField fieldName="Requested_service_Date__c" 
+                                              class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"/>
+                    </div>
+                </div>
+            </div>
+            
+            <lightning:button aura:id="submit" 
+                              type="submit"
+                              label="{!v._label}"
+                              onclick="{!c.saving}"
+                              variant="brand"
+                              class="slds-m-top--medium slds-align_absolute-center" />
+        </lightning:recordEditForm>
+    </div>
+</aura:component>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OB_Operation_Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>OB Operation Stage</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Stage_Types__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Docusign Received</fullName>
+                <default>false</default>
+                <label>Docusign Received</label>
+            </value>
+            <value>
+                <fullName>Billing Setup</fullName>
+                <default>false</default>
+                <label>Billing Setup</label>
+            </value>
+            <value>
+                <fullName>Info Validation</fullName>
+                <default>false</default>
+                <label>Info Validation</label>
+            </value>
+            <value>
+                <fullName>Info Complete</fullName>
+                <default>false</default>
+                <label>Info Complete</label>
+            </value>
+            <value>
+                <fullName>Campaign Test</fullName>
+                <default>false</default>
+                <label>Campaign Test</label>
+            </value>
+            <value>
+                <fullName>Campaign Creation</fullName>
+                <default>false</default>
+                <label>Campaign Creation</label>
+            </value>
+            <value>
+                <fullName>Campaign Active</fullName>
+                <default>false</default>
+                <label>Campaign Active</label>
+            </value>
+            <value>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+                <label>Deactivated</label>
+            </value>
+            <value>
+                <fullName>Setup</fullName>
+                <default>false</default>
+                <label>Setup</label>
+            </value>
+            <value>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <label>Active</label>
+            </value>
+            <value>
+                <fullName>Paused</fullName>
+                <default>false</default>
+                <label>Paused</label>
+            </value>
+            <value>
+                <fullName>Call Center DID</fullName>
+                <default>false</default>
+                <label>Call Center DID</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Docusign Received</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Billing Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Info Validation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Info Complete</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Campaign Test</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Campaign Creation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Campaign Active</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Deactivated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Paused</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OB Campaign</controllingFieldValue>
+            <valueName>Call Center DID</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

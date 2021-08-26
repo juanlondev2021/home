@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inside_Outside_Sales_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Inside &amp; Outside Sales</label>
+    <queue>Inside_Outside_Sales</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

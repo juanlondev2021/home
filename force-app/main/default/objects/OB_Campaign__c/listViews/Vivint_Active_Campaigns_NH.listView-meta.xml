@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vivint_Active_Campaigns_NH</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>OB_DBA_Name__c</columns>
+    <columns>Opportunity__c</columns>
+    <columns>NAME</columns>
+    <columns>Industry__c</columns>
+    <columns>OB_Campaign_Active__c</columns>
+    <columns>Call_Center_is_Ready_Post__c</columns>
+    <columns>OB_Campaign_Active_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OB_Campaign_Call_Center__c</field>
+        <operation>equals</operation>
+        <value>NuHome</value>
+    </filters>
+    <filters>
+        <field>Opportunity__c</field>
+        <operation>contains</operation>
+        <value>Vivint</value>
+    </filters>
+    <label>Vivint Active Campaigns - NH</label>
+</ListView>

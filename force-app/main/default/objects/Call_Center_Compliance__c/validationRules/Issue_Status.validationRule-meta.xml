@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Issue_Status</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( OR ( AND( ISNULL(  TEXT( Issue_Status__c )) ,ISNULL(  Issue_Status_Notes__c  ) ) , AND( NOT ( ISNULL(  TEXT( Issue_Status__c ))) ,NOT (ISNULL(  Issue_Status_Notes__c  ) ))) , False, True)</errorConditionFormula>
+    <errorMessage>You must Fill out both Issue Status and Issue Status Notes</errorMessage>
+</ValidationRule>

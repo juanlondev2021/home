@@ -1,0 +1,12 @@
+.THIS .helpTextContainer {
+    position: relative;
+}
+
+.THIS .helpText.left-column div {
+    right: 2em;
+}
+
+.THIS .helpText div {
+    position: absolute;
+    right: 0;
+}

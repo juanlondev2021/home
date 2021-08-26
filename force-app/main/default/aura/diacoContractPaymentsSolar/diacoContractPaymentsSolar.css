@@ -1,0 +1,13 @@
+.THIS .padding-right{
+    padding-right: 30px;
+}
+
+.THIS .margin-right {
+    margin-right: 20px; 
+}
+
+@media (max-width: 767px) {
+  .THIS .padding-right {
+    padding-right: 0px;
+  }
+}

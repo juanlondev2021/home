@@ -1,0 +1,177 @@
+<!--
+
+ Diaco
+ @author 			Esnayder Morales Corpas href=<esnaydermorales25@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering homeOwner information
+     
+ Changes (Version)
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		02/03/2019		Esnayder Morales (ES)	Initial implementation  of the component.
+-->
+<aura:component controller="DiacoSolarContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="customer" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="_label_2" type="String"/>
+    <aura:attribute name="_label_3" type="String"/>
+    <aura:attribute name="hs" type="Home_Services__c"/>
+    <aura:attribute name="Spinner" type="boolean" default="true"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <force:recordData aura:id="recordLoader" recordId="{!v.recordId}" 
+                      fields="RecordTypeId,RecordType.DeveloperName,Sales_Rep__c" targetFields="{!v.hs}"/>
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+    
+    <fieldset class="slds-box slds-theme--default ">
+        <!--Home Owner information header-->
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information</h1>
+                    <h2 class="slds-text-heading--medium">HomeOwner</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+            <div aria-labelledby="HOMEOWNER">
+                <lightning:recordEditForm aura:id="homeOwnerForm"
+                                          onsubmit="{!c.handleSubmit}"
+                                          onsuccess="{!c.handleSuccess}"
+                                          onerror="{!c.handleOnError}"
+                                          recordId="{!v.customer.Account__c}"
+                                          objectApiName="Account"
+                                          >
+                    <lightning:messages /> 
+                    <aura:if isTrue="{!not(v.Spinner)}">
+                        <div class="slds-form slds-grid slds-wrap margin-bottom">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                <lightning:inputField fieldName="FirstName" onchange="{! c.changeStatus }" />
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:inputField fieldName="LastName" onchange="{! c.changeStatus }" />
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                <lightning:inputField fieldName="Phone" onchange="{! c.changeStatus }" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:inputField fieldName="PersonEmail" onchange="{! c.changeStatus }" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                <lightning:inputField fieldName="Street__c" onchange="{! c.changeStatus }" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 ">
+                                <lightning:inputField fieldName="City__c" onchange="{! c.changeStatus }" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                <lightning:inputField fieldName="State__c" onchange="{! c.changeStatus }" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 ">
+                                <lightning:inputField fieldName="Zip__c" onchange="{! c.changeStatus }" />
+                            </div>
+                            
+                        </div>
+                    </aura:if>
+                </lightning:recordEditForm>
+                    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                        <lightning:layoutItem>
+                            <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="horizontal-small">
+                            <div class="page-section page-header">
+                                <h1 class="slds-text-heading--label">Information</h1>
+                                <h2 class="slds-text-heading--medium">HOA</h2>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout> 
+                    <lightning:recordEditForm aura:id="recordViewFormHOA"
+                                              onsubmit="{!c.handleSubmit}"
+                                              onsuccess="{!c.handleSuccess}"
+                                              onerror="{!c.handleOnError}"
+                                              recordId="{!v.customer.Id}"
+                                              objectApiName="Home_Services__c"
+                                              >
+                        <lightning:messages />
+                        <aura:if isTrue="{!not(v.Spinner)}">
+                            <div class="slds-form slds-grid slds-wrap" style="margin-top:15px;">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                    <lightning:inputField fieldName="Utility_Company__c" onchange="{! c.changeStatus_2 }" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <lightning:inputField fieldName="hoaName__c" onchange="{! c.changeStatus_2 }" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:inputField fieldName="hoaPhoneNumber__c" onchange="{! c.changeStatus_2 }" />
+                                </div>
+                            </div>
+                            
+                        </aura:if>
+                    </lightning:recordEditForm>
+                </div>
+            </lightning:layoutItem>
+        
+        <!--Sales Rep Information-->
+                <!--SALESREP-->
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:client" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">SaleRep</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="SalesRepInformation">
+                    <div class="slds-form slds-grid slds-wrap slds-grid_align-center slds-gutters_small ">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12 padding-right">
+                            <lightning:recordEditForm aura:id="recordEditHS"
+                                                      recordId="{!v.recordId}"
+                                                      objectApiName="Home_Services__c"
+                                                      onerror="{!c.handleOnError}"
+                                                      >
+                                <lightning:inputField fieldName="Sales_Rep__c" />
+                            </lightning:recordEditForm>
+                            
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12 padding-right">
+                            <lightning:recordViewForm recordId="{!v.hs.Sales_Rep__c}" objectApiName="User">
+                                        <lightning:outputField fieldName="Email" />
+                                   
+                            </lightning:recordViewForm>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12 padding-right">
+                            <lightning:button aura:id="submit" type="submit" 
+                                              variant="brand" 
+                                              label="{!v._label == 'Saving...' ? 'Saving...' : 'Save'}" 
+                                              title="{!v._label == 'Saving...' ? 'Saving...' : 'Save'}"  
+                                              disabled="{!v._label == 'Saving...'}"  
+                                              onclick="{! c.saveSaleRep }"
+                                              class="slds-m-top--medium slds-align_absolute-center"/>
+                        </div>
+                    </div>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        
+        </fieldset>
+    </aura:component>

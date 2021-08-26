@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Demo__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( TEXT(Appointment_results__c ) = &apos;Sale pending&apos;  || TEXT(Appointment_results__c ) = &apos;Sale Cancelled&apos;  || TEXT(Appointment_results__c ) = &apos;Sale Turn Down&apos;  || TEXT(Appointment_results__c ) = &apos;Sale Approved&apos; || TEXT(Appointment_results__c ) = &apos;PM&apos; || TEXT(Appointment_results__c ) = &apos;Bid Submitted&apos; || TEXT(Appointment_results__c ) = &apos;Pending Cancel&apos;, TRUE, FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Demo</label>
+    <type>Checkbox</type>
+</CustomField>

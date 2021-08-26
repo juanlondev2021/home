@@ -1,0 +1,49 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Signed Contract
+* Description:		Show Signed Contract
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		26/03/2020		Álvaro Ortega (AO)		Show Signed Contract
+**/-->
+<aura:component controller="DiacoSignedContractController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="String" />
+	<aura:attribute name="IsPinnacleFinance" type="Boolean" default="false"/>
+    
+    <aura:attribute name="filesContractId" type="String" />
+    <aura:attribute name="isLoading" type="Boolean" default="true"/>
+
+    <aura:attribute name="itWasSigned" type="Boolean" default="true"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!--Methods to work on utility contracts-->
+    <aura:attribute name="isUtilityContract" type="Boolean" default="false"/>
+    
+    <aura:method name="checkUtilityContract" description="Method to use component for any pre design envelope">
+        <aura:attribute name="utilityContract" type="String" default=""/>
+    </aura:method>
+    
+    <aura:method name="refresh" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.isLoading}">
+        <!-->lightning:spinner alternativeText="Loading" size="small" /-->
+        <aura:set attribute="else">
+            <aura:if isTrue="{!v.itWasSigned}">
+                <div class="slds-align_absolute-center slds-size_1-of-11" style="width: 200px; margin-top: 5px">
+                    <lightning:fileCard fileId="{!v.filesContractId}" description="Signed Contract"/>
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-align_absolute-center slds-size_1-of-1">
+                    <div class="slds-text-body_regular">The contract has not been signed yet. </div>
+                    </div>
+                    
+                </aura:set>
+            </aura:if>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

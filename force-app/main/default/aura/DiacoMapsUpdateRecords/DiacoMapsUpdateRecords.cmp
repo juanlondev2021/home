@@ -1,0 +1,48 @@
+<!--
+ * Diaco
+ * @author             Jeison Hernandez Sanchez
+ * Project:            Maps Delivery
+ * TestClass:          
+ * Description:        Aura Cmp - Site Lightning In 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    18/02/2020        Jeison Hernandez S         Initial implementation of the class.
+ *-->
+<aura:component controller="DiacoMapsDriverController"
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,lightning:isUrlAddressable"
+                access="global">
+    <aura:attribute access="global" name="recordId" type="String"/>
+    <aura:attribute name="Record" type="Object"/>
+    <aura:attribute name="LoadError" type="String"/>
+    <aura:attribute access="private" name="message" type="string"/>
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      mode="EDIT"
+                      fields="Name,Arrival_Latitude__c,Arrive_Longitude__c,Arrival_Location_Error__c"
+                      targetFields="{!v.Record}"
+                      targetError="{!v.LoadError}"
+                      />
+    
+    <div class="slds-card slds-box"> 
+        <lightning:card title="{!v.Record.Name}" >
+            <div class="slds-p-horizontal--small">
+                <p class="slds-truncate"><lightning:input placeholder="Arrive Longitude" value="{!v.Record.Arrive_Longitude__c}" /></p>
+                <p class="slds-truncate"> <lightning:input placeholder="Arrive Longitude" value="{!v.Record.Arrival_Latitude__c}" /></p>
+                <p class="slds-truncate"> <lightning:input placeholder="Arrival Location Error" value="{!v.Record.Arrival_Location_Error__c}" /></p>
+            </div>
+            <aura:set attribute="footer">
+                <lightning:button label="Save" onclick="{!c.save}"/>
+            </aura:set>
+        </lightning:card>
+        <aura:if isTrue="{!v.message}">
+            <div class="slds-modal__content slds-align_absolute-center" id="modal-content-id-1">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                    <h2>{!v.message}</h2>
+                </div>
+            </div>
+        </aura:if>
+    </div>    
+</aura:component>

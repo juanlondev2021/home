@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Written_confirmation_of_DNC_list_additio_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Written confirmation of DNC list additio</label>
+    <queue>Written_confirmation_of_DNC_list_additio</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

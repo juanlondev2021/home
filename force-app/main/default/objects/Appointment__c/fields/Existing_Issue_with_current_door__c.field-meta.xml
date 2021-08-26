@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Existing_Issue_with_current_door__c</fullName>
+    <externalId>false</externalId>
+    <label>Existing Issue(s) with current door</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Damaged sections</fullName>
+                <default>false</default>
+                <label>Damaged sections</label>
+            </value>
+            <value>
+                <fullName>Broken springs (door will not go up/down)</fullName>
+                <default>false</default>
+                <label>Broken springs (door will not go up/down)</label>
+            </value>
+            <value>
+                <fullName>Worn out hardware (side hinges)</fullName>
+                <default>false</default>
+                <label>Worn out hardware (side hinges)</label>
+            </value>
+            <value>
+                <fullName>Rollers out of tracks</fullName>
+                <default>false</default>
+                <label>Rollers out of tracks</label>
+            </value>
+            <value>
+                <fullName>Cable off the drums</fullName>
+                <default>false</default>
+                <label>Cable off the drums</label>
+            </value>
+            <value>
+                <fullName>Door won’t open</fullName>
+                <default>false</default>
+                <label>Door won’t open</label>
+            </value>
+            <value>
+                <fullName>Door won’t close</fullName>
+                <default>false</default>
+                <label>Door won’t close</label>
+            </value>
+            <value>
+                <fullName>Broken door parts</fullName>
+                <default>false</default>
+                <label>Broken door parts</label>
+            </value>
+            <value>
+                <fullName>Gaps around door when closed (bottom, side, or top)</fullName>
+                <default>false</default>
+                <label>Gaps around door when closed (bottom, side, or top)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

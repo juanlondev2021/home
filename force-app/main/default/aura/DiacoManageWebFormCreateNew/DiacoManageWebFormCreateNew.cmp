@@ -1,0 +1,220 @@
+<!--
+* Diaco
+* @author 			Álvaro Ortega href=<aovargassf@gmail.com>
+* Project:			WebFormManage
+* Description:		Unique object
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		03/04/2020		Álvaro Ortega (AO)   Initial implementation of the class.
+-->
+<aura:component controller="DiacoManageWebFormController"
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" >
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="isOpenCreate" type="boolean" default='true'/>
+    <aura:attribute name="isLoading" type="boolean" default='true'/>
+    
+    <aura:attribute name="currentObject" type="Object" />
+    <aura:attribute name="newWebForm" type="Object"/>
+    
+    <aura:attribute name="allInterests" type="List" default="[]" />
+    <aura:attribute name="currentInterests" type="List" default="[]" />
+    
+    <aura:attribute name="interestsToCreate" type="List" default="[]" />
+    <aura:attribute name="indexInterestsToCreate" type="Integer" default="-1" />
+    <aura:attribute name="currentInterestsToCreate" type="String"/>
+    
+    <aura:attribute name="isChoosing" type="Boolean" default="True" />
+    
+    <aura:attribute name="isOpenEdit" type="boolean" default="false"/>
+    <aura:attribute name="editObject" type="Object" />
+    
+    <aura:attribute name="statusOptions" type="List" default="[{Value: 'No Good', label: 'No Good'}, 
+                                                              {Value: 'Verified Appt Set', label: 'Verified Appt Set'},
+                                                              {Value: 'Verified', label: 'Verified'},
+                                                              {Value: 'Call Back', label: 'Call Back'},
+                                                              {Value: 'In process', label: 'In process'}]" />
+    
+    <aura:if isTrue="{!v.isOpenCreate}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.isOpenEdit ? 'Update Web Form' : 'Create Web Form'}</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" style="height: 500px;" id="modal-content-id-1">
+                    <lightning:messages />
+                    <aura:if isTrue="{!v.isLoading}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+                        </div> 
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!v.isOpenEdit}">
+                                
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-align_absolute-center slds-m-vertical_x-small" style="font-size: 15px; font-weight: bold;">
+                                        {!v.editObject.Interests__c}
+                                    </div> 
+                                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                        <lightning:recordEditForm recordId="" objectApiName="webForm__c">
+                                            <lightning:messages />
+                                            <lightning:inputField fieldName="Interests__c" aura:id="Interests__c"
+                                                                  value="{!v.editObject.Interests__c}"/>
+                                        </lightning:recordEditForm>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                        <lightning:input aura:id="inputField" 
+                                                         type="datetime" 
+                                                         name="Book Now Date" 
+                                                         label="Book Now Date" 
+                                                         value="{!v.editObject.Book_Now_Date__c}"
+                                                         required="true"/>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                        <lightning:select aura:id="inputField" name="Status" label="Status" value="{!v.editObject.Status__c}">
+                                            <option value="">choose one...</option>
+                                            <aura:iteration items="{!v.statusOptions}" var="item">
+                                                <option value="{!item.value}">{!item.label}</option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                        <lightning:textarea aura:id="inputField" 
+                                                            label="Notes" 
+                                                            name="Notes" 
+                                                            placeholder="Type your notes..."
+                                                            value="{!v.editObject.Notes__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <aura:set attribute="else">
+                                    
+                                    <aura:if isTrue="{!v.isChoosing}">
+                                        
+                                        <lightning:accordion aura:id="accordion" activeSectionName="MyInterests" allowMultipleSectionsOpen="true" >
+                                            <aura:if isTrue="{!v.currentInterests.length > 0}">
+                                                <lightning:accordionSection name="MyInterests" label="My Interests">
+                                                    <aura:set attribute="body">
+                                                        <div class="slds-grid slds-wrap">
+                                                            <aura:iteration items="{!v.currentInterests}" var="item">
+                                                                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_small">
+                                                                    <div class="{!(item.active ? 'selectedButton' : 'button') + ' slds-box slds-align_absolute-center'}"
+                                                                         value="{!item.label}"
+                                                                         data-value="{!item.label}"
+                                                                         data-mine="true"
+                                                                         onclick="{!c.onSelect}">
+                                                                        {!item.label}
+                                                                    </div>
+                                                                </div>
+                                                            </aura:iteration>
+                                                        </div>
+                                                    </aura:set>
+                                                </lightning:accordionSection>
+                                            </aura:if>
+                                            <lightning:accordionSection name="OtherInterests" label="Other Interests">
+                                                <aura:set attribute="body">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <aura:iteration items="{!v.allInterests}" var="item">
+                                                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_small">
+                                                                <div class="{!(item.active ? 'selectedButton' : 'button') + ' slds-box slds-align_absolute-center'}"
+                                                                     value="{!item.label}"
+                                                                     data-value="{!item.label}"
+                                                                     data-mine="false"
+                                                                     onclick="{!c.onSelect}">
+                                                                    {!item.label}
+                                                                </div>
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </aura:set>
+                                            </lightning:accordionSection>
+                                        </lightning:accordion>
+                                        
+                                        <aura:set attribute="else">
+                                            
+                                            <div class="slds-grid slds-wrap">
+                                                <aura:if isTrue="{!v.interestsToCreate.length > 1}">
+                                                    <div class="slds-col slds-size_1-of-1 slds-p-around_small">
+                                                        <lightning:progressIndicator type="base" variant="shaded" currentStep="{!v.currentInterestsToCreate}">
+                                                            <aura:iteration items="{!v.interestsToCreate}" var="item">
+                                                                <lightning:progressStep label="{!item}" value="{!item}"/>
+                                                            </aura:iteration>
+                                                        </lightning:progressIndicator>
+                                                    </div>
+                                                </aura:if>
+                                                
+                                                <div class="slds-align_absolute-center slds-m-vertical_x-small" style="font-size: 15px; font-weight: bold;">
+                                                    {!v.currentInterestsToCreate}
+                                                </div> 
+                                                
+                                                
+                                                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                                    <lightning:input aura:id="inputField" 
+                                                                     type="datetime" 
+                                                                     name="Book Now Date" 
+                                                                     label="Book Now Date" 
+                                                                     value="{!v.newWebForm.Book_Now_Date__c}"
+                                                                     required="true"/>
+                                                </div>
+                                                
+                                                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                                    <lightning:select aura:id="inputField" name="Status" label="Status" value="{!v.newWebForm.Status__c}">
+                                                        <option value="">choose one...</option>
+                                                        <aura:iteration items="{!v.statusOptions}" var="item">
+                                                            <option value="{!item.value}">{!item.label}</option>
+                                                        </aura:iteration>
+                                                    </lightning:select>
+                                                </div>
+                                                
+                                                <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-horizontal_x-small">
+                                                    <lightning:textarea aura:id="inputField" 
+                                                                        label="Notes" 
+                                                                        name="Notes" 
+                                                                        placeholder="Type your notes..."
+                                                                        value="{!v.newWebForm.Notes__c}"/>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </aura:set>
+                                    </aura:if>
+                                </aura:set>
+                            </aura:if> 
+                        </aura:set>
+                    </aura:if> 
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Close"
+                                      title="Close"
+                                      onclick="{! c.closeModel }"
+                                      disabled="{!v.isLoading}"/>
+                    <lightning:button variant="brand" 
+                                      label="{!v.indexInterestsToCreate == (v.interestsToCreate.length - 1) ? 'Finish' : 'Next'}"
+                                      title="{!v.indexInterestsToCreate == (v.interestsToCreate.length - 1) ? 'Finish' : 'Next'}"
+                                      onclick="{! c.onNext }"
+                                      disabled="{!and(or(v.isLoading, v.interestsToCreate.length == 0), !v.isOpenEdit)}"/>
+                </footer> 
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+</aura:component>

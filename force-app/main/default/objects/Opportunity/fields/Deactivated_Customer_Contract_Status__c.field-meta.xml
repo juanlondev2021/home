@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deactivated_Customer_Contract_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Deactivated Customer Contract Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Operational_Stages__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Contract Breach</fullName>
+                <default>false</default>
+                <label>Contract Breach</label>
+            </value>
+            <value>
+                <fullName>Contract Complete</fullName>
+                <default>false</default>
+                <label>Contract Complete</label>
+            </value>
+            <value>
+                <fullName>Trial</fullName>
+                <default>false</default>
+                <label>Trial</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Deactivated Customer</controllingFieldValue>
+            <valueName>Contract Breach</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Deactivated Customer</controllingFieldValue>
+            <valueName>Contract Complete</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Deactivated Customer</controllingFieldValue>
+            <valueName>Trial</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

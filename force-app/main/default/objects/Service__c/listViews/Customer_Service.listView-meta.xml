@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Service</fullName>
+    <columns>NAME</columns>
+    <columns>Phone__c</columns>
+    <columns>Phone_2__c</columns>
+    <columns>Services_Status__c</columns>
+    <columns>Bill_Start_Date__c</columns>
+    <columns>Billing_Frequency__c</columns>
+    <columns>Total_Monthly_Investment__c</columns>
+    <columns>Confirmation_Call_Status__c</columns>
+    <columns>Confirmation_Call_Count__c</columns>
+    <columns>Confirmation_Call_Notes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Service__c.Water</value>
+    </filters>
+    <filters>
+        <field>Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Sale,Time and Materials Only</value>
+    </filters>
+    <filters>
+        <field>Sale_Status__c</field>
+        <operation>notEqual</operation>
+        <value>Closed Won/Canceled</value>
+    </filters>
+    <label>Water Treatment Service Sasha</label>
+    <sharedTo>
+        <role>Home_Automation_Admin</role>
+        <role>Office_Admin</role>
+        <role>Water_Admin</role>
+    </sharedTo>
+</ListView>

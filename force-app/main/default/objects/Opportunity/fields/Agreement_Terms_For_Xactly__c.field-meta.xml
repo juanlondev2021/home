@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agreement_Terms_For_Xactly__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Agreement_Term_in_Months__c ,&quot;03&quot;, 3, &quot;04&quot;, 4, &quot;05&quot; ,5, &quot;06&quot; ,6, &quot;07&quot; , 7, &quot;08&quot;, 8, &quot;09&quot; , 9,&quot;10&quot;, 10,&quot;11&quot; ,11,&quot;12&quot;,12, 0)</formula>
+    <label>Agreement Terms For Xactly</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

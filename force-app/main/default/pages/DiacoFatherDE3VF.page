@@ -1,0 +1,93 @@
+<apex:page standardController="Home_Services__c" extensions="DiacoNERGYSolutionsVF"
+           showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+
+    <head>
+        
+         <style type="text/css">
+            
+            @page {
+            size: Legal;
+            margin: 5mm 2mm 2mm 2mm;
+            
+            }
+            
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            table, th, td {
+            border: 1px solid black;
+            }
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+             
+             .border-white,
+             .border-white td,
+             .border-white th {
+             	border: 0px;
+             }
+        </style>
+    </head>  
+    <body>
+        <apex:include pagename="DiacoNERGYSolutionsVF"/>
+        
+        <div class="page-break">
+            <apex:include pagename="DiacoNERGYSolutionsVF2" />
+        </div>
+        <div class="page-break">
+            <apex:include pagename="DiacoNergySolutionsVF3" />
+        </div>
+        <div class="page-break">
+            <apex:include pagename="DiacoNergySolutionsVF4"/>
+        </div>   
+        <div class="page-break">
+            <apex:include pagename="DiacoNergySolutionsVF5"/>
+        </div>            
+    </body>    
+</apex:page>

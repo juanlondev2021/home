@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Event template">
+    <aura:attribute name="appointments_mtd"  type="Appointment_RecordType_mtd__c[]" />
+</aura:event>

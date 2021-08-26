@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sale_Disposition__c</fullName>
+    <externalId>false</externalId>
+    <label>Sale Disposition</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Install</fullName>
+                <default>false</default>
+                <label>Install</label>
+            </value>
+            <value>
+                <fullName>No Good</fullName>
+                <default>false</default>
+                <label>No Good</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>PM</fullName>
+                <default>false</default>
+                <label>PM</label>
+            </value>
+            <value>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+                <label>Rescheduled</label>
+            </value>
+            <value>
+                <fullName>RS</fullName>
+                <default>false</default>
+                <label>RS</label>
+            </value>
+            <value>
+                <fullName>Sale</fullName>
+                <default>false</default>
+                <label>Sale</label>
+            </value>
+            <value>
+                <fullName>Pitch and miss</fullName>
+                <default>false</default>
+                <label>Pitch and miss</label>
+            </value>
+            <value>
+                <fullName>1 Leg</fullName>
+                <default>false</default>
+                <label>1 Leg</label>
+            </value>
+            <value>
+                <fullName>No Show</fullName>
+                <default>false</default>
+                <label>No Show</label>
+            </value>
+            <value>
+                <fullName>Reset</fullName>
+                <default>false</default>
+                <label>Reset</label>
+            </value>
+            <value>
+                <fullName>Did not run</fullName>
+                <default>false</default>
+                <label>Did not run</label>
+            </value>
+            <value>
+                <fullName>Sale turn down</fullName>
+                <default>false</default>
+                <label>Sale turn down</label>
+            </value>
+            <value>
+                <fullName>Sale cancel</fullName>
+                <default>false</default>
+                <label>Sale cancel</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

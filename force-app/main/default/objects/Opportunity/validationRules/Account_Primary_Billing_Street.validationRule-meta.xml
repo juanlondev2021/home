@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Primary_Billing_Street</fullName>
+    <active>true</active>
+    <description>Please Add the Primary Billing Street on the Account</description>
+    <errorConditionFormula>AND( 
+ISBLANK( Account.Primary_Billing_Street__c ), 
+OR( 
+ISPICKVAL(StageName, &quot;Send Docusign&quot;), 
+ISPICKVAL(StageName, &quot;Closed Won&quot;)))</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Please Add the Primary Billing Street on the Account</errorMessage>
+</ValidationRule>

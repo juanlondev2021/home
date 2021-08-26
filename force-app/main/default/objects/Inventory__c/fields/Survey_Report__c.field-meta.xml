@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Survey_Report__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( fBilling_Opp_Account__c , 
+     &quot;nuHome - Project Yes&quot;, &quot;Project Yes&quot;, 
+     Null, &quot;Boberdoo&quot;,
+&quot;Captive&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Survey Report</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

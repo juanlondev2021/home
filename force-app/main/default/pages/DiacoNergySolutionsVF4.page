@@ -1,0 +1,263 @@
+<apex:page standardController="Home_Services__c" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    
+    <head>
+        <title>N-ERGY</title>
+       <!-- 
+        <style type="text/css">
+            
+            @page {
+            size: A4;
+            margin: 10mm 2mm 10mm 2mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            }
+            div.footer {
+            align-text: justify;
+            font-size: 6pt;
+            margin: 0mm 12mm 0mm 17mm;
+            position: running(footer);
+            }
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.9pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .left {
+            font-size: 9pt; 
+            float: left;
+            text-align: left;
+            padding-right: 10px;
+            }
+            .right {
+            font-size: 9pt; 
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+            }
+            #page15{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.5pt; 
+            margin: 5mm 10mm 5mm 15mm;
+            }
+            .page16{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt; 
+            margin: 5mm 30mm 5mm 30mm;
+            }
+            .blue-color{
+            color: #0070C0;
+            }
+            .pagenumber:before {
+            content: counter(page);
+            }
+            .pagecount:before {
+            content: counter(pages);
+            }
+            ul.checkmark {
+            list-style-type:none;
+            }
+            ul.checkmark li:before {
+            content:"\2713\0020";
+            font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+            }
+            .center {
+            margin: auto;
+            width: 80%;
+            border: 3px solid black;
+            padding: 3px;
+            font-size: 20pt;
+            }
+        </style>
+        -->
+        
+            <style type="text/css">
+            
+            @page {
+            size: Legal;
+            margin: 5mm 2mm 2mm 2mm;
+            
+            }
+            
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            table, th, td {
+            border: 1px solid black;
+            }
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+            
+        </style>
+        
+    </head>
+    
+    <div class="center" style="background-color: #00ade6; border:2px solid black; width:91%; margin:auto; font-size:22px; padding:4px;">
+        <center>
+            ED3 Program Additional Requirements
+        </center>
+    </div>
+    <div style="width:75%; margin:auto; font-size:15px;">
+        <br/>
+        <p align="justify">
+            We at Nergy Solutions will be processing all the documents for your Solar System. In order to do this, we will access your online utility account to download a copy of your most recent utility bill and for ED3 customers. Please provide your utility company online account user name and password below.
+        </p>
+        <br/>
+        <table WIDTH="60%" style="margin: 30px 0px 0px 30px;">
+            <tr  WIDTH="40%"  style="border:0px;">
+                <td style="border:0px;">
+                    <b> Username: </b>
+                </td>
+                <td  WIDTH="60%" style="border:0px; border-bottom:1px solid black; text-align:center;">
+                    {!Home_Services__c.Username__c}
+                </td>
+            </tr>
+        </table>
+        <table WIDTH="60%" style="margin: 30px 0px 0px 30px; ">
+            <tr  WIDTH="30%"  style="border:0px;">
+                <td style="border:0px;">
+                    <b>ED3Password: </b>
+                </td>
+                <td  WIDTH="60%" style="border:0px; border-bottom:1px solid black; text-align:center;">
+                    {!Home_Services__c.Password__c}
+                </td>
+            </tr>
+        </table>
+        <br/><br/>
+        <p align="justify">
+            * Application must be made in the name of the homeowner. For homeowners without an ED3 account, a non‐billed customer account must be created to submit the application: <font style="color: #00ade6">https://billpay.ed3online.org/oscp/MyAccount/CreateUserId/CreateNewUser/tabid/189/ Default.aspx</font>
+        </p>
+        <div style="width:100%; margin-left:20px; margin-top:80px;">
+                   
+        <ul style="list-style-type:none;margin-top: 20px">
+            <li>
+                <span style="border: 1px solid; padding:3px;">Are you the property owner at the site location? </span>
+                <ul style="list-style-type:none;margin: 20px">
+                    <li><img src='{!IF(Home_Services__c.Property_Owner__c ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                                    class="changeImage" /> Yes</li>
+                    <li> <img src='{!IF(Home_Services__c.Property_Owner__c ==false,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                                    class="changeImage" /> No</li>
+                </ul>
+            </li>
+            <li>
+                <span style="border: 1px solid; padding:3px;">Do you have any pets on site?</span>
+                <ul style="list-style-type:none; margin: 20px">
+                    <li><img src='{!IF(Home_Services__c.Pets__c =="Yes","/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                             class="changeImage" /> Yes</li>
+                    <li><img src='{!IF(Home_Services__c.Pets__c !="Yes","/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}' style='float:left;'
+                             class="changeImage" />No</li>
+                </ul>
+            </li>
+            <li>
+                <span style="border: 1px solid; padding:3px;"> Is your electric meter located behind a fence?</span> 
+                <ul style="list-style-type:none; margin: 20px">
+                    <li><img src='{!IF(Home_Services__c.Electric_Behind_Fence__c ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                                    style='float:left;' class="changeImage" /> Yes</li>
+                    <li><img src='{!IF(Home_Services__c.Electric_Behind_Fence__c ==false,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                                    style='float:left;' class="changeImage" /> No</li>
+                </ul>
+            </li>
+            <li>
+                <span style="border: 1px solid; padding:3px;"> Is this an expansion to an existing generating solar system?</span> 
+                <ul style="list-style-type:none;margin: 20px">
+                    <li> <img src='{!IF(Home_Services__c.Existing_Generating_Solar_System__c ==true,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                                    style='float:left;' class="changeImage" /> Yes</li>
+                    <li><img src='{!IF(Home_Services__c.Existing_Generating_Solar_System__c ==false,"/img/checkbox_checked.gif", "/img/checkbox_unchecked.gif")}'
+                                    style='float:left;' class="changeImage" /> No</li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+    </div>
+    
+</apex:page>

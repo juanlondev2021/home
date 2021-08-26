@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner_Industry__c</fullName>
+    <externalId>false</externalId>
+    <label>Partner Industry</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Flooring</fullName>
+                <default>false</default>
+                <label>Flooring</label>
+            </value>
+            <value>
+                <fullName>Kitchen</fullName>
+                <default>false</default>
+                <label>Kitchen</label>
+            </value>
+            <value>
+                <fullName>Bath</fullName>
+                <default>false</default>
+                <label>Bath</label>
+            </value>
+            <value>
+                <fullName>Blinds &amp; Shutters</fullName>
+                <default>false</default>
+                <label>Blinds &amp; Shutters</label>
+            </value>
+            <value>
+                <fullName>Closet Organization</fullName>
+                <default>false</default>
+                <label>Closet Organization</label>
+            </value>
+            <value>
+                <fullName>Garage Floor Coating</fullName>
+                <default>false</default>
+                <label>Garage Floor Coating</label>
+            </value>
+            <value>
+                <fullName>Addition(s)</fullName>
+                <default>false</default>
+                <label>Addition(s)</label>
+            </value>
+            <value>
+                <fullName>Garage Organization</fullName>
+                <default>false</default>
+                <label>Garage Organization</label>
+            </value>
+            <value>
+                <fullName>Handyman</fullName>
+                <default>false</default>
+                <label>Handyman</label>
+            </value>
+            <value>
+                <fullName>Windows</fullName>
+                <default>false</default>
+                <label>Windows</label>
+            </value>
+            <value>
+                <fullName>Security Doors</fullName>
+                <default>false</default>
+                <label>Security Doors</label>
+            </value>
+            <value>
+                <fullName>Painting</fullName>
+                <default>false</default>
+                <label>Painting</label>
+            </value>
+            <value>
+                <fullName>Roofing</fullName>
+                <default>false</default>
+                <label>Roofing</label>
+            </value>
+            <value>
+                <fullName>Landscaping</fullName>
+                <default>false</default>
+                <label>Landscaping</label>
+            </value>
+            <value>
+                <fullName>Landscape Design/Installation</fullName>
+                <default>false</default>
+                <label>Landscape Design/Installation</label>
+            </value>
+            <value>
+                <fullName>Pool</fullName>
+                <default>false</default>
+                <label>Pool</label>
+            </value>
+            <value>
+                <fullName>Pool Design/Installation</fullName>
+                <default>false</default>
+                <label>Pool Design/Installation</label>
+            </value>
+            <value>
+                <fullName>Concrete</fullName>
+                <default>false</default>
+                <label>Concrete</label>
+            </value>
+            <value>
+                <fullName>Sunroom Patio Enclosure</fullName>
+                <default>false</default>
+                <label>Sunroom Patio Enclosure</label>
+            </value>
+            <value>
+                <fullName>Landscape Maintenance</fullName>
+                <default>false</default>
+                <label>Landscape Maintenance</label>
+            </value>
+            <value>
+                <fullName>Pool Maintenance</fullName>
+                <default>false</default>
+                <label>Pool Maintenance</label>
+            </value>
+            <value>
+                <fullName>Electric</fullName>
+                <default>false</default>
+                <label>Electric</label>
+            </value>
+            <value>
+                <fullName>Garage Doors</fullName>
+                <default>false</default>
+                <label>Garage Doors</label>
+            </value>
+            <value>
+                <fullName>Plumbing</fullName>
+                <default>false</default>
+                <label>Plumbing</label>
+            </value>
+            <value>
+                <fullName>Solar</fullName>
+                <default>false</default>
+                <label>Solar</label>
+            </value>
+            <value>
+                <fullName>Water Filtration</fullName>
+                <default>false</default>
+                <label>Water Filtration</label>
+            </value>
+            <value>
+                <fullName>HVAC</fullName>
+                <default>false</default>
+                <label>HVAC</label>
+            </value>
+            <value>
+                <fullName>Smart Home Automation</fullName>
+                <default>false</default>
+                <label>Smart Home Automation</label>
+            </value>
+            <value>
+                <fullName>TV &amp; Internet</fullName>
+                <default>false</default>
+                <label>TV &amp; Internet</label>
+            </value>
+            <value>
+                <fullName>Locksmith</fullName>
+                <default>false</default>
+                <label>Locksmith</label>
+            </value>
+            <value>
+                <fullName>Pest Control</fullName>
+                <default>false</default>
+                <label>Pest Control</label>
+            </value>
+            <value>
+                <fullName>House Cleaning</fullName>
+                <default>false</default>
+                <label>House Cleaning</label>
+            </value>
+            <value>
+                <fullName>Floor Cleaning</fullName>
+                <default>false</default>
+                <label>Floor Cleaning</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

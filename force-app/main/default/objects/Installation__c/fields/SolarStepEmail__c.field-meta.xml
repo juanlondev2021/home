@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SolarStepEmail__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( TEXT(Installation_Status__c) = &quot;Site Survey&quot;, &quot;Step 1&quot;,
+IF( TEXT(Installation_Status__c) = &quot;Plans&quot;, &quot;Step 2&quot;,
+IF( TEXT(Installation_Status__c) = &quot;Permitting&quot;, &quot;Step 3&quot;,
+IF( TEXT(Installation_Status__c) = &quot;Glass Install&quot;, &quot;Step 4&quot;,
+IF( TEXT(Installation_Status__c) = &quot;Battery Install&quot;, &quot;Step 5&quot;,
+IF( TEXT(Installation_Status__c) = &quot;Commissioning&quot;, &quot;Step 5P&quot;,
+IF( TEXT(Installation_Status__c) = &quot;&quot;, &quot;Step 6&quot;,
+&quot;&quot;)))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>SolarStepEmail</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

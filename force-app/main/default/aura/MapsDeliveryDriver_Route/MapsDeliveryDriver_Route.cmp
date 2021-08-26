@@ -1,0 +1,188 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Delivery Driver
+ * Description:        Maps Cmp Salesforce 1 - Info Route 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    26/02/2021         Jull Quintero D         Initial implementation of the class.
+ *-->
+
+<aura:component controller = 'MapsDeliveryDriverController'
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global">
+    <aura:method name="init" action="{!c.doInit}" /> 
+    <aura:attribute name="loaded" type="Boolean" default="true"/>    
+    <aura:attribute name="open"  type="Boolean" default="false" required="true" access="private"/>
+	<aura:attribute name="ConfirmModal" type="Boolean" default="false"/>
+    <!-- Hung Status Picklist-->
+    <aura:attribute access="public" name="Hung_Status__c" type="list" required="true" default="[]"/>
+
+    <!-- Objects -->
+    <aura:attribute name="route" type="maps__Route__c" access="global"/>    
+    <aura:attribute name="points" type="maps__Waypoint__c[]" access="global"/>
+    <aura:attribute name="point" type="maps__Waypoint__c" access="private"/>
+
+    <!-- record Data  -->
+    <aura:attribute name="dataRoute" type="object" />    
+    <aura:attribute name="routeError" type="String" />
+
+    <!-- Points order-->
+    <aura:attribute name="Order2" Type="Boolean" default="false"/>
+
+    <!-- start and stop button -->
+    <aura:attribute name="isStopRoute" type="Boolean" default="false" access="private"/>
+
+    <!-- modal open point -->
+    <aura:attribute name="openPoint" type="Boolean" default="false" access="private"/>
+
+    <aura:if isTrue="{!v.loaded}">
+        <lightning:spinner />
+    </aura:if>
+
+    <aura:if isTrue="{!v.open}">
+        <force:recordData   aura:id="routeRecord"
+                            recordId="{! v.route.Id }"
+                            fields="Name,Start__c,Stop__c,maps__Date__c"
+                            targetFields="{! v.dataRoute }"    
+                            recordUpdated="{!c.handleRecordUpdated}" 
+                            targetError="{!v.routeError}"                                        
+                            mode="EDIT"/>
+
+        <div class="slds-card slds-box">
+
+        <!-- HEADER-->
+        <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="utility:watchlist" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header ">
+                    <h2 class="slds-text-heading--medium"> {!v.route.Name}</h2>
+                    <h1 class="field-title slds-text-title_caps">
+                        {!v.route.maps__Date__c}
+                    </h1>
+                </div>
+            </lightning:layoutItem>
+
+            <aura:if isTrue="{! v.dataRoute.Stop__c == null }">
+                <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                    <lightning:button class="slds-m-top_small" label="{!v.isStopRoute ? 'Stop' : 'Start'}" iconName="{!v.isStopRoute ? 'utility:stop' : 'utility:play'}" onclick="{!c.startAndStopRoute}"/>
+                </lightning:layoutItem>
+            </aura:if>
+    
+        </lightning:layout>
+        <!-- /HEADER-->
+
+        <!-- ROUTES -->
+        <aura:if isTrue="{! v.dataRoute.Stop__c == null }">
+            <aura:if isTrue="{! v.dataRoute.Start__c != null }">
+                <lightning:card>
+                    <aura:set attribute="title">
+                        <lightning:icon iconName="utility:data_mapping" size="small"/>
+                        Points
+                    </aura:set>
+
+                    <div class="slds-grid slds-wrap slds-p-left_large slds-p-right_large" >
+
+                        <aura:iteration items="{!v.points}" var="item">
+
+                            <force:recordData   aura:id="pointRecord"
+                                                recordId="{!item.Id}"
+                                              fields="Id,Name,Checkout__c,Checking__c,Hung_Status__c,Delivery_Driver_Latitude__c,Delivery_Driver_Longitude__c,
+                                                      Maps_Delivery_Driver__c,Hung_Date_Time__c"                                                 
+                                              mode="EDIT"/>
+                                                
+                            <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-4 slds-medium-size--1-of-6 slds-large-size--1-of-8">            
+                                <fieldset class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-visual-picker slds-visual-picker_small">
+                                            <input type="CheckBox" id="{!item.Id}" value="{!item.Name}" name="options" onchange="{!c.selectPoint}" />
+                                            <label for="{!item.Id}">
+                                                <span class="slds-visual-picker__body">
+                                                    <span class="slds-text-title">{!'#'+( v.Order2 ? item.maps__SortOrder__c - 1:item.maps__SortOrder__c)}</span>
+                                                </span>
+                                                <span class="slds-visual-picker__figure slds-visual-picker__icon slds-align_absolute-center">
+                                                    <span class="slds-is-selected">
+                                                        <span class="slds-icon_container">
+                                                            <lightning:icon iconName="{!item.Checkout__c != null ? 'utility:check' : 'utility:checkin'}" title="{! item.maps__SortOrder__c }" />
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-is-not-selected">
+                                                        <span class="slds-icon_container">
+                                                            <lightning:icon iconName="{!item.Checkout__c != null ? 'utility:check' : 'utility:checkin'}" title="{! item.maps__SortOrder__c }" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                <span class="slds-visual-picker__body">
+                                                    <span class="slds-text-title">{!item.Name+'-'+item.Delivery_Object__r.Name}</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </aura:iteration>
+                    </div>
+
+                </lightning:card>
+
+                <aura:set attribute="else">
+                    <div class="slds-modal__content" id="modal-content-id-1">
+                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                            <h2>This route has not started yet, please start it to update delivery.</h2>
+                        </div>
+                    </div>
+                </aura:set>
+
+            </aura:if>
+
+            <aura:set attribute="else">
+                <div class="slds-modal__content" id="modal-content-id-1">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                        <h2>This route was closed, Contact your admin.</h2>
+                    </div>
+                </div>
+            </aura:set>
+
+        </aura:if>
+        <!-- /ROUTES -->
+
+        </div>
+
+    </aura:if>
+
+    <!-- OPEN POINT -->
+    <aura:if isTrue="{! v.openPoint }">
+        <c:MapsDeliveryDriver_Point aura:id="cmpPoint" points="{!v.points}" point="{!v.point}" Hung_Status__c="{!v.Hung_Status__c}"/>
+    </aura:if>    
+    <!-- OPEN POINT -->
+	<!--Confirmation Modal-->
+    <aura:if isTrue="{!v.ConfirmModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm Route Close</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">Are you sure you want to close route</div>
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }" />
+                    <lightning:button variant="brand" label="Confirm" title="Confirm" onclick="{! c.confirmCloseRoute}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+    </aura:if>
+</aura:component>

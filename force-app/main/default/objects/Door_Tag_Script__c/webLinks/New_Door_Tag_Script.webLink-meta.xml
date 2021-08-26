@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Door_Tag_Script</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>New Door Tag Script</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>window.location = &apos;apex/nuHome_Statistics?CF00Nj000000Ayf0w={!User_Address__c.Name}&amp;CF00Nj000000Ayf0w_lkid={!User_Address__c.Id}&amp;scontrolCaching=1&amp;retURL=%{!User_Address__c.Id}&amp;sfdc.override=1&apos;;</url>
+</WebLink>

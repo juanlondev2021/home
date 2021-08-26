@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pricebook_To_Display__c</fullName>
+    <description>This field will indicate this industry should display for Add Quote and Product Override VF industry field drop down or not.</description>
+    <externalId>false</externalId>
+    <label>Pricebook To Display</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>nuHome OB Campaign</fullName>
+                <default>false</default>
+                <label>nuHome OB Campaign</label>
+            </value>
+            <value>
+                <fullName>nuHome nuCard CPL</fullName>
+                <default>false</default>
+                <label>nuHome nuCard CPL</label>
+            </value>
+            <value>
+                <fullName>nuHome Door Tag Script</fullName>
+                <default>false</default>
+                <label>nuHome Door Tag Script</label>
+            </value>
+            <value>
+                <fullName>nuHome nuCard SUB</fullName>
+                <default>false</default>
+                <label>nuHome nuCard SUB</label>
+            </value>
+            <value>
+                <fullName>nuHome SPEC CPL</fullName>
+                <default>false</default>
+                <label>nuHome SPEC CPL</label>
+            </value>
+            <value>
+                <fullName>nuHome nuCard SPEC</fullName>
+                <default>false</default>
+                <label>nuHome nuCard SPEC</label>
+            </value>
+            <value>
+                <fullName>nuHome Hot Leads - Tier 3</fullName>
+                <default>false</default>
+                <label>nuHome Hot Leads - Tier 3</label>
+            </value>
+            <value>
+                <fullName>nuHome Hot Leads - Tier 2</fullName>
+                <default>false</default>
+                <label>nuHome Hot Leads - Tier 2</label>
+            </value>
+            <value>
+                <fullName>nuHome Hot Leads - Tier 1</fullName>
+                <default>false</default>
+                <label>nuHome Hot Leads - Tier 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

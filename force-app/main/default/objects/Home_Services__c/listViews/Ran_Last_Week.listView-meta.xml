@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ran_Last_Week</fullName>
+    <columns>NAME</columns>
+    <columns>Appointment_Date_Time__c</columns>
+    <columns>Home_Services_Status__c</columns>
+    <columns>ApptSetter__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Appointment_Date_Time__c</field>
+        <operation>equals</operation>
+        <value>LAST_WEEK</value>
+    </filters>
+    <filters>
+        <field>Home_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Rehash,Closed Lost,Closed Won</value>
+    </filters>
+    <label>Ran Last Week</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+        <role>Solar_Admin</role>
+    </sharedTo>
+</ListView>

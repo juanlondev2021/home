@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MSA__c</fullName>
+    <externalId>false</externalId>
+    <label>MSA</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Austin-Round Rock-San Marcos  TX</fullName>
+                <default>false</default>
+                <label>Austin-Round Rock-San Marcos  TX</label>
+            </value>
+            <value>
+                <fullName>Bakersfield  Ca</fullName>
+                <default>false</default>
+                <label>Bakersfield  Ca</label>
+            </value>
+            <value>
+                <fullName>Dallas-Fort Worth-Arlington TX</fullName>
+                <default>false</default>
+                <label>Dallas-Fort Worth-Arlington TX</label>
+            </value>
+            <value>
+                <fullName>Houston-Sugar Land-Baytown  TX</fullName>
+                <default>false</default>
+                <label>Houston-Sugar Land-Baytown  TX</label>
+            </value>
+            <value>
+                <fullName>Killeen-Temple TX</fullName>
+                <default>false</default>
+                <label>Killeen-Temple TX</label>
+            </value>
+            <value>
+                <fullName>Los Angeles--Riverside--Orange County  Ca</fullName>
+                <default>false</default>
+                <label>Los Angeles--Riverside--Orange County  Ca</label>
+            </value>
+            <value>
+                <fullName>Phoenix-Mesa-Glendale AZ</fullName>
+                <default>false</default>
+                <label>Phoenix-Mesa-Glendale AZ</label>
+            </value>
+            <value>
+                <fullName>Provo-Orem Ut</fullName>
+                <default>false</default>
+                <label>Provo-Orem Ut</label>
+            </value>
+            <value>
+                <fullName>Salt Lake City-Ogden  Ut</fullName>
+                <default>false</default>
+                <label>Salt Lake City-Ogden  Ut</label>
+            </value>
+            <value>
+                <fullName>San Antonio-New Braunfels  TX</fullName>
+                <default>false</default>
+                <label>San Antonio-New Braunfels  TX</label>
+            </value>
+            <value>
+                <fullName>San Diego-Carlsbad-San Marcos  Ca</fullName>
+                <default>false</default>
+                <label>San Diego-Carlsbad-San Marcos  Ca</label>
+            </value>
+            <value>
+                <fullName>Tucson  AZ</fullName>
+                <default>false</default>
+                <label>Tucson  AZ</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

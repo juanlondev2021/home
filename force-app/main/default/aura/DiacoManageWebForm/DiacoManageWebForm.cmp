@@ -1,0 +1,164 @@
+<!--
+* Diaco
+* @author 			Álvaro Ortega href=<aovargassf@gmail.com>
+* Project:			WebFormManage
+* Description:		WebFormManage
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		03/04/2020		Álvaro Ortega (AO)    Initial implementation of the class.
+-->
+<aura:component controller="DiacoManageWebFormController"
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" >
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="currentObject" type="Object" />
+    
+    <aura:attribute name="data" type="List" default="[]" />
+    <aura:attribute name="columns" type="List" default="[]" />
+    
+    <aura:attribute name="isOpenCreate" type="boolean" default="true"/>
+    <aura:attribute name="isLoading" type="boolean" default="true"/>
+    
+    <aura:attribute name="deleteObject" type="Object" />
+    <aura:attribute name="isOpenDelete" type="boolean" default="false"/>
+    
+    <aura:attribute name="editObject" type="Object" />
+    <aura:attribute name="isOpenEdit" type="boolean" default="false"/>
+    
+    <aura:handler name="change" value="{!v.isOpenCreate}" action="{!c.refresh}"/>
+    
+    <aura:attribute name="isOpemCreateHS" type="boolean" default="false"/>
+    <aura:attribute name="recordTypeHSToCreateId" type="String" />
+    <aura:attribute name="recordsType" type="List" />
+    
+    <aura:attribute name="newHSId" type="String"/>
+    <aura:handler name="change" value="{!v.newHSId}" action="{!c.handleSuccessHS}"/>
+    
+    <aura:attribute name="noAccount" type="boolean" default="false"/>
+
+    <aura:if isTrue="{!v.noAccount}">
+        An account associated with this object could not be found
+        <aura:set attribute="else">
+            <aura:if isTrue="{!v.isLoading}">
+                <div class="slds-align_absolute-center">
+                    <lightning:spinner size="small"/>
+                </div>
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.editObject}">
+                        <c:DiacoManageWebFormCreateNew isOpenCreate="{!v.isOpenCreate}" currentObject="{!v.currentObject}"
+                                                       editObject="{!v.editObject}" isOpenEdit="{!v.isOpenEdit}"/>
+                        <aura:set attribute="else">
+                            <c:DiacoManageWebFormCreateNew isOpenCreate="{!v.isOpenCreate}" currentObject="{!v.currentObject}"/>
+                        </aura:set>
+                    </aura:if>
+                </aura:set>
+            </aura:if>
+            
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem padding="horizontal-small">
+                    <lightning:icon iconName="custom:custom84" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Interests</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size-4-of-12 slds-align-middle">
+                    <aura:renderIf isTrue="{!$Browser.formFactor == 'PHONE'}">
+                        <lightning:icon class="semitransparent" iconName="utility:chevronleft" size="small" alternativeText="Table scroll left" />
+                    </aura:renderIf>
+                </div>
+                <div class="slds-col slds-size-4-of-12 slds-text-align_center slds-align-middle slds-m-around_x-small">
+                    <lightning:button label="New" onclick="{! c.openModel }"/>
+                </div>
+                <div class="slds-col slds-size-4-of-12 slds-text-align_right slds-align-middle">
+                    <aura:renderIf isTrue="{!$Browser.formFactor == 'PHONE'}">
+                        <lightning:icon class="semitransparent" iconName="utility:chevronright" size="small" alternativeText="Table scrolls right" />
+                    </aura:renderIf>
+                </div>
+            </div>
+            
+            <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                <lightning:datatable 
+                                     keyField="id"
+                                     data="{! v.data }"
+                                     columns="{! v.columns }"
+                                     hideCheckboxColumn="true"
+                                     onrowaction="{! c.handleRowAction }" />
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size-4-of-12 slds-align-middle">
+                    <aura:renderIf isTrue="{!$Browser.formFactor == 'PHONE'}">
+                        <lightning:icon class="semitransparent" iconName="utility:chevronleft" size="small" alternativeText="Table scroll left" />
+                    </aura:renderIf>
+                </div>
+                <div class="slds-col slds-size-4-of-12 slds-text-align_center slds-align-middle slds-m-around_x-small">
+                	<lightning:button label="New" onclick="{! c.openModel }"/>
+                </div>
+                <div class="slds-col slds-size-4-of-12 slds-text-align_right slds-align-middle">
+                    <aura:renderIf isTrue="{!$Browser.formFactor == 'PHONE'}">
+                        <lightning:icon class="semitransparent" iconName="utility:chevronright" size="small" alternativeText="Table scrolls right" />
+                    </aura:renderIf>
+                </div>
+            </div>
+            
+            <!--c:DiacoCreateHomeServiceModalFlow isOpen="{!v.isOpen}" recordtypeId="{!v.recordtypeId}"
+                        accountId="{!v.recordId}" phoneRep="{!v.phoneRep}" /-->
+            
+            <aura:if isTrue="{!v.isOpenDelete}">
+                <!--###### MODAL BOX Start######--> 
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- ###### MODAL BOX HEADER Start ######-->
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModelDelete }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Web Form</h2>
+                        </header>
+                        <!--###### MODAL BOX BODY Part Start######-->
+                        <!-- the messages component is for error messages -->
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <div class="slds-align_absolute-center slds-m-around_x-small">
+                                {!'Are you sure you want to delete '+v.deleteObject.Name+'?'}
+                            </div>
+                        </div>
+                        <!--###### MODAL BOX FOOTER Part Start ######--> 
+                        <footer class="slds-modal__footer">
+                            <aura:if isTrue="{!!(v.draftValues.length > 0)}">
+                                <lightning:button variant="neutral" 
+                                                  label="Cancel"
+                                                  title="Cancel"
+                                                  onclick="{! c.closeModelDelete }"/>
+                            </aura:if>
+                            <lightning:button variant="brand" 
+                                              label="Delete"
+                                              title="Delete"
+                                              onclick="{! c.deletingWebForm }"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                <!--###### MODAL BOX Part END Here ######-->
+            </aura:if>
+            
+        </aura:set>
+    </aura:if>  
+    
+    <c:DiacoCreateHomeServiceModalFlow isOpen="{!v.isOpemCreateHS}" recordtypeId="{!v.recordTypeHSToCreateId}"
+                                       accountId="{!v.recordId}" phoneRep="{!v.currentObject.Phone_Rep_Email__c}" 
+                                       newHSId="{!v.newHSId}"/>
+    
+</aura:component>

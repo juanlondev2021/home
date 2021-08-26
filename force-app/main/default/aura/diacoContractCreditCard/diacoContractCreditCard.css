@@ -1,0 +1,21 @@
+.THIS .padding-right{
+    padding-right: 30px;
+}
+
+@media (max-width: 767px) {
+  .THIS .padding-right {
+    padding-right: 0px;
+  }
+}
+
+@media (min-width: 1023px){
+  .THIS .height-content {
+    height: 360px;
+  }
+}
+
+@media (min-width: 1056px) {
+  .THIS .height-content {
+    height: 320px;
+  }
+}

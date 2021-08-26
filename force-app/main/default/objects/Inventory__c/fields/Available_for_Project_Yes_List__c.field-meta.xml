@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Available_for_Project_Yes_List__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(Disposition__c = &apos;Appointment Set&apos;, 
+  Disposition__c = &apos;Appt Set and Inventory Created&apos;,
+  Disposition__c = &apos;Appt set: Project Yes&apos;,
+  Disposition__c = &apos;Duplicate&apos;,
+  Disposition__c = &apos;Not Interested&apos;,
+  Disposition__c = &apos;Not Homeowner&apos;,
+  Disposition__c = &apos;No Good&apos;,
+  Disposition__c = &apos;No Network&apos;,
+  Call_Count__c  &gt;= 8,
+  fAccount_DNC__c = True),
+  False,
+  IF(OB_Inventory_Flag__c = True,
+    IF(AND(fBilling_Opp_Industry__c &lt;&gt; &apos;Granite/Marble&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Gutters&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Roofing&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Siding&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Flooring/Carpeting&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Kitchen Remodeling&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Bathroom Remodeling&apos;,
+      fBilling_Opp_Industry__c &lt;&gt; &apos;Windows/Doors&apos;) , 
+      False, True),
+    IF(OR(fBilling_Opp_Industry__c = &apos;Granite/Marble&apos;,
+      fBilling_Opp_Industry__c = &apos;Gutters&apos;,
+      fBilling_Opp_Industry__c = &apos;Roofing&apos;,
+      fBilling_Opp_Industry__c = &apos;Siding&apos;,
+      fBilling_Opp_Industry__c = &apos;Flooring/Carpeting&apos;,
+      fBilling_Opp_Industry__c = &apos;Kitchen Remodeling&apos;,
+      fBilling_Opp_Industry__c = &apos;Bathroom Remodeling&apos;,
+      fBilling_Opp_Industry__c = &apos;Windows/Doors&apos;,
+      fBilling_Opp_Industry__c = &apos;Plumber&apos;,
+      fBilling_Opp_Industry__c = &apos;Blinds/Shutters&apos;,
+      fBilling_Opp_Industry__c = &apos;Solar Power&apos;,
+      fBilling_Opp_Industry__c = &apos;Water Softener Filtration&apos;,
+      fBilling_Opp_Industry__c = &apos;HVAC Services&apos;,
+      fBilling_Opp_Industry__c = &apos;Security Systems&apos;,
+      fBilling_Opp_Industry__c = &apos;Home Automation&apos;,
+      fBilling_Opp_Industry__c = &apos;Landscape (Maintenance)&apos;,
+      fBilling_Opp_Industry__c = &apos;Electrician&apos;,
+      fBilling_Opp_Industry__c = &apos;Pest Control&apos;,
+      fBilling_Opp_Industry__c = &apos;Cable/Satellite TV/Internet&apos;), 
+      True, False) 
+)  
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Available for Project Yes List</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

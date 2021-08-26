@@ -1,0 +1,6 @@
+.THIS.fixed {
+    position: fixed;
+    bottom: 10px; 
+    left: 15px;
+    border-radius:50%;
+}

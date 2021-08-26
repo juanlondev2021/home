@@ -1,0 +1,224 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Delivery Driver
+ * Description:        Maps Cmp Salesforce 1 - Info Point 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    03/03/2021         Jull Quintero D         Initial implementation of the class.
+ *-->
+
+<aura:component controller = 'MapsDeliveryDriverController'
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global">
+    
+    <aura:method name="init" action="{!c.doInit}" />
+    <aura:handler event="aura:locationChange" action="{!c.locationUpdate}"/>
+    <aura:attribute name="loaded" type="Boolean" default="true"/>    
+    <aura:attribute name="open"  type="Boolean" default="false" required="true" access="private"/>
+    <aura:attribute name="ConfirmModal" type="Boolean" default="false"/>
+    <aura:attribute name="filetype" type="List" default="['.jpg','.png','.jpeg']" />
+    
+    <!-- Hung Status Picklist-->
+    <aura:attribute access="public" name="Hung_Status__c" type="list" required="true" default="[]"/>
+    <aura:attribute access="private" name="currentHungStatus" type="String"/>
+    <aura:attribute access="private" name="notValit" type="Boolean" default="false"/>
+    <aura:attribute access="private" name="lastHungStatus" type="String"/>
+    
+    <!-- Get GeoLocation -->
+    <aura:attribute name="latitude" type="Decimal"  access="global"/>
+    <aura:attribute name="longitude" type="Decimal" access="global"/>
+    
+    <!-- Objects -->
+    <aura:attribute access="public" name="point" type="maps__Waypoint__c" />
+    <aura:attribute access="public" name="points" type="maps__Waypoint__c[]" required="true" default="[]"/>
+    
+    <!-- start and CheckOut button -->
+    <aura:attribute name="isCheckOut" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="isSaved" type="Boolean" default="false" access="private"/>
+    
+    <!-- Record Data  -->
+    <aura:attribute name="dataPoint" type="object" />    
+    <aura:attribute name="pointError" type="String" />
+    
+    <!-- modal open point -->
+    <aura:attribute name="openPoint" type="Boolean" default="false" access="private"/>
+    
+    <aura:if isTrue="{!v.open}">
+        
+        <force:recordData   aura:id="pointRecord"
+                          recordId="{! v.point.Id }"
+                          fields="Id,Name,Checkout__c,Checking__c,Hung_Status__c,Delivery_Driver_Latitude__c,Delivery_Driver_Longitude__c,
+                                  Maps_Delivery_Driver__c,Hung_Date_Time__c"
+                          targetFields="{! v.dataPoint }"    
+                          recordUpdated="{!c.handleRecordUpdated}" 
+                          targetError="{!v.pointError}"                                        
+                          mode="EDIT" />
+        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon   iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="colorBlack slds-modal__close "/>
+                    
+                    <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+                        <lightning:layoutItem padding="horizontal-small">
+                            <lightning:icon iconName="utility:location" />
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="horizontal-small">
+                            <div class="page-section page-header ">
+                                <h2 class="slds-text-heading--medium"> {!v.point.Name}</h2>
+                                <h1 class="field-title slds-text-title_caps">
+                                    
+                                </h1>
+                            </div>
+                        </lightning:layoutItem>
+                        
+                        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                            <a class="slds-button slds-button_outline-brand slds-m-top_small" href="{!'https://www.google.com/maps/dir/?api=1&amp;travelmode=driving&amp;layer=traffic&amp;destination='+v.point.Delivery_Object__r.Street__c+'%2C'+v.point.Delivery_Object__r.City__c+'%2C'+v.point.Delivery_Object__r.State__c}" target="_blank">Take Me There - Address</a>
+                        </lightning:layoutItem>
+                        
+                        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                            <a class="slds-button slds-button_outline-brand slds-m-top_small" href="{!'https://waze.com/ul?ll=' + v.point.Delivery_Object__r.Maps_Latitude__c + ',' + v.point.Delivery_Object__r.Maps_Longitude__c+'&amp;navigate=yes'}" target="_blank">Take Me There - Waze</a>
+                            <!--lightning:button class="slds-m-top_small" label="Take Me There" onclick="{!c.mapTakeMeThere}"/-->
+                        </lightning:layoutItem>
+                        
+                        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                            <a class="slds-button slds-button_outline-brand slds-m-top_small" href="{!'https://www.google.com/maps/dir/?api=1&amp;travelmode=driving&amp;layer=traffic&amp;destination=' + v.point.Delivery_Object__r.Maps_Latitude__c + ',' + v.point.Delivery_Object__r.Maps_Longitude__c}" target="_blank">Take Me There - Lat/Lon</a>
+                            <!--lightning:button class="slds-m-top_small" label="Take Me There" onclick="{!c.mapTakeMeThere}"/-->
+                        </lightning:layoutItem>
+                        
+                        <aura:if isTrue="{! v.point.Delivery_Object__r.Aws_Url__c==null }">
+                            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                                <lightning:button class="slds-m-top_small"  variant="brand" 
+                                                  label="Upload Photo"
+                                                  title="Upload Photo"
+                                                  onclick="{! c.UpModel }"/>
+                            </lightning:layoutItem>
+                        </aura:if>
+                        
+                        <aura:if isTrue="{! not(v.isCheckOut) }">
+                            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                                <lightning:button class="slds-m-top_small" label="Check In" iconName="utility:play" onclick="{!c.checkInAndOut}"/>
+                            </lightning:layoutItem>
+                        </aura:if>
+                    </lightning:layout>
+                </header>    
+                <!-- /HEADER -->        
+                
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                    <aura:if isTrue="{! v.dataPoint.Checkout__c == null }">
+                        
+                        <aura:if isTrue="{!v.dataPoint.Checking__c != null }">
+                            
+                            <aura:if isTrue="{!v.loaded}">
+                                
+                                <div class="slds-align_absolute-center">
+                                    <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="medium" variant="brand"/>                                    
+                                </div>
+                                
+                                <aura:set attribute="else">
+                                    <!-- FORM -->
+                                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 ">
+                                        <lightning:select required="true" aura:id='fieldId' label="Hung Status" value="{! v.dataPoint.Hung_Status__c }" onchange="{!c.changeHungStatus}">
+                                            <option value="">--None--</option>
+                                            <aura:iteration items="{!v.Hung_Status__c}" var="item" >
+                                                <option value="{!item.key}" selected="{! v.dataPoint.Hung_Status__c == item.key}">
+                                                    {!item.value}
+                                                </option>
+                                            </aura:iteration>                                                                                    
+                                        </lightning:select>
+                                        
+                                        <aura:if isTrue="{!v.notValit}">
+                                            <ui:message title="Error" severity="error" closable="true">
+                                                This is the saved value, select another.
+                                            </ui:message>
+                                        </aura:if>
+                                    </div>
+                                    <!-- FORM -->
+                                    <!-- BUTTON -->
+                                    <div  class='slds-grid slds-wrap slds-p-top_xx-small slds-align_absolute-center'>
+                                        <div style="margin-top:12px;" class='slds-col'>
+                                            <lightning:button       
+                                                              label="Save"
+                                                              class="slds-align_absolute-center"
+                                                              variant="brand"
+                                                              iconName="utility:save" iconPosition="left"
+                                                              onclick="{!c.setHungStatus}"
+                                                              />
+                                        </div>
+                                    </div>
+                                    <!-- /BUTTON -->
+                                </aura:set>
+                            </aura:if>
+                            
+                            <aura:set attribute="else">
+                                <div class="slds-modal__content" id="modal-content-id-1">
+                                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                                        <h2>Please Check in the point to continue.</h2>
+                                    </div>
+                                </div>
+                            </aura:set>
+                            
+                        </aura:if>
+                        
+                        <aura:set attribute="else">
+                            <div class="slds-modal__content" id="modal-content-id-1">
+                                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                                    <h2>This point was check Out</h2>
+                                </div>
+                            </div>
+                        </aura:set>
+                    </aura:if>
+                    
+                </div>
+                
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    
+                </footer>                
+            </div>
+        </section>  
+        
+    </aura:if>
+    <!--Confirmation Modal-->
+    <aura:if isTrue="{!v.ConfirmModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModelP }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Upload Delivery Photo</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">
+                            <lightning:fileUpload   name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.point.Delivery_Object__c}"
+                                                  onuploadfinished="{!c.handleUploadFinished}" />
+                        </div>
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModelP }" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+    </aura:if>
+</aura:component>

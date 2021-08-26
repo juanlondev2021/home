@@ -1,0 +1,52 @@
+<aura:component controller="diacoContractHA" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="filesContractId" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="label" type="String" default="Send to Docusign"/>
+    
+    <aura:attribute name="loading" type="Boolean" default="true"/>
+    
+    <aura:attribute name="areThereAnyServices" type="Boolean" default="true"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="toReload" type="Boolean"/>
+    <aura:handler name="change" value="{!v.toReload}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.areThereAnyServices}">
+        <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+            <aura:if isTrue="{!v.loading}">
+                <lightning:spinner alternativeText="Loading" size="small" />
+                <aura:set attribute="else">
+                    <div class="slds-align_absolute-center slds-size_1-of-1">
+                        <lightning:fileCard fileId="{!v.filesContractId}" description="Pest Control"/>
+                    </div>
+                    <c:DiacoSignedContract aura:id="DiacoSignedContract" recordId="{!v.recordId}"/>
+                    <div class="slds-align_absolute-center slds-size_1-of-1">
+                        <lightning:button label="Generate Contract"
+                                      variant="brand" 
+                                      class="slds-m-top--medium slds-align_absolute-center"
+                                      title="Generate Contract"
+                                      onclick="{! c.doInit }" />
+                    </div>
+                </aura:set>
+            </aura:if>
+            
+            <aura:set attribute="else">
+                <iframe src="{! '/apex/PEST_CONTROL_AGREEMENT?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/>
+                <c:DiacoSignedContract aura:id="DiacoSignedContract" recordId="{!v.recordId}"/>
+            </aura:set>
+        </aura:if>
+        <div class="slds-align_absolute-center slds-size_1-of-1">
+            <lightning:button variant="success" 
+                              label="{!v.label}" 
+                              class="slds-m-top--medium slds-align_absolute-center" 
+                              title="{!v.label}"
+                              disabled="{!v.label == 'Sending...' }"
+                              onclick="{! c.ToDocusign}" />
+        </div>
+        
+        <aura:set attribute="else">
+            <h1 class="slds-text-heading--label">You must add at least one service</h1>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

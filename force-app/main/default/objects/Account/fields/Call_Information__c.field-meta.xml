@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Information__c</fullName>
+    <description>The opportunity they last called in on. This is used to store the name of the business if it needs to be forwarded after the call.</description>
+    <externalId>false</externalId>
+    <label>Call Information</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>TextArea</type>
+</CustomField>

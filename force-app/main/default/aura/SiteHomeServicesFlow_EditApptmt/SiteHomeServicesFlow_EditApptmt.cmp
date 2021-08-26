@@ -1,0 +1,122 @@
+<!--
+* Diaco
+* Project:			Site Home Service Flow
+* Description:		Site Tab home service Lightning Out
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		12/10/2020		Jull Quintero            Initial implementation of the class.
+-->
+
+<aura:component controller="SiteMyHomeServicesController">
+
+<aura:attribute name="loaded" type="Boolean" default="false" />
+<aura:handler name="change" value="{!v.open}" action="{!c.doInit}" />
+<aura:attribute name="open"  type="Boolean" default="false" required="false"/>
+<aura:attribute name="appointmentId" type="Object" required="true" description="ROW SELECT DATA TABLE"/>
+
+<!-- modal message -->
+<aura:attribute access="Private"  name="ErrorModal" type="Boolean" default="false"/>
+<aura:attribute access="Private"  name="SuccessModal" type="Boolean" default="false"/>
+
+<!-- EDIT appointment -->
+<aura:attribute name="appointment" type="Appointment__c"/>
+<aura:attribute name="appoinmType" type="Object" required="true" />
+<aura:attribute name="account" type="Account" required="true" description="Account Home service current"/>
+
+
+<!-- CMP FORM  RECORDTYPE  -->
+<aura:attribute name="handlerDoinit" type="Boolean" default="false"/>
+<aura:attribute name="picklistValues" type="list" />
+<aura:attribute name="picklistValuesByRecordType" type="list" default="[]"/>
+    
+<!-- PICKLIST API NAME APPOINTMENT -->
+<aura:attribute name="apiNames" type="List" default="[  'Existing_Keypad__c','Do_you_have_a_water_filtration_system__c','Pets__c','Types_of_Pets__c',
+                                                        'Pest_loose_in_backyard__c', 'Backyard_gate_locked__c','Age_of_Current_AC_System__c',
+                                                        'Occupancy_of_House__c','Type_of_Material__c','Leak_Damage__c','Timeline_of_Intent__c',
+                                                        'Frequency_Desired__c','Sq_Ft_of_Project_Area__c','Design__c','Included_in_Landscape_Project__c',
+                                                        'Chemical_Type__c','Area_of_Concrete_Surface__c','Area_to_be_coated__c','Existing_Coating__c',
+                                                        'Existing_Issue_with_current_door__c','Type_of_Material_on_Current_Door__c','Area_of_Concrete__c','Rooms_included_in_project__c',
+                                                        'Description_of_closet__c','Frequency_Requested__c','Floorplan__c','Cabinets__c','Bath_Floorplan__c',
+                                                        'Main_Area_of_Concern__c','Payment_Type__c',
+                                                        'Rooms_to_be_Installed__c','Number_of_Rooms__c','Utility_Provider__c',
+                                                        'Type_of_System_to_be_installed__c','Number_of_Windows__c','Type_of_Service__c', 'Project_Type__c']" />
+<!-- EVENT REFRESH -->
+<aura:registerEvent name="refresh" type="c:DiacoEventHomeServicesFlow" />
+
+<!-- EVENT UPDATE APPOINTMENT -->
+<aura:handler name="updateAppointment" event="c:DiacoEventHomeServicesFlow" action="{! c.handlerUpdate }" />       
+
+<aura:if isTrue="{!v.open}">
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+        <div class="slds-modal__container">
+
+            <aura:if isTrue="{!v.loaded}">
+                <lightning:spinner  alternativeText="Loading" size="small" />
+            </aura:if>
+
+            <!-- HEADER -->
+            <header class="slds-modal__header">
+                <lightning:buttonIcon   iconName="utility:close"
+                                        onclick="{! c.closeModel }"
+                                        alternativeText="close"
+                                        variant="bare-inverse"
+                                        class="slds-modal__close"/>
+            <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header_vertical slds-align_absolute-center">
+
+                <lightning:layoutItem padding="horizontal-small">
+                    <lightning:icon iconName="action:edit" />
+                </lightning:layoutItem>
+        
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="slds-page-header__name">
+                        <div class="slds-page-header__name-title">
+                            <h1>
+                                <span></span>
+                                <span class="slds-page-header__title slds-truncate" title="Recently Viewed"> {!v.appointment.Name}</span>
+                            </h1>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>                    
+            </header>    
+            <!-- /HEADER -->        
+            
+            <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+
+                <!-- INFO BY RECORDTYPE-->
+                <c:SiteAppointment_RecordtypeFields     open="{!v.handlerDoinit}"
+                                                        appointment="{!v.appointment}" 
+                                                        appoinmType="{!v.appoinmType}"
+                                                        account="{!v.account}"
+                                                        picklistValues= "{!v.picklistValues }" 
+                                                        apiNames="{!v.apiNames}"/>
+                <!-- INFO BY RECORDTYPE-->
+
+            </div>
+            
+            <footer class="slds-modal__footer">
+                <lightning:button   variant="neutral" 
+                                    label="Cancel"
+                                    title="Cancel"
+                                    onclick="{! c.closeModel }"/>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+</aura:if>
+
+<!-- Modal toast -->
+<c:SiteModalMessage show="{! v.ErrorModal }"
+                    variant="error" title="ERROR" 
+                    message="An unexpected error has occurred" />
+
+<c:SiteModalMessage show="{! v.SuccessModal }" 
+                    variant="success" title="SUCCESS" 
+                    message="The record has been saved successfully" />
+
+</aura:component>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Home_Automation_Service_Running</fullName>
+    <columns>NAME</columns>
+    <columns>Appt_Start_Date__c</columns>
+    <columns>Appt_End_Date__c</columns>
+    <columns>Sales_Rep__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Service__c.Home_Automation</value>
+    </filters>
+    <filters>
+        <field>Appt_Services_Status__c</field>
+        <operation>equals</operation>
+        <value>Dispatched</value>
+    </filters>
+    <label>Home Automation Service Running</label>
+    <sharedTo>
+        <role>Confimation_Dispatch</role>
+        <role>Home_Automation_Admin</role>
+        <role>Office_Admin</role>
+        <role>System_Admin</role>
+    </sharedTo>
+</ListView>

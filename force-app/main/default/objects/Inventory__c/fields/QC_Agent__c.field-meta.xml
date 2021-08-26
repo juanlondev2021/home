@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QC_Agent__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The QC Agent who approves or rejects this appt.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The QC Agent who approves or rejects this appt.</inlineHelpText>
+    <label>QC Agent</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Inventory1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

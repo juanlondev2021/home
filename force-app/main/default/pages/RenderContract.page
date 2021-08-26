@@ -1,0 +1,704 @@
+<apex:page renderAs="pdf" standardController="Home_Services__c" extensions="RenderContractController"
+           showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <title>Solar Contract</title>
+            
+            <style>
+                @page {
+                size: letter;
+                margin: 1mm 5mm 5mm 5mm;
+                }
+                .page-break {
+                display:block;
+                page-break-after:always;
+                }
+                body {
+                font-family: Arial;
+                font-size: 13px;
+                }
+            </style>
+        </head> 
+        <body>
+            <div class="page-break">
+                <div style='clear:right;'>
+                    <div style='float:right'>
+                        <p align="left">
+                            Customer to Furnish Electrical<br/> Outlet Within 5 Feet <br/>of Installation
+                        </p>
+                    </div>
+                    <div style='float:right'>
+                        <p align="center">
+                            Aqua Bright Water LLC<br/>
+                            AZROC # 128843<br/>
+                            664 W. Warner Rd. Tempe, AZ 85284<br/>
+                            480-776-5085 
+                        </p>
+                    </div>
+                    <div style='float:right'>
+                        <img src="{!URLFOR($Resource.contractIcon,'contractIcon/contractIcon.png')}" class="changeImage"/>
+                    </div>
+                </div>   
+                
+                <div style='clear:right;'>
+                    <p align="justify" style="font-size:0.8em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                        This Agreement is entered into on <u>{! CASE(MONTH(TODAY()), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(TODAY())}/{! YEAR(TODAY()) } </u> by <u>{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</u> and between Aqua Bright Water LLC, 
+                        (664 W. Warner Rd. Tempe, AZ 85284), hereinafter referred to as “COMPANY” and “CUSTOMER” listed below")
+                    </p>
+                </div>
+                
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td style="
+                                       border-top: 1px solid black;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;" width="50%">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Customer #1:</td>
+                                            <td>{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            
+                            <td style="
+                                       border-top: 1px solid black;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;" width="50%">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Customer #2:</td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">DOB: </td>
+                                            <td>
+                                                {! CASE(MONTH(Home_Services__c.Account__r.Customer_1_DOB__c), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(Home_Services__c.Account__r.Customer_1_DOB__c)}/{! YEAR(Home_Services__c.Account__r.Customer_1_DOB__c) }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">DOB: </td>
+                                            <td>
+                                                {! CASE(MONTH(Home_Services__c.Account__r.Customer_2_DOB__c), 1, "Jan", 2, "Feb", 3, "Mar", 4, "April", 5, "May", 6, "Jun", 7, "Jul", 8, "Aug", 9, "Sep", 10, "Oct", 11, "Nov",12, "Dec","None")}/{! DAY(Home_Services__c.Account__r.Customer_2_DOB__c)}/{! YEAR(Home_Services__c.Account__r.Customer_2_DOB__c) }   
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">SSN: </td>
+                                            <td>{!Home_Services__c.Account__r.Customer_1_SSN_E__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">SSN: </td>
+                                            <td>{!Home_Services__c.Account__r.Customer_2_SSN__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">DL #: </td>
+                                            <td>{!Home_Services__c.Account__r.Customer_1_Drivers_License__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">DL #: </td>
+                                            <td>{!Home_Services__c.Account__r.Customer_2_Drivers_License__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Home Phone: </td>
+                                            <td>{!Home_Services__c.Account__r.Phone}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Home Phone: </td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_Phone_Number__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td  style="
+                                        border-top: 0px;
+                                        border-right: 1px solid black;
+                                        border-bottom: 0px;
+                                        border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Cell Phone: </td>
+                                            <td>{!Home_Services__c.Account__r.PersonMobilePhone}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Cell Phone: </td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_Mobile__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Email:</td>
+                                            <td>{!Home_Services__c.Account__r.PersonEmail}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Email:</td>
+                                            <td>{!Home_Services__c.Account__r.Homeowner_2_Email__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Employer:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_1_Employer__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>              
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Employer:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_2_Employer__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Employer phone:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_1_Employer_Phone__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Employer phone:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_2_Employer_Phone__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Income:</td>
+                                            <td><apex:outputField value="{!Home_Services__c.Account__r.Customer_1_Income__c}"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Income:</td>
+                                            <td><apex:outputField value="{!Home_Services__c.Account__r.Customer_2_Income__c}"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Length of emp:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_1_Length_of_Employment__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 0px;
+                                       border-left:1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Length of emp:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_2_Length_of_Employment__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 1px solid black;
+                                       border-left: 1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Position:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_1_Employment_Position__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 1px solid black;
+                                       border-left: 1px solid black;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="40%">Position:</td>
+                                            <td>{!Home_Services__c.Account__r.Customer_2_Employment_Position__c}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr >
+                            <td  colspan="2" style="
+                                                    border-top: 1px solid black;
+                                                    border-right: 1px solid black;
+                                                    border-bottom: 0px;
+                                                    border-left:1px solid black;">
+                                
+                                Address: {!Home_Services__c.Account__r.Street__c &' '& Home_Services__c.Account__r.Zip__c &' '& Home_Services__c.Account__r.City__c &' '& Home_Services__c.Account__r.State__c }
+                                
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 0px;
+                                       border-bottom: 1px solid black;
+                                       border-left: 1px solid black">
+                                
+                                mortgage payment:&nbsp;<apex:outputField value="{!Home_Services__c.Account__r.Mortgage_Payment__c}"/>
+                                
+                            </td> 
+                            <td style="
+                                       border-top: 0px;
+                                       border-right: 1px solid black;
+                                       border-bottom: 1px solid black;
+                                       border-left: 0px">
+                                
+                                Install Date/Time:&nbsp;<apex:outputField value="{!Home_Services__c.Requested_Install_Date__c}"/> 
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td width="60%"> 
+                                <h4 style="text-align: center;">
+                                    water Analysis
+                                </h4>
+                                <table style="margin: 0 auto;" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="35%">Hardness gpg: </td>
+                                            <td width="20%">{!Home_Services__c.Hardness_gpg__c}</td>
+                                            <td width="25%">ph: </td>
+                                            <td width="20%">{!Home_Services__c.Ph__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>No reg.: </td>
+                                            <td>{!Home_Services__c.No_Reg__c}</td>
+                                            <td>Iron Algae: </td>
+                                            <td>{!Home_Services__c.Iron_Algae__c}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>Hyd. supl. ppm: </td>
+                                            <td>{!Home_Services__c.Hyd_Supl_ppm__c}</td>
+                                            <td>Iron ppm: </td>
+                                            <td>{!Home_Services__c.Iron_ppm__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>other: </td>
+                                            <td>{!Home_Services__c.Other__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" align="center" >Special Instructions</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" align="justify" style="font-size:0.8em;font-family:'Helvetica','Verdana','Monaco',sans-serif;">
+                                                {!Home_Services__c.Special_Instructions__c}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td  width="40%">
+                                <table style="margin: 0 auto;" >
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Cash Selling Price: </td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Total_Cash_Selling_Price__c}"/></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Sales Tax: </td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Sales_Tax__c}"/></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Total Cash Price: </td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Total_Cash_Price__c}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Down Payment:</td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Down_Payment__c}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Trade in Allowance:</td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Trade_in_Allowance__c}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Down Payment:</td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Total_Down_Payment__c}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Balance Due:</td>
+                                            <td align="right"><apex:outputField value="{!Home_Services__c.Balance_Due__c}"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Checking","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th>METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {!Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number:</th>
+                                            <td >{!Home_Services__c.Bank_Account_Number_Encrypted__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Routing Number:</th>
+                                            <td >{!Home_Services__c.Routing_Number__c}</td>
+                                        </tr> 
+                                        
+                                    </table>
+                                </div>
+                                
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Finance","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th >METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {!Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Finance Company:</th>
+                                            <td >{!Home_Services__c.Finance_Company__c}</td>
+                                        </tr> 
+                                        <tr>
+                                            <th >Financed Amount:</th>
+                                            <td >$<apex:outputField value="{!Home_Services__c.Financed_Amount__c}"/></td>
+                                        </tr> 
+                                    </table>
+                                </div>
+                                <div style='display:{!IF(Home_Services__c.Method_Of_Payment__c == "Credit Card","block", "none")};'>
+                                    <table>
+                                        <tr>
+                                            <th >METHOD OF PAYMENT:</th>
+                                            <td >
+                                                {! Home_Services__c.Method_Of_Payment__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Card Type:</th>
+                                            <td >
+                                                {! Home_Services__c.Card_Type__c}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th >Name on Card (Account):</th>
+                                            <td >{!Home_Services__c.Name_on_Card__c}</td>
+                                            <th >EXP DATE:</th> 
+                                            <td >{!Home_Services__c.Card_Expiration_Month__c &"/"& Home_Services__c.Card_Expiration_Year__c}</td>
+                                        </tr>
+                                        <tr>
+                                            <th >Account Number:</th>
+                                            <td >{!Home_Services__c.Account_Number__c}</td>                                
+                                            <th >CSV:</th>
+                                            <td >{!Home_Services__c.CSV__c}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br/>
+                                <table>
+                                    <tr>
+                                        <td>Authorization Signature(s)</td>
+                                        <td colspan="3">#1 __________________________</td>
+                                        <td colspan="3">#2 __________________________</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin: 50px 0 0 0">
+                <table border="1|0" width="100%" style="border-collapse: collapse; margin: 20px 0 0 0">
+                    <tbody>
+                        <tr >
+                            <td colspan="6"><h4 style="text-align: center;">Product List</h4>
+                                <table width="60%" style="margin: 0 auto" >
+                                    <thead>
+                                        <tr>
+                                            <th><b>Name</b></th>
+                                            <!--<th align="center">Product</th>-->
+                                            <th align="center"><b>Quantity</b></th>
+                                            <th align="right"><b>Total Sales Price</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepea">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputField value="{!LineIte.Name}" />
+                                                </td>
+                                                <td align="center">
+                                                    <apex:outputField value="{!LineIte.Quantity__c}" />
+                                                </td>
+                                                <td align="right">
+                                                    <apex:outputField value="{!LineIte.Total_Sales_Price_p__c }" />
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" align="justify">
+                                <p>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By signing below you certify that all information above is true and complete. 
+                                    You authorize us to confirm the information in this application and to request and receive credit information 
+                                    about you in order to determing creditworthiness. You further authorize us to furnish information about your 
+                                    account to credit reporting agencies. Credit Reports: By submitting your application, you agree that we may 
+                                    obtain at any time your credit report s for any legitimate purpose associated with your application, account 
+                                    or other requests, including but not limited to reviewing, modifying, renewing or collecting on your account. 
+                                    At your request you will be informed if such a report was obtained by us, and you will be given contact information 
+                                    for the consumer reporting agency that furnished the report. 
+                                </p> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" width="50%"><img src="{!URLFOR($Resource.contractIcon,'contractIcon/sign.png')}" style='float:center' class="changeImage"/></td>
+                            <td width="50%">
+                                <table width="100%">
+                                    <tr>
+                                        <td >--.</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" heigth="5px"><hr/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td >__.</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><hr/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{!Home_Services__c.Account__r.Homeowner_2_First_Name__c &' '& Home_Services__c.Account__r.Homeowner_2_Last_Name__c}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,95 @@
+<aura:component >
+    <aura:handler name="change" value="{!v.open}" action="{!c.doInit}" />    
+    <aura:attribute name="open" type="Boolean" default="false" required="true"/>
+    <!-- OBJECT -->
+    <aura:attribute name="appointment" type="Object" required="true"/>
+    <aura:attribute name="appoinmType" type="Object" required="true" />
+
+    <!-- SECTION APPOINTMENT INFO  -->
+    <aura:attribute access="private"  name="Timeline_of_Intent__c" type="List" default="[]" /> 
+    <aura:attribute name="account" type="Account" required="true"/>
+    <aura:attribute name="appointmentSetter" type="string" description="PERSONEL ID"/> 
+
+
+    <!-- APPOINTMENT DATETIME -->
+    <aura:attribute access="private" name="appointmentDate" type="Date" />
+    <aura:attribute access="private" name="appointmentTime" type="DateTime" /> 
+    <aura:attribute access="private" name="appointmentTimeValues" type="List" default="[]" />
+    <aura:attribute access="private" name="startDate" type="List"  default="[]" />
+    <aura:attribute access="private" name="endHour" type="Integer" />
+
+    <!-- Event Upsert Appointment -->
+    <aura:registerEvent name="upsertAppointment" type="c:DiacoEventInterestsWebForm" />
+
+    <!-- Event update Appointment -->
+    <aura:registerEvent name="updateAppointment" type="c:DiacoEventHomeServicesFlow" />
+    
+    <!--APPOINTMENT INFORMATION -->
+    <div>
+        <div class="slds-card slds-box">
+            <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+
+                <lightning:layoutItem padding="horizontal-small">
+                    <lightning:icon iconName="custom:custom32" />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header ">
+                        <h2 class="slds-text-heading--medium">
+                            <lightning:formattedText value="{!v.appointment.Id != null ? v.appointment.Name : v.appoinmType.Name}" />
+                        </h2>
+                        <h1 class="slds-text-heading--label">
+                            Information
+                        </h1>
+                    </div>
+                </lightning:layoutItem>
+
+                <aura:if isTrue="{! and(v.appointment.Id != null, v.appointment.Home_Service__c != null) }">
+                    <lightning:layoutItem  alignmentBump="left" padding="horizontal-small">
+                        <a class="slds-button" href="{!'/lightning/r/' + v.appointment.Home_Service__c + '/view'}" target="_blank">
+                            <div class="slds-visual-picker">
+                                <span class="slds-visual-picker__figure slds-visual-picker__icon slds-align_absolute-center">
+                                    <lightning:icon iconName="custom:custom33" alternativeText="Home service" title="Home Service" />
+                                </span>
+                                <span class="slds-visual-picker__body">
+                                    <span class="slds-text-title">Home Service</span>
+                                </span>
+                            </div>
+                        </a>
+                    </lightning:layoutItem>
+                </aura:if>
+            </lightning:layout>
+
+        </div>
+        <div class="slds-grid slds-wrap slds-gutters">
+            
+            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <lightning:input aura:id="fieldId" type="date" label="Appointment Date" value="{!v.appointmentDate}" onchange="{!c.handlerAppointmentDateTime}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <lightning:select  aura:id='fieldId' label="Appointment Time" value="{! v.appointmentTime }"  onchange="{!c.handlerAppointmentDateTime}">
+                    <option value="{!v.appointmentTime}"> <lightning:formattedText value="{!v.appointmentTime}" /> </option>
+                    <aura:iteration items="{!v.appointmentTimeValues}" var="item" >
+                        <option value="{!item.time}" selected="{! v.appointmentTime == item.time}">
+                            {!item.value}
+                        </option>
+                    </aura:iteration>                                                                                    
+                </lightning:select>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <lightning:textarea aura:id='fieldId' label="Appointment Notes" placeholder="type here..." value="{!v.appointment.Appointment_Notes__c}"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="slds-align_absolute-center slds-m-top_small">
+        <lightning:button   variant="brand" 
+                            label="{!v.appointment.Id != null ? 'Update' : 'New'}" 
+                            title="upsert" 
+                            iconName="{!v.appointment.Id != null ? 'utility:edit' : 'utility:new'}" 
+                            iconPosition="left"
+                            onclick="{! c.handlerUpdate }" />
+    </div>
+            
+        <!--APPOINTMENT INFORMATION -->
+    
+</aura:component>

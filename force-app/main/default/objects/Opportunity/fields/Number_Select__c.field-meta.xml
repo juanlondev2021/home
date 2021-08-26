@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number_Select__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(DID__c==&quot;&quot; &amp;&amp; Forward_to_number__c &lt;&gt; &quot;&quot;, HYPERLINK(&quot;https://numberselector.nuhome.com?id=&quot;&amp;Id&amp;&quot;&amp;areaCode=&quot;&amp;Area_Code__c&amp;&quot;&quot;&amp;&quot;&amp;forwardToNumber=&quot;&amp;Forward_to_number__c, &quot;Select Number&quot;), if(DID__c==&quot;&quot; &amp;&amp; Forward_to_number__c == &quot;&quot;, &quot;Need Forward To Number&quot;, &quot;SELECTED&quot;))</formula>
+    <label>Number Select</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

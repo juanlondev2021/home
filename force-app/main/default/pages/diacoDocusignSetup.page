@@ -1,0 +1,103 @@
+<apex:page controller="diacoDocusignSetup"
+           showHeader="false" standardStylesheets="false"
+           docType="html-5.0" applyHtmlTag="false" applyBodyTag="false" >
+    <head>
+        <title>setup</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"/>
+        <!--Icons materialize-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        
+        <!-- Compiled and minified JavaScript  SaveLineItems-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js">
+        </script>
+        <style>
+            nav {
+            background-color: #397cba;
+            }
+            .cent{
+            display: flex;
+            justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!--div class="container"-->
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center"><img src="{!URLFOR($Resource.DiacoSign,'icons/DSW.png')}" class="changeImage"/></a>
+                    <!--a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a-->
+                </div>
+                <div class="nav-content">
+                    <ul class="tabs tabs-transparent">
+                        <li class="tab"><a class="active" href="#general">General</a></li>
+                        <li class="tab"><a href="#test1">Water</a></li>
+                        <li class="tab"><a href="#test2">Solar</a></li>
+                        <li class="tab"><a href="#test3">Pest Control</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <apex:form >  
+                <div id="general" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputField value="{!conf.integratorsKey__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">Integrators Key</label>
+                        </div>
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputField value="{!conf.account__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">Account Number</label>
+                        </div>
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputField value="{!conf.accountId__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">Account Id</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="test1" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputField value="{!conf.userId__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">User Id</label>
+                        </div>
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputSecret value="{!conf.password__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="test2" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputField value="{!conf.userIdSolar__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">User Id</label>
+                        </div>
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputSecret value="{!conf.passwordSolar__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="test3" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputField value="{!conf.User_Id_Pest_Control__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">User Id</label>
+                        </div>
+                        <div class="input-field col s6 offset-s3">
+                            <apex:inputSecret value="{!conf.PassWord_Pest_Control__c}" styleClass="validate"/>
+                            <label class="active" for="first_name2">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 cent">
+                    <apex:commandLink action="{! save }" value="Save" styleClass=" btn-large red pulse center" reRender="false" onclick="M.toast({html: 'saved information'});" />
+                </div>
+            </apex:form>
+            
+        <!--/div-->
+        <script>
+        M.AutoInit();
+        </script>
+    </body>
+</apex:page>

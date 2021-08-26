@@ -1,0 +1,159 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="DiacoLeadFormsManageController" >
+    <!--LeadForm-->	
+    <aura:attribute name="recordId" type="String" /><!--LeadForm Id for Account Association-->	
+    <aura:attribute name="leadForm" type="Object" default="{}" />
+    <!--Account-->
+    <aura:attribute name="AccountId" type="String" />
+    <aura:attribute name="Account" type="Object" default="{}" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!--Possible Accounts-->
+    <aura:attribute name="PossibleAccountsData" type="List" default="[]"/>
+    <aura:attribute name="PossibleAccountsColumns" type="List"/>
+    <!--Account Creation Modal-->
+    <aura:attribute name="AccountCreationModal" type="Boolean" default="false"/>
+    <!--County picklist inside the Account creation modal -->
+    <aura:attribute name="isLoadingCountyData" type="Boolean" default="true" />    
+    <aura:attribute name="renderCounty" type="Boolean" default="false" />
+    <aura:attribute name="countyData" type="List" />
+    <aura:attribute name="county" type="String" default="" />
+    
+    <aura:if isTrue="{!v.AccountId !=null}">
+        <c:DiacoHomeServicesFlow recordId="{!v.AccountId}" />
+        <!-- Error title title="Lead Account - Home Services"-->
+        <!--No Account Associated-->
+        <aura:set attribute="else">
+            <!--Header--> 
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <lightning:icon iconName="standard:account" alternativeText="Account" title="Account" />
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate" title="Lead Account">Lead Account</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <aura:if isTrue="{!v.AccountId !=null}">
+                                    <p class="slds-page-header__name-meta">{!v.Account.Name}</p>
+                                    <aura:set attribute="else">
+                                        <p class="slds-page-header__name-meta">Please create or associate an Account</p>
+                                    </aura:set>
+                                </aura:if> 
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End of Header--> 
+            <div style="height: 150px">
+                <lightning:datatable
+                                     keyField="id"
+                                     data="{! v.PossibleAccountsData }"
+                                     columns="{! v.PossibleAccountsColumns }"
+                                     onrowaction="{! c.handleRowAction }"
+                                     hideCheckboxColumn="true"/>
+            </div>
+            <!-- Neutral variant (default) -->
+            <div style="text-align:center;margin-top:20px;">
+                
+                <lightning:button label="Create New Account" title="Create Account" onclick="{! c.createAccount }"/>
+            </div>
+            
+            
+        </aura:set>
+    </aura:if>
+    <aura:if isTrue="{!v.AccountCreationModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Account</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning:recordEditForm aura:id="recordEditForm"
+                                              objectApiName="Account"
+                                              onload="{!c.handleRecordEditFormLoad}"
+                                              onsuccess="{!c.handleAccountCreationSuccess}"
+                                              recordTypeId="012410000012NOKAA2">
+                        <lightning:messages />
+                        <div class="slds-col slds-grid slds-wrap">
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="FirstName" value="{!v.leadForm.First_Name__c}" />
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="LastName" value="{!v.leadForm.Last_Name__c}" />
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="Phone" value="{!v.leadForm.Phone__c}" />
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="PersonEmail" value="{!v.leadForm.Email__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="Street__c" value="{!v.leadForm.Street__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="City__c" value="{!v.leadForm.City__c}"/>
+                            </div>
+                            <div style="position:abolute;z-index=100;" class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="State__c" value="{!v.leadForm.State__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                                <lightning:inputField fieldName="Zip__c" value="{!v.leadForm.Zip__c}"/>
+                            </div>
+                            
+                            <!-- This is the real County field and it's never displayed.
+								 Whenever the component with Aura ID of CountyInfo is updated, this component takes its value.
+								 When the form is submitted, this field's value (and not CountyInfo's value) is sent to Salesforce. -->
+                            <div class="not-rendered">
+                                <lightning:inputField aura:id="countyField" fieldName="County__c" />
+                            </div>
+                            <!-- This is an editable County field. Whenever its value is updated, component countyField's value is set to this component's.
+							     When the form is submitted, only countyField's value (and not this field's value) is sent to Salesforce.
+								 It's displayed only after the rest of the form has finished loading. -->
+                            <div class="{!v.renderCounty ? 'slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2' : 'not-rendered'}">
+                                <lightning:select aura:id="CountyInfo"
+                                                  name="CountyInfo"
+                                                  label="County"
+                                                  value="{!v.county}"
+                                                  onchange="{!c.handleCountyPicklistChange}">
+                                    <aura:renderIf isTrue="{!v.isLoadingCountyData == false}">
+                                        <aura:if isTrue="{!v.county == undefined || v.county == null || v.county == ''}">
+                                            <option value="" selected="selected">Select an option</option>
+                                            <aura:set attribute="else">
+                                                <option value="">Select an option</option>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:iteration items="{!v.countyData}" var="item">
+                                            <aura:if isTrue="{!v.county == item.value}">
+                                                <option value="{!item.value}" selected="selected">{!item.key}</option>
+                                                <aura:set attribute="else">
+                                                    <option value="{!item.value}">{!item.key}</option>
+                                                </aura:set>
+                                            </aura:if>
+                                        </aura:iteration>
+                                    </aura:renderIf>
+                                </lightning:select>
+                            </div>
+                            
+                            <div  style="margin-top:25px;" class="slds-col slds-size_12-of-12 slds-small-size--1-of-1 slds-medium-size--12-of-12 slds-large-size--12-of-12 slds-p-horizontal_x-small">
+                                <div style="display:flex;justify-content: center;">
+                                    <lightning:button label="Cancel" title="Cancel action" onclick="{! c.handleCancelAccountC }"/>
+                                    <lightning:button type="submit" variant="brand" label="Create new" />
+                                </div>
+                            </div>
+                        </div>
+                    </lightning:recordEditForm>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    
+    
+</aura:component>

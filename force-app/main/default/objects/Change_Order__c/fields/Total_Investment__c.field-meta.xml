@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Investment__c</fullName>
+    <externalId>false</externalId>
+    <label>Total Investment</label>
+    <summarizedField>Order_Item__c.Monthly_Investment__c</summarizedField>
+    <summaryFilterItems>
+        <field>Order_Item__c.Service_Check__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Order_Item__c.Change_Order__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

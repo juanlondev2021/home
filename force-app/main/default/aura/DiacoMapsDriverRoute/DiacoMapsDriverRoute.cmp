@@ -1,0 +1,117 @@
+<!--
+ * Diaco
+ * @author             Jeison Hernandez Sanchez
+ * Project:            Maps Delivery
+ * TestClass:          
+ * Description:        Aura Cmp - Site Lightning In 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    25/01/2020         Jull Quintero D         Initial implementation of the class.
+ *-->
+
+<aura:component controller="DiacoMapsDriverController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,lightning:isUrlAddressable"
+                access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute access="global" name="recordId" type="String" />    
+    <aura:attribute access="private" name="successA" type="Boolean" default='false'/>
+    <aura:attribute access="private" name="message" type="string"/>
+    <aura:attribute access="private" name="messagetype" type="Boolean" default='true'/>
+    <aura:attribute access="private" name="loaded" type="Boolean" />
+    <aura:attribute access="private" name="waypoint" type="maps__Waypoint__c" />
+    <aura:attribute access="private" name="Atype" type="Boolean" default='true'/>
+    <aura:attribute access="private" name="modal" type="Boolean" default="false"/>
+    <aura:attribute access="private" name="modalMessage" type="String"/>
+    <div class="slds-card slds-box">
+        <aura:if isTrue="{!v.loaded}">    
+            <div class="slds-align_absolute-center">
+                <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="medium"/>
+            </div>
+            <aura:set attribute="else">
+                <!-- HEADER-->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right">
+                        <lightning:layoutItem>
+                            <lightning:icon iconName="action:check" alternativeText="My Expenses"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="horizontal-small">
+                            <div class="page-section page-header">
+                                <h1 class="slds-text-heading--label">Routes</h1>
+                                <h2 class="slds-text-heading--medium">Start / Stop</h2>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <!--/HEADER -->
+                <aura:if isTrue="{!v.successA}">
+                    <aura:if isTrue="{!v.Atype}">
+                        <div style="margin-top:12px;" class='slds-col'>
+                            <lightning:button       
+                                              label="Start Route"
+                                              class="slds-align_absolute-center"
+                                              variant="brand"
+                                              iconName="utility:save" iconPosition="left"
+                                              onclick="{!c.handledUpdateType}"
+                                              />
+                        </div>
+                        <aura:set attribute="else">
+                            <div style="margin-top:12px;" class='slds-col'>
+                                <lightning:button       
+                                                  label="Stop Route"
+                                                  class="slds-align_absolute-center"
+                                                  variant="brand"
+                                                  iconName="utility:save" iconPosition="left"
+                                                  onclick="{!c.handledUpdateType}"
+                                                  />
+                            </div>
+                        </aura:set>
+                    </aura:if>
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!v.messagetype}">
+                            <div class="slds-modal__content slds-align_absolute-center" id="modal-content-id-1">
+                                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                                    <h2>{!v.message}</h2>
+                                </div>
+                            </div>
+                            <aura:set attribute="else">
+                                <div class="slds-modal__content slds-align_absolute-center" id="modal-content-id-1">
+                                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                                        <h2>{!v.message}</h2>
+                                    </div>
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>
+            </aura:set>
+        </aura:if>
+        <aura:if isTrue="{!v.modal}">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation.</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" style="max-weight: 700px; weight: 100%;" id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">{!v.modalMessage}</div>
+                        </div>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }" />
+                        <lightning:button variant="brand" label="Save" title="Save" onclick="{! c.handledUpdate}" />
+                    </footer>
+                </div>
+            </section>
+            <!--<div class="slds-backdrop slds-backdrop_open"></div>-->
+            <!--###### MODAL BOX Part END Here ######-->
+        </aura:if>
+    </div>
+</aura:component>

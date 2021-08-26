@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Express_Written_Consent</fullName>
+    <active>true</active>
+    <description>Custom Report Type</description>
+    <label>Express Written Consent</label>
+    <picklistValues>
+        <picklist>EBR_Type__c</picklist>
+        <values>
+            <fullName>Inquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Anticipated_Delivery_Start_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+ISBLANK(  Anticipated_Delivery_Start_Date__c  ),
+OR(
+ISPICKVAL(StageName, &quot;Gift Card Docusign Received&quot;),
+ISPICKVAL(StageName, &quot;Gift Card Initial Payment Received&quot;)))</errorConditionFormula>
+    <errorDisplayField>Anticipated_Delivery_Start_Date__c</errorDisplayField>
+    <errorMessage>Please Add the Anticipated Delivery Start Date on the opportunity</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arrow_To_Show__c</fullName>
+    <externalId>false</externalId>
+    <formula>If(ISPICKVAL( Priority__c  , &apos;Very Low&apos;), &apos;arrow down lowGreen&apos;, If(ISPICKVAL( Priority__c  , &apos;Low&apos;), &apos;arrow down green&apos;, If(ISPICKVAL( Priority__c  , &apos;Medium&apos;), &apos;arrow up yellow&apos;, If(ISPICKVAL( Priority__c  , &apos;High&apos;), &apos;arrow up orange&apos;, &apos;arrow up red&apos; ) )) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Arrow To Show</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

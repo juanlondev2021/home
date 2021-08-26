@@ -1,0 +1,300 @@
+<!-- It will diplay search option for searching person account from Bright Pattern console/popup -->
+
+<apex:page controller="BrightPatternSearchPopup_AC" tabStyle="Account" id="pg">
+    <apex:stylesheet value="{!URLFOR($Resource.nuHome_jQuery, '/tooltip.css')}" />
+    <style>
+        .btnclose {
+        border: 0;
+        display: block;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+        position: absolute;
+        top: -11px;
+        right: -14px;
+        }
+        .btnclose{
+        background: url("{!URLFOR($Resource.Close)}");
+        }
+        #popupWindow {
+        background-color: white;
+        border-style: solid;
+        border-width: 0px;
+        padding: 10px;
+        position: absolute;
+        z-index: 9999;
+        width: 60%;
+        left: 20%;
+        right: 20%;
+        display: none;
+        top: 200px;
+        border-radius: 10px;
+        }
+        
+        #popupModal {
+        display: none;
+        background-color: black;
+        opacity: 0.20;
+        filter: alpha(opacity=15);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        }
+        
+    </style>
+    <script>
+    function onKeyup_TxtFieldcom(e)
+    {
+        var keynum;
+        keynum = e.which;
+        if(window.event) // IE
+        {
+            keynum = e.keyCode;
+        }
+        
+        if(keynum == 13) 
+        { 
+            doSearch();
+            return false; 
+        } 
+    }
+    </script>
+    
+    
+    <apex:form id="frm">
+        
+        <apex:actionFunction action="{!searchAccount}" name="doSearch" rerender="frm" />
+        
+        
+        <apex:pagemessages id="errMsg"/>
+        
+        
+        <!-- Displaying Searching option ---------------------------------------------------->
+        
+        
+        <apex:pageblock >
+            <apex:pageblockbuttons >
+                <apex:commandbutton value="Search Account" onclick="return searchAccountjs();" rerender="frm" id="searchbtn" status="search">
+                    <apex:actionStatus id="search">
+                        <apex:facet name="start" >
+                            <apex:image url="/apexpages/devmode/img/saveStatus.gif" />                       
+                        </apex:facet>
+                        <apex:facet name="stop" >
+                        </apex:facet>
+                    </apex:actionStatus> 
+                </apex:commandbutton>
+            </apex:pageblockbuttons>
+            <apex:actionFunction name="searchAccountCall" action="{!SearchAccount}" rerender="frm" status="search"></apex:actionFunction>
+            <apex:pageblocksection columns="1" Title="Search Account" collapsible="false">
+                <apex:inputText value="{!Name}" label="Name"  onkeypress="return onKeyup_TxtFieldcom(event);"  styleClass="nameTip"/>
+                <apex:inputText value="{!phone}" label="Phone"  onkeypress="return onKeyup_TxtFieldcom(event);"  styleClass="phoneTip"/>
+                <apex:inputText value="{!scanCode}" label="Gift Card Number (or) Scan Code" onkeypress="return onKeyup_TxtFieldcom(event);" styleClass="scanCode"/>
+                <apex:inputText value="{!confirmationNumber}" label="Confirmation Number" onkeypress="return onKeyup_TxtFieldcom(event);" />
+                <apex:inputText value="{!streetNumber}" label="Street Number"  onkeypress="return onKeyup_TxtFieldcom(event);" styleClass="streetNumber"/>
+                <apex:inputText value="{!streetName}" label="Street Name" onkeypress="return onKeyup_TxtFieldcom(event);"/>
+                <apex:inputText value="{!city}" label="City" onkeypress="return onKeyup_TxtFieldcom(event);"/>
+                <!--  <apex:inputText value="{!state}" label="State" onkeypress="return onKeyup_TxtFieldcom(event);"/> -->
+                <apex:pageblocksectionitem > 
+                    <apex:outputlabel value="State"/>
+                    <apex:selectList value="{!state}" size="1" multiselect="false" styleClass="stateList">
+                        <apex:selectOptions value="{!States}" />
+                        
+                    </apex:selectList>
+                </apex:pageblocksectionitem>
+                
+                <apex:inputText value="{!zipCode}" label="Zip Code" styleClass="zipCode" onkeypress="return onKeyup_TxtFieldcom(event);"/>
+            </apex:pageblocksection>
+            <b>Note:</b> Adding additional criteria to the Search Account page, will return search results faster.
+        </apex:pageblock>
+        <!----------------------------------------------------------------------------------->
+        
+        
+        <!------------------------------ Search Result Display Section -------------------------------------->
+        
+        
+        
+        
+        
+        <apex:outputpanel id="ptable">
+            <br/><br/>
+            
+            
+            <apex:pageblock title="Results : {!total_size}" id="pb1" rendered="{!showSearchBlk}">
+                <apex:outputtext id="navlabel" value="Showing Page {!pageNumber} of {!totalPages}" /><br/><br/>
+                <apex:pageBlockButtons >
+                    <apex:outputPanel id="myButtons">
+                        <apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>
+                        <apex:commandButton action="{!Previous}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>        
+                        <apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>
+                        <apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="myPanel,myButtons,navlabel"  status="navStatus"/>        
+                        &nbsp;&nbsp;&nbsp;&nbsp;<apex:actionStatus id="navStatus" startText="Loading ..." stopText=""/>
+                        <apex:commandbutton value="Create New Person Account"  action="{!GotoAccCreatePage}" id="acc" />
+                        
+                    </apex:outputPanel>
+                </apex:pageBlockButtons>
+                
+                
+                
+                
+                <apex:outputPanel id="myPanel">
+                    <apex:pageblockTable value="{!userAddressList}" var="acc" >
+                        <apex:column >
+                            <apex:commandButton value="Update" onclick="updateAddresspopup();return false;" rendered="{!IF(acc.id == searchAccountId,True,False)}" status="noRefresh"/>
+                        </apex:column>
+                        <apex:column headervalue="Name">
+                            <!--    <apex:outputlink value="/apex/VerbalConsent_VF?id={!acc.id}&Didid={!Didid}&Campaign={!campaign}&stepid={!stepId}"> 
+{!acc.name} </apex:outputlink> -->
+                            
+                            
+                            
+                            
+                            <apex:commandLink value="{!acc.UserAccount__r.name}" action="{!ValidateSearchAccount}" reRender="myPanel,errMsg,addDet">
+                                <apex:param name="searchAccountId" value="{!acc.id}" assignTo="{!searchAccountId}" />
+                            </apex:commandLink>
+                        </apex:column>
+                        
+                        <apex:column headervalue="Scan Code"> {!acc.Scan_code__c} </apex:column> 
+                        <apex:column headervalue="Respond Date"> {!acc.Respond_Date__c} </apex:column>                        
+                        <apex:column headervalue="Mobile Phone"> {!acc.UserAccount__r.personmobilephone} </apex:column>
+                        <apex:column headervalue="Home Phone"> {!acc.UserAccount__r.PersonHomePhone} </apex:column>
+                        <apex:column headervalue="Other Phone"> {!acc.UserAccount__r.PersonOtherPhone}</apex:column>
+                        <apex:column headervalue="Street"> {!acc.address__r.Street__c}</apex:column>
+                        <apex:column headervalue="City"> {!acc.Address__r.City__c}</apex:column>
+                        <apex:column headervalue="State"> {!acc.address__r.State__c}</apex:column>
+                        <apex:column headervalue="Zip Code"> {!acc.address__r.Zip_Code__c}</apex:column>
+                        <apex:column headervalue="Email"> {!acc.UserAccount__r.PersonEmail}</apex:column>
+                    </apex:pageblockTable>
+                </apex:outputPanel> 
+                
+            </apex:pageblock>
+            <div id="popupWindow">
+                <apex:pageBlock mode="edit" title="Address Details" id="addDet">
+                    <apex:pageMessages ></apex:pageMessages>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton action="{!Validate}" reRender="err,confirmationBlock,addDet" value="Validate & Create Address" status="actStatusId"  rendered="{!!isConfirm}" />
+                        <apex:commandButton action="{!createAddress}" reRender="err,confirmationBlock,table,accountInfo,addDet" value="Create Address As It is" status="actStatusId" rendered="{!!isConfirm}" />
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection >
+                        <apex:inputField value="{!address.Country__c}"/>
+                        <apex:inputField value="{!address.Street__c}" />
+                        <apex:inputField value="{!address.State__c}" />  
+                        <apex:inputField value="{!address.City__c}" />
+                        <apex:inputField value="{!address.Zip_Code__c}" />
+                        <apex:inputField value="{!address.County__c}"/> 
+                    </apex:pageBlockSection>
+                    
+                </apex:pageBlock> 
+                <apex:outputPanel id="confirmationBlock">
+                    <apex:pageBlock rendered="{!isConfirm}" mode="edit" title="Confirm Address Details">               
+                        <apex:pageBlockSection columns="2">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel styleClass="labelFont" value="Line1"/> 
+                                <apex:outputText value="{!responseAddressWrap.Line1}"/>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel styleClass="labelFont" value="Line2"/> 
+                                <apex:outputText value="{!responseAddressWrap.Line2}"/>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel styleClass="labelFont" value="City"/> 
+                                <apex:outputText value="{!responseAddressWrap.City}"/>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel styleClass="labelFont" value="State"/> 
+                                <apex:outputText value="{!responseAddressWrap.State}"/>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel styleClass="labelFont" value="ZipCode"/> 
+                                <apex:outputText value="{!responseAddressWrap.Zip5}"/> 
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock><center>
+                    
+                    
+                    <apex:commandButton value="Save" action="{!saveAddress}" reRender="err,confirmationBlock,table,accountInfo,ptable" status="actStatusId" rendered="{!isConfirm}" />
+                    <apex:actionStatus id="actStatusId"> 
+                        <apex:facet name="start" > 
+                            <img src="/img/loading.gif" /> 
+                        </apex:facet> 
+                    </apex:actionStatus></center>
+                </apex:outputPanel>
+                <apex:actionFunction action="{!closePopup}" name="closePopupClear"/>
+                <input type="button" class="btnclose" onclick="popupClose();" />
+            </div>
+            <div id="popupModal">
+            </div>         
+        </apex:outputpanel>
+        <!------------------------------------------------------------------------------------------------------>
+        <apex:includeScript value="{!URLFOR($Resource.nuHome_jQuery, '/jquery-1.12.0.min.js')}"/>
+        <script>
+        $('.phoneTip').on('keypress', function(ev) {
+            var keyCode = window.event ? ev.keyCode : ev.which;
+            if($(this).val().length > 9)
+                ev.preventDefault();
+            //codes for 0-9
+            if (keyCode < 48 || keyCode > 57) {
+                //codes for backspace, delete, enter
+                if (keyCode != 0 && keyCode != 8 && keyCode != 13 && !ev.ctrlKey ) {
+                    ev.preventDefault();
+                }
+            }
+        });
+        function searchAccountjs(){
+            var phone = $('.phoneTip').val();
+            phone = phone.replace(/\D/g,"");
+            if(phone == '' || phone.length == 10){
+                searchAccountCall();
+                return true;
+            }
+            else{
+                alert('Invalid Phone.');
+                return false;
+            }
+        }
+        function updateAddresspopup(){
+            $('.message').hide();
+            $('#popupWindow').show();
+            $('#popupModal').show();
+        }
+        function popupClose(){
+            $('#popupWindow').hide();
+            $('#popupModal').hide();
+            closePopupClear();
+        } 
+        $(document).ready(function() {
+            $('.nameTip,.phoneTip,.scanCode,.streetNumber,.stateList,.zipCode').hover(function(){
+                var thisVar = $(this).attr('class');
+                if(thisVar == 'nameTip')
+                    title = 'Search by First Name, Last Name or Full Name';
+                if(thisVar == 'phoneTip')
+                    title = 'Phone Number should be 10 digit';
+                if(thisVar == 'scanCode')
+                    title = 'Scan code should have spaces between the numbers like "0640 0316 0000 0140"';
+                if(thisVar == 'streetNumber')
+                    title = ' Street number should be like “4505”, “4112”';
+                if(thisVar == 'stateList')
+                    title = 'Select State';
+                if(thisVar == 'zipCode')
+                    title = 'Zipcode should be 5 digit';
+                $(this).data('tipText', title).removeAttr('title');
+                $('<p class="tooltip"></p>')
+                .text(title)
+                .appendTo('body')
+                .fadeIn('slow');
+            }, function() {
+                $(this).attr('title', $(this).data('tipText'));
+                $('.tooltip').remove();
+            }).mousemove(function(e) {
+                var mousex = e.pageX + 20;
+                var mousey = e.pageY + 10;
+                $('.tooltip')
+                .css({ top: mousey, left: mousex })
+            });
+        }); 
+        </script>
+    </apex:form>  
+    
+</apex:page>

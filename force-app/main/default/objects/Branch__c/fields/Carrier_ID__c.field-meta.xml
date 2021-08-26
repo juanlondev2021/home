@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Carrier_ID__c</fullName>
+    <description>It holds the career code for the branch.This code will be used to send to the outbound call of the delivery object</description>
+    <externalId>false</externalId>
+    <label>Carrier ID</label>
+    <length>100</length>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

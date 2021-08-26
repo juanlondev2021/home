@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CabinetsColor__c</fullName>
+    <description>And would you like Beautiful Wood Cabinets or a Solid Color?</description>
+    <externalId>false</externalId>
+    <label>And would you like Beautiful Wood Cabine</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Wood Cabinets.</fullName>
+                <default>false</default>
+                <label>Wood Cabinets.</label>
+            </value>
+            <value>
+                <fullName>Solid Color Cabinets.</fullName>
+                <default>false</default>
+                <label>Solid Color Cabinets.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Restaurant_com_fulfillment_email</fullName>
+        <description>Restaurant.com fulfillment email</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>All/Restaurant_com_fulfillment</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>PopulateExternalId</fullName>
+        <field>External_ID__c</field>
+        <formula>CASESAFEID(Id)</formula>
+        <name>PopulateExternalId</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>R_com_email_sent_Update</fullName>
+        <field>r_com_offer_sent__c</field>
+        <literalValue>1</literalValue>
+        <name>R.com email sent: Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_0_7_Days_Field_Update</fullName>
+        <description>It will update Dialer Campaign filed value</description>
+        <field>Dialer_Campaign__c</field>
+        <literalValue>0-7 Days</literalValue>
+        <name>UA: 0-7 Days Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_30_60_Dialer_Campaign_Field_Update</fullName>
+        <description>It will update Dialer Campaign filed</description>
+        <field>Dialer_Campaign__c</field>
+        <literalValue>31-60 Days</literalValue>
+        <name>UA: 30-60 Dialer Campaign Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_61_90_Dialer_Campaign_Field_Update</fullName>
+        <description>It will update Dialer Campaign filed value</description>
+        <field>Dialer_Campaign__c</field>
+        <literalValue>61-90 Days</literalValue>
+        <name>UA: 61-90 Dialer Campaign Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_8_29_Dialer_Campaign_Field_Update</fullName>
+        <description>It Will update the Dialer Campaign field</description>
+        <field>Dialer_Campaign__c</field>
+        <literalValue>8-29 Days</literalValue>
+        <name>UA: 8-29 Dialer Campaign Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_Dailer_Status_Ready_Field_Update</fullName>
+        <description>It will update the Dialer Campaign Status to Ready</description>
+        <field>Dialer_Campaign_Status__c</field>
+        <literalValue>Ready</literalValue>
+        <name>UA: Dailer Status Ready Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_Dialer_Do_Not_Call</fullName>
+        <description>It will update Dialer Campaign Status as DO Not Call</description>
+        <field>Dialer_Campaign_Status__c</field>
+        <literalValue>Do Not Call</literalValue>
+        <name>UA: Dialer Do Not Call</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_Dialer_Status_Cleared_Field_Update</fullName>
+        <description>It will clear the Dialer Campaign Status filed value</description>
+        <field>Dialer_Campaign_Status__c</field>
+        <name>UA: Dialer Status Cleared Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_InsertUserID_Field_Update</fullName>
+        <description>It will update User ID Who Captured Phone field value</description>
+        <field>User_Id_Who_Captured_Consent__c</field>
+        <formula>$User.Id</formula>
+        <name>UA: InsertUserID Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>UserAccount__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_Phone_Collected_Field_Update</fullName>
+        <description>It will update the Account Phone Captured filed value</description>
+        <field>Phone_Captured__c</field>
+        <literalValue>1</literalValue>
+        <name>UA: Phone Collected Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>UserAccount__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UA_Postgrading_Dialer_Campaign_Update</fullName>
+        <description>It will update the Dialer Campaign field value</description>
+        <field>Dialer_Campaign__c</field>
+        <literalValue>Postgrading</literalValue>
+        <name>UA: Postgrading Dialer Campaign Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>ExternalIDPopulation</fullName>
+        <actions>
+            <name>PopulateExternalId</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.External_ID__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Restaurant%2Ecom fulfillment email</fullName>
+        <actions>
+            <name>Restaurant_com_fulfillment_email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>R_com_email_sent_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.r_com_offer_qualified__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.r_com_offer_qualifying_user__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.r_com_offer_sent__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.fEmail__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>User Address %3A Dialer Campaign 8-29 Finished</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign__c</field>
+            <operation>equals</operation>
+            <value>8-29 Days</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Ready,Processing,Do Not Call</value>
+        </criteriaItems>
+        <description>This workflow for update the Dialer Campaign &amp; Dialer Campaign Status</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>UA_30_60_Dialer_Campaign_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>UA_Dailer_Status_Ready_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>23</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>User Address %3A Do Not Call</fullName>
+        <actions>
+            <name>UA_Dialer_Do_Not_Call</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.DNC__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>When this rule triggered it will update the field</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>User Address%3A Dialer Campaign 0-7 Finished</fullName>
+        <actions>
+            <name>UA_8_29_Dialer_Campaign_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>UA_Dialer_Status_Cleared_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign__c</field>
+            <operation>equals</operation>
+            <value>0-7 Days</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Ready,Processing,Do Not Call</value>
+        </criteriaItems>
+        <description>This workflow will update the fields based on the conditions</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>UA_Dailer_Status_Ready_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>User Address%3A Dialer Campaign 0-7 Start</fullName>
+        <actions>
+            <name>UA_0_7_Days_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>UA_Dialer_Status_Cleared_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Phone</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.DNC__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>This workflow for update the Dialer Campaign &amp; Dialer Campaign Status</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>UA_Dailer_Status_Ready_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>18</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>User Address%3A Dialer Campaign 31-60 Finished</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign__c</field>
+            <operation>equals</operation>
+            <value>31-60 Days</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Ready,Processing,Do Not Call</value>
+        </criteriaItems>
+        <description>This workflow for update the Dialer Campaign &amp; Dialer Campaign Status</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>UA_61_90_Dialer_Campaign_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>UA_Dailer_Status_Ready_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>User Address%3A Dialer Campaign 61-90 %2F Postgrading Finished</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign__c</field>
+            <operation>equals</operation>
+            <value>61-90 Days</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User_Address__c.Dialer_Campaign_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Ready,Processing,Do Not Call</value>
+        </criteriaItems>
+        <description>This workflow for update the Dialer Campaign &amp; Dialer Campaign Status</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>UA_Dailer_Status_Ready_Field_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>UA_Postgrading_Dialer_Campaign_Update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>User Address%3A Phone Captured</fullName>
+        <actions>
+            <name>UA_Phone_Collected_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.Respond_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>User Address%3A Phone Collected</fullName>
+        <actions>
+            <name>UA_InsertUserID_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User_Address__c.Respond_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow for update the User ID Who Captured Phone</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

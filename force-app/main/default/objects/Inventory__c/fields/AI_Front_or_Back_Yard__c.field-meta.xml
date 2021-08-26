@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_Front_or_Back_Yard__c</fullName>
+    <description>(Synthetic Grass or Putting Green)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Synthetic Grass or Putting Green)</inlineHelpText>
+    <label>Front or Back Yard</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Synthetic Grass/Putting Green - Front Yard</fullName>
+                <default>false</default>
+                <label>Synthetic Grass/Putting Green - Front Yard</label>
+            </value>
+            <value>
+                <fullName>Synthetic Grass/Putting Green - Back Yard</fullName>
+                <default>false</default>
+                <label>Synthetic Grass/Putting Green - Back Yard</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

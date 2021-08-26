@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fTotal_Card_Count__c</fullName>
+    <externalId>false</externalId>
+    <formula>Active_Card_Count__c + Approved_Card_Count_Not_Ordered__c + Ordered_Card_Count_not_Active__c + Sold_Card_Count_not_Approved__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fTotal Card Count</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Application__c</fullName>
+    <description>Type of application for SRP contracts. Please avoid using semicolons in option labels or values.</description>
+    <externalId>false</externalId>
+    <label>Type of Application</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Purchase</fullName>
+                <default>true</default>
+                <label>Purchase</label>
+            </value>
+            <value>
+                <fullName>Lease</fullName>
+                <default>false</default>
+                <label>Lease</label>
+            </value>
+            <value>
+                <fullName>New Home Construction</fullName>
+                <default>false</default>
+                <label>New Home Construction</label>
+            </value>
+            <value>
+                <fullName>Remove / Reinstall</fullName>
+                <default>false</default>
+                <label>Remove / Reinstall</label>
+            </value>
+            <value>
+                <fullName>Rental</fullName>
+                <default>false</default>
+                <label>Rental</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

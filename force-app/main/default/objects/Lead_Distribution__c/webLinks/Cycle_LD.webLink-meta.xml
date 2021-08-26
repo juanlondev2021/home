@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cycle_LD</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Cycle LD</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>var cycleLead_Distribution__c = {!GETRECORDIDS( $ObjectType.Lead_Distribution__c )};
+
+if(cycleLead_Distribution__c.length &gt;= 1){
+   localStorage[&apos;CycleLead_Distribution__c&apos;] = cycleLead_Distribution__c;
+   location.replace(&apos;/&apos; + cycleLead_Distribution__c[0]);
+}</url>
+</WebLink>

@@ -1,0 +1,137 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Delivery Driver
+ * Description:        Maps Cmp Salesforce 1 - list Routes
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    26/02/2021         Jull Quintero D         Initial implementation of the class.
+ *-->
+
+<aura:component controller = 'MapsDeliveryDriverController'
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />   
+    <aura:attribute name="loaded" type="Boolean" default="true"/>
+
+    <aura:attribute name="driver" type="string" access="private"/>
+    <aura:attribute name="routes" type="maps__Route__c[]" access="private"/>
+    <aura:attribute name="allWaypoints" type="maps__Waypoint__c[]" access="private"/>
+    <aura:attribute name="route" type="maps__Route__c" access="global"/>
+
+    <!-- Hung Status Picklist-->
+    <aura:attribute access="private" name="Hung_Status__c" type="list" />
+
+    <!-- Messages -->
+    <aura:attribute name="issuccess" type="Boolean" default="true" access="private" />
+    <aura:attribute name="message" type="String" access="private" />
+
+    <!-- modal open route -->
+    <aura:attribute name="openRoute" type="Boolean" default="false" access="private"/>
+
+    <div class="slds-card">
+
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner />
+        </aura:if>
+
+        <!-- HEADER -->
+        <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="utility:travel_and_places" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header ">
+                    <h2 class="slds-text-heading--medium">Delivery Driver</h2>
+                    <h1 class="field-title slds-text-title_caps">
+                        {!v.driver}
+                    </h1>
+                </div>
+            </lightning:layoutItem>
+
+            <aura:if isTrue="{! v.openRoute }">
+                <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                    <lightning:buttonIcon iconName="utility:back" variant="bare" size="large" alternativeText="Back" iconClass="dark" title="Back" onclick="{!c.closeRoute}"/>
+                </lightning:layoutItem>
+            </aura:if>
+
+        </lightning:layout>
+        <!-- /HEADER -->
+        
+        <aura:if isTrue="{! v.issuccess }">
+            
+            <aura:if isTrue="{!v.openRoute}">
+        
+                <!-- OPEN ROUTE -->
+                <c:MapsDeliveryDriver_Route aura:id="cmpRoute" route="{!v.route}" Hung_Status__c="{!v.Hung_Status__c}"/>
+                <!-- OPEN ROUTE -->
+        
+                <!-- ROUTES -->
+                <aura:set attribute="else">
+                    
+                    <aura:iteration items="{!v.allWaypoints}" var="point">
+                        <force:recordData   aura:id="pointRecord"
+                                            recordId="{!point.Id}"
+                                              fields="Id,Name,Checkout__c,Checking__c,Hung_Status__c,Delivery_Driver_Latitude__c,Delivery_Driver_Longitude__c,
+                                                      Maps_Delivery_Driver__c,Hung_Date_Time__c"                                                 mode="EDIT"/>
+
+                    </aura:iteration>  
+
+                    <div class="slds-grid slds-wrap slds-p-left_large slds-p-right_large" >
+                        <aura:iteration items="{!v.routes}" var="route">
+        
+                            <force:recordData   
+                                    aura:id="routeRecord"
+                                    recordId="{! route.Id }"
+                                    fields="Name,Start__c,Stop__c,maps__Date__c"                                     
+                                    mode="EDIT"/>
+
+                            <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-4 slds-medium-size--1-of-6 slds-large-size--1-of-8">            
+                                <fieldset class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-visual-picker slds-visual-picker_small">
+                                            <input type="checkbox" id="{!route.Id}" value="{!route.Name}" name="options" onchange="{!c.selectRoute}" />
+                                            <label for="{!route.Id}">
+                                                <span class="slds-visual-picker__figure slds-visual-picker__icon slds-align_absolute-center">
+                                                    <span class="slds-is-selected">
+                                                        <span class="slds-icon_container">
+                                                            <lightning:icon iconName="utility:monthlyview" alternativeText="{! route.Name }" title="{! route.Name }" />
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-is-not-selected">
+                                                        <span class="slds-icon_container">
+                                                            <lightning:icon iconName="utility:monthlyview" alternativeText="{! route.Name }" title="{! route.Name }" />
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                <span class="slds-visual-picker__body">
+                                                    <span class="slds-text-title">{!route.Name}</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </aura:set>
+                <!-- /ROUTES -->
+        
+            </aura:if>  
+
+            <aura:set attribute="else">
+                <div class="slds-modal__content" id="modal-content-id-1">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                        <h2> {!v.message} </h2>
+                    </div>
+                </div>
+            </aura:set>
+
+        </aura:if>
+
+    </div>
+
+</aura:component>

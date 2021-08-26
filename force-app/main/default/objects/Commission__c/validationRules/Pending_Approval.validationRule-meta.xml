@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_Approval</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Commission_Status__c, &quot;Pending&quot;) &amp;&amp;
+Approved__c</errorConditionFormula>
+    <errorDisplayField>Approved__c</errorDisplayField>
+    <errorMessage>Commission Status must be Pending Approval to change it to Approved</errorMessage>
+</ValidationRule>

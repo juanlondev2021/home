@@ -1,0 +1,78 @@
+<!--
+* Diaco
+* Project:			Site Home Service Flow
+* Description:		Site Tab home service Lightning Out
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		12/10/2020		Jull Quintero            Initial implementation of the class.
+-->
+
+<aura:component>
+    <aura:method name="init" action="{!c.doInit}" />   
+
+    <aura:attribute name="recordsType" type="List" description="RECORD TYPES APPOINTMENT"/>
+    <aura:attribute name="account" type="Account" required="true" description="Account Home service current"/>
+    <aura:attribute name="assiged" type="Boolean" default="false" required="true" description="FILTER APPOINTMENT FOR assigned__C"/>
+
+    <!-- DATA TABLE -->
+    <aura:attribute name="data" type="list" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="selectRowId" type="Object" description="ROW SELECT DATA TABLE"/>
+
+    <!-- OPEN MODAL EDIT APPOINTMENT-->
+    <aura:attribute name="editAppointment" type="Boolean" default="false"/>
+    <aura:attribute name="appoinmType" type="Object" />
+
+
+    <aura:registerEvent name="refresh" type="c:DiacoEventHomeServicesFlow" />
+
+    <!-- HEADER -->
+    <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--large">
+
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:service_appointment_capacity_usage" class="blackOnGreen"/>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header ">
+                <h1 class="slds-text-heading--label">Appointment</h1>
+                <h2 class="slds-text-heading--medium">List</h2>
+            </div>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem  alignmentBump="left" padding="horizontal-small">
+            <lightning:input    type="toggle" 
+                                label="View appointments Assigned ?" 
+                                checked="{!v.assiged}"
+                                onchange="{!c.handlerViewAssign}"/>           
+        </lightning:layoutItem>
+
+
+    </lightning:layout>
+    <!-- /HEADER -->
+    
+    <!-- DATA TABLE -->
+    <div class="slds-col slds-size_12-of-12 slds-scrollable_y">
+        <aura:if isTrue="{!v.data.length > 0 }">
+            <lightning:datatable    keyField="Id" 
+                                    data="{! v.data }" 
+                                    onrowaction="{! c.handleRowAction }"
+                                    columns="{! v.columns }" 
+                                    hideCheckboxColumn="true" />
+        </aura:if>
+    </div>
+    <!-- /DATA TABLE -->
+
+    <!-- MODAL EDIT APPOINTMENT-->
+    <c:SiteHomeServicesFlow_EditApptmt     open="{!v.editAppointment}" 
+                                            appointmentId="{!v.selectRowId}"
+                                            account="{!v.account}"
+                                            appoinmType="{!v.appoinmType}"/>
+
+    <!-- /MODAL NEW APPOINTMENT-->
+
+
+</aura:component>

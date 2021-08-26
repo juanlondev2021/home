@@ -1,0 +1,20 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water contract product list component
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		09/03/2019		Jorge Martinez (JM)		Initial implementation of the component.
+-->
+<aura:component>
+    <aura:attribute name="LineItemProduct" type="Line_Item__c[]" />
+    <aura:attribute name="isUpdate" type="boolean" default="false"/>
+    
+    <aura:iteration items="{!v.LineItemProduct}" var="lineitem">
+        <c:diacoContractProduct lineitem="{!lineitem}" isUpdate="{!v.isUpdate}"/>
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vendor_Complaint_i_e_ADT_RPM_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Vendor Complaint (i.e. ADT, RPM)</label>
+    <queue>Vendor_Complaint_i_e_ADT_RPM</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

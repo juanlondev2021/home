@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fDelivery_XML_In__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Delivery_File__c),&apos;&apos;,
+IF(CONTAINS(Delivery_File__c,&apos;/xml/&apos;), HYPERLINK($Setup.Delivery_BaseURL_Setting__c.Base_Url__c+ &apos;/user/&apos;+fLead_Id__c +&apos;/delivery/&apos;+ Name +&apos;/&apos;+RIGHT (Delivery_File__c, LEN(Delivery_File__c)-(FIND(&quot;/xml/&quot;,Delivery_File__c)+4)),RIGHT (Delivery_File__c, LEN(Delivery_File__c)-(FIND(&quot;/xml/&quot;,Delivery_File__c)+4))),
+IF(CONTAINS(Delivery_File__c,&apos;/&apos;),$Setup.Delivery_BaseURL_Setting__c.Base_Url__c +&apos;/user/&apos;+ RIGHT (Delivery_File__c, LEN(Delivery_File__c)-FIND(&quot;/&quot;,Delivery_File__c)),
+HYPERLINK($Setup.Delivery_BaseURL_Setting__c.Base_Url__c+ &apos;/user/&apos;+fLead_Id__c +&apos;/delivery/&apos;+ Name+&apos;/&apos;+Delivery_File__c,Delivery_File__c)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fDelivery XML In</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

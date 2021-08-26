@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OB_Report__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Appt_Verification__c, &quot;&quot;), &quot;Needs Verification&quot;, 
+  IF(ISPICKVAL(Appt_Verification__c, &quot;Rejected&quot;), IF( Rejected_New_Created__c ,&quot;Rejected:New Created&quot;,IF(OR(ISPICKVAL( Rejected_Status__c ,&quot;&quot;), ISPICKVAL(Rejected_Status__c, &quot;Not Fixed&quot;)) ,&quot;Rejected&quot;,&quot;Rejected:Lost&quot;)), 
+    IF(ISPICKVAL(Appt_Verification__c, &quot;Approved&quot;), IF(OR( AND(NOT(ISBLANK( idCPL_Billing_Opportunity__c )),NOT(ISBLANK( Missing_info__c )),NOT( Boberdoo_Applicable__c )), ISBLANK( idCPL_Billing_Opportunity__c )  ,  CONTAINS(fBilling_Opp_Account__c, &quot;nuHome&quot;))  , &quot;Need A Pro&quot;,  IF(  ISPICKVAL( Distribution_Status__c , &quot;Lead Distributed&quot;)  , &quot;Distributed&quot;, &quot;Approved&quot;) ),&quot;Needs Verification&quot;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>OB Report</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

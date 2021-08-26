@@ -1,0 +1,26 @@
+<!--
+/**
+ * Diaco
+ * @author 			Fabian Pineda href=<fpineda@diaco.us>
+ * Project:			Appointments
+ * Description:		Flow component. Renders a Record Type-dependent/restricted picklist. Returns selected value as output variable.
+ *
+ * Changes (Version)
+ * _________________________________________
+ *			No.		Date			Author					Description
+ *			____	__________		__________________  	_____________________________________
+ * @version	1.0		2020/08/14		Fabian Pineda (FP)		Initial version.
+ **/
+-->
+<aura:component implements="lightning:availableForFlowScreens">
+	<aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="picklistName" type="String" />
+    
+    <aura:attribute name="output" type="String" />
+    
+    <lightning:recordEditForm objectApiName="{!v.sObjectName}" recordTypeId="{!v.recordTypeId}" density="comfy">
+        <lightning:messages />
+        <lightning:inputField fieldName="{!v.picklistName}" onchange="{!c.updateOutputVariable}" />
+    </lightning:recordEditForm>
+</aura:component>

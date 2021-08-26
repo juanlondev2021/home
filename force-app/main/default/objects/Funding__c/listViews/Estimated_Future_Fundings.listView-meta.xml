@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estimated_Future_Fundings</fullName>
+    <columns>NAME</columns>
+    <columns>Funding_Status__c</columns>
+    <columns>Estimated_Funding_Date__c</columns>
+    <columns>Payment_Amount__c</columns>
+    <columns>Installation__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Funding_Status__c</field>
+        <operation>notEqual</operation>
+        <value>Paid,Reversed</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>notContain</operation>
+        <value>Test</value>
+    </filters>
+    <label>Estimated Future Fundings</label>
+</ListView>

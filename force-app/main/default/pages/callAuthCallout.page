@@ -1,0 +1,20 @@
+<apex:page standardController="Account" extensions="AuthCalloutvf" >
+<apex:form >
+<apex:outputPanel >
+  <apex:pageBlock title="Choose Contacts">
+  <apex:pageBlockButtons location="bottom" >
+  <apex:commandButton value="Request Payment Info" action="{!senddoc}" />
+  </apex:pageBlockButtons>
+  <apex:outputfield value="{!Account.Id}" id="ParentAccountId" rendered="false"/>
+      <apex:pageBlockTable value="{!acclist}" var="acc">
+      <apex:column >
+      <apex:inputCheckbox value="{!acc.selectedAccount}"/>
+      </apex:column>
+      <apex:column value="{!acc.accountins.name}"/>
+      <apex:column value="{!acc.accountins.email}"/>
+      </apex:pageBlockTable>
+  </apex:pageBlock>
+  {!displayError}
+  </apex:outputPanel>
+  </apex:form>
+</apex:page>

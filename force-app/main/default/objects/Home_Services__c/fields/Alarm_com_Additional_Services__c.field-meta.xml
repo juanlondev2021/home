@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alarm_com_Additional_Services__c</fullName>
+    <externalId>false</externalId>
+    <label>Alarm.com Additional Services</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Weather to Panel</fullName>
+                <default>false</default>
+                <label>Weather to Panel</label>
+            </value>
+            <value>
+                <fullName>Severe Weather Alerts</fullName>
+                <default>false</default>
+                <label>Severe Weather Alerts</label>
+            </value>
+            <value>
+                <fullName>Lock Service</fullName>
+                <default>false</default>
+                <label>Lock Service</label>
+            </value>
+            <value>
+                <fullName>Thermostat Service</fullName>
+                <default>false</default>
+                <label>Thermostat Service</label>
+            </value>
+            <value>
+                <fullName>Lights Service</fullName>
+                <default>false</default>
+                <label>Lights Service</label>
+            </value>
+            <value>
+                <fullName>Doorbell Camera</fullName>
+                <default>false</default>
+                <label>Doorbell Camera</label>
+            </value>
+            <value>
+                <fullName>Garage Door Control</fullName>
+                <default>false</default>
+                <label>Garage Door Control</label>
+            </value>
+            <value>
+                <fullName>Lift Master Integration</fullName>
+                <default>false</default>
+                <label>Lift Master Integration</label>
+            </value>
+            <value>
+                <fullName>Two-Way Voice</fullName>
+                <default>false</default>
+                <label>Two-Way Voice</label>
+            </value>
+            <value>
+                <fullName>Pro Video 3-4 Cameras</fullName>
+                <default>false</default>
+                <label>Pro Video 3-4 Cameras</label>
+            </value>
+            <value>
+                <fullName>Pro Video Plus 5-8 Cameras</fullName>
+                <default>false</default>
+                <label>Pro Video Plus 5-8 Cameras</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

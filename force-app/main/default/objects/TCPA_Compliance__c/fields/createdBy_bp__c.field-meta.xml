@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>createdBy_bp__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Check box used to identify the EBR Record Type for the TCPA Compliance Object</description>
+    <externalId>false</externalId>
+    <label>createdBy(bp)</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

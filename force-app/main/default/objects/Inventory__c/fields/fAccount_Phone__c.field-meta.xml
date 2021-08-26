@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fAccount_Phone__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(User_Address__r.Phone__c), IF(ISBLANK( User_Address__r.UserAccount__r.PersonContact.Phone ), IF(ISBLANK(  User_Address__r.PersonMobilePhone__c  ), User_Address__r.UserAccount__r.PersonContact.MobilePhone ,User_Address__r.PersonMobilePhone__c), User_Address__r.UserAccount__r.PersonContact.Phone ),User_Address__r.Phone__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fAccount Phone</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

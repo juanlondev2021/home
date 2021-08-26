@@ -1,0 +1,33 @@
+
+.recordTypeChooser{
+    Display:none;
+}
+.pbSubheader {
+    background: #E2E7EF!important;
+    border-top: 1px solid white!important;
+    color: black!important;
+}
+.caseCreater{
+    Display:none;
+}
+.center{
+    width:100%;
+    text-align:center;
+}
+.chosenRecordType{
+    margin-top: 0px;
+}
+.txtarea{
+    width: 340px;
+    height: 70px;
+}
+.tooltip {
+    display:none;
+    position:absolute;
+    border:1px solid #333;
+    background-color:#161616;
+    border-radius:5px;
+    padding:10px;
+    color:#fff;
+    font-size:12px Arial;
+} 

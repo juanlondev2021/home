@@ -1,0 +1,118 @@
+<aura:component >
+    
+    <aura:attribute name="deviceId" type="ID" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="site" type="DiacoAlarm__DiacoSiteAvantguard__c"/>
+    <aura:attribute name="isUpdate" type="boolean" default="false"/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    
+    <!--Use "slds-m-around_xx-large" class to add standard X-Large padding to the component--> 
+    <div class="slds-m-around_xx-large">
+        <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+        <aura:if isTrue="{!v.isOpen}">
+            
+            <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" 
+                     class="slds-modal slds-fade-in-open " 
+                     >
+                <div class="slds-modal__container" >
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Device</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+						<lightning:recordEditForm
+                                                  Aura:id="recordForm"
+                                                  recordId="{!v.deviceId == null?'':v.deviceId}"
+                                                  onload="{!c.handleLoad}"
+                                                  onsubmit="{!c.handleSubmit}"
+                                                  onsuccess="{!c.handleSuccess}"
+                                                  onerror="{!c.handleError}"
+                                                  objectApiName="DiacoAlarm__DiacoDevice__c">
+                            <lightning:messages />
+                            <div class="slds-form-element slds-form-element_horizontal">
+                                <div class="slds-grid slds-wrap slds-m-top_small container-box">
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="Name" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium slds-hide">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoCustomerAlarm__c" value="{!v.recordId}" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoDeviceId__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacowebSiteDeviceName__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoGroupName__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoInstallDate__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoMaintainDate__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoStatusDate__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoPartition__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoMonitoredForNormalActivity__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__Diacostatus__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoDeviceType__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacononReportingFlag__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoManufacturerSpecificInfo__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoIsSecondaryLoop__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoisExistingEquipment__c" readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoZWaveManufacturer__c " readonly="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_12-of-12 slds-m-bottom_medium">
+                                        <lightning:inputField fieldName="DiacoAlarm__DiacoMac__c" readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning:recordEditForm>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModel }"/>
+                        <!--lightning:button variant="brand" 
+                                          onclick="{! c.submitForm }"
+                                          label="{!v.deviceId == null ? 'Create' : 'Update'}"
+                                          title="{!v.deviceId == null ? 'Create' : 'Update'}"/-->
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+        </aura:if>
+    </div>
+	
+</aura:component>

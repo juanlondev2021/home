@@ -1,0 +1,370 @@
+<!-- This vf page is detail page Door Tag Script(Door_Tag_Script__c). If User wants to update Door_Tag_Script__c details, they can update
+   the details using [Edit] button -->
+<apex:page standardController="Door_Tag_Script__c" extensions="nuHome_DTS_View_AC">
+ <apex:pageMessages />
+    <apex:form >
+ <head>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <style>
+         h2.ch2{
+         display:block;
+         padding:20px;
+         }
+         label{
+         padding-left:20px;
+         text-align:left;
+         }
+         hr{
+         color:grey;
+         }
+        .ch2i{
+            font-style: italic;
+            font-weight: bolder;
+            padding: 10px 0px 10px 0px;
+            display: block;
+            }
+            .ch2top{
+            padding: 10px 0px 10px 0px;
+            font-weight:bolder;
+            display: block;
+            } 
+     .sectionHeaderRed{
+            text-align: center;
+            color: red;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 20px;
+            }
+            
+            .sectionHeaderblack{
+            text-align: center;
+            color: black;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 20px;
+            }
+            .sectionSubHeader{
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+            }
+            .sectionSubHeaderBlue{
+            color:blue;
+            }
+            hr {
+            color: grey;
+            border-bottom: 2px solid grey;
+            }
+            .highlightYellow{
+            background:yellow;
+            }
+             .customUL li{
+            padding-bottom: 10px;
+            }
+            .padding10{
+            padding:10px!important;
+            }
+     .customlabeldiv{
+           font-weight: bold;
+           color: #4a4a56;
+           padding: 20px 20px 20px 0px;
+       }
+        .blackfont{
+            color:#000;
+            }
+      </style>
+   </head>
+   
+     <apex:PageBlock rendered="{!displayDTS == True}" >
+           <apex:pageblockbuttons >
+              <apex:commandbutton value="Edit" action="{!Edit}" />
+           </apex:pageblockbuttons>
+         <div id="progressBar">
+            <div></div>
+         </div>
+         <br/>
+         <apex:pageBlockSection columns="1"  title="{!IF(outboundFlag,'Outbound TM Script','Inbound TM Script')}">
+                <apex:outputText label="Is this Mr./Mrs. ?" />
+                
+                <apex:outputText label="Account Name">
+                    <apex:outputLink value="/{!masterAcc.Id}">{!masterAcc.Name}</apex:outputLink>
+                </apex:outputText>
+                <apex:outputText label="User Address">
+                    <apex:outputLink value="/{!Door_Tag_Script__c.User_Address__c}">{!userAddrerss.name}</apex:outputLink>
+                </apex:outputText>
+                
+                <apex:outputField value="{!address.Street__c}" label="Primary Shipping Street"/>
+                <apex:outputField value="{!address.City__c}" label="Primary Shipping City"/>
+                <apex:outputField value="{!address.State__c}" label="Primary Shipping State"/>
+                <apex:outputField value="{!address.Country__c}" label="Primary Shipping Country"/>
+                <apex:outputField value="{!address.Zip_Code__c}" label="Primary Shipping Zip Code"/>
+                <apex:outputField value="{!address.Zip_Plus_Four__c}" label="Zip Plus Four"/>
+                <apex:outputField value="{!address.County__c}" label="County"/>
+                <apex:outputField value="{!address.County__c}" label="Primary Shipping Country"/>
+                <apex:outputField value="{!masterAcc.Phone}" label="Phone"/>
+                <apex:outputField value="{!masterAcc.PersonMobilePhone}" label="Mobile"/>
+
+          <!-- For the new outbound script v3 OCT 19 -->
+                <apex:outputpanel rendered="{!outboundFlag}">
+                    <apex:pageBlockSection columns="1" title="{!DTSVerbiage.ConfirmEmailSectionTitle__c}" collapsible="false">
+                        <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.OutboundAgentSection1__c}" escape="false" label="" rendered="{!DTSVerbiage.OutboundAgentSection1__c != ''}"></apex:outputText>
+                        <apex:repeat value="{!DTSQuestionsOutbound}" var="DTStetr">
+                            <div>
+                                {!DTStetr.Question_Pretext__c}
+                            </div>
+                            <apex:pageblocksectionitem >
+                                <apex:outputLabel >{!DTStetr.Question__c}</apex:outputLabel>
+                                <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                            </apex:pageblocksectionitem>
+                        </apex:repeat>
+                    
+
+                    <apex:pageblocksectionitem rendered="{!yearBuilt != Null}">
+                        <apex:outputLabel >What year was it Built?</apex:outputLabel>
+                        <apex:outputtext value="{!yearBuilt}" label=""/>
+                    </apex:pageblocksectionitem>
+                    </apex:pageBlockSection>
+
+                    </apex:outputpanel>
+
+               <h2 class="ch2">{!DTSVerbiage.GiftBoxConfirmationQuestion__c}</h2>
+               <apex:outputField value="{!Door_Tag_Script__c.Box_Confirmation__c}" label="Did you receive that?" />
+
+                <apex:outputpanel id="missingBoxSection">
+                    <apex:pageBlockSection columns="1" collapsible="false" rendered="{!IF(Door_Tag_Script__c.Box_Confirmation__c == 'no',TRUE,FALSE)}" >
+                        <apex:pageblocksectionItem />
+                        <h2 class="ch2">{!DTSVerbiage.Confirmation_No__c}</h2>
+                        <apex:outputField value="{!Door_Tag_Script__c.Box_Confirmation_Email2__c}" label="What’s the best email for you to send them to?" styleClass="newValEmailId" />
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection columns="1" collapsible="false" rendered="{!IF(Door_Tag_Script__c.Box_Confirmation__c == 'yes',TRUE,FALSE)}" >
+                        <h2 class="ch2">{!DTSVerbiage.ConfirmationYes__c}</h2>
+                        <apex:outputField value="{!Door_Tag_Script__c.Box_Confirmation_Email__c}" label="What is the best email for you to send them to? " styleClass="newValEmailId"  />
+                    </apex:pageBlockSection>
+                    
+                   <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.OutboundAgentPostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.OutboundAgentPostScript__c != ''}"></apex:outputText>
+                </apex:outputpanel>
+                
+
+                <apex:outputPanel rendered="{!NOT(outboundFlag)}">
+                <apex:pageBlockSection columns="1" title="{!DTSVerbiage.ConfirmEmailSectionTitle__c}" collapsible="false">
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.ConfirmEmailSectionPreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.ConfirmEmailSectionPreScript__c != ''}"></apex:outputText>
+                    <apex:repeat value="{!DTSQuestionsConfirmEmail}" var="DTStetr">
+                        <div class="customlabeldiv {!DTStetr.PopupHelperClass__c}Heading">
+                            {!DTStetr.Order__c}. {!DTStetr.Question__c}
+                        </div>
+                        <apex:pageblocksectionitem >
+                            <apex:outputLabel >{!DTStetr.Industry__c}</apex:outputLabel>
+                            <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                        </apex:pageblocksectionitem>
+                    </apex:repeat>
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.ConfirmEmailSectionPostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.ConfirmEmailSectionPostScript__c != ''}"></apex:outputText>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockSection columns="1"  title="CONSENT" collapsible="false">
+                    <h2 class="ch2">{!DTSVerbiage.Consent__c}</h2>
+                    <apex:outputField value="{!Door_Tag_Script__c.Consent__c}" label="Is that correct?" styleClass="consent" />
+                    <br/>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+                    
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.InboundScriptTitle__c}" rendered="{!DTSQuestionsInbound.size > 0}">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.InboundPreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.InboundPreScript__c != ''}"></apex:outputText>
+                <apex:repeat value="{!DTSQuestionsInbound}" var="DTStetr">
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTStetr.Question_Pretext__c}" escape="false" label="" rendered="{!DTStetr.Question_Pretext__c != ''}"></apex:outputText>
+                    <apex:pageblocksectionitem >
+                        <apex:outputLabel >{!DTStetr.Order__c}. {!DTStetr.Question__c}</apex:outputLabel>
+                        <apex:outputField value="{!survey[DTStetr.FieldAPIName__c]}" />
+                    </apex:pageblocksectionitem>
+                  </apex:repeat>
+                
+
+            <apex:pageblocksectionitem >
+                    <apex:outputLabel >What year was it Built?</apex:outputLabel>
+                    <apex:outputtext value="{!yearBuilt}" label=""/>
+                </apex:pageblocksectionitem>
+                <apex:pageblocksectionitem >
+                    <apex:outputLabel >How many Square Feet is it?</apex:outputLabel>
+                    <apex:outputtext value="{!SQFT}" label=""/>
+                </apex:pageblocksectionitem>
+                
+            <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.InboundPostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.InboundPostScript__c != ''}"></apex:outputText>
+                
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.Section1Title__c}" rendered="{!DTSQuestionsSection1.size > 0}">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section1_PreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section1_PreScript__c != ''}"></apex:outputText>
+                <apex:repeat value="{!DTSQuestionsSection1}" var="DTStetr">
+                    <div class="customlabeldiv {!DTStetr.PopupHelperClass__c}Heading">
+                        {!DTStetr.Order__c}. {!DTStetr.Question__c}
+                    </div>
+                    <apex:pageblocksectionitem >
+                        <apex:outputLabel >{!DTStetr.Industry__c}</apex:outputLabel>
+                        <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                    </apex:pageblocksectionitem>
+                  </apex:repeat>
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section1PostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section1PostScript__c != ''}"></apex:outputText>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.Section2_Title__c}" rendered="{!DTSQuestionsSection2.size > 0}">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section2_PreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section2_PreScript__c != ''}"></apex:outputText>
+                <apex:repeat value="{!DTSQuestionsSection2}" var="DTStetr">
+                    
+                    <apex:outputPanel rendered="{!DTStetr.FieldAPIName__c == 'HVAC__c'}">
+                        <div class="customlabeldiv">
+                            {!IF(outboundFlag,'4','5')}. Do you currently have a Home Warranty?
+                        </div>
+                    </apex:outputPanel>
+                    <apex:pageBlockSectionItem rendered="{!DTStetr.FieldAPIName__c == 'HVAC__c'}">
+                        <apex:outputLabel value="(Home Warranty/ Heating & Air (HVAC.)" ></apex:outputLabel>
+                        <apex:outputField styleClass="homeWarrantyRendering" value="{!Door_Tag_Script__c.DoyoucurrentlyhaveaHomeWarranty__c}" label=""></apex:outputField>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <apex:pageBlockSectionItem rendered="{!DTStetr.FieldAPIName__c == 'HVAC__c'}">
+                        <div class="customlabeldiv novalue">{!IF(outboundFlag,'4','5')}. Ok, so to make sure your Heating and A/C Unit stays running properly It is required that you do a tune up on your Unit every Fall and Spring to avoid costly breakdowns. As a new homeowner you qualify for a $59.00 Complete Tune-up... With winter being around the corner and you being a new homeowner and all… Would you like to go ahead and get your Fall tune-up scheduled?</div>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTStetr.Question_Pretext__c}" escape="false" label="" rendered="{!DTStetr.Question_Pretext__c != ''}"></apex:outputText>
+                    <div class="customlabeldiv {!DTStetr.PopupHelperClass__c}Heading">
+                        {!DTStetr.Order__c}. {!DTStetr.Question__c}
+                    </div>
+                    <apex:pageblocksectionitem >
+                        <apex:outputLabel >{!DTStetr.Industry__c}</apex:outputLabel>
+                        <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                    </apex:pageblocksectionitem>
+                  </apex:repeat>
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section2_PostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section2_PostScript__c != ''}"></apex:outputText>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.Section3_Title__c}" rendered="{!DTSQuestionsSection3.size > 0}">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section3_PreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section3_PreScript__c != ''}"></apex:outputText>
+                <apex:repeat value="{!DTSQuestionsSection3}" var="DTStetr">
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTStetr.Question_Pretext__c}" escape="false" label="" rendered="{!DTStetr.Question_Pretext__c != ''}"></apex:outputText>
+                    <div class="customlabeldiv {!DTStetr.PopupHelperClass__c}Heading">
+                        {!DTStetr.Order__c}. {!DTStetr.Question__c}
+                    </div>
+                    <apex:pageblocksectionitem >
+                        <apex:outputLabel >{!DTStetr.Industry__c}</apex:outputLabel>
+                        <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                    </apex:pageblocksectionitem>
+                  </apex:repeat>
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section3_PostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section3_PostScript__c != ''}"></apex:outputText>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.Section4_Title__c}" rendered="{!DTSQuestionsSection4.size > 0}">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section4_PreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section4_PreScript__c != ''}"></apex:outputText>
+                <apex:repeat value="{!DTSQuestionsSection4}" var="DTStetr">
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTStetr.Question_Pretext__c}" escape="false" label="" rendered="{!DTStetr.Question_Pretext__c != ''}"></apex:outputText>
+                    <div class="customlabeldiv {!DTStetr.PopupHelperClass__c}Heading">
+                        {!DTStetr.Order__c}. {!DTStetr.Question__c}
+                    </div>
+                    <apex:pageblocksectionitem >
+                        <apex:outputLabel >{!DTStetr.Industry__c}</apex:outputLabel>
+                        <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                    </apex:pageblocksectionitem>
+                  </apex:repeat>
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section4_PostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section4_PostScript__c != ''}"></apex:outputText>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.Section5_Title__c}" rendered="{!DTSQuestionsSection5.size > 0}">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section5_PreScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section5_PreScript__c != ''}"></apex:outputText>
+                <apex:repeat value="{!DTSQuestionsSection5}" var="DTStetr">
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTStetr.Question_Pretext__c}" escape="false" label="" rendered="{!DTStetr.Question_Pretext__c != ''}"></apex:outputText>
+                    <div class="customlabeldiv {!DTStetr.PopupHelperClass__c}Heading">
+                        {!DTStetr.Order__c}. {!DTStetr.Question__c}
+                    </div>
+                    <apex:pageblocksectionitem >
+                        <apex:outputLabel >{!DTStetr.Industry__c}</apex:outputLabel>
+                        <apex:outputField styleClass="{!DTStetr.PopupHelperClass__c}" value="{!survey[DTStetr.FieldAPIName__c]}" />
+                    </apex:pageblocksectionitem>
+                  </apex:repeat>
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.Section5_PostScript__c}" escape="false" label="" rendered="{!DTSVerbiage.Section5_PostScript__c != ''}"></apex:outputText>
+            </apex:pageBlockSection>
+                   
+                
+
+                    
+               <apex:pageBlockSection columns="1">
+                    <apex:outputField Value="{!Door_Tag_Script__c.CallDisposition__c}"/>
+                    <apex:outputField Value="{!Door_Tag_Script__c.CallNotes__c}"/> 
+                    <apex:outputField Value="{!Door_Tag_Script__c.Appointment_Summary__c}" label="Appointment Summary"/>
+                    </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" title="{!DTSVerbiage.SearsTransferTitle__c}" id="homeImprovement">
+                <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.SearsTransferVerbage__c}" escape="false" label="" rendered="{!DTSVerbiage.SearsTransferVerbage__c != ''}"></apex:outputText>
+            </apex:pageBlockSection>        
+                            
+                            
+               <apex:pageBlockSection columns="1" title="{!DTSVerbiage.ClosingSectionTitle__c}">
+                    <apex:outputText styleClass="customlabeldiv" value="{!DTSVerbiage.ClosingSectionVerbage__c}" escape="false" label="" rendered="{!DTSVerbiage.ClosingSectionVerbage__c != ''}"></apex:outputText>
+               </apex:pageBlockSection>
+     </apex:pageBlockSection>
+       
+       
+
+      </apex:pageBlock>
+  
+  
+  <!-- Fetching first agent Name -->
+        <apex:inputHidden value="{!Door_Tag_Script__c.Starting_Agent__r.Name}"/>
+  </apex:form>
+   <!-- progess bar -->
+   <style>
+      #progressBar {
+      width: 100%;
+      height: 18px;
+      border: 0.5px solid #111;
+      background-color: white;
+      }
+      #progressBar div {
+      height: 100%;
+      color: #fff;
+      text-align: right;
+      line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+      width: 0;
+      background-color: #A4A4A4;
+      }
+   </style>
+   <script>
+      function progress(percent, $element) {
+          var progressBarWidth = percent * $element.width() / 100;
+          $element.find('div').animate({ width: progressBarWidth }, 1500).html(percent + "% ");
+      }
+   </script>
+   <!-- scroll div -->
+   <style>
+      .scrollup {
+      width: 40px;
+      height: 40px;
+      position: fixed;
+      bottom: 30px;
+      right: 60px;
+      display: none;
+      text-indent: -9999px;
+      background: url("{!URLFOR($Resource.nuHome, '/img/arrow60.png')}") no-repeat;
+      background-size : 40px 40px;
+      }
+   </style>
+   <script>
+      $(document).ready(function () {
+          var perc = {!Door_Tag_Script__c.Completed_Percentage__c}
+          progress(perc, $('#progressBar'));
+          $(window).scroll(function () {
+              if ($(this).scrollTop() > 100) {
+                  $('.scrollup').fadeIn();
+              } else {
+                  $('.scrollup').fadeOut();
+              }
+          });
+          
+          $('.scrollup').click(function () {
+              $("html, body").animate({
+                  scrollTop: 0
+              }, 1000);
+              return false;
+          });
+      });
+   </script>
+   <a href="#" class="scrollup">Scroll</a> 
+  
+</apex:page>

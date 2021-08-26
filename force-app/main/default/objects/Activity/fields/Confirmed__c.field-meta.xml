@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmed__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL( Confirmation_Status__c  , &quot;Confirmed Running Blind&quot;) || ISPICKVAL( Confirmation_Status__c  , &quot;Confirmed via Text&quot;) || ISPICKVAL( Confirmation_Status__c  , &quot;Confirmed Voice&quot;)||  Dispatched__c  , 1, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Confirmed</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

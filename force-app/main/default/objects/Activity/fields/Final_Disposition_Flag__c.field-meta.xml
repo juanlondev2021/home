@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Final_Disposition_Flag__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(
+ Final_Disposition__c = 0, False, True)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Final Disposition Flag</label>
+    <type>Checkbox</type>
+</CustomField>

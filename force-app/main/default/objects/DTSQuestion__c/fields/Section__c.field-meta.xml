@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Section__c</fullName>
+    <externalId>false</externalId>
+    <label>Section</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Section 1</fullName>
+                <default>false</default>
+                <label>Section 1</label>
+            </value>
+            <value>
+                <fullName>Section 2</fullName>
+                <default>false</default>
+                <label>Section 2</label>
+            </value>
+            <value>
+                <fullName>Section 3</fullName>
+                <default>false</default>
+                <label>Section 3</label>
+            </value>
+            <value>
+                <fullName>Section 4</fullName>
+                <default>false</default>
+                <label>Section 4</label>
+            </value>
+            <value>
+                <fullName>Section 5</fullName>
+                <default>false</default>
+                <label>Section 5</label>
+            </value>
+            <value>
+                <fullName>Confirm Email</fullName>
+                <default>false</default>
+                <label>Confirm Email</label>
+            </value>
+            <value>
+                <fullName>Outbound</fullName>
+                <default>false</default>
+                <label>Outbound</label>
+            </value>
+            <value>
+                <fullName>Inbound</fullName>
+                <default>false</default>
+                <label>Inbound</label>
+            </value>
+            <value>
+                <fullName>Additional Interest Questions</fullName>
+                <default>false</default>
+                <label>Additional Interest Questions</label>
+            </value>
+            <value>
+                <fullName>Form Lead up</fullName>
+                <default>false</default>
+                <label>Form Lead up</label>
+            </value>
+            <value>
+                <fullName>Form Lead up with Popups</fullName>
+                <default>false</default>
+                <label>Form Lead up with Popups</label>
+            </value>
+            <value>
+                <fullName>Form Lead up with Popups 2</fullName>
+                <default>false</default>
+                <label>Form Lead up with Popups 2</label>
+            </value>
+            <value>
+                <fullName>Inbound TM Script</fullName>
+                <default>false</default>
+                <label>Inbound TM Script</label>
+            </value>
+            <value>
+                <fullName>Yes only section 1</fullName>
+                <default>false</default>
+                <label>Yes only section 1</label>
+            </value>
+            <value>
+                <fullName>Yes only section 2</fullName>
+                <default>false</default>
+                <label>Yes only section 2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

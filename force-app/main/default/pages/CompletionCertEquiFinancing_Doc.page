@@ -1,0 +1,351 @@
+<!--
+  @description       : 
+  @author            : William Aldana
+  @group             : 
+  @last modified on  : 03-07-2021
+  @last modified by  : William Aldana
+  Modifications Log 
+  Ver   Date         Author           Modification
+  1.0   02-23-2021   William Aldana   Initial Version
+-->
+<apex:page renderAs="pdf" standardController="Home_Services__c" extensions="RenderContractController" showHeader="false"
+    sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+
+        <head>
+            <title>Completion Certificate &amp; Verification of Equipment Financing and Monthly 
+                Monitoring Service Obligation</title>
+    
+            <style>
+                @page {
+                    size: legal;
+                    margin: 1mm 5mm 5mm 5mm;
+                }
+    
+                .page-break {
+                    display: block;
+                    page-break-after: always;
+                }
+    
+                body {
+                    font-family: Arial;
+                    font-size: 13px;
+                }
+    
+                .hidden {
+                    color: white;
+                }
+    
+                .hidden-WithBorder {
+                    color: white;
+                    border-bottom: 1px solid gray;
+                }
+    
+                .hidden-h {
+                    color: white;
+                }
+    
+                <!--NEW-->.cotain {
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+    
+                li {
+                    list-style-type: none;
+                    display: inline;
+                    float: left;
+                }
+    
+    
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 70px;
+                }
+    
+                .bold {
+                    font-weight: bold
+                }
+    
+                .border {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
+    
+                .border th {
+                    border: 1px solid black;
+                }
+    
+                .border td {
+                    border: 1px solid black;
+                }
+    
+                .no-border {
+                    border: 0px solid black;
+                    border-collapse: collapse;
+                }
+    
+                .no-border th {
+                    border: 0px solid black;
+                }
+    
+                .no-border td {
+                    border: 0px solid black;
+                }
+    
+                .margin p {
+                    margin: 0;
+                }
+    
+    
+                .mark-below {
+                    color: white;
+                    border-bottom: 1px solid gray;
+                }
+    
+                .mark-below-visible {
+                    color: black;
+                    border-bottom: 1px solid gray;
+                }
+    
+                span.cls_002::after {
+                    content: "\a";
+                    white-space: pre;
+                }
+    
+                span.cls_002 {
+                    font-family: "Calibri", serif;
+                    color: rgb(0, 0, 0);
+                    font-weight: normal;
+                    font-style: normal;
+                    text-decoration: none;
+                    font-size: 8px;
+                    position: inherit;
+                    top: 0px;
+                }
+    
+                span.cls_003::after {
+                    content: "\a";
+                    white-space: pre;
+                }
+    
+                span.cls_003 {
+                    font-family: "Calibri", serif;
+                    color: rgb(0, 0, 0);
+                    font-weight: normal;
+                    font-style: normal;
+                    text-decoration: none;
+                    position: inherit;
+                    top: 0px;
+                }
+    
+                span.cls_004 {
+                    font-family: Arial, serif;
+                    color: rgb(0, 0, 0);
+                    font-weight: normal;
+                    font-style: normal;
+                    text-decoration: none;
+                    margin-left: 5px
+                }
+
+                .center {
+                margin-left: auto;
+                margin-right: auto;
+                }
+            </style>
+        </head>
+    
+        <body>
+            <!--NEW FIRST PAGE-->
+            <div class="page-break;">
+                <div style='width:80%;margin: 0 auto;padding-top:50px'>
+                     <p align="center">   
+                        <strong style="font-size:12pt;font-family:'Arial-BoldMT';">Completion Certificate &amp; Verification of Equipment Financing and Monthly Monitoring Service Obligation</strong>
+                    </p>
+                    <br/><br/>
+                    <table border="1|0" width="100%" class="center" style="border-collapse: collapse;font-size:11pt;font-family:'ArialMT;">
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                Initials
+                            </td>
+                            <td style="width: 75%">
+                            </td>
+                        </tr>
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_2
+                        </span></u>
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_3
+                        </span></u>
+                            </td>
+                            <td style="width: 75%">
+                                <p align="justify" style="font-size:11pt;font-family:'ArialMT'">
+                                    I (We) certify that <u style="padding-right: 120px;border-bottom: 1px solid black;
+                                    margin-bottom: 0px; text-decoration: none;text-align: center;"><span>Protection Source
+                                    </span></u> has provided all goods and 
+                                    services provided under the Sales Agreement.  I am (We are) completely 
+                                    satisfied with the goods and services provided. 
+                                </p>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_2
+                        </span></u>
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_3
+                        </span></u>
+                            </td>
+                            <td style="width: 75%">
+                                <p align="justify" style="font-size:11pt;font-family:'ArialMT'">
+                                    I (We) certify that I (We) signed documents for both the Smart Home 
+                                    Equipment financing and monthly monitoring service.  I (We) further certify 
+                                    that I have received copies of the completed and signed documents for 
+                                    both the equipment financing and monthly monitoring service.  
+                                </p>
+                            </td>
+                        </tr>   
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_2
+                        </span></u>
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_3
+                        </span></u>
+                            </td>
+                            <td style="width: 75%">
+                                <p align="justify" style="font-size:11pt;font-family:'ArialMT'">
+                                    I am (We are) aware of the Right to Cancel the transaction when I (we) 
+                                    entered into it and chose not to exercise that right.
+                                </p> 
+                            </td>
+                        </tr>    
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_2
+                        </span></u>
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_3
+                        </span></u>
+                            </td>
+                            <td style="width: 75%">
+                                <p align="justify" style="font-size:11pt;font-family:'ArialMT'">
+                                    I (We) understand that there are separate payments for the equipment and 
+                                    the monthly monitoring service. 
+                                </p>
+                            </td>
+                        </tr>    
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_2
+                        </span></u>
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_3
+                        </span></u>
+                            </td>
+                            <td style="width: 75%">
+                                <p style="font-size:11pt;font-family:'ArialMT'">
+                                    For the <strong>Smart Home Equipment financing</strong> provided through Pinnacle 
+                                    Finance I certify:<br/><br/> 
+                                    <table>
+                                        <tr>
+                                            <td style="width: 60%">Loan Amount: </td>
+                                            <td style="width: 40%">$<u style="padding-right: 120px;border-bottom: 1px solid black;
+                                                margin-bottom: 0px; text-decoration: none;">{!IF(LoanInfo.dpcle__LA_SaleAmount__c==null,'0.0',LoanInfo.dpcle__LA_SaleAmount__c)}</u></td>      
+                                        </tr>
+                                        <tr> 
+                                            <td style="width: 60%">Minimum Monthly Payment:</td>
+                                            <td style="width: 40%">$<u style="padding-right: 120px;border-bottom: 1px solid black;
+                                                margin-bottom: 0px; text-decoration: none;">{!IF(financeInfo.size >0,financeInfo[0].Monthly_Renewal_PURCHASE__c,'0.0')}</u></td> 
+                                        </tr>
+                                        <tr> 
+                                            <td style="width: 60%">First Payment Date:</td>
+                                            <td style="width: 40%"><u style="padding-right: 120px;border-bottom: 1px solid black;
+                                                margin-bottom: 0px; text-decoration: none;">
+                                                {!IF(toLineItems2.size >0,TEXT(MONTH(toLineItems2[0].Bill_Start_Date__c)) &'/'& TEXT(DAY(toLineItems2[0].Bill_Start_Date__c)) &'/'& TEXT(YEAR(toLineItems2[0].Bill_Start_Date__c)),'')}
+                                                <!--{!IF(LoanInfo.dpcle__First_Payment_Date__c!=null,TEXT(MONTH(LoanInfo.dpcle__First_Payment_Date__c)) &'/'& TEXT(DAY(LoanInfo.dpcle__First_Payment_Date__c)) &'/'& TEXT(YEAR(LoanInfo.dpcle__First_Payment_Date__c)),'') }-->
+                                                </u></td> 
+                                        </tr>
+                                        <tr>  
+                                            <td style="width: 60%;padding-top:10px">Special Promotion:</td>
+                                            <td style="width: 40%;padding-top:10px"><strong>Year Same-as-Cash</strong></td>
+                                        </tr>
+                                    </table>
+                                    <br/> <br/> 
+                                    Automatic monthly payments will be deducted from your bank account 
+                                    beginning on the first payment due date, and each month thereafter, if 
+                                    bank account was information was provided.<br/><br/>  
+                                    
+                                    You will receive a statement each month. 
+                                </p>
+                            </td>
+                        </tr>  
+                        <tr style="width: 100%">
+                            <td style="width: 25%;text-align:center">
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_2
+                        </span></u>
+                                <u style="padding-right:10px;border-bottom: 1px solid black;margin-left:10px;
+                                margin-bottom: 0px; text-decoration: none;text-align:center;"><span style="color: white;font-size:12px">
+                            initial_3
+                        </span></u>
+                            </td>
+                            <td style="width: 75%">
+                                <p style="font-size:11pt;font-family:'ArialMT'">
+                                    For the <strong>Monthly Monitoring Service</strong>, provided through <u style="padding-right: 80px;border-bottom: 1px solid black;
+                                    margin-bottom: 0px; text-decoration: none;">{!TEXT(MONTH(contractEnd)) &'/'& TEXT(DAY(contractEnd)) &'/'& TEXT(YEAR(contractEnd)) }</u>,<br/><br/>   
+                                    <table>
+                                        <tr>
+                                            <td style="width: 60%">Monthly Monitoring Rate:</td>
+                                            <td style="width: 40%">$<u style="padding-right: 120px;border-bottom: 1px solid black;margin-bottom: 0px; text-decoration: none;">{!Home_Services__c.Total_Monthly_Investment__c}</u></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60%">First Payment Date:</td>       
+                                            <td style="width: 40%"><u style="padding-right: 120px;border-bottom: 1px solid black;
+                                        margin-bottom: 0px; text-decoration: none;">{!IF(toLineItems2.size >0,TEXT(MONTH(toLineItems2[0].Bill_Start_Date__c)) &'/'& TEXT(DAY(toLineItems2[0].Bill_Start_Date__c)) &'/'& TEXT(YEAR(toLineItems2[0].Bill_Start_Date__c)),'')}</u></td>
+                                        </tr>
+                                    </table><br/><br/> 
+                                    Automatic monthly payments will be deducted from your bank account 
+                                    beginning on the first payment due date, if bank account was information 
+                                    was provided. 
+                                </p>
+                            </td>
+                        </tr>                                                                                                                 
+                    </table>
+                    <br/><br/><br/>
+                    <table style="width:100%;font-size:14pt;font-family:'ArialMT'">
+                        <tr>
+                            <td style="width:40%;">Customer Signature(s)</td>
+                            <td style="width:60%;text-align:center"><u style="padding-right:300px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;"><span class="hidden" style="margin-left:0px;">sign_2</span></u></td>
+                        </tr> 
+                        <tr>
+                            <td style="width:40%;padding-top:40px"></td>
+                            <td style="width:60%;padding-top:40px;text-align:center"><u style="padding-right:300px;border-bottom: 1px solid black;
+                                margin-bottom: 0px; text-decoration: none;"><span class="hidden" style="margin-left:0px;">sign_3</span></u></td>
+                        </tr>                                                                                                                   
+                    </table>
+                </div> 
+            </div>
+        </body>
+    </html>
+</apex:page>

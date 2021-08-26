@@ -1,0 +1,13 @@
+<aura:component controller="DiacoCmpFlowController" 
+                implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,forceCommunity:availableForAllPageTypes" 
+                access="GLOBAL">
+    <aura:attribute name="c__AccountId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <div style="text-align: center; font-size: 20px; margin-top: 5px; margin-bottom: 5px;">
+        Appointment Setter
+    </div>
+    <fieldset class="slds-box slds-theme--default">
+        <lightning:flow aura:id="flowData"/>
+    </fieldset>
+</aura:component>

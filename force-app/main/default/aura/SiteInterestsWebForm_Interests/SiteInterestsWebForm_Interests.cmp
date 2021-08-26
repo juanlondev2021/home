@@ -1,0 +1,63 @@
+<!--
+* Diaco
+* Project:			Interest Manager
+* Description:		Modal select interests
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		23/09/2020		Jull Quintero           Initial implementation of the class.
+-->
+<aura:component>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />    
+
+    <aura:attribute name="interests" type="List" default="[]" required="true"/>
+    <aura:attribute name="interestSelected" type="List" default="[]"/>    
+    
+    <!-- EVENT SELECT INTEREST CHECKBOX -->
+    <aura:handler name="interestCheckBox" event="c:DiacoEventInterestsWebForm" action="{! c.handlerSelectInterest }" />
+    
+    <!-- EVENT LIST INTEREST SELECTED-->
+    <aura:registerEvent name="listInterestSelected" type="c:DiacoEventInterestsWebForm" />
+    
+    <div class="slds-card slds-box">
+        <div class="slds-grid slds-wrap" >
+            <aura:if isTrue="{!v.interests.length > 0 }">
+
+                <aura:iteration items="{!v.interests}" var="item">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--2-of-12">            
+                        <c:SiteInterestsWebForm_InterestBox name="{!item.name}"
+                                                            checked = "{!item.checked}"/>
+                    </div>
+                </aura:iteration>
+
+                <aura:set attribute="else">
+
+                    <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info slds-align_absolute-center" role="alert">
+                            <span class="slds-assistive-text">Information</span>
+                            <span class="slds-icon_container slds-icon-utility-user slds-m-right_x-small" title="Description of icon when needed">
+                                <lightning:icon class="white" iconName="utility:alert" size="large"/>
+                            </span>
+                            <h2 class="slds-text-title_caps slds-text-color_inverse">No available interests found</h2>
+                        </div>
+                    </div>
+
+                </aura:set>
+
+            </aura:if>
+        </div>
+
+        <div class="slds-align_absolute-center slds-m-top_small">
+            <aura:if isTrue="{!v.interests.length > 0 }">
+                <lightning:button   variant="brand" 
+                                    label="Select" 
+                                    title="Select" 
+                                    onclick="{! c.handlerSubmit }" />
+            </aura:if>
+        </div>
+        
+    </div>
+
+</aura:component>

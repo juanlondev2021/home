@@ -1,0 +1,54 @@
+<!--
+* Diaco
+* @author             Jull Quintero Daza
+* Project:            Site Masps Canvasser
+* Description:        Visual force page - Site Lightning In 
+*
+* Changes (Version)
+* _________________________________________
+*            No.        Date            Author                    Description
+*            ____    __________        __________________      _____________________________________
+* @version    1.0    05/11/2020         Jull Quintero D         Initial implementation of the class.
+*
+-->
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Map Canvasser</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            <apex:includeLightning />
+            <style>
+                body {
+                    background-image: url('/resource/1604607283000/HomeMapsCanvasser') !important;
+                    background-repeat: no-repeat !important;
+                    background-size: cover !important;
+                    background-attachment: fixed !important; 
+                }
+            </style>
+        </head>
+        <body>
+            <div id="lightning">
+            </div>
+            <script>
+                let c__AccountId = "{!$CurrentPage.parameters.RecordId}";
+                $Lightning.use("c:SiteMapsCanvasserApp", function () {
+                    $Lightning.createComponent(
+                            "c:SiteMapsCanvasserCmp",
+                        {
+                            pageReference:{
+                                state:{
+                                    "c__AccountId": c__AccountId,
+                                }
+                            }
+                        },
+                        "lightning"
+                    );
+                });
+            </script>
+        </body>
+</html>
+</apex:page>

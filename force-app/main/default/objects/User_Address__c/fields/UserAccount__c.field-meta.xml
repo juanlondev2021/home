@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UserAccount__c</fullName>
+    <description>It keeps the person name that corresponds to the person address</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select the person to associate with this address</inlineHelpText>
+    <label>UserAccount</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>User Address</relationshipLabel>
+    <relationshipName>User_Address</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

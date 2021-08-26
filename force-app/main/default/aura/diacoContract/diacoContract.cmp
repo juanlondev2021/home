@@ -1,0 +1,41 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering contracts
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+* @version  1.0     10/31/2020      Fabian Pineda (FP)      Improved lightning:isUrlAddressable support.
+* @version  1.0     11/04/2020      Fabian Pineda (FP)      Added support for Event IDs in recordId/c__recordId.
+-->
+<aura:component controller="DiacoCmpContractController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction,lightning:isUrlAddressable"
+                access="global" >
+    <!--Default for test-->
+    <aura:attribute name="recordId" type="String" default="a126300000G3emSAAR" />
+    <aura:attribute name="recordType" type="String" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:if isTrue="{!v.recordType == 'Water'}">
+        <c:diacoWaterContract recordId="{!v.recordId}"/>
+    </aura:if> 
+    <aura:if isTrue="{!v.recordType == 'Solar'}">
+       <c:diacoSolarContract recordId="{!v.recordId}"/>
+    </aura:if> 
+    <aura:if isTrue="{!v.recordType == 'Home Automation'}"> 
+        <c:diacoHomeAutomationContract recordId="{!v.recordId}"/>
+    </aura:if> 
+	<aura:if isTrue="{!v.recordType == 'Pest'}"> 
+        <c:diacoContractPestControl recordId="{!v.recordId}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.recordType == 'Remodel'}"> 
+        <c:DiacoContractRemodel recordId="{!v.recordId}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.recordType == ''}"> 
+        <c:diacoOtherContract recordId="{!v.recordId}" />
+    </aura:if>
+</aura:component>

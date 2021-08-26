@@ -1,0 +1,166 @@
+<!--
+* Diaco
+* @author 			William Aldana href=<wialdana@gmail.com>
+* Project:			Diaco SMS
+* Description:		Componenet to configure SMS notification Status
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		23/12/2020		William Aldana (WA)		Initial implementation of the component.
+* @version	2.0		08/01/2020		Jull Quintero D		    Change UI
+-->
+
+<aura:component controller="DiacoSMSNotificationController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute access="Private"  name="_label" type="String"/>
+    <aura:attribute access="Private"  name="showSpinner" type="Boolean" default="true" />
+
+    <aura:attribute access="Private"  name="customSetting" type="DiacoSMSNotificationDTO[]" />
+    <aura:attribute access="Private" name="notifications" type="list" description="Notifications"/>
+    <aura:attribute access="Private" name="notificationsUpdate" type="list" description="Notifications"/>
+    <aura:attribute access="Private" name="notif" type="SMS_Notification_Status__c" description="Notification"/>
+    
+    <aura:attribute access="Private" name="openEditNotf" type="boolean" default="false" description="OPEN MODAL" />
+    <aura:attribute access="Private" name="isSystemAdmin" type="Boolean" default="true" />
+
+    <aura:handler name="updateNotf" event="c:DiacoSMSNotificationEvent" action="{! c.updateNotf }" />       
+
+    <div class="slds-col slds-size_1-of-1">
+
+        <fieldset class="slds-box slds-theme--default ">
+
+            <div class="slds-form slds-grid slds-wrap">
+
+                <!-- HEADER-->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right">
+                        <lightning:layoutItem>
+                            <lightning:icon iconName="standard:settings" alternativeText="My Expenses"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="horizontal-small">
+                            <div class="page-section page-header">
+                                <h1 class="slds-text-heading--label">CUSTOM SETTING</h1>
+                                <h2 class="slds-text-heading--medium">SMS NOTIFICATION STATUS</h2>
+                            </div>
+                        </lightning:layoutItem>
+                        
+                        <aura:if isTrue="{!v.isSystemAdmin}">
+                            <lightning:layoutItem  alignmentBump="left" padding="horizontal-small">
+                                <lightning:button label="Create" iconName="utility:record_create" value="create" iconPosition="left"  onclick="{!c.editNotf}" />
+                            </lightning:layoutItem>
+                        </aura:if>
+                    </lightning:layout>
+                </div>
+                <!--/HEADER -->
+
+                <!-- SPINNER-->
+                <aura:if isTrue="{!v.showSpinner}">
+    
+                    <div class="slds-align_absolute-center">
+                        <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="medium"/>
+                    </div>
+
+                    <aura:set attribute="else">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium ">
+
+                            <!-- TABS -->
+                            <lightning:tabset variant="scoped">
+                                <aura:iteration items="{!v.customSetting}" var="setting" indexVar="key">
+        
+                                    <!-- CATEGORY -->
+                                    <lightning:tab label="{!setting.category}" id="{!key}">
+                                        <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-border_top slds-border_left slds-border_right slds-m-top--medium">
+                                            <lightning:layoutItem>
+                                                <lightning:icon iconName="standard:read_receipts" alternativeText="My Expenses"/>
+                                            </lightning:layoutItem>
+        
+                                            <lightning:layoutItem padding="horizontal-small">
+                                                <div class="page-section page-header">
+                                                    <h1 class="slds-text-heading--label">TEXT SETTING</h1>
+                                                    <h2 class="slds-text-heading--medium">{!setting.category}</h2>
+                                                </div>
+                                            </lightning:layoutItem>
+        
+                                            <lightning:layoutItem  alignmentBump="left" padding="horizontal-small">
+                                                <lightning:button label="Save" iconName="utility:save" iconPosition="left"  onclick="{! c.saveInfo }" />
+                                            </lightning:layoutItem>
+                                        </lightning:layout>
+        
+                                        <!-- Automatic Tex  -->
+                                        <div class="slds-grid slds-wrap slds-align_absolute-center">
+                                            <aura:iteration items="{!setting.TypeNotList}" var="typeList" indexVar="key">
+                                                <div class="slds-col slds-size_1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-3 slds-large-size--1-of-4  slds-m-right_large slds-m-top--medium">
+                                                    <div class="slds-card">
+                                                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom ">
+                                                            <lightning:layoutItem>
+                                                                <lightning:icon iconName="custom:custom53" alternativeText="My Expenses"/>
+                                                            </lightning:layoutItem>
+                                                            <lightning:layoutItem padding="horizontal-small">
+                                                                <div class="page-section page-header">
+                                                                    <h1 class="slds-text-heading--label">Automatic Text</h1>
+                                                                    <h1 class="slds-text-heading--label">{!typeList.type}</h1>
+                                                                </div>
+                                                            </lightning:layoutItem>
+                                                        </lightning:layout>
+                                                        <div class="slds-form slds-grid slds-wrap slds-m-top--medium slds-m-top--medium slds-p-horizontal_medium">
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                                                <aura:iteration items="{!typeList.notifications}" var="notif" indexVar="keyin">
+                                                                    <div class="slds-form-element">
+                                                                        <div class="slds-form-element__control">
+                                                                            <div class="slds-checkbox">
+                                                                            <input type="checkbox" name="options" id="{!notif.Id}"  checked="{!notif.Active__c}" onchange="{!c.handlerCheck}"/>
+                                                                            <label class="slds-checkbox__label" for="{!notif.Id}">
+                                                                                <span class="slds-checkbox_faux"></span>
+                                                                                <span class="slds-form-element__label">
+                                                                                    <button class="slds-button" value="{!notif.Id}" title="Settings" onclick="{!c.editNotf}"> {!notif.Name}
+                                                                                    </button>
+                                                                                </span>
+                                                                            </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </aura:iteration>                 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </aura:iteration>  
+                                        </div>
+                                        <!-- /Automatic Tex  -->
+        
+                                    </lightning:tab>
+                                    <!-- /CATEGORY -->
+        
+                                </aura:iteration>    
+                            </lightning:tabset>
+                            <!-- /TABS -->
+        
+                            <!-- BUTTON -->
+                            <lightning:button       
+                                label="Save"
+                                class="slds-m-top--medium slds-align_absolute-center"
+                                variant="brand"
+                                iconName="utility:save" iconPosition="left"
+                                onclick="{!c.saveInfo}"
+                            />
+                            <!-- /BUTTON -->
+        
+                        </div>   
+                    </aura:set>
+
+                </aura:if>
+                <!-- /SPINNER-->
+            </div>
+
+        </fieldset>
+    </div> 
+    
+    <!-- EDIT NOTF  -->
+    <c:DiacoSMSNotification_EditNotf aura:Id="cmpNotifId" open="{!v.openEditNotf}" notification="{!v.notif}" />
+    <!-- /EDIT NOTF  -->
+</aura:component>

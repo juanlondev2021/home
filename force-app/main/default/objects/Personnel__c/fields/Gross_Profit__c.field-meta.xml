@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gross_Profit__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(Sales_MPV__c&gt;5.09,&apos;Below M&apos;,if(Sales_MPV__c&gt;4.01,&apos;M&apos;,if(Sales_MPV__c&gt;3.01,&apos;P&apos;,if(Sales_MPV__c&gt;1.00,&apos;V&apos;,&apos;&apos;))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sale MPV</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,67 @@
+<!--
+* Diaco
+* Project:			Site Home Service Flow
+* Description:		Site Tab home service Lightning Out
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		12/10/2020		Jull Quintero            Initial implementation of the class.
+-->
+
+<aura:component controller="SiteMyHomeServicesController">
+
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="loaded" type="Boolean" default="true"/>
+
+    <!-- modal message -->
+    <aura:attribute access="Private"  name="ErrorModal" type="Boolean" default="false"/>
+    <aura:attribute access="Private"  name="SuccessModal" type="Boolean" default="false"/>
+    <!--Objects -->
+    <aura:attribute name="account" type="Account" />
+    <aura:attribute name="appointments" type="list" />
+    <aura:attribute name="homeservices" type="list" />
+    <aura:attribute name="appintmentsRecordTypes" type="List" />
+    <aura:attribute name="assiged" type="Boolean" default="false" description="FILTER APPOINTMENT FOR assigned__C"/>
+        
+    <!-- EVENT REFRESH -->
+    <aura:handler name="refresh" event="c:DiacoEventHomeServicesFlow" action="{! c.doInit }" />
+
+    <div class="slds-card slds-box">
+        
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner  alternativeText="Loading" size="small" />
+        </aura:if>
+
+        <lightning:tabset selectedTabId="1">
+
+            <lightning:tab label='Appointment' id="1" onactive="{! c.doInit }">
+        
+                <c:SiteHomeServicesFlow_Appointment     aura:id="appointmentId" 
+                                                        recordsType='{!v.appintmentsRecordTypes}' 
+                                                        data="{!v.appointments}" 
+                                                        account="{!v.account}"
+                                                        assiged="{!v.assiged}" />
+            </lightning:tab>
+    
+            <lightning:tab label="Home Services" id="2" onactive="{! c.doInit }">
+    
+                <c:SiteHomeServicesFlow_HomeService     aura:id="homeserviceId" 
+                                                        recordId="{!v.recordId}" 
+                                                        data="{!v.homeservices}"/>
+    
+            </lightning:tab>
+    
+        </lightning:tabset>
+    </div>
+
+    <!-- Modal toast -->
+    <c:SiteModalMessage show="{! v.ErrorModal }"
+                        variant="error" title="ERROR" 
+                        message="An unexpected error has occurred" />
+
+    <c:SiteModalMessage show="{! v.SuccessModal }" 
+                        variant="success" title="SUCCESS" 
+                        message="The record has been saved successfully" />
+</aura:component>

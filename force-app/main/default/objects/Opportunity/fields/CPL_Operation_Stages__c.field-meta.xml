@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Operation_Stages__c</fullName>
+    <externalId>false</externalId>
+    <label>CPL Operation Stages</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Stage_Types__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Docusign Received</fullName>
+                <default>false</default>
+                <label>Docusign Received</label>
+            </value>
+            <value>
+                <fullName>Billing Setup</fullName>
+                <default>false</default>
+                <label>Billing Setup</label>
+            </value>
+            <value>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+                <label>Deactivated</label>
+            </value>
+            <value>
+                <fullName>Setup</fullName>
+                <default>false</default>
+                <label>Setup</label>
+            </value>
+            <value>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <label>Active</label>
+            </value>
+            <value>
+                <fullName>Paused</fullName>
+                <default>false</default>
+                <label>Paused</label>
+            </value>
+            <value>
+                <fullName>Call Center DID</fullName>
+                <default>false</default>
+                <label>Call Center DID</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CPL</controllingFieldValue>
+            <controllingFieldValue>CPL Spec</controllingFieldValue>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Docusign Received</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPL</controllingFieldValue>
+            <controllingFieldValue>CPL Spec</controllingFieldValue>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Billing Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPL</controllingFieldValue>
+            <controllingFieldValue>CPL Spec</controllingFieldValue>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Deactivated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPL</controllingFieldValue>
+            <controllingFieldValue>CPL Spec</controllingFieldValue>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Setup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPL</controllingFieldValue>
+            <controllingFieldValue>CPL Spec</controllingFieldValue>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Active</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPL</controllingFieldValue>
+            <controllingFieldValue>CPL Spec</controllingFieldValue>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Call Center DID</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DT CPL</controllingFieldValue>
+            <valueName>Paused</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

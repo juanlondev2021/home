@@ -1,0 +1,112 @@
+<!--
+* Diaco
+* @author 			
+* Project:		    Appointment Recordtype Set Up
+* Description:		Setting Appointment - Home service
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/09/2020		Jull Quintero     		Initial implementation of the class.
+-->
+<aura:component>
+    <!--aura:handler name="change" value="{! v.open }" action="{!c.doInit}" /-->    
+
+    <aura:attribute name="open" type="boolean" default="false" description="OPEN MODAL" required="true" />
+    <aura:attribute name="data" type="List" default="[]" required="true"/>
+    <aura:attribute name="appointment_mtd" type="Appointment_RecordType_mtd__c" required="true"/> 
+
+    <!-- PICKLIST -->
+    <aura:attribute name="accountinterest" type="List" required="true"/>
+    <aura:attribute name="recordTypeAppointment" type="List" required="true"/>
+
+    <!-- EVENT UPDATE  Appointment-->
+    <aura:registerEvent name="updateAppointmentMtd" type="c:DiacoEventAppointmentRecordType_SetUp"/>
+
+    <aura:if isTrue="{!v.open}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+            <div class="slds-modal__container">
+            
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon   iconName="utility:close"
+                                            onclick="{! c.closeModel }"
+                                            alternativeText="close"
+                                            variant="bare-inverse"
+                                            class="slds-modal__close"/>
+                <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header_vertical slds-align_absolute-center">
+
+                    <lightning:layoutItem padding="horizontal-small">
+                        <lightning:icon iconName="{!v.appointment_mtd.Name != null ? 'action:edit': 'action:new' }" />
+                    </lightning:layoutItem>
+            
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span></span>
+                                    <span class="slds-page-header__title slds-truncate" title="Recently Viewed"> 
+                                        <lightning:formattedText value="{!v.appointment_mtd.Name != null ? v.appointment_mtd.Interest_Name__c : 'Create'}" />
+                                    </span>
+                                </h1>
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>                    
+                </header>    
+                <!-- /HEADER -->        
+                
+                <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap slds-gutters">
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                            <lightning:select  aura:id='fieldId' label="Interests" value="{! v.appointment_mtd.Interest_Name__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.accountinterest}" var="item" >
+                                    <option value="{!item.key}" selected="{! v.appointment_mtd.Interest_Name__c == item.key}">
+                                        {!item.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                            <lightning:select  aura:id='fieldId' label="RecordType Appointment" value="{! v.appointment_mtd.RT_Appointment_Id__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.recordTypeAppointment}" var="item" >
+                                    <option value="{!item.Id}" selected="{! v.appointment_mtd.RT_Appointment_Id__c == item.Id}">
+                                        {!item.Name}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                            <lightning:input    type="toggle" 
+                                                label="Activate" 
+                                                messageToggleActive='yes'
+                                                messageToggleInactive="No"
+                                                checked = "{! v.appointment_mtd.Interest_Activate__c }"/>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                        label="Cancel"
+                                        title="Cancel"
+                                        onclick="{! c.closeModel }"/>
+                    
+                    <lightning:button   variant="brand" 
+                                        label="Save" 
+                                        title="Save" 
+                                        onclick="{! c.handlerSave }" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+</aura:component>

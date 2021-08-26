@@ -1,0 +1,208 @@
+<!--
+* Diaco
+* @author 			Álvaro Ortega href=<aovargas05@gmail.com>
+* Project:			Change Order
+* Description:		Component to create Install Item Objects and Invoices Objects
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		30/11/2019		Alvaro Ortega (AO)		Component.
+-->
+
+<aura:component controller="DiacoInstallItemController" 
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="data" type="List"/>
+    
+    <aura:attribute name="isLoad" type="boolean" default='true'/>
+    <aura:attribute name="isLoadCCO" type="boolean" default='false'/>
+    
+    <aura:attribute name="isOpen" type="boolean" default='false'/>
+    <aura:attribute name="isOpenEdit" type="boolean" default='false'/>
+    <aura:attribute name="isOpenDelete" type="boolean" default='false'/>
+    
+    <aura:attribute name="COtoDelete" type="Object"/>
+    <aura:attribute name="lenCO" type="integer" />
+    
+    <aura:attribute name="COtoEdit" type="Object"/>
+    
+    <aura:attribute name="thereAreProducts" type="boolean" default='false'/>
+    <aura:attribute name="thereAreServices" type="boolean" default='false'/>
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+        <lightning:layoutItem padding="horizontal-small">
+            <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Information About</h1>
+                <h2 class="slds-text-heading--medium">Install Item</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <aura:if isTrue="{!v.isLoad}">
+       <div class="slds-align_absolute-center">
+           <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+        </div>
+        <aura:set attribute="else"><!--52
+  
+            <lightning:buttonIcon class="slds-m-around_x-small" iconName="utility:refresh" variant="border-filled" onclick="{! c.doInit }" />-->
+            
+            <div class="slds-align_absolute-center slds-m-around_x-small">
+                <lightning:button  label="New" onclick="{! c.openModel }"/>
+            </div>
+            
+            <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+                <lightning:datatable
+                                     keyField="id"
+                                     data="{! v.data }"
+                                     columns="{! v.columns }"
+                                     hideCheckboxColumn="true"
+                                     onrowaction="{! c.handleRowAction }"/>
+            </div>
+            
+            <div class="slds-align_absolute-center slds-m-around_x-small">
+                <lightning:button  label="New" onclick="{! c.openModel }"/>
+            </div>
+                <aura:if isTrue="{!v.isOpen}">
+                    <!--###### MODAL BOX Start######--> 
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- ###### MODAL BOX HEADER Start ######-->
+                            <header class="slds-modal__header">
+                                <lightning:buttonIcon iconName="utility:close"
+                                                      onclick="{! c.closeModel }"
+                                                      alternativeText="close"
+                                                      variant="bare-inverse"
+                                                      class="slds-modal__close"/>
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.COtoEdit == undefined ? 'Create Install Item '+v.lenCO : 'Update '+v.COtoEdit.Name} </h2>
+                            </header>
+                            <!--###### MODAL BOX BODY Part Start######-->
+                            <lightning:recordEditForm aura:id="editForm"
+                                                      onsuccess="{!c.handleSuccess}"
+                                                      onerror="{!c.handleError}"
+                                                      onload="{!c.onload}"
+                                                      objectApiName="Install_Item__c"
+                                                      recordId="{!v.COtoEdit == undefined ? undefined : v.COtoEdit.Id}"
+                                                      >
+                                <!-- the messages component is for error messages -->
+                                <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" style="height: 500px;" id="modal-content-id-1">
+                                    <lightning:messages />
+                                    <aura:if isTrue="{!v.isLoadCCO}">
+                                        <div class="slds-align_absolute-center">
+                                        	<lightning:spinner style="position: relative;display: inline-block;width: 80px;height: 80px;" size="small"/>
+                                        </div>
+                                        <aura:set attribute="else">
+                                            <lightning:inputField fieldName="Name" value="{!v.COtoEdit == undefined ? 'Install Item '+v.lenCO : v.COtoEdit.Name}"/>
+                                            <lightning:inputField fieldName="Business_Accounts__c"/>
+                                            <lightning:inputField fieldName="Job_Type__c"/>
+                                            <lightning:inputField fieldName="Order_Date__c"/>
+                                            <lightning:inputField fieldName="Install_Date__c"/>
+                                            <lightning:inputField fieldName="Scheduled_Date__c"/>
+                                            <lightning:inputField fieldName="Sub_Contractor__c"/>
+                                            <lightning:inputField fieldName="Notes__c"/>
+                                            <lightning:inputField class="slds-hide" fieldName="Installation__c" value="{!v.recordId}"/>
+                                        </aura:set>
+                                    </aura:if>  
+                                    
+                                </div>
+                                <!--###### MODAL BOX FOOTER Part Start ######-->
+                                <footer class="slds-modal__footer">
+                                    <lightning:button label="Close"
+                                                      title="Close"
+                                                      onclick="{! c.closeModel }"
+                                                      disabled="{!v.isLoadCCO}"/>
+                                    <lightning:button variant="brand"
+                                                      label="Create New"
+                                                      title="Create New"
+                                                      onclick="{!c.newII}"
+                                                      disabled="{!v.isLoadCCO}"/>
+                                </footer>
+                            </lightning:recordEditForm>  
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                    <!--###### MODAL BOX Part END Here ######-->
+                    
+                </aura:if>
+        </aura:set>
+    </aura:if>
+    <aura:if isTrue="{!v.isOpenDelete}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModelDelete }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Install Item</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-align_absolute-center slds-m-around_x-small">
+                        {!'Are you sure you want to delete '+v.COtoDelete.Name+'?'}
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######--> 
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModelDelete }"/>
+                    <lightning:button variant="brand" 
+                                      label="Delete"
+                                      title="Delete"
+                                      onclick="{! c.deletingInstallItem }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isOpenEdit}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModelEdit }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!'edit '+v.COtoEdit.Name+'´s invoices'} </h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <!-- the messages component is for error messages -->
+                <div class="slds-modal__content slds-p-around_medium" style="height: 500px;" id="modal-content-id-1">
+                     <c:DiacoInvoices recordId="{!v.COtoEdit.Id}"/>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######--> 
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="brand" 
+                                      label="Close"
+                                      title="Close"
+                                      onclick="{! c.closeModelEdit }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+	
+</aura:component>

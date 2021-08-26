@@ -1,0 +1,439 @@
+<apex:page renderAs="pdf" showHeader="false" standardController="Home_Services__c"
+           sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    
+    <head>
+        <title>N-ERGY</title>
+        <!--
+        <style type="text/css">
+            
+            @page {
+            size: A4;
+            margin: 10mm 20mm 10mm 15mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            }
+            div.footer {
+            align-text: justify;
+            font-size: 6pt;
+            margin: 0mm 12mm 0mm 17mm;
+            position: running(footer);
+            }
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.9pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .left {
+            font-size: 9pt; 
+            float: left;
+            text-align: left;
+            padding-right: 10px;
+            }
+            .right {
+            font-size: 9pt; 
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+            }
+            #page15{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.5pt; 
+            margin: 5mm 10mm 5mm 15mm;
+            }
+            .page16{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt; 
+            margin: 5mm 30mm 5mm 30mm;
+            }
+            .blue-color{
+            color: #0070C0;
+            }
+            .pagenumber:before {
+            content: counter(page);
+            }
+            .pagecount:before {
+            content: counter(pages);
+            }
+            ul.checkmark {
+            list-style-type:none;
+            }
+            ul.checkmark li:before {
+            content:"\2713\0020";
+            font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+            }
+            .center {
+            margin: auto;
+            width: 80%;
+            border: 3px solid black;
+            padding: 3px;
+            font-size: 20pt;
+            }
+        </style>
+        -->
+        
+        <style type="text/css">
+            
+            @page {
+            size: Legal;
+            margin: 5mm 2mm 2mm 2mm;
+            
+            }
+            
+            .page-break {
+            display:block;
+            clear: both;
+            page-break-after:always;
+            }                        
+            
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8pt;            
+            }
+            
+            .text-font{
+            font-size:90%;
+            } 
+            
+            table {
+            border-collapse: collapse;
+            }
+            
+            table, th, td {
+            border: 1px solid black;
+            }
+            
+            .table-page-two{
+            height: 15px;
+            }
+            
+            .white-font{
+            color: white;
+            }
+            
+            .output-text {
+            text-decoration: underline;
+            font-weight: bolder;
+            }
+            
+            .td-Borders {
+            border-top: 0px;
+            border-right: 0px;
+            border-bottom: 1px solid black;
+            border-left: 0px;      
+            }
+            
+            .td-Borders-right-left {
+            border-top: 0px;
+            border-right: 1px solid black;
+            border-bottom: 0px;
+            border-left: 1px solid black;      
+            }
+            
+            .page-break {
+            display: block;
+            clear: both;
+            page-break-after: always;
+            }
+            
+        </style>
+        
+    </head>
+    <table width="100%">
+        <tr>
+            <td width="50%" style="border:0px;">
+                <div width="100%">
+                    <center>
+                        <apex:image url="{!URLFOR($Resource.nergyimgs, 'img/nergy-contract.png')}" width="150px" height="80px" />
+                    </center>
+                </div>
+            </td>
+            <td width="50%" style="border:0px;">
+                <div width="100%">
+                    <center>
+                        <apex:image url="{!URLFOR($Resource.nergyimgs, 'img/nergy-contract2.png')}"  width="130px" height="120px" />
+                    </center>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div style="width:91%; margin:auto; font-size:12px;">
+        
+  
+    <table WIDTH="100%" style="margin-top:30px; font-size:11px">
+        <tr style="border:0px">
+            <td WIDTH="60%" style="border:0px; border-bottom:1px solid black;padding-top:20px">
+                {!Home_Services__c.Account__r.AcctFirstName__c &' '& Home_Services__c.Account__r.AcctLastName__c}
+            </td>
+            <td WIDTH="40%" style="border:0px; border-bottom:1px solid black; padding-top:20px">
+                {!Home_Services__c.Phone_1__c}
+            </td>
+        </tr>
+        <tr style="border:0px">
+            <td WIDTH="55%" style="border:0px; text-align:left;">
+                HOMEOWNER(S)
+            </td>
+            <td WIDTH="45%" style="border:0px; text-align:left;">
+                PHONE NUMBER 
+            </td>
+        </tr>
+        <tr style="border:0px; ">
+            <td WIDTH="50%" style="border:0px; border-bottom:1px solid black; padding-top:20px">
+                {!Home_Services__c.Street__c}
+            </td>
+            <td WIDTH="50%" style="border:0px; border-bottom:1px solid black; padding-top:20px">
+                {! Home_Services__c.City__c + ', ' + Home_Services__c.State__c + ', ' + Home_Services__c.Zip__c}
+            </td>
+        </tr>
+        <tr style="border:0px;">
+            <td WIDTH="50%" style="border:0px; text-align:left;">
+                STREET ADDRESS
+            </td>
+            <td WIDTH="50%" style="border:0px; text-align:left;">
+                CITY, STATE, ZIP CODE 
+            </td>
+        </tr>
+    </table>
+    <table  WIDTH="100%" style="margin-top:20px; font-size:11px; ">
+        <tr>
+            <td WIDTH="45%"  style=" border:0px; border-bottom:1px solid black;">
+                {!Home_Services__c.Femail__c}
+            </td>
+            <td WIDTH="10%" style=" border:0px;">
+            </td>
+            <td WIDTH="45%" style=" border:0px; border-bottom:1px solid black;">
+            </td>
+        </tr> 
+        <tr>
+            <td WIDTH="45%"  style=" border:0px;">
+                EMAIL ADDRESS 
+            </td>
+            <td WIDTH="10%" style=" border:0px;">
+            </td>
+            <td WIDTH="45%" style=" border:0px;">
+                REQUESTED VISIT DATE/TIME
+            </td>
+        </tr> 
+    </table>
+    <table width="100%" style="margin-top:20px; font-size:11px; ">
+        <tr>
+            <td width="50%" style="border:0px;">
+                <b>Energy Efficiency Upgrades</b>
+                <br/>
+                <br/>
+                <table width="60%" style="margin: auto; font-size:11px; ">
+                    <tr>
+                        <td width="50%" style="border:0px; padding-top:8px;">R-38 Insulation</td>
+                        <td width="50%" style="border:0px; padding-top:8px;"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="border:0px; padding-top:8px;">Radiant Barrier</td>
+                        <td width="50%" style="border:0px; padding-top:8px;"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="border:0px; padding-top:8px;">Attic Air Seal</td>
+                        <td width="50%" style="border:0px; padding-top:8px;"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="border:0px; padding-top:8px;">Duct Seal</td>
+                        <td width="50%" style="border:0px; padding-top:8px;">Units</td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="border:0px; padding-top:8px;">Air Handler Seal</td>
+                        <td width="50%" style="border:0px; padding-top:8px;">Units</td>
+                    </tr>
+                </table>
+                <table WIDTH="100%">
+                    <tr style="border:0px; ">
+                        <td width="100%" style="border:0px;">
+                            <table WIDTH="90%" border="1">
+                                <tr>
+                                    <td WIDTH="38%" style="border:0px; padding-top:14px; text-align:left; font-size:11px">
+                                        <b>Energy Star Total	$ </b>
+                                    </td>
+                                    <td WIDTH="62%" style="border:0px; border-bottom:1px solid black;">
+                                        Included w/Solar
+                                    </td>
+                                </tr>
+                            </table>                               
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="50%" style="border:0px;">
+                <b>Home Description</b>
+                <br/>
+                <br/>
+                <div style="width: 100%; border: 1px solid black;">
+                    <table WIDTH="100%">
+                        <tr style="border:0px; ">
+                            <td width="100%" style="border:0px;">
+                                <table WIDTH="60%" border="1">
+                                    <tr>
+                                        <td WIDTH="50%" style="border:0px; text-align:left; font-size:11px; ">
+                                            Square Feet: 
+                                        </td>
+                                        <td WIDTH="50%" style="border:0px; border-bottom:1px solid black;">
+                                            {!Home_Services__c.House_Square_Footage__c}
+                                        </td>
+                                    </tr>
+                                </table>                               
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table width="60%" style="margin: auto; font-size:11px; ">
+                        <tr>
+                            <td style="border:0px; padding-top:8px;">1 Story</td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td style="border:0px; padding-top:8px;">2 Story</td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td style="border:0px; padding-top:8px;">Tri-Level</td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td style="border:0px; padding-top:8px;">Current Insulation Fiberglass</td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td style="border:0px; padding-top:8px; padding-bottom:12px;">Current Insulation Cellulose</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+        <br/>
+    <center>
+        
+        <p>
+            <b>
+                Changes
+            </b><br/>
+            Any changes made to plans, materials used, time needed or any other portion of the work must be discussed with Owner prior to any decisions. If the Owner wishes to make any changes to this contract (additions or subtractions), the owner must discuss the changes with the contractor and both the owner and contractor must mutually agree upon the changes by completing a Change Order Form provided by the contractor.
+        </p>
+        
+        <p>
+            <b> Permits</b><br/>
+            Contractor agrees to secure any permits necessary so that this work will be done within the parameters of the laws of Arizona. Contractor agrees that any fees for these permits are already included in the total amount charged to the Owner.
+        </p>        
+        
+        <p>
+            <b>Workers</b><br/>
+            Contractor agrees that any laborer, subcontractor and/or employee that he/she hires for the purposes of this job is legally permitted to work in this function in this country.
+        </p>
+        
+        <p>
+            <b>Subcontractors</b><br/>
+            Owner agrees that the Contractor may hire subcontractors at his/her discretion, provided that Contractor agrees that the payment for said subcontractors is entirely the Contractor's responsibility. Owner is not in any way liable for a subcontractor's missed payment.
+        </p>
+        
+        <p>
+            <b>Insurance</b><br/>
+            Owner agrees to maintain the appropriate insurance on the reference in section one. Contractor agrees to maintain an insurance policy that covers himself/herself, any employees or subcontractors, his/her equipment, and any damage caused by the work.
+        </p>
+        <br/>
+        <p>
+            I HAVE READ AND UNDERSTAND THE ABOVE
+        </p>
+    </center>
+        <br/>
+    <table WIDTH="100%" style="margin-top: 30px; font-size:11px">
+        <tr style="border:0px; ">
+            <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:20px">
+                 <span style="color:white;">sign_1</span>
+            </td>
+            <td WIDTH="40%" style="border:0px;">
+                <table WIDTH="100%" style="margin: auto;">
+                    <tr style="border:0px;">
+                        <td WIDTH="30%" style="border:0px; padding-top:10px; text-align:right; font-size:13px">
+                            Date:
+                        </td>
+                        <td WIDTH="70%" style="border:0px; border-bottom:1px solid black;color: white;">
+                            date_1
+                        </td>
+                    </tr>
+                </table>                               
+            </td>
+        </tr>
+        <tr style="border:0px;">
+            <td WIDTH="55%" style="border:0px; text-align:left;">
+                Customer(s) Signature
+            </td>
+            <td WIDTH="45%" style="border:0px; text-align:center;">
+            </td>
+        </tr>
+    </table>
+    <table WIDTH="100%" style="margin-top: 20px; font-size:11px">
+        <tr style="border:0px; ">
+            <td WIDTH="60%" style="border:0px; border-bottom:1px solid black; padding-top:20px;font-size: 20pt">
+                <span style="color:white;">sign_3</span>
+                <!-- <b>Matthew Willes</b> -->
+            </td>
+            <td WIDTH="40%" style="border:0px;">
+                <table WIDTH="100%" style="margin-top: 22px;">
+                    <tr style="border:0px;">
+                        <td WIDTH="30%" style="border: 0px; padding-top:10px; text-align:right; font-size:13px">
+                            Date:
+                        </td>
+                        <td WIDTH="70%" style="border: 0px; border-bottom:1px solid black;color: white;">
+                            date_3
+                        </td>
+                    </tr>
+                </table>                               
+            </td>
+        </tr>
+        <tr style="border:0px;">
+            <td WIDTH="55%" style="border:0px; text-align:left;">
+                Sales Rep Signature
+            </td>
+            <td WIDTH="45%" style="border:0px; text-align:center;">
+                
+            </td>
+        </tr>
+    </table>
+     </div> 
+</apex:page>

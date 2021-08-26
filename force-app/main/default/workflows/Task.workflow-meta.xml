@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Confirmation_Date_Stamp</fullName>
+        <description>When Confirmation is &quot;Yes&quot; Confirmation Date is stamped with today&apos;s date.</description>
+        <field>Confirmation_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Confirmation Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Confirmation_Date_and_Time_Stamp</fullName>
+        <field>Confirmation_Date_and_Time__c</field>
+        <formula>Now()</formula>
+        <name>Confirmation Date and Time Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Task Event Meeting Date Stamp</fullName>
+        <actions>
+            <name>Confirmation_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Confirmation_Date_and_Time_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Task.Confirmation__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Task.Meetings__c</field>
+            <operation>equals</operation>
+            <value>1st Meeting,2nd Meeting,3rd Meeting,4th Meeting</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

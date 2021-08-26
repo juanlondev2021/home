@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sweepstakes1</fullName>
+    <columns>NAME</columns>
+    <columns>Services_Pick__c</columns>
+    <columns>Account__c</columns>
+    <columns>Phone__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>webForm__c.Solar</value>
+    </filters>
+    <filters>
+        <field>Url__c</field>
+        <operation>equals</operation>
+        <value>www.gosolarnowaps.com</value>
+    </filters>
+    <label>Go Solar Now APS</label>
+</ListView>

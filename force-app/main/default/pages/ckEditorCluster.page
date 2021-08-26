@@ -1,0 +1,13 @@
+<apex:page standardController="Inbound_Script__c">
+    
+    <apex:form >
+        <apex:commandButton action="{!save}" value="Save and return to record"/>
+        <apex:includescript value="{!URLFOR($Resource.CKEditor, 'ckeditor/ckeditor.js')}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!Inbound_Script__c.ClusterSection1__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!Inbound_Script__c.PopupPostCluster__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!Inbound_Script__c.ClusterSection3__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!Inbound_Script__c.ClusterSection4__c}" />
+        <apex:inputtextarea styleClass="ckeditor" richtext="false" value="{!Inbound_Script__c.ExpandableSection__c}" />
+    </apex:form>
+    
+</apex:page>

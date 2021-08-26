@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Who_Captured_Verbal_Consent__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This is a lookup field to link to the user who captured consent so it can be used in reporting.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is a lookup field to link to the user who captured consent so it can be used in reporting.</inlineHelpText>
+    <label>Consent By User</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Accounts2_del</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

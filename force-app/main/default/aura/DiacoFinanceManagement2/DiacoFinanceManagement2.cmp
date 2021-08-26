@@ -1,0 +1,127 @@
+<aura:component controller="DiacoFinance2Class" 
+                implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome"
+                access="global">
+    
+    <aura:attribute name="data" type="Object" default="{}"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:attribute name="action" type="String" default="Update" />
+    <aura:attribute name="disableInput" type="boolean" default="true" />
+    <aura:attribute name="loaded" type="Boolean" default="true" />
+    <aura:attribute name="financeId" type="string" default="" />
+    <aura:attribute name="notValidField" type="Boolean" default="false" />
+    
+    <div class="slds-box slds-box_small slds-m-bottom_small">
+        
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--large">
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:product_required" class="blueOnwhite" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label"></h1>
+                    <h2 class="slds-text-heading--medium">Finance Management</h2>
+                </div>
+            </lightning:layoutItem>
+          
+            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                <lightning:buttonIcon iconName="utility:settings"  
+                                      variant="border-filled"
+                                      name="UpdateFinance"
+                                      alternativeText="Update finance"
+                                      onclick="{! c.activateSectionToUpdate }"
+                                      />
+            </lightning:layoutItem>
+           
+        </lightning:layout> 
+        
+        <aura:if isTrue="{! v.loaded }">
+            <lightning:spinner alternativeText="Loading" />
+        </aura:if>
+        
+        
+        <div class="slds-box slds-box_x-small">
+            <form class="slds-m-around_x-small">
+               
+                <div class="slds-m-around_x-small">
+                 <!--    <lightning:input aura:id="Activation_Emergency_Video" type="number" name="Activation_Emergency_Video" label="Activation (Emergency And Video)" value="" formatter="currency" step="0.01" disabled="{!v.disableInput}"/>-->
+                    <lightning:input aura:id="Finance_Name" name="Finance_Name" label="Finance Name" disabled="true"/>
+                </div>
+
+                <div class="slds-grid slds-wrap">    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                        <div class="slds-box slds-box_small slds-m-around_x-small">                            
+                            <h3><b>Lease</b></h3>
+                            
+                            <lightning:input aura:id="Monthly_Payment" type="number" name="Monthly_Payment" label="Monthly Payment" value="" formatter="currency" step="0.01" disabled="{!v.disableInput}"/>
+                            <lightning:input aura:id="Activation_Emergency_Video" type="number" name="Activation_Emergency_Video" label="Activation (Emergency And Video)" value="" formatter="currency" step="0.01" disabled="{!v.disableInput}"/>
+                            <lightning:input aura:id="Monthly_Term" type="number" name="MonthlyTerm" label="Monthly Term" value="" disabled="{!v.disableInput}"/>
+                            <lightning:input aura:id="Monthly_Renewal" type="number" name="MonthlyRenewal" label="Monthly Renewal" value="" disabled="{!v.disableInput}"/>
+                            <lightning:select aura:id="Customer_Owned" name="CustomerOwned" label="Customer Owned" value="false" disabled="{!v.disableInput}">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </lightning:select>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                        <div class="slds-box slds-box_small slds-m-around_x-small">
+                            <h3><b>Purchase</b></h3>
+                            <lightning:input aura:id="Monthly_Payment_Two" type="number" name="Monthly_Payment" label="Monthly Payment" value="" formatter="currency" step="0.01" disabled="{!v.disableInput}"/>
+                            <lightning:input aura:id="Activation_Emergency_Video_Two" type="number" name="Activation_Emergency_Video" label="Activation (Emergency And Video)" value="" formatter="currency" step="0.01" disabled="{!v.disableInput}"/>
+                            <lightning:select aura:id="Months_Same_As_Cash" name="MonthsSameAsCash" label="12 Months Same As Cash" value="false" disabled="{!v.disableInput}">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </lightning:select>
+                            <lightning:input aura:id="Monthly_Term_Two" type="number" name="monthlyTermTwo" label="Monthly Term" value="" disabled="{!v.disableInput}"/>
+                            <lightning:input aura:id="Monthly_Renewal_Two" type="number" name="MonthlyRenewalTwo" label="Monthly Renewal" value="" disabled="{!v.disableInput}"/>
+                            <lightning:select aura:id="Customer_Owned_Two" name="CustomerOwned" label="Customer Owned" value="false" disabled="{!v.disableInput}">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </lightning:select>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_2-of-12">
+                        <div class="slds-box slds-box_small slds-m-top_x-small">
+                            
+                            <lightning:select aura:id="Type" name="Type" label="Type" value="" disabled="{!v.disableInput}">
+                                <option value="">Choose one</option>
+                                <option value="lease">Lease</option>
+                                <option value="purchase">Purchase</option>
+                            </lightning:select>
+                            <lightning:select aura:id="Payment_Factor" name="PaymentFactor" label="Payment Factor" value="0.01675" disabled="{!v.disableInput}">
+                                <option value="0.01675">0.01675</option>
+                                <option value="0.01487">0.01487</option>
+                            </lightning:select>
+                            <lightning:select aura:id="Tax" name="Tax" label="Tax" value="false" disabled="{!v.disableInput}">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </lightning:select>
+                            <lightning:select aura:id="Video" name="Video" label="Video" value="false" disabled="{!v.disableInput}">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </lightning:select>
+                            <lightning:input aura:id="APR" type="number" name="APR" label="APR" value="" formatter="currency" step="0.01" disabled="{!v.disableInput}"/>
+                        	<lightning:input aura:id="Term" type="number" name="Term" label="Term months" value="" disabled="true"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <aura:if isTrue="{!v.notValidField}">
+                    <div class="slds-m-vertical_medium slds-align_absolute-center">
+                        <p style="color:red;">Complete all fields</p>
+                    </div>
+                </aura:if> 
+                <aura:if isTrue="{!(!v.disableInput)}">
+                    <div class="slds-m-vertical_medium slds-align_absolute-center">
+                        <lightning:button label="Cancel" name="btnCancel" title="Cancel" onclick="{! c.activateSectionToUpdate }"/>
+                        <aura:if isTrue="{!v.action == 'Update'}">
+                            <lightning:button variant="brand" label="Update finance" title="Update" onclick="{! c.handleClick }" />
+                        </aura:if> 
+                    </div>
+                </aura:if> 
+            </form> 
+        </div>
+    </div>
+    <div class="slds-box slds-box_small slds-m-bottom_small">
+        <c:DiacoFinanceComponent2/>
+    </div>
+</aura:component>

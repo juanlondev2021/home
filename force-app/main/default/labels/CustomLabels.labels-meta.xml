@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AAA</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AAA</shortDescription>
+        <value>0231K000006PJvL</value>
+    </labels>
+    <labels>
+        <fullName>Batch_Failure_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Batch Failure Email</shortDescription>
+        <value>eric@mstsolutions.com</value>
+    </labels>
+    <labels>
+        <fullName>Batch_Size</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Batch Size</shortDescription>
+        <value>50</value>
+    </labels>
+    <labels>
+        <fullName>Data_com_Clean_User_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Data.com Clean User Id</shortDescription>
+        <value>0051K000009GELYQA4</value>
+    </labels>
+    <labels>
+        <fullName>Dummy_Address_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>It will hold the record id of dummy address</shortDescription>
+        <value>a4zj0000000g4pm</value>
+    </labels>
+    <labels>
+        <fullName>EBR_Filter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EBR Filter</shortDescription>
+        <value>Porch</value>
+    </labels>
+    <labels>
+        <fullName>Inbound_Filters</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>This value is used to filter the additional questions in CPL Inbound Calls</shortDescription>
+        <value>Porch</value>
+    </labels>
+    <labels>
+        <fullName>InternalAppSlackName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>App name of internal  import component</shortDescription>
+        <value>DIacoInternal</value>
+    </labels>
+    <labels>
+        <fullName>InternalChannelName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>name of internal channel import component</shortDescription>
+        <value>internal-import-cmp</value>
+    </labels>
+    <labels>
+        <fullName>Middleware_User_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Middleware User Id</shortDescription>
+        <value>005j000000DMjal</value>
+    </labels>
+    <labels>
+        <fullName>Outbound_Filters</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>This value is used to filter the additional questions in CPL Inbound Calls</shortDescription>
+        <value>Porch</value>
+    </labels>
+</CustomLabels>

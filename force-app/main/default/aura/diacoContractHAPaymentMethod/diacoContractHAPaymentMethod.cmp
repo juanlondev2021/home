@@ -1,0 +1,86 @@
+<!--
+
+ Diaco
+ @author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering home automation contract tabs
+     
+ Changes (Version)
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		12/03/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+-->
+
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="HomeServices" type="Home_Services__c" default="{ 'sobjectType': 'Home_Services__c' }"/>
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="options" type="String[]" default="Credit Card,Checking,Finance"/>
+    <aura:attribute name="toSend" type="boolean" default="false"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <fieldset class="slds-box slds-theme--default slds-m-top--medium">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="utility:money" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Payment Methods - Products</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked"> 
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Method Of Payment" aura:id="Method_Of_Payment"
+                                                      label="Method Of Payment"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      onchange="{! c.changeStatus }"
+                                                      value="{!v.HomeServices.Method_Of_Payment__c}">
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.options}" var="method">
+                                            <option value="{!method}">{!method}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <aura:if isTrue="{!v.HomeServices.Method_Of_Payment__c == 'Credit Card'}">
+                               <c:diacoContractWaterCreditCard recordId="{!v.recordId}" HomeServices="{!v.HomeServices}" />
+                            </aura:if> 
+                            <aura:if isTrue="{!v.HomeServices.Method_Of_Payment__c == 'Checking'}">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-m-top--medium">
+                                    <fieldset class="slds-box slds-theme--default ">
+                                        <c:diacoContractWaterChecking recordId="{!v.recordId}" HomeServices="{!v.HomeServices}" />
+                                    </fieldset>
+                                </div>
+                            </aura:if> 
+                             <aura:if isTrue="{!v.HomeServices.Method_Of_Payment__c == 'Finance'}">
+                               <c:diacoContractWaterFinance recordId="{!v.recordId}" HomeServices="{!v.HomeServices}" />
+                            </aura:if>
+                            
+                            <lightning:button variant="brand" label="{!v._label}" 
+                                              class="slds-m-top--medium slds-align_absolute-center" 
+                                              title="Brand action" 
+                                              onclick="{! c.saveInformation}" />
+                            <aura:if isTrue="{!v.toSend}">
+                                <lightning:button variant="brand" label="{!v.label}" 
+                                              class="slds-m-top--medium slds-align_absolute-center" 
+                                              title="Brand action" 
+                                              onclick="{! c.ToDocusign}" />
+                            </aura:if>
+                        </div>
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

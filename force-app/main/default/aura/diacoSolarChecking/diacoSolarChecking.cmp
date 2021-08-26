@@ -1,0 +1,120 @@
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="Bank_Account_Type" type="String" />
+    <aura:attribute name="options" type="String[]" default="Checking,Savings,Business Checking"/>
+    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+        <div aria-labelledby="FirstCustomerInformation">
+            <fieldset class="slds-theme--default ">
+                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                    <lightning:layoutItem>
+                        <lightning:icon iconName="custom:custom40" alternativeText="My Expenses"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="page-section page-header">
+                            <h1 class="slds-text-heading--label">INFORMATION ABOUT</h1>
+                            <h2 class="slds-text-heading--medium">Checking</h2>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout>
+                    <!--Form checking read only-->
+                    <div class="slds-form slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-align_absolute-center">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_11-of-12">
+                                <fieldset class="slds-box slds-theme--default height-content">
+                                    <lightning:recordViewForm recordId="{!v.Home_Services.Id}" objectApiName="Home_Services__c">
+                                        <div class="slds-form slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                <lightning:outputField fieldName="Bank_Name__c"/>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                <lightning:outputField fieldName="Bank_Account_Type__c"/>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_-of-12 slds-large-size_12-of-12">
+                                                <lightning:outputField fieldName="Bank_Account_Name__c"/>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_-of-12 slds-large-size_12-of-12">
+                                                <lightning:outputField fieldName="Bank_Account_Number_Encrypted__c"/>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_-of-12 slds-large-size_12-of-12">
+                                                <lightning:outputField fieldName="Routing_Number__c"/>
+                                            </div>
+                                            
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_-of-12 slds-large-size_12-of-12">
+                                                <lightning:outputField fieldName="Account_Number_Checking__c"/>
+                                            </div>
+                                        </div>
+                                    </lightning:recordViewForm>
+                                    
+                                </fieldset>
+                            </div>
+                        </div>
+                        
+                        <!--Form checking editable-->
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-align_absolute-center">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_11-of-12">
+                                <fieldset class="slds-box slds-theme--default height-content">
+                                    <div class="slds-form slds-grid slds-wrap">
+                                        <div aria-labelledby="FirstCustomerInformation">
+                                            <div class="slds-form slds-grid slds-wrap">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input aura:id="BankName"
+                                                                     onchange="{! c.changeStatus }"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_11-of-12"
+                                                                     name="BankNameField" 
+                                                                     label="Bank Name"/>
+                                                </div> 
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                                    <lightning:select name="BankAccountTypeField" aura:id="CustomerInfo"
+                                                                      label="Bank Account Type"
+                                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                      onchange="{! c.changeStatus }"
+                                                                      value="{!v.Bank_Account_Type}">
+                                                        <option value="">choose one...</option>
+                                                        <aura:iteration items="{!v.options}" var="color">
+                                                            <option value="{!color}">{!color}</option>
+                                                        </aura:iteration>
+                                                    </lightning:select>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                                    <lightning:input aura:id="BankAccountNameField"
+                                                                     onchange="{! c.changeStatus }"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                     name="BankAccountNameField" 
+                                                                     label="Bank Account Name"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                                    <lightning:input aura:id="BankAccountNumber"
+                                                                     onchange="{! c.changeStatus }"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                     name="BankAccountNumberField" 
+                                                                     label="Bank Account Number"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input aura:id="BankRoutingNumber"
+                                                                     onchange="{! c.changeStatus }"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_11-of-12"
+                                                                     name="BankRoutingNumberField" 
+                                                                     label="Routing Number"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                                    <lightning:input aura:id="CheckNumber"
+                                                                     onchange="{! c.changeStatus }"
+                                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                                     name="CheckNumberField" 
+                                                                     label="Check Number"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </lightning:layout>
+            </fieldset>
+        </div>
+    </lightning:layoutItem>
+</aura:component>

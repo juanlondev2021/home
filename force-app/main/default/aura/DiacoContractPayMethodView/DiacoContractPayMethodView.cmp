@@ -1,0 +1,98 @@
+<aura:component>
+    <aura:attribute name="selectedPaymentId" type="String" />
+    <aura:attribute name="selectedPaymentType" type="String" />
+
+    <lightning:recordEditForm recordId="{!v.selectedPaymentId}" objectApiName="PaymentMethod__c" aura:id='ViewPaymenttEditForm'>
+
+        <lightning:messages />
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                <lightning:inputField fieldName="PaymentMethodType__c" disabled="true" />
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                <lightning:inputField fieldName="Payment_Destination__c" disabled="true" />
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                <lightning:inputField fieldName="Amount__c" readonly="true" />
+            </div>
+            <aura:if isTrue="{!v.selectedPaymentType == 'ACH'}">
+                <div class="slds-col slds-size_6-of-12 slds-m-bottom_medium">
+                    <lightning:inputField fieldName="BankName__c" aura:id="BankName__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-m-bottom_medium">
+                    <lightning:inputField fieldName="Bank_Account_Name__c" aura:id="Bank_Account_Name__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-m-bottom_medium">
+                    <lightning:inputField fieldName="BankAccountType__c" aura:id="BankAccountType__c" disabled="true"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-m-bottom_medium">
+                    <lightning:inputField fieldName="BankAccountNumber__c" aura:id="BankAccountNumber__c" readonly="true"/>
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-m-bottom_medium">
+                    <lightning:inputField fieldName="RoutingNumber__c" aura:id="RoutingNumber__c" readonly="true"/>
+                </div>
+            </aura:if>
+
+            <aura:if isTrue="{!v.selectedPaymentType =='Checking'}">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="BankName__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="Bank_Account_Name__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="BankAccountNumber__c" readonly="true" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="AccountNumberChecking__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="RoutingNumber__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="BankAccountType__c" disabled="true" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="Does_it_have_chargent_order__c" disabled="true" />
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.selectedPaymentType =='Credit Card'}">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="NameOnCard__c" readonly="true" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="CardNumber__c" readonly="true" maxlength="4" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="CardType__c" disabled="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="Does_it_have_chargent_order__c" disabled="true" />
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="CSV__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="CardExpirationMonth__c" readonly="true" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="">
+                    <lightning:inputField fieldName="Card_Expiration_Year__c" readonly="true" />
+                </div>
+
+            </aura:if>
+            <aura:if isTrue="{!v.selectedPaymentType =='Finance'}">
+                <lightning:inputField fieldName="FinanceCompany__c" readonly="true" />
+            </aura:if>
+
+            <!-- <aura:if isTrue="{!v.selectedPaymentType =='Lease'}"> </aura:if>
+                        <aura:if isTrue="{!v.selectedPaymentType =='ACH'}"></aura:if>-->
+        </div>
+    </lightning:recordEditForm>
+
+</aura:component>

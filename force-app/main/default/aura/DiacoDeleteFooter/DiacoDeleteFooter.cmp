@@ -1,0 +1,13 @@
+<aura:component controller="DiacoDelete">
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute name="CustomObject" type="String"/>
+    <aura:attribute name="recordId" type="String"/>
+	<lightning:button variant="base" 
+                          label="Cancel"
+                          title="Cancel"
+                          onclick="{! c.closeModel }"/>
+        <lightning:button variant="destructive" 
+                          label="Delete"
+                          title="Delete"
+                          onclick="{! c.delete }"/>
+</aura:component>

@@ -1,0 +1,74 @@
+<!--
+
+ Diaco
+ @author 			Esnayder Morales Corpas href=<esnaydermorales25@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering solar Finance form
+     
+ Changes (Version)
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		01/05/2019		Esnayder Morales (ES)	Initial implementation  of the component.
+-->
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    
+    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+        <div aria-labelledby="FirstCustomerInformation">
+            <fieldset class="slds-theme--default ">
+                <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                    <lightning:layoutItem>
+                        <lightning:icon iconName="custom:custom17" alternativeText="My Expenses"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="page-section page-header">
+                            <h1 class="slds-text-heading--label">Information</h1>
+                            <h2 class="slds-text-heading--medium">Finance</h2>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <div class="slds-form slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-align_absolute-center">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_11-of-12">
+                            <fieldset class="slds-box slds-theme--default height-content">
+                                <lightning:recordViewForm recordId="{!v.Home_Services.Id}" objectApiName="Home_Services__c">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_-of-12 slds-large-size_12-of-12">
+                                        <lightning:outputField fieldName="Finance_Company__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_-of-12 slds-large-size_12-of-12">
+                                        <lightning:outputField fieldName="Financed_Amount__c"/>
+                                    </div>
+                                </lightning:recordViewForm>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-align_absolute-center">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_11-of-12">           
+                            <fieldset class="slds-box slds-theme--default height-content">
+                                <div class="slds-form slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <lightning:input aura:id="FinanceCompany"
+                                                         onchange="{! c.changeStatus }"
+                                                         class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                         name="FinanceCompany" 
+                                                         label="Finance Company"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                        <lightning:input aura:id="FinancedAmount"
+                                                         onchange="{! c.changeStatus }"
+                                                         class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12"
+                                                         name="FinancedAmount" 
+                                                         label="Financed Amount"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </lightning:layoutItem>
+    
+</aura:component>

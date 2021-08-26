@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fDays_to_Import_after_recording__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK(Recording_Date__c),NULL,
+    IF(   DATEVALUE( CreatedDate) - Recording_Date__c &gt; 90, NULL , DATEVALUE( CreatedDate) - Recording_Date__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fDays to Import after recording</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

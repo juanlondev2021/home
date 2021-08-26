@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>this object is responsible of organize the schedules to update records in salesforce when some record in salesrabbit has been updated and delete some record in salesrabbit after some time.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>SalesRabbit Schedule</label>
+    <visibility>Public</visibility>
+</CustomObject>

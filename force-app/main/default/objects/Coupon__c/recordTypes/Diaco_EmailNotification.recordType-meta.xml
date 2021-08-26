@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Diaco_EmailNotification</fullName>
+    <active>true</active>
+    <description>The email Notification Coupon</description>
+    <label>Email Notification</label>
+    <picklistValues>
+        <picklist>Source__c</picklist>
+        <values>
+            <fullName>Restaurant%2Ecom</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>

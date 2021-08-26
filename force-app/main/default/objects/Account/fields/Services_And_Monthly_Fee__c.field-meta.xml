@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Services_And_Monthly_Fee__c</fullName>
+    <externalId>false</externalId>
+    <label>Services And Monthly Fee</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Under $2.00</fullName>
+                <default>false</default>
+                <label>Under $2.00</label>
+            </value>
+            <value>
+                <fullName>$2.01 To $3.00</fullName>
+                <default>false</default>
+                <label>$2.01 To $3.00</label>
+            </value>
+            <value>
+                <fullName>$3.01 To $4.50</fullName>
+                <default>false</default>
+                <label>$3.01 To $4.50</label>
+            </value>
+            <value>
+                <fullName>$4.51 To $6.00</fullName>
+                <default>false</default>
+                <label>$4.51 To $6.00</label>
+            </value>
+            <value>
+                <fullName>$6.01+</fullName>
+                <default>false</default>
+                <label>$6.01+</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

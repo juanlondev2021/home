@@ -1,0 +1,10 @@
+.THIS .c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background-color: #ffffff;
+}
+.THIS .align-end-button {
+   display: flex;
+   align-items: flex-end;
+   justify-content: flex-end;
+}

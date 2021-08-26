@@ -1,0 +1,164 @@
+<!--
+
+ Diaco
+ @author 			Esnayder Morales Corpas href=<esnaydermorales25@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering solar payment form
+     
+ Changes (Version)
+ _________________________________________
+
+   No.		Date			Author					Description
+   ____	__________      __________________      _____________________________________
+@version	1.0		01/05/2019		Esnayder Morales (ES)	Initial implementation  of the component.
+-->
+<aura:component controller="DiacoSolarContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="toSend" type="boolean" default="false"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="Card_Number" value="{!v.Home_Services}" action="{!c.changeStatus}"/>
+    <aura:attribute name="Method_Of_Payment" type="String[]" default="Credit Card,Finance,Lease,ACH,Checking"/>
+    <aura:attribute name="Bank_Account_Type" type="String[]" default="Checking,Savings,Business Checking"/>
+    
+    <aura:attribute name="toReload" type="Boolean"/>
+    <aura:handler name="change" value="{!v.toReload}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="isLoad" type="boolean" default="true"/>
+    
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+    
+    <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="custom:custom40" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information</h1>
+                    <h2 class="slds-text-heading--medium">Payments</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <form class="slds-form--stacked">
+            <lightning:layout horizontalAlign="center">
+                <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                    <div aria-labelledby="FirstCustomerInformation" class="slds-align_absolute-center">
+                        
+                        <div class="slds-form slds-grid slds-wrap slds-align_absolute-center">
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 readonly="true"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12of-12"
+                                                 name="Remaining_Amount" 
+                                                 label="Remaining Amount"
+                                                 value="{!v.Home_Services.Balance_Due__c}"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="homeOwner"
+                                                 type="number"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="First_Payment" 
+                                                 label="First Payment"
+                                                 value="{!v.Home_Services.FirstPayment__c}"/>
+                            </div> 
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                <lightning:input aura:id="homeOwner"
+                                                 type="number"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Second_Payment" 
+                                                 label="Second Payment"
+                                                 value="{!v.Home_Services.SecondPayment__c}"/>
+                            </div> 
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <lightning:input aura:id="homeOwner"
+                                                 type="number"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                 name="Third_Payment" 
+                                                 label="Third Payment"
+                                                 value="{!v.Home_Services.ThirdPayment__c}"/>
+                            </div> 
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            
+            
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="utility:money" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information</h1>
+                        <h2 class="slds-text-heading--medium">Method Of Payment</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <aura:if isTrue="{!not(v.isLoad)}">
+                <lightning:layout horizontalAlign="center">
+                    <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                        <div aria-labelledby="FirstCustomerInformation">
+                            <div class="slds-form slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                    <lightning:select name="Method_Of_Payment" aura:id="Method_Of_Payment"
+                                                      label="Method Of Payment"
+                                                      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                      value="{!v.Home_Services.Method_Of_Payment__c}">
+                                        <option value="">choose one...</option>
+                                        <aura:iteration items="{!v.Method_Of_Payment}" var="color">
+                                            <option value="{!color}">{!color}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>                        
+                        </div>
+                        
+                    </lightning:layoutItem>
+                </lightning:layout>  
+                <div class="slds-form slds-grid slds-wrap">
+                    <aura:if isTrue="{!v.Home_Services.Method_Of_Payment__c == 'ACH'}">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                            <c:diacoContractACH aura:id="diacoContractACH" recordId="{!v.recordId}" Home_Services="{!v.Home_Services}" />
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.Home_Services.Method_Of_Payment__c == 'Finance'}">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                            <c:diacoContractWaterFinance aura:id="diacoContractWaterFinance" recordId="{!v.recordId}" HomeServices="{!v.Home_Services}" />
+                        </div>
+                        <!--c:diacoContractFinance Home_Services="{!v.Home_Services}"/-->
+                    </aura:if>
+                    <aura:if isTrue="{!v.Home_Services.Method_Of_Payment__c == 'Credit Card'}">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                            <c:diacoContractWaterCreditCard aura:id="diacoContractWaterCreditCard" recordId="{!v.recordId}" HomeServices="{!v.Home_Services}"/>
+                        </div>
+                        <!--c:diacoContractCreditCard Home_Services="{!v.Home_Services}" recordId="{!v.recordId}"/-->
+                    </aura:if>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-m-top--medium slds-p-horizontal_small">
+                        <c:diacoContractWaterChecking aura:id="diacoContractWaterChecking" recordId="{!v.recordId}" HomeServices="{!v.Home_Services}"/>
+                        <!--c:diacoContractWaterCreditCard recordId="{!v.recordId}" HomeServices="{!v.Home_Services}"/-->
+                    </div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning:button variant="brand"
+                                          class="slds-m-top--medium slds-align_absolute-center" 
+                                          title="{!v._label == 'Saving...' ? v._label : 'Save'}" 
+                                          label="{!v._label == 'Saving...' ? v._label : 'Save'}" 
+                                          disabled="{!v._label == 'Saving...'}" 
+                                          onclick="{! c.saveInformation}" /> 
+                    </div>
+                </div>
+            </aura:if>
+        </form>
+    </fieldset>	
+</aura:component>

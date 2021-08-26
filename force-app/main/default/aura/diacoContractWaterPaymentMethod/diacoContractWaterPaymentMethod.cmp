@@ -1,0 +1,16 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water payment methods view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		18/03/2019		Jorge Martinez (JM)		Initial implementation of the component.
+-->
+<aura:component >
+	<aura:attribute name="recordId" type="String" />
+    <c:diacoContractServices recordId="{!v.recordId}"/>
+</aura:component>

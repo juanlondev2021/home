@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Flooring_Install_Repair_Refinish__c</fullName>
+    <description>(Flooring/Carpeting)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Flooring/Carpeting)</inlineHelpText>
+    <label>Flooring Install /Repair /Refinish</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Wood - Install 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Wood - Install 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Install 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Wood - Install 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Install 5 + rooms</fullName>
+                <default>false</default>
+                <label>Wood - Install 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet - Install 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Carpet - Install 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet - Install 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Carpet - Install 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet - Install 5 + rooms</fullName>
+                <default>false</default>
+                <label>Carpet - Install 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Tile - Install 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Tile - Install 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Tile - Install 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Tile - Install 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Tile - Install 5 + rooms</fullName>
+                <default>false</default>
+                <label>Tile - Install 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Repair 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Wood - Repair 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Repair 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Wood - Repair 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Repair 5 + rooms</fullName>
+                <default>false</default>
+                <label>Wood - Repair 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet - Repair 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Carpet - Repair 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet - Repair 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Carpet - Repair 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Carpet - Repair 5 + rooms</fullName>
+                <default>false</default>
+                <label>Carpet - Repair 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Tile -Repair 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Tile -Repair 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Tile - Repair 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Tile - Repair 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Tile - Repair 5 + rooms</fullName>
+                <default>false</default>
+                <label>Tile - Repair 5 + rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Refinish 1-2 rooms</fullName>
+                <default>false</default>
+                <label>Wood - Refinish 1-2 rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Refinish 3-4 rooms</fullName>
+                <default>false</default>
+                <label>Wood - Refinish 3-4 rooms</label>
+            </value>
+            <value>
+                <fullName>Wood - Refinish 5 + rooms</fullName>
+                <default>false</default>
+                <label>Wood - Refinish 5 + rooms</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

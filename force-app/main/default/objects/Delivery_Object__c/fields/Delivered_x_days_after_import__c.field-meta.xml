@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivered_x_days_after_import__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( AND(DATEVALUE( User_Address__r.CreatedDate ) - User_Address__r.Recording_Date__c &lt; 21 , NOT( ISBLANK( User_Address__r.Recording_Date__c )), ISPICKVAL( Hung_Status__c , &quot;Hung&quot;),NOT( ISBLANK( Delivery_Date__c ))) , DATEVALUE(Delivery_Date__c) - DATEVALUE(User_Address__r.CreatedDate) , NULL)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Delivered x days after import</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

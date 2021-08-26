@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fDID_Type_CPL__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (  Call_Type__c  = &quot;nuHome nuCard SPEC&quot;, TRUE, FALSE )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>fDID Type CPL</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

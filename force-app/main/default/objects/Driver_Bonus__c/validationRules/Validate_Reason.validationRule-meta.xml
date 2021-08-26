@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Reason</fullName>
+    <active>true</active>
+    <description>Reason is required.</description>
+    <errorConditionFormula>AND(
+ISBLANK(Reason__c))</errorConditionFormula>
+    <errorDisplayField>Reason__c</errorDisplayField>
+    <errorMessage>Reason is required to continue.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,324 @@
+<aura:component controller="DiacoCmpFlowController">
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="recordtypeId" type="RecordType"/>
+    <aura:attribute name="accountId" type="ID"/>
+    <aura:attribute name="personnelRecords" type="Personnel__c"/>
+    <aura:attribute name="apptSetterValue" type="string"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    
+    <aura:attribute name="phoneRep" type="String"/>
+    <aura:attribute name="newHSId" type="String"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <div class="slds-m-around_xx-large">
+        <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+        <aura:if isTrue="{!v.isOpen}">
+            <!--###### MODAL BOX Start######--> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <lightning:recordEditForm
+                                          aura:id="formHomeServices"
+                                          onsubmit="{!c.handleSubmit}"
+                                          onsuccess="{!c.handleSuccess}"
+                                          onload="{!c.handleLoad}"
+                                          objectApiName="Home_Services__c">
+                    <div class="slds-modal__container">
+                        <!-- ###### MODAL BOX HEADER Start ######--> 
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.recordtypeId.Name}</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" style="height: 450px;" id="modal-content-id-1">
+                            
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+                            <aura:if isTrue="{!v.showSpinner}">
+                                <lightning:spinner style="height:80%"/>
+                            </aura:if>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_6-of-12 slds-hide">
+                                    <lightning:inputField fieldName="RecordTypeId" value="{!v.recordtypeId.Id}"/>
+                                </div>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Remodel Sales'}">
+                                    <div class="slds-col slds-size_12-of-12">
+                                    <lightning:inputField fieldName="Sub_Categories__c"/>
+                                </div>
+                                </aura:if>
+                                <div class="slds-col slds-size_6-of-12 slds-hide">
+                                    <lightning:inputField fieldName="Account__c" value="{!v.accountId}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:select aura:id="Personnel" name="Personnel" label="Appointment Setter" required="true" onchange="{! c.onChangePersonnelInputApptSetter}">
+                                        <option value="--None--">--None--</option>
+                                        <aura:iteration items="{!v.personnelRecords}" var="item">
+                                            <option value="{!item.Id}" selected="{!v.apptSetterValue==item.Id}">{!item.Name}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField class="slds-hide" aura:id="inputApptSetter" fieldName="ApptSetter__c"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning:input aura:Id="AppointmentDate" type="date" name="AppointmentDate" label="Appointment Date" required="true" onchange="{! c.onChangeDateTime}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+                                    <lightning:select aura:id="AppointmentTime" name="AppointmentTime" label="Appointment Time" required="true" onchange="{! c.onChangeDateTime}">
+                                        <option value="">--None--</option>
+                                        <option value="9" >9:00AM - 11:00AM</option>
+                                        <option value="12">12:00PM - 2:00PM</option>
+                                        <option value="15"> 3:00PM - 5:00PM</option>
+                                        <option value="18"> 6:00PM - 8:00PM</option>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField aura:Id="AppointmentDateField" class="slds-hide" fieldName="Appointment_Date_Time__c" required="true"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField aura:Id="AppointmentEndDateField" class="slds-hide" fieldName="Appt_End_Time__c" required="true"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="Cross_Streets__c"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="All_Decision_Makers__c" required="true"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="Year_Home_Built__c"/>
+                                </div>
+                                <!--div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="Homeowner_2_Name__c" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="Homeowner_2_Phone__c" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="Homeowner_2_Mobile__c" />
+                                </div-->
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Remodel Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Current_Window_Coverings__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Blinds__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Paint_Or_Stained__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Window_Replacement__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Window_Count_Blinds__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Window_Count_Shutters__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Window_Count_Replacement__c" />
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Pest Control Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pest_Service_Type__c" required="true"/>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Flooring Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Flooring_Sales_Number_of_Rooms__c"/>
+                                        <lightning:inputField fieldName="Flooring_Type__c"/>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Kitchen and Bath Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Kitchen_Bath_Sales_Appointment_Type__c" required="true"/>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Water Treatment Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Already_have_a_system__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pre_Plumb__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="People_in_the_home_water__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Bottled_Water__c"/>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Solar Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Solar_Type__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Electric_Company__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="People_in_the_home_solar__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="House_Square_Footage__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="of_Stories__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="AC_Units__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Avg_Temperature_AC_kept_at__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Average_Electric_Bill__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Credit_Score__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pool_Solar__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Solar__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Energy_Efficiencies__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Windows__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Shutters__c"/>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Pest Control Sales'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="X1_or_2_Story_House__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pets__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Kinds_Of_Pets__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pets_Running_Loose_Backyard__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Gate_to_Backyard__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Kept_Locked__c" required="true"/>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.recordtypeId.Name=='Home Automation Sales'}">											
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Main_Area_of_Concern__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Password__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Existing_Contract__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pool_Home_Automation__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Cable_Satellite__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Do_you_have_a_doorbell_camera__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="X2_Story__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="X99_Activation_Fee_Verified__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="RMR_Verified__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Under_Contract__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Payment_Type__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Existing_Keypad__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Months_Remaining__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pets__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Kinds_Of_Pets__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Pets_over_45_LBS__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="Cell_Phone_Type__c" required="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="of_people_in_the_home_Home_Automation__c"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="of_people_with_their_own_cell_phone__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="of_people_over_12_Home_Automation__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:inputField fieldName="of_Entry_Exit_Doors__c" />
+                                    </div>
+                                </aura:if> 
+                                
+                                <aura:if isTrue="{!$Browser.formFactor!='DESKTOP'}">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <lightning:select aura:id="Lead_Review" name="Lead Review" label="Lead Review" onchange="{!c.onChangePersonnelInputLeadReview}">
+                                            <option value="">--None--</option>
+                                            <aura:iteration items="{!v.personnelRecords}" var="item">
+                                                <option value="{!item.Id}">{!item.Name}</option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                    </div>
+                                </aura:if>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField class="{!$Browser.formFactor!='DESKTOP'?'slds-hide':''}" aura:id="inputLeadReview" fieldName="Lead_Review__c" required="true"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning:inputField fieldName="Notes__c"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" 
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{! c.closeModel }"/>
+                            <lightning:button  
+                                              variant="brand" 
+                                              type="submit" 
+                                              name="save" 
+                                              label="Save" />
+                        </footer>
+                    </div>
+                </lightning:recordEditForm>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!--###### MODAL BOX Part END Here ######-->
+            
+        </aura:if>
+    </div>
+    
+    
+</aura:component>

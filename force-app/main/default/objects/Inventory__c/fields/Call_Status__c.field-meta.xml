@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Status__c</fullName>
+    <description>It would define about Call End Status of Bright Pattern</description>
+    <externalId>false</externalId>
+    <label>Call Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Transfer Success</fullName>
+                <default>true</default>
+                <label>Transfer Success</label>
+            </value>
+            <value>
+                <fullName>Caller Hung up</fullName>
+                <default>false</default>
+                <label>Caller Hung up</label>
+            </value>
+            <value>
+                <fullName>Client Hung up</fullName>
+                <default>false</default>
+                <label>Client Hung up</label>
+            </value>
+            <value>
+                <fullName>Left Voice Mail</fullName>
+                <default>false</default>
+                <label>Left Voice Mail</label>
+            </value>
+            <value>
+                <fullName>Voice Mail Full</fullName>
+                <default>false</default>
+                <label>Voice Mail Full</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

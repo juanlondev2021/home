@@ -1,0 +1,67 @@
+<!--
+/**
+ * Diaco
+ * @author 			Fabian Pineda href=<fpineda@diaco.us>
+ * Project:			Account Signatures
+ * Description:		Displays and/or uploads signature images to Accounts' files
+ *
+ * Changes (Version)
+ * _________________________________________
+ *			No.		Date			Author					Description
+ *			____	__________		__________________  	_____________________________________
+ * @version	1.0		02/07/2020		Fabian Pineda (FP)		Initial version
+ **/
+-->
+<aura:component controller="DiacoAccountSignatureController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="supportedFileTypes" type="List" default="['.png', '.jpg', '.jpeg', '.gif']" />
+    
+    <aura:attribute name="loadingSignature" type="Boolean" default="true" />
+
+	<aura:attribute name="contentDocumentLink" type="ContentDocumentLink" default="null" />
+    <aura:attribute name="contentDocument" type="ContentDocument" default="null" />
+    <aura:attribute name="contentVersion" type="ContentVersion" default="null" />
+    
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    
+    <div style="text-align: center;">
+        <aura:if isTrue="{!v.loadingSignature}">
+            <!-- Displayed if loading the Account signature. -->
+            <div style="margin-top: 5em;"></div>
+            <lightning:spinner alternativeText="Loading" size="medium" />
+        <aura:set attribute="else">
+            <aura:if isTrue="{!or(v.contentDocumentLink == null, v.contentDocument == null, v.contentVersion == null)}">
+                <!-- Displayed if no Account signature exists yet. -->
+                <lightning:fileUpload label="Upload Signature Image"
+                                      lightning:id="SignatureComponent"
+                                      name="SignatureComponent"
+                                      multiple="false"
+                                      accept="{!v.supportedFileTypes}"
+                                      recordId="{!v.recordId}"
+                                      onuploadfinished="{!c.handleUploadFinished}" />
+            <aura:set attribute="else">
+                <!-- Displayed if an Account signature exists. -->
+                <h1>Current signature</h1>
+                
+                <img src="{!'/sfc/servlet.shepherd/version/download/' + v.contentVersion.Id}" style="width:auto; height:auto; padding: 2em 0;" />
+                
+                <lightning:fileUpload label="Replace Signature Image"
+                                      lightning:id="SignatureComponent"
+                                      name="SignatureComponent"
+                                      multiple="false"
+                                      accept="{!v.supportedFileTypes}"
+                                      recordId="{!v.recordId}"
+                                      onuploadfinished="{!c.handleUploadFinished}" />
+                
+                <div style="margin-top: 1.5em;"></div>
+                <lightning:recordEditForm recordId="{!v.contentVersion.Id}" objectApiName="ContentVersion" onsuccess="{!c.handleRecordEditSuccess}">
+                    <lightning:messages />
+                    <lightning:inputField aura:id="dealerCertificationTitleField" fieldName="Dealer_Certification_Title__c" onchange="{!c.handleInputFieldChange}" />
+                    <lightning:inputField aura:id="dealerCertificationNameField" fieldName="Dealer_Certification_Name__c" onchange="{!c.handleInputFieldChange}" />
+                    <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Save" />
+                </lightning:recordEditForm>
+            </aura:set>
+            </aura:if>
+        </aura:set>
+        </aura:if>
+	</div>
+</aura:component>

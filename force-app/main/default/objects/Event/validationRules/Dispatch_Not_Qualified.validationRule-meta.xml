@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispatch_Not_Qualified</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(  Appointment_results__c  , &quot;Not Qualified&quot;) &amp;&amp;  
+ISPICKVAL( Non_Qualified_Reasons_Dispatch__c, &quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>Non_Qualified_Reasons_Dispatch__c</errorDisplayField>
+    <errorMessage>Is Required</errorMessage>
+</ValidationRule>

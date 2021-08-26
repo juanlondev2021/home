@@ -1,0 +1,486 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Add Customer Alarm
+* Description:		Lightening components for add Customer Alarm
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+*
+@version	1.0		03/07/2019		Álvaro Ortega (AO)		Initial implementation of Lightening components.
+@version	1.0.1	09/07/2020		Kevin Vega H (KVH)		'Event Groups To Forward' fixed.
+**/-->
+<aura:component controller="diacoAlarmComController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" 
+                access="global">
+                
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <!-- PICKLIST -->
+    <aura:attribute name="DiacoAlarm__DiacoCsEventGroupsToForward__c" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoCsEventGroupsToForward_values" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoPropertyType__c" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoCountryIdAddressWithName__c" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoInstallationTimeZone__c" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoPanelType__c" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoCentralStationForwardingOption__c" type="List" default="[]" />
+    <aura:attribute name="DiacoAlarm__DiacoStatus__c" type="List" default="[]" />
+    <aura:attribute name="apiNames" type="List" default="['DiacoAlarm__DiacoCsEventGroupsToForward__c','DiacoAlarm__DiacoPropertyType__c','DiacoAlarm__DiacoCountryIdAddressWithName__c',
+                                                            'DiacoAlarm__DiacoInstallationTimeZone__c','DiacoAlarm__DiacoPanelType__c','DiacoAlarm__DiacoCentralStationForwardingOption__c',
+                                                            'DiacoAlarm__DiacoStatus__c']" />
+
+    <!-- OBJECTS -->
+    <aura:attribute name="customerAlarm" type="DiacoAlarm__Diaco_Customer_Alarm__c" />
+    <aura:attribute name="account" type="Account" />
+
+    <!-- ACCORDION -->
+    <aura:attribute name="activeSections" type="List" default="['Accounts']" />
+
+    <!-- EVENT AlarmInHomeService-->
+    <aura:registerEvent name="CustomerAlarmInHomeServiceEvent" type="c:DiacoCustomerAlarmInHomeServiceEvent" />
+
+    <!-- CMP diacoLookUp -->
+    <aura:attribute name="isRenderDone" type="Boolean" default="false" />
+
+    <aura:attribute name="_label" type="String" />
+    <aura:attribute name="sameAddressField" type="Boolean" default='true' />
+    <aura:attribute name="isUpdate" type="Boolean" default='false' />
+    <aura:attribute name="isLoadSave" type="boolean" default='false' />
+    <aura:attribute name="isCustomUpdate" type="boolean" default='true' />
+
+    <aura:attribute name="isLoad" type="boolean" default='true' />
+
+
+    <aura:if isTrue="{! v.isLoad }">
+
+        <div class="slds-align_absolute-center">
+            <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="small"/>
+        </div>
+
+        <aura:set attribute="else">
+
+    <lightning:accordion    allowMultipleSectionsOpen="true"
+                            activeSectionName="{! v.activeSections }">
+
+        <!-- Accounts -->
+        <lightning:accordionSection name="Accounts" label="Accounts">
+
+            <div class="c-container">
+                <!--Information about ACCount-->
+                <div class="slds-p-around_x-small">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:avatar" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Account</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                            <lightning:select  aura:id='fieldId' label="Property Type" value="{! v.customerAlarm.DiacoAlarm__DiacoPropertyType__c }">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoPropertyType__c}" var="pt" >
+                                    <option value="{!pt.key}" selected="{! v.customerAlarm.DiacoAlarm__DiacoPropertyType__c == pt.key}">
+                                        {!pt.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Created Login Name" value="{!v.customerAlarm.DiacoAlarm__DiacoCreatedLoginName__c}"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Created Password" value="{!v.customerAlarm.DiacoAlarm__DiacoCreatedPassword__c}"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-hide">
+                            <lightning:inputField fieldName="DiacoAlarm__DiacoPendingUpdateAvantguard__c" disabled="true" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-hide">
+                            <lightning:inputField fieldName="DiacoAlarm__DiacoPendingUpdateAvantguardDev__c" disabled="true" />
+                        </div>
+                    </div>
+                </div>
+                <!--Information about ACCount-->
+    
+                <!--Information about Customer-->
+                <div class="slds-p-around_x-small">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:customers" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Customer</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Company Name" value="{!v.customerAlarm.DiacoAlarm__DiacoCompanyNameAddress__c}" required="false"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="First Name" value="{!v.customerAlarm.DiacoAlarm__DiacoFirstNameAddress__c}" required="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Last Name" value="{!v.customerAlarm.DiacoAlarm__DiacoLastnameAddress__c}" required="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:id='fieldId' 
+                                                type="email"
+                                                label="Customer Account Email" 
+                                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                                messageWhenPatternMismatch="invalid email - email@example.com" 
+                                                value="{!v.customerAlarm.DiacoAlarm__DiacoCustomerAccountEmail__c}" required="true" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Desired Login Name" value="{!v.customerAlarm.DiacoAlarm__DiacoDesiredLoginName__c}" required="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-hide">
+                            <lightning:inputField fieldName="OwnerId"  variant="label-stacked"/>
+                        </div>
+                    </div>
+                </div>
+                <!--/Information about Customer-->
+            </div>
+        </lightning:accordionSection>
+        <!-- /Accounts -->
+
+        <!--Address-->
+        <lightning:accordionSection name="Address" label="Address">
+
+            <div class="c-container">
+                <!--Information avout Address-->
+                <div class="slds-p-around_x-small">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:address" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Address</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:select  aura:id='fieldId' label="Country" value="{! v.customerAlarm.DiacoAlarm__DiacoCountryIdAddressWithName__c }" required="true" onchange='{!c.onChangeSameAddress}'>
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoCountryIdAddressWithName__c}" var="ca" >
+                                    <option value="{!ca.key}" selected="{! v.customerAlarm.DiacoAlarm__DiacoCountryIdAddressWithName__c == ca.key}">
+                                        {!ca.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="City" value="{!v.customerAlarm.DiacoAlarm__DiacoCityAddressWithName__c}" required="true" onchange='{!c.onChangeSameAddress}'/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="State" value="{!v.customerAlarm.DiacoAlarm__DiacoStateAddressWithName__c}" required="true" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:Id="fieldId"
+                                                label="Zip"
+                                                messageWhenPatternMismatch="Please enter the number in this pattern - XXXXX"
+                                                pattern="[0-9]{5}"
+                                                maxlength="5"
+                                                minlength="5"
+                                                value="{! v.customerAlarm.DiacoAlarm__DiacoZipCodeAddressWithName__c }" 
+                                                required="true"
+                                                onchange='{!c.onChangeSameAddress}'/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:id='fieldId' 
+                                                label="Street #1" 
+                                                value="{!v.customerAlarm.DiacoAlarm__DiacoStreet1AddressWithName__c}" 
+                                                required="true" 
+                                                onchange='{!c.onChangeSameAddress}'/>
+
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 ">
+                            <lightning:input    aura:id='fieldId' 
+                                                label="Street #2" 
+                                                value="{!v.customerAlarm.DiacoAlarm__DiacoStreet2AddressWithName__c}" 
+                                                required="false" 
+                                                onchange='{!c.onChangeSameAddress}'/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:id="fieldId"
+                                                label="Phone"
+                                                type="tel"
+                                                messageWhenPatternMismatch="Please enter the number in this pattern - XXX XXX XXXX"
+                                                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                                                maxlength="10"
+                                                minlength="10"                                     
+                                                value="{! v.customerAlarm.DiacoAlarm__DiacoPhoneAddress__c }" 
+                                                required="true"/>  
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-m-top_large">
+                            <!-- sameAddres -->
+                            <lightning:input    aura:id="sameAddress"
+                                                type="toggle" 
+                                                label="System be installed at same address" 
+                                                checked = "{! v.customerAlarm.DiacoAlarm__DiacoSameContactAddress__c }"
+                                                onchange="{! c.onChangeSameAddress }" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:select aura:Id ="fieldId" label="Installation Time Zone" value="{! v.customerAlarm.DiacoAlarm__DiacoInstallationTimeZone__c}" required="true">
+                                <option value= "">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoInstallationTimeZone__c}" var="it">
+                                    <option value="{!it.key}" selected="{! v.customerAlarm.DiacoAlarm__DiacoInstallationTimeZone__c == it.key}">
+                                        {!it.value}
+                                    </option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </div>
+                    </div>
+                </div>
+                <!--/Information avout Address-->
+
+                <!--Information about installation Address-->
+                <aura:if isTrue="{! !(v.customerAlarm.DiacoAlarm__DiacoSameContactAddress__c) }">
+
+                    <div class="slds-p-around_x-small">
+                        <div class="slds-p-bottom_medium">
+                            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <lightning:icon iconName="standard:address" class="blueOnwhite" alternativeText="My Expenses" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="horizontal-small">
+                                    <div class="page-section page-header">
+                                        <h1 class="slds-text-heading--label">Information About</h1>
+                                        <h2 class="slds-text-heading--medium">Installation Address</h2>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">                                                                                  
+                                <lightning:select  aura:id='fieldId' label="Country" value="{! v.customerAlarm.DiacoAlarm__DiacoCountryId__c }" required="true" disabled="{!v.sameAddressField}">
+                                    <option value="">--None--</option>
+                                    <aura:iteration items="{!v.DiacoAlarm__DiacoCountryIdAddressWithName__c}" var="ca" >
+                                        <option value="{!ca.key}" selected="{! v.customerAlarm.DiacoAlarm__DiacoCountryId__c == ca.key}">
+                                            {!ca.value}
+                                        </option>
+                                    </aura:iteration>                                                                                    
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:input aura:id='fieldId' label="State" value="{!v.customerAlarm.DiacoAlarm__DiacoState__c}" required="true" disabled="{!v.sameAddressField}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:input aura:id='fieldId' label="City" value="{!v.customerAlarm.DiacoAlarm__DiacoCity__c}" required="true" disabled="{!v.sameAddressField}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:input    aura:id='fieldId' 
+                                                    label="Street #1" 
+                                                    value="{!v.customerAlarm.DiacoAlarm__DiacoStreet1__c}" 
+                                                    required="true" 
+                                                    disabled="{!v.sameAddressField}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:input    aura:Id="fieldId"
+                                                    label="Zip"
+                                                    messageWhenPatternMismatch="Please enter the number in this pattern - XXXXX"
+                                                    pattern="[0-9]{5}"
+                                                    maxlength="5"
+                                                    minlength="5"
+                                                    value="{! v.customerAlarm.DiacoAlarm__DiacoZipCode__c }" 
+                                                    required="true"
+                                                    disabled="{!v.sameAddressField}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning:input    aura:id='fieldId' 
+                                                    label="Street #2" 
+                                                    value="{!v.customerAlarm.DiacoAlarm__DiacoStreet2__c}" 
+                                                    required="false" 
+                                                    disabled="{!v.sameAddressField}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </aura:if>                
+                <!--/Information about installation Address-->
+            </div>
+
+        </lightning:accordionSection>
+        <!--/Address-->
+
+        <!--Monitoring-->
+        <lightning:accordionSection name="Monitoring" label="Monitoring Information">
+            <div class="c-container">
+                <!--Modem information-->
+                <div class="slds-p-around_x-small">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:custom" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Modem Information</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:select  aura:id='fieldId' label="Panel Type" value="{! v.customerAlarm.DiacoAlarm__DiacoPanelType__c }">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoPanelType__c}" var="pt" >
+                                    <option value="{!pt.key}" selected="{! v.customerAlarm.DiacoAlarm__DiacoPanelType__c == pt.key}">
+                                        {!pt.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:Id="fieldId"
+                                                label="Modem Serial Number"
+                                                messageWhenPatternMismatch="Invalid Modem Serial Number (Must be greater than or equal 10 character)"
+                                                minlength="10"
+                                                value="{! v.customerAlarm.DiacoAlarm__DiacoModemSerialNumber__c }" 
+                                                required="true"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modem information-->
+    
+                <!--Monitoring Station Forwading-->
+                <div class="slds-p-around_x-small">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:custom" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Monitoring Station Forwarding</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3">
+                            <lightning:input aura:id='fieldId' label="Central Station Account Number" value="{!v.customerAlarm.DiacoAlarm__DiacoCentralStationAccountNumber__c}" required="false" disabled="true"/>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3">
+                            <lightning:select  aura:id='fieldId' label="Central Station Forwarding Option" value="{! v.customerAlarm.DiacoAlarm__DiacoCentralStationForwardingOption__c }" required="true">
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.DiacoAlarm__DiacoCentralStationForwardingOption__c}" var="sf" >
+                                    <option value="{!sf.key}" selected="{! v.customerAlarm.DiacoAlarm__DiacoCentralStationForwardingOption__c == sf.key}">
+                                        {!sf.value}
+                                    </option>
+                                </aura:iteration>                                                                                    
+                            </lightning:select>
+                        </div>
+    
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3 slds-m-top_large">
+                            <lightning:input    type="toggle" 
+                                                label="Phone Line Present" 
+                                                checked = "{! v.customerAlarm.DiacoAlarm__DiacoPhoneLinePresent__c }"/>
+                        </div>
+                            
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1 slds-p-top_large slds-p-bottom_large slds-align_absolute-center">
+                            <lightning:dualListbox  aura:id="fieldId" 
+                                                    name="EventGroupsToForward" 
+                                                    label="Event Groups To Forward" 
+                                                    sourceLabel="Available" 
+                                                    selectedLabel="Selected" 
+                                                    options="{!v.DiacoAlarm__DiacoCsEventGroupsToForward__c}" 
+                                                    value="{!v.DiacoAlarm__DiacoCsEventGroupsToForward_values}"  />
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:id="fieldId"
+                                                label="Phone"
+                                                type="tel"
+                                                messageWhenPatternMismatch="Please enter the number in this pattern - XXX XXX XXXX"
+                                                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                                                maxlength="10"
+                                                minlength="10"                                     
+                                                value="{! v.customerAlarm.DiacoAlarm__DiacoCustomerAccountPhone__c }" 
+                                                required="true"/>  
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input    aura:Id="fieldId"
+                                                label="Central Station Receiver Number"
+                                                pattern="[0-9]{10}"
+                                                maxlength="10"
+                                                minlength="10"
+                                                value="{! v.customerAlarm.DiacoAlarm__DiacoCentralStationReceiverNumber__c }" 
+                                                required="false"/>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Monitoring Station Forwading-->
+                
+                <!--Information about monitoring station forwading2-->
+                <div class="slds-p-around_x-small">
+                    <div class="slds-p-bottom_medium">
+                        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                            <lightning:layoutItem padding="horizontal-small">
+                                <lightning:icon iconName="standard:custom" class="blueOnwhite" alternativeText="My Expenses" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="horizontal-small">
+                                <div class="page-section page-header">
+                                    <h1 class="slds-text-heading--label">Information About</h1>
+                                    <h2 class="slds-text-heading--medium">Monitoring Station Forwarding</h2>
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Customer ID" value="{!v.customerAlarm.DiacoAlarm__DiacoCustomerId__c}" disabled="true"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <lightning:input aura:id='fieldId' label="Status" value="{!v.customerAlarm.DiacoAlarm__DiacoStatus__c}" disabled="true"/>
+                        </div>
+                    </div>
+                </div>
+                <!--/Information about monitoring station forwading2-->
+            </div>
+        </lightning:accordionSection>
+        <!-- /Monitoring-->
+
+    </lightning:accordion>
+
+    <!-- BUTTON -->
+    <lightning:button   variant="brand" 
+                        type="submit"
+                        class="slds-align_absolute-center" 
+                        label="{!v._label == 'Saved'? 'Update' : 'Create New'}" 
+                        title="Update" 
+                        iconName="utility:save" 
+                        iconPosition="left"  
+                        disabled="{!v.isLoadSave}" 
+                        onclick="{! c.handlerSave }"/>
+    <!-- //BUTTON -->
+        </aura:set>
+
+    </aura:if>
+
+
+        
+</aura:component>

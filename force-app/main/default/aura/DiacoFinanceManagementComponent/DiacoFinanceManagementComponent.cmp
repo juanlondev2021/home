@@ -1,0 +1,100 @@
+<aura:component controller="DiacoFinanceClass" 
+                implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome"
+                access="global">
+    
+    <aura:attribute name="data" type="Object" default="[]"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="packageId" type="String"/>
+    <aura:attribute name="IndexElementIntable" type="Integer"/>
+    <aura:attribute name="loaded" type="Boolean" default="true" />
+    <aura:attribute name="visibleForm" type="Boolean" default="false" />
+     <aura:attribute name="notValidField" type="Boolean" default="false" />
+    <aura:attribute name="action" type="String" default="Create" />
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    
+    <div class="slds-box slds-box_small slds-m-bottom_small">
+        
+        <aura:if isTrue="{! v.loaded }">
+            <lightning:spinner alternativeText="Loading" />
+        </aura:if>
+        
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--large">
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:product_required" class="blueOnwhite" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label"></h1>
+                    <h2 class="slds-text-heading--medium">Finance Management</h2>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+                <lightning:buttonIcon iconName="utility:add"  
+                                      variant="border-filled" 
+                                      alternativeText="Create package"
+                                      onclick="{! c.onclickShowForm }"
+                                      />
+            </lightning:layoutItem>
+        </lightning:layout> 
+        
+        <aura:if isTrue="{!v.visibleForm}">
+            <form class="slds-m-around_x-small">
+                <div class="slds-m-around_x-small">
+                    <lightning:input aura:id="Package_name" name="packageName" label="Package name" value=""/>
+                    <lightning:input aura:id="Promotional_Discount" type="number" name="PromotionalDiscount" label="Promotional Discount" value="" formatter="currency" step="0.01"/>
+                </div>
+                <div class="slds-grid slds-wrap">    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                        <div class="slds-box slds-box_small slds-m-around_x-small">                            
+                            <h3><b>Promotion</b></h3>
+                            <lightning:input aura:id="Package_Price" type="number" name="PackagePrice" label="Package Price" value="" formatter="currency" step="0.01"/>
+                            <lightning:input aura:id="Monthly_Term" type="number" name="MonthlyTerm" label="Monthly Term" value=""/>
+                            <lightning:input aura:id="Monthly_Renewal" type="number" name="MonthlyRenewal" label="Monthly Renewal" value=""/>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                        <div class="slds-box slds-box_small slds-m-around_x-small">
+                            <h3><b>Finance</b></h3>
+                            <lightning:input aura:id="Monitoring" type="number" name="monitoring" label="Monitoring" value="" formatter="currency" step="0.01"/>
+                            <lightning:input aura:id="Monthly_Term_Two" type="number" name="monthlyTermTwo" label="Monthly Term" value=""/>
+                            <lightning:input aura:id="Monthly_Renewal_Two" type="number" name="MonthlyRenewalTwo" label="Monthly Renewal" value=""/>
+                        </div>
+                    </div>
+                </div>
+                
+                <aura:if isTrue="{!v.notValidField}">
+                    <div class="slds-m-vertical_medium slds-align_absolute-center">
+                        <p style="color:red;">Complete all fields</p>
+                    </div>
+                </aura:if> 
+                
+                <div class="slds-m-vertical_medium slds-align_absolute-center">
+                    <lightning:button label="Cancel" title="Cancel" onclick="{! c.onclickCloseForm }"/>
+                    <aura:if isTrue="{!v.action == 'Create'}">
+                        <lightning:button variant="brand" label="Create package" title="Create" onclick="{! c.handleClick }" />
+                    </aura:if> 
+                    <aura:if isTrue="{!v.action == 'Update'}">
+                        <lightning:button variant="brand" label="Update package" title="Update" onclick="{! c.onclickUpdate }" />
+                    </aura:if> 
+                </div>
+            </form> 
+        </aura:if> 
+        
+        <!-- the container element determine the height of the datatable -->
+        <div class="slds-m-around_x-small" >
+            <lightning:datatable
+                                 columns="{! v.columns }"
+                                 data="{! v.data }"
+                                 keyField="id"
+                                 hideCheckboxColumn="true"
+                                 onrowaction="{! c.handleRowAction }"/>
+        </div>
+        
+    </div>
+    
+    <div class="slds-box slds-box_small slds-m-bottom_small">
+        <c:DiacoFinanceComponent></c:DiacoFinanceComponent>
+    </div>
+</aura:component>

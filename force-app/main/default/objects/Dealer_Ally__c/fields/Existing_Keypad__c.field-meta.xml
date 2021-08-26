@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Existing_Keypad__c</fullName>
+    <externalId>false</externalId>
+    <label>Existing Keypad</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Demco</fullName>
+                <default>false</default>
+                <label>Demco</label>
+            </value>
+            <value>
+                <fullName>GE</fullName>
+                <default>false</default>
+                <label>GE</label>
+            </value>
+            <value>
+                <fullName>DSC</fullName>
+                <default>false</default>
+                <label>DSC</label>
+            </value>
+            <value>
+                <fullName>2 Gig</fullName>
+                <default>false</default>
+                <label>2 Gig</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Don´t Know</fullName>
+                <default>false</default>
+                <label>Don´t Know</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

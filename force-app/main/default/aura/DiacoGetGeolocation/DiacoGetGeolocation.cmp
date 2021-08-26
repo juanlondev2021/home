@@ -1,0 +1,50 @@
+<!--
+* Diaco
+* @author 			Jull Quintero D
+* Project:			Geo Accurracy
+* Description:		Create a contract for Data Integration Rule (Geocodes for Account Billing Address) 
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		14/01/2021		Jull Quintero D		    Initial implementation of the component.
+-->
+
+<aura:component controller="DiacoGetGeoLocation" implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global" >
+
+    <!--Basic Attributes-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />   
+    <aura:attribute name="loaded" type="Boolean" default="true" />
+    <aura:attribute name="success" type="Boolean" default="true" />
+
+    <aura:attribute access="global" name="recordId" type="String" />
+
+    
+    <!-- SPINNER-->
+        <aura:if isTrue="{!v.loaded}">
+
+            <div class="slds-align_absolute-center">
+                <lightning:spinner style="position: relative;display: inline-block;width: 80px; height: 80px;" size="medium" variant="brand"/>
+            </div>
+
+            <aura:set attribute="else">
+                <aura:if isTrue="{!v.success}">
+                    <div class="slds-modal__content" id="modal-content-id-1">
+                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+                            <h2>Has been calculated localization successfully.</h2>
+                        </div>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="slds-modal__content" id="modal-content-id-1">
+                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                                <h2>Something went wrong.</h2>
+                            </div>
+                        </div>
+                    </aura:set>
+                </aura:if>
+            </aura:set>
+
+        </aura:if>
+</aura:component>

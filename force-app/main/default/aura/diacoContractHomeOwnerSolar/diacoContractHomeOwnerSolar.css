@@ -1,0 +1,18 @@
+.THIS .padding-right{
+    padding-right: 30px;
+}
+.THIS .slds-spinner_container {  
+  z-index: 10000;
+    background-color: white;
+    position: relative;
+}
+
+.THIS .margin-bottom{
+    margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  .THIS .padding-right {
+    padding-right: 0px;
+  }
+}

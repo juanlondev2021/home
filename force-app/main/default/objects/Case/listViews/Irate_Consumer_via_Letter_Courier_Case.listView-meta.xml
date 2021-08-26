@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Irate_Consumer_via_Letter_Courier_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Irate Consumer via Letter/Courier</label>
+    <queue>Irate_Consumer_via_Letter_Courier</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

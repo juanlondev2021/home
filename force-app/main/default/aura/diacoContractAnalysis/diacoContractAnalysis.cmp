@@ -1,0 +1,114 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water contract analysis view
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component controller="DiacoWaterContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    
+    <aura:attribute name="isLoad" type="Boolean" default="true" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+    
+     <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Water Analysis</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked">
+                        <div class="slds-form slds-grid slds-wrap">
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Hardness_gpg" 
+                                                 label="Hardness gpg"
+                                                 value="{!v.Home_Services.Hardness_gpg__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Ph" 
+                                                 label="Ph"
+                                                 value="{!v.Home_Services.Ph__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Iron_Algae" 
+                                                 label="Iron Algae"
+                                                 value="{!v.Home_Services.Iron_Algae__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Iron ppm" 
+                                                 label="Iron ppm"
+                                                 value="{!v.Home_Services.Iron_ppm__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="SSN" 
+                                                 label="Hyd. Supl. ppm"
+                                                 value="{!v.Home_Services.Hyd_Supl_ppm__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="No_Reg" 
+                                                 label="No Reg"
+                                                 value="{!v.Home_Services.No_Reg__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Other" 
+                                                 label="Other"
+                                                 value="{!v.Home_Services.Other__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-horizontal_x-small">
+                                <lightning:textarea aura:id="CustomerInfo"
+                                                 onchange="{! c.changeStatus }"
+                                                 name="Special Instructions" 
+                                                 label="Special Instructions"
+                                                 value="{!v.Home_Services.Special_Instructions__c}"/>
+                            </div>
+                            
+                            
+                        </div>
+                        <lightning:button variant="brand"
+                                          class="slds-m-top--medium slds-align_absolute-center" 
+                                          label="{!v._label == 'Saving...' ? v._label : 'Save Analysis Information'}" 
+                                          title="{!v._label == 'Saving...' ? v._label : 'Save'}"  
+                                          disabled="{!v._label == 'Saving...'}"
+                                          onclick="{! c.saveInformation}" />
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

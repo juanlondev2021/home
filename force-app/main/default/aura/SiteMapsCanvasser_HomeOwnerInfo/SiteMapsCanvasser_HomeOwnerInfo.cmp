@@ -1,0 +1,206 @@
+<!--
+ * Diaco
+ * @author             Jull Quintero Daza
+ * Project:            Site Maps Canvasser
+ * TestClass:          
+ * Description:        Aura Cmp Account info - Site Lightning Out 
+ *
+ * Changes (Version)
+ * _________________________________________
+ *            No.        Date            Author                    Description
+ *            ____    __________        __________________      _____________________________________
+ * @version    1.0    05/11/2020         Jull Quintero D         Initial implementation of the class.
+ * @version    2.0    02/06/2021         Jull Quintero D         Change picklist values - Account.Canvasser_Disposition__c
+ *-->
+
+<aura:component controller="SiteMapsCanvasserController" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute access="Private" name="loaded" type="Boolean" default="true"/>
+
+    <!-- Modal message -->
+    <aura:attribute access="Private"  name="ErrorModal" type="Boolean" default="false"/>
+    <aura:attribute access="Private"  name="SuccessModal" type="Boolean" default="false"/>
+
+    <!-- Object Account -->
+    <aura:attribute access="Private" name="account" type="Account" default="{}"/>
+    <aura:attribute access="Private" name="showSpouse" type="Boolean" default="true"/>
+
+    <!-- ConfirmationId -->
+    <aura:attribute access="Private" name="confirmationId" type="String" />
+
+    <!-- SMS -->
+    <aura:attribute access="Private" name="phoneNumberSMS" type="List" default="[]"/>
+    <aura:attribute access="Private" name="sendSMShomeOwner" type="Boolean" default="false"/>
+    <aura:attribute access="Private" name="sendSMSpouse" type="Boolean" default="false"/>
+
+    <!-- Picklist values -->
+    <!--aura:attribute name="apiNames" type="List" default="[]" /-->
+    <aura:attribute access="private" name="Canvasser_Disposition__c" type="List" default="['Consent N','Card Sent','DT Left','Gated Community',' Duplicate Tag']" /> 
+
+    <!-- Get GeoLocation -->
+    <aura:attribute  name="latitude" type="Decimal" required="true"/>
+    <aura:attribute  name="longitude" type="Decimal" required="true"/>
+    
+    <div class="slds-card slds-box slds-p-around_small">
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:spinner  alternativeText="Loading" size="small"/>
+        </aura:if>            
+        
+        <!-- HEADER -->
+        <lightning:layout multipleRows="true" class="slds-page-header slds-page-header--object-home slds-border_bottom slds-m-bottom--small">
+
+            <lightning:layoutItem padding="horizontal-small">
+                <lightning:icon iconName="standard:avatar"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h2 class="slds-text-heading--medium">   
+                        <lightning:formattedText value="{!v.account.FirstName + ' ' + v.account.LastName}" />                          
+                    </h2>
+                    <h1 class="slds-text-heading--label">
+                        Information
+                    </h1>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <!-- /HEADER -->
+
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:input aura:id="fieldId" label="Confirmation Id" value="{!v.confirmationId}" disabled="true"/>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:input aura:id="fieldId"
+                                label="Phone Number"
+                                type="tel"
+                                messageWhenPatternMismatch="Please enter the number in this pattern - XXX XXX XXXX"
+                                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                                maxlength="10"
+                                minlength="10"                                     
+                                value="{!v.account.Phone}"/>  
+            </div>
+
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:input aura:id='fieldId' 
+                                type="email"
+                                label="Email" 
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                messageWhenPatternMismatch="invalid email - email@example.com" 
+                                value="{!v.account.PersonEmail}"
+                                disabled="false"/>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:textarea aura:id='fieldId' label="Canvasser Notes" placeholder="type here..." value="{!v.account.Canvasser_Notes__c}"/>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                <lightning:input type="toggle" 
+                                label="Do you have spouse ? " 
+                                messageToggleActive='yes'
+                                messageToggleInactive="No"
+                                checked = "{!v.showSpouse}" 
+                                onchange="{!c.handlerShowSpouse}"/>
+            </div>
+            <!-- if is spouse -->
+            <aura:if isTrue="{!v.showSpouse}">
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:input aura:id="fieldId" label="Spouse First Name" value="{!v.account.Homeowner_2_First_Name__c}" disabled="false" required="false"/>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:input aura:id="fieldId" label="Spouse Last Name" value="{!v.account.Homeowner_2_Last_Name__c}" disabled="false" required="false"/>
+                </div>
+    
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:input aura:id="fieldId"
+                                    label="Spouse Phone Number"
+                                    type="tel"
+                                    messageWhenPatternMismatch="Please enter the number in this pattern - XXX XXX XXXX"
+                                    pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                                    maxlength="10"
+                                    minlength="10"                                     
+                                    value="{!v.account.Homeowner_2_Phone_Number__c}" />  
+                </div>
+    
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:input aura:id='fieldId' 
+                                    type="email"
+                                    label="Spouse Email" 
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                    messageWhenPatternMismatch="invalid email - email@example.com" 
+                                    value="{!v.account.Homeowner_2_Email__c}"
+                                    disabled="false"/>
+                </div>
+            </aura:if>
+            <!-- /if is spouse -->
+
+            <!-- SEND SMS -->
+            <div class="slds-col slds-size_1-of-1 slds-m-top_small slds-m-bottom_small">
+                <span class="slds-badge slds-col">Send SMS to</span>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1">
+                        <!--ui:inputCheckbox label="Homeowner" value="{!v.sendSMShomeOwner}"/-->
+                        <!--lightning:input type="checkbox" label="Homeowner" checked="{!v.sendSMShomeOwner}"/-->
+                        <lightning:input type="toggle" 
+                                        label="Homeowner"
+                                        messageToggleActive='yes'
+                                        messageToggleInactive="No"
+                                        checked = "{!v.sendSMShomeOwner}" />
+                    </div>
+
+                    <aura:if isTrue="{!v.showSpouse}">
+                        <div class="slds-col slds-size_1-of-1">
+                            <!--ui:inputCheckbox label="Spouse" value="{!v.sendSMSpouse}"/-->
+                            <!--lightning:input type="checkbox" label="Spouse" checked="{!v.sendSMSpouse}" /-->
+                            <lightning:input type="toggle" 
+                                            label="Spouse"
+                                            messageToggleActive='yes'
+                                            messageToggleInactive="No"
+                                            checked = "{!v.sendSMSpouse}" />
+                        </div>
+                    </aura:if>
+
+                    <aura:if isTrue="{!or(v.sendSMShomeOwner,v.sendSMSpouse)}">
+                        <div class="slds-align_absolute-center">
+                            <lightning:button label="Send SMS" iconName="utility:send" onclick="{!c.sendSMS}"/>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+            <!-- /SEND SMS -->
+
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:select  aura:id='fieldId' label="Disposition" value="{!v.account.Canvasser_Disposition__c}">
+                    <option value="">--None--</option>
+                    <aura:iteration items="{!v.Canvasser_Disposition__c}" var="item" >
+                        <option value="{!item}" selected="{!v.account.Canvasser_Disposition__c == item}">
+                            {!item}
+                        </option>
+                    </aura:iteration>                                                                                    
+                </lightning:select>
+            </div>
+
+            <div class="slds-align_absolute-center slds-m-top_small">
+                <lightning:button variant="brand" 
+                                label="Save"                                      
+                                title="upsert" 
+                                iconName="utility:save" 
+                                iconPosition="left"
+                                onclick="{!c.updateAccount}" />
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Modal toast -->
+    <c:SiteModalMessage show="{! v.ErrorModal }"
+                        variant="error" title="ERROR" 
+                        message="An unexpected error has occurred" />
+
+    <c:SiteModalMessage show="{! v.SuccessModal }" 
+                        variant="success" title="SUCCESS" 
+                        message="The record has been saved successfully" />
+</aura:component>

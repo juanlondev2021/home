@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Full_Bathroom_Partial__c</fullName>
+    <description>(Bathroom Remodeling)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Bathroom Remodeling)</inlineHelpText>
+    <label>Full Bathroom /Partial</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bathroom Remodeling - Full Bathroom</fullName>
+                <default>false</default>
+                <label>Bathroom Remodeling - Full Bathroom</label>
+            </value>
+            <value>
+                <fullName>Bathroom Remodeling - Partial Bathroom</fullName>
+                <default>false</default>
+                <label>Bathroom Remodeling - Partial Bathroom</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

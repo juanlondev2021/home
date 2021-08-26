@@ -1,0 +1,1 @@
+<aura:event type="COMPONENT" description="Closes any open modal windows." />

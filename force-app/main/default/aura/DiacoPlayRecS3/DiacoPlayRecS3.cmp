@@ -1,0 +1,23 @@
+<aura:component controller="DiacoPlayRec"
+                implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction"
+                access="global">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="_label" type="String"/>
+    <aura:attribute name="recWAV" type="String"/>
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:handler name="init" action="{!c.init}" value="{!this}"/>
+    <aura:if isTrue="{!v.recWAV != null}">
+    	<audio id="rec" controls="true">
+            <source src="{!v.recWAV}" type="audio/wav"/>
+            Your browser does not support the audio element.
+        </audio>
+    </aura:if>
+    <div class="slds-grid slds-wrap">
+        <div style="height: 300px" class="slds-col slds-size_12-of-12 slds-scrollable_y">
+            <lightning:datatable keyField="id" data="{! v.data }" onrowaction="{! c.handleRowAction }"
+                                 columns="{! v.columns }" hideCheckboxColumn="true" />
+        </div>
+        
+    </div>
+</aura:component>

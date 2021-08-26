@@ -1,0 +1,19 @@
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
+		 <div class="container"> 
+            <p>
+                Diaco
+                * @author 			Kevin Vega Hernandez href='kevin.vega.h@hotmail.com'
+                * Project:			Finance Component
+                * Description:		Migrate the Finance Component from SFI Org to Home Service Org .
+                *
+                * Changes (Version)
+                * -------------------------------------
+                *			No.		Date			Author						 Description
+                *			-----	----------		--------------------		 ---------------
+                * @version	1.0		30/06/2020		Kevin Vega Hernandez (KVH)	 Migrate the Finance Component from SFI Org to Home Service Org. 
+            </p>
+        </div>
+	</aura:example>
+</aura:documentation>

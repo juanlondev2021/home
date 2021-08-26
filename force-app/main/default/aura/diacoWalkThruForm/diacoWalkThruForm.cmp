@@ -1,0 +1,146 @@
+<!--
+* Diaco
+* @author 			Fabian Pineda href=<fpineda@diaco.us>
+* Project:			Products & Installation
+* Description:		Renders an Event's Walk-Through Form tab.
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		2020/07/24		Fabian Pineda (FP)		Initial version.
+* @version  1.0     2020/11/02      Fabian Pineda (FP)      Added lightning:isUrlAddressable support. 
+-->
+<aura:component controller="DiacoWalkThruForm" implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,flexipage:availableForRecordHome,force:hasRecordId,force:appHostable" access="global">
+    <aura:attribute name="supportedFileTypes" type="List" default="['.png', '.jpg', '.jpeg', '.gif', '.pdf']" />
+    
+    <aura:attribute name="event" type="Event" />
+    <aura:attribute name="assignedTo" type="sObject" />
+    <aura:attribute name="homeService" type="Home_Services__c" />
+    <aura:attribute name="formContentDocumentLink" type="ContentDocumentLink" />
+    <aura:attribute name="formContentDocument" type="ContentDocument" />
+    <aura:attribute name="formContentVersion" type="ContentVersion" />
+    
+    <aura:attribute name="loadingData" type="Boolean" default="true" />
+    <aura:attribute name="saving" type="Boolean" default="false" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <fieldset class="slds-box slds-theme--default">
+        <aura:if isTrue="{!v.loadingData}">
+            <!-- Displayed only while loading data -->
+            <lightning:spinner alternativeText="Loading" size="medium" />
+        <aura:set attribute="else">
+            <!-- Displayed once the data has finished loading. -->
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="standard:client" alternativeText="Walk-Through Form"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information About</h1>
+                        <h2 class="slds-text-heading--medium">Walk-Through Form</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            
+            <lightning:layout horizontalAlign="center">
+            	<lightning:layoutItem flexibility="no-flex" padding="around-small" size="12">
+                    <form class="slds-form--stacked">
+                        <div class="slds-form slds-grid slds-wrap">
+                            <aura:if isTrue="{!or(v.homeService == null, and(v.event != null, or(v.assignedTo == null, v.homeService == null)))}">
+								<!-- Displayed if Home Service is null, OR, if either the Home Service or event assignee are null while the Event isn't null. -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <aura:if isTrue="{!v.homeService == null}">
+                                        <p>Home Service not found.</p>
+                                    <aura:set attribute="else">
+										<p>Make sure this event has been assigned to someone and is associated with a Home Service.</p>
+                                    </aura:set>
+                                    </aura:if>
+                                </div>
+                            <aura:set attribute="else">
+                                <!-- Displayed if the above condition wasn't fulfilled. -->
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="padding-bottom: 1em;">
+                                    <aura:if isTrue="{!and(v.formContentDocumentLink != null, v.formContentDocument != null, v.formContentVersion != null)}">
+                                        <!-- Displayed if there's a Walk-Through Form document uploaded. -->
+                                        <p style="padding-bottom: 1em;">Walk-Through Form uploaded.</p>
+                                        
+                                        <lightning:fileCard fileId="{!v.formContentDocument.Id}" description="Walk-Through Form."/>
+                                        
+                                        <div style="padding-bottom: 1em;"></div>
+                                        
+                                        <lightning:fileUpload	label="Replace Walk-Through Form"
+                                          						lightning:id="WalkThroughFormUpload"
+                                                              	name="WalkThroughFormUpload"
+                                          						multiple="false"
+                                          						accept="{!v.supportedFileTypes}"
+                                          						recordId="{!v.recordId}"
+                                          						onuploadfinished="{!c.handleUploadFinished}" />
+                                    <aura:set attribute="else">
+                                        <!-- Displayed if no Walk-Through Form document has been uploaded. -->
+                                        <lightning:fileUpload	label="Upload Walk-Through Form"
+                                          						lightning:id="WalkThroughFormUpload"
+                                                              	name="WalkThroughFormUpload"
+                                          						multiple="false"
+                                          						accept="{!v.supportedFileTypes}"
+                                          						recordId="{!v.recordId}"
+                                          						onuploadfinished="{!c.handleUploadFinished}" />
+                                    </aura:set>
+                                    </aura:if>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="walkThruForm"
+                                                     type="checkbox"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="WalkThruComplete" 
+                                                     label="Walk-Through Completed?"
+                                                     onchange="{!c.handleWalkThruFormChange}"
+                                                     checked="{!v.homeService.Walk_Thru_Complete__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:input aura:id="walkThruForm"
+                                                     type="checkbox"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="WalkThruFormUploaded" 
+                                                     label="Walk-Through Form Uploaded?"
+                                                     onchange="{!c.handleWalkThruFormChange}"
+                                                     checked="{!v.homeService.Walk_Thru_Form_Uploaded__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"  style="padding-bottom: 1em;">
+                                    <lightning:input aura:id="walkThruForm"
+                                                     type="checkbox"
+                                                     class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12"
+                                                     name="CostsInline" 
+                                                     label="Costs In-Line?"
+                                                     onchange="{!c.handleWalkThruFormChange}"
+                                                     checked="{!v.homeService.Costs_In_Line__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <lightning:textarea aura:id="walkThruForm"
+                                                        name="WalkThruNotes"
+                                                        value="{!v.homeService.Walk_Thru_Notes__c}"
+                                                        placeholder="Enter any Walk-Through notes here."
+                                                        label="Walk-Through Notes:"
+                                                        maxlength="32768"
+                                                        onchange="{!c.handleWalkThruFormChange}"
+                                                        messageWhenTooLong="A maximum of 32768 characters are allowed." />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <!-- Submit button -->
+                                    <lightning:button variant="brand"
+                                                      class="slds-m-top--medium slds-align_absolute-center"
+                                                      label="{!v.saving ? 'Saving...' : 'Save'}"
+                                                      title="{!v.saving ? 'Saving...' : 'Save'}"  
+                                                      disabled="{!v.saving}"
+                                                      onclick="{!c.handleSaveButtonClick}" /> 
+                                </div>
+                            </aura:set>
+                            </aura:if>
+                        </div>
+                    </form>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:set>
+        </aura:if>
+    </fieldset>
+</aura:component>

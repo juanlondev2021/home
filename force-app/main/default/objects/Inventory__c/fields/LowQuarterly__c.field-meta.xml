@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LowQuarterly__c</fullName>
+    <description>Just to verify I have everything correct, the low Quarterly fee will be $</description>
+    <externalId>false</externalId>
+    <label>Just to verify I have everything correct</label>
+    <length>6</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

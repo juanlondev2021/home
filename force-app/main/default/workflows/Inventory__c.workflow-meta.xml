@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_Door_Tag_Script_lead_client_when_lead_is_created_from_Door_Tag_Script</fullName>
+        <description>Email Door Tag Script lead client when lead is created from Door Tag Script</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Opp_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Lead_Creation_from_Door_Tag_Script</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_OB_Call_Center_Billing_Opp_when_appt_is_created_from_OB_Call_Center</fullName>
+        <description>Email OB Call Center Billing Opp when appt is created from OB Call Center</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Opp_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>fCC_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Appt_Set_OB_Call_Center</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Send_Dispatch_Email_on_Confirmed_Appts</fullName>
+        <description>Email: Send Dispatch Email on Confirmed Appts</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Opp_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Dispatch_Rep_CC_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Dispatch_Rep_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>fCC_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Confirmed_Appt_Dipatch_to_Rep</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_nuCard_CPL_lead_client_when_lead_is_created_phone_call</fullName>
+        <description>Email nuCard CPL lead client when lead is created phone call</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Opp_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Lead_Creation_from_nuCard_CPL</template>
+    </alerts>
+    <alerts>
+        <fullName>Inventory_Client_Summary_Email_Notification</fullName>
+        <ccEmails>customerservice@nuhome.com</ccEmails>
+        <description>Inventory: Client Summary Email Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Opp_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>fCC_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Inventory_Client_Email_Notification_Template_Summary</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Boberdoo_Applicable_Date_c</fullName>
+        <field>Boberdoo_Applicable_Date__c</field>
+        <formula>now()</formula>
+        <name>Boberdoo_Applicable_Date__c</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Dispatch_Date_Time_Now</fullName>
+        <field>Dispatch_Email_Sent_Date_Time__c</field>
+        <formula>NOW()</formula>
+        <name>Dispatch Date Time: Now</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Dispatch_Status_Email_Sent</fullName>
+        <field>Dispatch_Status__c</field>
+        <literalValue>Email Sent</literalValue>
+        <name>Dispatch Status: Email Sent</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fillup_Distribution_Date</fullName>
+        <field>Boberdoo_Distribution_date__c</field>
+        <formula>NOW()</formula>
+        <name>Fillup Distribution Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Find_Account_Record</fullName>
+        <field>ANI__c</field>
+        <formula>ANI__c</formula>
+        <name>Find Account Record</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Insert_Date_Time_Stamp</fullName>
+        <description>Insert the date time stamp that the Inventory record was approved to be emailed.</description>
+        <field>Date_OBCC_Appointment_Approved__c</field>
+        <formula>NOW()</formula>
+        <name>Insert Date Time Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Inventory_Hot_Leads_Tier_1_Date_Update</fullName>
+        <description>This Hot Leads Tier 1 Date Update</description>
+        <field>Hot_Leads_Tier_1_Date__c</field>
+        <formula>User_Address__r.Hot_Leads_Tier_1_Date__c</formula>
+        <name>Inventory : Hot Leads Tier 1 Date Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Inventory_Hot_Leads_Tier_2_Date_Update</fullName>
+        <description>Inventory Hot Leads Tier 2 Date Update</description>
+        <field>Hot_Leads_Tier_2_Date__c</field>
+        <formula>User_Address__r.Hot_Leads_Tier_2_Date__c</formula>
+        <name>Inventory : Hot Leads Tier 2 Date Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Inventory_Hot_Leads_Tier_3_Date_Update</fullName>
+        <description>Inventory Hot Leads Tier 1 Date Update</description>
+        <field>Hot_Leads_Tier_3_Date__c</field>
+        <formula>User_Address__r.Hot_Leads_Tier_3_Date__c</formula>
+        <name>Inventory : Hot Leads Tier 3 Date Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Inventory_Phone_Mobile_Filed_Update</fullName>
+        <description>Phone/Mobile field update</description>
+        <field>Phone_Mobile__c</field>
+        <formula>if( ISBLANK(fAccount_Phone__c) ,fAccount_Mobile__c,fAccount_Phone__c)</formula>
+        <name>Inventory : Phone Mobile Filed Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Lead_Emailed</fullName>
+        <field>Lead_Emailed__c</field>
+        <literalValue>1</literalValue>
+        <name>Lead Emailed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Lead_Emailed_Date_Stamp</fullName>
+        <field>Lead_Emailed_Date_Stamp__c</field>
+        <formula>Now()</formula>
+        <name>Lead Emailed Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Opp_Email_on_Opp</fullName>
+        <field>Billing_Opp_Email__c</field>
+        <formula>fBilling_Opp_Email__c</formula>
+        <name>Update: Billing Opp Email on Opp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Boberdoo_Distribution_Date</fullName>
+        <field>Boberdoo_Distribution_date__c</field>
+        <formula>Now()</formula>
+        <name>Update: Boberdoo Distribution Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Distribution_Status</fullName>
+        <field>Distribution_Status__c</field>
+        <literalValue>Lead Distributed</literalValue>
+        <name>Update: Distribution Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Lead_Emailed</fullName>
+        <field>Lead_Emailed__c</field>
+        <literalValue>1</literalValue>
+        <name>Update: Lead Emailed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Lead_Emailed_Inv</fullName>
+        <description>Updates the field Lead Emailed to true</description>
+        <field>Lead_Emailed__c</field>
+        <literalValue>1</literalValue>
+        <name>Update: Lead Emailed Inv</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Updates_the_Email_Field_fCC</fullName>
+        <field>fCC_Email__c</field>
+        <formula>CC_Email__c</formula>
+        <name>Updates the Email Field fCC</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>cc_Email_Update</fullName>
+        <field>fCC_Email__c</field>
+        <formula>fBilling_Opp_cc_Email__c</formula>
+        <name>cc Email Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>nuHome_Hot_Lead_Active</fullName>
+        <field>Active_Record__c</field>
+        <literalValue>1</literalValue>
+        <name>nuHome Hot Lead Active</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Copy CC email to an Email Field</fullName>
+        <actions>
+            <name>Updates_the_Email_Field_fCC</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.CC_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Because we need the inventory object to be an email field this gets around the formula field we need to use to get it over to inventory.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Update</fullName>
+        <actions>
+            <name>Update_Billing_Opp_Email_on_Opp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.fBilling_Opp_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Appt Set OB Call Center - Send to Business</fullName>
+        <actions>
+            <name>Email_OB_Call_Center_Billing_Opp_when_appt_is_created_from_OB_Call_Center</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Lead_Emailed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Lead_Emailed_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8</booleanFilter>
+        <criteriaItems>
+            <field>Inventory__c.Inventory_Type__c</field>
+            <operation>equals</operation>
+            <value>nuHome OB Campaign</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Appt_Verification__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Lead_Emailed__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.idCPL_Billing_Opportunity_Paused__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.OB_Call_Center_Appointment_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.idCPL_Billing_Opportunity_Status__c</field>
+            <operation>equals</operation>
+            <value>Campaign Active,Campaign Test</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.OBCC_Approved_to_Send_Appt_Email__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fBilling_Opp_Account__c</field>
+            <operation>notContain</operation>
+            <value>NnuHome</value>
+        </criteriaItems>
+        <description>Appt Set Ob Call Center</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Dispatch Confirmed Appts</fullName>
+        <actions>
+            <name>Email_Send_Dispatch_Email_on_Confirmed_Appts</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Dispatch_Date_Time_Now</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Dispatch_Status_Email_Sent</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome OB Campaign</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Appt_Verification__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Confirmation_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Dispatch_Status__c</field>
+            <operation>equals</operation>
+            <value>Send Email</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Dispatch_Rep_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Dispatch Confirmed Appts</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Lead Creation from Door Tag Script</fullName>
+        <actions>
+            <name>Email_Door_Tag_Script_lead_client_when_lead_is_created_from_Door_Tag_Script</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Update_Lead_Emailed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8</booleanFilter>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Door Tag Script</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Lead_Emailed__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Billing_Opp_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.UnMatching_Invetnory__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.isProcessed__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fBilling_Opp_Account__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fVerbal_Consent_Flag__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Billing_Stage__c</field>
+            <operation>equals</operation>
+            <value>Billable</value>
+        </criteriaItems>
+        <description>Lead Creation from Door Tag Script</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Lead Creation from nuCard CPL</fullName>
+        <actions>
+            <name>Email_nuCard_CPL_lead_client_when_lead_is_created_phone_call</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Fillup_Distribution_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Lead_Emailed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome nuCard CPL,nuHome nuCard SUB,nuHome nuCard SPEC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Lead_Emailed__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fBilling_Opp_Account__c</field>
+            <operation>notEqual</operation>
+            <value>Porch-nuCard</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Distribution_date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Insert Account ID</fullName>
+        <actions>
+            <name>Find_Account_Record</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>ISNULL ( Account__c )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Inv Hotlead</fullName>
+        <actions>
+            <name>Fillup_Distribution_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Inventory%3A Appt Verification</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Inventory__c.Appt_Verification__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Inventory%3A Client Summary Email Notification</fullName>
+        <actions>
+            <name>Inventory_Client_Summary_Email_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Fillup_Distribution_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Lead_Emailed_Inv</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND 9 AND 10 AND 11</booleanFilter>
+        <criteriaItems>
+            <field>Inventory__c.Billing_Opp_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Consumer_Summary__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Door Tag Script</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fVerbal_Consent_Flag__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Billing_Stage__c</field>
+            <operation>equals</operation>
+            <value>Billable</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Lead_Emailed__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fAcoountNameFirst__c</field>
+            <operation>notEqual</operation>
+            <value>Cody</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fAcoountNameLast__c</field>
+            <operation>notEqual</operation>
+            <value>Garrett</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.OB_Inventory_Flag__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Distribution_date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>It will send the Consumer Summary details to Clients(Billing Opportunity)</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead Emailed</fullName>
+        <actions>
+            <name>Update_Distribution_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.Lead_Emailed__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead Emailed Date Stamp</fullName>
+        <actions>
+            <name>Lead_Emailed_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( 
+ISCHANGED( Lead_Emailed__c ), 
+ISBLANK( Lead_Emailed_Date_Stamp__c ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Lead Distribution</fullName>
+        <actions>
+            <name>Update_Boberdoo_Distribution_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome OB Campaign</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Distribution_Status__c</field>
+            <operation>equals</operation>
+            <value>Lead Distributed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Distribution_date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>Links Old distribution flow with nuhome billing flow</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OBCC Appointment Approved Date Stamp</fullName>
+        <actions>
+            <name>Insert_Date_Time_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.OBCC_Approved_to_Send_Appt_Email__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>The date that the appointment set was approved.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>cc Email Update</fullName>
+        <actions>
+            <name>cc_Email_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>fBilling_Opp_cc_Email__c &lt;&gt; fCC_Email__c</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>nuHome %3A Inventory Hot Leads Tier 1 Date workflow</fullName>
+        <actions>
+            <name>Inventory_Hot_Leads_Tier_1_Date_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <description>This workflow will update the Hot Leads Tier 1 Date field on inevntory</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>nuHome %3A Inventory Hot Leads Tier 2 Date workflow</fullName>
+        <actions>
+            <name>Inventory_Hot_Leads_Tier_2_Date_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <description>This workflow will update the Hot Leads Tier 2 Date field on inevntory</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>nuHome %3A Inventory Hot Leads Tier 3 Date workflow</fullName>
+        <actions>
+            <name>Inventory_Hot_Leads_Tier_3_Date_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <description>This workflow will update the Hot Leads Tier 1 Date field on inevntory</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>nuHome %3A Inventory Phone%2FMobile Workflow Rule</fullName>
+        <actions>
+            <name>Inventory_Phone_Mobile_Filed_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.fAccount_Mobile__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.fAccount_Phone__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This will update Phone/Mobile	value</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>nuHome Hot Lead Tier 1</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 1</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>nuHome_Hot_Lead_Active</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Inventory__c.Respond_Date__c</offsetFromField>
+            <timeLength>4</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>nuHome Hot Lead Tier 2</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 2</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>nuHome_Hot_Lead_Active</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Inventory__c.Respond_Date__c</offsetFromField>
+            <timeLength>8</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>nuHome Hot Lead Tier 3</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>nuHome Hot Lead</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 3</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>nuHome_Hot_Lead_Active</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Inventory__c.Respond_Date__c</offsetFromField>
+            <timeLength>22</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>test</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Inventory__c.Agent_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>test inv Operational Stage</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Hot_Leads_Tier_1_Date__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Boberdoo_Applicable_Date_c</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Inventory__c.Hot_Leads_Tier_1_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>test inv Operational Stage tier 2</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 2</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Hot_Leads_Tier_2_Date__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Boberdoo_Applicable_Date_c</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Inventory__c.Hot_Leads_Tier_2_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>test inv Operational Stage tier 3</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Inventory__c.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 3</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Hot_Leads_Tier_3_Date__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Inventory__c.Boberdoo_Applicable__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Boberdoo_Applicable_Date_c</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Inventory__c.Hot_Leads_Tier_3_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

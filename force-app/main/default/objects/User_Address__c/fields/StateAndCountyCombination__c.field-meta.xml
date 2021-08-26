@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StateAndCountyCombination__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Address__r.State__c) != &apos;&apos;&amp;&amp; Address__r.County__c != &apos;&apos;, TRIM(LOWER(TEXT(Address__r.State__c) +&apos;:&apos;+Address__r.County__c)),&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>StateAndCountyCombination</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

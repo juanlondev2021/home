@@ -1,0 +1,185 @@
+<!--/**
+* Diaco
+* @author 			Álvaro José Ortega Vargas href=<aovargassf@gmail.com>
+* Project:			Tickets Component
+* Description:		
+*
+* Changes (Version)
+* ____________________________________
+*			No.		Date			Author					Description
+*			_____	__________		_____________________	___________________________________
+* @version	1.0		20/02/2020		Álvaro Ortega (AO)		Create Tickets and Attentios
+**/-->
+
+<aura:component controller="DiacoTicketComponentController" implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+	
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="data" type="list" default="[]"/>
+    <aura:attribute name="allData" type="list" default="[]"/>
+    
+    <aura:attribute name="columns" type="list"/>
+    
+    <aura:attribute name="selectedCode" type="string" default=""/>
+    <aura:attribute name="selectedName" type="string" default=""/>
+    <aura:attribute name="selectedAssingTo" type="string" default=""/>
+    <aura:attribute name="selectedNotAssing" type="boolean" default="false"/>
+    <aura:attribute name="selectedStatus" type="string" default=""/>
+    <aura:attribute name="selectedPriority" type="string" default=""/>
+    
+    <aura:attribute name="isLoad" type="boolean" default="true"/>
+    
+    <aura:attribute name="isFilter" type="boolean" default="true"/>
+    
+    <aura:attribute name="totalPages" type="integer" default="1"/>
+    <aura:attribute name="selectedPage" type="integer" default="1"/>
+    
+    <aura:attribute name="ticketToEdit" type="Ticket__c"/>
+    
+    <aura:attribute name="statusOptions" type="List" default="[
+                                                              {'label': 'All', 'value': ''},
+                                                              {'label': 'Opened', 'value': 'Opened'},
+                                                              {'label': 'In Progress', 'value': 'In Process'},
+                                                              {'label': 'Closed', 'value': 'Closed'}
+                                                              ]"/> 
+    <aura:attribute name="priorityOptions" type="List" default="[
+                                                                {'label': 'All', 'value': ''},
+                                                                {'label': 'Very Low', 'value': 'Very Low'},
+                                                                {'label': 'Low', 'value': 'Low'},
+                                                                {'label': 'Medium', 'value': 'Medium'},
+                                                                {'label': 'High', 'value': 'High'},
+                                                                {'label': 'Very High', 'value': 'Very High'}
+                                                                ]"/> 
+    
+  
+        
+    <aura:if isTrue="{!v.isFilter}">
+        <div id="filters" class="container slds-box slds-theme--default toLeft">
+            <div class="slds-m-bottom_small">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning:icon iconName="standard:case_change_status" alternativeText="Usuario" size="medium"/>
+                            </span>
+                        </div>
+                        <div class="slds-media__body slds-m-top_xx-small">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Ticket Manager">Ticket Manager</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div >
+                <aura:if isTrue="{!v.isLoad}">
+                    <lightning:spinner alternativeText="Loading" size="medium" />
+                </aura:if>              
+                <div class="slds-box slds-grid slds-wrap">
+                    <div class="slds-col slds-grid slds-wrap slds-size_12-of-12">
+                        <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-1 slds-medium-size--5-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small" onkeyup="{!c.formPress}">
+                            <lightning:input aura:id="codeId" name="Code" label="Code" placeholder="Search by Ticket code" value="{!v.selectedCode}"/>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12 slds-small-size--1-of-1 slds-medium-size--7-of-12 slds-large-size--4-of-12 slds-p-horizontal_x-small" onkeyup="{!c.formPress}">
+                            <lightning:input aura:id="nameId" name="Name" label="Name" placeholder="Search by Ticket name" value="{!v.selectedName}"/>
+                        </div>
+                        
+                        <div class="slds-col slds-size_4-of-12 slds-small-size--1-of-1 slds-medium-size--6-of-12 slds-large-size--4-of-12 slds-p-horizontal_x-small" onkeyup="{!c.formPress}">
+                            <lightning:input aura:id="assignId" name="Assign to" label="Assign to" placeholder="Search by Personnel name" value="{!v.selectedAssingTo}" disabled="{!v.selectedNotAssing}"/>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12 slds-small-size--1-of-1 slds-medium-size--2-of-12 slds-large-size--2-of-12 slds-p-horizontal_x-small slds-m-top_large">
+                            <!--lightning:input type="toggle" label="Not Assigned" name="Not Assigned" checked="{!v.selectedNotAssing}" onchange="{!c.searching}"/-->
+                            <lightning:input type="checkbox" label="Not Assigned" name="Not Assigned"  checked="{!v.selectedNotAssing}" onchange="{!c.searching}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-grid slds-wrap slds-size_12-of-12">
+                        <div class="slds-col slds-size_5-of-12 slds-small-size--1-of-1 slds-medium-size--2-of-2 slds-large-size--5-of-12 slds-p-horizontal_x-small">
+                            <lightning:radioGroup aura:id="statusId"
+                                                  name="Radio Button Status"
+                                                  label="Status"
+                                                  options="{! v.statusOptions}"
+                                                  type="button"
+                                                  onchange="{!c.searching}"
+                                                  value="{!v.selectedStatus}"/>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-small-size--1-of-1 slds-medium-size--2-of-2 slds-large-size--6-of-12 slds-p-horizontal_x-small">
+                            <lightning:radioGroup aura:id="priorityId"
+                                                  name="Radio Button Priority"
+                                                  label="Priority"
+                                                  options="{! v.priorityOptions}"
+                                                  type="button"
+                                                  onchange="{!c.searching}"
+                                                  value="{!v.selectedPriority}"/>
+                        </div>
+                        <div class="slds-col slds-size_1-of-12 slds-small-size--1-of-1 slds-medium-size--2-of-2 slds-large-size--1-of-12 slds-p-horizontal_x-small slds-m-top_large">
+                            <lightning:button variant="brand" name="Clear" label="Clear" onclick="{!c.clearFilter}"/>
+                        </div>
+                    </div> 
+                </div>
+                
+                <div class="slds-align_absolute-center slds-m-top_small">
+                    <div style="max-width: 100%;" class="slds-box slds-col slds-size_12-of-12 ">
+                        <div class="slds-align_absolute-center slds-col slds-size_12-of-12 slds-m-vertical_xx-small">
+                            <lightning:button variant="Neutral" name="New" label="New" onclick="{!c.onCreateTicket}"/>
+                        </div>
+                        
+                        <lightning:buttonGroup>
+                            <span class="slds-page-header__title slds-truncate slds-m-top_xx-small slds-m-bottom_x-small" style="font-size:12px">{!v.allData.length +' Tickets • Page '+ v.selectedPage + ' / ' + v.totalPages }</span>
+                            <div class="slds-m-left_small slds-m-bottom_x-small">
+                                <lightning:buttonIcon iconName="utility:left" alternativeText="Left" variant="bare" size="medium" onclick="{! c.backPage }"/>
+                                <lightning:buttonIcon iconName="utility:right" alternativeText="Right" variant="bare" size="medium" onclick="{! c.nextPage }"/>
+                            </div>
+                        </lightning:buttonGroup>
+                        
+                        <lightning:datatable keyField="id"
+                                             data="{! v.data }"
+                                             columns="{! v.columns }"
+                                             hideCheckboxColumn="true"
+                                             enableInfiniteLoading="true"
+                                             onrowaction="{! c.handleRowAction }"/>
+                        
+                        <div class="slds-align_absolute-center slds-col slds-size_12-of-12 slds-m-vertical_xx-small">
+                            <lightning:button variant="Neutral" name="New" label="New" onclick="{!c.onCreateTicket}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        
+        <aura:set attribute="else">
+            <div id="editTicket" class="container slds-box slds-theme--default">
+                <div class="slds-m-bottom_small">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container">
+                                    <lightning:icon iconName="standard:case_change_status" alternativeText="Usuario" size="medium"/>
+                                </span>
+                            </div>
+                            <div class="slds-media__body slds-m-top_xx-small">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate" title="Ticket Manager">Ticket Manager</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--lightning:buttonIcon class="slds-m-bottom_small" iconName="utility:left" alternativeText="Back to Home" variant="bare" size="large" onclick="{! c.backToHome }"/-->
+                <lightning:button class="slds-m-bottom_small" variant="Neutral" name="Back" label="Back" onclick="{!c.backToHome}"/>
+                <c:DiacoTicketEdit recordId="{!v.ticketToEdit.Id}" isLoad="{!v.isLoad}"/>
+                
+            </div>
+            
+        </aura:set>
+    </aura:if>
+
+</aura:component>

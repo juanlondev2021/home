@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X30_Business_Days_From_Permitting_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( CONTAINS(TEXT(Installation_Status__c),&quot;Permitting&quot;), ( 
+IF(MOD(  Permitting_Start_Date__c  - DATE(1900, 1, 6), 7) &gt; 1, 
+Permitting_Start_Date__c + 42, 
+IF(MOD( Permitting_Start_Date__c - DATE(1900, 1, 6), 7) &gt; 0, 
+Permitting_Start_Date__c + 40, Permitting_Start_Date__c + 41 
+)) 
+),Permitting_Start_Date__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>30 Business Days From Permitting Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

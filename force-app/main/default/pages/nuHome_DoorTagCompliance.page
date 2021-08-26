@@ -1,0 +1,264 @@
+<!-- This vf page is detail page Door Tag Script(Survey). If User wants to update survey details, they can update
+   the details using [Edit] button -->
+<apex:page standardController="Door_Tag_Script__c" extensions="nuHome_DoorTagCompliance_AC" tabStyle="Account">
+<apex:pageMessages />
+<apex:outputPanel rendered="{!doorTagInsList.size == 0}">
+
+</apex:outputPanel>
+<apex:outputPanel rendered="{!doorTagInsList.size > 0}" >
+   <head>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <style>
+         h2.ch2{
+         display:block;
+         padding:20px;
+         }
+         label{
+         padding-left:20px;
+         text-align:left;
+         }
+         hr{
+         color:grey;
+         }
+      </style>
+   </head>
+   <apex:form id="frm">
+   
+   
+   <!------------------------ Door Tag Compliance Input Mode ------------------------------------------------------------------------>
+   
+      <apex:pageBlock mode="detail" id="pbt">
+      <apex:pageBlockSection columns="1" title="Door Tag Compliance" rendered="{!inputMode}" id="inputMode">
+       <apex:inputField value="{!doorTagCompliance.User_Address_For_Compliance__c}" label="User Address" required="true"/>        
+       <apex:inputField value="{!doorTagCompliance.Person_Account__c}" label="Account" required="true"/>
+       <apex:inputField value="{!doorTagCompliance.Account_Phone__c}" label="Account Phone"/>
+       <apex:inputField value="{!doorTagCompliance.Account_Mobile__c}" label="Account Mobile"/>
+       <apex:inputField value="{!doorTagCompliance.Person_Email__c}" label="Account Email"/>
+       <apex:inputField value="{!doorTagCompliance.TCPA_Response__c}" label="TCPA Response"/>
+        
+       <apex:inputField value="{!doorTagCompliance.Survey_Details__c}" label="Survey Detail"/>
+       <apex:inputField value="{!doorTagCompliance.Compliance_Agent__c}" label="Compliance Agent"/>
+       <apex:inputField value="{!doorTagCompliance.Call_Center_Agent__c}" label="Call Center Agent"/>
+       <apex:inputField value="{!doorTagCompliance.Compliance_Notes__c}" label="Compliance Notes"/>
+      
+       </apex:pageBlockSection>
+       
+       
+  <!------------------------ Door Tag Compliance Output Mode ------------------------------------------------------------------------>   
+     
+     
+       <apex:pageBlockSection columns="1" title="Door Tag Compliance" rendered="{!outputMode}" id="outputMode">
+       
+       <apex:pageblocksectionitem > User Address
+         <apex:outputLink value="/{!doorTagCompliance.User_Address_For_Compliance__c}">{!doorTagCompliance.User_Address_For_Compliance__c} </apex:outputlink> 
+       </apex:pageblocksectionitem>
+       
+       <apex:pageblocksectionitem > 
+        Account
+       <apex:outputLink value="/{!doorTagCompliance.Person_Account__c}">{!doorTagCompliance.Person_Account__c} </apex:outputlink> 
+       </apex:pageblocksectionitem>
+       
+       <apex:outputField value="{!doorTagCompliance.Account_Phone__c}" label="Account Phone"/>
+       <apex:outputField value="{!doorTagCompliance.Account_Mobile__c}" label="Account Mobile"/>
+       <apex:outputField value="{!doorTagCompliance.Person_Email__c}" label="Account Email"/>
+       <apex:outputField value="{!doorTagCompliance.TCPA_Response__c}" label="TCPA Response"/>
+        
+       <apex:pageblocksectionitem > Survey Details 
+       <apex:outputlink value="/{!doorTagCompliance.Survey_Details__c}" > {!doorTagCompliance.Survey_Details__c} </apex:outputlink>
+       </apex:pageblocksectionitem>
+       <apex:outputField value="{!doorTagCompliance.Compliance_Agent__c}" label="Compliance Agent"/>
+       <apex:outputField value="{!doorTagCompliance.Call_Center_Agent__c}" label="Call Center Agent"/>
+       <apex:outputField value="{!doorTagCompliance.Compliance_Notes__c}" label="Compliance Notes"/>
+       </apex:pageBlockSection>
+      <apex:pageBlockButtons >
+    <apex:commandButton action="{!EditRec}" value="Edit" reRender="pbt" rendered="{!outputMode}"/> 
+    <apex:commandButton action="{!SaveRec}" value="Save" reRender="pbt"/> </apex:pageBlockButtons>
+     </apex:PageBlock>
+     
+     
+   <!------------------------------------------- Survey Details Page ------------------------------------------------------------------------>
+     
+     <apex:PageBlock >
+     
+          <apex:pageblockbuttons >
+             <apex:commandbutton value="Edit Survey" action="{!editSurveyFunc}"   rerender="frm"/>
+          </apex:pageblockbuttons>
+         <apex:pageBlockSection columns="1"  title="Inbound TM Script">
+            <apex:outputpanel rendered="{!NOT(ISNULL(createdDateStr))}">
+               <p align="right"><b>Start Date</b> {!createdDateStr}</p>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!NOT(ISNULL(finishedDateStr))}">
+               <p align="right"><b>End Date</b> {!finishedDateStr}</p>
+            </apex:outputpanel>
+            <h2 class="ch2">Good Morning/Afternoon.  Welcome to nuCards! My name is {!currUserName}</h2>
+            <apex:outputText label="How may I assist you?" />
+            
+            <h2 class="ch2">Ok perfect! I can help you with that.  </h2>
+             <apex:outputField label="May I ask who I have the pleasure of speaking with? (IF SPOUSE, ENTER NAME IN ACCOUNT)" value="{!doorTagIns.Spouse_Name__c}" />
+                 
+           <h2 class="ch2"> If person listed validate address below:</h2>
+      
+            <apex:outputText label="Is this Mr./Mrs. ?" />
+            <apex:outputText label="Account Name">
+               <apex:outputLink value="/{!doorTagIns.Account__c}">{!doorTagIns.Account__r.Name}</apex:outputLink>
+            </apex:outputText>
+            <apex:outputField value="{!doorTagIns.Account__r.Primary_Shipping_Street__c}" label="Primary Shipping Street"/>
+            <apex:outputField value="{!doorTagIns.Account__r.Primary_Shipping_City__c}" label="Primary Shipping City"/>
+            <apex:outputField value="{!doorTagIns.Account__r.Primary_Shipping_State__c}" label="Primary Shipping State"/>
+            <apex:outputField value="{!doorTagIns.Account__r.Primary_Shipping_Country__c}" label="Primary Shipping Country"/>
+            <apex:outputField value="{!doorTagIns.Account__r.Primary_Shipping_Zip_Code__c}" label="Primary Shipping Zip Code"/>
+            <apex:outputField value="{!doorTagIns.Account__r.PrimaryShippingZip_Code_Plus_4_Lookup__c}" label="Zip Plus Four"/>
+            <apex:outputField value="{!doorTagIns.Account__r.County__c}" label="County"/>
+            <apex:outputField value="{!doorTagIns.Account__r.Primary_Shipping_County__c}" label="Primary Shipping Country"/>
+            <apex:outputField value="{!doorTagIns.Account__r.Phone}" label="Phone"/>
+            <apex:outputField value="{!doorTagIns.Account__r.PersonMobilePhone}" label="Mobile"/>
+          
+          
+             <h2 class="ch2">You should have received a box with gift cards inside, it was paid for by local businesses in your area as a way to welcome you to the neighborhood. </h2>
+            <apex:outputField value="{!doorTagIns.Box_Confirmation__c}" label="Did you get that box? "/>  
+            
+             <apex:pageBlockSection columns="1" title="Missing Box"  collapsible="false" >
+                        <apex:pageblocksectionItem />
+                        <h2 class="ch2">  IF THEY SAY NO, THAT THEY DID NOT RECEIVE IT: <br/><br/>
+                        I apologize for the inconvenience; I am going to assume you just purchased a new home right? <br/><br/>
+                        The gift box is full of gift cards from your local grocery stores, gas stations, restaurants and home improvement companies. What I can do, is send you a second set through the U.S. mail, so we can make sure we get them into the right hands. To save time, I am going to shoot you out a confirmation email, so you won’t have to call back to activate them once they are received.  What’s the best email for you? <br/>
+                        </h2>
+                         <apex:outputField value="{!doorTagIns.Box_Confirmation_Email2__c}" label="What’s the best email to send that to?"/>
+                         
+                       
+             </apex:pageBlockSection>
+             
+             
+              <apex:pageBlockSection columns="1" title="Got the Box" collapsible="false">
+                <h2 class="ch2">Congratulations on your new home, how was the move? (WFR) The reason we have you call in is to verify that you did receive the gift box and I’ll get them activated for you. I am going to shoot you out a quick confirmation email… Give me a second… And what is the best email for you?</h2>
+                <apex:outputField value="{!doorTagIns.Box_Confirmation_Email__c}" label="What’s the best email to send that to?"/>
+                <br/>
+                
+              
+              
+               </apex:pageBlockSection>
+         </apex:pageBlockSection>
+         <apex:pageBlockSection columns="1"  title="Consent Lead Up">
+            <h2 class="ch2">We know a lot of home owners like to eat out during the move</h2>
+            <apex:repeat value="{!DTSQuestionsInboundtm}" var="DTStetr">
+                        <apex:outputField value="{!doorTagCompliance[DTStetr.FieldAPIName__c]}" label="{!DTStetr.Question__c}"/>
+                </apex:repeat> 
+            <h2 class="ch2">So while I send out that email, I need to read a small paragraph just to verify that all the information you gave me is yours, that you are the homeowner, and that you will be getting the gift box for free. So I am going to breeze through it and in the end I am going to need you to answer with a yes. (Go straight into Consent) </h2>
+            <apex:pageBlockSection columns="1"  title="Consent" collapsible="true">
+               <h2 class="ch2">You agree the permission you give us today will constitute your express written consent and understand that you are not required to consent in order to buy anything. You agree that activations of your nucards will take place upon completion of this call and confirmation will be sent to the email you provided to us. You agree to receive offers via texts, autodialed calls and recorded messages at the number you called us on today from nuHome Promotions and other affiliates or partners such as Verizon,   SafeStreets ADT, Home Depot and Terminix. A full directory of partners can be found at nuHome.com. You agree that all of the information you provided during this call is accurate, that the number you called us on is your own and that you can opt out at any time.  
+                 </h2>
+               <apex:outputField value="{!Door_Tag_Script__c.survey_details__r.Consent__c}" label="Is that correct?"/>
+                   <br/>
+                   <hr/>
+                   </apex:pageBlockSection>
+               </apex:pageBlockSection>
+              
+               <apex:pageBlockSection columns="1"  title="Form Lead Up">
+                    <apex:repeat value="{!DTSQuestionsFormLeadup}" var="DTStetr">
+                            <apex:outputField value="{!doorTagCompliance[DTStetr.FieldAPIName__c]}" label="{!DTStetr.Order__c}. {!DTStetr.Question__c}"/>
+                            <apex:outputText rendered="{!DTStetr.Order__c == 2}">(if yes, congratulate them on that accomplishment and build rapport)</apex:outputText>
+                        </apex:repeat>
+             </apex:pageBlockSection>
+               
+             <apex:pageBlockSection columns="1">
+        <h2 class="ch2">
+            Congratulations again.  Here at nuHome, we are the largest concierge service in the country between homeowners and local businesses. Our goal is to help the new homeowner “Get Stuff Done.” We have a lot of services to offer, such as Lifelock who is giving our new home owners a free 30-days of credit and identity theft protection just for activating. So I’m going make sure they reach out, explain all of the benefits and answer any questions you may have, Okay  {!Door_Tag_Script__c.Account__r.Name} 
+        </h2>
+        <apex:outputField value="{!Door_Tag_Script__c.survey_details__r.LifeLock__c}"/>
+        <h2 class="ch2">In addition, I am just going to go over some of the other top services we provide. If you need any of the businesses or services just answer yes and we will make sure one of our “certified professionals” reaches out to assist you.Now….. (GO STRAIGHT INTO QUESTIONS) </h2>
+        
+    </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1">
+            <apex:repeat value="{!DTSQuestions}" var="DTStetr">
+                <apex:outputField value="{!doorTagCompliance[DTStetr.FieldAPIName__c]}" label="{!DTStetr.Order__c}. {!DTStetr.Question__c}"/>
+                    <apex:outputText rendered="{!DTStetr.Order__c == 14}"><h1><u>These next items are services that homeowners also express great interest in.  Again, anything you need just say yes and I will take care of it.</u></h1></apex:outputText>
+                            <apex:pageblocksectionitem rendered="{!DTStetr.Order__c == 4}">
+                                <apex:outputLabel >(Landscaping) Are you looking for a Landscaper to help with design, maintenance, lawn and weed control or Synthetic Grass/Putting greens?</apex:outputLabel>
+                                <!--<apex:outputField styleClass="interestedLandscape" value="{!Door_Tag_Script__c.survey_details__r.InterestedDesignMaintainenceLawnGras__c}" />-->
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem rendered="{!DTStetr.Order__c == 18}">
+                                <apex:outputLabel >(Bathroom &amp; Kitchen Remodeling) Are you looking for Bathroom or Kitchen Remodeling? </apex:outputLabel>
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem rendered="{!DTStetr.Order__c == 25}">
+                                <apex:outputLabel >Are you going to be needing any exterior renovations such as gutters, siding or roofing?if yes – (which one)</apex:outputLabel>
+                                <!--<apex:outputField styleClass="interestedGuttersSidingRoofing" value="{!Door_Tag_Script__c.survey_details__r.RenovationsGuttersSidingRoofing__c}" />-->
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem rendered="{!DTStetr.Order__c == 32}">
+                                <apex:outputLabel > Are you planning any outside additions like Decks/Patios/ Awnings or Fencing?</apex:outputLabel>
+                                <!--<apex:outputField styleClass="DecksPatiosAwningFencing" value="{!Door_Tag_Script__c.survey_details__r.DecksPatiosAwningsorFencing__c}" />-->
+                            </apex:pageblocksectionitem>
+                    </apex:repeat>
+                    <apex:outputField Value="{!Door_Tag_Script__c.Appointment_Summary__c}" label="Industry"/>
+                    </apex:pageBlockSection>
+              
+               
+               
+               
+               
+               
+               
+               </apex:pageBlock>
+      
+      
+    
+   </apex:form>
+   <!-- progess bar -->
+   <style>
+      #progressBar {
+      width: 100%;
+      height: 18px;
+      border: 0.5px solid #111;
+      background-color: white;
+      }
+      #progressBar div {
+      height: 100%;
+      color: #fff;
+      text-align: right;
+      line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+      width: 0;
+      background-color: #A4A4A4;
+      }
+   </style>
+   <script>
+      function progress(percent, $element) {
+          var progressBarWidth = percent * $element.width() / 100;
+          $element.find('div').animate({ width: progressBarWidth }, 1500).html(percent + "% ");
+      }
+   </script>
+   <!-- scroll div -->
+   <style>
+      .scrollup {
+      width: 40px;
+      height: 40px;
+      position: fixed;
+      bottom: 30px;
+      right: 60px;
+      display: none;
+      text-indent: -9999px;
+      background: url("{!URLFOR($Resource.nuHome, '/img/arrow60.png')}") no-repeat;
+      background-size : 40px 40px;
+      }
+   </style>
+   <script>
+      $(document).ready(function () {
+          var perc = {!doorTagIns.Completed_Percentage__c}
+          progress(perc, $('#progressBar'));
+          $(window).scroll(function () {
+              if ($(this).scrollTop() > 100) {
+                  $('.scrollup').fadeIn();
+              } else {
+                  $('.scrollup').fadeOut();
+              }
+          });
+          
+          $('.scrollup').click(function () {
+              $("html, body").animate({
+                  scrollTop: 0
+              }, 1000);
+              return false;
+          });
+      });
+   </script>
+   <a href="#" class="scrollup">Scroll</a> 
+   </apex:outputPanel>
+</apex:page>

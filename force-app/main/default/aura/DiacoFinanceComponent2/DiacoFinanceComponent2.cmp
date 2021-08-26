@@ -1,0 +1,624 @@
+<aura:component
+  controller="DiacoFinance2Class"
+  implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,lightning:isUrlAddressable"
+  access="global"
+>
+  <!-- Attributes for docusign butom-->
+  <aura:attribute name="isHomeAuto" type="Boolean" default="false" />
+  <aura:attribute name="label" type="String" default="Send to Docusign" />
+  <aura:attribute name="itWasSigned" type="Boolean" default="true" />
+  <aura:attribute name="AlarmEmpty" type="Boolean" default="false" />
+  <aura:attribute name="contentModal" type="Boolean" default="false" />
+  <aura:attribute name="header" type="String" />
+  <aura:attribute name="body" type="Object" />
+  <aura:attribute name="HaveACH" type="Boolean" default="false" />
+  <aura:attribute name="withACH" type="Boolean" default="false" />
+  <aura:handler
+    name="AccPayMethod"
+    event="c:DiacoFinanceOrderTypeEvent"
+    action="{!c.closeModel1}"
+  />
+  <!-- end docusign attributes -->
+
+  <aura:attribute name="data" type="Object" default="{}" />
+  <aura:attribute name="backUp" type="Object" default="{}" />
+  <aura:handler name="init" value="{! this }" action="{! c.init }" />
+  <aura:attribute name="loaded" type="Boolean" default="true" />
+  <aura:attribute name="disablePrimaryInput" type="Boolean" default="true" />
+  <aura:attribute name="annualSavings" type="Integer" default="true" />
+  <aura:attribute name="recordId" type="String" />
+  <aura:attribute name="hsId" type="String" />
+  <aura:attribute name="financeId" type="String" />
+  <aura:attribute name="att_Border_Select_lease" type="String" />
+  <aura:attribute name="att_Border_Select_purchase" type="String" />
+  <aura:attribute name="att_Yearly" type="Integer" />
+  <aura:attribute name="disableInputHS" type="Boolean" default="true" />
+  <aura:attribute name="existId" type="Boolean" default="false" />
+
+  <lightning:layout
+    class="slds-page-header slds-border_bottom slds-m-bottom_small"
+  >
+    <lightning:layoutItem>
+      <lightning:icon
+        iconName="standard:investment_account"
+        alternativeText="My Expenses"
+      />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="horizontal-small">
+      <div class="page-section page-header">
+        <h1 class="slds-text-heading--label">Information about</h1>
+        <h2 class="slds-text-heading--medium">Finance</h2>
+      </div>
+    </lightning:layoutItem>
+    <aura:if isTrue="{!v.disablePrimaryInput}">
+      <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+        <aura:if isTrue="{! v.existId }">
+          <lightning:button
+            variant="brand"
+            label="Edit"
+            title="Update finance"
+            onclick="{! c.activateSectionToUpdate }"
+          />
+        </aura:if>
+      </lightning:layoutItem>
+      <aura:set attribute="else">
+        <lightning:layoutItem alignmentBump="left" padding="horizontal-small">
+          <lightning:buttonIcon
+            iconName="utility:close"
+            variant="border-filled"
+            name="UpdateFinance"
+            alternativeText="Close"
+            onclick="{! c.closeUpdateSection }"
+          />
+          <lightning:buttonIcon
+            iconName="utility:check"
+            variant="border-filled"
+            name="UpdateFinance"
+            alternativeText="Confirm"
+            onclick="{! c.saveInfo }"
+          />
+        </lightning:layoutItem>
+      </aura:set>
+    </aura:if>
+  </lightning:layout>
+
+  <aura:if isTrue="{! v.loaded }">
+    <lightning:spinner variant="brand" alternativeText="Loading" />
+  </aura:if>
+
+  <div class="slds-grid slds-wrap">
+    <div
+      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12"
+    >
+      <div
+        class="slds-p-right_xx-small slds-p-left_xx-small slds-p-bottom_x-small"
+      >
+        <div
+          class="slds-box slds-box_small slds-theme_default"
+          style="{!v.att_Border_Select_lease}"
+          draggable="false"
+        >
+          <div class="slds-p-bottom_x-small">
+            <div class="slds-align_absolute-center">
+              <div class="page-section page-header">
+                <h2
+                  class="slds-text-heading--medium"
+                  style="
+                    text-decoration: none;
+                    border-bottom: 1px solid #6c6b6b;
+                  "
+                >
+                  Lease
+                </h2>
+              </div>
+            </div>
+
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">
+                  Activation (Emergency and Video)
+                </div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  onchange="{!c.onChangeInput}"
+                  disabled="{!v.disablePrimaryInput}"
+                  value="{!v.data.Activation_Emergency_Video_LEASE__c}"
+                  placeholder="0"
+                  name="ActivationEmergencyVideo"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monthly Payment</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Payment_LEASE__c}"
+                  placeholder="0"
+                  name="MonthlyPayment"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Total Min Payments</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Total_Min_Payments__c}"
+                  placeholder="0"
+                  name="ActivationEmergencyVideo"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monthly Term</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Term_LEASE__c}"
+                  placeholder="0"
+                  name="ActivationEmergencyVideo"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monthly Renewal</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Renewal_LEASE__c}"
+                  placeholder="0"
+                  name="ActivationEmergencyVideo"
+                />
+              </div>
+            </div>
+
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Customer Owned</div>
+              </div>
+
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:select
+                  name="CustomerOwned"
+                  value="{!v.data.Customer_Owned_LEASE__c}"
+                  disabled="true"
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </lightning:select>
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large"><b>Yearly Investment</b></div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.att_Yearly}"
+                  placeholder="0"
+                  name="MonthlyPayment"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12"
+    >
+      <div
+        class="slds-p-right_xx-small slds-p-left_xx-small slds-p-bottom_x-small"
+      >
+        <div
+          class="slds-box slds-box_small slds-theme_default"
+          style="{!v.att_Border_Select_purchase}"
+          draggable="false"
+        >
+          <div class="slds-p-bottom_x-small">
+            <div class="slds-align_absolute-center">
+              <div class="page-section page-header">
+                <h2
+                  class="slds-text-heading--medium"
+                  style="
+                    text-decoration: none;
+                    border-bottom: 1px solid #6c6b6b;
+                  "
+                >
+                  Purchase
+                </h2>
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">
+                  Activation (Emergency and Video)
+                </div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Activation_Emergency_Video_PURCHASE__c}"
+                  placeholder="0"
+                  name="ActivationEmergencyVideoTwo"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monthly Payment</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Payment_PURCHASE__c}"
+                  placeholder="0"
+                  name="MonthlyPayment"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monitoring</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monitoring__c}"
+                  placeholder="0"
+                  name="Monitoring"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Equipment Min Payment</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Equipment_Min_Payment__c}"
+                  placeholder="0"
+                  name="Monitoring"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Purchase</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="{!v.disablePrimaryInput}"
+                  value="{!v.data.Purchase__c}"
+                  placeholder="0"
+                  name="Purchase"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">12 Months Same As Cash</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:select
+                  name="X12MonthsSameAsCash"
+                  value="{!v.data.X12_Months_Same_As_Cash__c}"
+                  disabled="true"
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </lightning:select>
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monthy Term</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Term_PURCHASE__c}"
+                  placeholder="0"
+                  name="MonthlyRenewal"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Monthly Renewal</div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Renewal_PURCHASE__c}"
+                  placeholder="0"
+                  name="MonthlyRenewal"
+                />
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large">Customer Owned</div>
+              </div>
+
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:select
+                  name="CustomerOwnedTwo"
+                  value="{!v.data.Customer_Owned_PURCHASE__c}"
+                  disabled="true"
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </lightning:select>
+              </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_7-of-12">
+                <div class="slds-p-top_large"><b>Yearly Investment</b></div>
+              </div>
+              <div class="slds-col slds-size_5-of-12">
+                <lightning:input
+                  type="number"
+                  disabled="true"
+                  value="{!v.data.Monthly_Term_PURCHASE__c * v.data.Monitoring__c}"
+                  placeholder="0"
+                  name="MonthlyPayment"
+                  formatter="currency"
+                  step="0.01"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_2-of-12"
+    >
+      <div class="slds-box slds-box_small slds-theme_default" draggable="false">
+        Annual Savings With Purchase
+        <lightning:input
+          type="number"
+          disabled="true"
+          placeholder="0"
+          value="{!v.annualSavings}"
+          formatter="currency"
+          step="0.01"
+          name="AnnualSavingswithPurchase"
+        />
+      </div>
+      <div class="slds-p-top_x-small">
+        <div
+          class="slds-box slds-box_small slds-theme_default"
+          draggable="false"
+        >
+          <lightning:select
+            aura:id="financeType"
+            name="Type"
+            label="Type"
+            onchange="{!c.onChageUpdateType}"
+            value="{!v.data.type__c}"
+            disabled="{!v.disableInputHS}"
+          >
+            <option value="">Choose one</option>
+            <option value="lease">Lease</option>
+            <option value="purchase">Purchase</option>
+          </lightning:select>
+        </div>
+      </div>
+
+      <div class="slds-p-top_x-small">
+        <div
+          class="slds-box slds-box_small slds-theme_default"
+          draggable="false"
+        >
+          <lightning:select
+            aura:id="Payment_Factor"
+            name="PaymentFactor"
+            label="Payment Factor"
+            onchange="{!c.onchangePaymentFactor}"
+            value="{!v.data.Payment_Factor__c}"
+            disabled="{!v.disableInputHS}"
+          >
+            <option value="0.01675">0.01675</option>
+            <option value="0.01487">0.01487</option>
+          </lightning:select>
+          <!--
+                    <lightning:select aura:id="Tax" name="Tax" label="Tax" onchange="{!c.onchangeUpdateTax}" value="{!v.data.Tax__c}" disabled="{!v.disableInputHS}">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </lightning:select>
+					-->
+          <lightning:select
+            aura:id="Video"
+            name="Video"
+            label="Video"
+            onchange="{!c.onchangeUpdateVideo}"
+            value="{!v.data.Video__c}"
+            disabled="{!v.disableInputHS}"
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            <option value="">Recurring No</option>
+          </lightning:select>
+          <lightning:input
+            aura:id="Term"
+            type="number"
+            name="Term"
+            label="Term months"
+            value="{!v.data.Payment_Number__c}"
+            disabled="true"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <aura:if isTrue="{!v.itWasSigned}">
+      <div class="slds-align_absolute-center slds-size_1-of-1">
+        <c:DiacoSignedContract
+          aura:id="DiacoSignedContract"
+          IsPinnacleFinance="true"
+          recordId="{!v.recordId}"
+        />
+      </div>
+    </aura:if>
+    <aura:if isTrue="{!v.isHomeAuto}">
+      <div class="slds-align_absolute-center slds-size_1-of-1">
+        <!-- <lightning:button variant="success" 
+                              label="{!v.label}" 
+                              class="slds-align_absolute-center" 
+                              title="{!v.label}" 
+                              disabled="{!v.label == 'Sending...' }"
+                              onclick="{!c.AlarmToDocusign}" /> -->
+      </div>
+      <!-- Modal To display Alert about empty Field on Custom Alarm object -->
+      <aura:if isTrue="{!v.AlarmEmpty}">
+        <section
+          role="dialog"
+          tabindex="-1"
+          aria-labelledby="modal-heading-01"
+          aria-modal="true"
+          aria-describedby="modal-content-id-1"
+          class="slds-modal slds-fade-in-open"
+        >
+          <div class="slds-modal__container">
+            <!-- ###### MODAL BOX HEADER Start ######-->
+            <header class="slds-modal__header">
+              <lightning:buttonIcon
+                iconName="utility:close"
+                onclick="{! c.closeModel }"
+                alternativeText="close"
+                variant="bare-inverse"
+                class="slds-modal__close"
+              />
+              <h2
+                id="modal-heading-03"
+                class="slds-text-heading_medium slds-hyphenate"
+              >
+                Empty Fields
+              </h2>
+            </header>
+            <!--###### MODAL BOX BODY Part Start######-->
+            <div
+              class="slds-modal__content slds-p-around_medium"
+              id="modal-content-id-3"
+            >
+              <div class="slds-grid slds-wrap">
+                <div
+                  class="slds-col slds-size_1-of-1 slds-align_absolute-center"
+                >
+                  The following fields may be empty, "Panel Type, Modem Serial
+                  Number" in Customer Alarm, Are you sure you want to continue?
+                </div>
+              </div>
+            </div>
+            <!--###### MODAL BOX FOOTER Part Start ######-->
+            <footer class="slds-modal__footer">
+              <lightning:button
+                variant="neutral"
+                label="Cancel"
+                title="Cancel"
+                onclick="{! c.closeModel }"
+              />
+              <!-- <lightning:button variant="brand" 
+                                              label="{!v.label}"
+                                              title="Delete" onclick="{! c.ToDocusign}"/> -->
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+      </aura:if>
+    </aura:if>
+
+    <aura:if isTrue="{!v.contentModal}">
+      <section
+        role="dialog"
+        tabindex="-1"
+        aria-labelledby="modal-heading-01"
+        aria-modal="true"
+        aria-describedby="modal-content-id-1"
+        class="slds-modal slds-fade-in-open"
+      >
+        <div class="slds-modal__container">
+          <!-- ###### MODAL BOX HEADER Start ######-->
+          <header class="slds-modal__header">
+            <lightning:buttonIcon
+              iconName="utility:close"
+              onclick="{! c.closeModel1 }"
+              alternativeText="close"
+              variant="bare-inverse"
+              class="slds-modal__close"
+            />
+            <h2
+              id="modal-heading-01"
+              class="slds-text-heading_medium slds-hyphenate"
+            >
+              {!v.header}
+            </h2>
+          </header>
+          <!--###### MODAL BOX BODY Part Start######-->
+          <div
+            class="slds-modal__content slds-p-around_medium"
+            style="weight: 700px"
+            id="modal-content-id-1"
+          >
+            <div class="slds-grid slds-wrap">
+              <div class="slds-col slds-size_1-of-1">{!v.body}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+      <!--###### MODAL BOX Part END Here ######-->
+    </aura:if>
+  </div>
+</aura:component>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Waze_Address__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&apos;https://waze.com/ul?q=&apos;+  BillingStreet +&apos;%20&apos;+  BillingCity +&apos;%20&apos;+ BillingState +&apos;%20&apos;+ BillingPostalCode +&apos;ll=&apos;+ TEXT(BillingLatitude)+&apos;,&apos;+ TEXT(BillingLongitude)+&apos;&amp;navigate=yes&apos;, &apos;Go to Waze - Address&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Waze - Address</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,17 @@
+<apex:page standardController="Home_Services__c">
+    <apex:includeLightning />
+    
+    <div id="DicoContractPayMethod" />
+
+    <script>
+        $Lightning.use("c:DiacoHSContractPayMethodsApp", function() {
+          $Lightning.createComponent("c:DiacoContractPayMethod",
+              {recordId: '{!Home_Services__c.Id}'},
+              "DicoContractPayMethod",
+              function(cmp) {
+                // ...
+              }
+          );
+        });
+    </script>
+</apex:page>

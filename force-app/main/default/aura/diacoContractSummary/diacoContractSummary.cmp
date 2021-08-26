@@ -1,0 +1,166 @@
+<!--
+
+ Diaco
+ @author 			dayana lorena rodriguez reyes href=<lorenarodriquez144@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering home automation contract tabs
+     
+ Changes (Version)
+ _________________________________________
+
+      No.		Date			Author					Description
+      ____	__________      __________________      _____________________________________
+@version	1.0		12/03/2019		Dayana Rodriguez (DY)	Initial implementation  of the component.
+@version	1.0		16/10/2020		Fabian Pineda (FP)  	Added Tax__c to the recordEditForm, and made the form save and reload whenever its value changes. 
+@version    1.0     09/11/2020      Fabian Pineda (FP)      Added help text to some fields.
+-->
+
+<aura:component controller="DiacoWaterContractController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    
+    <aura:attribute name="recordType" type="String"/>
+    
+    <aura:attribute name="toReload" type="Boolean"/>
+    <aura:handler name="change" value="{!v.toReload}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="isLoad" type="Boolean" default="true" />
+    
+    <!--aura:handler name="init" action="{!c.doInit}" value="{!this}"/-->
+    
+    <aura:if isTrue="{!v.isLoad}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+    
+    <fieldset class="slds-box slds-theme--default ">
+        <!--PRICING-->
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information About</h1>
+                    <h2 class="slds-text-heading--medium">Pricing</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked">
+                        <div class="slds-form slds-grid slds-wrap slds-align_absolute-center">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <aura:if isTrue="{!v.recordId}">
+                                    <lightning:recordEditForm aura:id="recordViewForm"
+                                                              recordId="{!v.recordId}"
+                                                              onsuccess="{!c.handleSuccess}"
+                                                              onload="{!c.handleLoad}" 
+                                                              onerror="{!c.handleOnError}" 
+                                                              objectApiName="Home_Services__c">
+                                        <lightning:messages />
+                                        <lightning:inputField fieldName="Total_Gross_Sale__c" />
+                                        <aura:if isTrue="{!v.recordType!='Solar'}">
+                                            <lightning:inputField aura:id="taxField" fieldName="Tax__c" onchange="{! c.validate }" />
+                                            <lightning:outputField aura:id="salesTaxField" fieldName="Total_Sales_Tax__c" onchange="{! c.validate }" />
+                                        </aura:if> 
+                                        
+                                        <lightning:inputField fieldName="Total_Cash_Price__c" />
+                                        <div class="helpTextContainer"><lightning:helptext content="Required." class="helpText" /></div>
+                                        <lightning:inputField aura:id="downPaymentField" fieldName="Down_Payment__c" onchange="{!  c.validate }" />
+                                        <aura:if isTrue="{!v.recordType!='Solar'}">
+                                            <lightning:inputField aura:id="tradeInAllowanceField" fieldName="Trade_in_Allowance__c" onchange="{! c.validate }" />
+                                        </aura:if> 
+                                        <lightning:inputField fieldName="Total_Down_Payment__c" />
+                                        <lightning:inputField fieldName="Total_Balance_Due__c" />
+                                        <aura:if isTrue="{!v.recordType!='Solar'}">
+                                            <lightning:button aura:id="submit"
+                                                              variant="brand"
+                                                              onclick="{!c.handleSubmit}"
+                                                              label="{!v._label == 'Saving...' ? v._label : 'Save'}"
+                                                              title="{!v._label == 'Saving...' ? v._label : 'Save'}"
+                                                              disabled="{!v._label == 'Saving...'}"
+                                                              class="slds-m-top--medium slds-align_absolute-center" />
+                                        </aura:if>
+                                        
+                                    </lightning:recordEditForm>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <!--/END OF PRICING-->
+        <!--Payments(For solar)-->
+        <aura:if isTrue="{!v.recordType=='Solar'}">
+            <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="standard:work_capacity_usage" alternativeText="My Expenses"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Information</h1>
+                        <h2 class="slds-text-heading--medium">Payments </h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout horizontalAlign="center">
+                <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                    <div aria-labelledby="FirstCustomerInformation">
+                        <form class="slds-form--stacked">
+                            <div class="slds-form slds-grid slds-wrap slds-align_absolute-center">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                    <aura:if isTrue="{!v.recordId}">
+                                        <lightning:recordEditForm aura:id="recordViewForm2"
+                                                                  recordId="{!v.recordId}"
+                                                                  onload="{!c.handleLoad}" 
+                                                                  onerror="{!c.handleOnError}" 
+                                                                  objectApiName="Home_Services__c">
+                                            <lightning:messages />
+                                            <div class="slds-form slds-grid slds-wrap slds-align_absolute-center">
+                                                
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                    <lightning:inputField  fieldName="Balance_Due__c"
+                                                                          name="Remaining_Amount" 
+                                                                          label="Remaining Amount"/>
+                                                </div>
+                                                
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                    <lightning:inputField  fieldName="FirstPayment__c"/>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                    <lightning:inputField  fieldName="SecondPayment__c"/>
+                                                </div>
+                                                <!--<div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                    <lightning:inputField  fieldName="ThirdPayment__c"/>
+                                                </div>-->
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                    <lightning:inputField  fieldName="Trade_in_Allowance__c" />
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 padding-right">
+                                                </div>
+                                            </div>
+                                            
+                                            <lightning:button aura:id="submit"
+                                                              variant="brand"
+                                                              onclick="{!c.handleSubmit}"
+                                                              label="{!v._label == 'Saving...' ? v._label : 'Save'}"
+                                                              title="{!v._label == 'Saving...' ? v._label : 'Save'}"
+                                                              disabled="{!v._label == 'Saving...'}"
+                                                              class="slds-m-top--medium slds-align_absolute-center" />
+                                            
+                                        </lightning:recordEditForm>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+        <!--/End of payment-->
+        
+    </fieldset>
+</aura:component>

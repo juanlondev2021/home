@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OB_Report_Teams__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Call_Disposition__c , 
+  &apos;Appt Set: IB&apos;, &apos;IB Appt&apos;, 
+  &apos;Appt Set: OB&apos;, &apos;OB Appt&apos;,
+  &apos;Appt set: Project Yes&apos;, &apos;Yes Appt&apos;,
+  &apos;Transfer: IB&apos;, &apos;IB Appt&apos;, 
+  &apos;Transfer: OB&apos;, &apos;OB Appt&apos;,
+  &apos;Transfer: Project Yes&apos;, &apos;Yes Appt&apos;,
+  &apos;Appointment Set&apos;, &apos;OB Appt&apos;,
+&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>OB Report: Teams</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

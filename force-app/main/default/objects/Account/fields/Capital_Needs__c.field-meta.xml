@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Capital_Needs__c</fullName>
+    <externalId>false</externalId>
+    <label>Capital Needs</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A) Sell Accounts, Retire Or Liquidate</fullName>
+                <default>false</default>
+                <label>A) Sell Accounts, Retire Or Liquidate</label>
+            </value>
+            <value>
+                <fullName>B) Finance An Acquisition</fullName>
+                <default>false</default>
+                <label>B) Finance An Acquisition</label>
+            </value>
+            <value>
+                <fullName>C) Consolidate Debt</fullName>
+                <default>false</default>
+                <label>C) Consolidate Debt</label>
+            </value>
+            <value>
+                <fullName>D) Expand Business Growth</fullName>
+                <default>false</default>
+                <label>D) Expand Business Growth</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

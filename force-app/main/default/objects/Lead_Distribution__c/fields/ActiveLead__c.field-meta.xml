@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActiveLead__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This box will be check by the Trigger to tell Bright Pattern which record to dial next for this industry branch group.</description>
+    <externalId>false</externalId>
+    <label>Active Lead</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

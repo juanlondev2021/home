@@ -1,0 +1,7 @@
+<design:component label="Record Type-Dependent Picklist">
+	<design:attribute name="sObjectName" label="sObject API Name" required="true" description="API Name of the sObject containing the Record Type-Dependent Picklist." />
+    <design:attribute name="recordTypeId" label="Record Type ID" required="true" description="ID of the Record Type of the sObject containing the dependent Picklist." />
+    <design:attribute name="picklistName" label="Picklist API Name" required="true" description="API Name of the Record Type-dependent Picklist." />
+    
+    <design:attribute name="output" label="Component Output" description="Use this as an output variable. Avoid assigning input values to it." />
+</design:component>

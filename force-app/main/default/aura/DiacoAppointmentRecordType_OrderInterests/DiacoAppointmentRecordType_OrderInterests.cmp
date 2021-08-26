@@ -1,0 +1,105 @@
+<!--
+* Diaco
+* @author 			
+* Project:		    Appointment Recordtype Set Up
+* Description:		Order Interests
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		12/08/2020		Jull Quintero     		Initial implementation of the class.
+-->
+<aura:component>      
+
+    <aura:attribute name="open" type="boolean" default="false" description="OPEN MODAL" required="true" />
+    <aura:attribute name="appointments_mtd" type="list" description="CUSTOM SETTING Appointment_RecordType_mtd__c" required="true"/> 
+
+    <aura:attribute access="private" name="dragid" type="Integer" />
+
+    <!-- EVENT UPDATE TASK MANAGER -->
+    <aura:registerEvent name="updateAppointmentMtd" type="c:DiacoEventAppointmentRecordType_SetUp" />
+    
+    <aura:if isTrue="{! v.open }">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_small slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon   iconName="utility:close"
+                                            onclick="{! c.closeModel }"
+                                            alternativeText="close"
+                                            variant="bare-inverse"
+                                            class="slds-modal__close"/>
+
+                <lightning:layout  multipleRows="true"  class="slds-page-header slds-page-header_vertical slds-align_absolute-center">
+                    <lightning:layoutItem padding="horizontal-small">
+                        <lightning:icon iconName="action:user_activation" />
+                    </lightning:layoutItem>
+            
+                    <lightning:layoutItem padding="horizontal-small">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span>Drag And Drop</span>
+                                    <span class="slds-page-header__title slds-truncate" title="Recently Viewed"> Order </span>
+                                </h1>
+                            </div>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>                    
+                </header>    
+                <!-- /HEADER -->
+                
+                <!-- TABLE -->
+                <div class="slds-modal__content  slds-p-around_medium" id="modal-content-id-1">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Name">Interest Name</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody      ondragover="{!c.cancel}" 
+                                    ondragenter="{!c.cancel}"
+                                    ondrop="{!c.drop}">
+                            <aura:iteration items="{!v.appointments_mtd}"
+                                            indexVar="index"
+                                            var="value">
+                                
+                                <tr class="slds-hint-parent">
+                                    
+                                    <td data-label="Opportunity Name">
+                                        <div    class="slds-truncate" title="{!v.value.value.Interest_Name__c}"
+                                                draggable="true"
+                                                ondragstart="{!c.dragstart}"
+                                                data-drag-id="{!index}">
+                                                <lightning:formattedText value="{! add(index,1) + ' - ' + value.Interest_Name__c }" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /TABLE -->
+                <footer class="slds-modal__footer">
+                    <lightning:button   variant="neutral" 
+                                        label="Cancel"
+                                        title="Cancel"
+                                        onclick="{! c.closeModel }"/>
+                    
+                    <lightning:button   variant="brand" 
+                                        label="Save" 
+                                        title="Save" 
+                                        iconName="utility:save" 
+                                        iconPosition="left"  
+                                        onclick="{! c.handlerSave }" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

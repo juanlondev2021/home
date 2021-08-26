@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Additional_Details__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>I have listened to the call and all Additional Details are in the notes.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>I have listened to the call and all Additional Details are in the notes.</inlineHelpText>
+    <label>Additional Details</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Text_Appt_Confirmed__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+$Setup.Text_Settings_Appt__c.Appt_Confirmed_HA__c = TRUE, &quot;HA &quot;,&quot;&quot;) +
+IF(
+ $Setup.Text_Settings_Appt__c.Appt_Confirmed_SO__c = TRUE, &quot;SO &quot;,&quot;&quot;) +
+IF(
+ $Setup.Text_Settings_Appt__c.Appt_Confirmed_WA__c = TRUE, &quot;WA &quot;,&quot;&quot;) +
+IF(
+ $Setup.Text_Settings_Appt__c.Appt_Confirmed_WI__c = TRUE, &quot;WI &quot;,&quot;&quot;)</formula>
+    <label>Text -Appt Confirmed</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

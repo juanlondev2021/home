@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appointment_Summary__c</fullName>
+    <description>This filed will contains the information about industry and survey questions,responses and appointment details</description>
+    <externalId>false</externalId>
+    <label>Appointment Summary</label>
+    <length>131000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

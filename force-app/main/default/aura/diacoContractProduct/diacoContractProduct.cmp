@@ -1,0 +1,110 @@
+<!--
+* Diaco
+* @author 			Jorge Martinez href=<jorgeality29@gmail.com>
+* Project:			Contracts
+* Description:		component reponsible of rendering water line items products
+*
+* Changes (Version)
+* ___________________________________
+*			No.		Date			Author					Description
+*			_____	__________		____________________	____________________________________
+* @version	1.0		11/03/2019		Jorge Martinez (JM)		Initial implementation of the class.
+-->
+<aura:component controller="DiacoCmpContractController">
+    <aura:attribute name="lineitem" type="Line_Item__c" />
+    <aura:attribute name="Product" type="Product__c" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    
+    <aura:attribute name="isUpdate" type="boolean" default="false"/>
+    
+    <aura:if isTrue="{!v.lineitem.Active__c}">
+        <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-2">
+            <div class="slds-col slds-size_1-of-2 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center">
+                <fieldset class="slds-box slds-theme--default slds-m-top--medium">
+                    <lightning:card variant="Narrow" iconName="standard:account">
+                        <aura:set attribute="title">
+                            <h4 class="slds-p-horizontal_x-large">Product</h4>
+                        </aura:set>
+                        <aura:set attribute="actions">
+                            <lightning:buttonIcon iconName="utility:close" variant="border-filled" onclick="{!c.openModel}" alternativeText="Show More" size="small"/>
+                        </aura:set>
+                        <div class="slds-form slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-horizontal_small">
+                                <lightning:input aura:id="nameField"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                                                 name="Name"
+                                                 label="Name"
+                                                 placeholder="Name"
+                                                 value="{!v.lineitem.Name}"/>
+                                
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-top--medium slds-p-horizontal_small">
+                                <lightning:input aura:id="unitPriceField" type="number"
+                                                 formatter="currency"
+                                                 step="0.01"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_10-of-12 slds-align_absolute-center"
+                                                 name="UnitPrice" 
+                                                 label="Unit Price"
+                                                 placeholder="Unit Price"
+                                                 onchange="{!c.checkUnitPrice}"
+                                                 onblur="{!c.putPrice}"
+                                                 min="0"
+                                                 value="{!v.lineitem.Unit_Price__c}"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-top--medium slds-p-horizontal_small">
+                                <lightning:input aura:id="quantityField" type="number"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_10-of-12 slds-align_absolute-center"
+                                                 name="Quantity" 
+                                                 label="Quantity"
+                                                 placeholder="Quantity"
+                                                 onchange="{!c.totalPrice}"
+                                                 min="1"
+                                                 step="0"
+                                                 value="{!v.lineitem.Quantity__c}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-top--medium slds-p-horizontal_small">
+                                <lightning:input aura:id="totalField" type="number"
+                                                 formatter="currency"
+                                                 step="0.01"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_11-of-12 slds-large-size_11-of-12 slds-align_absolute-center"
+                                                 name="Total Sales Price" 
+                                                 label="Total Sales Price"
+                                                 value="{!v.lineitem.Total_Sales_Price_p__c}"
+                                                 disabled="true"/>
+                            </div>
+                        </div>
+                    </lightning:card>
+                </fieldset>
+            </div>
+        </div>
+    </aura:if> 
+        <aura:if isTrue="{!v.isOpen}">
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <h4 class="slds-p-horizontal_x-large">{!'Are you sure to delete ' + v.lineitem.Name +' product?'}</h4>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand" 
+                                      label="Aceptar"
+                                      title="Aceptar"
+                                      onclick="{! c.deleteItem }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+</aura:component>

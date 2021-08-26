@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DT_Plumbing_install_repair_leak_detect__c</fullName>
+    <description>(Plumber)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>(Plumber)</inlineHelpText>
+    <label>Plumbing install /repair /leak detection</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Plumber - New Install?</fullName>
+                <default>false</default>
+                <label>Plumber - New Install?</label>
+            </value>
+            <value>
+                <fullName>Plumber - Existing Repair?</fullName>
+                <default>false</default>
+                <label>Plumber - Existing Repair?</label>
+            </value>
+            <value>
+                <fullName>Plumber - Leak Detection?</fullName>
+                <default>false</default>
+                <label>Plumber - Leak Detection?</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

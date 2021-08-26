@@ -1,0 +1,5 @@
+<!-- It will display WaterSoftnerFiltration script -->
+
+<apex:page showHeader="false" controller="nuHome_Outbound_Beta_AC" id="pg" tabStyle="Account">
+    
+</apex:page>

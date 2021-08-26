@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stage_Types__c</fullName>
+    <externalId>false</externalId>
+    <label>Stage Types</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gift Card</fullName>
+                <default>false</default>
+                <label>Gift Card</label>
+            </value>
+            <value>
+                <fullName>Premier Partner Fee</fullName>
+                <default>false</default>
+                <label>Premier Partner Fee</label>
+            </value>
+            <value>
+                <fullName>Hot Lead</fullName>
+                <default>false</default>
+                <label>Hot Lead</label>
+            </value>
+            <value>
+                <fullName>OB Campaign</fullName>
+                <default>false</default>
+                <label>OB Campaign</label>
+            </value>
+            <value>
+                <fullName>Alarm Sale</fullName>
+                <default>false</default>
+                <label>Alarm Sale</label>
+            </value>
+            <value>
+                <fullName>CPL</fullName>
+                <default>false</default>
+                <label>CPL</label>
+            </value>
+            <value>
+                <fullName>CPL Spec</fullName>
+                <default>false</default>
+                <label>CPL Spec</label>
+            </value>
+            <value>
+                <fullName>DT CPL</fullName>
+                <default>false</default>
+                <label>DT CPL</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Gift Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Premier Partner Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Hot Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>OB Campaign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Alarm Sale</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>CPL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>CPL Spec</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>DT CPL</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

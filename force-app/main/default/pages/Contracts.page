@@ -1,0 +1,1547 @@
+<apex:page standardController="Home_Services__c" extensions="ContractsController"
+           showHeader="false" standardStylesheets="false"
+           docType="html-5.0" applyHtmlTag="false" applyBodyTag="false" >
+    <head>
+        <title>Contract</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"/>
+        <!--Icons materialize-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        
+        <!-- Compiled and minified JavaScript  SaveLineItems-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js">
+        </script>
+        <style>
+            nav {
+            background-color: #397cba;
+            }
+        </style>
+    </head>
+    <body>
+        <!--LineItems-->
+        <div class="navbar-fixed">
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo"><h5>{!productType} Contract</h5></a>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li style='display:{!water};'><a href="#FirstCustomer" class="tooltipped" data-position="bottom" data-tooltip="First Customer" onclick="next('FirstCustomer');"><i class="material-icons">person</i></a></li>
+                        <li style='display:{!solar};'><a href="#FirstCustomer" class="tooltipped" data-position="bottom" data-tooltip="HomeOwner Information" onclick="next('FirstCustomer');"><i class="material-icons">person</i></a></li>
+                        <li style='display:{!water};'><a href="#SecondCustomer" class="tooltipped" data-position="bottom" data-tooltip="Second Customer" onclick="next('SecondCustomer');"><i class="material-icons">person_add</i></a></li>
+                        <li style='display:{!water};'><a href="#LocationAndPayments" class="tooltipped" data-position="bottom" data-tooltip="Mortgage Payment And Location" onclick="next('LocationAndPayments');"><i class="material-icons">payment</i></a></li>
+                        <li style='display:{!water};'><a href="#InstallationDate" class="tooltipped" data-position="bottom" data-tooltip="Installation Date" onclick="next('InstallationDate');"><i class="material-icons">date_range</i></a></li>
+                        <li><a href="#Products" class="tooltipped" data-position="bottom" data-tooltip="installation product" onclick="next('Products');"><i class="material-icons">view_column</i></a></li>
+                        <li style='display:{!water};'><a href="#Analysis" class="tooltipped" data-position="bottom" data-tooltip="Water Analysis" onclick="next('Analysis');"><i class="material-icons">security</i></a></li>
+                        <li><a href="#Summary" class="tooltipped" data-position="bottom" data-tooltip="Pricing" onclick="next('Summary');"><i class="material-icons">playlist_add_check</i></a></li>
+                        <li style='display:{!water};'><a href="#Services" class="tooltipped" data-position="bottom" data-tooltip="Service Agreement" onclick="next('Services');"><i class="material-icons">room_service</i></a></li>
+                        <li style='display:{!water};'><a href="#ServicesList" class="tooltipped" data-position="bottom" data-tooltip="Services List" onclick="next('ServicesList');"><i class="material-icons">format_list_numbered</i></a></li>
+                        <li><a href="#PaymentMethod" class="tooltipped" data-position="bottom" data-tooltip="Method of Payment" onclick="next('PaymentMethod');"><i class="material-icons">monetization_on</i></a></li>
+                        <li><a href="/{!Home_Services__c.Id}" class="tooltipped" data-position="left" data-tooltip="Back"><i class="material-icons">arrow_back</i></a></li>
+                    </ul>
+                    
+                </div>
+            </nav>
+        </div>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <h5 align="center">
+                    Option menu
+                </h5>
+            </li>
+            <li><div class="divider"></div></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('FirstCustomer');"><i class="material-icons">person</i>First Customer</a></li>
+            <li style='display:{!solar};'><a href="#!" class="waves-effect" onclick="next('FirstCustomer');"><i class="material-icons">person</i>HomeOwner Information</a></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('SecondCustomer');"><i class="material-icons">person_add</i>Second Customer</a></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('LocationAndPayments');"><i class="material-icons">payment</i>Mortgage Payment</a></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('InstallationDate');"><i class="material-icons">date_range</i>Installation Date</a></li>
+            <li ><a href="#!" class="waves-effect" onclick="next('Products');"><i class="material-icons">view_column</i>Products</a></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('Analysis');"><i class="material-icons">security</i>Water Analysis</a></li>
+            <li><a href="#!" class="waves-effect" onclick="next('Summary');"><i class="material-icons">playlist_add_check</i>Pricing</a></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('Services');"><i class="material-icons">room_service</i>Service Agreement</a></li>
+            <li style='display:{!water};'><a href="#!" class="waves-effect" onclick="next('ServicesList');"><i class="material-icons">format_list_numbered</i>Services List</a></li>
+            <li><a href="#!" class="waves-effect" onclick="next('PaymentMethod');"><i class="material-icons">monetization_on</i>Method of Payment</a></li>
+            <li><a href="/{!Home_Services__c.Id}" class="waves-effect" ><i class="material-icons">arrow_back</i>back</a></li>
+        </ul>   
+        <div id="FirstCustomer" class="col s12">
+            <div class="row">
+                <apex:form >
+                    <h4 align="center" style='display:{!water};'>
+                        First Customer
+                    </h4>
+                    <h4 align="center" style='display:{!solar};'>
+                        HomeOwner Information
+                    </h4>
+                    <div class="col s12">
+                        <div class="row">
+                            
+                            <div class="input-field col s12" style='display:{!water};'>
+                                <table >
+                                    <tr>
+                                        <th><apex:outputLabel value="First Name"/></th>
+                                        <th><apex:inputField value="{!acct.AcctFirstName__c}" styleClass="validate"/></th>
+                                        <th><apex:outputLabel value="Last Name"/></th>
+                                        <th><apex:inputField value="{!acct.AcctLastName__c}"  styleClass="validate"/></th>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style='display:{!water};'>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">assignment_ind</i>
+                                    <apex:inputField value="{!acct.Customer_1_SSN_E__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">SSN</label>
+                                </div>
+                                <div class="col s12 m1 l1">
+                                    <h6>
+                                        DOB
+                                    </h6>
+                                </div>
+                                <div class="col s12 m5 l5">
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Day}" size="1">
+                                            <apex:selectOptions value="{!DayList}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Day</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Month}" size="1">
+                                            <apex:selectOptions value="{!monthlist}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Month</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Year}" size="1">
+                                            <apex:selectOptions value="{!YearList}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Year</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">assignment_ind</i>
+                                    <apex:inputField value="{!acct.Customer_1_Drivers_License__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">DL #</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">assignment_ind</i>
+                                    <apex:inputField value="{!acct.Drivers_license_Issuing_state_1__c}" styleClass="validate" />
+                                    <label for="icon_prefix">Drivers license Issuing state</label>
+                                </div>
+                                
+                                
+                                <div class="input-field col s12 m1 l1">
+                                    <h6>
+                                        Drivers License Issue
+                                    </h6>
+                                </div>
+                                <div class="col s12 m5 l5">
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Day_Dli}" size="1">
+                                            <apex:selectOptions value="{!DayList}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Day</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Month_Dli}" size="1">
+                                            <apex:selectOptions value="{!monthlist}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Month</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Year_Dli}" size="1">
+                                            <apex:selectOptions value="{!YearList}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Year</label>
+                                    </div>
+                                </div>
+                                <div class="input-field col s12 m1 l1">
+                                    <h6>
+                                        Driver License Expiration
+                                    </h6>
+                                </div>
+                                <div class="col s12 m5 l5">
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Day_Dle}" size="1">
+                                            <apex:selectOptions value="{!DayList}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Day</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Month_Dle}" size="1">
+                                            <apex:selectOptions value="{!monthlist}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Month</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:selectList value="{!customer1Year_Dle}" size="1">
+                                            <apex:selectOptions value="{!YearList}"/>
+                                        </apex:selectList>
+                                        <label for="icon_prefix">Year</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style='display:{!Solar};'>
+                                <div class="input-field col s12 m6 l6">
+                                    <table >
+                                        <tr>
+                                            <th width="20%"><apex:outputLabel value="HOMEOWNER"/></th>
+                                            <th width="40%"><apex:outputText value="{!acct.AcctFirstName__c &'   '& acct.AcctLastName__c}" styleClass="validate"/></th>
+                                            
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">phone</i>
+                                    <apex:inputField value="{!acct.Phone}" styleClass="validate"/>
+                                    <label for="icon_telephone"> Home Phone</label>
+                                </div>
+                                
+                                
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">location_on</i>
+                                    <apex:inputField value="{!acct.Street__c}" styleClass="validate"/>
+                                    <label for="icon_telephone">Street</label>
+                                </div>
+                                <div class="input-field col s12 m2 l2">
+                                    <apex:inputField value="{!acct.City__c}" styleClass="validate"/>
+                                    <label for="icon_telephone">City</label>
+                                </div>
+                                <div class="input-field col s12 m2 l2">
+                                    <apex:inputField value="{!acct.State__c}" styleClass="validate"/>
+                                    <label for="icon_telephone">State</label>
+                                </div>
+                                <div class="input-field col s12 m2 l2">
+                                    <apex:inputField value="{!acct.Zip__c}" styleClass="validate"/>
+                                    <label for="icon_telephone">Zip Code</label>
+                                </div>
+                            </div>
+                            
+                            <div class="input-field col s12 m6 l6" style='display:{!water};'>
+                                <i class="material-icons prefix">phone</i>
+                                <apex:inputField value="{!acct.Phone}" styleClass="validate"/>
+                                <label for="icon_telephone"> Home Phone</label>
+                            </div>
+                            <div class="input-field col s12 m6 l6" style='display:{!water};'>
+                                <i class="material-icons prefix">phone_android</i>
+                                <apex:inputField value="{!acct.PersonMobilePhone}" styleClass="validate"/>
+                                <label for="icon_telephone"> Cell Phone</label>
+                            </div>
+                            <div class="{!classCss}">
+                                <i class="material-icons prefix">email</i>
+                                <apex:inputField value="{!acct.PersonEmail}" styleClass="validate"/>
+                                <label for="email">Email</label>
+                            </div>
+                            <div style='display:{!solar};'>
+                                <div class="input-field col s12 m6 l6" >
+                                    <apex:inputField value="{!homeService.Utility_Company__c}" styleClass="validate"/>
+                                    <label for="email">Utility Company</label>
+                                </div>
+                            </div>
+                            <div style='display:{!solar};'>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <apex:inputField value="{!homeService.hoaName__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Hoa Name</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">phone</i>
+                                    <apex:inputField value="{!homeService.hoaPhoneNumber__c}" styleClass="validate"/>
+                                    <label for="icon_telephone">Phone Number</label>
+                                </div>
+                            </div>
+                            
+                            <br/>
+                            <div style='display:{!water};'>
+                                <div class="input-field col s12 m12 l12">
+                                    <h4 align="center">
+                                        Employer Information
+                                    </h4>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">person</i>
+                                    <apex:inputField value="{!acct.Customer_1_Employer__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Name</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">phone</i>
+                                    <apex:inputField value="{!acct.Customer_1_Employer_Phone__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Phone</label>
+                                </div>
+                                
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">attach_money</i>
+                                    <apex:inputField value="{!acct.Customer_1_Income__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Income</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">group</i>
+                                    <apex:inputField value="{!acct.Customer_1_Length_of_Employment__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Length emp.</label>
+                                </div>
+                                
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="material-icons prefix">show_chart</i>
+                                    <apex:inputField value="{!acct.Customer_1_Employment_Position__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Position</label>
+                                </div>
+                            </div>
+                            
+                            <div class="input-field col s12 m12 l12" style='display:{!water};'>
+                                <div class="row">
+                                    <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                                        <apex:commandLink action="{! print }" value="Save" styleClass=" btn-large red pulse center" reRender="false" onclick="M.toast({html: 'saved information'});next('SecondCustomer');" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-field col s12 m12 l12" style='display:{!solar};'>
+                                <div class="row">
+                                    <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                                        <apex:commandLink action="{! print }" value="Save" styleClass=" btn-large red pulse center" reRender="false" onclick="M.toast({html: 'saved information'});next('Products');" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </apex:form>
+            </div>
+        </div>
+        <div id="SecondCustomer" class="col s12">
+            <div class="row">
+                <h4 align="center">
+                    Second Customer
+                </h4>
+                <div class="col s12">
+                    <div class="row">
+                        <apex:form >
+                            <div class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <apex:inputField value="{!acct.Homeowner_2_First_Name__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">First Name</label>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <apex:inputField value="{!acct.Homeowner_2_Last_Name__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">Last Name</label>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">assignment_ind</i>
+                                        <apex:inputField value="{!acct.Customer_2_SSN__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">SSN</label>
+                                    </div>
+                                    <div class="input-field col s12 m1 l1">
+                                        <h6>
+                                            DOB
+                                        </h6>
+                                    </div>
+                                    <div class="input-field col s12 m5 l5">
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Day}" size="1">
+                                                <apex:selectOptions value="{!DayList}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Day</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Month}" size="1">
+                                                <apex:selectOptions value="{!monthlist}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Month</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Year}" size="1">
+                                                <apex:selectOptions value="{!YearList}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Year</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">assignment_ind</i>
+                                        <apex:inputField value="{!acct.Customer_2_Drivers_License__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">DL #</label>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">assignment_ind</i>
+                                        <apex:inputField value="{!acct.Drivers_license_Issuing_state_2__c}" styleClass="validate" />
+                                        <label for="icon_prefix">Drivers license Issuing state</label>
+                                    </div>
+                                    <div class="input-field col s12 m1 l1">
+                                        <h6>
+                                            Drivers License Issue
+                                        </h6>
+                                    </div>
+                                    <div class="input-field col s12 m5 l5">
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Day_Dli}" size="1">
+                                                <apex:selectOptions value="{!DayList}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Day</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Month_Dli}" size="1">
+                                                <apex:selectOptions value="{!monthlist}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Month</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Year_Dli}" size="1">
+                                                <apex:selectOptions value="{!YearList}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Year</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-field col s12 m1 l1">
+                                        <h6>
+                                            Drivers License Expiration
+                                        </h6>
+                                        
+                                    </div>
+                                    <div class="input-field col s12 m5 l5">
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Day_Dle}" size="1">
+                                                <apex:selectOptions value="{!DayList}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Day</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Month_Dle}" size="1">
+                                                <apex:selectOptions value="{!monthlist}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Month</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <apex:selectList value="{!customer2Year_Dle}" size="1">
+                                                <apex:selectOptions value="{!YearList}"/>
+                                            </apex:selectList>
+                                            <label for="icon_prefix">Year</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">phone</i>
+                                        <apex:inputField value="{!acct.Homeowner_2_Phone_Number__c}" styleClass="validate"/>
+                                        <label for="icon_telephone"> Home Phone</label>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">phone_android</i>
+                                        <apex:inputField value="{!acct.Homeowner_2_Mobile__c}" styleClass="validate"/>
+                                        <label for="icon_telephone"> Cell Phone</label>
+                                    </div>
+                                    <div class="input-field col s12 m12 l12">
+                                        <i class="material-icons prefix">email</i>
+                                        <apex:inputField value="{!acct.Homeowner_2_Email__c}" styleClass="validate"/>
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <div class="input-field col s12 m12 l12">
+                                        <h4 align="center">
+                                            Employer Information
+                                        </h4>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">person</i>
+                                        <apex:inputField value="{!acct.Customer_2_Employer__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">Name</label>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">phone</i>
+                                        <apex:inputField value="{!acct.Customer_2_Employer_Phone__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">Phone</label>
+                                    </div>
+                                    
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">attach_money</i>
+                                        <apex:inputField value="{!acct.Customer_2_Income__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">Income</label>
+                                    </div>
+                                    <div class="input-field col s12 m6 l6">
+                                        <i class="material-icons prefix">group</i>
+                                        <apex:inputField value="{!acct.Customer_2_Length_of_Employment__c}" styleClass="validate" />
+                                        <label for="icon_prefix">Length emp.</label>
+                                    </div>
+                                    
+                                    <div class="input-field col s12 m12 l12">
+                                        <i class="material-icons prefix">show_chart</i>
+                                        <apex:inputField value="{!acct.Customer_2_Employment_Position__c}" styleClass="validate"/>
+                                        <label for="icon_prefix">Position</label>
+                                    </div>
+                                    <div class="input-field col s12 m12 l12">
+                                        <div class="row">
+                                            <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                                                <apex:commandLink action="{! print }" value="Save" styleClass=" btn-large red pulse center" reRender="false" onclick="M.toast({html: 'saved information'});next('LocationAndPayments');" />
+                                            </div>
+                                        </div>                                            
+                                    </div> 
+                                </div>
+                            </div>
+                        </apex:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="LocationAndPayments" class="col s12">
+            <h4 align="center">
+                Mortgage Payment And Location
+            </h4>
+            <div class="row">
+                
+                <div class="col s12">
+                    <div class="row">
+                        <apex:form >
+                            <div class="col s12">
+                                <div class="row ">
+                                    <div class="col s2">
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <i class="material-icons prefix">location_on</i>
+                                        <label for="icon_prefix"><strong>Address Location</strong></label>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col s2">
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <div class="divider"></div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col s2">
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <table>
+                                            <tr>
+                                                <th><apex:outputLabel value="State"/></th>
+                                                <th><apex:outputLabel value="{!acct.State__c}"/></th>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th><apex:outputLabel value="City"/></th>
+                                                <th><apex:outputLabel value="{!acct.City__c}"/></th>
+                                            </tr>
+                                            <tr>
+                                                <th><apex:outputLabel value="Street"/></th>
+                                                <th><apex:outputLabel value="{!acct.Street__c}"/></th>
+                                            </tr>
+                                            <tr>
+                                                <th><apex:outputLabel value="Zip Code"/></th>
+                                                <th><apex:outputLabel value="{!acct.Zip__c}"/></th>   
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="input-field col s10 offset-s1 m10 offset-m1 l10 offset-l1">
+                                    <i class="material-icons prefix">payment</i>
+                                    <apex:inputField value="{!acct.Mortgage_Payment__c}" styleClass="validate"/>
+                                    <label for="icon_prefix">Mortgage Payment</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12">
+                                    <div class="row">
+                                        <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                                            <apex:commandLink action="{! print }" value="Save" styleClass=" btn-large red pulse center" reRender="false" onclick="M.toast({html: 'saved information'});next('InstallationDate');"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div id="InstallationDate" class="col s12">
+            <h4 align="center">
+                Installation Date
+            </h4>
+            <div class="row">
+                
+                <div class="col s12">
+                    <div class="row">
+                        <apex:form id="sales">
+                            <div class="col s12">
+                                <!--Account-->
+                                <div class="row ">
+                                    <div class="col s12 m1 l1 offset-m5 offset-l5">
+                                        <h6 align="center">
+                                            Sales Rep
+                                        </h6>
+                                    </div>
+                                    <div class="input-field col s12 m3 l3 offset-m4 offset-l4">
+                                        <apex:inputField value="{! homeService.Sales_Rep__c}" styleClass="validate"  />
+                                    </div>
+                                    <div class="col s2 m1 l1 offset-s4">
+                                        <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Add</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:form>
+                        <apex:form id="inst">
+                            <div class="col s12">
+                                <div class="col s12 m12 l12">
+                                    <h4 align="center">
+                                        installation data
+                                    </h4>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">date_range</i>
+                                    <apex:inputText value="{!installationDay}" styleClass="validate datepicker"/> 
+                                    <label for="thisi">Day</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="material-icons prefix">access_time</i>
+                                    <apex:inputText value="{!installationHour}" styleClass="validate timepicker"/> 
+                                    <label for="thisi">Hour</label>
+                                </div>
+                                
+                                <!--<div class="input-field col s12 m6 l6">
+<apex:inputField value="{!homeService.Installation_Status__c}" styleClass="validate"  /> 
+<label for="thisi">Installation Status</label>
+</div>
+<div class="input-field col s12 m6 l6">
+<apex:inputField value="{!homeService.Appt_Instalation_Status__c}" styleClass="validate"  />
+<label for="thisi">Appt Installation Status</label>
+</div>-->
+                                <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                                    <apex:commandLink action="{! SaveEvent }" value="Save" styleClass=" btn-large red pulse center" reRender="False" onclick="M.toast({html: 'saved information'});next('Products');" />
+                                </div>
+                            </div>
+                        </apex:form>
+                        
+                        <!-- Modal Trigger -->
+                        
+                        
+                        <!-- Modal Structure -->
+                        <div id="modal2" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                                <apex:form >
+                                    <div class="row">
+                                        <nav>
+                                            <div class="nav-wrapper">
+                                                <a href="#" class="brand-logo center">Users</a>
+                                            </div>
+                                        </nav>
+                                        <div class="col s12">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Select</th>
+                                                        <th>Name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <apex:repeat value="{!users}" var="user">
+                                                        <tr>
+                                                            <td>
+                                                                <a href="javascript:if (userAct) useUSer('{!user.Id}');" class="modal-close waves-effect waves-green btn-flat">
+                                                                    <i class="material-icons">
+                                                                        check
+                                                                    </i>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <apex:outputField value="{!user.Name}" styleClass="validate"  />
+                                                            </td>
+                                                        </tr>
+                                                    </apex:repeat>
+                                                </tbody>
+                                            </table>
+                                            <apex:actionFunction action="{!useUSer}" name="useUSer" reRender="sales" >
+                                                <apex:param name="accountid" value="" assignTo="{!IdUser}"/>
+                                            </apex:actionFunction>
+                                        </div>
+                                    </div>
+                                </apex:form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div id="Products" class="col s12">
+            <div class="row">
+                <div class="col s12">
+                    <apex:form id="prodForm">
+                        <h3 align="center">
+                            installation product
+                        </h3>
+                        <div class="col s12">
+                            <table class="centered responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Name</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Total Sales Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!toLineItems}" var="LineIte" id="theRepea">
+                                        <tr>
+                                            
+                                            <td>
+                                                <a href="javascript:if (userAct) DeleteLI('{!LineIte.Id}');" class="modal-close waves-effect waves-green btn-flat">
+                                                    <i class="material-icons">
+                                                        delete
+                                                    </i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <apex:outputField value="{!LineIte.Name}" styleClass="validate"/>
+                                            </td>
+                                            <td>
+                                                <apex:outputField value="{!LineIte.Product__c}" styleClass="validate"/>
+                                            </td>
+                                            <td>
+                                                <apex:outputField value="{!LineIte.Quantity__c}" styleClass="validate"/>
+                                            </td>
+                                            <td>
+                                                <apex:inputField value="{!LineIte.Total_Sales_Price_p__c }" styleClass="validate"/>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                            <apex:actionFunction action="{!DeleteLI}" name="DeleteLI" reRender="prodForm"  >
+                                <apex:param name="accountid" value="" assignTo="{!IdtoLineItems}"/>
+                            </apex:actionFunction>
+                            <div class="row">
+                                <div class="col s9 m4 l4 offset-s3 offset-m8 offset-l8">
+                                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Select Products</a>
+                                </div>
+                            </div>
+                            <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6" style='display:{!water};'>
+                                <apex:commandLink action="{! SaveLineItems }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'Analysis')" />
+                            </div> 
+                            <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6" style='display:{!solar};'>
+                                <apex:commandLink action="{! SaveLineItems }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'Summary')" />
+                            </div> 
+                        </div>
+                    </apex:form>
+                    <apex:form >
+                        <div id="modal1" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                                <div class="row">
+                                    <nav>
+                                        <div class="nav-wrapper">
+                                            <a href="#" class="brand-logo center">
+                                                <h5>
+                                                    {!productType} Product    
+                                                </h5>
+                                            </a>
+                                        </div>
+                                    </nav>
+                                    <div class="col s12">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                <apex:repeat value="{!LineItems}" var="LineItem" id="theRepeat">
+                                                    <tr>
+                                                        <td>
+                                                            <apex:inputField value="{!LineItem.Name}" styleClass="validate"/>
+                                                        </td>
+                                                        <td>
+                                                            <apex:outputField value="{!LineItem.Product__c}" styleClass="validate"/>
+                                                        </td>
+                                                        <td>
+                                                            <apex:inputField value="{!LineItem.Quantity__c}" styleClass="validate"/>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat> 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <apex:commandLink action="{!Pprod}" value="validate" styleClass="modal-close waves-effect waves-green btn-flat red" onclick="sessionStorage.setItem('section', 'Products')"/>
+                            </div>
+                        </div>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+        <div id="Analysis" class="col s12">
+            <h4 align="center">
+                Water Analysis
+            </h4>
+            <apex:form id="AnaForm">
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        <apex:inputField value="{!homeService.Hardness_gpg__c}" styleClass="validate"/>
+                        <label for="icon_prefix">Hardness gpg</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        <apex:inputField value="{!homeService.Ph__c}" styleClass="validate"/>
+                        <label for="icon_prefix">Ph</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        <apex:inputField value="{!homeService.Iron_Algae__c}" styleClass="validate"/>
+                        <label for="icon_prefix">Iron Algae</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        <apex:inputField value="{!homeService.Iron_ppm__c}" styleClass="validate"/>
+                        <label for="icon_prefix">Iron ppm</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        <apex:inputField value="{!homeService.Hyd_Supl_ppm__c}" styleClass="validate"/>
+                        <label for="icon_prefix">Hyd. Supl. ppm</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        
+                        <apex:inputField value="{!homeService.No_Reg__c}" styleClass="validate"/>
+                        <label for="icon_prefix">No. Reg</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="col s3"></div>
+                    <div class="input-field col s6">
+                        
+                        <apex:inputField value="{!homeService.Other__c}" styleClass="validate"/>
+                        <label for="icon_prefix">Other</label>
+                    </div>
+                    <div class="col s3"></div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m8 l8 offset-m2 offset-l2">
+                        <apex:inputTextarea value="{!homeService.Special_Instructions__c}" styleClass="materialize-textarea"/>
+                        <label for="icon_prefix">Special Instructions</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                        <apex:commandLink action="{! SaveHomeService }" value="Save" styleClass=" btn-large red pulse center" reRender="false" onclick="M.toast({html: 'saved information'});next('Summary');" />
+                    </div>
+                </div>
+            </apex:form>
+        </div>
+        <div id="Summary" class="col s12">
+            <h4 align="center">
+                Pricing
+            </h4>
+            <apex:form id="SummaryForm">
+                <div class="row">
+                    <div class="col s12">
+                        
+                        <div class="col s4 m2 l2 offset-m2 offset-l2">
+                            <label for="icon_prefix">Total Cash Selling Price</label> 
+                        </div>
+                        <div class="input-field col s8 m8 l8 offset-m2 offset-l2">
+                            <apex:inputField value="{!homeService.Total_Cash_Selling_Price__c}" styleClass="validate"  />
+                        </div>
+                        <div class="input-field col s12 s8 m8 l8 offset-m2 offset-l2" style='display:{!water};'>
+                            <apex:inputField value="{!homeService.Sales_Tax__c}" styleClass="validate"  />
+                            <label for="icon_prefix">Sales Tax</label>
+                        </div>
+                        <div class="col s3 m2 l2 offset-m2 offset-l2">
+                            <label for="icon_prefix">Total Cash Price</label> 
+                        </div>
+                        <div class="input-field col s9 m8 l8 offset-m2 offset-l2">
+                            <apex:inputField value="{!homeService.Total_Cash_Price__c}" styleClass="validate"  />
+                        </div>
+                        <div class="input-field col s12 s8 m8 l8 offset-m2 offset-l2">
+                            <apex:inputField value="{!homeService.Down_Payment__c}" styleClass="validate"  />
+                            <label for="icon_prefix">Down Payment</label>
+                        </div>
+                        <div class="input-field col s12  m8 l8 offset-m2 offset-l2" style='display:{!water};'>
+                            <apex:inputField value="{!homeService.Trade_in_Allowance__c}" styleClass="validate"  />
+                            <label for="icon_prefix">Trade in Allowance</label>
+                        </div>
+                        <div class="col s3 m2 l2 offset-m2 offset-l2">
+                            <label for="icon_prefix">Total Down Payment</label>
+                        </div>
+                        <div class="input-field col s9 m8 l8 offset-m2 offset-l2">
+                            <apex:inputField value="{!homeService.Total_Down_Payment__c}" styleClass="validate"  />
+                        </div>
+                        <div class="col s3 m2 l2 offset-m2 offset-l2">
+                            <label for="icon_prefix">Balance Due</label> 
+                        </div>
+                        <div class="input-field col s9 m8 l8 offset-m2 offset-l2">
+                            <apex:inputField value="{!homeService.Balance_Due__c}" styleClass="validate"  />
+                        </div>
+                        <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6" style='display:{!water};'>
+                            <apex:commandLink action="{! SaveHomeService }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'Services')" />
+                        </div>
+                        <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6" style='display:{!solar};'>
+                            <apex:commandLink action="{! SaveHomeService }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'PaymentMethod')" />
+                        </div>
+                    </div>
+                </div>
+            </apex:form>
+        </div>
+        <div id="Services" class="col s12">
+            <h4 align="center">
+                Service Agreement
+            </h4>
+            <apex:form >
+                <div class="row">
+                    <div class="input-field col s12 m6 l6">
+                        <h5 align="center">
+                            Customer #1 Information
+                        </h5>
+                        <div class="row">
+                            <div class="input-field col s12 m12 l12">
+                                <table>
+                                    <tr>
+                                        <th><apex:outputLabel value="First Name"/></th>
+                                        <th><apex:outputField value="{!acct.AcctFirstName__c}" styleClass="validate"/></th>
+                                        <th><apex:outputLabel value="Last Name"/></th>
+                                        <th><apex:outputField value="{!acct.AcctLastName__c}"  styleClass="validate"/></th>
+                                    </tr>
+                                    <tr>
+                                        <th><apex:outputLabel value="Home Phone"/></th>
+                                        <th><apex:outputField value="{!acct.Phone}" styleClass="validate"/></th>
+                                        <th><apex:outputLabel value="Email"/></th>
+                                        <th><apex:outputField value="{!acct.PersonEmail}" styleClass="validate"/></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <h5 align="center">
+                            Customer #2 Information
+                        </h5>
+                        <div class="row">
+                            <div class="input-field col s12 m12 l12">
+                                <table>
+                                    <tr>
+                                        <th><apex:outputLabel value="First Name"/></th>
+                                        <th><apex:outputField value="{!acct.Homeowner_2_First_Name__c}" styleClass="validate"/></th>
+                                        <th><apex:outputLabel value="Last Name"/></th>
+                                        <th><apex:outputField value="{!acct.Homeowner_2_Last_Name__c}"  styleClass="validate"/></th>
+                                    </tr>
+                                    <tr>
+                                        <th><apex:outputLabel value="Home Phone"/></th>
+                                        <th><apex:outputField value="{!acct.Homeowner_2_Phone_Number__c}" styleClass="validate"/></th>
+                                        <th><apex:outputLabel value="Email"/></th>
+                                        <th><apex:outputField value="{!acct.Homeowner_2_Email__c}" styleClass="validate"/></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <p align="left">
+                            <strong>Service Address</strong> 
+                        </p>
+                        <table>
+                            <tr>
+                                <th><apex:outputLabel value="State"/></th>
+                                <th><apex:outputLabel value="City"/></th>
+                                <th><apex:outputLabel value="Street"/></th>
+                                <th><apex:outputLabel value="Zip Code"/></th>
+                            </tr>
+                            <tr>
+                                <th><apex:outputLabel value="{!acct.State__c}"/></th>
+                                <th><apex:outputLabel value="{!acct.City__c}"/></th>
+                                <th><apex:outputLabel value="{!acct.Street__c}"/></th>
+                                <th><apex:outputLabel value="{!acct.Zip__c}"/></th> 
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+            </apex:form>
+            <apex:form id="formService">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="input-field col s6 m3 l3">
+                            <label for="icon_telephone">Billing Information From</label>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <div class="input-field col s6 m3 l3">
+                            <apex:inputField value="{!acct.Billing_Information_From__c}" styleClass="validate" >
+                                <apex:actionSupport action="{!billingInformation}" event="onchange" onsubmit="sessionStorage.setItem('section', 'Services')">
+                                    <apex:param name="idService" value="{!acct.Id}"/>
+                                </apex:actionSupport>
+                            </apex:inputField>
+                        </div>
+                        <!--div class="switch">
+<label>
+<span>Billing Address Same As Service Address:  </span><br/>
+no
+<apex:inputCheckbox id="isEm" value="{!acct.Billing_Address_Same_As_Service_Address__c}" >
+<apex:actionsupport event="onclick" action="{! Baddress }" onsubmit="sessionStorage.setItem('section', 'Services')"/>
+</apex:inputCheckbox>
+<span class="lever"></span>
+yes
+</label>
+</div-->
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <p align="left">
+                            <strong>Billing Information</strong> 
+                        </p>
+                        <div class="input-field col s6 m4 l4">
+                            <apex:inputField value="{!acct.Billing_First_Name__c}" styleClass="validate" />
+                            <label for="icon_telephone">First Name</label>
+                        </div>
+                        <div class="input-field col s6 m4 l4">
+                            <apex:inputField value="{!acct.Billing_Last_Name__c}" styleClass="validate" />
+                            <label for="icon_telephone">Last Name</label>
+                        </div>
+                        <div class="input-field col s6 m4 l4">
+                            <apex:inputField value="{!acct.Billing_Phone__c}" styleClass="validate" />
+                            <label for="icon_telephone">Phone</label>
+                        </div>
+                        <div class="input-field col s6 m4 l4">
+                            <apex:inputField value="{!acct.Billing_Email__c}" styleClass="validate" />
+                            <label for="icon_telephone">Email</label>
+                        </div>
+                        <div class="input-field col s6 m4 l4">
+                            <apex:inputField value="{!acct.Billing_Fax__c}" styleClass="validate" />
+                            <label for="icon_telephone">Fax</label>
+                        </div>
+                        <div class="input-field col s6 m4 l4">
+                            <apex:inputField value="{!acct.Billing_Company__c}" styleClass="validate" />
+                            <label for="icon_telephone">Company</label>
+                        </div>
+                        <div class="input-field col s6 m3 l3">
+                            <apex:inputField value="{!acct.Primary_Billing_State__c}" styleClass="validate" />
+                            <label for="icon_telephone">State</label>
+                        </div>
+                        <div class="input-field col s6 m3 l3">
+                            <apex:inputField value="{!acct.Primary_Billing_City__c}" styleClass="validate" />
+                            <label for="icon_telephone">City</label>
+                        </div>
+                        <div class="input-field col s6 m3 l3">
+                            <apex:inputField value="{!acct.Primary_Billing_Street__c}" styleClass="validate" />
+                            <label for="icon_telephone">Street</label>
+                        </div>
+                        <div class="input-field col s6 m3 l3">
+                            <apex:inputField value="{!acct.Primary_Billing_Zip_Code__c}" styleClass="validate" />
+                            <label for="icon_telephone">Zip Code</label>
+                        </div>
+                        
+                    </div>
+                    <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                        <apex:commandLink action="{! upaccocunt }" value="Save"  styleClass="btn-large red pulse center" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'ServicesList')" />
+                    </div>
+                </div>
+            </apex:form>
+        </div>
+        <div id="ServicesList" class="col s12">
+            <div class="row">
+                <div class="col s12">
+                    <apex:form id="prodForm2">
+                        <h3 align="center">
+                            Services List
+                        </h3>
+                        <div class="col s12">
+                            <table class="striped highlight responsive-table centered">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Name</th>
+                                        <th>Monthly Investment</th>
+                                        <th>Billing Frequency</th>
+                                        <th>Bill Start Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!toServiceLineItems}" var="LineIte" id="theRepea">
+                                        <tr>
+                                            <td>
+                                                <a href="javascript:if (userAct) DeleteLIS('{!LineIte.Id}');" class="modal-close waves-effect waves-green btn-flat">
+                                                    <i class="material-icons">
+                                                        delete
+                                                    </i>
+                                                </a> 
+                                            </td>
+                                            <td>
+                                                <apex:outputField value="{!LineIte.Name}" styleClass="validate"/>
+                                            </td>
+                                            <td>
+                                                <apex:outputField value="{!LineIte.Monthly_Investment__c }" styleClass="validate"/>
+                                            </td>
+                                            <td>
+                                                <apex:inputField value="{!LineIte.Billing_Frequency__c}">
+                                                    <apex:actionSupport action="{!test}" event="onchange" onsubmit="sessionStorage.setItem('section', 'ServicesList')">
+                                                        <apex:param name="idService" value="{!LineIte.Id}"/>
+                                                    </apex:actionSupport>
+                                                </apex:inputField>
+                                            </td>
+                                            <td><apex:outputField value="{!LineIte.Bill_Start_Date__c }" styleClass="validate"/></td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                            <apex:actionFunction action="{!DeleteLIS}" name="DeleteLIS" reRender="prodForm2">
+                                <apex:param name="accountid" value="" assignTo="{!IdtoServiceLineItems}" />
+                            </apex:actionFunction>
+                            <div class="row">
+                                <div class="col s9 m2 l2 offset-s3 offset-m8 offset-l8">
+                                    <a class="waves-effect waves-light btn modal-trigger right" href="#modal3">Select Products</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6 m2 l2">
+                                    <p align="right">
+                                        <strong>Total Monthly Investment: </strong>
+                                    </p>
+                                </div>
+                                <div class="input-field col s6 m10 l10">
+                                    <strong><apex:outputField value="{!homeService.Total_Monthly_Investment__c}" styleClass="validate"/></strong>
+                                </div>
+                            </div>
+                            <div class="col s2 m2 l2 offset-s4 offset-m6 offset-l6">
+                                <apex:commandLink action="{! SaveLineItemsservice }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'PaymentMethod')" />
+                            </div> 
+                        </div>
+                    </apex:form>
+                    <apex:form >
+                        <div id="modal3" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                                <div class="row">
+                                    <nav>
+                                        <div class="nav-wrapper">
+                                            <a href="#" class="brand-logo center">
+                                                <h5>
+                                                    {!productType} Product
+                                                </h5>
+                                            </a>
+                                        </div>
+                                    </nav>
+                                    <div class="col s12">
+                                        <table class="centered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Add</th>
+                                                    <th>Name</th>
+                                                    <th>Product</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!ServiceLineItems}" var="LineItem" id="theRepeat">
+                                                    <tr>
+                                                        <td>
+                                                            <label>
+                                                                <apex:inputCheckbox value="{!LineItem.Service_Check__c}"/>
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <apex:inputField value="{!LineItem.Name}" styleClass="validate"/>
+                                                        </td>
+                                                        <td>
+                                                            <apex:outputField value="{!LineItem.Product__c}" styleClass="validate"/>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat>  
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <apex:commandLink action="{!Pprod2}" value="validate" styleClass="modal-close waves-effect waves-green btn-flat red" onclick="M.toast({html: 'saved information'});sessionStorage.setItem('section', 'ServicesList')"/>
+                            </div>
+                        </div>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+        <div id="PaymentMethod">
+            <div class="row">
+                <div class="col s12">
+                    <apex:form >
+                        <div class="row"  style='display:{!solar};'>
+                            <div class="col s12 m8 l8 offset-m2 offset-l2">
+                                <h3 align="center">
+                                    Payments
+                                </h3>
+                                <div class="col s3 m2 l2">
+                                    <label for="icon_prefix">Total Payment: </label> 
+                                </div>
+                                <div class="col s9 m8 l8">
+                                    <apex:inputField value="{!homeService.Balance_Due__c}" styleClass="validate"  />
+                                </div>
+                                <div class="input-field col s12 m12 l12">
+                                    <apex:inputField value="{!homeService.FirstPayment__c}"/>
+                                    <label for="first_name">First Payment</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12">
+                                    <apex:inputField value="{!homeService.SecondPayment__c}"/>
+                                    <label for="first_name">Second Payment</label>
+                                </div>
+                                <div class="input-field col s12 m12 l12">
+                                    <apex:inputField value="{!homeService.ThirdPayment__c}"/>
+                                    <label for="first_name">Third Payment</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 align="center">
+                            Method Of Payment
+                        </h3>
+                        <div class="input-field col s10 m6 l6 offset-s1 offset-m3 offset-l3">
+                            <div>
+                                <apex:selectList value="{!PayMethod}" size="1">
+                                    <apex:selectOptions value="{!IF(waterb, methods,IF(Solarb ,payMethods,extra))}"/>
+                                    <apex:actionSupport event="onchange" oncomplete="nextItem('{!PayMethod}');" reRender="false"  /> 
+                                    <!--action="{!nextPaymethod}"-->
+                                </apex:selectList>
+                                <label>Method Of Payment</label>
+                            </div>
+                        </div>
+                        
+                        
+                        <!--Finance-->
+                        
+                        <div id="Finance" style='display:{!Finance};' class="col s12 m8 l8 offset-m2 offset-l2">
+                            <div class="col s12 m12 l12">
+                                <h5 id="title" align="center" style="display:{!title};">
+                                    Information
+                                </h5>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <apex:inputField value="{!homeService.Finance_Company__c}"/>
+                                <label for="first_name">Finance Company</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <apex:inputField value="{!homeService.Financed_Amount__c}"/>
+                                <label for="first_name">Financed Amount</label>
+                            </div>
+                            
+                        </div>
+                        
+                        <!--Finance-->
+                        <!--Credit Card-->
+                        
+                        <div id="Credit Card" style='display:{!CreditCard};' class="row">
+                            <div class="col s12 m12 l12">
+                                <h5 id="title" align="center" style="display:{!title};">
+                                    Information
+                                </h5>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                
+                                <div class="input-field col s6 m6 l6">
+                                    <label>Credit Card Type:</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Card_Type__c}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Name On Card:</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Name_on_Card__c}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Card Number: </label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Account_Number__c}" />
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Card Last 4 numbers:</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Card_Last_4__c}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">csv</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.CSV__c}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Exp. Date</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputText >{!homeService.Card_Expiration_Month__c} / {!homeService.Card_Expiration_Year__c}</apex:outputText>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                
+                                
+                                <div class="input-field col s12 m6 l6">
+                                    <!--apex:inputText value="{!creditCardType}"/-->
+                                    <apex:selectList value="{!creditCardType}" size="1">
+                                        <apex:selectOptions value="{!Cards}"/>
+                                    </apex:selectList>
+                                    <!--apex:inputField value="{!homeService.Credit_Card_Type_System__c}"/-->
+                                    <label>Credit Card Type</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:inputText value="{!creditCardnumber}"/>
+                                    <!--apex:inputField value="{!homeService.Card_Number__c}"/-->
+                                    <label for="first_name">Card Number</label>
+                                </div>
+                                <div class="input-field col s12 m3 l3">
+                                    <apex:inputText value="{!creditCardCsv}"/>
+                                    <!--apex:inputField value="{!homeService.Credit_Card_CSV__c}"/-->
+                                    <label for="first_name">csv</label>
+                                </div>
+                                <div class="col s12 m9 l9">
+                                    <div class="input-field col s3 m3 l3">
+                                        <label for="first_name">Exp. Date</label>
+                                    </div>
+                                    <div class="input-field col s4 m4 l4">
+                                        <apex:inputText value="{!creditCardMonth}"/>
+                                        <!--apex:inputField value="{!homeService.Expiration_Month__c}"/-->
+                                        <label for="first_name">Month</label>
+                                    </div>
+                                    <div class="input-field col s5 m5 l5">
+                                        <apex:inputText value="{!creditCardYear}"/>
+                                        <!--apex:inputField value="{!homeService.Expiration_Year__c}"/-->
+                                        <label for="first_name">year</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Credit Card-->
+                        <!--Checking-->
+                        
+                        <div id="Checking" style='display:{!Checking};' class="row">
+                            <div class="col s12 m12 l12">
+                                <h5 id="title" align="center" style="display:{!title};">
+                                    Checking Information
+                                </h5>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Bank Name</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Bank_Name__c}" rendered="{!if(water == 'block', true, false)}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Bank Account Type</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Bank_Account_Type__c}" rendered="{!if(water == 'block', true, false)}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Bank Account Name</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Bank_Account_Name__c}" rendered="{!if(water == 'block', true, false)}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Bank Account Number</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Bank_Account_Number_Encrypted__c}" rendered="{!if(water == 'block', true, false)}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Bank Routing Number</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Routing_Number__c}" rendered="{!if(water == 'block', true, false)}"/>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <label for="first_name">Check Number</label>
+                                </div>
+                                <div class="input-field col s6 m6 l6">
+                                    <apex:outputField value="{!homeService.Account_Number_Checking__c}" rendered="{!if(water == 'block', true, false)}"/>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:inputText value="{!BankName}" rendered="{!if(water == 'block', true, false)}"/>
+                                    <!--apex:inputField value="{!homeService.Bank_Name_System__c}" rendered="{!if(water == 'block', true, false)}"/-->
+                                    <label for="first_name">Bank Name</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:selectList value="{!BankAccountType}" size="1" rendered="{!if(water == 'block', true, false)}">
+                                        <apex:selectOptions value="{!AccountType}"/>
+                                    </apex:selectList>
+                                    <!--apex:inputField value="{!homeService.Bank_Account_Type_System__c}" rendered="{!if(water == 'block', true, false)}"/-->
+                                    
+                                    <label for="first_name">Bank Account Type</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:inputText value="{!BankAccountName}" rendered="{!if(water == 'block', true, false)}"/>
+                                    <!--apex:inputField value="{!homeService.Bank_Account_Name_System__c}" rendered="{!if(water == 'block', true, false)}"/-->
+                                    <label for="first_name">Bank Account Name</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:inputText value="{!BankAccountNumber}" rendered="{!if(water == 'block', true, false)}"/>
+                                    <!--apex:inputField value="{!homeService.Bank_Account_Number__c}" rendered="{!if(water == 'block', true, false)}"/-->
+                                    <label for="first_name">Bank Account Number</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:inputText value="{!BankRoutingNumber}" rendered="{!if(water == 'block', true, false)}"/>
+                                    <!--apex:inputField value="{!homeService.Bank_Routing_Number__c}" rendered="{!if(water == 'block', true, false)}"/-->
+                                    <label for="first_name">Bank Routing Number</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <apex:inputText value="{!CheckNumber}" rendered="{!if(water == 'block', true, false)}"/>
+                                    <!--apex:inputField value="{!homeService.Check_Number__c}" rendered="{!if(water == 'block', true, false)}"/-->
+                                    <label for="first_name">Check Number</label>
+                                </div>
+                            </div>
+                            <div class="col s7 m7 l7 offset-s4 offset-m5 offset-l5">
+                                <apex:commandLink action="{! paymentMethod }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});document.getElementById('send').style.display = 'block'" reRender="false" />
+                            </div>
+                        </div>
+                        
+                        <!--Checking-->
+                        <!--ACH-->
+                        
+                        <div id="ACH" style='display:{!ACH};' class="col s12 m8 l8 offset-m2 offset-l2">
+                            <div class="col s12 m12 l12">
+                                <h5 id="title" align="center" style="display:{!title};">
+                                    Information
+                                </h5>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <apex:inputField value="{!homeService.Routing_Number__c}"/>
+                                <label for="first_name">Routing Number</label>
+                            </div>
+                            <div class="input-field col s12 m12 l12">
+                                <apex:inputField value="{!homeService.Account_Number_Checking__c}"/>
+                                <label for="first_name">Account Number</label>
+                            </div>                            
+                        </div>
+                        
+                        <!--ACH-->
+                        <!--Lease-->
+                        
+                        <div id="Lease" style='display:{!Lease};' class="col s12 m8 l8 offset-m2 offset-l2">
+                            
+                        </div>
+                        
+                        <!--Lease-->
+                        <!--Check-->
+                        
+                        <div id="Check" style='display:{!Check};' class="col s12 m8 l8 offset-m2 offset-l2">
+                            <div class="col s12 m12 l12">
+                                <h5 id="title" align="center" style="display:{!title};">
+                                    Check Information
+                                </h5>
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                <apex:inputField value="{!homeService.Bank_Name__c}" rendered="{!if(solar == 'block', true, false)}"/>
+                                <label for="first_name">Bank Name</label>
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                <apex:inputField value="{!homeService.Bank_Account_Type__c}" rendered="{!if(solar == 'block', true, false)}"/>
+                                <label for="first_name">Bank Account Type</label>
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                <apex:inputField value="{!homeService.Bank_Account_Name__c}" rendered="{!if(solar == 'block', true, false)}"/>
+                                <label for="first_name">Bank Account Name</label>
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                <apex:inputField value="{!homeService.Bank_Account_Number__c}" rendered="{!if(solar == 'block', true, false)}"/>
+                                <label for="first_name">Bank Account Number</label>
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                <apex:inputField value="{!homeService.Bank_Routing_Number__c}" rendered="{!if(solar == 'block', true, false)}"/>
+                                <label for="first_name">Bank Routing Number</label>
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                <apex:inputField value="{!homeService.Check_Number__c}" rendered="{!if(solar == 'block', true, false)}"/>
+                                <label for="first_name">Check Number</label>
+                            </div>
+                            
+                            <div class="col s2 m2 l2 offset-s4 offset-m5 offset-l5">
+                                <apex:commandLink action="{! paymentMethod }" value="Save" styleClass=" btn-large red pulse center" onclick="M.toast({html: 'saved information'});document.getElementById('send').style.display = 'block'" reRender="false" />
+                            </div>
+                        </div>
+                        
+                        <!--Check-->
+                    </apex:form>
+                    <apex:form id="sendContract">
+                        <div id="send" class="col s12 m8 l8 offset-m2 offset-l2" style='clear:left;margin-top:50px;display:{!IF(AND(homeService.envelopeId__c != null, homeService.envelopeId__c != ""),"block","none")}' >
+                            <div class="col s2 m2 l2">
+                                <apex:commandLink action="{! sendToDocusign }" value="send!" styleClass=" btn-large red pulse center"  reRender="sendContract" />
+                            </div>
+                            <div class="col s10 m10 l10">
+                                <h6 align="center" style="display: {!show}">
+                                    this contract already has been sent and it's ready to sign. <br/> Contract Id : {!envelopeId}
+                                </h6>
+                                <h6 align="center" style="display: {!show2}">
+                                    {!envelopeId}
+                                </h6>
+                            </div>
+                        </div>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+        <script>
+        var userAct = true;
+        var index = 0;
+        var sections =['FirstCustomer','SecondCustomer','LocationAndPayments', 'InstallationDate','Products', 'Summary','Analysis','Services','ServicesList', 'PaymentMethod'];
+        var sectionsItems =['Finance','Credit Card','Checking', 'ACH', 'Check','Lease'];
+        next(sections[0]);
+        //document.getElementById('send').style.display = 'block';
+        
+        function next(x){
+            document.getElementById(x).style.display = 'block';
+            document.getElementById('title').style.display = 'block';
+            for(var s in sections){
+                if(sections[s] != x){
+                    document.getElementById(sections[s]).style.display = 'none';
+                }
+            }
+        }  
+        function hideSection(x, y){
+            document.getElementById(x).style.display = y;
+        }  
+        function nextItem(x){
+            document.getElementById(x).style.display = 'block';
+            for(var s in sectionsItems){
+                if(sectionsItems[s] != x && sectionsItems[s] != 'Checking' && sectionsItems[s] != 'Check' ){
+                    document.getElementById(sectionsItems[s]).style.display = 'none';
+                }
+            }
+        }  
+        M.AutoInit();
+        document.addEventListener('DOMContentLoaded', function() {
+            if(sessionStorage.getItem('section') != null || sessionStorage.getItem('section') != ''){
+                next(sessionStorage.getItem('section'));
+            }
+            sessionStorage.setItem('section', '');
+        });
+        
+        </script>
+        
+        
+    </body>
+</apex:page>

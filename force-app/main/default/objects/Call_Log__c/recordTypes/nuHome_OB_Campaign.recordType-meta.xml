@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>nuHome_OB_Campaign</fullName>
+    <active>true</active>
+    <description>OBCC Call Center Calls</description>
+    <label>nuHome OB Campaign</label>
+    <picklistValues>
+        <picklist>Call_Disposition__c</picklist>
+        <values>
+            <fullName>Announcement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Answering Machine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appointment Set</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Busy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Back Appointment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Back Later</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DNC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dropped while talking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fast busy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fax or modem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forward to Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Has Provider</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invalid number</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Network announcement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No English</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No disposition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No numbers left to call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Answered</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Number matches DNC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other connection issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Person%27s Work Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Persons Work Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QC Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>System failure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warm Transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wrong Number</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wrong person</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Added_or_Updated_Industry</fullName>
+        <description>Added or Updated Industry</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Industry_Updated</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Update_OBC_Active</fullName>
+        <description>Update the OBC Active field FALSE</description>
+        <field>OBC_Active__c</field>
+        <literalValue>0</literalValue>
+        <name>Update OBC Active</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Add or Edit Industry</fullName>
+        <actions>
+            <name>Added_or_Updated_Industry</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( Name )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update OBC Active in industry</fullName>
+        <actions>
+            <name>Update_OBC_Active</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Industry__c.Active__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Make the OBC active field false when the industry is inactive</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

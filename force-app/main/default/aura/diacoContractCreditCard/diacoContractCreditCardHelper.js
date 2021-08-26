@@ -1,0 +1,5 @@
+({
+	getDataCreditCard : function(component, recordId) {
+       
+    }
+})

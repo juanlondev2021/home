@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_LQ_OB_Campaign_Client</fullName>
+        <description>Email LQ OB Campaign Client</description>
+        <protected>false</protected>
+        <recipients>
+            <field>trigOB_Campaign_Primary_Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_OB_Campaign_Client</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_OB_Campaign_Client</fullName>
+        <description>Email OB Campaign Client</description>
+        <protected>false</protected>
+        <recipients>
+            <field>trigOB_Campaign_Primary_Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_OB_Campaign_Client</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Check_Call_Cadence_Box</fullName>
+        <field>Call_Cadence_Sent__c</field>
+        <literalValue>1</literalValue>
+        <name>Check Call Cadence Box</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DupCatcher</fullName>
+        <field>DupCatcher__c</field>
+        <formula>AccountName__c &amp; &quot;_&quot; &amp; OB_Campaign__c</formula>
+        <name>DupCatcher</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Insert_Phone_number</fullName>
+        <description>Insert the phone number to click to dial.</description>
+        <field>Click_to_Dial_Phone__c</field>
+        <formula>fPhoneBP__c</formula>
+        <name>Insert Phone number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_OB_Campaign_Primary_Contact_Email</fullName>
+        <description>Updates Primary Contact Email address on the OB Campaign Members page layout. Used for the automation process for the CPL. DO NOT DELETE.</description>
+        <field>trigOB_Campaign_Primary_Contact_Email__c</field>
+        <formula>OB_Campaign_Primary_Contact_Email__c</formula>
+        <name>Update OB Campaign Primary Contact Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_UniqueKey</fullName>
+        <field>UniqueKey__c</field>
+        <formula>AccountName__c &amp; &quot;_&quot; &amp; OB_Campaign__c</formula>
+        <name>Update UniqueKey</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>LeadQual_Lead_Post_OB_Camp_Member</fullName>
+        <apiVersion>38.0</apiVersion>
+        <description>Post new leads t LeadQual</description>
+        <endpointUrl>http://www.leadqual.com/post/nuhome/nuhome-leads.php</endpointUrl>
+        <fields>Branch__c</fields>
+        <fields>Campaign_Name__c</fields>
+        <fields>City__c</fields>
+        <fields>Country__c</fields>
+        <fields>County__c</fields>
+        <fields>Delivery_Date__c</fields>
+        <fields>Email__c</fields>
+        <fields>First_Name__c</fields>
+        <fields>Id</fields>
+        <fields>Id__c</fields>
+        <fields>Last_Name__c</fields>
+        <fields>LeadCreationToken__c</fields>
+        <fields>MSA__c</fields>
+        <fields>Name</fields>
+        <fields>NuHome_LeadID__c</fields>
+        <fields>OB_Campaign__c</fields>
+        <fields>Opportunity__c</fields>
+        <fields>Phone__c</fields>
+        <fields>Respond_Date__c</fields>
+        <fields>Sale_Date__c</fields>
+        <fields>Secondary_Phone__c</fields>
+        <fields>State__c</fields>
+        <fields>Street__c</fields>
+        <fields>Zip__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>cgarrett@myhomes.services</integrationUser>
+        <name>LeadQual Lead Post - OB Camp Member</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Call Cadence Sent</fullName>
+        <actions>
+            <name>Check_Call_Cadence_Box</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.Call_Cadence_Sent__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.fWebsite__c</field>
+            <operation>equals</operation>
+            <value>Ready</value>
+        </criteriaItems>
+        <description>Check box so we know it went to the dialer.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Client LQ No Transfer OB Camp Member</fullName>
+        <actions>
+            <name>Email_LQ_OB_Campaign_Client</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.LeadQual_Status_Post__c</field>
+            <operation>equals</operation>
+            <value>AssignedToClient</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Client No Transfer OB Camp Member</fullName>
+        <actions>
+            <name>Email_OB_Campaign_Client</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.LeadQual_Status_Post__c</field>
+            <operation>equals</operation>
+            <value>AssignedToClient</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>LQ Email to%3A OB Campaign Client</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.LeadQual_Status_Post__c</field>
+            <operation>equals</operation>
+            <value>AssignedToClient</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>LeadQual Lead Post</fullName>
+        <actions>
+            <name>LeadQual_Lead_Post_OB_Camp_Member</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.Id__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.Phone__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign DupCatcher</fullName>
+        <actions>
+            <name>DupCatcher</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.AccountID__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Member Sent</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.CreatedDate</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.fCall_Center__c</field>
+            <operation>equals</operation>
+            <value>LeadQual</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>OBCM Unique Key</fullName>
+        <actions>
+            <name>Update_UniqueKey</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.AccountID__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update OB Campaign Primary Contact Email</fullName>
+        <actions>
+            <name>Update_OB_Campaign_Primary_Contact_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.OB_Campaign_Primary_Contact_Email__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <description>Auto populated with the OB Campaign Primary Contact Email when an OB Campaign Member record is created. Field is used for automation process. DO NOT DELETE</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update click to dial phone</fullName>
+        <actions>
+            <name>Insert_Phone_number</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>OB_Campaign_Member__c.CreatedDate</field>
+            <operation>greaterOrEqual</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <description>If phone is populated then update click to dial phone field.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

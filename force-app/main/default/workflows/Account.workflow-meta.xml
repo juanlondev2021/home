@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Account_Update_Hot_Lead_Created_Field</fullName>
+        <description>Update Verbal_Consent__c as True</description>
+        <field>Hot_Lead_Created__c</field>
+        <literalValue>1</literalValue>
+        <name>Account: Update Hot Lead Created Field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Delivery_Date_Stamp</fullName>
+        <field>Delivery_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Delivery Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Home_Type_Update</fullName>
+        <field>Home_Type__c</field>
+        <literalValue>SF</literalValue>
+        <name>Home Type Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>InsertUserID</fullName>
+        <field>User_ID_Who_Captured_Phone__c</field>
+        <formula>$User.Id</formula>
+        <name>InsertUserID</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Insert_Current_User</fullName>
+        <field>User_Id_Who_Captured_Email__c</field>
+        <formula>$User.Id</formula>
+        <name>Insert Current User</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>PAEmail</fullName>
+        <field>PAEmail__c</field>
+        <formula>PersonEmail</formula>
+        <name>PAEmail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Phone_Collected</fullName>
+        <field>Phone_Captured__c</field>
+        <literalValue>1</literalValue>
+        <name>Phone Collected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>PopulateExternalId</fullName>
+        <description>Its populate account 18 digit record id to the ExternalId.</description>
+        <field>External_ID__c</field>
+        <formula>CASESAFEID(Id)</formula>
+        <name>PopulateExternalId</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Responded_Date_Stamp</fullName>
+        <field>Respond_Date__c</field>
+        <formula>Today()</formula>
+        <name>Responded Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_AR_Level_1_Date_Stamp</fullName>
+        <field>Ret_Stage_AR_Level_1_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage AR Level 1 Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_AR_Level_2_Date_Stamp</fullName>
+        <field>Ret_Stage_AR_Level_2_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage AR Level 2 Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_CS_Level_1_Date_Stamp</fullName>
+        <field>Ret_Stage_CS_Level_1_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage CS Level 1 Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_CS_Level_2_Date_Stamp</fullName>
+        <field>Ret_Stage_CS_Level_2_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage CS Level 2 Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_Cancel_Pend1_Date_Stamp</fullName>
+        <field>Ret_Stage_Cancel_Pending_1_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage Cancel Pend1 Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_Cancel_Pend2_Date_Stamp</fullName>
+        <field>Ret_Stage_Cancel_Pending_2_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage Cancel Pend2 Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_Deactivate_Date_Stamp</fullName>
+        <field>Ret_Stage_Deactivate_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage Deactivate Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_Reinstate_Date_Stamp</fullName>
+        <field>Ret_Stage_Reinstate_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Retention Stage Reinstate Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_update_to_AR_Level_1</fullName>
+        <field>Retention_Stage__c</field>
+        <literalValue>AR Level 1</literalValue>
+        <name>Retention Stage update to AR Level 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_update_to_CS_Level_2</fullName>
+        <field>Retention_Stage__c</field>
+        <literalValue>CS Level 2</literalValue>
+        <name>Retention Stage update to CS Level 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_update_to_CancelPending1</fullName>
+        <field>Retention_Stage__c</field>
+        <literalValue>Cancel Pending 1</literalValue>
+        <name>Retention Stage update to CancelPending1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Retention_Stage_update_to_CancelPending2</fullName>
+        <field>Retention_Stage__c</field>
+        <literalValue>Cancel Pending 2</literalValue>
+        <name>Retention Stage update to CancelPending2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_City</fullName>
+        <field>BillingCity</field>
+        <formula>Primary_Billing_City__c</formula>
+        <name>Update Billing City</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Country</fullName>
+        <field>BillingCountry</field>
+        <formula>TEXT(Primary_Billing_Country__c )</formula>
+        <name>Update Billing Country</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Street</fullName>
+        <field>BillingStreet</field>
+        <formula>Primary_Billing_Street__c</formula>
+        <name>Update Billing Street</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Billing_Zip_Code</fullName>
+        <field>BillingPostalCode</field>
+        <formula>Primary_Billing_Zip_Code__c</formula>
+        <name>Update Billing Zip Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Email_Collected</fullName>
+        <field>Email_Collected__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Email Collected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Primary_Shipping_Zip_Code</fullName>
+        <field>Primary_Shipping_Zip_Code__c</field>
+        <formula>LEFT( PrimaryShippingZip_Code_Plus_4_Lookup__c, 5)</formula>
+        <name>Update Primary Shipping Zip Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_State</fullName>
+        <field>BillingState</field>
+        <formula>TEXT(Primary_Billing_State__c)</formula>
+        <name>Update State</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Welcome_Email_sent_update</fullName>
+        <field>Welcome_email_sent__c</field>
+        <literalValue>1</literalValue>
+        <name>Welcome Email sent update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Zip_Plus_4_Update</fullName>
+        <field>Zip_Plus_Four__c</field>
+        <formula>RIGHT( PrimaryShippingZip_Code_Plus_4_Lookup__c, 4)</formula>
+        <name>Zip Plus 4 Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>PS_Lead_Push</fullName>
+        <apiVersion>38.0</apiVersion>
+        <description>Push New Lead to Protection Source</description>
+        <endpointUrl>https://na16.salesforce.com/00Q/e?retURL=%2F00Q%2Fo</endpointUrl>
+        <fields>FirstName</fields>
+        <fields>Id</fields>
+        <fields>LastName</fields>
+        <fields>PersonEmail</fields>
+        <fields>PersonHomePhone</fields>
+        <fields>PersonMobilePhone</fields>
+        <fields>Phone</fields>
+        <fields>Primary_Shipping_City__c</fields>
+        <fields>Primary_Shipping_Country__c</fields>
+        <fields>Primary_Shipping_County__c</fields>
+        <fields>Primary_Shipping_Full_Zip__c</fields>
+        <fields>Primary_Shipping_State__c</fields>
+        <fields>Primary_Shipping_Street__c</fields>
+        <fields>Primary_Shipping_Zip_Code__c</fields>
+        <fields>Respond_Date__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>cgarrett@myhomes.services</integrationUser>
+        <name>PS Lead Push</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Account%3A Update Hot Lead Created Checkbox on Verbal Consent Update</fullName>
+        <actions>
+            <name>Account_Update_Hot_Lead_Created_Field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Hot_Lead_Created__c Update</description>
+        <formula>ISCHANGED(Verbal_Consent__c) &amp;&amp; (ISPICKVAL(Verbal_Consent__c, &apos;Yes&apos;) || ISPICKVAL(Verbal_Consent__c, &apos;Phone Only&apos;)) &amp;&amp; (Hot_Lead_Created__c = false) &amp;&amp; ( Not(ISBLANK(Respond_Date__c))) 
+&amp;&amp; Not(ISCHANGED(Respond_Date__c)) &amp;&amp; (Inventory_Created__c=false)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Accounting Seed - Billing Address</fullName>
+        <actions>
+            <name>Update_Billing_City</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Country</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Street</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Billing_Zip_Code</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_State</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.CreatedDate</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <description>Copy from Primary Billing Address to Standard Billing Address</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Delivery Date Stamp</fullName>
+        <actions>
+            <name>Delivery_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <description>Captures the date at which the package was dropped and delivered to the customer.</description>
+        <formula>AND( 
+ISCHANGED( Scan_Code__c ), 
+ISBLANK( PRIORVALUE( Scan_Code__c ) ) , 
+ISBLANK( Delivery_Date__c ) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Added</fullName>
+        <actions>
+            <name>PAEmail</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.PersonEmail</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Collected</fullName>
+        <actions>
+            <name>Insert_Current_User</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Email_Collected</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.PersonEmail</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>ExternalIDPopulation</fullName>
+        <actions>
+            <name>PopulateExternalId</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.External_ID__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>Used to populate the record Id to the externalId, when the account get insert with empty ExternalId.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Home Type Update</fullName>
+        <actions>
+            <name>Home_Type_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Home_Type__c</field>
+            <operation>equals</operation>
+            <value>SF</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>PS Lead Push</fullName>
+        <actions>
+            <name>PS_Lead_Push</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Person Account</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Respond_Date__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <description>Push a new lead to Protection Source.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Phone Captured</fullName>
+        <actions>
+            <name>Phone_Collected</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Respond_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Phone Collected</fullName>
+        <actions>
+            <name>InsertUserID</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Respond_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Responded Date Stamp</fullName>
+        <actions>
+            <name>Responded_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND (
+ISCHANGED(Phone) || ISCHANGED( PersonMobilePhone ) , 
+ISBLANK( PRIORVALUE( PersonMobilePhone ) ), 
+ISBLANK( PRIORVALUE( Phone ) ), 
+ISBLANK( Respond_Date__c ) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A AR Level 1 Time Rule</fullName>
+        <actions>
+            <name>Retention_Stage_AR_Level_1_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>AR Level 1</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Retention_Stage_update_to_CancelPending1</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A AR Level 2 Time Rule</fullName>
+        <actions>
+            <name>Retention_Stage_AR_Level_2_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>AR Level 2</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Retention_Stage_update_to_CancelPending2</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A CS Level 1 Time Rule</fullName>
+        <actions>
+            <name>Retention_Stage_CS_Level_1_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>CS Level 1</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Retention_Stage_update_to_CS_Level_2</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A CS Level 2 Time Rule</fullName>
+        <actions>
+            <name>Retention_Stage_CS_Level_2_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>CS Level 2</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Retention_Stage_update_to_AR_Level_1</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>14</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A Cancel Pending 1 Date Stamp</fullName>
+        <actions>
+            <name>Retention_Stage_Cancel_Pend1_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>Cancel Pending 1</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A Cancel Pending 2 Date Stamp</fullName>
+        <actions>
+            <name>Retention_Stage_Cancel_Pend2_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>Cancel Pending 2</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A Deactivate Date Stamp</fullName>
+        <actions>
+            <name>Retention_Stage_Deactivate_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>Deactivate</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Ret Stage%3A Reinstate Date Stamp</fullName>
+        <actions>
+            <name>Retention_Stage_Reinstate_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Accounts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Retention_Stage__c</field>
+            <operation>equals</operation>
+            <value>Reinstate</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Split and Pop ZipCode</fullName>
+        <actions>
+            <name>Update_Primary_Shipping_Zip_Code</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Zip_Plus_4_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Cloudingo_Address_Validated__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Welcome Email</fullName>
+        <actions>
+            <name>Welcome_Email_sent_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.PAEmail__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Welcome_email_sent__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>sendPardotEmail</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.PersonEmail</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>sendemail</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.PersonEmail</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>duy</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,2345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>nuHome_nuCard_CPL</fullName>
+    <active>true</active>
+    <description>Once the Bright Pattern Inbound call comes in for NuCard Sub &amp; NuCard CPL and the call is forwarded to the Billing Opportunity, the agent needs to click on the Transfer Success button and an Inventory record should be auto created.</description>
+    <label>nuHome nuCard CPL</label>
+    <picklistValues>
+        <picklist>AI_Doors__c</picklist>
+        <values>
+            <fullName>Doors - Custom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doors - Standard</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_Front_or_Back_Yard__c</picklist>
+        <values>
+            <fullName>Synthetic Grass%2FPutting Green - Back Yard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Synthetic Grass%2FPutting Green - Front Yard</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_How_many_family_members__c</picklist>
+        <values>
+            <fullName>Dentist - 1 or 2%3F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dentist - 3 or 4%3F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dentist - 5 or 6%3F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_How_often_would_you_need_the_service__c</picklist>
+        <values>
+            <fullName>House Cleaning - Bi-Weekly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>House Cleaning - Monthly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>House Cleaning - One Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>House Cleaning - Weekly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_Immediate_Issue__c</picklist>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_Number_of_Seats__c</picklist>
+        <values>
+            <fullName>Hot Tub - 4 seats</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hot Tub - 8 seats</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_One_Time_or_Ongoing__c</picklist>
+        <values>
+            <fullName>Lawn %26 Weed Control - One Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lawn %26 Weed Control - Ongoing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_Ongoing_or_One_Time__c</picklist>
+        <values>
+            <fullName>Chiropractor - One Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chiropractor - Ongoing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>AI_Windows__c</picklist>
+        <values>
+            <fullName>Windows - 5 or Less</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows - 6 or More</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Appointment_Outcome__c</picklist>
+        <values>
+            <fullName>Appointment Set</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Network Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Lead</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Appt_Verification__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_in_need_of_blinds__c</picklist>
+        <values>
+            <fullName>Blinds%2FShutters - Blinds - 5 or Below</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Blinds - 6 or more</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_in_need_of_door__c</picklist>
+        <values>
+            <fullName>Windows%2FDoors - Doors - Custom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows%2FDoors - Doors - Standard</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_in_need_of_shutters__c</picklist>
+        <values>
+            <fullName>Blinds%2FShutters - Shutters - 5 or Below</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Shutters - 6 or more</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_in_need_of_windows__c</picklist>
+        <values>
+            <fullName>Windows%2FDoors - Windows - 5 or Less</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows%2FDoors - Windows - 6 or More</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_looking_for_an_energy_audit_on_y__c</picklist>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_looking_for_lead_detection__c</picklist>
+        <values>
+            <fullName>Plumber - Leak Detection%3F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Are_you_looking_for_solar_power__c</picklist>
+        <values>
+            <fullName>Solar Power</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BackSplash__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BestTimeBlindInbound__c</picklist>
+        <values>
+            <fullName>12-5PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-8PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BestTimeHVASInbound__c</picklist>
+        <values>
+            <fullName>12-5PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-8PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BestTimePlumbingInbound__c</picklist>
+        <values>
+            <fullName>12-5PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-8PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BestTimeSolarInbound__c</picklist>
+        <values>
+            <fullName>12-5PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-8PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BetterTime__c</picklist>
+        <values>
+            <fullName>12-5PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-8PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Billing_Stage__c</picklist>
+        <values>
+            <fullName>Billable</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Billable</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BlindsorShuttersInbound__c</picklist>
+        <values>
+            <fullName>Blinds%2FShutters - Blinds - 5 or Less%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Blinds - 6 or More%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Shutters- 5 or Less%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Shutters- 6 or More%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BottledMonthlyExpense__c</picklist>
+        <values>
+            <fullName>%2410%2E00 - %2420%2E00</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2420%2E00 - %2430%2E00</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>More than %2430%2E00</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BuysbottledwaterInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Are_you_in_need_of_Windows_Doors__c</picklist>
+        <values>
+            <fullName>Windows%2FDoors - Doors - Custom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows%2FDoors - Doors - Standard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows%2FDoors - Windows - 5 or Less</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows%2FDoors - Windows - 6 or More</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Complete_landscape_design_or_partial__c</picklist>
+        <values>
+            <fullName>Landscape Design %26 Install - Complete</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Do_you_need_Blinds_and_Shutters__c</picklist>
+        <values>
+            <fullName>Blinds%2FShutters - Blinds - 5 or Below</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Blinds - 6 or more</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Shutters - 5 or Below</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blinds%2FShutters - Shutters - 6 or more</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Do_you_need_shelving_storage__c</picklist>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Shelves - 1-2 Closets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Shelves - 3 %2B Closets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Storage System - 1-2 Closets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Storage System - 3 %2B Closets</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Interior_painting_Exterior_painting__c</picklist>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Exterior - partial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Interior - 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Interior - 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Interior rooms - 5%2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Is_this_complete_remodel_or_partial__c</picklist>
+        <values>
+            <fullName>Home Remodeling - Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Remodeling - Partial</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Is_this_for_carpet_tile_cleaning__c</picklist>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Carpet Cleaning - 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Carpet Cleaning - 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Carpet Cleaning- 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Tile Cleaning - 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Tile Cleaning - 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Tile Cleaning - 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_New_electrical_work_existing_repair__c</picklist>
+        <values>
+            <fullName>Electrician - New Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electrician - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_New_install_Repair_existing_gutters__c</picklist>
+        <values>
+            <fullName>Gutters - New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gutters - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_New_install_Repair_the_existing__c</picklist>
+        <values>
+            <fullName>Roofing - New Install</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roofing - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_New_siding_Repair_the_existing__c</picklist>
+        <values>
+            <fullName>Siding - New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Siding - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_One_time_service_or_ongoing_service__c</picklist>
+        <values>
+            <fullName>Pest Control - One Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pest Control - Ongoing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_What_type_of_fencing_are_you_in_need__c</picklist>
+        <values>
+            <fullName>Fencing - Complete Brick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Concrete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Iron</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Vinyl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Wood</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Brick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Concrete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Iron</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Vinyl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Wood</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_What_type_of_granite_or_marble_work__c</picklist>
+        <values>
+            <fullName>Granite%2FMarble - Granite - Bathroom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite%2FMarble - Granite - Countertops</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite%2FMarble - Granite - Fireplace</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite%2FMarble - Marble - Bathroom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite%2FMarble - Marble - Countertops</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite%2FMarble - Marble - Fireplace</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_What_type_of_service_are_you_in_need__c</picklist>
+        <values>
+            <fullName>HVAC Services - Home Warranty Coverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HVAC Services - Repair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HVAC Services - Upgrade</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Wood_Carpet_Tile__c</picklist>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile -Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Refinish 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Refinish 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_new_plumbing_install__c</picklist>
+        <values>
+            <fullName>Plumber - Existing Repair%3F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumber - Leak Detection%3F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumber - New Install%3F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CabinetboxesNeeded__c</picklist>
+        <values>
+            <fullName>10-15 Cabinets%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-10 Cabinets%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>More than 15 Cabinets%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CabinetsColor__c</picklist>
+        <values>
+            <fullName>Solid Color Cabinets%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood Cabinets%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Attempts__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Disposition__c</picklist>
+        <values>
+            <fullName>Appointment Set</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Business No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Back Appointment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delivered to Wrong House</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disposition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dropped while talking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Failed Transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hang Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lead Returned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left Message</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manager Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Answer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Email%2FActivation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No English</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Gift Box Delivered</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Home owner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Home owner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Homeowner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Owner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QC Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Activation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical Problems</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telemarketing Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transfer to Business</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Status__c</picklist>
+        <values>
+            <fullName>Caller Hung up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Hung up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left Voice Mail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transfer Success</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Voice Mail Full</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Carpet__c</picklist>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Carpet - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CommodebackupInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Complete_landscape_design_or_partial__c</picklist>
+        <values>
+            <fullName>Landscape Design %26 Install - Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Landscape Design %26 Install - Partial</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation_Status__c</picklist>
+        <values>
+            <fullName>Call Back</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Show  To Confirm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RESET</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reschedule</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation_Type__c</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Voice</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CurrentlyUnderContract__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DTS_Maintenance__c</picklist>
+        <values>
+            <fullName>HVAC Services - Home Warranty Coverage</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DTS_New_Install__c</picklist>
+        <values>
+            <fullName>HVAC Services - Upgrade</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DTS_Project_Details__c</picklist>
+        <values>
+            <fullName>Home Remodeling - Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Remodeling - Partial</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DTS_Type_of_Stone__c</picklist>
+        <values>
+            <fullName>Granite - Bathroom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite - Countertops</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite - Fireplace</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marble - Bathroom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marble - Countertops</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marble - Fireplace</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Fence_Construction_Repair__c</picklist>
+        <values>
+            <fullName>Fencing - Complete Brick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Concrete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Iron</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Vinyl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Complete Wood</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Brick</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Concrete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Iron</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Vinyl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing - Partial Wood</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Flooring_Install_Repair_Refinish__c</picklist>
+        <values>
+            <fullName>Carpet - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile -Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Refinish 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Refinish 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Refinish 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wood - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Full_Bathroom_Partial__c</picklist>
+        <values>
+            <fullName>Bathroom Remodeling - Full Bathroom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bathroom Remodeling - Partial Bathroom</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Full_Kitchen_Partial_Kitchen__c</picklist>
+        <values>
+            <fullName>Kitchen Remodeling - Full Kitchen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kitchen Remodeling - Partial Kitchen</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Garage_Door_Install_Repair__c</picklist>
+        <values>
+            <fullName>Close</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garage Door - Insulation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garage Door - Repair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garage Door - Replacement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Install_Replacement_Maintenance__c</picklist>
+        <values>
+            <fullName>HVAC Services - Home Warranty Coverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HVAC Services - Repair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HVAC Services - Upgrade</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Installation_of_new_electrical_Repair__c</picklist>
+        <values>
+            <fullName>Electrician - New Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electrician - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_New_Gutter_Install_Repair__c</picklist>
+        <values>
+            <fullName>Gutters - New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gutters - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Plumbing_install_repair_leak_detect__c</picklist>
+        <values>
+            <fullName>Plumber - Existing Repair%3F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumber - Leak Detection%3F</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumber - New Install%3F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Pool_Service_Install_one_time_clean__c</picklist>
+        <values>
+            <fullName>Pool Installation%2FRemodeling - Chlorine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pool Installation%2FRemodeling - Salt Water</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pool Maintenance - Bi-Weekly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pool Maintenance - Monthly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pool Maintenance - Weekly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Roof_Repair_Replacement__c</picklist>
+        <values>
+            <fullName>Roofing - New Install</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roofing - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Shelves_Storage_System__c</picklist>
+        <values>
+            <fullName>Shelves - 3 %2B Closets</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Siding_Install_Repair__c</picklist>
+        <values>
+            <fullName>Siding - New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Siding - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Water_Softener_Install_Repair__c</picklist>
+        <values>
+            <fullName>Water Softener Filtration - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DT_Windows_Doors__c</picklist>
+        <values>
+            <fullName>Doors - Custom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doors - Standard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows - 5 or Less</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windows - 6 or More</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DeepdishTub__c</picklist>
+        <values>
+            <fullName>Deep-dish Tub%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Walk-in-Shower%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dispatch_Status__c</picklist>
+        <values>
+            <fullName>Email Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Email</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Distribution_Status__c</picklist>
+        <values>
+            <fullName>Appt Dispatch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distribution Process Incomplete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lead Distributed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Do_you_need_a_new_one_installed__c</picklist>
+        <values>
+            <fullName>Roofing - New Install</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Do_you_need_a_new_siding_installed__c</picklist>
+        <values>
+            <fullName>Siding - New</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Do_you_need_additional_shelving__c</picklist>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Shelves - 3 %2B Closets</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Do_you_need_existing_electrical_repaired__c</picklist>
+        <values>
+            <fullName>Electrician - New Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electrician - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Do_you_need_new_ones_installed__c</picklist>
+        <values>
+            <fullName>Gutters - New</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Do_you_need_storage_system__c</picklist>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Storage System - 1-2 Closets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closet Organizing%2FGarage Shelving - Storage System - 3 %2B Closets</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DoyouhavePets__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Drinkswaterfromtap__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DrippingfaucetsInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ElectricheatingunitInbound__c</picklist>
+        <values>
+            <fullName>Electric furnace%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gas furnace%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FICOcreditscoreInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FlatOrPitchedRoof__c</picklist>
+        <values>
+            <fullName>Flat Roof%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pitched Roof%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Gatebackyard__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>GatedCommunityInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>GatedCommunityPlumbingInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HasKeypadInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Homekeypadinbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HowmanyWindowDoorsInbound__c</picklist>
+        <values>
+            <fullName>1-2 Doors%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-2 Windows%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-3 Doors%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3%2B Doors%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-5 Windows%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6%2B Windows%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>InstallationorMaintenanceInbound__c</picklist>
+        <values>
+            <fullName>Installation%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maintenance%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Inventory_Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Inventory_Type__c</picklist>
+        <values>
+            <fullName>Appt%2EScheduled DTS Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appt%2EScheduled OBC Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appt%2EScheduled Spec Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DT Script</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NuCard Sub-CPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified DTS Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified OBC Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verified Spec Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>nuCard Spec</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>nuHome OB Campaign</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_it_an_interior_painting_project__c</picklist>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Interior - 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Interior - 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Interior rooms - 5%2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_this_complete_remodel_or_partial__c</picklist>
+        <values>
+            <fullName>Home Remodeling - Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Remodeling - Partial</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_this_going_to_be_for_carpet_cleaning__c</picklist>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Carpet Cleaning - 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Carpet Cleaning - 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Carpet Cleaning- 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_this_going_to_be_for_tile_cleaning__c</picklist>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Tile Cleaning - 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Tile Cleaning - 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet%2FTile Cleaning - Tile Cleaning - 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_this_going_to_be_new_plumbing_install__c</picklist>
+        <values>
+            <fullName>Plumber - New Install%3F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Isitnormallylocked__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Looking_to_repair_existing_gutters__c</picklist>
+        <values>
+            <fullName>Gutters - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Looking_to_repair_the_existing_one__c</picklist>
+        <values>
+            <fullName>Roofing - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Looking_to_repair_the_existing_siding__c</picklist>
+        <values>
+            <fullName>Siding - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>OB_Call_Center_Appointment_Time_Frame__c</picklist>
+        <values>
+            <fullName>1 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10 AM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11 AM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8 AM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8 PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9 AM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9 PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>One_time_service_or_an_ongoing_service__c</picklist>
+        <values>
+            <fullName>Pest Control - One Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pest Control - Ongoing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Operational_Stage_Hot_Leads__c</picklist>
+        <values>
+            <fullName>Active Tier 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Active Tier 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Active Tier 3</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Or_a_repair_to_existing_plumbing__c</picklist>
+        <values>
+            <fullName>Plumber - Existing Repair%3F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Or_are_you_in_need_of_exterior_painting__c</picklist>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Exterior - complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Painting %28Exterior%2FInterior%29 - Exterior - partial</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PetsBackyard__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PlanningMoveNext4Year__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason_for_Non_Billable__c</picklist>
+        <values>
+            <fullName>Lead Quality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Previous Cancel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trial Period</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rejected_Status__c</picklist>
+        <values>
+            <fullName>Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Fixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejection Verified</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Repair_Replacement__c</picklist>
+        <values>
+            <fullName>HVAC Services - Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Requested_Window_Time__c</picklist>
+        <values>
+            <fullName>1 Hour</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 Hour</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 Hour</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4 Hour</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5 Hour</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rescheduling_Status__c</picklist>
+        <values>
+            <fullName>Rescheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sale_Disposition__c</picklist>
+        <values>
+            <fullName>Install</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rescheduled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sale</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SoapMonthlyExpensesInbound__c</picklist>
+        <values>
+            <fullName>%2420%2E00 - %2430%2E00</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2430%2E00 - %2440%2E00</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>More than %2440%2E00</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>Available</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Sold</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tile__c</picklist>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Tile - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Vivint_Sales_Assignment__c</picklist>
+        <values>
+            <fullName>A</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WhenyoueventuallyRemodelyourKitchen__c</picklist>
+        <values>
+            <fullName>New Custom Cabinets Installation%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reface Existing Cabinet boxes%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WhenyoueventuallyUpgradeyourCounter__c</picklist>
+        <values>
+            <fullName>Acrylic Solid Color%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Granite%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quartz%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WholeHouseorjustPartial__c</picklist>
+        <values>
+            <fullName>Full Installation%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partial Installation%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WindowsFeetHigherInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Wood__c</picklist>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Install 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Install 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Install 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Refinish 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Refinish 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Refinish 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Repair 1-2 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Repair 3-4 rooms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooring%2FCarpeting - Wood - Repair 5 %2B rooms</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WorkBestTimeInbound__c</picklist>
+        <values>
+            <fullName>12-5PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-8PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12PM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>collectthepaymentdetailsInbound__c</picklist>
+        <values>
+            <fullName>Credit Card%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Debit Card%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Payment Method%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>houseStory__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>howmanyadultsInbound__c</picklist>
+        <values>
+            <fullName>1 Adult%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 Adults%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-3 Adults%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4%2B Adults%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>outsideunitontheground__c</picklist>
+        <values>
+            <fullName>Ground%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roof%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>partnerspouseInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>partnerspouseplumbingInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>serviceprovideragreementinbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>skylightsinthehomeInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>wallsReplacing__c</picklist>
+        <values>
+            <fullName>1-2 Walls%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-4 Walls%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>watersofteningsystemInbound__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>whattypesofflooring__c</picklist>
+        <values>
+            <fullName>Carpet-1-2 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet-3-4 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carpet-5 or more Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laminate-1-2 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laminate-3-4 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laminate-5 or more Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resilient %26 LVT-1-2 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resilient %26 LVT-3-4 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resilient %26 LVT-5 or more Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile-1-2 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile-3-4 Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tile-5 or more Rooms%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

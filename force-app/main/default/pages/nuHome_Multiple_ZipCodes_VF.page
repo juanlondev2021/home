@@ -1,0 +1,34 @@
+<!-- Inline visual force page for to select/unselect multiple zipcodes in the product page -->
+<apex:page standardController="Product2" extensions="nuHome_Multiple_ZipCodes_AC">
+    <apex:form id="form">
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Save" action="{!saveZip}" reRender="form" rendered="{!edit}"/>
+                <apex:commandButton value="Edit" action="{!editZip}" reRender="form" rendered="{!view}"/> 
+            </apex:pageBlockButtons>            
+            <apex:pageBlockSection columns="2">
+                	<apex:outputField value="{!prod.Available_ZipCodes__c}" rendered="{!view}"/>
+                	<apex:outputField value="{!prod.Exclude_Zip_Codes__c}" rendered="{!view}"/>
+                
+                <apex:panelGrid columns="3" id="abcd" rendered="{!edit}" style="margin-left:auto;margin-right:auto">
+                    <apex:panelGroup ><label style="font-weight:bold">Exclude Zip Codes</label><br/><apex:selectList id="sel1" value="{!leftSelected}" multiselect="true" style="width:216px" size="6">
+                        <apex:selectOptions value="{!unselectedvalues}" />
+                    </apex:selectList></apex:panelGroup> 
+                    <apex:panelGroup >
+                        <br/><br/><br/>
+                        <apex:image value="/s.gif" alt="Add" styleClass="picklistArrowRight">
+                            <apex:actionSupport event="onclick" action="{!selectClick}" reRender="abcd"/>
+                        </apex:image>
+                        <br/><br/>
+                        <apex:image value="/s.gif" alt="Remove" styleClass="picklistArrowLeft" >
+                            <apex:actionSupport event="onclick" action="{!unSelectClick}" reRender="abcd"/>
+                        </apex:image>
+                    </apex:panelGroup>
+                    <apex:panelGroup ><label style="font-weight:bold">Available Zip Codes</label><br/><apex:selectList id="sel2" value="{!rightSelected}" multiselect="true" style="width:216px" size="6">
+                        <apex:selectOptions value="{!SelectedValues}" />
+                    </apex:selectList></apex:panelGroup>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>            
+    </apex:form>
+</apex:page>

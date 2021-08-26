@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Branch_Lkp__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Branch Lkp</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Branch__c.Active_for_Campaigns__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Branch__c</referenceTo>
+    <relationshipLabel>Opportunity Product</relationshipLabel>
+    <relationshipName>Opportunity_Product</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

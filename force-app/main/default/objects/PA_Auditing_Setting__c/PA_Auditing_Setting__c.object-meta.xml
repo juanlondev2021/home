@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>The number of days for threshold value for checking if the person account were created in past X days.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>PA Auditing Setting</label>
+    <visibility>Protected</visibility>
+</CustomObject>

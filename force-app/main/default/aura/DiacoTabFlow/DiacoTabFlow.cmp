@@ -1,0 +1,116 @@
+<aura:component controller="DiacoCmpFlowController" implements="lightning:isUrlAddressable,force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="newAccountId" type="String"/>
+    
+    <aura:attribute name="phoneRep" type="String"/>
+    <aura:attribute name="originalPhoneRep" type="String"/>
+    <aura:attribute name="callerId" type="String"/>
+    
+    <aura:attribute name="fn" type="String"/>
+    <aura:attribute name="ln" type="String"/>
+    <aura:attribute name="st" type="String"/> 
+    <aura:attribute name="ct" type="String"/>
+    <aura:attribute name="sta" type="String"/>
+    <aura:attribute name="zp" type="String"/>
+    <aura:attribute name="em" type="String"/>
+    
+    <aura:attribute name="obj" type="Object" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <aura:attribute name="tabSelected" type="Object" default="one"/>
+    
+    <aura:handler name="change" value="{!v.newAccountId}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="thereIsDataToChange" type="Boolean" default="true"/>
+    <aura:attribute name="decision" type="String" default="None"/>
+    <aura:attribute name="toDecision" type="Boolean" default="true"/>
+    
+    <lightning:tabset variant="scoped" selectedTabId="{!v.tabSelected}">
+
+        <!-- ACCOUNT TAB URL-->
+        <aura:if isTrue="{!and(v.obj.isAccount==null, v.obj.accountId==null)}">
+            <lightning:tab label="Account" id="one">
+                <aura:if isTrue="{!and(v.obj.accountId != null,v.thereIsDataToChange)}">
+                    <div class="slds-grid slds-wrap">
+                        <aura:if isTrue="{!or(v.decision=='None',v.decision=='old')}">
+                            <div class="{!(v.decision=='None'?'c-container':'')+' slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-'+(v.decision=='None'?'2':'1')+' slds-large-size--1-of-'+(v.decision=='None'?'2':'1')}">
+                                <aura:if isTrue="{!v.decision=='None'}">
+                                    <div class="slds-col slds-size_12-of-12 align-end-button">
+                                        <lightning:button variant="brand" class="slds-m-around_small" onclick="{!c.onOldAccount}" label="Use this Account" />
+                                    </div>
+                                </aura:if>
+                                <c:diacoCreateAndUpdateAccount toDecision="{!v.toDecision}" aura:Id="forAccount" recordId='{!v.recordId}' newAccountId="{!v.newAccountId}" phoneRep="{!v.phoneRep}" callerId="{!v.callerId}"/>
+                                <aura:if isTrue="{!v.decision=='None'}">
+                                    <div class="slds-col slds-size_12-of-12 align-end-button">
+                                        <lightning:button variant="brand" class="slds-m-around_small" onclick="{!c.onOldAccount}" label="Use this Account" />
+                                    </div>
+                                </aura:if>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!or(v.decision=='None',v.decision=='new')}">
+                            <div class="{!'slds-p-left_small slds-col slds-size_1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-'+(v.decision=='None'?'2':'1')+' slds-large-size--1-of-'+(v.decision=='None'?'2':'1')}"	>
+                                <div class="{!v.decision=='None'?'c-container':''}">
+                                    <aura:if isTrue="{!v.decision=='None'}">
+                                        <div class="slds-col slds-size_12-of-12 align-end-button">
+                                            <lightning:button variant="brand" class="slds-m-around_small" onclick="{!c.onNewAccount}" label="Update Account" />
+                                        </div>
+                                    </aura:if>
+                                    <c:diacoCreateAndUpdateAccount toDecision="{!v.toDecision}"  aura:Id="forAccount" recordId='{!v.recordId}' newAccountId="{!v.newAccountId}" phoneRep="{!v.phoneRep}" callerId="{!v.callerId}"
+                                                    fn="{!v.fn}"
+                                                    ln="{!v.ln}"
+                                                    st="{!v.st}"
+                                                    ct="{!v.ct}"
+                                                    sta="{!v.sta}"
+                                                    zp="{!v.zp}"
+                                                    em="{!v.em}"/>
+                                    <aura:if isTrue="{!v.decision=='None'}">
+                                        <div class="slds-col slds-size_12-of-12 align-end-button">
+                                            <lightning:button variant="brand" class="slds-m-around_small" onclick="{!c.onNewAccount}" label="Update Account" />
+                                        </div>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </aura:if>
+                    </div>
+                    <aura:set attribute="else">
+                        <c:diacoCreateAndUpdateAccount toDecision="false"  aura:Id="forAccount" recordId='{!v.recordId}' newAccountId="{!v.newAccountId}" phoneRep="{!v.phoneRep}" callerId="{!v.callerId}"
+                                                    fn="{!v.fn}"
+                                                    ln="{!v.ln}"
+                                                    st="{!v.st}"
+                                                    ct="{!v.ct}"
+                                                    sta="{!v.sta}"
+                                                    zp="{!v.zp}"
+                                                    em="{!v.em}"/>
+                    </aura:set>
+                </aura:if>
+            </lightning:tab>
+        </aura:if>
+        <!-- /ACCOUNT TAB URL-->
+
+        <aura:if isTrue="{!v.obj.accountId != null}">
+            
+            <!-- ACCOUNT -->
+            <aura:if isTrue="{!v.obj.accountId}">
+                <lightning:tab label="Account" id="one">
+                    <c:diacoCreateAndUpdateAccount recordId='{!v.obj.accountId}' />
+                </lightning:tab>
+            </aura:if>
+            <!-- /ACCOUNT -->
+
+            <!-- INTEREST -->
+            <lightning:tab label="Interest" id="two">
+                <!--c:DiacoManageWebForm recordId="{!v.obj.accountId}" kunnectID="{!v.callerId}"/-->
+                <c:DiacoInterestWebForm recordId="{!v.obj.accountId}" kunnectID="{!v.phoneRep}"/>
+            </lightning:tab>
+            <!-- /INTEREST -->
+
+            <!-- HOME SERVICES  -->
+            <lightning:tab label="Home Services">
+                <c:DiacoHomeServicesFlow recordId="{!v.obj.accountId}"/>
+            </lightning:tab>
+            <!-- /HOME SERVICES  -->
+
+        </aura:if>
+
+    </lightning:tabset>
+</aura:component>

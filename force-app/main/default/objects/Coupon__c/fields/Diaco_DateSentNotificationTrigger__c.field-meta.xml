@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Diaco_DateSentNotificationTrigger__c</fullName>
+    <description>Field responsible to determinate if its need to do a sent a notification mail</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Field responsible to determinate if its need to do a sent a notification mail</inlineHelpText>
+    <label>Date Sent Notification Trigger</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

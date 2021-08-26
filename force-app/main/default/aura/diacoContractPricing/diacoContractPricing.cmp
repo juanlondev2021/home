@@ -1,0 +1,123 @@
+<!--
+
+ Diaco
+ @author 			Esnayder Morales Corpas href=<esnaydermorales25@gmail.com>
+ Project:			DiacoContracts
+ Description:		component reponsible of rendering solar pricing form
+					
+ Changes (Version)
+ _________________________________________
+
+			No.		Date			Author					Description
+			____	__________      __________________      _____________________________________
+@version	1.0		01/05/2019		Esnayder Morales (ES)	Initial implementation  of the component.
+-->
+
+<aura:component  controller="DiacoCmpContractController">
+	<aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="Home_Services" type="Home_Services__c" />
+    <aura:attribute name="_label" type="String"/>
+    <fieldset class="slds-box slds-theme--default ">
+        <lightning:layout class="slds-page-header slds-page-header--object-home slds-border_bottom">
+            <lightning:layoutItem>
+                <lightning:icon iconName="custom:custom41" alternativeText="My Expenses"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--label">Information</h1>
+                    <h2 class="slds-text-heading--medium">Pricing</h2>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem flexibility="no-flex" padding="around-small" size="12" >
+                <div aria-labelledby="FirstCustomerInformation">
+                    <form class="slds-form--stacked">
+                        <lightning:recordViewForm recordId="{!v.recordId}" 
+                                                      objectApiName="Home_Services__c">
+                        <lightning:recordEditForm aura:id="recordViewForm"
+                                          onsuccess="{!c.handleSuccess}"
+                                          onerror="{!c.handleOnError}"
+                                          recordId="{!v.recordId}"
+                                          objectApiName="Home_Services__c"
+                                          >
+                    <lightning:messages />
+                        <div class="slds-form slds-grid slds-wrap slds-align_absolute-center">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <!--lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 readonly="true"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center"
+                                                 name="Total_Cash_Selling_Price" 
+                                                 label="Total Cash Selling Price"
+                                                 value="{!v.Home_Services.Total_Cash_Selling_Price__c}"/-->
+                                <lightning:outputField fieldName="Total_Cash_Selling_Price__c" />
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <!--lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 readonly="true"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center"
+                                                 name="Total_Cash_Price" 
+                                                 label="Total Cash Price"
+                                                 value="{!v.Home_Services.Total_Cash_Price__c}"/-->
+                                <lightning:outputField fieldName="Total_Cash_Price__c" />
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <!--lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center"
+                                                 name="Down_Payment" 
+                                                 label="Down Payment"
+                                                 value="{!v.Home_Services.Down_Payment__c}"/-->
+                                <lightning:inputField fieldName="Down_Payment__c" onchange="{! c.changeStatus }"/>
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <!--lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 readonly="true"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center"
+                                                 name="Total_Down_Payment" 
+                                                 label="Total_Down_Payment"
+                                                 value="{!v.Home_Services.Total_Down_Payment__c}"/-->
+                                <lightning:outputField fieldName="Total_Down_Payment__c" />
+                            </div>
+                            
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                                <!--lightning:input aura:id="CustomerInfo" type="number"
+                                                 onchange="{! c.changeStatus }"
+                                                 readonly="true"
+                                                 formatter="currency"
+                                                 class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center"
+                                                 name="Balance_Due" 
+                                                 label="Balance Due"
+                                                 value="{!v.Home_Services.Balance_Due__c}"/-->
+                                <lightning:outputField fieldName="Balance_Due__c" />
+                            </div>
+                            
+                            <!--lightning:button variant="brand" label="{!v._label}" 
+                                          class="slds-m-top-medium slds-align_absolute-center" 
+                                          title="Brand action" 
+                                          onclick="{! c.saveInformation}" /-->
+                            <lightning:button aura:id="submit" type="submit" 
+                                              variant="brand" 
+                                              label="Save"  
+                                              class="slds-m-top--medium slds-align_absolute-center"/>
+                        </div>
+                        </lightning:recordEditForm>
+                        </lightning:recordViewForm>
+                    </form>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+	
+</aura:component>

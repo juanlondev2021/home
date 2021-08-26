@@ -1,0 +1,1506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_Cancel_Pending</fullName>
+        <description>Email: Cancel Pending</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Gift_Card_Cancel_Pending</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Closed_Lost_Opportunity</fullName>
+        <description>Email: Closed Lost Opportunity</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Closed_Lost_Opp</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Deactivated_Customer</fullName>
+        <description>Email: Deactivated Customer</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Deactivated_Customer</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Gift_Card_Active_Customer</fullName>
+        <description>Email: Gift Card Active Customer</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Gift_Card_Active_Customer</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Gift_Card_Awaiting_Artwork</fullName>
+        <description>Email: Gift Card Awaiting Artwork</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Gift_Card_Awaiting_Artwork</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Gift_Card_Client_Approved</fullName>
+        <description>Email: Gift Card Client Approved</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_Gift_Card_Client_Approved</template>
+    </alerts>
+    <alerts>
+        <fullName>OB_Campaign_Pause_Email</fullName>
+        <description>OB Campaign Pause Email</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>All/Email_OB_Campaign_Paused</template>
+    </alerts>
+    <alerts>
+        <fullName>Pause_Campaign_in_Bright_Pattern</fullName>
+        <description>Pause Campaign in Bright Pattern</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_OB_Campaign_Paused</template>
+    </alerts>
+    <alerts>
+        <fullName>Restart_the_OB_Campaign_in_Bright_Pattern</fullName>
+        <description>Restart the OB Campaign in Bright Pattern</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_OB_Campaign_Unpaused</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_New_Campaign_Name_to_LeadQual</fullName>
+        <ccEmails>clientservices@leadqual.com</ccEmails>
+        <ccEmails>goppenheimer@leadqual.com</ccEmails>
+        <description>Send New Campaign Name to LeadQual</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>cgarrett@myhomes.services</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Email_LeadQual_New_Campaign</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Check_Scheduling_Paused_Checkbox</fullName>
+        <field>Scheduling_Paused__c</field>
+        <literalValue>1</literalValue>
+        <name>Check Scheduling Paused Checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>City_Clear</fullName>
+        <field>Opp_Mailing_City__c</field>
+        <name>City Clear</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Closed_Date_Update</fullName>
+        <field>CloseDate</field>
+        <formula>TODAY()</formula>
+        <name>Closed Date Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Closed_Won_Update</fullName>
+        <field>Closed_Won__c</field>
+        <literalValue>1</literalValue>
+        <name>Closed Won Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Country_Clear</fullName>
+        <field>Opp_Mailing_Country__c</field>
+        <name>Country Clear</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Deactivate_OB_Campaign_Active_Checkbox</fullName>
+        <field>OB_Campaign_Active__c</field>
+        <literalValue>0</literalValue>
+        <name>Deactivate OB Campaign Active Checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Delete_OB_Campaign_Active_Date</fullName>
+        <description>If the OB Operation Stage is not equal to Campaign Active the OB Campaign Active Date field will be updated to blank.</description>
+        <field>OB_Campaign_Active_Date__c</field>
+        <name>Delete OB Campaign Active Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Hot_Lead_Stage_Hot_Leads_Active</fullName>
+        <field>Hot_Leads_Active_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Hot Lead Stage:Hot Leads Active</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Hot_Lead_Stage_Hot_Leads_Portal_Complete</fullName>
+        <field>Hot_Leads_Portal_Complete_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Hot Lead Stage:Hot Leads Portal Complete</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Hot_Lead_Stage_Hot_Leads_Portal_Setup</fullName>
+        <field>Hot_Leads_Portal_Setup_Date_Stamp__c</field>
+        <formula>Today()</formula>
+        <name>Hot Lead Stage:Hot Leads Portal Setup</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>OB_Campaign_Active_Date_Stamp</fullName>
+        <field>OB_Campaign_Active_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>OB Campaign Active Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Active_Customer_Date_Stamp</fullName>
+        <field>Opp_Stage_Active_Customer_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Active Customer Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Awaiting_Artwork_Date_Stamp</fullName>
+        <field>Opp_Stage_Awaiting_Artwork_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Awaiting Artwork Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Cancel_Pending</fullName>
+        <field>Opp_Stage_Cancel_Pending__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Cancel Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Client_Proof_Approved_Date_St</fullName>
+        <field>Opp_Stage_Client_Proof_Apvd_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Client Proof Approved Date St</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Deactivated_Customer_Date_Sta</fullName>
+        <field>Opp_Stage_Deactivated_Cust_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Deactivated Customer Date Sta</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Gift_Card_Ordered_Date_Stamp</fullName>
+        <field>Opp_Stage_Gift_Card_Ordered_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Gift Card Ordered Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Graphic_Design_Date_Stamp</fullName>
+        <field>Opp_Stage_Graphic_Design_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Graphic Design Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Proof_Approved_Date_Stamp</fullName>
+        <field>Opp_Stage_Proof_Approved_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Proof Approved Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Proof_Sent_Date_Stamp</fullName>
+        <field>Opp_Stage_Proof_Sent_Client_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Proof Sent Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opp_Stage_Recvd_FulFill_Date_Stamp</fullName>
+        <field>Opp_Stage_Rcvd_Fulfill_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Opp Stage: Recvd &amp; FulFill Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opportunity1_Update_Stage_value_as_Negle</fullName>
+        <description>Opportunity Stage needs to be automatically changed to &apos;Neglected&apos; when the Opportunity is sitting in a same stage as described below.
+Qualified - 10 days
+Needs Analysis - 10 days
+Presentation - 5 days
+Proposal - 5 days
+DocuSign Sent - 3 days</description>
+        <field>StageName</field>
+        <literalValue>Neglected</literalValue>
+        <name>Opportunity: Update Stage value as Negle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opportunity_Update_Last_Modified_Date</fullName>
+        <field>Last_Modified_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Opportunity: Update Last Modified Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opportunity_Update_Stage_value_as_Negle</fullName>
+        <description>Opportunity Stage needs to be automatically changed to &apos;Neglected&apos; when the Opportunity is sitting in a same stage as described below.
+Qualified - 10 days
+Needs Analysis - 10 days
+Presentation - 5 days
+Proposal - 5 days
+DocuSign Sent - 3 days</description>
+        <field>StageName</field>
+        <literalValue>Neglected</literalValue>
+        <name>Opportunity: Update Stage value as Negle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Opty_Naming_Fieldupdate</fullName>
+        <field>Name</field>
+        <formula>Name+ Opp_Number__c</formula>
+        <name>Opty_Naming_Fieldupdate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Pre_Close_Free_Hot_Leads_Stage_Date_Sta</fullName>
+        <field>Pre_Close_Free_Hot_Leads_Stage_Date__c</field>
+        <formula>Today()</formula>
+        <name>Pre Close: Free Hot Leads Stage Date Sta</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Recurring_Setup</fullName>
+        <field>Recurring_Setup__c</field>
+        <literalValue>No</literalValue>
+        <name>Recurring Setup</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Docusign_Rcvd_Date_Stamp</fullName>
+        <field>Docusign_Rcvd_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Docusign Rcvd Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Initial_Pay_Rcvd_Date_Stamp</fullName>
+        <field>Initial_Pay_Rcvd_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Initial Pay Rcvd Date Stamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Update_Needs_Anaylsis</fullName>
+        <field>Need_Analysis_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Update Needs Anaylsis</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Update_Negotiation_Review</fullName>
+        <field>Negotiation_Review__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Update Negotiation/Review</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Update_Proposal_Quote</fullName>
+        <field>Proposal_Price_Quote_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Update Proposal/Quote</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Update_Value_Proposition</fullName>
+        <field>Value_Proposition_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Update Value Proposition</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sales_Stage_Update_Won_Lost</fullName>
+        <field>Closed_Won_Lost_Date_Stamp__c</field>
+        <formula>TODAY()</formula>
+        <name>Sales Stage: Update Won/Lost</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Schedule_End_Date_Blank</fullName>
+        <field>OB_Campaign_Scheduling_Paused_End_Date__c</field>
+        <name>Schedule End Date Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Schedule_Paused_Checkbox_blank</fullName>
+        <field>Scheduling_Paused__c</field>
+        <literalValue>0</literalValue>
+        <name>Schedule Paused Checkbox blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Schedule_Start_Date_Blank</fullName>
+        <field>OB_Campaign_Scheduling_Paused_Start_Date__c</field>
+        <name>Schedule Start Date Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stage_Change</fullName>
+        <field>StageName</field>
+        <name>Stage - Change</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>PreviousValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>State_Clear</fullName>
+        <field>Opp_Mailing_State__c</field>
+        <name>State Clear</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Street_Clear</fullName>
+        <field>Opp_Mailing_Street__c</field>
+        <name>Street Clear</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Restart_Campaign</fullName>
+        <field>Restart_Campaign__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Restart Campaign</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_City</fullName>
+        <field>Opp_Mailing_City__c</field>
+        <formula>Account.Primary_Billing_City__c</formula>
+        <name>Update City</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Country</fullName>
+        <field>Opp_Mailing_Country__c</field>
+        <formula>TEXT( Account.Primary_Billing_Country__c )</formula>
+        <name>Update Country</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_OB_Campaign_Active_Checkbox</fullName>
+        <field>OB_Campaign_Active__c</field>
+        <literalValue>1</literalValue>
+        <name>Update OB Campaign Active Checkbox</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_OB_Campaign_Original_Active_Date</fullName>
+        <field>OB_Campaign_Original_Activation_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Update OB Campaign Original Active Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_State1</fullName>
+        <field>Opp_Mailing_State__c</field>
+        <formula>TEXT(Account.Primary_Billing_State__c)</formula>
+        <name>Update State</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Street</fullName>
+        <field>Opp_Mailing_Street__c</field>
+        <formula>Account.Primary_Billing_Street__c</formula>
+        <name>Update Street</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Zip_Code</fullName>
+        <field>Opp_Mailing_Zip_Code__c</field>
+        <formula>Account.Primary_Billing_Zip_Code__c</formula>
+        <name>Update Zip Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Zip_Code_Clear</fullName>
+        <field>Opp_Mailing_Zip_Code__c</field>
+        <name>Zip Code Clear</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Cloned Opportunity</fullName>
+        <actions>
+            <name>Closed_Won_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email LeadQual New Campaign Name</fullName>
+        <actions>
+            <name>Send_New_Campaign_Name_to_LeadQual</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <formula>OB_Campaign_Call_Center__r.Name = &quot;LeadQual&quot; &amp;&amp; ISPICKVAL( Stage_Types__c , &quot;OB Campaign&quot;)</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Cancel Pending</fullName>
+        <actions>
+            <name>Email_Cancel_Pending</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Cancel Pending</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Closed Lost Opp</fullName>
+        <actions>
+            <name>Email_Closed_Lost_Opportunity</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Lost</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Closed Won Opp</fullName>
+        <actions>
+            <name>Closed_Date_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Deactivated Customer</fullName>
+        <actions>
+            <name>Email_Deactivated_Customer</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Deactivated Customer</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Gift Card Active Customer</fullName>
+        <actions>
+            <name>Email_Gift_Card_Active_Customer</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Active Customer</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Gift Card Awaiting Artwork</fullName>
+        <actions>
+            <name>Email_Gift_Card_Awaiting_Artwork</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Awaiting Artwork</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3A Gift Card Client Approved</fullName>
+        <actions>
+            <name>Email_Gift_Card_Client_Approved</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Client Approved</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3APause Campaign In Bright Pattern</fullName>
+        <actions>
+            <name>Pause_Campaign_in_Bright_Pattern</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Pause_Campaign</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <description>Email Call Center Techs to pause campaign.</description>
+        <formula>AND(ISCHANGED(Scheduling_Paused__c), PRIORVALUE(Scheduling_Paused__c) = False)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email%3ARestart OB Campaign In Bright Pattern</fullName>
+        <actions>
+            <name>Restart_the_OB_Campaign_in_Bright_Pattern</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Restart_This_campagin</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Scheduling_Paused__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email Call Center Techs to restart OB Campaign.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Hot Lead Stage%3AHot Leads Active</fullName>
+        <actions>
+            <name>Hot_Lead_Stage_Hot_Leads_Active</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 1,Active Tier 2,Active Tier 3,Hot Leads Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Hot_Leads_Active_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Hot Lead Stage%3AHot Leads Portal Complete</fullName>
+        <actions>
+            <name>Hot_Lead_Stage_Hot_Leads_Portal_Complete</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Hot Leads Portal Complete</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Hot_Leads_Portal_Complete_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Hot Lead Stage%3AHot Leads Portal Setup</fullName>
+        <actions>
+            <name>Hot_Lead_Stage_Hot_Leads_Portal_Setup</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Hot Leads Portal Setup</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Hot_Leads_Portal_Setup_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mailing Address Same As Site Address</fullName>
+        <actions>
+            <name>Update_City</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Country</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_State1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Street</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Zip_Code</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Mailing_Address_Same_As_Site_Address__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mailing Address Same As Site Address - Clear</fullName>
+        <actions>
+            <name>City_Clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Country_Clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>State_Clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Street_Clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Zip_Code_Clear</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Mailing_Address_Same_As_Site_Address__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Activation</fullName>
+        <actions>
+            <name>Update_OB_Campaign_Active_Checkbox</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.OB_Operation_Stage__c</field>
+            <operation>equals</operation>
+            <value>Campaign Active</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Active Date Stamp</fullName>
+        <actions>
+            <name>OB_Campaign_Active_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.OB_Campaign_Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Deactivation</fullName>
+        <actions>
+            <name>Deactivate_OB_Campaign_Active_Checkbox</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Delete_OB_Campaign_Active_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.OB_Operation_Stage__c</field>
+            <operation>notEqual</operation>
+            <value>Campaign Active</value>
+        </criteriaItems>
+        <description>If the OB Operation Stage is not equal to Campaign Active the OB Campaign Active field will be unchecked.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Original Active Date Stamp</fullName>
+        <actions>
+            <name>Update_OB_Campaign_Original_Active_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( 
+ISCHANGED( OB_Campaign_Active__c ), 
+ISBLANK( OB_Campaign_Original_Activation_Date__c ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Paused</fullName>
+        <actions>
+            <name>OB_Campaign_Pause_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Scheduling_Paused__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Scheduling Paused</fullName>
+        <actions>
+            <name>Check_Scheduling_Paused_Checkbox</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.OB_Campaign_Scheduling_Paused_Start_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.OB_Campaign_Scheduling_Paused_End_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.OB_Campaign_Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OB Campaign Scheduling Reactivated</fullName>
+        <actions>
+            <name>Schedule_End_Date_Blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Schedule_Paused_Checkbox_blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Schedule_Start_Date_Blank</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Uncheck_Restart_Campaign</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Restart_Campaign__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Active Customer Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Active_Customer_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 AND 2) OR 3 OR 4 OR 5</booleanFilter>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Active_Customer_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Active Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.OB_Operation_Stage__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.CPL_Operation_Stages__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Active Tier 1,Active Tier 2,Active Tier 3</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Awaiting Artwork Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Awaiting_Artwork_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Awaiting Artwork</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Awaiting_Artwork_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Cancel Pending Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Cancel_Pending</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Cancel Pending</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Cancel_Pending__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Client Proof Approved Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Client_Proof_Approved_Date_St</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Client Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Client_Proof_Apvd_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Deactivated Customer Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Deactivated_Customer_Date_Sta</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Deactivated Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Deactivated_Cust_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Gift Card Ordered Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Gift_Card_Ordered_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Ordered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Gift_Card_Ordered_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Graphic Design Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Graphic_Design_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Graphic Design</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Graphic_Design_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Proof Approved Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Proof_Approved_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Proof Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Proof_Approved_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Proof Sent Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Proof_Sent_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Proof Sent to Client</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Proof_Sent_Client_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opp Stage%3A Recvd %26 FulFill Date Stamp</fullName>
+        <actions>
+            <name>Opp_Stage_Recvd_FulFill_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Received &amp; in Fulfillment</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Opp_Stage_Rcvd_Fulfill_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opportunity%3A Update Last Modified Date field</fullName>
+        <actions>
+            <name>Opportunity_Update_Last_Modified_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Update the Last Modified Date field as current date and time when the stageName field&apos;s previous value is not equal to new value.</description>
+        <formula>TEXT(PRIORVALUE( StageName )) != TEXT(StageName)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Opportunity%3A Update Stage for Qualified 10 days Opp</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Qualified,Needs Analysis</value>
+        </criteriaItems>
+        <description>Opportunity Stage needs to be automatically changed to &apos;Neglected&apos; when the Opportunity is sitting in a same stage as described below.
+Qualified - 10 days
+Needs Analysis - 10 days</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Opportunity_Update_Stage_value_as_Negle</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Opportunity.LastModifiedDate</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Opportunity%3A Update Stage for Qualified 3 days Opp</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>DocuSign Sent</value>
+        </criteriaItems>
+        <description>Opportunity Stage needs to be automatically changed to &apos;Neglected&apos; when the Opportunity is sitting in a same stage as described below.
+DocuSign Sent - 3 days</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Opportunity_Update_Stage_value_as_Negle</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Opportunity.LastModifiedDate</offsetFromField>
+            <timeLength>3</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Opportunity%3A Update Stage for Qualified 5 days Opp</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Presentation,Proposal</value>
+        </criteriaItems>
+        <description>Opportunity Stage needs to be automatically changed to &apos;Neglected&apos; when the Opportunity is sitting in a same stage as described below.
+Presentation - 5 days
+Proposal - 5 days</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Opportunity_Update_Stage_value_as_Negle</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Opportunity.Last_Modified_Date__c</offsetFromField>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Opty_Naming</fullName>
+        <actions>
+            <name>Opty_Naming_Fieldupdate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>true</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pre Close%3A Free Hot Leads Stage Date Stamp</fullName>
+        <actions>
+            <name>Pre_Close_Free_Hot_Leads_Stage_Date_Sta</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Pre Close: Free Hot Leads</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Pre_Close_Free_Hot_Leads_Stage_Date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Recurring Setup</fullName>
+        <actions>
+            <name>Recurring_Setup</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Gift Card Active Customer</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Recurring_Setup__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Docusign Rcvd Date Stamp</fullName>
+        <actions>
+            <name>Sales_Stage_Docusign_Rcvd_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>2 AND (1 OR 3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Opportunity.Docusign_Rcvd_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.OB_Operation_Stage__c</field>
+            <operation>equals</operation>
+            <value>Docusign Received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Docusign Received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Docusign Received</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Premier_Partner_Operation_Stage__c</field>
+            <operation>equals</operation>
+            <value>Docusign Received</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Initial Pay Rcvd Date Stamp</fullName>
+        <actions>
+            <name>Sales_Stage_Initial_Pay_Rcvd_Date_Stamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>2 AND (1 OR 3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Opportunity.Initial_Pay_Rcvd_Date_Stamp__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.OB_Operation_Stage__c</field>
+            <operation>equals</operation>
+            <value>Billing Setup</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stage_Hot_Leads__c</field>
+            <operation>equals</operation>
+            <value>Billing Setup</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Operational_Stages__c</field>
+            <operation>equals</operation>
+            <value>Billing Setup</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Premier_Partner_Operation_Stage__c</field>
+            <operation>equals</operation>
+            <value>Billing Setup</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Update Needs Anaylsis</fullName>
+        <actions>
+            <name>Sales_Stage_Update_Needs_Anaylsis</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Needs Analysis</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Update Negotiation%2FReview</fullName>
+        <actions>
+            <name>Sales_Stage_Update_Negotiation_Review</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Negotiation/Review</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Update Proposal%2FQuote</fullName>
+        <actions>
+            <name>Sales_Stage_Update_Proposal_Quote</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Proposal/Price Quote</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Update Value Proposition</fullName>
+        <actions>
+            <name>Sales_Stage_Update_Value_Proposition</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Value Proposition</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Stage%3A Update Won%2FLost</fullName>
+        <actions>
+            <name>Sales_Stage_Update_Won_Lost</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won,Closed Lost</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Docusign</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Send Docusign</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.IsClosed</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Stage_Change</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <tasks>
+        <fullName>Pause_Campaign</fullName>
+        <assignedTo>cgarrett@myhomes.services</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Pause the scheduling for the campaign.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Opportunity.OB_Campaign_Scheduling_Paused_Start_Date__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>Pause Campaign</subject>
+    </tasks>
+    <tasks>
+        <fullName>Restart_This_campagin</fullName>
+        <assignedTo>cgarrett@myhomes.services</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Pause the scheduling for the campaign.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Opportunity.OB_Campaign_Scheduling_Paused_End_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>Restart This campagin</subject>
+    </tasks>
+</Workflow>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appt_Verification__c</fullName>
+    <description>I have completed all Verification steps and Approve or Reject this appointment</description>
+    <externalId>false</externalId>
+    <inlineHelpText>I have completed all Verification steps and Approve or Reject this appointment</inlineHelpText>
+    <label>Appt Verification</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Need A Pro</fullName>
+                <default>false</default>
+                <label>Need A Pro</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>No phone or mobile on user address</fullName>
+                <default>false</default>
+                <label>No phone or mobile on user address</label>
+            </value>
+            <value>
+                <fullName>Please check all Appt Verification boxes</fullName>
+                <default>false</default>
+                <label>Please check all Appt Verification boxes</label>
+            </value>
+            <value>
+                <fullName>Please Update Owner Field</fullName>
+                <default>false</default>
+                <label>Please Update Owner Field</label>
+            </value>
+            <value>
+                <fullName>Please Update Call Disposition Field</fullName>
+                <default>false</default>
+                <label>Please Update Call Disposition Field</label>
+            </value>
+            <value>
+                <fullName>Additional Details is unchecked</fullName>
+                <default>false</default>
+                <label>Additional Details is unchecked</label>
+            </value>
+            <value>
+                <fullName>Agent Name Correct is unchecked</fullName>
+                <default>false</default>
+                <label>Agent Name Correct is unchecked</label>
+            </value>
+            <value>
+                <fullName>Homeowner is unchecked</fullName>
+                <default>false</default>
+                <label>Homeowner is unchecked</label>
+            </value>
+            <value>
+                <fullName>Interest Expressed is unchecked</fullName>
+                <default>false</default>
+                <label>Interest Expressed is unchecked</label>
+            </value>
+            <value>
+                <fullName>Market Area is unchecked</fullName>
+                <default>false</default>
+                <label>Market Area is unchecked</label>
+            </value>
+            <value>
+                <fullName>Time &amp; Date is unchecked</fullName>
+                <default>false</default>
+                <label>Time &amp; Date is unchecked</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

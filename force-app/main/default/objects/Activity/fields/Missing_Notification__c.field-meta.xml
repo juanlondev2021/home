@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Missing_Notification__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK(In_Transit_Date_Time__c), &quot; - In Transit&quot;+BR(),&quot;&quot;) +
+IF( ISBLANK(Going_In_Date_Time__c), &quot; - Going In&quot;+BR(),&quot;&quot;) +
+IF(  ISBLANK(Out_Date_Time__c), &quot; - Out&quot;+BR(),&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Missing Notification</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

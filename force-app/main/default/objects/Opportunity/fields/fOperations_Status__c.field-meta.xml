@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>fOperations_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(TEXT(CPL_Operation_Stages__c)),
+   IF(ISBLANK(TEXT(OB_Operation_Stage__c)),
+      IF(ISBLANK(TEXT(Operational_Stage_Hot_Leads__c)),
+         IF(ISBLANK(TEXT(Operational_Stages__c)),
+            IF(ISBLANK(TEXT(Premier_Partner_Operation_Stage__c)),Null
+               , TEXT(Premier_Partner_Operation_Stage__c))
+            , TEXT(Operational_Stages__c))
+         , TEXT(Operational_Stage_Hot_Leads__c))
+      , IF( ISPICKVAL(OB_Operation_Stage__c, &quot;Campaign Test&quot;) , &quot;Active&quot;, TEXT(OB_Operation_Stage__c)) )
+   , TEXT(CPL_Operation_Stages__c))</formula>
+    <label>fOperations Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billing_Country</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT( OR(ISPICKVAL(Primary_Billing_Country__c,&quot;US&quot;),ISPICKVAL(Primary_Billing_Country__c,&quot;&quot;))))</errorConditionFormula>
+    <errorDisplayField>Of_Baths__c</errorDisplayField>
+    <errorMessage>Input Proper Billing Country</errorMessage>
+</ValidationRule>

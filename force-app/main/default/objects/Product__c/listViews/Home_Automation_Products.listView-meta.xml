@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Home_Automation_Products</fullName>
+    <columns>NAME</columns>
+    <columns>Part_Number__c</columns>
+    <columns>Cost__c</columns>
+    <columns>Installation_Cost__c</columns>
+    <columns>Unit_Total_Cost__c</columns>
+    <columns>active__c</columns>
+    <columns>Product_Type__c</columns>
+    <columns>Description__c</columns>
+    <columns>Manufacture__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product_Type__c</field>
+        <operation>equals</operation>
+        <value>Home Automation</value>
+    </filters>
+    <filters>
+        <field>active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Home Automation</label>
+</ListView>

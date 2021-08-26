@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Address_Link__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&quot;http://maps.apple.com/?address=&quot;&amp; Home_Service__r.Street__c &amp;&quot;,&quot;&amp; Home_Service__r.City__c &amp;&quot;,&quot;&amp; Home_Service__r.State__c &amp;&quot;+&quot;&amp; Home_Service__r.Zip__c, Home_Service__r.Street__c &amp;&quot; &quot;&amp; Home_Service__r.City__c &amp;&quot;, &quot;&amp; Home_Service__r.State__c &amp;&quot; &quot;&amp; Home_Service__r.Zip__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Address Link</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

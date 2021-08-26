@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>collectthepaymentdetailsInbound__c</fullName>
+    <description>Perfect, the Technician will collect the payment details at the time of service.  Now just for my notes, will you be using a debit card or credit card? (WFR)</description>
+    <externalId>false</externalId>
+    <label>Perfect, the Technician will collect the</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Debit Card.</fullName>
+                <default>false</default>
+                <label>Debit Card.</label>
+            </value>
+            <value>
+                <fullName>Credit Card.</fullName>
+                <default>false</default>
+                <label>Credit Card.</label>
+            </value>
+            <value>
+                <fullName>Other Payment Method.</fullName>
+                <default>false</default>
+                <label>Other Payment Method.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
